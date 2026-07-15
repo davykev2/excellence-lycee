@@ -1,0 +1,27 @@
+{
+  "matiere_slug": "maths",
+  "niveau": "Terminale",
+  "series": ["C"],
+  "output": "../../resumes_tle_maths.sql",
+  "lecons": [
+    { "file": "L01.md", "ordre": 1,  "titre": "L1 — Limites et continuité", "description": "Fonctions numériques · composée, monotone bornée, TVI, bijection, racine n-ième" },
+    { "file": "L02.md", "ordre": 2,  "titre": "L2 — Barycentre et lignes de niveau", "description": "Géométrie du plan · barycentre, réduction, coordonnées, lignes de niveau" },
+    { "file": "L03.md", "ordre": 3,  "titre": "L3 — Divisibilité dans Z", "description": "Arithmétique · division euclidienne, congruences, numération, nombres premiers" },
+    { "file": "L04.md", "ordre": 4,  "titre": "L4 — Dérivabilité et étude de fonctions", "description": "Fonctions numériques · dérivée à gauche/droite, composée, réciproque, accroissements finis" },
+    { "file": "L05.md", "ordre": 5,  "titre": "L5 — Géométrie analytique de l'espace", "description": "Géométrie de l'espace · vecteur normal, équations, distances, positions relatives" },
+    { "file": "L06.md", "ordre": 6,  "titre": "L6 — Primitives", "description": "Fonctions numériques · primitives usuelles, opérations, composition" },
+    { "file": "L07.md", "ordre": 7,  "titre": "L7 — Coniques", "description": "Géométrie du plan · parabole, ellipse, hyperbole, équations réduites" },
+    { "file": "L08.md", "ordre": 8,  "titre": "L8 — Fonction logarithme népérien", "description": "Fonctions numériques · propriétés, limites, dérivée de ln u, base a" },
+    { "file": "L09.md", "ordre": 9,  "titre": "L9 — Nombres complexes", "description": "Calculs algébriques · forme algébrique, module, argument, Moivre, Euler, équations" },
+    { "file": "L10.md", "ordre": 10, "titre": "L10 — Fonction exponentielle et puissance", "description": "Fonctions numériques · exp, base a, fonction puissance, croissances comparées" },
+    { "file": "L11.md", "ordre": 11, "titre": "L11 — PPCM et PGCD", "description": "Arithmétique · Euclide, Bézout, Gauss, équations diophantiennes" },
+    { "file": "L12.md", "ordre": 12, "titre": "L12 — Suites numériques", "description": "Fonctions numériques · récurrence, convergence, croissances comparées, suite récurrente" },
+    { "file": "L13.md", "ordre": 13, "titre": "L13 — Nombres complexes et géométrie du plan", "description": "Transformations du plan · configurations, transformations, similitude directe" },
+    { "file": "L14.md", "ordre": 14, "titre": "L14 — Isométries du plan", "description": "Transformations du plan · symétries, rotations, symétrie glissée, déplacements" },
+    { "file": "L15.md", "ordre": 15, "titre": "L15 — Calcul intégral", "description": "Fonctions numériques · intégrale, Chasles, IPP, aires, valeur moyenne" },
+    { "file": "L16.md", "ordre": 16, "titre": "L16 — Similitudes directes du plan", "description": "Transformations du plan · rapport, angle, forme réduite, écriture complexe" },
+    { "file": "L17.md", "ordre": 17, "titre": "L17 — Probabilité conditionnelle et variable aléatoire", "description": "Phénomène aléatoire · conditionnelle, indépendance, loi binomiale, espérance" },
+    { "file": "L18.md", "ordre": 18, "titre": "L18 — Équations différentielles", "description": "Fonctions numériques · y'+ay=b, y''±ω²y=0, conditions initiales" },
+    { "file": "L19.md", "ordre": 19, "titre": "L19 — Statistique à deux variables", "description": "Traitement des données · covariance, corrélation, moindres carrés, régression" }
+  ]
+}

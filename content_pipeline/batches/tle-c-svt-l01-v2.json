@@ -1,0 +1,309 @@
+{
+  "schema_version": 2,
+  "batch_code": "2026-07-tle-c-svt-l01-v2",
+  "status": "reviewed",
+  "target": {
+    "niveau": "Terminale",
+    "serie": "C",
+    "matiere_slug": "svt",
+    "chapitre_id": "892d9b92-9d7c-482a-aba8-88e26a385b31",
+    "chapitre_code": "TLE-C-SVT-L01",
+    "chapitre_ordre": 1,
+    "chapitre_titre": "L1 — Le réflexe conditionnel"
+  },
+  "source": {
+    "code": "CI-EN-TD-SVT-L04-REF-2026-07",
+    "titre": "Terminale D — SVT — Le réflexe conditionnel",
+    "type": "pdf",
+    "auteur_organisme": "Côte d’Ivoire — MENET-FP, Mon école à la maison",
+    "url": null,
+    "licence_code": null,
+    "licence_url": null,
+    "attribution": null,
+    "droits_statut": "reference_only",
+    "storage_path": "content_sources/archive_20260713/Nouveau dossier/TD/SVT TD/SVT TD_L1_Le reflexe conditionnel.pdf",
+    "sha256": "a20b773b445ccd6abf014e2e8c895d6d19424eb1de544c9820622ae77b10e6b2",
+    "locator": "PDF de 15 pages ; fichier d’archive repéré L1, en-tête interne « Leçon 4 : Le réflexe conditionnel »",
+    "notes": "Le manifeste associe ce PDF Terminale D au premier chapitre SVT de Terminale C par réemploi inter-séries et concordance parfaite du titre (score 1). Le chapitre distant n’a pas de code ; TLE-C-SVT-L01 est un code interne stable. Le décalage entre le repère L1 de l’archive et l’en-tête interne Leçon 4 est conservé dans la provenance. Source utilisée uniquement pour l’alignement au programme ; situations, données et corrections de ce lot sont originales."
+  },
+  "levels": [
+    {
+      "palier": "entrainement",
+      "libelle": "Facile",
+      "titre": "Facile — Reconnaître les éléments du conditionnement",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-C-SVT-L01-FAC-E01",
+          "titre": "Du signal neutre au signal conditionnel",
+          "consigne": "Un chien ne salive pas lorsqu’il entend un bref son de clochette. En revanche, le dépôt d’une petite quantité de nourriture sur sa langue déclenche immédiatement la salivation. Pendant plusieurs séances, l’expérimentateur fait entendre la clochette juste avant de présenter la nourriture. À la fin de l’apprentissage, la clochette seule déclenche la salivation.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Avant l’apprentissage, préciser la nature de la clochette et celle de la nourriture par rapport à la salivation. Justifier chaque réponse.",
+              "correction_md": "Avant l’apprentissage, la clochette est un **stimulus neutre** : elle ne provoque pas naturellement la salivation. La nourriture est un **stimulus absolu**, aussi appelé stimulus inconditionnel : elle déclenche spontanément la salivation sans apprentissage préalable."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Nommer la réaction provoquée par la nourriture seule avant tout apprentissage.",
+              "correction_md": "La salivation provoquée directement par la nourriture est un **réflexe inné** ou **réflexe inconditionnel**. Cette réponse existe avant le dressage et ne dépend pas de l’association avec la clochette."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Décrire les deux règles du protocole qui permettent l’apprentissage.",
+              "correction_md": "Le stimulus initialement neutre doit **précéder** le stimulus absolu : la clochette est présentée juste avant la nourriture. Cette association doit être **répétée plusieurs fois** dans des conditions favorables. L’ordre et la répétition permettent l’installation de la nouvelle réponse."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Après l’apprentissage, donner le nouveau statut de la clochette et le nom de la salivation qu’elle déclenche seule.",
+              "correction_md": "Après l’apprentissage, la clochette est devenue un **stimulus conditionnel**. La salivation déclenchée par la clochette seule est un **réflexe conditionnel**, aussi appelé **réflexe acquis**, car elle résulte de l’apprentissage."
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-C-SVT-L01-FAC-E02",
+          "titre": "Lire les phases d’une expérience",
+          "consigne": "Chez un animal éveillé, un faible souffle d’air dirigé vers l’œil provoque un clignement immédiat. Une lumière bleue présentée seule ne provoque d’abord aucun clignement. On réalise les quatre phases suivantes : **A** — lumière seule, pas de clignement ; **B** — souffle d’air seul, clignement ; **C** — lumière puis souffle d’air, association répétée, clignement ; **D** — lumière seule après apprentissage, clignement.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "À partir des phases A et B, identifier le stimulus neutre, le stimulus absolu et le réflexe inné.",
+              "correction_md": "La lumière bleue est le **stimulus neutre**, puisqu’elle ne déclenche d’abord aucun clignement. Le souffle d’air est le **stimulus absolu**, car il provoque naturellement le clignement. Le clignement produit par le souffle d’air est donc le **réflexe inné** ou inconditionnel."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Expliquer ce qui se déroule pendant la phase C.",
+              "correction_md": "La phase C est la **phase d’apprentissage**. La lumière, initialement neutre, est présentée avant le souffle d’air, puis cette succession est répétée. L’animal apprend ainsi l’association entre les deux stimuli."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Interpréter le résultat de la phase D avec le vocabulaire du cours.",
+              "correction_md": "À la phase D, la lumière seule déclenche le clignement. Elle est donc devenue un **stimulus conditionnel** et le clignement qu’elle provoque est un **réflexe conditionnel ou acquis**. Ce résultat prouve que l’association a été apprise."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Prévoir ce qui peut se produire si la lumière est ensuite présentée de nombreuses fois sans souffle d’air, puis nommer ce phénomène.",
+              "correction_md": "La fréquence ou l’intensité du clignement conditionnel diminuera progressivement, puis la réponse pourra disparaître. Cette disparition d’un réflexe conditionnel non entretenu est appelée **extinction**. Elle montre que le réflexe acquis est temporaire et doit être renforcé."
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-C-SVT-L01-FAC-E03",
+          "titre": "Le trajet du message nerveux",
+          "consigne": "Un chien a appris à saliver au son d’un métronome. On cherche à décrire le trajet fonctionnel qui relie ce son à la sécrétion de salive.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Identifier le récepteur sensoriel, le stimulus conditionnel, l’effecteur et la réponse observable.",
+              "correction_md": "Les récepteurs de l’oreille constituent le **récepteur sensoriel**. Le son du métronome est le **stimulus conditionnel**. Les glandes salivaires sont les **effecteurs** et la sécrétion de salive est la **réponse réflexe observable**."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Remettre sous la forme d’une chaîne ordonnée les structures suivantes : aire auditive, glandes salivaires, récepteurs de l’oreille, centre salivaire du bulbe rachidien, aire gustative, fibres nerveuses motrices.",
+              "correction_md": "La chaîne fonctionnelle est : **son → récepteurs de l’oreille → voies sensitives auditives → aire auditive → nouvelle liaison nerveuse → aire gustative → centre salivaire du bulbe rachidien → fibres nerveuses motrices → glandes salivaires → salivation**."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Préciser le rôle de la nouvelle liaison nerveuse formée pendant l’apprentissage.",
+              "correction_md": "La nouvelle liaison relie fonctionnellement l’aire corticale qui traite le son à l’aire impliquée dans la réponse alimentaire. Grâce à elle, le message auditif peut activer le circuit salivaire même lorsque la nourriture n’est pas présentée."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Prévoir la conséquence d’une perte de fonctionnement des récepteurs auditifs sur la réponse au métronome, tout en supposant le circuit gustatif intact.",
+              "correction_md": "Sans récepteurs auditifs fonctionnels, le son ne produit pas de message nerveux auditif : il ne peut donc plus déclencher la salivation conditionnelle. La nourriture peut cependant encore provoquer la salivation innée si les récepteurs gustatifs, le centre salivaire, les voies motrices et les glandes restent intacts."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "palier": "maitrise",
+      "libelle": "Moyen",
+      "titre": "Moyen — Analyser des résultats et contrôler les conditions",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-C-SVT-L01-MOY-E01",
+          "titre": "Acquisition puis extinction",
+          "consigne": "On recueille la salive d’un chien pendant une expérience. Les résultats sont les suivants :\n\n| Essais | Présentation | Gouttes de salive en 30 s |\n|---|---|---|\n| 1-2 | Sifflet seul | 0 ; 0 |\n| 3-4 | Nourriture seule | 14 ; 15 |\n| 5-10 | Sifflet puis nourriture | 14 ; 15 ; 15 ; 14 ; 15 ; 15 |\n| 11-14 | Sifflet seul | 13 ; 14 ; 13 ; 12 |\n| 15-19 | Sifflet seul, toujours sans renforcement | 9 ; 6 ; 3 ; 1 ; 0 |",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Analyser les résultats des essais 1 à 4, puis attribuer un statut au sifflet et à la nourriture avant l’apprentissage.",
+              "correction_md": "Aux essais 1 et 2, le sifflet seul ne produit aucune salivation : il est donc initialement **neutre** par rapport à cette réponse. Aux essais 3 et 4, la nourriture seule provoque 14 puis 15 gouttes : elle est un **stimulus absolu** et la salivation correspondante est un réflexe inné."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Identifier la phase représentée par les essais 5 à 10 et expliquer ce qui permet de conclure que l’apprentissage a réussi.",
+              "correction_md": "Les essais 5 à 10 constituent la **phase d’apprentissage** : le sifflet précède la nourriture et l’association est répétée. Les salivations observées pendant ces essais ne suffisent pas seules à prouver le conditionnement, car la nourriture est présente. La preuve apparaît aux essais 11 à 14 : le sifflet seul déclenche encore 12 à 14 gouttes. Il est donc devenu conditionnel."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Calculer la moyenne du nombre de gouttes pour les essais 11 à 14, puis pour les essais 15 à 19. Interpréter la différence.",
+              "correction_md": "Pour les essais 11 à 14, la moyenne vaut $(13+14+13+12)/4=13$ gouttes. Pour les essais 15 à 19, elle vaut $(9+6+3+1+0)/5=3{,}8$ gouttes. La forte baisse de $13$ à $3{,}8$ gouttes traduit l’affaiblissement progressif du réflexe conditionnel lorsque le sifflet n’est plus suivi de nourriture."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Nommer le phénomène visible aux essais 15 à 19 et proposer une manière d’entretenir le réflexe.",
+              "correction_md": "Il s’agit de l’**extinction** : la réponse acquise diminue puis disparaît faute de renforcement. Pour l’entretenir, il faut réassocier périodiquement le sifflet à la nourriture, en conservant le bon ordre — sifflet d’abord, nourriture ensuite — et des conditions expérimentales stables."
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-C-SVT-L01-MOY-E02",
+          "titre": "Réponse à des sons de fréquences voisines",
+          "consigne": "Chez un lapin calme, un son pur de 1 000 Hz ne provoque initialement aucun clignement lors de trois présentations. Pendant l’apprentissage, ce son, émis durant 1 s, précède immédiatement un faible souffle d’air non traumatique vers l’œil, qui déclenche naturellement le clignement ; cette association est répétée vingt fois. Après l’apprentissage, une unique séance courte présente chaque son seul trois fois, dans un ordre aléatoire. Tous les sons ont la même durée (1 s), la même intensité (60 dB) et proviennent du même haut-parleur. La salle, la distance au haut-parleur, l’intervalle entre deux essais (2 min) et l’état de vigilance de l’animal restent comparables.\n\n| Fréquence du son | 600 Hz | 900 Hz | 1 000 Hz | 1 100 Hz | 1 600 Hz |\n|---|---:|---:|---:|---:|---:|\n| Clignements observés sur 3 présentations | 0 | 2 | 3 | 2 | 1 |",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Identifier la variable manipulée, la réponse mesurée et au moins quatre variables contrôlées pendant la séance de test.",
+              "correction_md": "La variable manipulée est la **fréquence du son**. La réponse mesurée est le **nombre de clignements sur trois présentations**. Sont contrôlés : la durée de chaque son (1 s), son intensité (60 dB), le haut-parleur et sa distance à l’animal, la salle, l’intervalle entre les essais (2 min) et un état de vigilance comparable. Ainsi, la fréquence est le principal facteur modifié entre les tests."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Donner le statut du son de 1 000 Hz avant puis après l’apprentissage, en utilisant les observations qui le prouvent.",
+              "correction_md": "Avant l’apprentissage, le son de 1 000 Hz est un **stimulus neutre**, puisqu’aucune des trois présentations ne provoque de clignement. Après vingt associations avec le souffle d’air, ce même son déclenche trois clignements sur trois lorsqu’il est présenté seul : il est devenu un **stimulus conditionnel** et le clignement obtenu est un réflexe acquis."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Analyser la relation observée entre la fréquence testée et le nombre de clignements.",
+              "correction_md": "La réponse est maximale pour le son appris de 1 000 Hz : 3/3. Les fréquences voisines de 900 et 1 100 Hz provoquent chacune 2/3 clignements. Les fréquences plus éloignées provoquent moins de réponses : 0/3 à 600 Hz et 1/3 à 1 600 Hz. **Dans cette séance et pour cet animal**, la réponse acquise s’étend donc davantage aux sons proches de la fréquence apprise qu’aux sons plus éloignés."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Limiter la portée de la conclusion et expliquer pourquoi la séance de test ne doit pas multiplier les présentations non renforcées.",
+              "correction_md": "Les données concernent un seul lapin, trois présentations par fréquence, une intensité de 60 dB et les cinq fréquences indiquées. Elles ne permettent pas de généraliser à tous les lapins, à toutes les fréquences ni à d’autres intensités. Il faudrait répéter l’étude sur plusieurs animaux avec le même protocole et un ordre de présentation équilibré. Les tests sont volontairement peu nombreux, car chaque son est présenté sans souffle d’air : leur répétition excessive pourrait affaiblir le réflexe puis provoquer son extinction."
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-C-SVT-L01-MOY-E03",
+          "titre": "Diagnostiquer quatre protocoles",
+          "consigne": "Quatre groupes veulent conditionner la salivation d’un chien à une lumière. **Groupe A** : la nourriture est donnée avant la lumière, vingt fois. **Groupe B** : la lumière précède la nourriture, mais seulement deux fois. **Groupe C** : la lumière précède la nourriture vingt fois, dans une salle bruyante alors que l’animal est très agité. **Groupe D** : une lumière nette précède immédiatement la nourriture, vingt fois, chez un animal vigilant dont les organes sensoriels sont intacts.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Indiquer le protocole qui a le plus de chances d’installer le réflexe conditionnel et justifier ce choix.",
+              "correction_md": "Le protocole du **groupe D** est le plus favorable. Le stimulus neutre précède le stimulus absolu, l’association est répétée, le signal est précis, l’animal est vigilant et ses organes sont intacts. Il réunit donc les principales conditions du cours."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Expliquer l’erreur principale du groupe A.",
+              "correction_md": "Le groupe A présente les stimuli dans le mauvais ordre. Pour que la lumière annonce la nourriture, elle doit apparaître **avant** celle-ci. Si la nourriture est donnée d’abord, la lumière ne joue pas correctement le rôle de signal prédictif et le conditionnement recherché risque d’échouer."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Expliquer séparément pourquoi les protocoles B et C sont peu favorables.",
+              "correction_md": "Dans le protocole B, deux associations sont généralement insuffisantes : l’apprentissage exige des répétitions. Dans le protocole C, le bruit et l’agitation réduisent la vigilance et rendent les stimuli moins précis. Même avec vingt essais, ces conditions perturbent la mise en place de la liaison fonctionnelle."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Décrire le test qui permettrait au groupe D de vérifier l’acquisition, puis préciser comment éviter l’extinction après ce test.",
+              "correction_md": "Après l’apprentissage, le groupe D doit présenter **la lumière seule**. Une salivation déclenchée sans nourriture prouve que la lumière est devenue conditionnelle. Pour éviter l’extinction, le groupe doit ensuite entretenir le réflexe par des rappels où la lumière précède de nouveau la nourriture."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "palier": "concours",
+      "libelle": "Difficile",
+      "titre": "Difficile — Concevoir et interpréter une démarche expérimentale",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-C-SVT-L01-DIF-E01",
+          "titre": "Prouver l’acquisition malgré la présence de nourriture",
+          "consigne": "Un expérimentateur utilise un clic bref comme signal et mesure la salivation d’un chien.\n\n| Essais | Présentation | Gouttes de salive en 30 s |\n|---|---|---|\n| 1-3 | Clic seul | 0 ; 0 ; 0 |\n| 4-5 | Nourriture seule | 15 ; 15 |\n| 6-12 | Clic puis nourriture | 15 ; 14 ; 15 ; 15 ; 14 ; 15 ; 15 |\n| 13-18 | Clic seul | 14 ; 12 ; 9 ; 5 ; 2 ; 0 |\n| 19-21 | Clic puis nourriture | 14 ; 15 ; 15 |\n| 22 | Clic seul | 14 |",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Expliquer pourquoi les salivations des essais 6 à 12 ne suffisent pas, à elles seules, à démontrer que le clic est devenu conditionnel. Indiquer le premier essai qui apporte cette preuve.",
+              "correction_md": "Aux essais 6 à 12, la nourriture est présente et peut déclencher la salivation innée ; on ne peut donc pas attribuer avec certitude la réponse au clic. La première preuve est l’**essai 13** : le clic seul provoque 14 gouttes, alors qu’il n’en provoquait aucune aux essais 1 à 3. Le clic est donc devenu un stimulus conditionnel."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Analyser quantitativement l’évolution entre les essais 13 et 18, puis l’interpréter.",
+              "correction_md": "Sous l’effet du clic seul, la salivation passe successivement de 14 à 12, 9, 5, 2 puis 0 goutte. La baisse totale est de 14 gouttes, soit une disparition complète de la réponse mesurée. Comme le clic n’est plus suivi de nourriture, le réflexe conditionnel s’affaiblit puis s’éteint : c’est l’**extinction**."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Interpréter les essais 19 à 22 et relier le résultat au caractère temporaire du réflexe acquis.",
+              "correction_md": "Aux essais 19 à 21, le clic est de nouveau associé à la nourriture : le réflexe est renforcé. À l’essai 22, le clic seul déclenche 14 gouttes, ce qui montre que la réponse conditionnelle est rétablie. Le réflexe acquis n’est pas définitif : il peut disparaître sans entretien, mais une nouvelle série d’associations peut le restaurer."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Proposer un témoin expérimental permettant de vérifier que le clic ne déclenche pas naturellement la salivation.",
+              "correction_md": "On peut utiliser un chien comparable qui n’a jamais reçu l’association clic-nourriture, placé dans les mêmes conditions, puis lui présenter le clic seul. L’absence de salivation chez ce témoin confirmerait que le clic est initialement neutre et que la réponse du chien entraîné résulte bien de l’apprentissage."
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-C-SVT-L01-DIF-E02",
+          "titre": "Localiser une rupture dans le circuit",
+          "consigne": "Un chien conditionné salive au son seul et à la nourriture seule. On réalise ensuite des simulations fonctionnelles réversibles, une structure à la fois. **Situation A** : aire auditive temporairement inactive — son : aucune salivation ; nourriture : salivation. **Situation B** : nouvelle liaison entre aire auditive et aire gustative interrompue — son : aucune salivation ; nourriture : salivation. **Situation C** : fibres motrices destinées aux glandes salivaires inactives — son : aucune salivation ; nourriture : aucune salivation.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "À partir de la situation A, expliquer le rôle de l’aire auditive dans le réflexe conditionnel.",
+              "correction_md": "L’aire auditive reçoit et traite le message issu du son. Lorsqu’elle est inactive, le signal sonore ne peut plus emprunter le circuit acquis, donc le son ne déclenche aucune salivation. La nourriture continue d’agir par le circuit gustatif inné, ce qui explique le maintien de sa réponse."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Interpréter la situation B et préciser ce que l’apprentissage a modifié.",
+              "correction_md": "La situation B montre que l’aire auditive et le circuit salivaire peuvent fonctionner séparément, mais que leur connexion acquise est indispensable pour transformer le son en signal salivaire. L’apprentissage a établi une **nouvelle liaison fonctionnelle** entre l’aire auditive et l’aire gustative ; son interruption supprime uniquement la réponse conditionnelle."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Expliquer pourquoi, dans la situation C, ni le son ni la nourriture ne provoquent de salivation observable.",
+              "correction_md": "Les deux voies — conditionnelle pour le son et innée pour la nourriture — convergent vers le centre salivaire puis commandent les glandes par des fibres motrices. Si ces fibres sont inactives, le message de commande n’atteint aucun effecteur. Les circuits centraux peuvent être activés, mais les glandes ne sécrètent pas de salive observable."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Construire un schéma fonctionnel textuel unique qui rende compte des trois situations.",
+              "correction_md": "Le schéma attendu est : **son → récepteurs auditifs → voies sensitives → aire auditive → nouvelle liaison acquise → aire gustative → centre salivaire du bulbe rachidien → fibres motrices → glandes salivaires → salivation**. La voie innée rejoint le circuit à partir de la stimulation gustative par la nourriture : **nourriture → récepteurs gustatifs → aire gustative / centre salivaire → fibres motrices → glandes → salivation**."
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-C-SVT-L01-DIF-E03",
+          "titre": "Concevoir une expérience de conditionnement",
+          "consigne": "On veut vérifier expérimentalement qu’une lumière verte, sans effet initial sur le retrait de la patte, peut devenir le signal d’un retrait réflexe. Le stimulus absolu choisi est une brève stimulation mécanique standardisée et non traumatique de la patte, qui provoque naturellement son retrait. Le protocole doit respecter le bien-être de l’animal et arrêter immédiatement toute séance en cas de stress.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Définir la variable manipulée, la réponse mesurée et un mode simple de mesure de cette réponse.",
+              "correction_md": "La variable manipulée est la **présentation du stimulus** : lumière seule, stimulation mécanique seule ou lumière suivie de la stimulation. La réponse est le **retrait de la patte**. On peut noter sa présence ou son absence et mesurer sa latence, c’est-à-dire le temps entre le début de la lumière et le retrait. Les mêmes critères doivent être utilisés à chaque essai."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Décrire les deux tests préalables nécessaires pour établir le statut initial de chaque stimulus.",
+              "correction_md": "On présente d’abord la lumière verte seule : elle ne doit pas provoquer de retrait, ce qui confirme son statut de **stimulus neutre**. On applique ensuite séparément la stimulation mécanique : elle doit provoquer le retrait sans apprentissage, ce qui confirme son statut de **stimulus absolu** et celui de réflexe inné pour la réponse obtenue."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Proposer la phase d’apprentissage en précisant l’ordre, la répétition et les conditions de réalisation.",
+              "correction_md": "À chaque essai, la lumière verte doit être allumée brièvement **juste avant** la stimulation mécanique. Cette succession est répétée un nombre suffisant de fois, avec des intervalles réguliers. L’animal doit être vigilant, calme et en bonne santé ; ses organes sensoriels doivent être intacts, les stimuli précis et l’environnement stable. Toute réaction de stress impose l’arrêt du protocole."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Décrire plusieurs tests finaux limités et construire un véritable protocole témoin non associé permettant d’attribuer la réponse à l’apprentissage.",
+              "correction_md": "L’animal entraîné reçoit un petit nombre identique de tests espacés où la **lumière verte seule** est présentée ; on relève, sur l’ensemble des tests, la fréquence des retraits et leur latence. Le témoin reçoit pendant la phase préparatoire **le même nombre de lumières et le même nombre de stimulations mécaniques**, avec les mêmes durées, intensités, intervalles globaux et conditions, mais les deux stimuli sont présentés séparément et jamais associés dans le temps. Il subit ensuite exactement les mêmes tests limités de lumière seule. Une fréquence de retrait plus élevée et une latence plus courte chez l’animal entraîné que chez le témoin soutiennent l’effet de l’association temporelle. Le nombre de tests reste faible et identique afin de limiter l’extinction et de rendre la comparaison équitable."
+            },
+            {
+              "ordre": 5,
+              "enonce_md": "Prévoir un protocole d’extinction puis un protocole d’entretien, et donner le résultat attendu dans chaque cas.",
+              "correction_md": "Pour provoquer l’extinction, on présente plusieurs fois la lumière verte seule : le retrait devrait devenir moins fréquent ou plus lent, puis disparaître. Pour entretenir le réflexe, on réintroduit périodiquement l’association correcte lumière puis stimulation mécanique ; la lumière seule doit alors conserver, ou retrouver, son pouvoir de déclencher le retrait."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

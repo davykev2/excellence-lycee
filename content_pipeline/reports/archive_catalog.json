@@ -1,0 +1,3735 @@
+{
+  "generated_at_utc": "2026-07-13T04:30:23.953930+00:00",
+  "archive_root": "content_sources/archive_20260713",
+  "methodology": {
+    "exact_deduplication": "SHA-256 of complete PDF bytes",
+    "taxonomy": "series and subject from relative folders; lesson code and title from filename",
+    "pdf_reader": "pypdf 6.10.0",
+    "text_audit": "Every page of every SHA-256-unique PDF was tested; a page is extractable at >=30 alphanumeric characters.",
+    "scan_rule": "Suspected scan if fewer than 20% of pages are extractable and more than 50% contain image XObjects.",
+    "sample": "First, middle and last pages of 11 representative subject/series categories.",
+    "taxonomy_note_fr": "Le code du nom de fichier est conservé comme ordre global de l’archive. Le numéro imprimé dans le PDF peut redémarrer à 1 dans chaque thème.",
+    "rights_note_fr": "Les PDF servent de documentation source. Ne pas republier leur texte intégral sans autorisation; générer des exercices originaux et conserver la provenance."
+  },
+  "summary": {
+    "physical_pdf_files": 206,
+    "physical_pages": 2415,
+    "physical_bytes": 101880383,
+    "physical_mib": 97.16,
+    "unique_sha256_objects": 136,
+    "unique_pages": 1561,
+    "unique_bytes": 71410385,
+    "unique_mib": 68.1,
+    "duplicate_hash_groups": 45,
+    "files_in_duplicate_groups": 115,
+    "unique_only_hash_groups": 91,
+    "redundant_copies": 70,
+    "redundant_copy_rate_percent": 33.98,
+    "deduplicated_bytes_saved": 30469998,
+    "deduplicated_mib_saved": 29.06
+  },
+  "classification": {
+    "physical_files_by_series_subject": [
+      {
+        "series": "TA",
+        "subject": "history_geography",
+        "physical_files": 15
+      },
+      {
+        "series": "TA",
+        "subject": "mathematics",
+        "physical_files": 8
+      },
+      {
+        "series": "TA",
+        "subject": "philosophy",
+        "physical_files": 10
+      },
+      {
+        "series": "TA",
+        "subject": "spanish",
+        "physical_files": 30
+      },
+      {
+        "series": "TA",
+        "subject": "svt",
+        "physical_files": 8
+      },
+      {
+        "series": "TC",
+        "subject": "history_geography",
+        "physical_files": 15
+      },
+      {
+        "series": "TC",
+        "subject": "mathematics",
+        "physical_files": 19
+      },
+      {
+        "series": "TC",
+        "subject": "philosophy",
+        "physical_files": 10
+      },
+      {
+        "series": "TC",
+        "subject": "physics_chemistry",
+        "physical_files": 20
+      },
+      {
+        "series": "TD",
+        "subject": "history_geography",
+        "physical_files": 15
+      },
+      {
+        "series": "TD",
+        "subject": "mathematics",
+        "physical_files": 12
+      },
+      {
+        "series": "TD",
+        "subject": "philosophy",
+        "physical_files": 10
+      },
+      {
+        "series": "TD",
+        "subject": "physics_chemistry",
+        "physical_files": 20
+      },
+      {
+        "series": "TD",
+        "subject": "svt",
+        "physical_files": 14
+      }
+    ],
+    "unique_objects_by_scope_subject": [
+      {
+        "target_series": [
+          "TA"
+        ],
+        "subject": "mathematics",
+        "subdiscipline": null,
+        "unique_objects": 8
+      },
+      {
+        "target_series": [
+          "TA"
+        ],
+        "subject": "spanish",
+        "subdiscipline": null,
+        "unique_objects": 30
+      },
+      {
+        "target_series": [
+          "TA"
+        ],
+        "subject": "svt",
+        "subdiscipline": null,
+        "unique_objects": 8
+      },
+      {
+        "target_series": [
+          "TA",
+          "TC",
+          "TD"
+        ],
+        "subject": "history_geography",
+        "subdiscipline": "geography",
+        "unique_objects": 6
+      },
+      {
+        "target_series": [
+          "TA",
+          "TC",
+          "TD"
+        ],
+        "subject": "history_geography",
+        "subdiscipline": "history",
+        "unique_objects": 9
+      },
+      {
+        "target_series": [
+          "TA",
+          "TC",
+          "TD"
+        ],
+        "subject": "philosophy",
+        "subdiscipline": null,
+        "unique_objects": 10
+      },
+      {
+        "target_series": [
+          "TC"
+        ],
+        "subject": "mathematics",
+        "subdiscipline": null,
+        "unique_objects": 19
+      },
+      {
+        "target_series": [
+          "TC",
+          "TD"
+        ],
+        "subject": "physics_chemistry",
+        "subdiscipline": "chemistry",
+        "unique_objects": 12
+      },
+      {
+        "target_series": [
+          "TC",
+          "TD"
+        ],
+        "subject": "physics_chemistry",
+        "subdiscipline": "physics",
+        "unique_objects": 8
+      },
+      {
+        "target_series": [
+          "TD"
+        ],
+        "subject": "mathematics",
+        "subdiscipline": null,
+        "unique_objects": 12
+      },
+      {
+        "target_series": [
+          "TD"
+        ],
+        "subject": "svt",
+        "subdiscipline": null,
+        "unique_objects": 14
+      }
+    ],
+    "lesson_coverage": [
+      {
+        "target_series": [
+          "TA"
+        ],
+        "subject": "mathematics",
+        "subdiscipline": null,
+        "lesson_codes": [
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "L5",
+          "L6",
+          "L7",
+          "L8"
+        ],
+        "missing_within_observed_range": [],
+        "duplicate_lesson_codes": [],
+        "repeated_titles": []
+      },
+      {
+        "target_series": [
+          "TA"
+        ],
+        "subject": "spanish",
+        "subdiscipline": null,
+        "lesson_codes": [
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "L5",
+          "L6",
+          "L7",
+          "L8",
+          "L9",
+          "L10",
+          "L11",
+          "L12",
+          "L13",
+          "L14",
+          "L15",
+          "L16",
+          "L17",
+          "L18",
+          "L19",
+          "L20",
+          "L21",
+          "L22",
+          "L23",
+          "L24",
+          "L25",
+          "L26",
+          "L27",
+          "L28",
+          "L29",
+          "L30"
+        ],
+        "missing_within_observed_range": [],
+        "duplicate_lesson_codes": [],
+        "repeated_titles": []
+      },
+      {
+        "target_series": [
+          "TA"
+        ],
+        "subject": "svt",
+        "subdiscipline": null,
+        "lesson_codes": [
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "L5",
+          "L6",
+          "L7",
+          "L8"
+        ],
+        "missing_within_observed_range": [],
+        "duplicate_lesson_codes": [],
+        "repeated_titles": [
+          {
+            "normalized_title": "levolution de la lignee humaine",
+            "lesson_codes": [
+              "L4",
+              "L8"
+            ]
+          }
+        ]
+      },
+      {
+        "target_series": [
+          "TA",
+          "TC",
+          "TD"
+        ],
+        "subject": "history_geography",
+        "subdiscipline": "geography",
+        "lesson_codes": [
+          "G1",
+          "G2",
+          "G3",
+          "G4",
+          "G6",
+          "G7"
+        ],
+        "missing_within_observed_range": [
+          "G5"
+        ],
+        "duplicate_lesson_codes": [],
+        "repeated_titles": []
+      },
+      {
+        "target_series": [
+          "TA",
+          "TC",
+          "TD"
+        ],
+        "subject": "history_geography",
+        "subdiscipline": "history",
+        "lesson_codes": [
+          "H1",
+          "H2",
+          "H3",
+          "H4",
+          "H5",
+          "H6",
+          "H7",
+          "H8",
+          "H9"
+        ],
+        "missing_within_observed_range": [],
+        "duplicate_lesson_codes": [],
+        "repeated_titles": []
+      },
+      {
+        "target_series": [
+          "TA",
+          "TC",
+          "TD"
+        ],
+        "subject": "philosophy",
+        "subdiscipline": null,
+        "lesson_codes": [
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "L5",
+          "L6",
+          "L7",
+          "L8",
+          "L9",
+          "L10"
+        ],
+        "missing_within_observed_range": [],
+        "duplicate_lesson_codes": [],
+        "repeated_titles": []
+      },
+      {
+        "target_series": [
+          "TC"
+        ],
+        "subject": "mathematics",
+        "subdiscipline": null,
+        "lesson_codes": [
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "L5",
+          "L6",
+          "L7",
+          "L8",
+          "L9",
+          "L10",
+          "L11",
+          "L12",
+          "L13",
+          "L14",
+          "L15",
+          "L16",
+          "L17",
+          "L18",
+          "L19"
+        ],
+        "missing_within_observed_range": [],
+        "duplicate_lesson_codes": [],
+        "repeated_titles": []
+      },
+      {
+        "target_series": [
+          "TC",
+          "TD"
+        ],
+        "subject": "physics_chemistry",
+        "subdiscipline": "chemistry",
+        "lesson_codes": [
+          "CH1",
+          "CH2",
+          "CH3",
+          "CH4",
+          "CH5",
+          "CH6",
+          "CH7",
+          "CH8",
+          "CH9",
+          "CH10",
+          "CH11",
+          "CH12"
+        ],
+        "missing_within_observed_range": [],
+        "duplicate_lesson_codes": [],
+        "repeated_titles": []
+      },
+      {
+        "target_series": [
+          "TC",
+          "TD"
+        ],
+        "subject": "physics_chemistry",
+        "subdiscipline": "physics",
+        "lesson_codes": [
+          "PHY1",
+          "PHY2",
+          "PHY4",
+          "PHY5",
+          "PHY6",
+          "PHY8",
+          "PHY9",
+          "PHY10"
+        ],
+        "missing_within_observed_range": [
+          "PHY3",
+          "PHY7"
+        ],
+        "duplicate_lesson_codes": [],
+        "repeated_titles": []
+      },
+      {
+        "target_series": [
+          "TD"
+        ],
+        "subject": "mathematics",
+        "subdiscipline": null,
+        "lesson_codes": [
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "L5",
+          "L6",
+          "L7",
+          "L8",
+          "L9",
+          "L10",
+          "L11",
+          "L12"
+        ],
+        "missing_within_observed_range": [],
+        "duplicate_lesson_codes": [],
+        "repeated_titles": []
+      },
+      {
+        "target_series": [
+          "TD"
+        ],
+        "subject": "svt",
+        "subdiscipline": null,
+        "lesson_codes": [
+          "L1",
+          "L2",
+          "L3",
+          "L4",
+          "L5",
+          "L6",
+          "L7",
+          "L8",
+          "L9",
+          "L10",
+          "L11",
+          "L12",
+          "L14",
+          "L15"
+        ],
+        "missing_within_observed_range": [
+          "L13"
+        ],
+        "duplicate_lesson_codes": [],
+        "repeated_titles": []
+      }
+    ]
+  },
+  "deduplication": {
+    "patterns": [
+      {
+        "target_series": [
+          "TA",
+          "TC",
+          "TD"
+        ],
+        "subject": "history_geography",
+        "subdiscipline": "geography",
+        "copies_per_hash": 3,
+        "hash_groups": 6
+      },
+      {
+        "target_series": [
+          "TA",
+          "TC",
+          "TD"
+        ],
+        "subject": "history_geography",
+        "subdiscipline": "history",
+        "copies_per_hash": 3,
+        "hash_groups": 9
+      },
+      {
+        "target_series": [
+          "TA",
+          "TC",
+          "TD"
+        ],
+        "subject": "philosophy",
+        "subdiscipline": null,
+        "copies_per_hash": 3,
+        "hash_groups": 10
+      },
+      {
+        "target_series": [
+          "TC",
+          "TD"
+        ],
+        "subject": "physics_chemistry",
+        "subdiscipline": "chemistry",
+        "copies_per_hash": 2,
+        "hash_groups": 12
+      },
+      {
+        "target_series": [
+          "TC",
+          "TD"
+        ],
+        "subject": "physics_chemistry",
+        "subdiscipline": "physics",
+        "copies_per_hash": 2,
+        "hash_groups": 8
+      }
+    ],
+    "semantic_duplicate_outside_binary_hash": {
+      "lesson_codes": [
+        "L4",
+        "L8"
+      ],
+      "paths": [
+        "Nouveau dossier/TA/SVT TA/SVT TA_L4_Lévolution de la lignée humaine.pdf",
+        "Nouveau dossier/TA/SVT TA/SVT TA_L8_Lévolution de la lignée humaine.pdf"
+      ],
+      "binary_sha256": [
+        "4bf8a32777307701a8e015ab1a2b5e86f14a12fa8efa3bd339b41f666db8fa56",
+        "a2add090225cfce4954bae93df613665a8be761c7796ba721b1e78539e47563b"
+      ],
+      "normalized_extracted_text_sha256": [
+        "65b1ab4451f58be34fc061f4c592f22e90eb0e382b75107427a6f5cf3de73a5a",
+        "65b1ab4451f58be34fc061f4c592f22e90eb0e382b75107427a6f5cf3de73a5a"
+      ],
+      "normalized_text_equal": true,
+      "normalized_text_characters": [
+        15126,
+        15126
+      ]
+    },
+    "all_exact_groups_are_available_in_lessons_all_paths": true
+  },
+  "text_extraction": {
+    "unique_documents_tested": 136,
+    "unique_pages_tested": 1561,
+    "extractable_pages_ge_30_alnum": 1529,
+    "extractable_page_rate_percent": 97.95,
+    "low_text_pages_1_to_29_alnum": 28,
+    "zero_text_pages": 4,
+    "pages_with_image_xobjects": 543,
+    "documents_all_pages_extractable": 118,
+    "documents_with_at_least_one_zero_text_page": 3,
+    "suspected_scan_documents": 0,
+    "pdf_read_errors": 0,
+    "zero_text_page_details": [
+      {
+        "representative_path": "Nouveau dossier/TA/HG T all/Tle G1_Les fondements du developpement ?conomique de la C?te dIvoire.pdf",
+        "pages_1based": [
+          12,
+          13
+        ]
+      },
+      {
+        "representative_path": "Nouveau dossier/TA/HG T all/Tle H3-De la fin de la guerre froide vers un monde multipolaire.pdf",
+        "pages_1based": [
+          15
+        ]
+      },
+      {
+        "representative_path": "Nouveau dossier/TD/SVT TD/SVT TD_L1_Le reflexe conditionnel.pdf",
+        "pages_1based": [
+          15
+        ]
+      }
+    ],
+    "representative_sample": [
+      {
+        "sample_id": "ta_spanish",
+        "target_series": [
+          "TA"
+        ],
+        "subject": "spanish",
+        "subdiscipline": null,
+        "lesson_code": "L1",
+        "title": "Espagne-réalités sociolinguistiques",
+        "representative_path": "Nouveau dossier/TA/espagnol/L1 Espagne-réalités sociolinguistiques.pdf",
+        "sample_pages_1based": [
+          1,
+          2,
+          3
+        ],
+        "sample_alnum_characters": [
+          1331,
+          1246,
+          1306
+        ],
+        "result": "text_native"
+      },
+      {
+        "sample_id": "all_geography",
+        "target_series": [
+          "TA",
+          "TC",
+          "TD"
+        ],
+        "subject": "history_geography",
+        "subdiscipline": "geography",
+        "lesson_code": "G1",
+        "title": "Les fondements du developpement économique de la Côte dIvoire",
+        "representative_path": "Nouveau dossier/TA/HG T all/Tle G1_Les fondements du developpement économique de la Côte dIvoire.pdf",
+        "sample_pages_1based": [
+          1,
+          7,
+          13
+        ],
+        "sample_alnum_characters": [
+          1041,
+          1422,
+          0
+        ],
+        "result": "text_native"
+      },
+      {
+        "sample_id": "all_history",
+        "target_series": [
+          "TA",
+          "TC",
+          "TD"
+        ],
+        "subject": "history_geography",
+        "subdiscipline": "history",
+        "lesson_code": "H1",
+        "title": "LOrganisation des Nations Unies(ONU)",
+        "representative_path": "Nouveau dossier/TA/HG T all/Tle H1-LOrganisation des Nations Unies(ONU).pdf",
+        "sample_pages_1based": [
+          1,
+          7,
+          13
+        ],
+        "sample_alnum_characters": [
+          1229,
+          1575,
+          1158
+        ],
+        "result": "text_native"
+      },
+      {
+        "sample_id": "ta_mathematics",
+        "target_series": [
+          "TA"
+        ],
+        "subject": "mathematics",
+        "subdiscipline": null,
+        "lesson_code": "L1",
+        "title": "fonctions polynôme et fonctions rationnelles",
+        "representative_path": "Nouveau dossier/TA/Maths TA/TA Maths leçon 01 fonctions polynôme et fonctions rationnelles.pdf",
+        "sample_pages_1based": [
+          1,
+          15,
+          28
+        ],
+        "sample_alnum_characters": [
+          1056,
+          723,
+          97
+        ],
+        "result": "text_native"
+      },
+      {
+        "sample_id": "all_philosophy",
+        "target_series": [
+          "TA",
+          "TC",
+          "TD"
+        ],
+        "subject": "philosophy",
+        "subdiscipline": null,
+        "lesson_code": "L1",
+        "title": "La dissertation philosophique",
+        "representative_path": "Nouveau dossier/TA/philo/Tle_Philo_L1_La dissertation philosophique.pdf",
+        "sample_pages_1based": [
+          1,
+          4,
+          7
+        ],
+        "sample_alnum_characters": [
+          1404,
+          1010,
+          761
+        ],
+        "result": "text_native"
+      },
+      {
+        "sample_id": "ta_svt",
+        "target_series": [
+          "TA"
+        ],
+        "subject": "svt",
+        "subdiscipline": null,
+        "lesson_code": "L1",
+        "title": "Les réactions émotionnelles chez lHomme",
+        "representative_path": "Nouveau dossier/TA/SVT TA/SVT TA_L1_Les réactions émotionnelles chez lHomme.pdf",
+        "sample_pages_1based": [
+          1,
+          7,
+          12
+        ],
+        "sample_alnum_characters": [
+          1626,
+          1225,
+          191
+        ],
+        "result": "text_native"
+      },
+      {
+        "sample_id": "tc_mathematics",
+        "target_series": [
+          "TC"
+        ],
+        "subject": "mathematics",
+        "subdiscipline": null,
+        "lesson_code": "L1",
+        "title": "Limite et continuité",
+        "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 01 Limite et continuité.pdf",
+        "sample_pages_1based": [
+          1,
+          12,
+          23
+        ],
+        "sample_alnum_characters": [
+          963,
+          769,
+          644
+        ],
+        "result": "text_native"
+      },
+      {
+        "sample_id": "tc_td_chemistry",
+        "target_series": [
+          "TC",
+          "TD"
+        ],
+        "subject": "physics_chemistry",
+        "subdiscipline": "chemistry",
+        "lesson_code": "CH1",
+        "title": "Les alcools",
+        "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L1_Les alcools.pdf",
+        "sample_pages_1based": [
+          1,
+          6,
+          10
+        ],
+        "sample_alnum_characters": [
+          1134,
+          594,
+          727
+        ],
+        "result": "text_native"
+      },
+      {
+        "sample_id": "tc_td_physics",
+        "target_series": [
+          "TC",
+          "TD"
+        ],
+        "subject": "physics_chemistry",
+        "subdiscipline": "physics",
+        "lesson_code": "PHY1",
+        "title": "Cinématique du point",
+        "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L1_Cinématique du point.pdf",
+        "sample_pages_1based": [
+          1,
+          6,
+          10
+        ],
+        "sample_alnum_characters": [
+          1629,
+          907,
+          2319
+        ],
+        "result": "text_native"
+      },
+      {
+        "sample_id": "td_mathematics",
+        "target_series": [
+          "TD"
+        ],
+        "subject": "mathematics",
+        "subdiscipline": null,
+        "lesson_code": "L1",
+        "title": "LIMITES ET CONTINUITE",
+        "representative_path": "Nouveau dossier/TD/maths TD/TD Maths leçon 01 LIMITES ET CONTINUITE.pdf",
+        "sample_pages_1based": [
+          1,
+          12,
+          23
+        ],
+        "sample_alnum_characters": [
+          963,
+          769,
+          644
+        ],
+        "result": "text_native"
+      },
+      {
+        "sample_id": "td_svt",
+        "target_series": [
+          "TD"
+        ],
+        "subject": "svt",
+        "subdiscipline": null,
+        "lesson_code": "L1",
+        "title": "Le reflexe conditionnel",
+        "representative_path": "Nouveau dossier/TD/SVT TD/SVT TD_L1_Le reflexe conditionnel.pdf",
+        "sample_pages_1based": [
+          1,
+          8,
+          15
+        ],
+        "sample_alnum_characters": [
+          1080,
+          1199,
+          0
+        ],
+        "result": "text_native"
+      }
+    ]
+  },
+  "source_markers_on_first_page": {
+    "counts_among_unique_documents": {
+      "cote_ivoire_ecole_numerique": 123,
+      "ecole_ci_online": 12,
+      "cannot_be_sold_notice": 11,
+      "menetfp_property_notice": 2,
+      "mon_ecole_a_la_maison": 14
+    },
+    "basis": "First page text of all 136 SHA-256-unique PDFs."
+  },
+  "lessons": [
+    {
+      "catalog_id": "TA:mathematics:general:L1",
+      "sha256": "9eaa927eae1332ac3463860a3724203d8ff7455e7e2d0501687e794826c02b93",
+      "bytes": 818627,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L1",
+      "title_from_filename": "fonctions polynôme et fonctions rationnelles",
+      "pages": 28,
+      "representative_path": "Nouveau dossier/TA/Maths TA/TA Maths leçon 01 fonctions polynôme et fonctions rationnelles.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/Maths TA/TA Maths leçon 01 fonctions polynôme et fonctions rationnelles.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:mathematics:general:L2",
+      "sha256": "b8257b893e47ff3506cb12d5e61e24db05a265361e1572a6e9b9bb7a30d20f35",
+      "bytes": 373325,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L2",
+      "title_from_filename": "Probabilité",
+      "pages": 13,
+      "representative_path": "Nouveau dossier/TA/Maths TA/TA Maths leçon 02 Probabilité.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/Maths TA/TA Maths leçon 02 Probabilité.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:mathematics:general:L3",
+      "sha256": "38be6e570af32e3c583cbfba6f3fe70a2042886238ea37b8e7b8b5d86f5869eb",
+      "bytes": 385716,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L3",
+      "title_from_filename": "fonction logarithme neperien",
+      "pages": 10,
+      "representative_path": "Nouveau dossier/TA/Maths TA/TA Maths leçon 03 fonction logarithme neperien.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/Maths TA/TA Maths leçon 03 fonction logarithme neperien.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:mathematics:general:L4",
+      "sha256": "226e875c99012087fb5a490a14efb80338c2711bf86cfc1b68e61c56bb30de37",
+      "bytes": 674700,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L4",
+      "title_from_filename": "Fonction exponnentielle",
+      "pages": 14,
+      "representative_path": "Nouveau dossier/TA/Maths TA/TA Maths leçon 04 Fonction  exponnentielle.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/Maths TA/TA Maths leçon 04 Fonction  exponnentielle.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:mathematics:general:L5",
+      "sha256": "510ce962189f454a9dd9c1327da0ee6574dde732f6e9ec35b3430596eeb1a58e",
+      "bytes": 293017,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L5",
+      "title_from_filename": "Suites numériques",
+      "pages": 10,
+      "representative_path": "Nouveau dossier/TA/Maths TA/TA Maths leçon 05 Suites numériques.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/Maths TA/TA Maths leçon 05 Suites numériques.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:mathematics:general:L6",
+      "sha256": "50a65a9a08b3ad457e4419d19df86f907355b56b68dbf02804305b9609879b3f",
+      "bytes": 3310758,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L6",
+      "title_from_filename": "Statistiques",
+      "pages": 22,
+      "representative_path": "Nouveau dossier/TA/Maths TA/TA Maths leçon 06 Statistiques.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/Maths TA/TA Maths leçon 06 Statistiques.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:mathematics:general:L7",
+      "sha256": "fe0ec0604701597bff414c76bc0f7c765be6bda285898d852e8ac1a031a53a0f",
+      "bytes": 565300,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L7",
+      "title_from_filename": "Systèmes linéaires",
+      "pages": 10,
+      "representative_path": "Nouveau dossier/TA/Maths TA/TA Maths leçon 07 Systèmes linéaires.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/Maths TA/TA Maths leçon 07 Systèmes linéaires.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:mathematics:general:L8",
+      "sha256": "2659e8667b28d5c40d1bcec1e9a0d56c401ade25df5850b3e77448bb479c694b",
+      "bytes": 411328,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L8",
+      "title_from_filename": "Primitives et Calcul integral",
+      "pages": 9,
+      "representative_path": "Nouveau dossier/TA/Maths TA/TA Maths leçon 08 Primitives et Calcul integral.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/Maths TA/TA Maths leçon 08 Primitives et Calcul integral.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L1",
+      "sha256": "fcf8e384bf8f29292ca9bc039553733422632d884599f8c495e1838e7bc23852",
+      "bytes": 300006,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L1",
+      "title_from_filename": "Espagne-réalités sociolinguistiques",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L1 Espagne-réalités sociolinguistiques.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L1 Espagne-réalités sociolinguistiques.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L2",
+      "sha256": "2097339371b6572d92ca98a12a094187d61f8b9ed6c5779836510daa7ecacf2e",
+      "bytes": 185808,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L2",
+      "title_from_filename": "Espagne-réalités politiques, sociales histo",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L2 Espagne-réalités politiques, sociales histo.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L2 Espagne-réalités politiques, sociales histo.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L3",
+      "sha256": "7bc3d0c26306ceda33094a97ba9b6853b5e9544c06f6ca7965f8491da6f43af8",
+      "bytes": 282049,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L3",
+      "title_from_filename": "Am. hispa.-réalités sociales, histo",
+      "pages": 7,
+      "representative_path": "Nouveau dossier/TA/espagnol/L3 Am. hispa.-réalités sociales, histo.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L3 Am. hispa.-réalités sociales, histo.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L4",
+      "sha256": "17c4c81015be418e04cfabc903461b4d76f6b5cb287b5aa01f2f5bfd879e3c19",
+      "bytes": 181846,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L4",
+      "title_from_filename": "Am. hispa.-réalités économ. et sociales",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L4 Am. hispa.-réalités économ. et sociales.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L4 Am. hispa.-réalités économ. et sociales.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L5",
+      "sha256": "e46762de60aaf3298c6d12b8fd4d28c5492a8024dd4ec0d28beafc356ae2619d",
+      "bytes": 201650,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L5",
+      "title_from_filename": "Guiné Equatoriale-Réalités",
+      "pages": 4,
+      "representative_path": "Nouveau dossier/TA/espagnol/L5 Guiné Equatoriale-Réalités.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L5 Guiné Equatoriale-Réalités.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L6",
+      "sha256": "e728969ea205586edfa5e9e46df133d15c79801585c42387c4d63870719f1199",
+      "bytes": 191793,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L6",
+      "title_from_filename": "Poser des questions",
+      "pages": 4,
+      "representative_path": "Nouveau dossier/TA/espagnol/L6 Poser des questions.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L6 Poser des questions.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L7",
+      "sha256": "55e6e4cb2c5df386d61eb2bbfd7889dde40272854edb81cff58f0afd8c2df117",
+      "bytes": 211793,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L7",
+      "title_from_filename": "Décrire",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L7 Décrire.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L7 Décrire.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L8",
+      "sha256": "e74bd8e4d2cc978c7f2f20f23bbf42746a9d0737ca4fd7542e52a46d0f37cf82",
+      "bytes": 197076,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L8",
+      "title_from_filename": "Raconter un fait",
+      "pages": 4,
+      "representative_path": "Nouveau dossier/TA/espagnol/L8 Raconter un fait.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L8 Raconter un fait.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L9",
+      "sha256": "c54b89f6c5f39bf0eba72c1be951cd196bd3410ac675c43a472324e85ebd0a1a",
+      "bytes": 217703,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L9",
+      "title_from_filename": "Résumer",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L9 Résumer.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L9 Résumer.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L10",
+      "sha256": "e41ab702525c0c562d55def7bff61520a01daeb2f1a126256ced3e99630963e6",
+      "bytes": 190706,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L10",
+      "title_from_filename": "Rappeler une information",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L10 Rappeler une information.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L10 Rappeler une information.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L11",
+      "sha256": "7f38423b8ee2a6adae7635b79fe277311fd2cdf5d407cd13cfcde74a53eae2f5",
+      "bytes": 216042,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L11",
+      "title_from_filename": "Exprimer une opinion",
+      "pages": 4,
+      "representative_path": "Nouveau dossier/TA/espagnol/L11 Exprimer une opinion.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L11 Exprimer une opinion.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L12",
+      "sha256": "249590c164029fee2eac36180b3b3cc37074e66b860c677aa274c1893c62496b",
+      "bytes": 207285,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L12",
+      "title_from_filename": "Exprimer la capacité -lincapacité",
+      "pages": 4,
+      "representative_path": "Nouveau dossier/TA/espagnol/L12 Exprimer la capacité -lincapacité.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L12 Exprimer la capacité -lincapacité.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L13",
+      "sha256": "2a555ee04884c01b58e5c535b4952a3f23adc12421c65e15586b5761f0489a64",
+      "bytes": 196428,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L13",
+      "title_from_filename": "Exprimer lapprobation",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L13 Exprimer lapprobation.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L13 Exprimer lapprobation.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L14",
+      "sha256": "d8e0578d4be7399c30954ba762846f97fd15d6893d4e76ad6405af36533c184c",
+      "bytes": 187275,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L14",
+      "title_from_filename": "Exprimer la désapprobaion",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L14 Exprimer la désapprobaion.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L14 Exprimer la désapprobaion.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L15",
+      "sha256": "650fc83cb40649bf48b58d1983d3913d378abe2776d95810f481a514d27d6a94",
+      "bytes": 298027,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L15",
+      "title_from_filename": "Convaincre",
+      "pages": 4,
+      "representative_path": "Nouveau dossier/TA/espagnol/L15 Convaincre .pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L15 Convaincre .pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L16",
+      "sha256": "80733a1ec4ba2cfb5e8e31a67220a0f1bd1ad350b119c87f4a93a1b1d76ab349",
+      "bytes": 184471,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L16",
+      "title_from_filename": "Exprier lindignatin",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L16 Exprier lindignatin.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L16 Exprier lindignatin.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L17",
+      "sha256": "92be61c82bd917c641283f12f1a59e4b037b795cc606e669ab8bd2fa3002a0bf",
+      "bytes": 201111,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L17",
+      "title_from_filename": "Exprimer la gratitud -explimer le voeu",
+      "pages": 4,
+      "representative_path": "Nouveau dossier/TA/espagnol/L17 Exprimer la gratitud -explimer le voeu.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L17 Exprimer la gratitud -explimer le voeu.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L18",
+      "sha256": "5e78ce4001ccb4cc2f219fbb13aabe9de0de8eec66a65e4e09acce3b95a14114",
+      "bytes": 187480,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L18",
+      "title_from_filename": "Exprimer la joie",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L18 Exprimer la joie.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L18 Exprimer la joie.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L19",
+      "sha256": "eb90461fb4d39581eb73ad15b761333e665384a6f7b7c82ed4da1bd54af005e4",
+      "bytes": 184941,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L19",
+      "title_from_filename": "Exprimer la peine",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L19 Exprimer la peine.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L19 Exprimer la peine.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L20",
+      "sha256": "bf31590501c91ee7bd1238fcea52cc5360e6b69cbc1cc1e87a61a7129e14514b",
+      "bytes": 183638,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L20",
+      "title_from_filename": "Exprimer lespoir",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L20 Exprimer lespoir .pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L20 Exprimer lespoir .pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L21",
+      "sha256": "39504d35a98603f3c06a25389bb3f8cae904a1b9787934e56ad0bea25aab09de",
+      "bytes": 193277,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L21",
+      "title_from_filename": "Donner des consignes",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L21 Donner des consignes.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L21 Donner des consignes.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L22",
+      "sha256": "c37587c52cce39bc44f1e2563b0cb15e89c7ff0231d720482964dcb4b863a9ba",
+      "bytes": 186472,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L22",
+      "title_from_filename": "Donner des conseils",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L22 Donner des conseils.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L22 Donner des conseils.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L23",
+      "sha256": "d061266a11ba8be433e95df4d58aca0f2912c80f685a756849ce9e3d104c7fed",
+      "bytes": 249904,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L23",
+      "title_from_filename": "Faire des suggestions",
+      "pages": 4,
+      "representative_path": "Nouveau dossier/TA/espagnol/L23 Faire des suggestions.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L23 Faire des suggestions.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L24",
+      "sha256": "e39a1743dc5b2c70fb10bf1d0ba2e08e1bbc4ea5b8ffdb32c9457f15c8f540c4",
+      "bytes": 191724,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L24",
+      "title_from_filename": "Faire une demande",
+      "pages": 4,
+      "representative_path": "Nouveau dossier/TA/espagnol/L24 Faire une demande.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L24 Faire une demande.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L25",
+      "sha256": "2cbe1566ba342561d6a61f737afd08db38993590b842160263c48d849184001e",
+      "bytes": 181653,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L25",
+      "title_from_filename": "Dissuader",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L25 Dissuader .pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L25 Dissuader .pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L26",
+      "sha256": "e19dca93f7b5cf50c7d131fb3a923e5427991241be987bb110beeb8e66f32331",
+      "bytes": 226864,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L26",
+      "title_from_filename": "Réaliser une conversation",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L26 Réaliser une conversation.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L26 Réaliser une conversation.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L27",
+      "sha256": "20a14c9d9c17b637b1bb9da1a3f5a305dbf622dd4b86403e57c45c0281e71936",
+      "bytes": 194709,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L27",
+      "title_from_filename": "Réaliser une interview",
+      "pages": 4,
+      "representative_path": "Nouveau dossier/TA/espagnol/L27 Réaliser une interview.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L27 Réaliser une interview.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L28",
+      "sha256": "27f3074ec45a7791ea86fc359ec660d73666eb2ec14bcc32a11a733171adefd4",
+      "bytes": 194150,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L28",
+      "title_from_filename": "Faire un exposé",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L28 Faire un exposé.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L28 Faire un exposé.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L29",
+      "sha256": "47215af3abcb7908174c2161e1cac5d8d358efeec9c19ca6fb7a26965646363f",
+      "bytes": 228943,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L29",
+      "title_from_filename": "Présenter un thème",
+      "pages": 3,
+      "representative_path": "Nouveau dossier/TA/espagnol/L29 Présenter un thème.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L29 Présenter un thème.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:spanish:general:L30",
+      "sha256": "138fc7fea527d798098a2418153892a175dc603b52e91a7004862a62a3569df9",
+      "bytes": 718035,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "spanish",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L30",
+      "title_from_filename": "Commenter une image",
+      "pages": 5,
+      "representative_path": "Nouveau dossier/TA/espagnol/L30 Commenter une image.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/espagnol/L30 Commenter une image.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:svt:general:L1",
+      "sha256": "09d3df1bc32942daf688655d8d93bb7ad8c25598dee1e1d563afaf6b714e1e7c",
+      "bytes": 788167,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L1",
+      "title_from_filename": "Les réactions émotionnelles chez lHomme",
+      "pages": 12,
+      "representative_path": "Nouveau dossier/TA/SVT TA/SVT TA_L1_Les réactions émotionnelles chez lHomme.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/SVT TA/SVT TA_L1_Les réactions émotionnelles chez lHomme.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:svt:general:L2",
+      "sha256": "e83ba9315dea412f63b3e65092202bf3b6b9eda71e44cec97a0757bb136cac9f",
+      "bytes": 635161,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L2",
+      "title_from_filename": "Lactivité cérébrale chez lHomme",
+      "pages": 13,
+      "representative_path": "Nouveau dossier/TA/SVT TA/SVT TA_L2_Lactivité cérébrale chez lHomme.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/SVT TA/SVT TA_L2_Lactivité cérébrale chez lHomme.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:svt:general:L3",
+      "sha256": "51cb1ef77a4305054add0c66ced8541e7c29a13f17910222ab1c19308984ccd8",
+      "bytes": 455569,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L3",
+      "title_from_filename": "Lorigine de la vie",
+      "pages": 8,
+      "representative_path": "Nouveau dossier/TA/SVT TA/SVT TA_L3_Lorigine de la vie.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/SVT TA/SVT TA_L3_Lorigine de la vie.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:svt:general:L4",
+      "sha256": "4bf8a32777307701a8e015ab1a2b5e86f14a12fa8efa3bd339b41f666db8fa56",
+      "bytes": 541363,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L4",
+      "title_from_filename": "Lévolution de la lignée humaine",
+      "pages": 13,
+      "representative_path": "Nouveau dossier/TA/SVT TA/SVT TA_L4_Lévolution de la lignée humaine.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/SVT TA/SVT TA_L4_Lévolution de la lignée humaine.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:svt:general:L5",
+      "sha256": "957b65af78c9eb9500a904cfd8273bab2700747606a297e40709480de07c5d3b",
+      "bytes": 399946,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L5",
+      "title_from_filename": "Lhérédité du sexe et du groupe sanguin chez lHomme",
+      "pages": 8,
+      "representative_path": "Nouveau dossier/TA/SVT TA/SVT TA_L5_Lhérédité du sexe et du groupe sanguin chez lHomme.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/SVT TA/SVT TA_L5_Lhérédité du sexe et du groupe sanguin chez lHomme.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:svt:general:L6",
+      "sha256": "1a3ed624d7397a6932b652fe4a366a983b797c4be169612b235a5ff03509d51f",
+      "bytes": 498410,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L6",
+      "title_from_filename": "Les prévisions génétiques",
+      "pages": 9,
+      "representative_path": "Nouveau dossier/TA/SVT TA/SVT TA_L6_Les prévisions génétiques.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/SVT TA/SVT TA_L6_Les prévisions génétiques.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:svt:general:L7",
+      "sha256": "3868fe6f01bd77332e98a0e30f9599319a69bad0f5e8e7dbd3fb81c65b95ecf2",
+      "bytes": 1004776,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L7",
+      "title_from_filename": "La biosynthèse des protéines",
+      "pages": 12,
+      "representative_path": "Nouveau dossier/TA/SVT TA/SVT TA_L7_La biosynthèse des protéines.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/SVT TA/SVT TA_L7_La biosynthèse des protéines.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA:svt:general:L8",
+      "sha256": "a2add090225cfce4954bae93df613665a8be761c7796ba721b1e78539e47563b",
+      "bytes": 541363,
+      "target_series": [
+        "TA"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L8",
+      "title_from_filename": "Lévolution de la lignée humaine",
+      "pages": 13,
+      "representative_path": "Nouveau dossier/TA/SVT TA/SVT TA_L8_Lévolution de la lignée humaine.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/SVT TA/SVT TA_L8_Lévolution de la lignée humaine.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TA+TC+TD:history_geography:geography:G1",
+      "sha256": "71f0ac775b49b1661a32ab291e4dc7bb92b2c9d387e34d9647162c166d04ad59",
+      "bytes": 341622,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "history_geography",
+      "subdiscipline": "geography",
+      "lesson_code_from_filename": "G1",
+      "title_from_filename": "Les fondements du developpement économique de la Côte dIvoire",
+      "pages": 13,
+      "representative_path": "Nouveau dossier/TA/HG T all/Tle G1_Les fondements du developpement économique de la Côte dIvoire.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/HG T all/Tle G1_Les fondements du developpement économique de la Côte dIvoire.pdf",
+        "Nouveau dossier/TC/HG Toute série/Tle G1_Les fondements du developpement économique de la Côte dIvoire.pdf",
+        "Nouveau dossier/TD/HG T all/Tle G1_Les fondements du developpement économique de la Côte dIvoire.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 683244
+    },
+    {
+      "catalog_id": "TA+TC+TD:history_geography:geography:G2",
+      "sha256": "9a4624f5b1baad578ac3bd253171a7aaee9b308d91445845ed4980281f64bf58",
+      "bytes": 439263,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "history_geography",
+      "subdiscipline": "geography",
+      "lesson_code_from_filename": "G2",
+      "title_from_filename": "Les secteurs dactivités économiques de la Côte dIvoire",
+      "pages": 15,
+      "representative_path": "Nouveau dossier/TA/HG T all/Tle G2_Les secteurs dactivités économiques de la Côte dIvoire.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/HG T all/Tle G2_Les secteurs dactivités économiques de la Côte dIvoire.pdf",
+        "Nouveau dossier/TC/HG Toute série/Tle G2_Les secteurs dactivités économiques de la Côte dIvoire.pdf",
+        "Nouveau dossier/TD/HG T all/Tle G2_Les secteurs dactivités économiques de la Côte dIvoire.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 878526
+    },
+    {
+      "catalog_id": "TA+TC+TD:history_geography:geography:G3",
+      "sha256": "3d07f1f0ca9560627ab245d8169d48eedf028b988c478dcabf83f8e930e8e09a",
+      "bytes": 325897,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "history_geography",
+      "subdiscipline": "geography",
+      "lesson_code_from_filename": "G3",
+      "title_from_filename": "Les problèmes de développement économique de la Côte dIvoire",
+      "pages": 18,
+      "representative_path": "Nouveau dossier/TA/HG T all/Tle G3_Les problèmes de développement économique de la Côte dIvoire.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/HG T all/Tle G3_Les problèmes de développement économique de la Côte dIvoire.pdf",
+        "Nouveau dossier/TC/HG Toute série/Tle G3_Les problèmes de développement économique de la Côte dIvoire.pdf",
+        "Nouveau dossier/TD/HG T all/Tle G3_Les problèmes de développement économique de la Côte dIvoire.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 651794
+    },
+    {
+      "catalog_id": "TA+TC+TD:history_geography:geography:G4",
+      "sha256": "3af57ed5ef284d1145cd5524b7e98431b1c0ec0c6c87a7c2eb15fd8b1f926153",
+      "bytes": 640569,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "history_geography",
+      "subdiscipline": "geography",
+      "lesson_code_from_filename": "G4",
+      "title_from_filename": "Les fondements du développement économique de la corée du Sud",
+      "pages": 14,
+      "representative_path": "Nouveau dossier/TA/HG T all/Tle G4_Les fondements du développement économique de la corée du Sud.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/HG T all/Tle G4_Les fondements du développement économique de la corée du Sud.pdf",
+        "Nouveau dossier/TC/HG Toute série/Tle G4_Les fondements du développement économique de la corée du Sud.pdf",
+        "Nouveau dossier/TD/HG T all/Tle G4_Les fondements du développement économique de la corée du Sud.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 1281138
+    },
+    {
+      "catalog_id": "TA+TC+TD:history_geography:geography:G6",
+      "sha256": "27b4a9d00fd4406d0d379d01563faad2ecfd22e68d279dc2bbbdd52f0366da1a",
+      "bytes": 772250,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "history_geography",
+      "subdiscipline": "geography",
+      "lesson_code_from_filename": "G6",
+      "title_from_filename": "La CEDEAO une organisation régionale à caractère économique",
+      "pages": 12,
+      "representative_path": "Nouveau dossier/TA/HG T all/Tle G6_La CEDEAO une organisation régionale à caractère économique.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/HG T all/Tle G6_La CEDEAO une organisation régionale à caractère économique.pdf",
+        "Nouveau dossier/TC/HG Toute série/Tle G6_La CEDEAO une organisation régionale à caractère économique.pdf",
+        "Nouveau dossier/TD/HG T all/Tle G6_La CEDEAO une organisation régionale à caractère économique.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 1544500
+    },
+    {
+      "catalog_id": "TA+TC+TD:history_geography:geography:G7",
+      "sha256": "c229ecb2ff53b46550f25e7eedce3377c0659cb9450580535be924cac8b33b33",
+      "bytes": 340603,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "history_geography",
+      "subdiscipline": "geography",
+      "lesson_code_from_filename": "G7",
+      "title_from_filename": "Les relations UE -ACP un exemple de coopération Nord-Sud",
+      "pages": 18,
+      "representative_path": "Nouveau dossier/TA/HG T all/Tle G7_Les relations UE -ACP un exemple de coopération Nord-Sud.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/HG T all/Tle G7_Les relations UE -ACP un exemple de coopération Nord-Sud.pdf",
+        "Nouveau dossier/TC/HG Toute série/Tle G7_Les relations UE -ACP un exemple de coopération Nord-Sud.pdf",
+        "Nouveau dossier/TD/HG T all/Tle G7_Les relations UE -ACP un exemple de coopération Nord-Sud.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 681206
+    },
+    {
+      "catalog_id": "TA+TC+TD:history_geography:history:H1",
+      "sha256": "18f34ae93b429102c576dffd7a3b947a18d8a8028072e0aabbccf9f184b5e976",
+      "bytes": 330332,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "history_geography",
+      "subdiscipline": "history",
+      "lesson_code_from_filename": "H1",
+      "title_from_filename": "LOrganisation des Nations Unies(ONU)",
+      "pages": 13,
+      "representative_path": "Nouveau dossier/TA/HG T all/Tle H1-LOrganisation des Nations Unies(ONU).pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/HG T all/Tle H1-LOrganisation des Nations Unies(ONU).pdf",
+        "Nouveau dossier/TC/HG Toute série/Tle H1-LOrganisation des Nations Unies(ONU).pdf",
+        "Nouveau dossier/TD/HG T all/Tle H1-LOrganisation des Nations Unies(ONU).pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 660664
+    },
+    {
+      "catalog_id": "TA+TC+TD:history_geography:history:H2",
+      "sha256": "c069f22a9e429a819964b7dd93ccb9620c4326e76740608de9b13c6528831dcb",
+      "bytes": 980019,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "history_geography",
+      "subdiscipline": "history",
+      "lesson_code_from_filename": "H2",
+      "title_from_filename": "Lère de la bipolarisation de 1947 à 1991",
+      "pages": 28,
+      "representative_path": "Nouveau dossier/TA/HG T all/Tle H2- Lère de la bipolarisation de 1947 à 1991.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/HG T all/Tle H2- Lère de la bipolarisation de 1947 à 1991.pdf",
+        "Nouveau dossier/TC/HG Toute série/Tle H2- Lère de la bipolarisation de 1947 à 1991.pdf",
+        "Nouveau dossier/TD/HG T all/Tle H2- Lère de la bipolarisation de 1947 à 1991.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 1960038
+    },
+    {
+      "catalog_id": "TA+TC+TD:history_geography:history:H3",
+      "sha256": "23eaee9712421838fd3de627f0691f49d1be925b7fd5aa683ef76c6febd87906",
+      "bytes": 566131,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "history_geography",
+      "subdiscipline": "history",
+      "lesson_code_from_filename": "H3",
+      "title_from_filename": "De la fin de la guerre froide vers un monde multipolaire",
+      "pages": 15,
+      "representative_path": "Nouveau dossier/TA/HG T all/Tle H3-De la fin de la guerre froide vers un monde multipolaire.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/HG T all/Tle H3-De la fin de la guerre froide vers un monde multipolaire.pdf",
+        "Nouveau dossier/TC/HG Toute série/Tle H3-De la fin de la guerre froide vers un monde multipolaire.pdf",
+        "Nouveau dossier/TD/HG T all/Tle H3-De la fin de la guerre froide vers un monde multipolaire.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 1132262
+    },
+    {
+      "catalog_id": "TA+TC+TD:history_geography:history:H4",
+      "sha256": "71d9aacd6819117623e6c7506c4663aebcedebc848993aaf7bcc0ad78962763b",
+      "bytes": 299592,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "history_geography",
+      "subdiscipline": "history",
+      "lesson_code_from_filename": "H4",
+      "title_from_filename": "la montée des nationalismes ok",
+      "pages": 10,
+      "representative_path": "Nouveau dossier/TA/HG T all/Tle H4-la montée des nationalismes ok.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/HG T all/Tle H4-la montée des nationalismes ok.pdf",
+        "Nouveau dossier/TC/HG Toute série/Tle H4-la montée des nationalismes ok.pdf",
+        "Nouveau dossier/TD/HG T all/Tle H4-la montée des nationalismes ok.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 599184
+    },
+    {
+      "catalog_id": "TA+TC+TD:history_geography:history:H5",
+      "sha256": "a8749720fddd11783f123e3b6464427425e9eb5e5e86a7bb75bf133649e57d44",
+      "bytes": 314320,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "history_geography",
+      "subdiscipline": "history",
+      "lesson_code_from_filename": "H5",
+      "title_from_filename": "LAccession de la Côte dIvoire à lindépendance",
+      "pages": 12,
+      "representative_path": "Nouveau dossier/TA/HG T all/Tle H5-LAccession de la Côte dIvoire à lindépendance.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/HG T all/Tle H5-LAccession de la Côte dIvoire à lindépendance.pdf",
+        "Nouveau dossier/TC/HG Toute série/Tle H5-LAccession de la Côte dIvoire à lindépendance.pdf",
+        "Nouveau dossier/TD/HG T all/Tle H5-LAccession de la Côte dIvoire à lindépendance.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 628640
+    },
+    {
+      "catalog_id": "TA+TC+TD:history_geography:history:H6",
+      "sha256": "e13627b9217c7952e00e8209f9e3ea0ff0321a7e7beeaafb54a70fed17d7e714",
+      "bytes": 707025,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "history_geography",
+      "subdiscipline": "history",
+      "lesson_code_from_filename": "H6",
+      "title_from_filename": "Laccession de lAlgérie à lindépendance",
+      "pages": 12,
+      "representative_path": "Nouveau dossier/TA/HG T all/Tle H6- Laccession de lAlgérie à lindépendance.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/HG T all/Tle H6- Laccession de lAlgérie à lindépendance.pdf",
+        "Nouveau dossier/TC/HG Toute série/Tle H6- Laccession de lAlgérie à lindépendance.pdf",
+        "Nouveau dossier/TD/HG T all/Tle H6- Laccession de lAlgérie à lindépendance.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 1414050
+    },
+    {
+      "catalog_id": "TA+TC+TD:history_geography:history:H7",
+      "sha256": "71ec6645b3512d2e08c5c07af36fc7900b893cef745bdafc83d7d136f15bbc36",
+      "bytes": 306564,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "history_geography",
+      "subdiscipline": "history",
+      "lesson_code_from_filename": "H7",
+      "title_from_filename": "L Union Africaine",
+      "pages": 12,
+      "representative_path": "Nouveau dossier/TA/HG T all/Tle H7-L Union Africaine.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/HG T all/Tle H7-L Union Africaine.pdf",
+        "Nouveau dossier/TC/HG Toute série/Tle H7-L Union Africaine.pdf",
+        "Nouveau dossier/TD/HG T all/Tle H7-L Union Africaine.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 613128
+    },
+    {
+      "catalog_id": "TA+TC+TD:history_geography:history:H8",
+      "sha256": "0183e365d94a4897d9adc595bad28d74fe0baba13e5fb8fd462680208297dbff",
+      "bytes": 287400,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "history_geography",
+      "subdiscipline": "history",
+      "lesson_code_from_filename": "H8",
+      "title_from_filename": "Croyances et valeurs dominantes dans le monde Occidental",
+      "pages": 12,
+      "representative_path": "Nouveau dossier/TA/HG T all/Tle H8-Croyances et valeurs dominantes dans le monde Occidental.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/HG T all/Tle H8-Croyances et valeurs dominantes dans le monde Occidental.pdf",
+        "Nouveau dossier/TC/HG Toute série/Tle H8-Croyances et valeurs dominantes dans le monde Occidental.pdf",
+        "Nouveau dossier/TD/HG T all/Tle H8-Croyances et valeurs dominantes dans le monde Occidental.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 574800
+    },
+    {
+      "catalog_id": "TA+TC+TD:history_geography:history:H9",
+      "sha256": "50a4edf0dafae8d897505b48cef6d1588994d6de1ef60e1cf88bebef25cd65d9",
+      "bytes": 361542,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "history_geography",
+      "subdiscipline": "history",
+      "lesson_code_from_filename": "H9",
+      "title_from_filename": "Les mutations contemporaines de la civilisation négro africaine",
+      "pages": 15,
+      "representative_path": "Nouveau dossier/TA/HG T all/Tle H9-Les mutations contemporaines de la civilisation négro africaine.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/HG T all/Tle H9-Les mutations contemporaines de la civilisation négro africaine.pdf",
+        "Nouveau dossier/TC/HG Toute série/Tle H9-Les mutations contemporaines de la civilisation négro africaine.pdf",
+        "Nouveau dossier/TD/HG T all/Tle H9-Les mutations contemporaines de la civilisation négro africaine.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 723084
+    },
+    {
+      "catalog_id": "TA+TC+TD:philosophy:general:L1",
+      "sha256": "c15905ea6781d7fae52b4cdcfc9ebaa244e2f8fa6beab59afb8dd7649d31c58b",
+      "bytes": 323452,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "philosophy",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L1",
+      "title_from_filename": "La dissertation philosophique",
+      "pages": 7,
+      "representative_path": "Nouveau dossier/TA/philo/Tle_Philo_L1_La dissertation philosophique.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/philo/Tle_Philo_L1_La dissertation philosophique.pdf",
+        "Nouveau dossier/TC/philo/Tle_Philo_L1_La dissertation philosophique.pdf",
+        "Nouveau dossier/TD/philo/Tle_Philo_L1_La dissertation philosophique.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 646904
+    },
+    {
+      "catalog_id": "TA+TC+TD:philosophy:general:L2",
+      "sha256": "73033cf1ff589f003d470d71437cf3834dddff78898e94f475d622221b84f4c9",
+      "bytes": 295075,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "philosophy",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L2",
+      "title_from_filename": "Le commentataire de texte philosophique",
+      "pages": 8,
+      "representative_path": "Nouveau dossier/TA/philo/Tle_Philo_L2_Le commentataire de texte philosophique.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/philo/Tle_Philo_L2_Le commentataire de texte philosophique.pdf",
+        "Nouveau dossier/TC/philo/Tle_Philo_L2_Le commentataire de texte philosophique.pdf",
+        "Nouveau dossier/TD/philo/Tle_Philo_L2_Le commentataire de texte philosophique.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 590150
+    },
+    {
+      "catalog_id": "TA+TC+TD:philosophy:general:L3",
+      "sha256": "e10eb8391ad34618092146d6edfa514d77b569130068478b46a46c17e0510dd9",
+      "bytes": 244499,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "philosophy",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L3",
+      "title_from_filename": "La connaissance de lhomme",
+      "pages": 6,
+      "representative_path": "Nouveau dossier/TA/philo/Tle_Philo_L3_La connaissance de lhomme.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/philo/Tle_Philo_L3_La connaissance de lhomme.pdf",
+        "Nouveau dossier/TC/philo/Tle_Philo_L3_La connaissance de lhomme.pdf",
+        "Nouveau dossier/TD/philo/Tle_Philo_L3_La connaissance de lhomme.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 488998
+    },
+    {
+      "catalog_id": "TA+TC+TD:philosophy:general:L4",
+      "sha256": "00538245b378949d2b94036519f2ef604597f9b098a511efa74f59c5556af137",
+      "bytes": 325271,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "philosophy",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L4",
+      "title_from_filename": "La vie en société",
+      "pages": 10,
+      "representative_path": "Nouveau dossier/TA/philo/Tle_Philo_L4_La vie en société.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/philo/Tle_Philo_L4_La vie en société.pdf",
+        "Nouveau dossier/TC/philo/Tle_Philo_L4_La vie en société.pdf",
+        "Nouveau dossier/TD/philo/Tle_Philo_L4_La vie en société.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 650542
+    },
+    {
+      "catalog_id": "TA+TC+TD:philosophy:general:L5",
+      "sha256": "d92a4b35d9da781498cfe823e05b93d715988bbf7c5dc7f82c2b3fe4b42a05a8",
+      "bytes": 316524,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "philosophy",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L5",
+      "title_from_filename": "Dieu et la réligion",
+      "pages": 7,
+      "representative_path": "Nouveau dossier/TA/philo/Tle_Philo_L5_Dieu et la réligion.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/philo/Tle_Philo_L5_Dieu et la réligion.pdf",
+        "Nouveau dossier/TC/philo/Tle_Philo_L5_Dieu et la réligion.pdf",
+        "Nouveau dossier/TD/philo/Tle_Philo_L5_Dieu et la réligion.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 633048
+    },
+    {
+      "catalog_id": "TA+TC+TD:philosophy:general:L6",
+      "sha256": "59f4fa2a7104274101ae92193d73b3f9fc0647f33c1aa6c7fbe15d4d8ec87039",
+      "bytes": 332665,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "philosophy",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L6",
+      "title_from_filename": "Lhistoire et lhumanité",
+      "pages": 10,
+      "representative_path": "Nouveau dossier/TA/philo/Tle_Philo_L6_Lhistoire et lhumanité.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/philo/Tle_Philo_L6_Lhistoire et lhumanité.pdf",
+        "Nouveau dossier/TC/philo/Tle_Philo_L6_Lhistoire et lhumanité.pdf",
+        "Nouveau dossier/TD/philo/Tle_Philo_L6_Lhistoire et lhumanité.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 665330
+    },
+    {
+      "catalog_id": "TA+TC+TD:philosophy:general:L7",
+      "sha256": "b019e1d15180b281334d0bf8858187b9f6665a0818ea8d3747ca70e0aa295719",
+      "bytes": 317245,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "philosophy",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L7",
+      "title_from_filename": "La valeur de la philosophie",
+      "pages": 11,
+      "representative_path": "Nouveau dossier/TA/philo/Tle_Philo_L7_La valeur de la philosophie.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/philo/Tle_Philo_L7_La valeur de la philosophie.pdf",
+        "Nouveau dossier/TC/philo/Tle_Philo_L7_La valeur de la philosophie.pdf",
+        "Nouveau dossier/TD/philo/Tle_Philo_L7_La valeur de la philosophie.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 634490
+    },
+    {
+      "catalog_id": "TA+TC+TD:philosophy:general:L8",
+      "sha256": "e8a1f316c2b93aad1e076cba8730cf21b4975760e135dd1ea6a38cd7de12210e",
+      "bytes": 274230,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "philosophy",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L8",
+      "title_from_filename": "Progrès et Bonheur",
+      "pages": 10,
+      "representative_path": "Nouveau dossier/TA/philo/Tle_Philo_L8_Progrès et Bonheur.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/philo/Tle_Philo_L8_Progrès et Bonheur.pdf",
+        "Nouveau dossier/TC/philo/Tle_Philo_L8_Progrès et Bonheur.pdf",
+        "Nouveau dossier/TD/philo/Tle_Philo_L8_Progrès et Bonheur.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 548460
+    },
+    {
+      "catalog_id": "TA+TC+TD:philosophy:general:L9",
+      "sha256": "d1943d753f571d0376c373dc8d4a143536ad6ec49381b340db8b29168af1d37b",
+      "bytes": 320368,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "philosophy",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L9",
+      "title_from_filename": "Langage et Vérité",
+      "pages": 15,
+      "representative_path": "Nouveau dossier/TA/philo/Tle_Philo_L9_Langage et Vérité.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/philo/Tle_Philo_L9_Langage et Vérité.pdf",
+        "Nouveau dossier/TC/philo/Tle_Philo_L9_Langage et Vérité.pdf",
+        "Nouveau dossier/TD/philo/Tle_Philo_L9_Langage et Vérité.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 640736
+    },
+    {
+      "catalog_id": "TA+TC+TD:philosophy:general:L10",
+      "sha256": "16f4ad89b323ec637b0a788a9745c1e41bc544e9bf1ca2b211e5a2ad68823d0b",
+      "bytes": 382411,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "philosophy",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L10",
+      "title_from_filename": "La Connaissance scientifique",
+      "pages": 17,
+      "representative_path": "Nouveau dossier/TA/philo/Tle_Philo_L10_La Connaissance scientifique.pdf",
+      "all_paths": [
+        "Nouveau dossier/TA/philo/Tle_Philo_L10_La Connaissance scientifique.pdf",
+        "Nouveau dossier/TC/philo/Tle_Philo_L10_La Connaissance scientifique.pdf",
+        "Nouveau dossier/TD/philo/Tle_Philo_L10_La Connaissance scientifique.pdf"
+      ],
+      "physical_copies": 3,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 764822
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L1",
+      "sha256": "e8c25ae6a92e361f1a9ae768269c812ab1eef1d5202cb6dadc41f76327e9ddcf",
+      "bytes": 717766,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L1",
+      "title_from_filename": "Limite et continuité",
+      "pages": 23,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 01 Limite et continuité.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 01 Limite et continuité.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L2",
+      "sha256": "3b240200119351385338bb6b6df8d0158ed64921ccbe1168995b4619c4aee68e",
+      "bytes": 504223,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L2",
+      "title_from_filename": "Barycentre",
+      "pages": 14,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 02 Barycentre.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 02 Barycentre.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L3",
+      "sha256": "749abc359ef808199ddb3643a2740d025bc75d36989828a030fe9c9176a6046b",
+      "bytes": 430437,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L3",
+      "title_from_filename": "Divisibilité dans Z",
+      "pages": 19,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 03 Divisibilité dans  Z.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 03 Divisibilité dans  Z.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L4",
+      "sha256": "dff27309b68ba4f491b856b628e65b6f44dbb318cc8b47c7531db2ff5da4ce67",
+      "bytes": 1012314,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L4",
+      "title_from_filename": "DERIVABILITE ET ETUDE DE FONCTIONS",
+      "pages": 24,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 04 DERIVABILITE ET ETUDE DE FONCTIONS.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 04 DERIVABILITE ET ETUDE DE FONCTIONS.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L5",
+      "sha256": "a9a65a1fe16cf0ccc585c4e6c98efa2c8cfe54c244b6433de5b5658d7fdd62a7",
+      "bytes": 480222,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L5",
+      "title_from_filename": "Géometrie analytique de lespace",
+      "pages": 14,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 05 Géometrie analytique de lespace.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 05 Géometrie analytique de lespace.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L6",
+      "sha256": "3b44753efb9803bded5412f0895e087c088bc733ca9c050f7f943cb2edea0619",
+      "bytes": 360433,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L6",
+      "title_from_filename": "PRIMITIVES",
+      "pages": 11,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 06 PRIMITIVES.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 06 PRIMITIVES.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L7",
+      "sha256": "0b52014f8a457ed7c2019c2b2ff4dbc62d2af5fec9bd5139515cb7f7088449c9",
+      "bytes": 502904,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L7",
+      "title_from_filename": "Coniques",
+      "pages": 14,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 07 Coniques.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 07 Coniques.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L8",
+      "sha256": "47ae980e0abc3a8ba9d7630f0282df0b0567289e03108c8b8c3c6606bc50cdb7",
+      "bytes": 987395,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L8",
+      "title_from_filename": "FONCTIONS LOGARITHMES",
+      "pages": 11,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 08 FONCTIONS LOGARITHMES.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 08 FONCTIONS LOGARITHMES.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L9",
+      "sha256": "2ed2fc87cd1077db4337edf7681ed1bdf68c8426bc4c93601a20d444046c873d",
+      "bytes": 702179,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L9",
+      "title_from_filename": "Nombres complexes",
+      "pages": 24,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 09 Nombres complexes.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 09 Nombres complexes.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L10",
+      "sha256": "5fefa79c95d4ec9fa89ad7d28d357254cf1426f4fed3905743805ed5803b8938",
+      "bytes": 497920,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L10",
+      "title_from_filename": "Fonction exponentielle et fonction puissance",
+      "pages": 14,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 10 Fonction exponentielle et fonction puissance.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 10 Fonction exponentielle et fonction puissance.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L11",
+      "sha256": "9f1ba25230d41e946d33bcffeff91531402a69d34f4597b5a346165550b4f63a",
+      "bytes": 387922,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L11",
+      "title_from_filename": "PPCM et PGCD de deux entiers relatifs",
+      "pages": 16,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 11 PPCM et PGCD de deux entiers relatifs.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 11 PPCM et PGCD de deux entiers relatifs.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L12",
+      "sha256": "6dc368067cde33c0cd66c776155220ac37db51e6b50771dfe42c42f1ee1fccba",
+      "bytes": 463218,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L12",
+      "title_from_filename": "Suites numériques",
+      "pages": 14,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 12 Suites numériques.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 12 Suites numériques.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L13",
+      "sha256": "ef1573cb1a19f500bfc16f7cb69aa9d56c41a3b1a6569f1d5f5225a320a1d197",
+      "bytes": 835319,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L13",
+      "title_from_filename": "Nombres complexes et géometrie du plan",
+      "pages": 27,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths lecon 13 Nombres complexes et géometrie du plan.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths lecon 13 Nombres complexes et géometrie du plan.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L14",
+      "sha256": "79a08a2e8ebb9cb966341d2b598df3a5fd2e1ca2fa9d07a8928620f1570f9e66",
+      "bytes": 707605,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L14",
+      "title_from_filename": "isometrie du plan",
+      "pages": 23,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 14 isometrie du plan.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 14 isometrie du plan.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L15",
+      "sha256": "4ae7a770e77f2b3e7a1a4212e91b56e8fc71c251ec3f5cb36c9afca7047b1562",
+      "bytes": 496632,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L15",
+      "title_from_filename": "Calcul intégral",
+      "pages": 16,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 15 Calcul intégral.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 15 Calcul intégral.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L16",
+      "sha256": "360b6e28f5fa03909ac935f2b6869a11b3271ae74907329584c0f008ec2a6751",
+      "bytes": 1279083,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L16",
+      "title_from_filename": "Similitudes directes",
+      "pages": 33,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 16 Similitudes directes.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 16 Similitudes directes.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L17",
+      "sha256": "1edc8a037d8ac197a667ec3e697e633ebef56c3f564672d9bbad1ab6e04338ac",
+      "bytes": 668381,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L17",
+      "title_from_filename": "Probabilité",
+      "pages": 13,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 17 Probabilité.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 17 Probabilité.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L18",
+      "sha256": "ee7c97534dc0a5711d5c441e63d5d131ce11eb4aa97c313f6d64ed5bc015f596",
+      "bytes": 395621,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L18",
+      "title_from_filename": "Equations différentielles",
+      "pages": 7,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 18 Equations différentielles.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 18 Equations différentielles.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC:mathematics:general:L19",
+      "sha256": "72154eb906b21b9c08cf77e510caf3988fd8010195d6ae2764a8b53187bdc81a",
+      "bytes": 855159,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L19",
+      "title_from_filename": "Statistiques",
+      "pages": 12,
+      "representative_path": "Nouveau dossier/TC/Maths/TC Maths leçon 19 Statistiques.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/Maths/TC Maths leçon 19 Statistiques.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:chemistry:CH1",
+      "sha256": "4b8a1648dc4ad3554d4c6a3024af7f1074262a894c3f7b5a884b0890dd32137d",
+      "bytes": 403881,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "chemistry",
+      "lesson_code_from_filename": "CH1",
+      "title_from_filename": "Les alcools",
+      "pages": 10,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L1_Les alcools.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L1_Les alcools.pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_CH_L1_Les alcools.pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 403881
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:chemistry:CH2",
+      "sha256": "f45ed509e1295811258f195ad547452b1c156a439d3b03a43bf4c595aa1a7830",
+      "bytes": 420952,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "chemistry",
+      "lesson_code_from_filename": "CH2",
+      "title_from_filename": "Composés carbonylés",
+      "pages": 9,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L2_Composés carbonylés.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L2_Composés carbonylés.pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_CH_L2_Composés carbonylés.pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 420952
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:chemistry:CH3",
+      "sha256": "f9816766762f83de208f49d456c74309257e68a0ea684f1ccb338af83dd1a02b",
+      "bytes": 293111,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "chemistry",
+      "lesson_code_from_filename": "CH3",
+      "title_from_filename": "Les amines",
+      "pages": 8,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L3_ Les amines.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L3_ Les amines.pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_CH_L3_ Les amines.pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 293111
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:chemistry:CH4",
+      "sha256": "fa9359cca651b64493f452553185952a85fde1fc7a44fad6895e0967b442feb9",
+      "bytes": 570918,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "chemistry",
+      "lesson_code_from_filename": "CH4",
+      "title_from_filename": "Acides carboxyliques et dérivés",
+      "pages": 11,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L4_Acides carboxyliques et dérivés.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L4_Acides carboxyliques et dérivés.pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_CH_L4_Acides carboxyliques et dérivés.pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 570918
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:chemistry:CH5",
+      "sha256": "41927f2217ea60c1161d6531e9c239af89bd27e86c563721547f563a249b9ae5",
+      "bytes": 431350,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "chemistry",
+      "lesson_code_from_filename": "CH5",
+      "title_from_filename": "Fabrication dun savon",
+      "pages": 8,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L5_Fabrication dun savon.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L5_Fabrication dun savon.pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_CH_L5_Fabrication dun savon.pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 431350
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:chemistry:CH6",
+      "sha256": "d092b22d5a74f003a975831fd63330cc335fc482e9a9be54a5983e07f06d9033",
+      "bytes": 470463,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "chemistry",
+      "lesson_code_from_filename": "CH6",
+      "title_from_filename": "Solutions aqueuses-Notion de pH (2)",
+      "pages": 10,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L6_Solutions aqueuses-Notion de  pH (2).pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L6_Solutions aqueuses-Notion de  pH (2).pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_CH_L6_Solutions aqueuses-Notion de  pH (2).pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 470463
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:chemistry:CH7",
+      "sha256": "d08a0f48b12d21fb02e716e60086ffdfcabc79dcba0211924adb6d1fa1c7376c",
+      "bytes": 498530,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "chemistry",
+      "lesson_code_from_filename": "CH7",
+      "title_from_filename": "Acide fort-base forte (2)",
+      "pages": 9,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L7_Acide fort-base forte (2).pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L7_Acide fort-base forte (2).pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_CH_L7_Acide fort-base forte (2).pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 498530
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:chemistry:CH8",
+      "sha256": "8f66cb672a796b3be78f239135ffad06c6ead53644b6e8302d37bc1ec5614208",
+      "bytes": 479748,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "chemistry",
+      "lesson_code_from_filename": "CH8",
+      "title_from_filename": "Acide faible base faible",
+      "pages": 12,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L8_Acide faible base faible.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L8_Acide faible base faible.pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_CH_L8_Acide faible base faible.pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 479748
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:chemistry:CH9",
+      "sha256": "ed0319acafe69d017ffba58046cb3efbc59dc96247a0ff42cbb63e08e1f49310",
+      "bytes": 539875,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "chemistry",
+      "lesson_code_from_filename": "CH9",
+      "title_from_filename": "Couple acide-base",
+      "pages": 12,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L9_Couple acide-base.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L9_Couple acide-base.pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_CH_L9_Couple acide-base.pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 539875
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:chemistry:CH10",
+      "sha256": "1e65793a1c7f5d8b4c13abf98a134a6afcd68b3aeb97048eaf5fffd97f44a5ba",
+      "bytes": 960869,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "chemistry",
+      "lesson_code_from_filename": "CH10",
+      "title_from_filename": "Réactions acidobasiques. Solutions tampons",
+      "pages": 21,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L10_Réactions acidobasiques. Solutions tampons.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L10_Réactions acidobasiques. Solutions tampons.pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_CH_L10_Réactions acidobasiques. Solutions tampons.pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 960869
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:chemistry:CH11",
+      "sha256": "2b07531ad80091e43503b3d2370bd07c7428d7d9589d908ad527281ccebe8732",
+      "bytes": 451959,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "chemistry",
+      "lesson_code_from_filename": "CH11",
+      "title_from_filename": "Dosage Acido-Basique (2)",
+      "pages": 10,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L11_Dosage Acido-Basique (2).pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L11_Dosage Acido-Basique (2).pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_CH_L11_Dosage Acido-Basique (2).pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 451959
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:chemistry:CH12",
+      "sha256": "adca5232b6b471f14b8bca82974b5651ef21ac7339772d44567fa12a602f8039",
+      "bytes": 374203,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "chemistry",
+      "lesson_code_from_filename": "CH12",
+      "title_from_filename": "Acides alpha aminés",
+      "pages": 7,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L12_Acides alpha aminés.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_CH_L12_Acides alpha aminés.pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_CH_L12_Acides alpha aminés.pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 374203
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:physics:PHY1",
+      "sha256": "4e590030c6508d40a1893772fe6f473f9f7a665fff29a4a9f08f15281862adb0",
+      "bytes": 421614,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "physics",
+      "lesson_code_from_filename": "PHY1",
+      "title_from_filename": "Cinématique du point",
+      "pages": 10,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L1_Cinématique du point.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L1_Cinématique du point.pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_PHY_L1_Cinématique du point.pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 421614
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:physics:PHY2",
+      "sha256": "a150d344440f0335d969a03a7ccfb20cb64cc30ba416b77cfebd1e978c7368a3",
+      "bytes": 374545,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "physics",
+      "lesson_code_from_filename": "PHY2",
+      "title_from_filename": "Mouvement du centre dinertie dun solide",
+      "pages": 11,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L2_Mouvement du centre dinertie dun solide.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L2_Mouvement du centre dinertie dun solide.pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_PHY_L2_Mouvement du centre dinertie dun solide.pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 374545
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:physics:PHY4",
+      "sha256": "f5aec7cb2f7bcf42e705afb995e9eece1e9d61b82840fda830a53066b2ef4814",
+      "bytes": 571438,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "physics",
+      "lesson_code_from_filename": "PHY4",
+      "title_from_filename": "Mouvement dans les champs g et E uniformes",
+      "pages": 12,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L4_Mouvement dans les champs g et E uniformes.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L4_Mouvement dans les champs g et E uniformes.pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_PHY_L4_Mouvement dans les champs g et E uniformes.pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 571438
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:physics:PHY5",
+      "sha256": "c0344adb521ffe68cda3374ad864f3ca3f513d31a351eafa606016b436ff9fce",
+      "bytes": 415350,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "physics",
+      "lesson_code_from_filename": "PHY5",
+      "title_from_filename": "Oscillations mécaniques libres",
+      "pages": 8,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L5_Oscillations mécaniques libres.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L5_Oscillations mécaniques libres.pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_PHY_L5_Oscillations mécaniques libres.pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 415350
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:physics:PHY6",
+      "sha256": "b2f9f20481b55af46e42fc8892eb89c8c593580a4cd0e83e99a5c28efe8f1a19",
+      "bytes": 348958,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "physics",
+      "lesson_code_from_filename": "PHY6",
+      "title_from_filename": "Champ magnétique",
+      "pages": 8,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L6_Champ magnétique.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L6_Champ magnétique.pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_PHY_L6_Champ magnétique.pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 348958
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:physics:PHY8",
+      "sha256": "98c6b93ffe078f9d761bb053e677c21b5bb5cc2772ca5fa120cbf1be265f16af",
+      "bytes": 571132,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "physics",
+      "lesson_code_from_filename": "PHY8",
+      "title_from_filename": "Loi de Laplace",
+      "pages": 13,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L8_Loi de Laplace.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L8_Loi de Laplace.pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_PHY_L8_Loi de Laplace.pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 571132
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:physics:PHY9",
+      "sha256": "d5216b8726b5591074e0ec073614cd1061347eb5abdd6cc47961b9bbfe75d72a",
+      "bytes": 868865,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "physics",
+      "lesson_code_from_filename": "PHY9",
+      "title_from_filename": "Induction électromagnétique",
+      "pages": 14,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L9_Induction électromagnétique.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L9_Induction électromagnétique.pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_PHY_L9_Induction électromagnétique.pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 868865
+    },
+    {
+      "catalog_id": "TC+TD:physics_chemistry:physics:PHY10",
+      "sha256": "dded2c4ac8e2ddacdb54cfdc75e094c0135c37e1879523a27709be2acadac47d",
+      "bytes": 712499,
+      "target_series": [
+        "TC",
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": "physics",
+      "lesson_code_from_filename": "PHY10",
+      "title_from_filename": "Auto induction",
+      "pages": 11,
+      "representative_path": "Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L10_Auto induction.pdf",
+      "all_paths": [
+        "Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L10_Auto induction.pdf",
+        "Nouveau dossier/TD/PC Tle CDE/TleD_PHY_L10_Auto induction.pdf"
+      ],
+      "physical_copies": 2,
+      "exact_duplicate_group": true,
+      "redundant_bytes": 712499
+    },
+    {
+      "catalog_id": "TD:mathematics:general:L1",
+      "sha256": "bec72c4aee89eae08b967602e91ee7a3e90779b52765cd0de83124fb619afd10",
+      "bytes": 717752,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L1",
+      "title_from_filename": "LIMITES ET CONTINUITE",
+      "pages": 23,
+      "representative_path": "Nouveau dossier/TD/maths TD/TD Maths leçon 01 LIMITES ET CONTINUITE.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/maths TD/TD Maths leçon 01 LIMITES ET CONTINUITE.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:mathematics:general:L2",
+      "sha256": "3ba61743130f07411a87c35f20ca19fd0e0096cfe4984677671d609057786693",
+      "bytes": 668166,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L2",
+      "title_from_filename": "Probabilité 1",
+      "pages": 13,
+      "representative_path": "Nouveau dossier/TD/maths TD/TD Maths leçon 02 Probabilité_1.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/maths TD/TD Maths leçon 02 Probabilité_1.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:mathematics:general:L3",
+      "sha256": "8dcbdf3b999689737262e9dea8e8a119a1b42c4035a8447a6f2dacc915f647be",
+      "bytes": 1012089,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L3",
+      "title_from_filename": "DERIVABILITE ET ETUDE DE FONCTIONS",
+      "pages": 24,
+      "representative_path": "Nouveau dossier/TD/maths TD/TD Maths leçon 03 DERIVABILITE ET ETUDE DE FONCTIONS.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/maths TD/TD Maths leçon 03 DERIVABILITE ET ETUDE DE FONCTIONS.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:mathematics:general:L4",
+      "sha256": "44448ab4b6c3265386021e0ff86be309f010267f2362cd30aa6564714b41f49e",
+      "bytes": 359334,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L4",
+      "title_from_filename": "PRIMITIVES",
+      "pages": 10,
+      "representative_path": "Nouveau dossier/TD/maths TD/TD Maths leçon 04 PRIMITIVES.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/maths TD/TD Maths leçon 04 PRIMITIVES.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:mathematics:general:L5",
+      "sha256": "4b229f15f8a44ea8bbe535108954e482fca987cfc2e7b14efc12f0daddd36345",
+      "bytes": 987350,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L5",
+      "title_from_filename": "FONCTIONS LOGARITHMES",
+      "pages": 11,
+      "representative_path": "Nouveau dossier/TD/maths TD/TD Maths leçon 05 FONCTIONS LOGARITHMES.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/maths TD/TD Maths leçon 05 FONCTIONS LOGARITHMES.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:mathematics:general:L6",
+      "sha256": "1beccf372089f9e6f9ed9d0f68d107eab853b44e29edf30b619bf1dbb5a0254c",
+      "bytes": 702594,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L6",
+      "title_from_filename": "Nombres complexes",
+      "pages": 24,
+      "representative_path": "Nouveau dossier/TD/maths TD/TD Maths leçon 06 Nombres complexes.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/maths TD/TD Maths leçon 06 Nombres complexes.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:mathematics:general:L7",
+      "sha256": "bc455d0085a06d60821015cc57782ccad17074692cfd600ef5c3db2390e7c171",
+      "bytes": 497920,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L7",
+      "title_from_filename": "Fonction exponentielle et fonction puissance",
+      "pages": 14,
+      "representative_path": "Nouveau dossier/TD/maths TD/TD Maths leçon 07 Fonction exponentielle et fonction puissance.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/maths TD/TD Maths leçon 07 Fonction exponentielle et fonction puissance.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:mathematics:general:L8",
+      "sha256": "3df8488b798ffca4a066f16d06703ef9c85ed6052ab1a9fdb54f2882d3f10f20",
+      "bytes": 834172,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L8",
+      "title_from_filename": "Nombres complexes et géometrie du plan",
+      "pages": 26,
+      "representative_path": "Nouveau dossier/TD/maths TD/TD Maths lecon 08 Nombres complexes et géometrie du plan.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/maths TD/TD Maths lecon 08 Nombres complexes et géometrie du plan.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:mathematics:general:L9",
+      "sha256": "a66e4d2dc77bc609d680341afd641c39eb679d3bea4a588504a4b0450dbcef35",
+      "bytes": 463214,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L9",
+      "title_from_filename": "suites numériques",
+      "pages": 14,
+      "representative_path": "Nouveau dossier/TD/maths TD/TD Maths leçon 09 suites numériques.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/maths TD/TD Maths leçon 09 suites numériques.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:mathematics:general:L10",
+      "sha256": "663116242961b97aa0bf5d31f55c4d7c5eee3476d00fa4caf1ff8b78a63d1d92",
+      "bytes": 496879,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L10",
+      "title_from_filename": "Calcul intégral",
+      "pages": 16,
+      "representative_path": "Nouveau dossier/TD/maths TD/TD Maths leçon 10 Calcul intégral.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/maths TD/TD Maths leçon 10 Calcul intégral.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:mathematics:general:L11",
+      "sha256": "0fd13c589ef044f12089bc7c54d428ca69cccb4776c781ca5de60d54919a90a4",
+      "bytes": 854793,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L11",
+      "title_from_filename": "Statistiques",
+      "pages": 12,
+      "representative_path": "Nouveau dossier/TD/maths TD/TD Maths leçon 11 Statistiques.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/maths TD/TD Maths leçon 11 Statistiques.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:mathematics:general:L12",
+      "sha256": "158d106e802520428877926b863734bd753f433631fd80c2355fe06525f3e4e8",
+      "bytes": 394641,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "mathematics",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L12",
+      "title_from_filename": "Equations différentielles",
+      "pages": 7,
+      "representative_path": "Nouveau dossier/TD/maths TD/TD Maths leçon 12 Equations différentielles.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/maths TD/TD Maths leçon 12 Equations différentielles.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:svt:general:L1",
+      "sha256": "a20b773b445ccd6abf014e2e8c895d6d19424eb1de544c9820622ae77b10e6b2",
+      "bytes": 818881,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L1",
+      "title_from_filename": "Le reflexe conditionnel",
+      "pages": 15,
+      "representative_path": "Nouveau dossier/TD/SVT TD/SVT TD_L1_Le reflexe conditionnel.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/SVT TD/SVT TD_L1_Le reflexe conditionnel.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:svt:general:L2",
+      "sha256": "b3a0f0dc955c9f63153944ebc7fcef00a972a549a15f69c77cb1ccd3b7cf201b",
+      "bytes": 3025140,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L2",
+      "title_from_filename": "Le fonctionnement du tissu nerveux",
+      "pages": 27,
+      "representative_path": "Nouveau dossier/TD/SVT TD/SVT TD_L2_Le fonctionnement du  tissu nerveux.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/SVT TD/SVT TD_L2_Le fonctionnement du  tissu nerveux.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:svt:general:L3",
+      "sha256": "150c5bbeba11ca417a33305c981f0fa01ad1ecafee6a379014b4c6e1825f351d",
+      "bytes": 1172368,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L3",
+      "title_from_filename": "Le fonctionnement du muscle strié squelettique",
+      "pages": 11,
+      "representative_path": "Nouveau dossier/TD/SVT TD/SVT TD_L3_Le fonctionnement du muscle strié squelettique.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/SVT TD/SVT TD_L3_Le fonctionnement du muscle strié squelettique.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:svt:general:L4",
+      "sha256": "9ac3f6ba32609499b0eb84d879f29cab4bbf8198ad59dd656c2779f7c80b788f",
+      "bytes": 869169,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L4",
+      "title_from_filename": "Le fonctionnement du coeur",
+      "pages": 16,
+      "representative_path": "Nouveau dossier/TD/SVT TD/SVT TD_L4_Le fonctionnement du coeur.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/SVT TD/SVT TD_L4_Le fonctionnement du coeur.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:svt:general:L5",
+      "sha256": "0cc7bc7c0a030520087200a84876f007394e0e1ce93e09d90f143c73a235ae8c",
+      "bytes": 959573,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L5",
+      "title_from_filename": "Le maintien de la constance du milieu intérieur (4)",
+      "pages": 16,
+      "representative_path": "Nouveau dossier/TD/SVT TD/SVT TD_L5_Le maintien de la constance du milieu intérieur (4).pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/SVT TD/SVT TD_L5_Le maintien de la constance du milieu intérieur (4).pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:svt:general:L6",
+      "sha256": "b1d354821c07cc32ac0244874e5859cd9129256accd03c1dbd2bb6c9929b4b33",
+      "bytes": 1378238,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L6",
+      "title_from_filename": "Le systeme de defense de lorganisme",
+      "pages": 18,
+      "representative_path": "Nouveau dossier/TD/SVT TD/SVT TD_L6_Le systeme de defense de lorganisme.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/SVT TD/SVT TD_L6_Le systeme de defense de lorganisme.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:svt:general:L7",
+      "sha256": "5637e8d70537b3956ce16254db593241ad1bb50c02d4844660ca375d643510ac",
+      "bytes": 362188,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L7",
+      "title_from_filename": "Linfection de lorganisme pâr le VIH",
+      "pages": 7,
+      "representative_path": "Nouveau dossier/TD/SVT TD/SVT TD_L7_Linfection de lorganisme pâr le VIH.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/SVT TD/SVT TD_L7_Linfection de lorganisme pâr le VIH.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:svt:general:L8",
+      "sha256": "3b2a840d8ea0faa081352540e0023e70885c656b91e3ca9873535ae7baed9829",
+      "bytes": 659513,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L8",
+      "title_from_filename": "Le devenir des cellules sexuelles chez les mammifères",
+      "pages": 6,
+      "representative_path": "Nouveau dossier/TD/SVT TD/SVT TD_L8_Le devenir des cellules sexuelles chez les mammifères.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/SVT TD/SVT TD_L8_Le devenir des cellules sexuelles chez les mammifères.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:svt:general:L9",
+      "sha256": "19ca766acfd0670783d6602f4a094738c31117bff64b95241e88a2c408cd5074",
+      "bytes": 711225,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L9",
+      "title_from_filename": "Le fonctionnement des organes sexuels chez lHomme (ok)",
+      "pages": 15,
+      "representative_path": "Nouveau dossier/TD/SVT TD/SVT TD_L9_Le fonctionnement des organes sexuels chez lHomme (ok).pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/SVT TD/SVT TD_L9_Le fonctionnement des organes sexuels chez lHomme (ok).pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:svt:general:L10",
+      "sha256": "4163986344f0932d56795c224fb72bf1b36373dd6d7b77dba55746e526beac81",
+      "bytes": 445682,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L10",
+      "title_from_filename": "La reproduction chez les spermaphytes",
+      "pages": 8,
+      "representative_path": "Nouveau dossier/TD/SVT TD/SVT TD_L10_La reproduction chez les spermaphytes.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/SVT TD/SVT TD_L10_La reproduction chez les spermaphytes.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:svt:general:L11",
+      "sha256": "9507b913ec8e685d5379912853892f512873a6d0a27e7090779ff09a20f3bb1c",
+      "bytes": 649564,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L11",
+      "title_from_filename": "La transmission dun caractère héréditaire chez lHomme",
+      "pages": 12,
+      "representative_path": "Nouveau dossier/TD/SVT TD/SVT TD_L11_La transmission dun caractère héréditaire chez lHomme.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/SVT TD/SVT TD_L11_La transmission dun caractère héréditaire chez lHomme.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:svt:general:L12",
+      "sha256": "afc4e53bc717cbcdad70c59776b65101dd57c6c8d46fd3894fefef4f8be25314",
+      "bytes": 486758,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L12",
+      "title_from_filename": "La transmission de deux caractères héréditaires ches les êtres vivants",
+      "pages": 19,
+      "representative_path": "Nouveau dossier/TD/SVT TD/SVT TD_L12_La transmission de deux caractères héréditaires ches les êtres vivants.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/SVT TD/SVT TD_L12_La transmission de deux caractères héréditaires ches les êtres vivants.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:svt:general:L14",
+      "sha256": "1c47271ccf222b97dd0426e323b45c1472ecc3ba5dea62f08a980f13ad89d696",
+      "bytes": 487773,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L14",
+      "title_from_filename": "Lexploitation des gisements miniers",
+      "pages": 12,
+      "representative_path": "Nouveau dossier/TD/SVT TD/SVT TD_L14_Lexploitation des gisements miniers.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/SVT TD/SVT TD_L14_Lexploitation des gisements miniers.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    },
+    {
+      "catalog_id": "TD:svt:general:L15",
+      "sha256": "6e6c2a3ecd1382e90630adf1d39fc7a1fb990c7a44621b89c50223fd21fdb451",
+      "bytes": 315162,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "svt",
+      "subdiscipline": null,
+      "lesson_code_from_filename": "L15",
+      "title_from_filename": "Lamélioration et la protection des sols",
+      "pages": 12,
+      "representative_path": "Nouveau dossier/TD/SVT TD/SVT TD_L15_Lamélioration et la protection des sols.pdf",
+      "all_paths": [
+        "Nouveau dossier/TD/SVT TD/SVT TD_L15_Lamélioration et la protection des sols.pdf"
+      ],
+      "physical_copies": 1,
+      "exact_duplicate_group": false,
+      "redundant_bytes": 0
+    }
+  ]
+}

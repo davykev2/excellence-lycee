@@ -1,0 +1,41 @@
+# Dépendances
+node_modules/
+**/node_modules/
+
+# Build
+dist/
+build/
+**/dist/
+
+# Variables d'environnement (garder .env.example)
+.env
+.env.local
+.env.*.local
+**/.env
+!**/.env.example
+
+# Vercel
+.vercel/
+**/.vercel/
+
+# Sources de contenu volumineuses / sous copyright (PDF officiels téléchargés)
+content_sources/
+tmp/
+.tmp/
+
+# Caches d'outils
+.agents/
+.codex/
+
+# Préférences locales (garder launch.json)
+.claude/settings.local.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+*.suo
+*.sw?

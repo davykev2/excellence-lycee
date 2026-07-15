@@ -1,0 +1,304 @@
+{
+  "schema_version": 2,
+  "batch_code": "2026-07-tle-a-philosophie-l01-v2",
+  "status": "reviewed",
+  "target": {
+    "niveau": "Terminale",
+    "serie": "A",
+    "matiere_slug": "philosophie",
+    "chapitre_id": "a46ae96e-2431-43ab-9fc0-89dee46198dc",
+    "chapitre_code": "TLE-A-PHILO-L01",
+    "chapitre_ordre": 1,
+    "chapitre_titre": "L1 — La dissertation philosophique"
+  },
+  "source": {
+    "code": "CI-EN-TA-PHILO-L01-REF-2026-07",
+    "titre": "Terminale toutes séries — Philosophie — La dissertation philosophique",
+    "type": "pdf",
+    "auteur_organisme": "Côte d’Ivoire — École numérique",
+    "url": null,
+    "licence_code": null,
+    "licence_url": null,
+    "attribution": null,
+    "droits_statut": "reference_only",
+    "storage_path": "content_sources/archive_20260713/Nouveau dossier/TA/philo/Tle_Philo_L1_La dissertation philosophique.pdf",
+    "sha256": "c15905ea6781d7fae52b4cdcfc9ebaa244e2f8fa6beab59afb8dd7649d31c58b",
+    "locator": "Leçon 1, pages 1-7 — La dissertation philosophique",
+    "notes": "Source utilisée uniquement pour l’alignement à la méthode de la dissertation : étude parcellaire, reformulation, problématisation, introduction, développement, transitions et conclusion. Le code du chapitre distant est nul ; TLE-A-PHILO-L01 est un code interne stable. Les sujets, formulations et corrigés de ce lot sont originaux et ne reproduisent pas les activités corrigées du PDF. Aucune citation philosophique n’est attribuée."
+  },
+  "levels": [
+    {
+      "palier": "entrainement",
+      "libelle": "Facile",
+      "titre": "Facile — Acquérir les gestes essentiels",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-A-PHILO-L01-FAC-E01",
+          "titre": "Comprendre et problématiser un sujet",
+          "consigne": "Travaille au brouillon sur le sujet suivant : « La loi empêche-t-elle d’être libre ? » L’objectif est de passer du sens des mots à une difficulté philosophique précise.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Repère les termes et expressions essentiels du sujet, puis définis-les selon leur sens dans cette question.",
+              "correction_md": "**Attendus.** Les expressions indispensables sont « la loi », « empêche-t-elle » et « être libre ». Ici, la loi désigne une règle commune, obligatoire et assortie d’une autorité ; il ne s’agit donc pas d’une simple habitude personnelle. « Empêcher » signifie rendre impossible ou faire obstacle. Être libre signifie pouvoir décider et agir par soi-même. L’étude doit aussi remarquer que la question porte sur la relation entre une contrainte collective et l’autonomie de l’individu."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Reformule le sujet en conservant exactement sa tension initiale.",
+              "correction_md": "**Reformulation possible.** Les règles communes rendent-elles impossible l’action autonome de l’individu ? Cette phrase explicite les termes sans répondre à la question. Une reformulation comme « La loi supprime toujours la liberté » serait incorrecte, car elle transformerait le sujet interrogatif en affirmation et ferait disparaître le débat."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Formule le problème central soulevé par le sujet.",
+              "correction_md": "**Problème possible.** Comment la loi peut-elle apparaître comme une limitation de la liberté alors qu’elle peut aussi protéger les conditions dans lesquelles chacun exerce cette liberté ? La difficulté ne consiste donc pas seulement à opposer loi et liberté : il faut comprendre si une contrainte commune détruit nécessairement l’autonomie ou si elle peut la rendre possible."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Dégage deux aspects du problème capables d’annoncer les deux premiers axes du développement.",
+              "correction_md": "**Aspects attendus.** Premier aspect : en quel sens l’obligation d’obéir à la loi limite-t-elle les choix individuels ? Deuxième aspect : la loi ne protège-t-elle pas chacun contre l’arbitraire et la violence, créant ainsi un espace commun de liberté ? Ces deux questions sont liées au problème central et organisent une progression, de l’apparente opposition vers une possible complémentarité."
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-A-PHILO-L01-FAC-E02",
+          "titre": "Construire une introduction cohérente",
+          "consigne": "Prépare l’introduction du sujet : « Le travail est-il seulement une contrainte ? » Chaque étape doit conduire logiquement à la suivante.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Propose une amorce brève qui introduit le thème sans donner déjà la réponse.",
+              "correction_md": "**Amorce possible.** Le travail occupe une grande partie de l’existence humaine : il exige des efforts et obéit souvent à des horaires ou à des règles. Pourtant, il permet aussi de produire, d’apprendre et de participer à la vie collective. Cette entrée présente une expérience commune et fait apparaître une tension, sans trancher la question."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Explique le sens de « seulement » et montre son importance pour comprendre le sujet.",
+              "correction_md": "« Seulement » signifie « rien d’autre que ». Le sujet ne demande donc pas si le travail comporte des contraintes, ce qui est peu contestable, mais s’il peut être entièrement réduit à elles. Ce mot oblige à examiner d’autres dimensions possibles du travail : autonomie, formation, utilité, reconnaissance ou coopération. L’oublier conduirait à traiter un sujet différent."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Formule le problème puis deux aspects du problème.",
+              "correction_md": "**Problème possible.** Le travail se réduit-il à une obligation pénible imposée à l’individu, ou peut-il aussi contribuer à son accomplissement ? **Aspects :** d’abord, pourquoi le travail est-il vécu comme une nécessité qui limite le temps et les choix ? Ensuite, comment peut-il développer des capacités, procurer une place sociale et donner le sentiment d’être utile ? Le problème et ses aspects rendent explicite l’alternative contenue dans « seulement »."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Rédige une introduction complète en réunissant l’amorce, le problème et les aspects sans annoncer une conclusion prématurée.",
+              "correction_md": "**Proposition rédigée.** Le travail occupe une grande partie de l’existence humaine. Il impose des efforts, des horaires et des règles, mais il permet également de produire, d’apprendre et de prendre part à la vie collective. Dès lors, le travail se réduit-il à une obligation pénible imposée à l’individu, ou peut-il aussi contribuer à son accomplissement ? Nous examinerons d’abord ce qui fait du travail une contrainte, puis les conditions dans lesquelles il peut développer les capacités de la personne et soutenir son intégration sociale. Cette introduction conduit du constat initial à la difficulté, puis aux directions de l’analyse."
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-A-PHILO-L01-FAC-E03",
+          "titre": "Organiser le développement et la conclusion",
+          "consigne": "À partir du sujet « La technique nous rend-elle plus autonomes ? », construis l’ossature d’un développement simple et sa conclusion.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Formule une idée directrice favorable à la technique, puis un argument qui la justifie.",
+              "correction_md": "**Idée directrice possible.** La technique peut accroître l’autonomie humaine. **Argument :** en fournissant des outils qui réduisent certaines limites physiques ou matérielles, elle permet d’accomplir plus facilement des tâches et d’accéder à des possibilités nouvelles. Par exemple, un moyen de communication peut permettre de demander de l’aide, de s’informer ou de travailler à distance. L’exemple illustre l’argument sans le remplacer."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Formule une objection à cette première idée et appuie-la par un argument distinct.",
+              "correction_md": "**Objection possible.** L’usage de la technique ne garantit pas à lui seul l’autonomie. **Argument :** lorsqu’une personne ne comprend plus les outils dont elle dépend ou ne peut pas s’en passer, sa capacité à décider et agir par elle-même peut diminuer. Une assistance permanente peut ainsi devenir une dépendance. L’objection ne nie pas toute utilité technique ; elle en montre une limite."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Rédige une transition entre ces deux axes.",
+              "correction_md": "**Transition possible.** Les outils techniques élargissent donc effectivement notre pouvoir d’action. Cependant, posséder davantage de moyens ne signifie pas nécessairement maîtriser ses choix. Il faut alors se demander si l’autonomie dépend moins de la quantité d’outils disponibles que de l’usage réfléchi que nous en faisons. Cette transition résume l’acquis du premier axe et justifie le passage à sa limite."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Rédige une conclusion comprenant un bilan et une réponse précise au problème.",
+              "correction_md": "**Conclusion possible.** L’analyse a montré que la technique augmente souvent nos possibilités d’action, mais qu’elle peut également créer de nouvelles dépendances. Elle ne rend donc pas automatiquement plus autonome. Elle favorise l’autonomie lorsque l’utilisateur comprend ses outils, peut en contrôler l’usage et demeure capable de choisir ses fins. La réponse est nuancée, mais nette : la technique est un moyen possible de l’autonomie, non sa garantie."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "palier": "maitrise",
+      "libelle": "Moyen",
+      "titre": "Moyen — Construire une argumentation méthodique",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-A-PHILO-L01-MOY-E01",
+          "titre": "Du brouillon au plan détaillé",
+          "consigne": "Traite les opérations préparatoires du sujet : « Faut-il toujours dire la vérité ? » Le mot « toujours » doit rester au centre de l’analyse.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Réalise l’étude parcellaire et propose une reformulation fidèle.",
+              "correction_md": "**Étude parcellaire.** « Faut-il » interroge un devoir ou une obligation raisonnable ; « dire la vérité » signifie exprimer ce que l’on tient pour conforme aux faits, sans chercher à tromper ; « toujours » signifie dans toutes les circonstances, sans exception. **Reformulation :** sommes-nous tenus d’être véridiques en toute circonstance ? La reformulation conserve la portée absolue du terme « toujours », qui constitue la difficulté du sujet."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Formule le problème central et deux aspects complémentaires.",
+              "correction_md": "**Problème.** L’exigence de vérité impose-t-elle une obligation sans exception, même lorsque ses conséquences risquent de nuire à autrui ? **Aspects :** pourquoi la sincérité paraît-elle nécessaire à la confiance et au respect des personnes ? Puis, existe-t-il des situations où se taire, différer une révélation ou protéger une information semble plus responsable qu’une parole immédiate ? La difficulté oppose ici la valeur de vérité à d’autres exigences morales, et non la vérité au simple intérêt personnel."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Construis un plan en deux axes comprenant deux arguments par axe et un exemple pertinent par axe.",
+              "correction_md": "**Axe 1 — La véracité constitue une obligation fondamentale.** Argument 1 : sans parole fiable, la confiance et les engagements deviennent impossibles. Argument 2 : tromper volontairement revient à orienter le choix d’autrui à son insu et porte atteinte à son autonomie. Exemple : une fausse information donnée dans un accord empêche l’autre de consentir lucidement. **Axe 2 — L’obligation de vérité doit être pensée avec les circonstances et la responsabilité.** Argument 1 : toute vérité n’est pas due à toute personne à tout moment, notamment lorsqu’une information relève de l’intimité. Argument 2 : se taire n’est pas nécessairement mentir ; le silence peut éviter une divulgation injuste sans falsifier les faits. Exemple : refuser de révéler publiquement une confidence protège la personne concernée."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Rédige la transition centrale et indique la réponse nuancée vers laquelle le devoir peut conduire.",
+              "correction_md": "**Transition possible.** La vérité est indispensable aux relations de confiance et au respect de la liberté d’autrui ; on ne peut donc en faire une valeur facultative. Pourtant, l’exigence de véracité ne signifie pas que chacun possède un droit illimité sur toute information. Il faut alors distinguer le mensonge, qui cherche à tromper, du silence responsable, qui peut protéger un droit légitime. **Réponse visée :** il faut refuser la tromperie, mais l’obligation de parler doit tenir compte de la personne à qui l’information est due, du moment et de la responsabilité engagée."
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-A-PHILO-L01-MOY-E02",
+          "titre": "Développer sans juxtaposer des idées",
+          "consigne": "Prépare le développement du sujet : « Vivre avec les autres menace-t-il nécessairement notre liberté ? » Chaque paragraphe doit comporter une idée, une justification et une illustration.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Explique la contradiction qui permet de faire apparaître le problème du sujet.",
+              "correction_md": "Autrui semble d’abord limiter notre liberté : vivre ensemble impose des règles, des attentes et la prise en compte de volontés différentes de la nôtre. Mais l’isolement ne garantit pas pour autant une liberté réelle, car beaucoup de capacités, de protections et de projets supposent la coopération. Le problème devient donc : la présence d’autrui réduit-elle nécessairement notre pouvoir d’agir, ou peut-elle contribuer à former et sécuriser une liberté effective ?"
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Rédige un paragraphe argumenté montrant que la vie commune peut limiter la liberté.",
+              "correction_md": "**Paragraphe possible.** La vie commune limite une part de la spontanéité individuelle, car chacun doit régler sa conduite sur des normes et sur les droits des autres. Je ne peux pas réaliser n’importe quel désir dès lors que mon action risque de nuire ou de perturber la coexistence. Dans un espace partagé, par exemple, le respect des horaires, des règles de sécurité ou de la parole d’autrui restreint certaines initiatives immédiates. Ainsi, vivre avec les autres oblige à renoncer à une liberté comprise comme absence totale de contraintes."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Rédige un second paragraphe montrant que la relation aux autres peut aussi rendre la liberté plus réelle.",
+              "correction_md": "**Paragraphe possible.** La présence des autres peut toutefois élargir la liberté en donnant accès à l’apprentissage, à l’entraide et à des institutions protectrices. Une capacité n’est pas librement exercée si elle n’a jamais été développée ou si la personne reste exposée à la violence. L’éducation reçue d’autrui, par exemple, permet d’acquérir le langage et le jugement nécessaires pour choisir avec davantage de lucidité. La vie commune ne se réduit donc pas à une contrainte : organisée équitablement, elle fournit aussi les moyens d’une autonomie effective."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Propose une transition et une conclusion qui ne se contentent pas de répéter les deux axes.",
+              "correction_md": "**Transition.** Si toute coexistence restreint certains désirs, cette restriction n’a pas toujours le même sens : elle peut être une domination arbitraire ou la condition réciproque d’une liberté protégée. **Conclusion.** Vivre avec les autres menace la liberté lorsque les rapports sociaux imposent des contraintes injustes et empêchent de participer aux décisions. Mais cette menace n’est pas nécessaire : des règles communes, lorsqu’elles protègent chacun et peuvent être discutées, rendent possibles l’éducation, la sécurité et la coopération. La question décisive porte donc sur la qualité des relations sociales, non sur la seule présence d’autrui."
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-A-PHILO-L01-MOY-E03",
+          "titre": "Encadrer un développement par une introduction et une conclusion",
+          "consigne": "Travaille sur le sujet : « Le progrès des connaissances suffit-il à améliorer l’humanité ? » Tu dois articuler correctement compréhension, problématisation et réponse finale.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Analyse les expressions « progrès des connaissances », « suffit-il » et « améliorer l’humanité », puis reformule le sujet.",
+              "correction_md": "Le « progrès des connaissances » désigne l’accroissement et la précision des savoirs disponibles. « Suffit-il » demande si ce progrès constitue à lui seul une condition complète, et non s’il est simplement utile. « Améliorer l’humanité » peut signifier rendre la vie humaine plus juste, plus digne ou plus sûre. **Reformulation :** l’augmentation des savoirs produit-elle, par elle-même, un progrès moral et social des êtres humains ?"
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Formule le problème et construis deux axes comportant chacun deux arguments.",
+              "correction_md": "**Problème.** Comment les connaissances pourraient-elles accroître les moyens d’améliorer la condition humaine sans garantir que ces moyens seront orientés vers des fins justes ? **Axe 1 : les connaissances rendent de nombreuses améliorations possibles.** Elles permettent de mieux comprendre les difficultés ; elles donnent des moyens plus efficaces pour agir. **Axe 2 : le savoir ne détermine pas à lui seul l’usage qui en est fait.** Une même connaissance peut servir des fins opposées ; le progrès humain suppose donc aussi des choix moraux, politiques et éducatifs."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Rédige une introduction complète qui annonce clairement cette démarche sans accumuler de définitions isolées.",
+              "correction_md": "**Introduction possible.** Les sociétés disposent aujourd’hui de savoirs toujours plus nombreux pour comprendre la nature, produire et organiser la vie collective. Cette évolution semble promettre une amélioration continue de la condition humaine. Pourtant, mieux connaître ce qui est possible ne dit pas encore ce qu’il est juste de faire. Dès lors, l’augmentation des savoirs produit-elle, par elle-même, un progrès moral et social ? Nous montrerons d’abord que les connaissances offrent des moyens décisifs d’amélioration, avant d’examiner pourquoi leur orientation exige des choix qui ne relèvent pas du savoir seul."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Rédige la conclusion en distinguant le bilan de la réponse au problème.",
+              "correction_md": "**Bilan.** Les connaissances permettent d’identifier des problèmes et d’élaborer des moyens d’action plus puissants ; elles constituent donc une condition importante du progrès humain. Mais elles peuvent être employées de manières contraires et ne fixent pas, à elles seules, les fins à poursuivre. **Réponse.** Le progrès des connaissances ne suffit pas à améliorer l’humanité : il doit être accompagné d’un jugement moral, d’institutions responsables et d’une éducation capable d’orienter les savoirs vers le bien commun."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "palier": "concours",
+      "libelle": "Difficile",
+      "titre": "Difficile — Examiner et reconstruire une dissertation",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-A-PHILO-L01-DIF-E01",
+          "titre": "Diagnostiquer un brouillon défectueux",
+          "consigne": "Un élève prépare le sujet « Peut-on être heureux sans autrui ? » et écrit : « Reformulation : Les autres nous empêchent d’être heureux. Problème : Pourquoi les autres sont-ils nuisibles ? Axes : 1. Les autres sont mauvais. 2. Il faut vivre seul. » Analyse puis reconstruis ce brouillon.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Relève et explique au moins trois défauts méthodologiques dans ce brouillon.",
+              "correction_md": "**Défauts attendus.** Premièrement, la prétendue reformulation affirme que les autres empêchent le bonheur, alors que le sujet demande si leur absence est compatible avec le bonheur ; elle répond donc avant d’analyser. Deuxièmement, le problème « Pourquoi les autres sont-ils nuisibles ? » suppose déjà leur nocivité et supprime la contradiction. Troisièmement, les deux axes vont dans le même sens : le second répète le premier au lieu d’examiner une difficulté opposée. Enfin, « les autres sont mauvais » est un jugement général non défini et non argumenté. Le brouillon ne permet donc ni débat réel ni progression."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Effectue une étude parcellaire correcte et propose une reformulation neutre du sujet.",
+              "correction_md": "« Peut-on » interroge ici à la fois la possibilité réelle et les conditions d’une existence heureuse. « Être heureux » désigne un état relativement durable de satisfaction et d’accord avec son existence, et non un plaisir momentané. « Sans autrui » signifie sans relation avec d’autres personnes, et pas seulement loin de la foule. **Reformulation :** une personne peut-elle accomplir durablement son existence en étant privée de toute relation avec les autres ? Cette formulation ne préjuge pas de la réponse."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Construis une problématique et un plan détaillé en deux axes, avec deux arguments par axe.",
+              "correction_md": "**Problème.** Autrui est-il surtout une source de conflits qui trouble le bonheur, ou les relations humaines constituent-elles une condition de l’accomplissement personnel ? **Axe 1 — La recherche du bonheur peut conduire à prendre distance avec autrui.** Les attentes sociales peuvent imposer des comparaisons et des pressions ; les conflits et les dépendances affectives peuvent rendre l’existence instable. **Axe 2 — Un bonheur entièrement solitaire paraît incomplet et fragile.** Les capacités de la personne se forment dans l’éducation et le dialogue ; l’amitié, la coopération et la reconnaissance donnent une dimension partagée aux projets. Le plan ne nie pas les difficultés de la relation, mais examine si elles justifient l’absence totale d’autrui."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Rédige une introduction et une conclusion cohérentes avec ce plan.",
+              "correction_md": "**Introduction possible.** Les relations humaines sont parfois associées aux conflits, aux comparaisons et aux déceptions ; il semble alors tentant de chercher la tranquillité dans la solitude. Pourtant, une existence heureuse suppose aussi l’apprentissage, l’affection et des projets auxquels d’autres participent. Une personne peut-elle donc accomplir durablement son existence en étant privée de toute relation avec autrui ? Nous examinerons d’abord pourquoi la distance peut protéger une part du bonheur, puis pourquoi l’absence totale des autres en compromet les conditions. **Conclusion possible.** S’éloigner de certaines relations oppressantes peut préserver l’équilibre personnel, mais cela ne prouve pas que le bonheur soit possible sans autrui. Nos capacités, notre identité et nombre de nos joies se développent dans des relations choisies et réciproques. Le bonheur exige donc moins la suppression d’autrui qu’une manière juste et libre de vivre avec lui."
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-A-PHILO-L01-DIF-E02",
+          "titre": "Maîtriser une notion ambiguë",
+          "consigne": "Traite le sujet : « Être indépendant, est-ce n’avoir besoin de personne ? » Le devoir doit distinguer l’indépendance de l’isolement sans effacer la question posée.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Montre comment l’analyse des mots fait apparaître une ambiguïté et formule le problème qui en résulte.",
+              "correction_md": "« Être indépendant » peut signifier décider par soi-même et ne pas subir une domination ; l’expression peut aussi être comprise, de manière plus radicale, comme l’absence de tout besoin à l’égard des autres. Or « avoir besoin de quelqu’un » peut désigner une dépendance qui prive d’autonomie, mais aussi une coopération ordinaire compatible avec le choix. **Problème :** l’autonomie exige-t-elle la suppression de tout lien de dépendance, ou peut-elle se construire dans des relations réciproques qui n’abolissent pas la capacité de décider ?"
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Propose un plan progressif en trois axes et justifie l’ordre choisi.",
+              "correction_md": "**Axe 1 :** l’indépendance paraît d’abord exiger de pouvoir satisfaire ses besoins et prendre ses décisions sans être soumis à la volonté d’un autre. **Axe 2 :** une indépendance absolue est cependant irréaliste, car chacun reçoit d’autrui des savoirs, des soins, des biens et des possibilités de coopération. **Axe 3 :** il faut donc redéfinir l’indépendance comme autonomie au sein de relations réciproques : dépendre de services communs n’est pas être dominé si l’on conserve des droits, une capacité de choix et la possibilité de participer aux règles. L’ordre va de l’intuition initiale à sa limite, puis à une distinction qui résout la difficulté."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Rédige l’argument central du troisième axe avec une illustration et une réponse à une objection.",
+              "correction_md": "**Paragraphe attendu.** L’autonomie ne suppose pas de tout accomplir seul, mais de pouvoir comprendre, accepter ou contester les relations dont on dépend. Dans une coopération équitable, chacun reçoit quelque chose des autres tout en contribuant lui-même à l’action commune. Par exemple, utiliser un service collectif ne retire pas nécessairement la liberté si son accès est garanti par des règles discutables et si la personne garde la possibilité de choisir ses projets. On pourrait objecter que tout besoin crée une vulnérabilité ; toutefois, la vulnérabilité ne devient domination que lorsqu’un acteur peut l’exploiter sans contrôle ni réciprocité."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Rédige une conclusion qui répond explicitement à la formulation « est-ce » et précise une condition de l’indépendance.",
+              "correction_md": "**Conclusion possible.** Être indépendant ne consiste pas à n’avoir besoin de personne, car une telle autosuffisance est incompatible avec la formation et la vie sociale de l’être humain. L’indépendance désigne plutôt la capacité de conduire son existence sans être placé sous la volonté arbitraire d’autrui. Elle demeure possible dans l’interdépendance à condition que les relations soient réciproques, que les règles protègent chacun et que la personne conserve un pouvoir réel de décision."
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-A-PHILO-L01-DIF-E03",
+          "titre": "Concevoir une dissertation complète au brouillon",
+          "consigne": "Élabore le dossier préparatoire du sujet : « Sommes-nous responsables de toutes les conséquences de nos actes ? » Tu dois préserver la portée du mot « toutes » et distinguer prévision, intention et responsabilité.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Réalise l’étude parcellaire, reformule le sujet et formule le problème central.",
+              "correction_md": "**Étude parcellaire.** « Sommes-nous responsables » demande dans quelle mesure une action peut nous être imputée et nous oblige à en répondre. « Conséquences » désigne les effets produits par l’acte, qu’ils soient immédiats ou lointains, voulus ou non. « Toutes » étend la question aux effets imprévus et indirects. **Reformulation :** devons-nous répondre sans limite de chaque effet provoqué par ce que nous faisons ? **Problème :** comment imputer à l’agent les effets réels de son action sans lui attribuer ceux qu’il ne pouvait ni prévoir ni maîtriser ?"
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Construis un plan en trois axes, avec deux arguments précis par axe.",
+              "correction_md": "**Axe 1 — Agir rend responsable des effets de son choix.** Un acte volontaire engage son auteur ; ignorer systématiquement les conséquences prévisibles serait une forme de négligence. **Axe 2 — La responsabilité ne peut couvrir indistinctement tous les effets.** Certaines conséquences résultent d’événements impossibles à anticiper ; plusieurs acteurs ou circonstances peuvent intervenir dans la chaîne causale. **Axe 3 — Une responsabilité raisonnable dépend du degré de maîtrise.** Elle s’évalue selon l’intention, les informations disponibles, la prévisibilité du dommage et les précautions possibles ; reconnaître une limite n’exonère donc pas de réparer un effet lorsqu’on pouvait raisonnablement l’éviter."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Rédige le passage d’un premier axe au deuxième, puis du deuxième au troisième, en faisant progresser le raisonnement.",
+              "correction_md": "**Transition 1.** Parce qu’un acte volontaire transforme réellement une situation, son auteur ne peut se désintéresser des effets prévisibles qu’il produit. Cependant, la chaîne des conséquences peut s’étendre bien au-delà de ce qu’une personne est capable de connaître ou de contrôler ; une responsabilité sans limite finirait alors par devenir impossible à déterminer. **Transition 2.** Refuser cette extension illimitée ne signifie pourtant pas réduire la responsabilité à la seule intention déclarée. Il faut rechercher des critères permettant de distinguer l’accident imprévisible de la négligence et d’ajuster l’imputation au pouvoir réel d’anticiper et d’agir."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Rédige une introduction et une conclusion qui encadrent ce plan et donnent une réponse précise.",
+              "correction_md": "**Introduction possible.** Nos décisions produisent souvent des effets qui dépassent le résultat immédiatement recherché. Il paraît juste de demander à chacun de répondre de ce qu’il fait ; pourtant, certaines conséquences éloignées dépendent d’événements ou d’acteurs qu’il ne pouvait prévoir. Devons-nous alors répondre sans limite de chaque effet provoqué par nos actes ? Autrement dit, comment reconnaître l’engagement de l’agent sans lui attribuer ce qu’il ne maîtrisait pas ? Nous montrerons d’abord pourquoi l’action volontaire engage la responsabilité, puis les limites d’une imputation totale, avant d’établir des critères gradués. **Conclusion possible.** Nous ne sommes pas responsables de toutes les conséquences au même degré. Nous devons répondre des effets voulus, prévisibles ou évitables par des précautions raisonnables ; en revanche, un effet véritablement imprévisible et incontrôlable limite l’imputation. La responsabilité doit donc être proportionnée à l’intention, à l’information disponible et au pouvoir d’agir, tout en maintenant le devoir de réparer lorsque notre négligence a contribué au dommage."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

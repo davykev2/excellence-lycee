@@ -1,0 +1,50 @@
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "oxlint",
+    "mobile:sync": "npm run build && node node_modules/@capacitor/cli/bin/capacitor sync android",
+    "mobile:setup": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/setup-android-toolchain.ps1",
+    "mobile:apk": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-android-debug.ps1",
+    "mobile:install": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/install-android-debug.ps1",
+    "mobile:open": "node node_modules/@capacitor/cli/bin/capacitor open android",
+    "mobile:run": "npm run mobile:apk && npm run mobile:install",
+    "mobile:doctor": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/android-doctor.ps1",
+    "test": "node --test test/*.test.mjs",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.4.1",
+    "@capacitor/app": "^8.1.0",
+    "@capacitor/core": "^8.4.1",
+    "@capacitor/haptics": "^8.0.2",
+    "@capacitor/splash-screen": "^8.0.1",
+    "@capacitor/status-bar": "^8.0.2",
+    "@phosphor-icons/react": "^2.1.10",
+    "@supabase/supabase-js": "^2.110.2",
+    "embla-carousel-react": "^8.6.0",
+    "katex": "^0.17.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-markdown": "^10.1.0",
+    "react-router-dom": "^7.18.1",
+    "rehype-katex": "^7.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-math": "^6.0.0",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.4.1",
+    "@tailwindcss/vite": "^4.3.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "oxlint": "^1.73.0",
+    "tailwindcss": "^4.3.2",
+    "vite": "^8.1.1"
+  }
+}
