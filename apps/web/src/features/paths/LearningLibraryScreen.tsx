@@ -15,6 +15,7 @@ import {
 import type { LearningPath } from "../../domain/paths";
 import type { SchoolLevel, SubjectDefinition, SubjectId } from "../../domain/learning";
 import type { CurriculumLessonTitle } from "../../data/curriculumCatalog";
+import { formatXp } from "../../data/xpRewards";
 
 interface LearningLibraryScreenProps {
   level: SchoolLevel;
@@ -90,7 +91,7 @@ export function LearningLibraryScreen({ level, subjects, selectedSubjectId, path
                     <span>{path ? path.description : "Titre officiel ajouté. Le contenu détaillé sera publié prochainement."}</span>
                   </div>
                   {path ? (
-                    <footer><span><Clock size={17} />{path.estimatedMinutes} min</span><span><BookOpenText size={17} />{levelCount} niveaux</span><span><Medal size={17} />{totalXp} XP</span><ArrowRight className="lesson-library-arrow" size={22} weight="bold" /></footer>
+                    <footer><span><Clock size={17} />{path.estimatedMinutes} min</span><span><BookOpenText size={17} />{levelCount} niveaux</span><span><Medal size={17} />{formatXp(totalXp)} XP</span><ArrowRight className="lesson-library-arrow" size={22} weight="bold" /></footer>
                   ) : (
                     <footer><span><Clock size={17} />Contenu à venir</span><span className="lesson-library-source">Progression officielle 2025-2026</span></footer>
                   )}

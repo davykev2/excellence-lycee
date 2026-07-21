@@ -20,6 +20,7 @@ import {
   UsersThree,
 } from "@phosphor-icons/react";
 import type { LearnerProfile, SchoolLevel, SubjectDefinition, SubjectId } from "../../domain/learning";
+import { formatXp } from "../../data/xpRewards";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
 
 interface ArenaScreenProps {
@@ -149,7 +150,7 @@ export function ArenaScreen({ profile, level, subject, subjects, totalXp, onSubj
           <h1 id="arena-title">Bienvenue dans l’Arène</h1>
           <p>Choisis ton défi, mesure tes progrès et deviens meilleur à chaque tentative.</p>
           <div className="arena-hero-stats">
-            <span><Medal size={20} weight="duotone" /><strong>{totalXp}</strong> XP gagnés</span>
+            <span><Medal size={20} weight="duotone" /><strong>{formatXp(totalXp)}</strong> XP gagnés</span>
             <span><Sparkle size={20} weight="duotone" /><strong>6</strong> modes</span>
             <span><UsersThree size={20} weight="duotone" /><strong>{level.label}</strong></span>
           </div>

@@ -1,3 +1,46 @@
+export const XP_PER_LESSON = 10_000;
+const XP_ALLOCATION_UNIT = 10;
+
+function normalizeLessonRewards(rewards: Map<string, number>) {
+  const rewardsByPath = new Map<string, Array<{ key: string; lessonId: string; weight: number }>>();
+  rewards.forEach((weight, key) => {
+    const separatorIndex = key.indexOf(":");
+    const pathId = key.slice(0, separatorIndex);
+    const lessonId = key.slice(separatorIndex + 1);
+    const pathRewards = rewardsByPath.get(pathId) ?? [];
+    pathRewards.push({ key, lessonId, weight: Math.max(1, weight) });
+    rewardsByPath.set(pathId, pathRewards);
+  });
+
+  rewardsByPath.forEach((pathRewards) => {
+    const totalWeight = pathRewards.reduce((sum, reward) => sum + reward.weight, 0);
+    const totalUnits = XP_PER_LESSON / XP_ALLOCATION_UNIT;
+    const allocations = pathRewards.map((reward, index) => {
+      const rawUnits = totalUnits * reward.weight / totalWeight;
+      const baseUnits = Math.floor(rawUnits);
+      return { ...reward, index, baseUnits, fractionalUnits: rawUnits - baseUnits };
+    });
+    const remainingUnits = totalUnits - allocations.reduce((sum, allocation) => sum + allocation.baseUnits, 0);
+    const bonusIndexes = new Set(
+      [...allocations]
+        .sort((left, right) => (
+          right.fractionalUnits - left.fractionalUnits
+          || (left.lessonId < right.lessonId ? -1 : left.lessonId > right.lessonId ? 1 : 0)
+          || left.index - right.index
+        ))
+        .slice(0, remainingUnits)
+        .map((allocation) => allocation.index),
+    );
+
+    allocations.forEach((allocation) => {
+      rewards.set(
+        allocation.key,
+        (allocation.baseUnits + (bonusIndexes.has(allocation.index) ? 1 : 0)) * XP_ALLOCATION_UNIT,
+      );
+    });
+  });
+}
+
 const lessonRewards = new Map<string, number>([
   ["seconde-c-general-functions:function-machine", 30],
   ["seconde-c-general-functions:function-domain", 40],
@@ -10,12 +53,6 @@ const lessonRewards = new Map<string, number>([
   ["seconde-c-kinematics:velocity-vector", 50],
   ["seconde-c-kinematics:acceleration-motion", 60],
   ["seconde-c-kinematics:motion-equations", 80],
-  ["terminale-a-polynomial-rational-functions:polynomial-limits", 50],
-  ["terminale-a-polynomial-rational-functions:rational-limits", 50],
-  ["terminale-a-polynomial-rational-functions:limit-operations", 60],
-  ["terminale-a-polynomial-rational-functions:asymptotes", 60],
-  ["terminale-a-polynomial-rational-functions:derivatives-extrema", 70],
-  ["terminale-a-polynomial-rational-functions:tangent-intermediate-value", 80],
   ["terminale-a-polynomial-rational-functions:polynomial-limit-at-point", 50],
   ["terminale-a-polynomial-rational-functions:polynomial-limit-at-infinity", 55],
   ["terminale-a-polynomial-rational-functions:rational-limit-defined-point", 40],
@@ -176,6 +213,16 @@ for (const [pathId, suffixes] of svtLessonSuffixes) {
   });
 }
 
+normalizeLessonRewards(lessonRewards);
+
 export function getLessonReward(pathId: string, lessonId: string) {
   return lessonRewards.get(`${pathId}:${lessonId}`);
+}
+
+export function getPathRewardTotal(pathId: string) {
+  let total = 0;
+  lessonRewards.forEach((reward, key) => {
+    if (key.startsWith(`${pathId}:`)) total += reward;
+  });
+  return total;
 }

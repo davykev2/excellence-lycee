@@ -15,6 +15,7 @@ import type { LearningLesson, LearningPath } from "../../domain/paths";
 import type { SchoolLevel, SubjectDefinition } from "../../domain/learning";
 import type { ProgressLesson } from "../progress/useLearningProgress";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
+import { formatXp } from "../../data/xpRewards";
 
 interface MathPathScreenProps {
   path: LearningPath;
@@ -78,7 +79,7 @@ export function MathPathScreen({
           <p>{path.description}</p>
           <div className="mastery-metrics">
             <span><Clock size={19} weight="duotone" /> {path.estimatedMinutes} min</span>
-            <span><Medal size={19} weight="duotone" /> {lessons.reduce((sum, lesson) => sum + lesson.xp, 0)} XP</span>
+            <span><Medal size={19} weight="duotone" /> {formatXp(lessons.reduce((sum, lesson) => sum + lesson.xp, 0))} XP</span>
             <span><Target size={19} weight="duotone" /> {completedCount}/{lessons.length} niveaux</span>
           </div>
         </div>
@@ -123,14 +124,14 @@ export function MathPathScreen({
                   <div className="mastery-level-card">
                     <div className="mastery-level-meta">
                       <span>Niveau {index + 1}</span>
-                      <span>+{lesson.xp} XP</span>
+                      <span>+{formatXp(lesson.xp)} XP</span>
                     </div>
                     <h2>{lesson.title}</h2>
                     <p>{lesson.summary}</p>
                     <div className="mastery-level-footer">
                       <span>{lesson.durationMinutes} min</span>
                       {state === "completed" ? (
-                        <strong>{progressEntry?.bestScore ?? 20}/20 • {progressEntry?.xpAwarded ?? lesson.xp}/{lesson.xp} XP</strong>
+                        <strong>{progressEntry?.bestScore ?? 20}/20 • {formatXp(progressEntry?.xpAwarded ?? lesson.xp)}/{formatXp(lesson.xp)} XP</strong>
                       ) : state === "available" ? <strong>Prêt à commencer</strong> : <strong>Termine le niveau {index}</strong>}
                     </div>
                   </div>

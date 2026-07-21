@@ -7,8 +7,9 @@ import { terminalMathematicsPaths } from "./terminalMathPaths";
 import { terminalPhilosophyAdvancedPaths } from "./terminalPhilosophyAdvancedPaths";
 import { terminalPhilosophyPaths } from "./terminalPhilosophyPaths";
 import { terminalSvtPaths } from "./terminalSvtPaths";
+import { applyLessonXpBudget } from "./xpRewards";
 
-export const learningPaths: LearningPath[] = [
+const baseLearningPaths: LearningPath[] = [
   ...mathematicsPaths,
   ...terminalMathematicsPaths,
   ...physicsPaths,
@@ -18,3 +19,5 @@ export const learningPaths: LearningPath[] = [
   ...terminalPhilosophyAdvancedPaths,
   ...terminalSvtPaths,
 ];
+
+export const learningPaths: LearningPath[] = baseLearningPaths.map(applyLessonXpBudget);

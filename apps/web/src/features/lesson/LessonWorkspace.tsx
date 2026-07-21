@@ -20,6 +20,7 @@ import { CompanionAvatar } from "../companion/CompanionAvatar";
 import { MathFormula, MathText } from "../../components/MathText";
 import { MarkdownContent } from "../../components/MarkdownContent";
 import { ApiError } from "../../lib/api";
+import { formatXp } from "../../data/xpRewards";
 
 interface LessonWorkspaceProps {
   lesson: LearningLesson;
@@ -197,7 +198,7 @@ export function LessonWorkspace({ lesson, path, nextLesson, currentProgress, onC
           <div className="lesson-player-progress-bars" aria-hidden="true"><span className="is-done" /><span className={phase !== "learn" ? "is-done" : ""} /><span className={phase === "result" ? "is-done" : ""} /></div>
           <strong>{phase === "learn" ? "Apprendre" : phase === "quiz" ? "S’entraîner" : "Résultat"}</strong>
         </div>
-        <div className="lesson-player-xp"><Medal size={20} weight="duotone" /><strong>{currentProgress?.xpAwarded ?? 0}/{lesson.xp} XP</strong></div>
+        <div className="lesson-player-xp"><Medal size={20} weight="duotone" /><strong>{formatXp(currentProgress?.xpAwarded ?? 0)}/{formatXp(lesson.xp)} XP</strong></div>
       </header>
 
       <main key={phase} ref={mainRef} className="lesson-player-main mastery-lesson-main">
@@ -341,7 +342,7 @@ export function LessonWorkspace({ lesson, path, nextLesson, currentProgress, onC
             <div className={`mastery-reward ${resultSynced ? "is-synced" : "is-pending"}`}>
               <Medal size={25} weight="duotone" />
               <span>{resultSynced
-                ? <><strong>+{result.xpDelta} XP</strong> cet essai • {result.xpAwarded}/{lesson.xp} XP obtenus</>
+                ? <><strong>+{formatXp(result.xpDelta)} XP</strong> cet essai • {formatXp(result.xpAwarded)}/{formatXp(lesson.xp)} XP obtenus</>
                 : submitting ? "Enregistrement de tes XP…" : "Score calculé • XP non synchronisés"}
               </span>
             </div>

@@ -31,6 +31,7 @@ import type {
 import type { SubjectId } from "../../domain/learning";
 import { schoolLevels, subjects } from "../../data/programme";
 import { adminActivity } from "../../data/admin";
+import { formatXp } from "../../data/xpRewards";
 import { useAuth } from "../auth/AuthProvider";
 import { useAdminUsers } from "./useAdminUsers";
 import { useAdminWorkspace } from "./useAdminWorkspace";
@@ -513,7 +514,7 @@ export function AdminScreen({
               <div className="admin-user-row" role="row" key={user.id}>
                 <div className="admin-user-identity"><span><UserCircle size={25} weight="duotone" /></span><div><strong>{user.name}</strong><small>{user.email}</small></div></div>
                 <span className={`admin-role is-${user.role}`}>{roleLabels[user.role]}{user.levelLabel && <small>{user.levelLabel}</small>}</span>
-                <div className="admin-user-progress"><div><i style={{ width: `${user.role === "student" ? user.progress : 100}%` }} /></div><span>{user.role === "student" ? `${user.completedLessons ?? 0} leç. · ${user.totalXp ?? 0} XP` : "—"}</span></div>
+                <div className="admin-user-progress"><div><i style={{ width: `${user.role === "student" ? user.progress : 100}%` }} /></div><span>{user.role === "student" ? `${user.completedLessons ?? 0} leç. · ${formatXp(user.totalXp ?? 0)} XP` : "—"}</span></div>
                 <span className="admin-last-active">{user.lastActive}</span>
                 <div className="admin-user-action">
                   <span className={`admin-user-state is-${user.status}`}>{user.status === "active" ? "Actif" : "Suspendu"}</span>
