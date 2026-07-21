@@ -1,0 +1,26 @@
+**/node_modules/
+**/dist/
+**/.npm-cache/
+**/.vercel/
+
+# Variables locales et secrets
+**/.env
+**/.env.local
+**/.env.*.local
+!**/.env.example
+
+# Données locales de développement
+apps/api/data/*.db
+apps/api/data/*.db-*
+
+# Fichiers temporaires et rapports locaux
+.agents/
+.audit/
+.claude/
+tmp/
+/design-qa*
+*.log
+
+# Fichiers système
+.DS_Store
+Thumbs.db

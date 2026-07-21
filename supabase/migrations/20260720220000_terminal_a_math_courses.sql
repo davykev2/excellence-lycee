@@ -1,0 +1,38 @@
+-- Rewards for the remaining Terminale A mathematics mastery paths.
+
+insert into public.lesson_rewards (path_id, lesson_id, xp_awarded) values
+  ('terminale-a1-probability-random-variable', 'random-experiments-events', 50),
+  ('terminale-a1-probability-random-variable', 'event-operations', 55),
+  ('terminale-a1-probability-random-variable', 'finite-probability', 65),
+  ('terminale-a1-probability-random-variable', 'random-variable-law', 75),
+  ('terminale-a2-probability', 'random-experiments-events', 50),
+  ('terminale-a2-probability', 'event-operations', 55),
+  ('terminale-a2-probability', 'finite-probability', 65),
+  ('terminale-a-natural-logarithm', 'log-definition-properties', 60),
+  ('terminale-a-natural-logarithm', 'log-limits-variations', 60),
+  ('terminale-a-natural-logarithm', 'log-equations-inequalities', 70),
+  ('terminale-a-natural-logarithm', 'log-composite-derivatives', 70),
+  ('terminale-a-exponential', 'exp-definition-properties', 60),
+  ('terminale-a-exponential', 'exp-limits-variations', 60),
+  ('terminale-a-exponential', 'exp-equations-inequalities', 70),
+  ('terminale-a-exponential', 'exp-composite-derivatives', 70),
+  ('terminale-a-sequences', 'arithmetic-sequences', 55),
+  ('terminale-a-sequences', 'arithmetic-sums', 60),
+  ('terminale-a-sequences', 'geometric-sequences', 60),
+  ('terminale-a-sequences', 'geometric-sums-modeling', 70),
+  ('terminale-a-bivariate-statistics', 'statistical-series-scatterplot', 50),
+  ('terminale-a-bivariate-statistics', 'mean-point-marginals', 60),
+  ('terminale-a-bivariate-statistics', 'mayer-adjustment', 60),
+  ('terminale-a-bivariate-statistics', 'covariance-correlation-regression', 70),
+  ('terminale-a-bivariate-statistics', 'statistical-estimation', 70),
+  ('terminale-a-linear-systems', 'substitution-elimination', 55),
+  ('terminale-a-linear-systems', 'log-exp-systems', 60),
+  ('terminale-a-linear-systems', 'linear-inequalities-halfplanes', 60),
+  ('terminale-a-linear-systems', 'inequality-systems-modeling', 70),
+  ('terminale-a-primitives-integrals', 'primitive-definition-usual-functions', 55),
+  ('terminale-a-primitives-integrals', 'primitive-initial-condition', 60),
+  ('terminale-a-primitives-integrals', 'composite-primitives', 65),
+  ('terminale-a-primitives-integrals', 'definite-integral', 70),
+  ('terminale-a-primitives-integrals', 'integral-area', 70)
+on conflict (path_id, lesson_id) do update
+  set xp_awarded = excluded.xp_awarded;

@@ -1,0 +1,41 @@
+{
+  "name": "@excellence/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "tsx src/server.ts",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "seed:admin": "tsx src/scripts/seed-admin.ts",
+    "test:messages": "node src/scripts/test-messaging.mjs",
+    "test:profile-photo": "node src/scripts/test-profile-photo.mjs",
+    "voice:prepare": "node src/scripts/prepare-davy-voice.mjs",
+    "voice:create": "node src/scripts/create-davy-voice.mjs"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.1.2",
+    "@fastify/cors": "^11.3.0",
+    "@fastify/helmet": "^13.1.0",
+    "@fastify/jwt": "^10.2.0",
+    "@fastify/rate-limit": "^11.1.0",
+    "@supabase/supabase-js": "^2.110.7",
+    "bcryptjs": "^3.0.3",
+    "better-sqlite3": "^12.11.1",
+    "fastify": "^5.10.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^26.1.1",
+    "ffmpeg-static": "^5.3.0",
+    "tsx": "^4.23.1",
+    "typescript": "5.9.3"
+  },
+  "allowScripts": {
+    "better-sqlite3": true,
+    "esbuild": true,
+    "ffmpeg-static": true
+  }
+}
