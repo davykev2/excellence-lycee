@@ -1,0 +1,304 @@
+{
+  "schema_version": 2,
+  "batch_code": "2026-07-tle-a-francais-l01-v2",
+  "status": "reviewed",
+  "target": {
+    "niveau": "Terminale",
+    "serie": "A",
+    "matiere_slug": "francais",
+    "chapitre_id": "d75b6871-8b3e-474d-b286-ccecb7be724b",
+    "chapitre_code": "TLE-A-FRA-L01",
+    "chapitre_ordre": 1,
+    "chapitre_titre": "Le roman et ses personnages"
+  },
+  "source": {
+    "code": "CI-DPFC-TLE-FRA-PROGRAMME-REF-2026-07",
+    "titre": "Programme éducatif de Français — Classes de Terminale A/B/C/D/E/F",
+    "type": "pdf",
+    "auteur_organisme": "Direction de la Pédagogie et de la Formation Continue — Côte d’Ivoire",
+    "url": "https://dpfc-ci.net/wp-content/uploads/dpfc_fichiers/Programmes/prg_secondaire/Fran/PROGRAMME%20EDUCATIF%20TERMINALE%20VALIDE.pdf",
+    "licence_code": null,
+    "licence_url": null,
+    "attribution": null,
+    "droits_statut": "reference_only",
+    "storage_path": "content_sources/official_dpfc/programme-educatif-francais-terminale-valide.pdf",
+    "sha256": "cfe10a59591d94a2c17b793a7348cdae9a25614ddb787b4fc7980121a46adc58",
+    "locator": "Pages 10-11 : œuvre narrative, roman et construction du sens ; page 16 : focalisations ; pages 68-69 : outils d’analyse du texte narratif, descriptif et du portrait ; pages 71-73 : narrateur, points de vue et effets produits",
+    "notes": "Lot d’entraînement original aligné sur les habiletés du programme officiel : identifier, analyser et interpréter les personnages, l’espace, le temps, les modes de narration, les indices textuels et les focalisations. Tous les micro-textes et toutes les situations sont des créations inédites pour l’application ; aucune œuvre littéraire ni aucun extrait du PDF n’est reproduit. La source demeure une référence pédagogique uniquement."
+  },
+  "levels": [
+    {
+      "palier": "entrainement",
+      "libelle": "Facile",
+      "titre": "Facile — Repérer narrateur, personnages et point de vue",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-A-FRA-L01-FAC-E01",
+          "titre": "Le candidat de l’aube",
+          "consigne": "Lis ce micro-récit original, puis traite toutes les questions. « Je descendis du car à l’aube. Devant le lycée encore silencieux, ma sœur Awa m’attendait avec une bouteille d’eau. Je serrai contre moi la chemise qui contenait ma convocation. Dans quelques heures, j’allais affronter l’épreuve que je redoutais depuis des semaines. Awa sourit ; ce simple sourire calma un peu mon cœur pressé. »",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Identifie le narrateur et précise s’il participe à l’histoire.",
+              "correction_md": "Le narrateur est le candidat qui raconte son arrivée au lycée. Il participe directement à l’histoire : c’est donc un **narrateur-personnage**. Les pronoms et déterminants de la première personne — « je », « moi », « mon » — prouvent qu’il raconte sa propre expérience."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Présente les deux personnages et indique lequel occupe la place centrale dans cet extrait.",
+              "correction_md": "Les personnages sont le candidat-narrateur et sa sœur Awa. Le candidat occupe la place centrale, car le récit suit son arrivée, ses gestes et son inquiétude devant l’épreuve. Awa est un personnage secondaire, mais son sourire agit sur lui et l’apaise."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Relève deux repères de temps et un repère d’espace, puis explique ce qu’ils apportent à la scène.",
+              "correction_md": "Les repères temporels possibles sont « à l’aube », « dans quelques heures » et « depuis des semaines ». Le repère spatial est « devant le lycée ». Ils situent précisément l’action juste avant une épreuve et créent une attente : le lecteur comprend que le personnage se trouve au seuil d’un moment important."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Détermine la focalisation dominante et justifie ta réponse par deux indices.",
+              "correction_md": "La focalisation est **interne** : la scène est perçue à travers le candidat. Le lecteur connaît ce qu’il redoute — « l’épreuve que je redoutais » — et ressent son état physique et affectif — « mon cœur pressé », puis l’apaisement. Il n’accède pas aux pensées d’Awa."
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-A-FRA-L01-FAC-E02",
+          "titre": "La femme au panier bleu",
+          "consigne": "Lis ce micro-récit original, puis traite toutes les questions. « À midi, une femme en boubou jaune entra sur la place. Elle posa un panier bleu près de la fontaine, essuya lentement son front et observa les trois rues. Un jeune cycliste passa. La femme leva la main, mais il poursuivit sa route. Elle reprit le panier, fit dix pas vers la gare, puis revint s’asseoir sans prononcer un mot. »",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Relève quatre informations certaines que le texte donne sur le personnage.",
+              "correction_md": "Le texte permet d’affirmer que le personnage est une femme, qu’elle porte un boubou jaune, qu’elle transporte un panier bleu et qu’elle se trouve sur une place à midi. On peut aussi relever qu’elle fait signe à un cycliste, marche vers la gare, revient s’asseoir et reste silencieuse."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Explique pourquoi on ne peut pas affirmer avec certitude ce que la femme attend ni ce qu’elle ressent.",
+              "correction_md": "Le narrateur ne révèle ni ses pensées, ni ses souvenirs, ni ses émotions. Il décrit seulement des gestes observables : elle pose le panier, regarde les rues, lève la main, marche et revient. Le lecteur peut former des hypothèses, mais aucune n’est confirmée par le texte."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Identifie la focalisation et relève les indices qui la caractérisent.",
+              "correction_md": "Il s’agit d’une **focalisation externe**. Le personnage est vu de l’extérieur, comme par une caméra. Les verbes « entra », « posa », « essuya », « observa », « leva », « reprit » et « revint » décrivent des actions visibles, sans accès à sa vie intérieure."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Quel effet ce choix de focalisation produit-il sur le lecteur ?",
+              "correction_md": "La focalisation externe crée du mystère et de l’attente. Le lecteur remarque des gestes qui semblent importants, mais ignore leur cause. Il est donc poussé à se demander qui est cette femme, pourquoi elle hésite et qui elle espère rencontrer."
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-A-FRA-L01-FAC-E03",
+          "titre": "La lettre sous le baobab",
+          "consigne": "Lis ce micro-récit original, puis traite toutes les questions. « Adjoua glissa la lettre sous la pierre, au pied du baobab. Elle croyait que son frère Kader avait déjà quitté le village. En réalité, il se cachait derrière l’atelier et suivait chacun de ses gestes. Ni l’un ni l’autre ne savait encore que cette lettre les réunirait, trois jours plus tard, dans la cour de leur grand-mère. »",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Distingue ce qu’Adjoua croit de ce que le narrateur apprend au lecteur.",
+              "correction_md": "Adjoua croit que Kader a déjà quitté le village. Le narrateur apprend pourtant au lecteur que Kader se cache derrière l’atelier et observe la scène. Le lecteur possède donc une information que le personnage ignore."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Montre que le narrateur connaît aussi l’avenir des personnages.",
+              "correction_md": "La dernière phrase annonce que la lettre réunira Adjoua et Kader « trois jours plus tard » dans la cour de leur grand-mère. Cette anticipation prouve que le narrateur sait ce qui se produira après la scène racontée."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Nomme la focalisation dominante et justifie-la complètement.",
+              "correction_md": "La focalisation est **zéro**, aussi appelée point de vue omniscient. Le narrateur connaît la croyance d’Adjoua, la position cachée de Kader, ce que chacun ignore et même leur avenir. Son savoir dépasse donc celui de tous les personnages."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Explique l’effet produit par l’écart entre le savoir du lecteur et celui des personnages.",
+              "correction_md": "Cet écart crée une attente. Le lecteur sait que Kader est proche et que la lettre provoquera une rencontre, alors qu’Adjoua l’ignore. Il veut découvrir comment la lettre sera trouvée et comment les deux personnages se retrouveront."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "palier": "maitrise",
+      "libelle": "Moyen",
+      "titre": "Moyen — Analyser la construction des personnages et du récit",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-A-FRA-L01-MOY-E01",
+          "titre": "La boutique fermée",
+          "consigne": "Lis ce micro-récit original, puis traite toutes les questions. « Lorsque Sali aperçut le cadenas neuf, le marché lui sembla soudain trop bruyant. Les appels des vendeuses se brouillaient dans sa tête. Elle posa la paume sur la porte de la boutique familiale et sentit sous ses doigts une rayure qu’elle connaissait depuis l’enfance. Son oncle avait-il vraiment vendu le local ? Elle relut le bref message reçu le matin, cherchant un mot qui lui rendrait espoir. »",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Formule une hypothèse de lecture qui relie le lieu, le personnage et le conflit suggéré.",
+              "correction_md": "Hypothèse possible : **la fermeture de la boutique familiale confronte Sali à la perte d’un lieu chargé de souvenirs**. Le cadenas neuf déclenche le trouble ; la rayure connue depuis l’enfance révèle l’attachement au lieu ; la question sur la vente fait apparaître le conflit."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Analyse trois indices qui installent une focalisation interne.",
+              "correction_md": "Le marché est perçu selon l’état de Sali : il lui « sembla soudain trop bruyant ». Le brouillage des voix traduit sa confusion. La sensation tactile de la rayure et la question « Son oncle avait-il vraiment vendu le local ? » donnent accès à ses perceptions et à son interrogation. Ces indices limitent le récit à son point de vue."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Construis le portrait moral de Sali à partir de ses gestes et de ses perceptions.",
+              "correction_md": "Sali apparaît attachée à sa famille et à son passé : elle reconnaît une ancienne rayure et qualifie la boutique de familiale. Elle est inquiète, car le bruit l’agresse et elle relit le message. Enfin, elle demeure pleine d’espoir puisqu’elle cherche encore un mot rassurant. Le portrait est donc surtout indirect, construit par ses réactions."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Explique comment l’espace devient ici plus qu’un simple décor.",
+              "correction_md": "La boutique concentre la mémoire et le conflit du personnage. La porte, le cadenas et la rayure matérialisent à la fois le passé familial et la menace de la perte. L’espace agit sur les sensations de Sali et fait avancer l’intrigue ; il devient un enjeu du récit, pas un décor neutre."
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-A-FRA-L01-MOY-E02",
+          "titre": "L’inconnu du quai",
+          "consigne": "Lis ce micro-récit original, puis traite toutes les questions. « Un homme descendit du taxi, posa une valise grise sur le quai et consulta deux fois l’horloge. Il resta debout face aux rails, les mains immobiles. Depuis le guichet, Nafi l’observait. Elle reconnut enfin la cicatrice au-dessus de son sourcil et son souffle se coupa : l’inconnu était le médecin qui l’avait sauvée dix ans plus tôt. Devait-elle sortir et lui parler ? »",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Découpe le texte en deux mouvements et donne un titre précis à chacun.",
+              "correction_md": "Premier mouvement, de « Un homme » à « immobiles » : **l’apparition énigmatique d’un voyageur**. Second mouvement, de « Depuis le guichet » à la fin : **la reconnaissance du médecin par Nafi et son hésitation**. Le passage du simple spectacle extérieur à la mémoire de Nafi structure l’extrait."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Montre que la focalisation change entre les deux mouvements.",
+              "correction_md": "Au début, la focalisation est externe : seuls les gestes et l’apparence de l’homme sont donnés. Ensuite, elle devient interne à Nafi : le lecteur partage sa reconnaissance, son émotion physique — « son souffle se coupa » —, son souvenir et sa question intérieure."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Analyse la manière dont l’identité et le rôle du personnage masculin se construisent progressivement.",
+              "correction_md": "Le personnage est d’abord réduit à « un homme », puis à « l’inconnu » : son identité est cachée. La cicatrice sert d’indice de reconnaissance. Enfin, le groupe nominal « le médecin qui l’avait sauvée » révèle son rôle décisif dans le passé de Nafi. Cette progression transforme une silhouette mystérieuse en personnage lié à l’histoire de l’héroïne."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Explique l’intérêt narratif de terminer l’extrait par une question.",
+              "correction_md": "La question « Devait-elle sortir et lui parler ? » exprime directement l’hésitation de Nafi et suspend l’action. Elle ouvre deux suites possibles — la rencontre ou le silence — et invite le lecteur à anticiper le choix du personnage. Elle renforce donc à la fois la focalisation interne et le suspense."
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-A-FRA-L01-MOY-E03",
+          "titre": "Le cahier rouge",
+          "consigne": "Lis ce micro-récit original, puis traite toutes les questions. « Autrefois, Bamba cachait ses rédactions au fond de son sac, persuadé que ses phrases feraient rire la classe. Un après-midi, sa professeure posa devant lui un cahier rouge et lui demanda d’y écrire une histoire par semaine. Les années passèrent. À présent bibliothécaire, Bamba ouvre chaque mercredi ce même cahier devant les enfants du quartier. Il se souvient de sa peur, puis lit à haute voix le premier récit qu’il osa terminer. Au fond de la salle, son ancienne professeure écoute sans se montrer ; elle sait qu’il l’a reconnue à son parfum de menthe. »",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Reconstitue les trois étapes de l’évolution de Bamba.",
+              "correction_md": "Première étape : Bamba est un élève peu sûr de lui qui cache ses textes. Deuxième étape : sa professeure lui confie un cahier et l’encourage à écrire régulièrement. Troisième étape : devenu bibliothécaire, il lit ses récits aux enfants. Son parcours va donc de la peur d’être jugé à la transmission confiante de la lecture."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Analyse le rôle des repères temporels et des temps verbaux dans cette évolution.",
+              "correction_md": "« Autrefois » ouvre le passé de l’élève ; « un après-midi » désigne l’événement décisif ; « les années passèrent » résume une longue durée ; « à présent » et « chaque mercredi » installent la situation actuelle et répétée. L’imparfait décrit les habitudes et états anciens, le passé simple marque les changements, tandis que le présent rend vivante la transformation accomplie."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Montre que le cahier rouge remplit deux fonctions dans le récit.",
+              "correction_md": "Le cahier est d’abord un **objet de l’intrigue** : il donne à Bamba un cadre pour écrire. Il est aussi un **symbole** : conservé pendant des années, il relie l’élève timide au bibliothécaire qui transmet des histoires. Il représente la confiance acquise grâce à l’accompagnement de la professeure."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Interprète le dernier échange silencieux entre Bamba et son ancienne professeure.",
+              "correction_md": "La professeure reste cachée, mais le narrateur révèle qu’elle sait avoir été reconnue grâce au parfum. Ce silence suggère une complicité et une gratitude qui n’ont pas besoin de paroles. La scène finale montre aussi l’effet durable d’un geste éducatif : l’encouragement reçu par Bamba bénéficie maintenant aux enfants."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "palier": "concours",
+      "libelle": "Difficile",
+      "titre": "Difficile — Interpréter les choix narratifs et défendre une lecture",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-A-FRA-L01-DIF-E01",
+          "titre": "Deux regards sur une même porte",
+          "consigne": "Compare ces deux versions originales d’une même scène. Version A : « L’élève poussa la porte, entra dans le bureau et posa une enveloppe sur la table. La directrice leva les yeux. L’élève recula d’un pas, puis resta immobile. » Version B : « Quand Issa poussa la porte, le bureau lui parut immense. Il posa l’enveloppe, certain que la directrice entendait les battements de son cœur. Lorsqu’elle leva les yeux, il voulut fuir, mais ses jambes refusèrent de bouger. »",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Identifie la focalisation de chaque version et justifie chaque réponse avec des indices précis.",
+              "correction_md": "La version A adopte une **focalisation externe** : elle montre uniquement les gestes observables de l’élève et de la directrice. La version B adopte une **focalisation interne** centrée sur Issa : le bureau est perçu par lui, le lecteur connaît sa certitude, entend symboliquement son cœur et partage son désir de fuir."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Distingue, pour la version B, la question « qui raconte ? » de la question « qui voit et ressent ? ».",
+              "correction_md": "Un narrateur extérieur raconte à la troisième personne : il désigne le personnage par « Issa » et « il ». En revanche, c’est Issa qui sert de centre de perception : l’immensité du bureau, les battements du cœur et la peur sont rapportés selon sa conscience. Narrateur et point de vue ne se confondent donc pas."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Compare les effets produits par les deux versions sur la représentation du personnage.",
+              "correction_md": "Dans la version A, l’élève reste énigmatique : son recul peut signaler la peur, mais le lecteur n’en est pas certain. Dans la version B, Issa devient un personnage psychologiquement accessible ; ses perceptions et son blocage rendent son anxiété évidente et favorisent l’identification. La même action produit ainsi mystère d’un côté et proximité émotionnelle de l’autre."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Réécris la scène selon une focalisation zéro en deux ou trois phrases, puis indique l’information nouvelle apportée.",
+              "correction_md": "Proposition : « Issa entra, persuadé qu’une sanction l’attendait. Il ignorait que la directrice avait déjà lu la lettre qui l’innocentait et qu’elle cherchait seulement comment lui annoncer la bonne nouvelle. Elle leva les yeux tandis qu’il reculait. » Le narrateur révèle ici les pensées d’Issa et le savoir de la directrice ; cette double connaissance caractérise la focalisation zéro."
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-A-FRA-L01-DIF-E02",
+          "titre": "La dernière barque",
+          "consigne": "Lis ce micro-récit original, puis traite toutes les questions. « La crue avait coupé le quartier du dispensaire. Sur la rive, Yao tenait la corde de l’unique barque encore intacte. Son père lui avait ordonné de ne transporter personne avant le retour des secours. Pourtant, une vieille femme serrait contre elle un enfant brûlant de fièvre. “La rivière monte”, répétait le père au téléphone. Yao regarda le courant brun, puis les lèvres sèches de l’enfant. Il détacha la corde. Au premier coup de rame, la voix du père continuait de vibrer dans sa poche. »",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Formule un axe d’étude qui rende compte du conflit central et du choix du personnage.",
+              "correction_md": "Axe possible : **la construction d’un personnage partagé entre l’obéissance familiale et le devoir de sauver une vie**. Cet axe unit l’ordre prudent du père, l’urgence médicale, l’hésitation de Yao et sa décision finale de prendre la barque."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Analyse comment l’espace, le lexique et les sensations rendent la décision dangereuse.",
+              "correction_md": "L’espace est bloqué par la crue et séparé du dispensaire. Le lexique du danger — « crue », « unique barque », « rivière monte », « courant brun » — souligne la menace. Les « lèvres sèches » et la fièvre rendent parallèlement l’inaction dangereuse. Le personnage doit donc choisir entre deux risques concrets."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Montre que les gestes de Yao construisent indirectement son portrait moral.",
+              "correction_md": "Yao ne prononce aucun discours héroïque. Il observe successivement le courant puis l’enfant, ce qui traduit une délibération. Lorsqu’il détache la corde et donne le premier coup de rame malgré l’ordre reçu, ses actes révèlent son courage, sa compassion et sa capacité à assumer une décision. Le portrait moral naît donc de l’action."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Interprète la dernière phrase et porte un jugement argumenté sur le choix de Yao.",
+              "correction_md": "La voix qui « continuait de vibrer dans sa poche » matérialise l’ordre paternel et la culpabilité qui accompagnent Yao, même après sa décision. Son choix est moralement compréhensible : l’enfant a besoin de soins immédiats. Il reste pourtant risqué, car la barque est fragile et la rivière monte. Un jugement nuancé reconnaît donc à la fois la solidarité du geste et le danger auquel il expose les passagers."
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-A-FRA-L01-DIF-E03",
+          "titre": "La place réservée",
+          "consigne": "Lis ce micro-récit original, puis traite toutes les questions. « Chaque soir, au premier rang de la petite salle de lecture, Aminata laissait une chaise vide. Les nouveaux élèves croyaient qu’elle attendait un invité important. Elle ne les détrompait pas. Des années auparavant, son ami Moussa avait quitté le village après avoir promis de revenir écouter l’histoire qu’elle écrivait. Ce soir-là, un garçon couvert de poussière s’arrêta sur le seuil. Aminata reconnut la manière qu’avait Moussa de pencher la tête, mais le visage était trop jeune. Le garçon tendit un carnet. “Mon père disait que cette place l’aidait à tenir sa promesse.” Avant même d’ouvrir le carnet, Aminata comprit que Moussa ne reviendrait pas. Les élèves virent son sourire, puis ses larmes, sans savoir lequel des deux disait la vérité. Elle invita le garçon à s’asseoir sur la chaise et commença la lecture. »",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Formule une hypothèse de lecture et un axe d’étude adaptés à l’ensemble du passage.",
+              "correction_md": "Hypothèse : la chaise vide conserve la mémoire d’une promesse ancienne. Axe d’étude possible : **du signe de l’absence au geste de transmission : le deuil d’Aminata transformé par l’arrivée du fils de Moussa**. Cet axe permet d’étudier l’objet symbolique, la révélation progressive, les émotions du personnage et la reprise finale de la lecture."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Analyse l’organisation des points de vue au fil du récit et les effets de leurs changements.",
+              "correction_md": "Le début évoque le regard limité des élèves, qui imaginent un invité. Le narrateur élargit ensuite le savoir en révélant le passé d’Aminata et de Moussa : la focalisation devient zéro. À l’arrivée du garçon, la perception se resserre sur Aminata, qui reconnaît un geste puis comprend la mort de son ami. Enfin, le regard revient aux élèves, incapables d’interpréter le sourire et les larmes. Ces changements entretiennent le mystère, livrent progressivement la vérité et préservent une part d’émotion inexpliquée."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Montre comment la chaise, le carnet, le sourire et les larmes construisent le personnage d’Aminata et les thèmes du récit.",
+              "correction_md": "La chaise vide montre la fidélité d’Aminata à la promesse et son refus d’effacer l’absent. Le carnet apporte la trace concrète de Moussa et permet à son fils de prendre place dans l’histoire. Le sourire peut exprimer la joie de voir la promesse transmise ; les larmes, la douleur de comprendre la mort. Ensemble, ces signes construisent une femme fidèle et résiliente et développent les thèmes de la mémoire, du deuil et de la transmission."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Rédige une interprétation argumentée de 150 à 180 mots montrant comment la fin donne une portée au récit.",
+              "correction_md": "Proposition : « La fin transforme une attente douloureuse en acte de transmission. Depuis des années, Aminata réserve une chaise à Moussa : cet objet matérialise sa fidélité, mais aussi une absence qu’elle ne parvient pas à clore. L’arrivée du fils ne réalise pas la promesse au sens littéral, puisque Moussa ne reviendra pas. Elle lui donne cependant une forme nouvelle. Le carnet transmet la parole du père et le garçon reprend sa place dans la salle. Le sourire et les larmes expriment simultanément la perte et le soulagement ; aucun de ces signes n’est faux. En invitant le garçon à s’asseoir puis en commençant la lecture, Aminata choisit de ne pas rester prisonnière du passé. La littérature devient alors un lien entre les absents, les vivants et les élèves présents. Le récit suggère ainsi qu’une promesse peut survivre à celui qui l’a faite, à condition qu’un autre en recueille la mémoire et la transforme en geste partagé. »"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

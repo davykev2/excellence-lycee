@@ -1,26 +1,50 @@
+# Dépendances
+node_modules/
 **/node_modules/
+
+# Builds et caches
+dist/
+build/
 **/dist/
 **/.npm-cache/
-**/.vercel/
 
 # Variables locales et secrets
+.env
+.env.local
+.env.*.local
 **/.env
 **/.env.local
 **/.env.*.local
 !**/.env.example
 
+# Vercel
+.vercel/
+**/.vercel/
+
 # Données locales de développement
 apps/api/data/*.db
 apps/api/data/*.db-*
 
-# Fichiers temporaires et rapports locaux
+# Sources volumineuses ou sous copyright
+content_sources/
+
+# Fichiers temporaires et caches d’outils
 .agents/
 .audit/
-.claude/
+.codex/
 tmp/
+.tmp/
 /design-qa*
-*.log
 
-# Fichiers système
+# Préférences locales
+.claude/settings.local.json
+
+# Logs
+*.log
+npm-debug.log*
+
+# Fichiers système et éditeurs
 .DS_Store
 Thumbs.db
+*.suo
+*.sw?

@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "catalog_id": "OFFICIAL:francais:terminale:programme-educatif-valide",
+      "sha256": "cfe10a59591d94a2c17b793a7348cdae9a25614ddb787b4fc7980121a46adc58",
+      "bytes": 1092155,
+      "pages": 76,
+      "target_series": [
+        "TA",
+        "TC",
+        "TD"
+      ],
+      "subject": "french",
+      "subdiscipline": null,
+      "locator": "PROGRAMME",
+      "title": "Programme éducatif de Français — Classes de Terminale A/B/C/D/E/F",
+      "source_path": "content_sources/official_dpfc/programme-educatif-francais-terminale-valide.pdf",
+      "source_url": "https://dpfc-ci.net/wp-content/uploads/dpfc_fichiers/Programmes/prg_secondaire/Fran/PROGRAMME%20EDUCATIF%20TERMINALE%20VALIDE.pdf",
+      "publisher": "Direction de la Pédagogie et de la Formation Continue — Côte d’Ivoire",
+      "rights_status": "reference_only",
+      "retrieved_at": "2026-07-13",
+      "official_program": true
+    },
+    {
+      "catalog_id": "OFFICIAL:physique-chimie:terminale-c:programme-educatif-apc",
+      "sha256": "6626f53aaae3db0d46a442b54d31c24457f3508c8a8c2b846a267d196104be1a",
+      "bytes": 2514161,
+      "pages": 86,
+      "target_series": [
+        "TC"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": null,
+      "locator": "PROGRAMME",
+      "title": "Programme éducatif de Physique-Chimie — Terminale C",
+      "source_path": "content_sources/official_dpfc/programme-educatif-physique-chimie-terminale-c.pdf",
+      "source_url": "https://dpfc-ci.net/wp-content/uploads/dpfc_fichiers/2018-2019/programmes_guides/Physique_Chimie/PROGR_ED_PC_2018-2019_TLE_C_APC.pdf",
+      "publisher": "Direction de la Pédagogie et de la Formation Continue — Côte d’Ivoire",
+      "rights_status": "reference_only",
+      "retrieved_at": "2026-07-13",
+      "official_program": true
+    },
+    {
+      "catalog_id": "OFFICIAL:physique-chimie:terminale-d:programme-educatif-apc",
+      "sha256": "8e551045f92ad3e55130d9e5ab1b4f84374e3f21a04bdb59a8d4e6aaf82d3893",
+      "bytes": 2491995,
+      "pages": 83,
+      "target_series": [
+        "TD"
+      ],
+      "subject": "physics_chemistry",
+      "subdiscipline": null,
+      "locator": "PROGRAMME",
+      "title": "Programme éducatif de Physique-Chimie — Terminale D",
+      "source_path": "content_sources/official_dpfc/programme-educatif-physique-chimie-terminale-d.pdf",
+      "source_url": "https://dpfc-ci.net/wp-content/uploads/dpfc_fichiers/2018-2019/programmes_guides/Physique_Chimie/PROGR_ED_PC_2018-2019_TLE_D_APC.pdf",
+      "publisher": "Direction de la Pédagogie et de la Formation Continue — Côte d’Ivoire",
+      "rights_status": "reference_only",
+      "retrieved_at": "2026-07-13",
+      "official_program": true
+    }
+  ]
+}

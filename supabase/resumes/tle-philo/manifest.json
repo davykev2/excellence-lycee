@@ -1,0 +1,18 @@
+{
+  "matiere_slug": "philosophie",
+  "niveau": "Terminale",
+  "series": ["A", "C", "D"],
+  "output": "../../resumes_tle_philosophie.sql",
+  "lecons": [
+    { "file": "L1.md",  "ordre": 1,  "titre": "L1 — La dissertation philosophique", "description": "Méthodologie · Compétence I : rédiger une dissertation philosophique" },
+    { "file": "L2.md",  "ordre": 2,  "titre": "L2 — Le commentaire de texte philosophique", "description": "Méthodologie · Compétence I : rédiger un commentaire de texte philosophique" },
+    { "file": "L3.md",  "ordre": 3,  "titre": "L3 — La connaissance de l'homme", "description": "Les conditions de la liberté · conscience, inconscient, responsabilité" },
+    { "file": "L4.md",  "ordre": 4,  "titre": "L4 — La vie en société", "description": "Les conditions de la liberté · société, État, nation, autrui, violence" },
+    { "file": "L5.md",  "ordre": 5,  "titre": "L5 — Dieu et la religion", "description": "Les conditions de la liberté · Dieu, rôles de la religion, aliénation et liberté" },
+    { "file": "L6.md",  "ordre": 6,  "titre": "L6 — L'histoire et l'humanité", "description": "Les conditions du bonheur · historicité, décolonisation, diversité culturelle" },
+    { "file": "L7.md",  "ordre": 7,  "titre": "L7 — La valeur de la philosophie", "description": "Les conditions du bonheur · philosophie, raison et mythe" },
+    { "file": "L8.md",  "ordre": 8,  "titre": "L8 — Progrès et bonheur", "description": "Les conditions du bonheur · désir, travail, technique, art, types de progrès" },
+    { "file": "L9.md",  "ordre": 9,  "titre": "L9 — Langage et vérité", "description": "Les conditions d'élaboration de la connaissance · formes du langage, critères de la vérité" },
+    { "file": "L10.md", "ordre": 10, "titre": "L10 — La connaissance scientifique", "description": "Les conditions d'élaboration de la vérité · types de sciences, démarches, bioéthique" }
+  ]
+}

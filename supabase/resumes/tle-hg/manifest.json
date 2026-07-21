@@ -1,0 +1,23 @@
+{
+  "matiere_slug": "histoire-geo",
+  "niveau": "Terminale",
+  "series": ["A", "C", "D"],
+  "output": "../../resumes_tle_histoire_geo.sql",
+  "lecons": [
+    { "file": "H1.md", "ordre": 1,  "titre": "H1 — L'Organisation des Nations Unies (ONU)", "description": "Histoire · Thème 1 : Les relations internationales de 1945 à nos jours" },
+    { "file": "H2.md", "ordre": 2,  "titre": "H2 — L'ère de la bipolarisation de 1947 à 1991", "description": "Histoire · Thème 1 : Les relations internationales de 1945 à nos jours" },
+    { "file": "H3.md", "ordre": 3,  "titre": "H3 — De la fin de la guerre froide vers un monde multipolaire", "description": "Histoire · Thème 1 : Les relations internationales de 1945 à nos jours" },
+    { "file": "H4.md", "ordre": 4,  "titre": "H4 — La montée des nationalismes en Afrique", "description": "Histoire · Thème 2 : De la décolonisation aux efforts d'organisation de l'Afrique" },
+    { "file": "H5.md", "ordre": 5,  "titre": "H5 — L'accession de la Côte d'Ivoire à l'indépendance", "description": "Histoire · Thème 2 : De la décolonisation aux efforts d'organisation de l'Afrique" },
+    { "file": "H6.md", "ordre": 6,  "titre": "H6 — L'accession de l'Algérie à l'indépendance", "description": "Histoire · Thème 2 : De la décolonisation aux efforts d'organisation de l'Afrique" },
+    { "file": "H7.md", "ordre": 7,  "titre": "H7 — L'Union Africaine (UA)", "description": "Histoire · Thème 2 : De la décolonisation aux efforts d'organisation de l'Afrique" },
+    { "file": "H8.md", "ordre": 8,  "titre": "H8 — Croyances et valeurs dominantes dans le monde occidental", "description": "Histoire · Thème 3 : Croyances et valeurs dans le monde d'aujourd'hui" },
+    { "file": "H9.md", "ordre": 9,  "titre": "H9 — Les mutations contemporaines de la civilisation négro-africaine", "description": "Histoire · Thème 3 : Croyances et valeurs dans le monde d'aujourd'hui" },
+    { "file": "G1.md", "ordre": 10, "titre": "G1 — Les fondements du développement économique de la Côte d'Ivoire", "description": "Géographie · Thème 1 : La Côte d'Ivoire, étude économique" },
+    { "file": "G2.md", "ordre": 11, "titre": "G2 — Les secteurs d'activités économiques de la Côte d'Ivoire", "description": "Géographie · Thème 1 : La Côte d'Ivoire, étude économique" },
+    { "file": "G3.md", "ordre": 12, "titre": "G3 — Les problèmes de développement économique de la Côte d'Ivoire", "description": "Géographie · Thème 1 : La Côte d'Ivoire, étude économique" },
+    { "file": "G4.md", "ordre": 13, "titre": "G4 — Les fondements du développement économique de la Corée du Sud", "description": "Géographie · Thème 2 : La Corée du Sud, un exemple de pays émergent" },
+    { "file": "G6.md", "ordre": 15, "titre": "G6 — La CEDEAO, une organisation régionale à caractère économique", "description": "Géographie · Thème 3 : Regroupements et coopération économique" },
+    { "file": "G7.md", "ordre": 16, "titre": "G7 — Les relations UE-ACP : un exemple de coopération Nord-Sud", "description": "Géographie · Thème 3 : Regroupements et coopération économique" }
+  ]
+}

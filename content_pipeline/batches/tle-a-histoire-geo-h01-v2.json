@@ -1,0 +1,304 @@
+{
+  "schema_version": 2,
+  "batch_code": "2026-07-tle-a-histoire-geo-h01-v2",
+  "status": "reviewed",
+  "target": {
+    "niveau": "Terminale",
+    "serie": "A",
+    "matiere_slug": "histoire-geo",
+    "chapitre_id": "ca3b17e8-b772-450c-8484-eea6c664bf5d",
+    "chapitre_code": "TLE-A-HG-H01",
+    "chapitre_ordre": 1,
+    "chapitre_titre": "H1 — L'Organisation des Nations Unies (ONU)"
+  },
+  "source": {
+    "code": "CI-EN-TA-HG-H01-REF-2026-07",
+    "titre": "Terminale toutes séries — Histoire — L'Organisation des Nations Unies (ONU)",
+    "type": "pdf",
+    "auteur_organisme": "Côte d'Ivoire — École numérique",
+    "url": null,
+    "licence_code": null,
+    "licence_url": null,
+    "attribution": null,
+    "droits_statut": "reference_only",
+    "storage_path": "content_sources/archive_20260713/Nouveau dossier/TA/HG T all/Tle H1-LOrganisation des Nations Unies(ONU).pdf",
+    "sha256": "18f34ae93b429102c576dffd7a3b947a18d8a8028072e0aabbccf9f184b5e976",
+    "locator": "Leçon H1, pages 1-13 — création, fonctionnement et bilan de l'ONU",
+    "notes": "Source partagée par le manifeste entre les séries Terminale A, C et D. Elle est utilisée uniquement pour l'alignement au cours : construction progressive de 1941 à 1945, objectifs et principes, organes principaux, organismes spécialisés, succès, limites et réformes. Le code du chapitre distant est nul ; TLE-A-HG-H01 est un code interne stable. Les mises en situation, formulations et corrections de ce lot sont originales et ne reproduisent pas les exercices du PDF. La distinction entre la signature de la Charte le 26 juin 1945 et son entrée en vigueur le 24 octobre 1945 est explicitée afin d'éviter toute ambiguïté chronologique."
+  },
+  "levels": [
+    {
+      "palier": "entrainement",
+      "libelle": "Facile",
+      "titre": "Facile — Maîtriser les repères et les acteurs",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-A-HG-H01-FAC-E01",
+          "titre": "De l'idée à la naissance de l'ONU",
+          "consigne": "À partir des repères suivants, reconstruis la création progressive de l'ONU : conférence de San Francisco ; rencontre de Terre-Neuve ; conférence de Dumbarton Oaks ; déclaration de Washington ; conférences de Moscou et de Téhéran ; conférence de Yalta ; entrée en vigueur de la Charte.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Replace les sept repères dans l'ordre chronologique et associe à chacun son année ou sa date.",
+              "correction_md": "**Ordre attendu :** 1. Terre-Neuve, 14 août 1941 ; 2. Washington, 1er janvier 1942 ; 3. Moscou puis Téhéran, 1943 ; 4. Dumbarton Oaks, du 21 août au 7 octobre 1944 ; 5. Yalta, février 1945 ; 6. San Francisco, du 25 avril au 26 juin 1945 ; 7. entrée en vigueur de la Charte, 24 octobre 1945. Cette suite montre que l'ONU n'est pas issue d'une décision unique, mais d'une construction diplomatique étalée sur plusieurs années."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Explique la contribution particulière de Terre-Neuve, de Dumbarton Oaks et de San Francisco à cette construction.",
+              "correction_md": "À **Terre-Neuve**, Roosevelt et Churchill formulent dans la Charte de l'Atlantique des principes de liberté, de démocratie et de sécurité qui nourrissent le projet. À **Dumbarton Oaks**, les Alliés précisent les organes et le fonctionnement de la future organisation. À **San Francisco**, cinquante États discutent puis signent la Charte des Nations Unies : le projet reçoit ainsi sa base institutionnelle et juridique."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Distingue clairement ce qui se produit le 26 juin 1945 de ce qui se produit le 24 octobre 1945.",
+              "correction_md": "Le **26 juin 1945** correspond à la signature de la Charte à l'issue de la conférence de San Francisco. Le **24 octobre 1945** correspond à l'entrée en vigueur de cette Charte après les ratifications nécessaires ; l'ONU commence alors officiellement à fonctionner. Les deux dates sont donc complémentaires : l'une clôt la rédaction et la signature du texte fondateur, l'autre marque son effet juridique et institutionnel."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Rédige une synthèse de cinq à six lignes montrant pourquoi la création de l'ONU est qualifiée de construction progressive.",
+              "correction_md": "**Synthèse possible.** L'échec de la Société des Nations et les destructions de la Seconde Guerre mondiale poussent les Alliés à imaginer une nouvelle organisation de sécurité collective. De 1941 à 1943, plusieurs déclarations affirment des principes communs et l'idée d'une organisation internationale. En 1944, Dumbarton Oaks en précise les organes. Yalta règle notamment la question du droit de veto. Enfin, la Charte est élaborée et signée à San Francisco le 26 juin 1945, puis entre en vigueur le 24 octobre. Chaque étape prépare donc la suivante."
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-A-HG-H01-FAC-E02",
+          "titre": "Objectifs et principes en situation",
+          "consigne": "Deux États membres, Azur et Boréal, se disputent une zone frontalière. Azur menace d'employer la force, refuse toute négociation et intervient dans le choix des dirigeants de Boréal. Il affirme que sa souveraineté l'autorise à ignorer les engagements pris devant l'ONU.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Présente deux objectifs de l'ONU directement concernés par cette situation.",
+              "correction_md": "Le premier objectif concerné est le **maintien de la paix et de la sécurité internationales**, puisque le différend peut dégénérer en conflit armé. Le second est le développement de la **coopération internationale et de l'harmonisation des efforts**, nécessaire pour trouver une issue commune. On peut aussi mobiliser la promotion de la souveraineté des peuples, car l'ingérence d'Azur met en cause la capacité de Boréal à décider par lui-même."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Nomme quatre principes de l'ONU qui permettent d'évaluer le comportement des deux États.",
+              "correction_md": "Les quatre principes les plus utiles sont : l'**égalité souveraine** des États membres ; l'exécution **de bonne foi** des obligations envers l'ONU ; le **règlement pacifique** des différends ; l'interdiction de recourir à la **menace ou à la force**. La **non-ingérence** dans les affaires intérieures d'un État membre complète cette liste et s'applique directement à l'intervention politique d'Azur."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Identifie précisément les violations commises par Azur et justifie chaque réponse.",
+              "correction_md": "La menace militaire viole le principe d'abstention de la menace ou de la force. Le refus de négocier contredit le règlement pacifique des différends. L'intervention dans le choix des dirigeants de Boréal enfreint la non-ingérence et méconnaît son égalité souveraine. Enfin, prétendre que la souveraineté dispense de respecter les engagements contredit l'obligation de bonne foi : la souveraineté reconnue par l'ONU s'exerce dans un ordre international accepté, elle n'annule pas les obligations librement souscrites."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Propose une conduite conforme aux principes de l'ONU pour empêcher l'escalade du conflit.",
+              "correction_md": "Les deux États devraient suspendre toute menace, accepter une médiation ou des négociations et soumettre au besoin le différend juridique à une procédure pacifique. Le secrétaire général pourrait offrir ses bons offices ; le Conseil de sécurité pourrait appeler au cessez-le-feu et adopter une résolution ; un accord devrait ensuite garantir le respect de la souveraineté des deux parties. Cette conduite associe prévention, dialogue, décision collective et respect des engagements."
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-A-HG-H01-FAC-E03",
+          "titre": "Qui fait quoi au sein du système onusien ?",
+          "consigne": "Une session doit voter le budget de l'ONU ; une crise menace la paix ; l'administration quotidienne doit être assurée ; deux États demandent le règlement d'un litige juridique ; une région subit une famine et une épidémie. Identifie les organes ou organismes compétents et explique leurs rôles.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Associe les quatre premières situations à l'Assemblée générale, au Conseil de sécurité, au Secrétariat général et à la Cour internationale de Justice.",
+              "correction_md": "L'**Assemblée générale** vote le budget et délibère selon le principe d'une voix par État membre. Le **Conseil de sécurité** intervient lorsqu'une menace pèse sur la paix et la sécurité. Le **Secrétariat général** assure l'administration de l'ONU et prépare le travail institutionnel sous l'autorité du secrétaire général. La **Cour internationale de Justice**, siégeant à La Haye, règle les différends juridiques entre États lorsqu'ils lui sont soumis."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Indique quels organismes spécialisés sont particulièrement adaptés à la famine et à l'épidémie, puis précise leur champ d'action.",
+              "correction_md": "La **FAO** agit dans les domaines de l'alimentation et de l'agriculture ; elle est donc adaptée à la lutte contre la faim et la malnutrition. L'**OMS** coordonne l'action sanitaire internationale et intervient contre les épidémies et les pandémies. Dans une crise réelle, leurs missions seraient complémentaires : sécurité alimentaire d'un côté, surveillance et réponse sanitaires de l'autre."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Compare l'Assemblée générale et le Conseil de sécurité sur la composition, le type de décision et la fonction principale.",
+              "correction_md": "L'Assemblée générale réunit tous les États membres, chacun disposant d'une voix ; elle délibère, vote le budget, participe aux élections internes et formule surtout des décisions non contraignantes. Le Conseil de sécurité comprend cinq membres permanents dotés du veto et dix membres non permanents élus pour deux ans ; il peut adopter des résolutions et des sanctions relatives à la paix. L'Assemblée est donc l'organe le plus représentatif, tandis que le Conseil porte la responsabilité opérationnelle principale en matière de sécurité."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Montre en un court paragraphe pourquoi ces organes doivent coopérer plutôt que travailler isolément.",
+              "correction_md": "Une crise combine souvent des dimensions politiques, juridiques, administratives et humanitaires. Le Conseil de sécurité peut décider d'une réponse à la menace, mais le secrétaire général doit faciliter la médiation et mettre en œuvre les décisions ; l'Assemblée générale finance et soutient l'action collective ; les organismes spécialisés apportent leur expertise ; la Cour peut clarifier un litige de droit. La coopération transforme donc une décision politique en réponse coordonnée et durable."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "palier": "maitrise",
+      "libelle": "Moyen",
+      "titre": "Moyen — Analyser le fonctionnement et le bilan",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-A-HG-H01-MOY-E01",
+          "titre": "Une crise à l'épreuve de la sécurité collective",
+          "consigne": "Dans un conflit fictif, les combats se rapprochent d'une capitale. Le secrétaire général propose une médiation. Un projet de résolution exige un cessez-le-feu, mais un membre permanent annonce son veto. L'Assemblée générale ouvre un débat. Après de nouvelles violences, un embargo est envisagé, puis une force d'interposition est proposée.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Identifie le rôle joué ou envisageable par le secrétaire général, le Conseil de sécurité et l'Assemblée générale.",
+              "correction_md": "Le **secrétaire général** exerce ici des bons offices : il met les parties en contact, propose une médiation et attire l'attention des organes compétents sur la crise. Le **Conseil de sécurité** examine la menace, tente d'adopter une résolution et peut décider de sanctions ou d'une opération de maintien de la paix. L'**Assemblée générale** offre un cadre de débat plus représentatif, mobilise l'opinion des États et peut recommander une orientation, mais ses décisions n'ont pas la même portée contraignante que celles du Conseil en matière de sécurité."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Reconstitue la gradation de la réponse du Conseil de sécurité et explique sa logique.",
+              "correction_md": "La réponse peut progresser ainsi : 1. appel au cessez-le-feu et recherche d'un règlement pacifique ; 2. résolution accompagnée de pressions diplomatiques ; 3. sanctions économiques ou embargo si les décisions ne sont pas respectées. Une **opération de maintien de la paix** peut ensuite stabiliser la situation si les principales parties y consentent : elle reste impartiale et n'emploie la force qu'en légitime défense ou pour défendre son mandat. Elle ne constitue donc pas simplement le dernier degré d'une escalade coercitive. L'**imposition de la paix**, pouvant aller jusqu'à l'autorisation de la force sous mandat du Conseil, relève d'une logique distincte et plus contraignante, envisagée en dernier recours."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Explique comment le veto peut protéger un équilibre politique tout en limitant l'efficacité de l'ONU.",
+              "correction_md": "Le veto garantit qu'une décision majeure de sécurité ne soit pas imposée contre l'opposition d'une grande puissance, ce qui peut éviter une rupture entre celle-ci et l'organisation. Mais il permet aussi à un seul membre permanent de bloquer une décision soutenue par les autres, même face à une urgence. Il crée donc une tension entre la recherche d'un accord entre grandes puissances et la capacité d'agir rapidement pour protéger la paix."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Propose une stratégie réaliste si le veto empêche l'adoption du premier projet de résolution.",
+              "correction_md": "Une stratégie réaliste consiste à poursuivre la médiation du secrétaire général, renégocier le texte pour obtenir un compromis minimal sur le cessez-le-feu, faire documenter la situation et mobiliser l'Assemblée générale afin d'accroître la pression politique. Les organismes humanitaires doivent parallèlement protéger les civils dans la limite de leur mandat. Cette stratégie ne supprime pas le veto, mais elle évite l'inaction totale et prépare une nouvelle décision du Conseil si le rapport de forces évolue."
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-A-HG-H01-MOY-E02",
+          "titre": "Construire un bilan réellement nuancé",
+          "consigne": "Dossier de faits : adoption de normes relatives aux droits de l'homme ; médiations et supervision de processus électoraux ; actions sanitaires, alimentaires et éducatives ; envoi de forces de paix ; persistance de conflits ; usage abusif du veto ; insuffisance de certains secours ; maintien de fortes inégalités entre pays.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Classe les faits du dossier en réussites, limites institutionnelles et limites liées aux résultats obtenus.",
+              "correction_md": "**Réussites :** production de normes relatives aux droits de l'homme ; médiations et supervision électorale ; actions sanitaires, alimentaires et éducatives ; opérations de paix lorsqu'elles préviennent ou limitent les violences. **Limites institutionnelles :** usage abusif du veto, lenteur ou blocage de la décision. **Limites de résultats :** persistance de conflits, secours parfois insuffisants et maintien des inégalités. Cette dernière catégorie rappelle qu'une action peut exister sans résoudre entièrement le problème visé."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Explique pourquoi la persistance d'un problème mondial ne suffit pas, à elle seule, à prouver l'inutilité de l'ONU.",
+              "correction_md": "L'ONU dépend des mandats, des financements et de la coopération que lui accordent les États ; elle ne possède pas un pouvoir illimité sur leurs décisions. Un conflit ou une famine peut persister malgré une médiation, tout en ayant été contenu ou partiellement soulagé. Il faut donc évaluer des résultats précis — vies protégées, accord obtenu, aide distribuée, norme diffusée — et les comparer aux objectifs et aux moyens. La persistance du problème révèle une limite, mais n'annule pas automatiquement les effets obtenus."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Rédige un paragraphe argumenté justifiant l'expression « bilan mitigé ».",
+              "correction_md": "**Paragraphe possible.** Le bilan de l'ONU est mitigé parce que l'organisation a produit des résultats importants sans atteindre complètement ses ambitions. Elle a fourni un cadre de négociation, soutenu des opérations de paix, promu les droits de l'homme et coordonné des actions humanitaires. Cependant, les conflits persistent, l'aide reste parfois insuffisante et le veto peut paralyser la décision collective. Les réussites prouvent donc l'utilité de l'organisation, tandis que ses blocages et les résultats inachevés montrent la nécessité de la réformer."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Propose quatre indicateurs permettant d'évaluer plus rigoureusement une action de l'ONU.",
+              "correction_md": "On peut retenir : 1. l'**objectif initial** et son degré d'atteinte ; 2. la **durée** et la stabilité du résultat, par exemple le respect d'un cessez-le-feu ; 3. les **effets humains mesurables**, comme l'accès aux secours ou la protection des civils ; 4. le **rapport entre moyens engagés et résultats**. On peut ajouter la coopération des États et le respect du droit. Ces indicateurs évitent de réduire le bilan à une impression générale."
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-A-HG-H01-MOY-E03",
+          "titre": "Coordonner une réponse humanitaire",
+          "consigne": "Après un conflit, une région connaît des déplacements de population, une épidémie, une pénurie alimentaire et la fermeture des écoles. Les autorités demandent une réponse coordonnée du système des Nations Unies.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Associe chaque besoin principal à un organisme adapté parmi le HCR, l'OMS, la FAO et l'UNESCO.",
+              "correction_md": "Le **HCR** protège et assiste les réfugiés et personnes déplacées relevant de son mandat. L'**OMS** coordonne la réponse à l'épidémie et l'appui aux systèmes de santé. La **FAO** contribue à la sécurité alimentaire en agissant sur l'alimentation et l'agriculture. L'**UNESCO** soutient l'éducation et la culture, notamment la continuité éducative. Chaque organisme possède une spécialité, mais les besoins des populations se recoupent."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Établis un ordre de priorités pour les premières semaines et justifie-le sans opposer artificiellement les besoins.",
+              "correction_md": "La priorité immédiate est de protéger les vies : sécurité, abris, eau, soins d'urgence et contrôle de l'épidémie. Il faut simultanément organiser l'approvisionnement alimentaire, car la malnutrition aggrave la vulnérabilité sanitaire. Dès que les conditions minimales sont stabilisées, la reprise de l'éducation doit être préparée afin de protéger les enfants et restaurer une vie sociale. Cet ordre est pratique, non absolu : les équipes doivent travailler en parallèle et ajuster les priorités aux données du terrain."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Explique le rôle de coordination que peuvent jouer les organes principaux de l'ONU dans cette réponse.",
+              "correction_md": "Le Conseil de sécurité peut créer les conditions de sécurité nécessaires si le conflit menace encore la paix. Le secrétaire général et le Secrétariat facilitent la coordination administrative et attirent l'attention sur l'urgence. L'Assemblée générale vote les ressources communes et mobilise les États. Le Conseil économique et social coordonne les activités économiques et sociales. Les organismes spécialisés exécutent ensuite des programmes adaptés à leurs compétences."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Présente deux limites possibles de cette intervention et une réponse pour chacune.",
+              "correction_md": "Première limite : l'insuffisance des financements ou le retard des contributions peut réduire les secours ; une réponse consiste à établir des priorités transparentes, mobiliser les États et coordonner les donateurs. Deuxième limite : l'insécurité ou le refus de coopération des autorités peut bloquer l'accès ; il faut négocier des garanties, documenter les entraves et rechercher un appui politique des organes compétents. L'efficacité humanitaire dépend donc à la fois de l'expertise technique et de conditions politiques."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "palier": "concours",
+      "libelle": "Difficile",
+      "titre": "Difficile — Discuter l'efficacité et les réformes",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-A-HG-H01-DIF-E01",
+          "titre": "Réformer le Conseil de sécurité",
+          "consigne": "Dossier synthétique : le Conseil de sécurité conserve depuis 1945 cinq membres permanents dotés du veto. Ce mécanisme a parfois paralysé l'action collective. Des États du Sud souhaitent une représentation permanente plus conforme au poids démographique et régional de pays comme l'Inde, le Brésil ou le Nigeria. D'autres craignent qu'un élargissement rende la décision encore plus lente.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Dégage le problème historique et politique central posé par le dossier.",
+              "correction_md": "Le problème central est le décalage entre une structure de décision héritée du rapport de forces de 1945 et un monde devenu plus divers. Le Conseil doit rester capable de décider, mais sa légitimité est contestée lorsque de vastes régions ne disposent d'aucun siège permanent. La difficulté consiste donc à concilier **représentativité**, **égalité souveraine** et **efficacité opérationnelle**."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Analyse les deux critiques adressées au veto : l'inégalité entre les États et le risque de paralysie.",
+              "correction_md": "Le veto crée d'abord une inégalité de pouvoir : cinq États peuvent bloquer une décision alors que les autres membres n'en ont pas la capacité. Il peut ensuite paralyser le Conseil lorsqu'un intérêt national d'un membre permanent s'oppose à l'action collective. Toutefois, il a été conçu pour maintenir les grandes puissances dans le système et éviter qu'une décision de sécurité majeure ne soit adoptée contre elles. Une analyse complète présente donc sa fonction initiale avant d'en montrer les effets problématiques."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Propose une réforme précise du Conseil et évalue un avantage ainsi qu'un risque de ta proposition.",
+              "correction_md": "**Proposition possible :** créer des sièges permanents ou de longue durée pour des régions aujourd'hui sous-représentées, notamment l'Afrique et l'Amérique latine, et demander aux membres permanents de s'abstenir d'utiliser le veto lors d'atrocités massives clairement établies. **Avantage :** le Conseil refléterait mieux la diversité du monde et gagnerait en légitimité. **Risque :** davantage de membres et des critères contestés pourraient ralentir la recherche d'un accord. La réforme doit donc prévoir une procédure de décision claire et révisable."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Rédige une réponse argumentée à la question : « Un Conseil plus représentatif serait-il nécessairement plus efficace ? »",
+              "correction_md": "Un Conseil plus représentatif ne serait pas nécessairement plus efficace à court terme, car l'augmentation du nombre d'acteurs peut compliquer les compromis. Cependant, une décision perçue comme légitime peut être mieux acceptée et appliquée par les États, ce qui renforce son efficacité à moyen terme. L'enjeu n'est donc pas de choisir entre représentation et action, mais d'organiser leur complémentarité : élargissement raisonnable, transparence, responsabilité dans l'usage du veto et méthodes de négociation capables de produire des accords."
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-A-HG-H01-DIF-E02",
+          "titre": "Légalité, légitimité et usage de la force",
+          "consigne": "Dans une crise fictive, le Conseil de sécurité adopte une résolution autorisant des moyens coercitifs après l'échec d'un embargo. Une grande puissance dirige ensuite l'opération militaire et interprète largement le mandat. Certains États estiment que l'ONU a défendu la paix ; d'autres pensent qu'elle a servi les intérêts de cette puissance.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Distingue la légalité formelle de l'opération et sa légitimité politique.",
+              "correction_md": "La **légalité formelle** dépend de l'existence d'une résolution adoptée par l'organe compétent et du respect de son mandat. La **légitimité politique** concerne la justification, la proportionnalité, la transparence et l'acceptation de l'action par les États et les populations. Une opération peut donc être autorisée tout en étant contestée si son exécution paraît dépasser le mandat ou favoriser un intérêt national. Inversement, une intention présentée comme juste ne remplace pas une autorisation juridique."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Montre en quoi cette situation révèle à la fois une force et une faiblesse du système de sécurité collective.",
+              "correction_md": "La force du système réside dans la possibilité d'adopter une réponse commune et graduée après l'échec des moyens pacifiques : l'action ne relève plus seulement d'une initiative unilatérale. Sa faiblesse apparaît lorsque l'exécution dépend fortement des moyens d'une grande puissance, qui peut influencer les objectifs ou l'ampleur de l'opération. L'ONU dispose alors d'une autorité collective, mais pas toujours d'une autonomie matérielle suffisante."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Formule deux critères permettant de vérifier si l'exécution reste fidèle au mandat du Conseil de sécurité.",
+              "correction_md": "Premier critère : les actions engagées doivent rester **nécessaires et proportionnées** à l'objectif défini par la résolution. Deuxième critère : l'opération doit faire l'objet d'un **contrôle collectif**, avec des rapports réguliers, une durée limitée et la possibilité pour le Conseil de modifier ou d'arrêter le mandat. On peut ajouter la protection des civils et le respect du droit international. Ces critères réduisent le risque qu'une autorisation collective devienne un blanc-seing."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Prends position de manière nuancée sur l'affirmation : « Dès qu'une grande puissance dirige une opération, l'ONU disparaît comme acteur. »",
+              "correction_md": "L'affirmation met justement en garde contre la captation d'un mandat collectif par l'État qui possède l'essentiel des moyens militaires. Cependant, diriger l'exécution ne signifie pas automatiquement que l'ONU disparaît : le Conseil conserve un rôle s'il définit précisément le mandat, contrôle les opérations et exige des comptes. La conclusion doit donc être conditionnelle : l'ONU s'efface lorsque ses organes renoncent au contrôle ; elle demeure un acteur lorsque l'autorité politique collective encadre réellement les moyens nationaux."
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-A-HG-H01-DIF-E03",
+          "titre": "Composition : l'ONU entre utilité et insuffisances",
+          "consigne": "Sujet de composition : « Les limites de l'ONU justifient-elles sa disparition ou sa réforme ? » Construis une démonstration historique en mobilisant sa création, son fonctionnement, ses actions et ses difficultés.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Analyse les termes du sujet et formule une problématique précise.",
+              "correction_md": "Le sujet oppose deux conséquences possibles des limites de l'ONU. **Disparition** signifie supprimer l'organisation parce qu'elle serait devenue inutile ou nuisible. **Réforme** signifie conserver son cadre tout en modifiant ses règles, ses organes ou ses moyens. Les **limites** désignent les blocages institutionnels, les échecs opérationnels et les résultats insuffisants. **Problématique possible :** les échecs et les blocages de l'ONU prouvent-ils l'inutilité de l'organisation, ou montrent-ils plutôt qu'un cadre indispensable de coopération doit être transformé ?"
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Propose un plan détaillé en trois parties, avec deux idées majeures par partie.",
+              "correction_md": "**I. Une organisation fondée sur une nécessité historique :** A. l'échec de la SDN et la construction de 1941-1945 ; B. les objectifs de paix, de droits et de coopération. **II. Une utilité réelle mais incomplète :** A. médiations, opérations de paix, normes relatives aux droits de l'homme ; B. action économique, sociale et humanitaire des organismes spécialisés. **III. Des limites qui appellent une réforme :** A. veto, représentativité, dépendance envers les États et insuffisance des moyens ; B. encadrement du veto, démocratisation des organes, prévention des conflits et renforcement de l'action en faveur des populations. Ce plan progresse de la raison d'être vers le bilan, puis vers la réponse."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Rédige le développement de la troisième partie en reliant chaque proposition de réforme à une limite identifiée.",
+              "correction_md": "**Développement possible.** Les limites de l'ONU rendent d'abord nécessaire une réforme de la décision. Le veto, lorsqu'il est employé pour défendre un intérêt particulier, peut bloquer la protection de la paix ; son usage devrait donc être mieux encadré et publiquement justifié. La faible représentation permanente de plusieurs régions alimente ensuite une crise de légitimité ; un élargissement raisonné du Conseil donnerait davantage de place au Sud. Enfin, la prévention, l'aide humanitaire et le développement restent tributaires de financements et de la volonté des États. Des contributions plus prévisibles, une meilleure coordination des organismes et un contrôle régulier des mandats permettraient de relier les ambitions aux moyens. Chaque réforme répond ainsi à une faiblesse précise sans supprimer le cadre de coopération."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Rédige une conclusion complète qui répond au sujet sans présenter l'ONU comme toute-puissante.",
+              "correction_md": "**Conclusion possible.** Les blocages du Conseil de sécurité, les échecs de certaines opérations et la persistance des crises montrent que l'ONU ne peut garantir seule la paix ni le progrès. Ils ne prouvent pourtant pas qu'elle soit inutile : elle offre un cadre universel de négociation, produit des normes communes et coordonne des actions que les États isolés mèneraient difficilement. Sa disparition créerait donc un vide sans supprimer les rivalités qui limitent déjà son action. La réponse la plus cohérente est une réforme exigeante de sa représentation, de ses procédures et de ses moyens, accompagnée d'un engagement réel des États membres."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

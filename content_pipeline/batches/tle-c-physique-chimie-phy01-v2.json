@@ -1,0 +1,304 @@
+{
+  "schema_version": 2,
+  "batch_code": "2026-07-tle-c-physique-chimie-phy01-v2",
+  "status": "reviewed",
+  "target": {
+    "niveau": "Terminale",
+    "serie": "C",
+    "matiere_slug": "physique-chimie",
+    "chapitre_id": "f20bd48f-d0dc-4af3-9c07-ce623fdbfeeb",
+    "chapitre_code": "TLE-C-PC-PHY01",
+    "chapitre_ordre": 1,
+    "chapitre_titre": "Physique · L1 — Cinématique du point"
+  },
+  "source": {
+    "code": "CI-EN-TC-PC-PHY01-REF-2026-07",
+    "titre": "Terminales C, D — Physique-Chimie — Cinématique du point",
+    "type": "pdf",
+    "auteur_organisme": "Côte d’Ivoire — École numérique",
+    "url": null,
+    "licence_code": null,
+    "licence_url": null,
+    "attribution": null,
+    "droits_statut": "reference_only",
+    "storage_path": "content_sources/archive_20260713/Nouveau dossier/TC/PC Tle CDE/TleD_PHY_L1_Cinématique du point.pdf",
+    "sha256": "4e590030c6508d40a1893772fe6f473f9f7a665fff29a4a9f08f15281862adb0",
+    "locator": "Physique · L1 — Cinématique du point (PHY1, 10 pages)",
+    "notes": "Source utilisée uniquement pour l’alignement au programme. Le code du chapitre distant est nul ; TLE-C-PC-PHY01 est un code interne stable. Tous les exercices de ce lot sont originaux."
+  },
+  "levels": [
+    {
+      "palier": "entrainement",
+      "libelle": "Facile",
+      "titre": "Facile — Identifier et appliquer les relations de base",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-C-PC-PHY01-FAC-E01",
+          "titre": "Position, vitesse et accélération",
+          "consigne": "Dans un repère orthonormé $(O,\\vec i,\\vec j)$, un point mobile $M$ a pour coordonnées $x(t)=3t-1$ et $y(t)=2t^2$, avec $t\\ge0$. Les distances sont en mètres et le temps en secondes.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Écrire le vecteur-position $\\overrightarrow{OM}(t)$.",
+              "correction_md": "Dans le plan, $\\overrightarrow{OM}=x\\vec i+y\\vec j$. Ainsi : $$\\boxed{\\overrightarrow{OM}(t)=(3t-1)\\vec i+2t^2\\vec j}\\quad (\\mathrm m).$$"
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Déterminer $\\overrightarrow{OM}(0)$ et $\\overrightarrow{OM}(2)$.",
+              "correction_md": "À $t=0$, $x=-1$ et $y=0$, donc $\\overrightarrow{OM}(0)=-\\vec i\\ \\mathrm m$. À $t=2$, $x=3\\times2-1=5$ et $y=2\\times2^2=8$, donc $$\\boxed{\\overrightarrow{OM}(2)=5\\vec i+8\\vec j\\ \\mathrm m}.$$"
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Calculer le vecteur-vitesse $\\vec v(t)$ puis la valeur $v(t)$ de la vitesse.",
+              "correction_md": "On dérive chaque coordonnée : $\\dot x=3$ et $\\dot y=4t$. Donc $$\\vec v(t)=3\\vec i+4t\\vec j\\quad(\\mathrm{m\\,s^{-1}}).$$ Sa valeur est la norme du vecteur : $$\\boxed{v(t)=\\sqrt{3^2+(4t)^2}=\\sqrt{9+16t^2}\\ \\mathrm{m\\,s^{-1}}}.$$"
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Déterminer $\\vec v(1)$, $v(1)$ et le vecteur-accélération $\\vec a(t)$.",
+              "correction_md": "À $t=1$, $\\vec v(1)=3\\vec i+4\\vec j\\ \\mathrm{m\\,s^{-1}}$ et $v(1)=\\sqrt{9+16}=5\\ \\mathrm{m\\,s^{-1}}$. En dérivant $\\vec v$, on obtient $$\\boxed{\\vec a(t)=4\\vec j\\ \\mathrm{m\\,s^{-2}}}.$$"
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-C-PC-PHY01-FAC-E02",
+          "titre": "Mouvement rectiligne uniforme",
+          "consigne": "Sur un axe $(O,\\vec i)$, la position d’un cycliste est donnée par $x(t)=6t-15$, avec $t\\ge0$, $x$ en mètres et $t$ en secondes.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Identifier la position initiale $x_0$ et la vitesse initiale $v_0$.",
+              "correction_md": "On compare $x(t)=6t-15$ à la forme $x(t)=v_0t+x_0$. On lit directement $$\\boxed{x_0=-15\\ \\mathrm m\\quad\\text{et}\\quad v_0=6\\ \\mathrm{m\\,s^{-1}}}.$$"
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Calculer la vitesse et l’accélération, puis préciser la nature du mouvement.",
+              "correction_md": "$v(t)=\\dfrac{dx}{dt}=6\\ \\mathrm{m\\,s^{-1}}$ est constante et $a(t)=\\dfrac{dv}{dt}=0$. La trajectoire étant une droite, le mouvement est donc $$\\boxed{\\text{rectiligne et uniforme}}.$$"
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "À quelle date le cycliste passe-t-il par l’origine $O$ ?",
+              "correction_md": "Le passage par $O$ correspond à $x(t)=0$. Ainsi, $6t-15=0$, d’où $$\\boxed{t=\\frac{15}{6}=2{,}5\\ \\mathrm s}.$$"
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Calculer la distance parcourue entre $t=2\\ \\mathrm s$ et $t=7\\ \\mathrm s$.",
+              "correction_md": "$x(2)=12-15=-3\\ \\mathrm m$ et $x(7)=42-15=27\\ \\mathrm m$. Comme la vitesse est positive, le cycliste ne change pas de sens. La distance parcourue vaut donc $$\\boxed{d=x(7)-x(2)=27-(-3)=30\\ \\mathrm m}.$$"
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-C-PC-PHY01-FAC-E03",
+          "titre": "Mouvement circulaire uniforme",
+          "consigne": "Un point décrit un cercle de rayon $R=0{,}50\\ \\mathrm m$ avec l’abscisse angulaire $\\theta(t)=4t+\\dfrac{\\pi}{6}$, où $\\theta$ est en radians.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Identifier la vitesse angulaire $\\omega$ et l’abscisse angulaire initiale $\\theta_0$.",
+              "correction_md": "On compare $\\theta(t)=4t+\\pi/6$ à $\\theta(t)=\\omega t+\\theta_0$. Ainsi : $$\\boxed{\\omega=4\\ \\mathrm{rad\\,s^{-1}}\\quad\\text{et}\\quad\\theta_0=\\frac{\\pi}{6}\\ \\mathrm{rad}}.$$"
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Calculer la vitesse linéaire $v$ du point.",
+              "correction_md": "Pour un mouvement circulaire uniforme, $v=R\\omega$. Donc $$\\boxed{v=0{,}50\\times4=2{,}0\\ \\mathrm{m\\,s^{-1}}}.$$"
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Calculer l’accélération normale $a_n$ et préciser sa direction.",
+              "correction_md": "$a_n=R\\omega^2$, donc $$\\boxed{a_n=0{,}50\\times4^2=8{,}0\\ \\mathrm{m\\,s^{-2}}}.$$ Le vecteur-accélération est normal à la trajectoire et dirigé vers le centre du cercle : il est centripète."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Déterminer la durée $T$ d’un tour complet.",
+              "correction_md": "Un tour correspond à une variation angulaire de $2\\pi$. Comme $\\Delta\\theta=\\omega T$, $$\\boxed{T=\\frac{2\\pi}{\\omega}=\\frac{2\\pi}{4}=\\frac{\\pi}{2}\\ \\mathrm s\\approx1{,}57\\ \\mathrm s}.$$"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "palier": "maitrise",
+      "libelle": "Moyen",
+      "titre": "Moyen — Relier équations horaires et nature du mouvement",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-C-PC-PHY01-MOY-E01",
+          "titre": "Trajectoire plane et caractère accéléré",
+          "consigne": "Dans un repère orthonormé $(O,\\vec i,\\vec j)$, les équations horaires d’un mobile sont $x(t)=t^2+2t$ et $y(t)=3t$ pour $t\\ge0$, avec $x$ et $y$ en mètres et $t$ en secondes.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Écrire le vecteur-position $\\overrightarrow{OM}(t)$.",
+              "correction_md": "En remplaçant $x(t)$ et $y(t)$ dans $\\overrightarrow{OM}=x\\vec i+y\\vec j$, on obtient $$\\boxed{\\overrightarrow{OM}(t)=(t^2+2t)\\vec i+3t\\vec j}\\quad(\\mathrm m).$$"
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Déterminer $\\vec v(t)$ et la valeur $v(t)$ de la vitesse.",
+              "correction_md": "$\\dot x=2t+2$ et $\\dot y=3$. Ainsi, $$\\vec v(t)=(2t+2)\\vec i+3\\vec j,$$ puis $$\\boxed{v(t)=\\sqrt{(2t+2)^2+9}\\ \\mathrm{m\\,s^{-1}}}.$$"
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Calculer $\\vec a(t)$ puis le produit scalaire $\\vec a(t)\\cdot\\vec v(t)$.",
+              "correction_md": "En dérivant le vecteur-vitesse, $\\vec a(t)=2\\vec i\\ \\mathrm{m\\,s^{-2}}$. Le produit scalaire vaut $$\\boxed{\\vec a\\cdot\\vec v=(4t+4)\\ \\mathrm{m^2\\,s^{-3}}}.$$"
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "En déduire si le mouvement est accéléré ou retardé, puis éliminer $t$ pour obtenir l’équation cartésienne de la trajectoire.",
+              "correction_md": "Pour $t\\ge0$, $4t+4>0$ ; ainsi $\\vec a\\cdot\\vec v>0$ et le mouvement est accéléré. De $y=3t$, on tire $t=y/3$. Alors $$x=\\left(\\frac y3\\right)^2+2\\left(\\frac y3\\right)=\\frac{y^2}{9}+\\frac{2y}{3}.$$ La trajectoire vérifie donc $$\\boxed{9x=y^2+6y\\quad\\text{avec }y\\ge0}.$$"
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-C-PC-PHY01-MOY-E02",
+          "titre": "Freinage rectiligne",
+          "consigne": "À $t=0$, une rame se trouve à $x_0=10\\ \\mathrm m$, avance à $v_0=18\\ \\mathrm{m\\,s^{-1}}$ et freine avec l’accélération constante $a=-3\\ \\mathrm{m\\,s^{-2}}$ jusqu’à son arrêt.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Établir les équations horaires $v(t)$ et $x(t)$ pendant le freinage.",
+              "correction_md": "Pour un mouvement rectiligne uniformément varié, $v(t)=at+v_0$ et $x(t)=\\frac12at^2+v_0t+x_0$. On obtient $$\\boxed{v(t)=18-3t}$$ et $$\\boxed{x(t)=10+18t-1{,}5t^2}.$$"
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Déterminer la date d’arrêt $t_A$.",
+              "correction_md": "À l’arrêt, $v(t_A)=0$. Donc $18-3t_A=0$, d’où $$\\boxed{t_A=6\\ \\mathrm s}.$$"
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Calculer la position d’arrêt et la distance de freinage.",
+              "correction_md": "$x(6)=10+18\\times6-1{,}5\\times6^2=10+108-54=64\\ \\mathrm m$. La rame part de $x_0=10\\ \\mathrm m$, donc la distance de freinage est $$\\boxed{d=64-10=54\\ \\mathrm m}.$$"
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Justifier que le mouvement est retardé avant l’arrêt et vérifier la relation $v_A^2-v_0^2=2a(x_A-x_0)$.",
+              "correction_md": "Pour $0<t<6$, $a=-3<0$ et $v(t)>0$, donc $av<0$ : le mouvement est retardé. À l’arrêt, le membre de gauche vaut $0^2-18^2=-324$. Le membre de droite vaut $2\\times(-3)\\times(64-10)=-6\\times54=-324$. La relation est donc vérifiée."
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-C-PC-PHY01-MOY-E03",
+          "titre": "Retrouver les paramètres d’un mouvement circulaire",
+          "consigne": "Un point décrit un cercle de rayon $R=1{,}25\\ \\mathrm m$ à vitesse constante. Son accélération normale vaut $a_n=20\\ \\mathrm{m\\,s^{-2}}$.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "À partir de $a_n=\\dfrac{v^2}{R}$, calculer la vitesse linéaire $v$.",
+              "correction_md": "$v^2=a_nR=20\\times1{,}25=25$. La vitesse étant une valeur positive, $$\\boxed{v=\\sqrt{25}=5\\ \\mathrm{m\\,s^{-1}}}.$$"
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Déterminer la vitesse angulaire $\\omega$.",
+              "correction_md": "$v=R\\omega$, donc $$\\boxed{\\omega=\\frac vR=\\frac5{1{,}25}=4\\ \\mathrm{rad\\,s^{-1}}}.$$"
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Calculer la période $T$ du mouvement.",
+              "correction_md": "$T=2\\pi/\\omega$. Ainsi, $$\\boxed{T=\\frac{2\\pi}{4}=\\frac{\\pi}{2}\\ \\mathrm s\\approx1{,}57\\ \\mathrm s}.$$"
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Calculer l’angle balayé et la longueur d’arc parcourue pendant $3\\ \\mathrm s$.",
+              "correction_md": "$\\Delta\\theta=\\omega\\Delta t=4\\times3=12\\ \\mathrm{rad}$. La longueur d’arc vaut $s=R\\Delta\\theta=1{,}25\\times12=15\\ \\mathrm m$. On retrouve aussi $s=v\\Delta t=5\\times3=15\\ \\mathrm m$. Donc $$\\boxed{\\Delta\\theta=12\\ \\mathrm{rad}\\quad\\text{et}\\quad s=15\\ \\mathrm m}.$$"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "palier": "concours",
+      "libelle": "Difficile",
+      "titre": "Difficile — Combiner modélisation et calcul vectoriel",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-C-PC-PHY01-DIF-E01",
+          "titre": "Rattrapage de deux véhicules",
+          "consigne": "À $t=0$, un véhicule $A$ situé à $x_A(0)=40\\ \\mathrm m$ roule à vitesse constante $v_A=12\\ \\mathrm{m\\,s^{-1}}$. Au même instant, un véhicule $B$ part de $x_B(0)=0$ avec $v_B(0)=4\\ \\mathrm{m\\,s^{-1}}$ et une accélération constante $a_B=2\\ \\mathrm{m\\,s^{-2}}$. Les deux véhicules se déplacent dans le même sens sur une route rectiligne.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Établir $x_A(t)$, $v_B(t)$ et $x_B(t)$.",
+              "correction_md": "$A$ est en mouvement rectiligne uniforme : $$x_A(t)=x_A(0)+v_At=40+12t.$$ Pour $B$, $v_B(t)=a_Bt+v_B(0)=2t+4$ et $$x_B(t)=\\frac12a_Bt^2+v_B(0)t+x_B(0)=t^2+4t.$$"
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Déterminer la date exacte $t_R$ du rattrapage, puis une valeur approchée.",
+              "correction_md": "Au rattrapage, $x_A(t_R)=x_B(t_R)$ : $$40+12t_R=t_R^2+4t_R,$$ soit $t_R^2-8t_R-40=0$. Le discriminant vaut $\\Delta=(-8)^2-4\\times1\\times(-40)=224=16\\times14$. Les solutions sont $4\\pm2\\sqrt{14}$ ; seule la solution positive est physique. Ainsi, $$\\boxed{t_R=4+2\\sqrt{14}\\ \\mathrm s\\approx11{,}48\\ \\mathrm s}.$$"
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Calculer la position du rattrapage et la vitesse de $B$ à cet instant.",
+              "correction_md": "La position vaut $$x_R=40+12t_R=40+12(4+2\\sqrt{14})=\\boxed{88+24\\sqrt{14}\\ \\mathrm m\\approx177{,}80\\ \\mathrm m}.$$ La vitesse de $B$ est $$v_B(t_R)=4+2t_R=4+2(4+2\\sqrt{14})=\\boxed{12+4\\sqrt{14}\\ \\mathrm{m\\,s^{-1}}\\approx26{,}97\\ \\mathrm{m\\,s^{-1}}}.$$"
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "La vitesse est limitée à $90\\ \\mathrm{km\\,h^{-1}}$. Déterminer si chaque conducteur respecte cette limite au moment du rattrapage.",
+              "correction_md": "Pour $A$, $v_A=12\\times3{,}6=43{,}2\\ \\mathrm{km\\,h^{-1}}<90\\ \\mathrm{km\\,h^{-1}}$. Pour $B$, $v_B(t_R)\\approx26{,}97\\times3{,}6\\approx97{,}1\\ \\mathrm{km\\,h^{-1}}>90\\ \\mathrm{km\\,h^{-1}}$. Ainsi, $A$ respecte la limitation mais $B$ la dépasse."
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-C-PC-PHY01-DIF-E02",
+          "titre": "Mouvement circulaire en coordonnées cartésiennes",
+          "consigne": "Dans un repère orthonormé $(O,\\vec i,\\vec j)$, un point mobile a pour coordonnées $x(t)=2\\cos(3t)$ et $y(t)=2\\sin(3t)$, avec $t\\ge0$, les longueurs en mètres et les angles en radians.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Éliminer $t$ et identifier la trajectoire.",
+              "correction_md": "$x^2+y^2=4\\cos^2(3t)+4\\sin^2(3t)=4$. La trajectoire vérifie donc $$\\boxed{x^2+y^2=4}.$$ C’est le cercle de centre $O$ et de rayon $R=2\\ \\mathrm m$."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Calculer les vecteurs $\\vec v(t)$ et $\\vec a(t)$.",
+              "correction_md": "$\\dot x=-6\\sin(3t)$ et $\\dot y=6\\cos(3t)$, donc $$\\vec v(t)=-6\\sin(3t)\\vec i+6\\cos(3t)\\vec j.$$ En dérivant encore, $$\\boxed{\\vec a(t)=-18\\cos(3t)\\vec i-18\\sin(3t)\\vec j}.$$ Les unités sont respectivement $\\mathrm{m\\,s^{-1}}$ et $\\mathrm{m\\,s^{-2}}$."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Calculer les valeurs de la vitesse et de l’accélération.",
+              "correction_md": "La norme de $\\vec v$ vaut $$v=\\sqrt{36\\sin^2(3t)+36\\cos^2(3t)}=\\boxed{6\\ \\mathrm{m\\,s^{-1}}}.$$ De même, $$a=\\sqrt{324\\cos^2(3t)+324\\sin^2(3t)}=\\boxed{18\\ \\mathrm{m\\,s^{-2}}}.$$"
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Montrer que la vitesse est tangente au cercle et que l’accélération est centripète, puis conclure sur la nature du mouvement.",
+              "correction_md": "$\\overrightarrow{OM}\\cdot\\vec v=2\\cos(3t)(-6\\sin(3t))+2\\sin(3t)(6\\cos(3t))=0$ : la vitesse est perpendiculaire au rayon, donc tangente au cercle. De plus, $$\\vec a(t)=-\\omega^2\\overrightarrow{OM}(t)=-9\\ \\mathrm{s^{-2}}\\overrightarrow{OM}(t),$$ donc $\\vec a$ est dirigé vers $O$ et est centripète. La trajectoire est circulaire et la valeur $v=6\\ \\mathrm{m\\,s^{-1}}$ est constante : le mouvement est circulaire et uniforme, de vitesse angulaire $\\omega=3\\ \\mathrm{rad\\,s^{-1}}$."
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-C-PC-PHY01-DIF-E03",
+          "titre": "Retrouver une loi horaire à partir de mesures",
+          "consigne": "Un mobile se déplace sur un axe avec une accélération constante $a$. À $t=0$, sa position est $x_0=-5\\ \\mathrm m$ et sa vitesse initiale $v_0$ est inconnue. On mesure $x(2)=7\\ \\mathrm m$ et $v(2)=10\\ \\mathrm{m\\,s^{-1}}$.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Écrire les expressions générales de $v(t)$ et $x(t)$ en fonction de $a$ et $v_0$.",
+              "correction_md": "Pour une accélération constante, $$v(t)=at+v_0$$ et $$x(t)=\\frac12at^2+v_0t+x_0.$$ Comme $x_0=-5\\ \\mathrm m$, on a $$\\boxed{x(t)=\\frac12at^2+v_0t-5}.$$"
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Utiliser les deux mesures à $t=2\\ \\mathrm s$ pour déterminer $a$ et $v_0$.",
+              "correction_md": "$v(2)=10$ donne $2a+v_0=10$. D’autre part, $x(2)=7$ donne $2a+2v_0-5=7$, donc $a+v_0=6$. En soustrayant cette dernière équation de la première, on obtient $a=4\\ \\mathrm{m\\,s^{-2}}$, puis $v_0=2\\ \\mathrm{m\\,s^{-1}}$. Ainsi, $$\\boxed{v(t)=4t+2\\quad\\text{et}\\quad x(t)=2t^2+2t-5}.$$"
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Déterminer la première date $t\\ge0$ à laquelle le mobile atteint $x=40\\ \\mathrm m$, puis sa vitesse à cet instant.",
+              "correction_md": "$x(t)=40$ équivaut à $2t^2+2t-45=0$. Le discriminant vaut $\\Delta=2^2-4\\times2\\times(-45)=364=4\\times91$. La seule solution positive est $$t=\\frac{-2+2\\sqrt{91}}{4}=\\frac{-1+\\sqrt{91}}2\\approx4{,}27\\ \\mathrm s.$$ À cette date, $$v=4t+2=2\\sqrt{91}\\approx19{,}08\\ \\mathrm{m\\,s^{-1}}.$$"
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Vérifier la relation $v^2-v_0^2=2a(x-x_0)$ entre $x_0=-5\\ \\mathrm m$ et $x=40\\ \\mathrm m$, puis préciser si le mouvement est accéléré.",
+              "correction_md": "Au point $x=40\\ \\mathrm m$, $v=2\\sqrt{91}$, donc $v^2-v_0^2=4\\times91-2^2=364-4=360\\ \\mathrm{m^2\\,s^{-2}}$. D’autre part, $2a(x-x_0)=2\\times4\\times(40-(-5))=8\\times45=360\\ \\mathrm{m^2\\,s^{-2}}$ : la relation est vérifiée. Pour $t\\ge0$, $a=4>0$ et $v(t)=4t+2>0$, donc $av>0$ ; le mouvement est accéléré."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

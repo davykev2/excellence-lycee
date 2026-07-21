@@ -1,0 +1,190 @@
+{
+  "matiere_slug": "espagnol",
+  "niveau": "Terminale",
+  "series": [
+    "A"
+  ],
+  "output": "../../resumes_tle_espagnol.sql",
+  "lecons": [
+    {
+      "file": "L01.md",
+      "ordre": 1,
+      "titre": "L1 — Realidades sociolingüísticas de España",
+      "description": "Conocer el mundo hispánico · variedades del español, seseo/yeísmo"
+    },
+    {
+      "file": "L02.md",
+      "ordre": 2,
+      "titre": "L2 — Realidades políticas e históricas de España",
+      "description": "Conocer el mundo hispánico · Guerra Civil, franquismo, memoria histórica"
+    },
+    {
+      "file": "L03.md",
+      "ordre": 3,
+      "titre": "L3 — Realidades sociales e históricas de Hispanoamérica",
+      "description": "Conocer el mundo hispánico · culturas precolombinas (aztecas, mayas, incas)"
+    },
+    {
+      "file": "L04.md",
+      "ordre": 4,
+      "titre": "L4 — Realidades económicas y sociales de Hispanoamérica",
+      "description": "Conocer el mundo hispánico · emigración, la ruta de la muerte"
+    },
+    {
+      "file": "L05.md",
+      "ordre": 5,
+      "titre": "L5 — Realidades de Guinea Ecuatorial",
+      "description": "Conocer el mundo hispánico y África · historia, plurilingüismo, petróleo"
+    },
+    {
+      "file": "L06.md",
+      "ordre": 6,
+      "titre": "L6 — Poser des questions / Preguntar",
+      "description": "Intercambio de información · técnica interrogativa"
+    },
+    {
+      "file": "L07.md",
+      "ordre": 7,
+      "titre": "L7 — Décrire / Describir",
+      "description": "Intercambio de información · comparativos"
+    },
+    {
+      "file": "L08.md",
+      "ordre": 8,
+      "titre": "L8 — Raconter un fait / Relatar",
+      "description": "Intercambio de información · tiempos del relato"
+    },
+    {
+      "file": "L09.md",
+      "ordre": 9,
+      "titre": "L9 — Résumer / Resumir",
+      "description": "Intercambio de información · conectores de resumen"
+    },
+    {
+      "file": "L10.md",
+      "ordre": 10,
+      "titre": "L10 — Rappeler une information / Recordar",
+      "description": "Intercambio de información · recordar / acordarse de"
+    },
+    {
+      "file": "L11.md",
+      "ordre": 11,
+      "titre": "L11 — Exprimer une opinion",
+      "description": "Expresión de opinión · fórmulas de opinión"
+    },
+    {
+      "file": "L12.md",
+      "ordre": 12,
+      "titre": "L12 — Exprimer la capacité / l'incapacité",
+      "description": "Expresión de opinión · ser capaz de / incapaz de"
+    },
+    {
+      "file": "L13.md",
+      "ordre": 13,
+      "titre": "L13 — Exprimer l'approbation",
+      "description": "Expresión de opinión · estar de acuerdo, aprobar"
+    },
+    {
+      "file": "L14.md",
+      "ordre": 14,
+      "titre": "L14 — Exprimer la désapprobation",
+      "description": "Expresión de opinión · no creer que + subjuntivo"
+    },
+    {
+      "file": "L15.md",
+      "ordre": 15,
+      "titre": "L15 — Convaincre",
+      "description": "Expresión de opinión · oración concesiva"
+    },
+    {
+      "file": "L16.md",
+      "ordre": 16,
+      "titre": "L16 — Exprimer l'indignation",
+      "description": "Estados de ánimo · subjuntivo de indignación"
+    },
+    {
+      "file": "L17.md",
+      "ordre": 17,
+      "titre": "L17 — Exprimer la gratitude / le vœu",
+      "description": "Estados de ánimo · gratitud y deseo"
+    },
+    {
+      "file": "L18.md",
+      "ordre": 18,
+      "titre": "L18 — Exprimer la joie",
+      "description": "Estados de ánimo · disfrutar, alegría"
+    },
+    {
+      "file": "L19.md",
+      "ordre": 19,
+      "titre": "L19 — Exprimer la peine",
+      "description": "Estados de ánimo · expresiones de pena"
+    },
+    {
+      "file": "L20.md",
+      "ordre": 20,
+      "titre": "L20 — Exprimer l'espoir",
+      "description": "Estados de ánimo · esperanza, acabar con, ¡ojalá!"
+    },
+    {
+      "file": "L21.md",
+      "ordre": 21,
+      "titre": "L21 — Donner des consignes",
+      "description": "Expresión de la orden · imperativo"
+    },
+    {
+      "file": "L22.md",
+      "ordre": 22,
+      "titre": "L22 — Donner des conseils",
+      "description": "Expresión de la orden · imperativo y obligación"
+    },
+    {
+      "file": "L23.md",
+      "ordre": 23,
+      "titre": "L23 — Faire des suggestions",
+      "description": "Expresión de la orden · sugerir/proponer que + subjuntivo"
+    },
+    {
+      "file": "L24.md",
+      "ordre": 24,
+      "titre": "L24 — Faire une demande",
+      "description": "Expresión de la orden · pedir/rogar/instar que + subjuntivo"
+    },
+    {
+      "file": "L25.md",
+      "ordre": 25,
+      "titre": "L25 — Dissuader",
+      "description": "Expresión de la orden · imperativo negativo, desaconsejar"
+    },
+    {
+      "file": "L26.md",
+      "ordre": 26,
+      "titre": "L26 — Réaliser une conversation",
+      "description": "Técnica de expresión · marcadores de conversación"
+    },
+    {
+      "file": "L27.md",
+      "ordre": 27,
+      "titre": "L27 — Réaliser une interview",
+      "description": "Técnica de expresión · técnica interrogativa"
+    },
+    {
+      "file": "L28.md",
+      "ordre": 28,
+      "titre": "L28 — Faire un exposé / Ponencia",
+      "description": "Técnica de expresión · estructura de la ponencia"
+    },
+    {
+      "file": "L29.md",
+      "ordre": 29,
+      "titre": "L29 — Présenter un thème",
+      "description": "Técnica de expresión · actitudes para presentar un tema"
+    },
+    {
+      "file": "L30.md",
+      "ordre": 30,
+      "titre": "L30 — Commenter une image",
+      "description": "Técnica de expresión · situar y describir una imagen"
+    }
+  ]
+}

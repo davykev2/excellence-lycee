@@ -1,0 +1,20 @@
+{
+  "appId": "com.excellencelycee.app",
+  "appName": "Excellence Lycée",
+  "webDir": "dist",
+  "backgroundColor": "#0a0a12",
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 1200,
+      "launchAutoHide": true,
+      "backgroundColor": "#0a0a12",
+      "showSpinner": false
+    },
+    "SystemBars": {
+      "insetsHandling": "css"
+    }
+  }
+}

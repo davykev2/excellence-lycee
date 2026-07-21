@@ -1,0 +1,304 @@
+{
+  "schema_version": 2,
+  "batch_code": "2026-07-tle-a-espagnol-l01-v2",
+  "status": "reviewed",
+  "target": {
+    "niveau": "Terminale",
+    "serie": "A",
+    "matiere_slug": "espagnol",
+    "chapitre_id": "061e1e9c-525a-42c5-b9f1-73a06023c1bd",
+    "chapitre_code": "TLE-A-ESP-L01",
+    "chapitre_ordre": 1,
+    "chapitre_titre": "L1 — Realidades sociolingüísticas de España"
+  },
+  "source": {
+    "code": "CI-EN-TA-ESP-L01-REF-2026-07",
+    "titre": "Terminale A - Espagnol - Connaître les réalités sociolinguistiques de l’Espagne",
+    "type": "pdf",
+    "auteur_organisme": "Côte d’Ivoire - École numérique",
+    "url": null,
+    "licence_code": null,
+    "licence_url": null,
+    "attribution": null,
+    "droits_statut": "reference_only",
+    "storage_path": "content_sources/archive_20260713/Nouveau dossier/TA/espagnol/L1 Espagne-réalités sociolinguistiques.pdf",
+    "sha256": "fcf8e384bf8f29292ca9bc039553733422632d884599f8c495e1838e7bc23852",
+    "locator": "Leçon 1, fiche 1, pages 1-3 - Connaître les réalités sociolinguistiques de l’Espagne",
+    "notes": "Renforcement écrit original, strictement aligné sur les notions de la fiche PDF, laquelle présente la leçon comme une activité de compréhension orale. Ce lot ne prétend pas reproduire, transcrire ni remplacer un audio : il permet de revoir par écrit idioma, hispanohablante, comprensión mutua, unos/as cuantos/as, les oppositions s/z et ll/y, la s finale, le seseo, le yeísmo, les zones et les niveaux socioculturels."
+  },
+  "levels": [
+    {
+      "palier": "entrainement",
+      "libelle": "Facile",
+      "titre": "Facile - Comprendre les notions essentielles",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-A-ESP-L01-FAC-E01",
+          "titre": "Idioma, hispanohablante y variedad",
+          "consigne": "Lee este texto breve y realiza todas las actividades: «Lucía vive en Sevilla y Diego vive en Ciudad de México. Los dos tienen el español como idioma habitual y son hispanohablantes. A veces emplean palabras o pronunciaciones diferentes, pero conversan sin dificultad porque comparten la misma lengua.»",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Explica en español las palabras **idioma** e **hispanohablante** a partir del texto.",
+              "correction_md": "Un **idioma** es una lengua que permite comunicarse dentro de una comunidad; en el texto, ese idioma es el español. Un **hispanohablante** es una persona que habla español. Por eso Lucía y Diego son hispanohablantes, aunque vivan en países diferentes."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Explica por qué Lucía y Diego pueden hablar de manera diferente sin hablar idiomas distintos.",
+              "correction_md": "Hablan el mismo idioma, pero cada uno usa una **variedad lingüística** propia de su zona y de su comunidad. La dispersión geográfica y los distintos niveles socioculturales explican parte de las diferencias de vocabulario y pronunciación, sin que el español deje de ser una lengua compartida."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Señala la idea del texto que demuestra que las variedades no impiden necesariamente la comunicación.",
+              "correction_md": "La idea clave es: «conversan sin dificultad porque comparten la misma lengua». Las diferencias existen, pero en este caso hay comprensión mutua entre los dos hablantes."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Resume el texto en dos frases utilizando las expresiones **misma lengua** y **variedades diferentes**.",
+              "correction_md": "Modelo posible: «Lucía y Diego hablan la misma lengua: el español. Usan variedades diferentes, pero pueden comprenderse y conversar sin dificultad.»"
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-A-ESP-L01-FAC-E02",
+          "titre": "Unos cuantos y unas cuantas",
+          "consigne": "Trabaja la concordancia de las expresiones **unos cuantos** y **unas cuantas**, que indican una cantidad imprecisa equivalente a *algunos* o *algunas*.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Completa de forma adecuada estas cuatro frases: «En el club hay ___ alumnos peruanos»; «Hemos escuchado ___ grabaciones»; «Conocemos ___ acentos»; «La profesora propone ___ actividades».",
+              "correction_md": "Las frases completas son: «En el club hay **unos cuantos alumnos** peruanos»; «Hemos escuchado **unas cuantas grabaciones**»; «Conocemos **unos cuantos acentos**»; «La profesora propone **unas cuantas actividades**»."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Justifica la elección de la forma masculina o femenina en cada frase.",
+              "correction_md": "La expresión concuerda en género y número con el sustantivo: **alumnos** y **acentos** son masculinos plurales, de modo que se usa **unos cuantos**; **grabaciones** y **actividades** son femeninos plurales, de modo que se usa **unas cuantas**."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Reformula sin cambiar el sentido: «Algunos estudiantes comparan sus acentos» y «Algunas regiones presentan seseo».",
+              "correction_md": "Se obtiene: «**Unos cuantos estudiantes** comparan sus acentos» y «**Unas cuantas regiones** presentan seseo». En ambos casos se mantiene la idea de una cantidad indeterminada."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Redacta dos frases sobre la diversidad del español: una con **unos cuantos** y otra con **unas cuantas**.",
+              "correction_md": "Modelo posible: «En la grabación aparecen **unos cuantos hablantes** de países distintos. Se oyen **unas cuantas diferencias** de pronunciación, pero todos se comprenden.» Se aceptan otras frases correctas si hay concordancia y sentido."
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-A-ESP-L01-FAC-E03",
+          "titre": "Seseo, distinción y yeísmo",
+          "consigne": "Lee esta ficha: «Algunos hablantes distinguen la pronunciación de *casa* y *caza*. Los hablantes seseantes pronuncian con /s/ tanto la *s* como la *z* y la *c* ante *e* o *i*. Los hablantes yeístas pronuncian de la misma manera la *ll* y la *y*. En ciertas variedades también puede debilitarse la /s/ al final de una sílaba.»",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Explica la diferencia entre la **distinción** y el **seseo** con las palabras *casa* y *caza*.",
+              "correction_md": "Con distinción, *casa* se pronuncia con /s/ y *caza* con /θ/: [ˈkasa] frente a [ˈkaθa]. Con seseo, las dos palabras se pronuncian con /s/: [ˈkasa]. El contexto permite reconocer el significado."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Define el **yeísmo** y proporciona un ejemplo con *valla* y *vaya*.",
+              "correction_md": "El yeísmo es la pronunciación coincidente de las grafías **ll** e **y**. Para un hablante yeísta, *valla* y *vaya* pueden sonar igual, aunque se escriban de manera diferente y tengan significados distintos."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Sitúa prudentemente estos rasgos: ¿dónde son frecuentes la distinción y el seseo?",
+              "correction_md": "La distinción es frecuente en buena parte del centro y del norte de España. El seseo es general en Canarias y en Hispanoamérica y también aparece en zonas de Andalucía. Son tendencias geográficas: no se debe afirmar que cada persona de una región hable exactamente igual."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Explica por qué estas diferencias siguen perteneciendo al español y cómo pueden comprenderse sus hablantes.",
+              "correction_md": "Son rasgos de variedades de una misma lengua. Los hispanohablantes comparten gran parte de la gramática y del vocabulario; además, el contexto ayuda a reconocer el sentido de las palabras. Por eso suele existir comprensión mutua, aunque alguna pronunciación requiera una aclaración."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "palier": "maitrise",
+      "libelle": "Moyen",
+      "titre": "Moyen - Comparer et expliquer les usages",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-A-ESP-L01-MOY-E01",
+          "titre": "Voces de zonas diferentes",
+          "consigne": "Analiza este diálogo ficticio: «Clara, de Valladolid: Distingo *cocer* y *coser*, y pronuncio igual *valla* y *vaya*. Elena, de Sevilla: Soy seseante y yeísta; en mi pronunciación algunas /s/ finales de sílaba pueden sonar aspiradas. Mateo, de Ciudad de México: También soy seseante y yeísta, pero suelo conservar la /s/ final. Los tres: Tenemos rasgos diferentes, pero nos comprendemos.»",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Identifica la distinción o el seseo de cada hablante.",
+              "correction_md": "Clara practica la **distinción**: pronuncia de manera diferente *cocer* y *coser*. Elena y Mateo son **seseantes**: pronuncian con /s/ tanto las grafías *s* como *z* y *c* ante *e* o *i*. El texto describe a estos tres hablantes ficticios, no a todas las personas de sus ciudades."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Explica qué rasgo comparten Clara, Elena y Mateo en la pronunciación de *ll* e *y*.",
+              "correction_md": "Los tres son **yeístas**. Clara pronuncia igual *valla* y *vaya*, y Elena y Mateo se declaran yeístas. En el yeísmo, las grafías *ll* e *y* corresponden a una misma pronunciación."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Compara la realización de la /s/ final de sílaba en las palabras de Elena y Mateo.",
+              "correction_md": "Elena indica que algunas /s/ finales de sílaba pueden sonar aspiradas en su pronunciación. Mateo dice que suele conservarlas. La /s/ final constituye así otro rasgo que puede diferenciar variedades del español."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Redacta de 80 a 100 palabras para explicar cómo el diálogo muestra variedad y comprensión mutua.",
+              "correction_md": "Modelo posible: «Clara, Elena y Mateo son hispanohablantes porque comparten el español. Sus pronunciaciones presentan diferencias. Clara distingue *cocer* y *coser*, mientras que Elena y Mateo son seseantes. Los tres son yeístas y pronuncian igual *ll* e *y*. También se diferencian en la /s/ final de sílaba: Elena puede aspirarla y Mateo suele conservarla. Estos rasgos se relacionan con variedades de zonas diferentes. Sin embargo, los tres comparten el mismo idioma y pueden comprenderse. El diálogo muestra así que la diversidad de pronunciación no impide necesariamente la comprensión mutua.»"
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-A-ESP-L01-MOY-E02",
+          "titre": "Zonas y niveles socioculturales",
+          "consigne": "Lee este informe original: «El español se habla en zonas muy alejadas. En buena parte del centro y del norte de España se distinguen los sonidos de *casa* y *caza*. El seseo es frecuente en Andalucía, Canarias e Hispanoamérica. El yeísmo aparece en muchas zonas, y la /s/ final de sílaba puede realizarse de maneras diferentes. Además de la zona, los distintos niveles socioculturales de los hablantes contribuyen a la variedad del idioma.»",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Extrae del informe las dos grandes causas de variedad mencionadas.",
+              "correction_md": "Las dos causas son la **dispersión por zonas geográficas** y los **distintos niveles socioculturales de los hablantes**. El informe explica que ambas contribuyen a que el español no se hable exactamente de la misma manera en todas partes."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Organiza los tres rasgos de pronunciación citados: oposición s/z, oposición ll/y y /s/ final de sílaba.",
+              "correction_md": "Oposición **s/z**: se mantiene con la distinción y desaparece con el seseo. Oposición **ll/y**: desaparece con el yeísmo. **/s/ final de sílaba**: puede conservarse, aspirarse o debilitarse según la variedad descrita."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Explica con tus palabras qué significa **niveles socioculturales** en el informe.",
+              "correction_md": "La expresión se refiere a diferencias relacionadas con la formación, las comunidades y las experiencias sociales y culturales de los hablantes. Esos elementos pueden influir en el vocabulario o en ciertos usos del idioma y se suman a las diferencias entre zonas."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Resume el informe en tres frases usando **zonas**, **niveles socioculturales** y **variedades del español**.",
+              "correction_md": "Modelo posible: «Las variedades del español se explican en parte por la gran distancia entre las zonas donde se habla. Los niveles socioculturales de los hispanohablantes también pueden producir diferencias. El seseo, el yeísmo y las distintas realizaciones de la /s/ final muestran esa diversidad de pronunciación.»"
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-A-ESP-L01-MOY-E03",
+          "titre": "Unos cuantos testimonios hispanohablantes",
+          "consigne": "Lee estos testimonios ficticios: A) «Soy Carmen, española. En mi zona distingo *casa* y *caza*, pero pronuncio igual *valla* y *vaya*.» B) «Soy Pablo, colombiano. Soy seseante y yeísta.» C) «En nuestro club hay unos cuantos hispanohablantes de zonas diferentes. Comparamos unas cuantas pronunciaciones y nos comprendemos.»",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Explica por qué Carmen y Pablo son hispanohablantes y señala el idioma que comparten.",
+              "correction_md": "Carmen y Pablo son **hispanohablantes** porque hablan español. El **idioma** que comparten es el español, aunque procedan de zonas diferentes y no pronuncien todas las palabras de la misma manera."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Compara la oposición s/z y la oposición ll/y en los testimonios A y B.",
+              "correction_md": "Carmen mantiene la oposición **s/z**, pues distingue *casa* y *caza*. Pablo es seseante y no mantiene esa oposición. En cambio, los dos son **yeístas**: Carmen pronuncia igual *valla* y *vaya*, y Pablo lo declara expresamente."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Localiza **unos cuantos** y **unas cuantas** en el testimonio C y justifica su concordancia.",
+              "correction_md": "**Unos cuantos** concuerda con **hispanohablantes**, sustantivo masculino plural. **Unas cuantas** concuerda con **pronunciaciones**, sustantivo femenino plural. Las dos expresiones indican una cantidad indeterminada."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Presenta los tres testimonios en un texto de 90 a 110 palabras usando **idioma**, **hispanohablante**, **seseo**, **yeísmo** y **comprensión mutua**.",
+              "correction_md": "Modelo posible: «Los testimonios presentan a varios hispanohablantes que comparten un mismo idioma, el español. Carmen vive en España y distingue *casa* y *caza*, pero es yeísta porque pronuncia igual *valla* y *vaya*. Pablo vive en Colombia y presenta tanto seseo como yeísmo. En el club participan unos cuantos hablantes de zonas distintas y comparan unas cuantas pronunciaciones. Sus rasgos no son idénticos, ya que la dispersión geográfica produce variedades. Sin embargo, todos comparten muchas palabras y estructuras. Por eso existe comprensión mutua y pueden intercambiar informaciones sobre su manera de hablar.»"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "palier": "concours",
+      "libelle": "Difficile",
+      "titre": "Difficile - Analyser et mener une médiation sociolinguistique",
+      "exercises": [
+        {
+          "numero": 1,
+          "code": "TLE-A-ESP-L01-DIF-E01",
+          "titre": "Tres voces en un pódcast",
+          "consigne": "Analiza este extracto ficticio: «Ana, de Valladolid: Distingo *cocer* y *coser*, pero soy yeísta. Luis, de Cádiz: Soy seseante y yeísta; algunas /s/ finales de sílaba suenan aspiradas en mi pronunciación. Camila, de Bogotá: También soy seseante y yeísta, y suelo conservar la /s/ final. Los tres: Nuestras voces no son idénticas, pero conversamos sin problema.»",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Construye un cuadro comparativo de los cuatro rasgos mencionados: distinción, seseo, yeísmo y realización de la /s/ final.",
+              "correction_md": "| Hablante | Distinción / seseo | Yeísmo | /s/ final de sílaba |\n|---|---|---|---|\n| Ana | Distinción | Sí | No se especifica |\n| Luis | Seseo | Sí | Algunas realizaciones aspiradas |\n| Camila | Seseo | Sí | Suele conservarla |\n\nEl cuadro describe únicamente a estos hablantes ficticios y no a todas las personas de sus ciudades."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Determina qué rasgo comparten los tres hablantes y qué contraste principal aparece entre Ana, por una parte, y Luis y Camila, por otra.",
+              "correction_md": "Los tres se declaran **yeístas**, de modo que no distinguen fonéticamente *ll* e *y*. El contraste principal es que Ana practica la **distinción** entre /s/ y /θ/, mientras que Luis y Camila son **seseantes**."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Compara las tres oposiciones estudiadas: s/z, ll/y y conservación o aspiración de la /s/ final.",
+              "correction_md": "En la oposición **s/z**, Ana distingue, mientras que Luis y Camila sesean. En la oposición **ll/y**, los tres son yeístas y, por tanto, no distinguen esas dos pronunciaciones. Para la **/s/ final de sílaba**, Luis menciona realizaciones aspiradas, Camila suele conservarla y Ana no aporta información."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Redacta una síntesis de 130 a 160 palabras que explique por qué el pódcast ilustra a la vez unidad y diversidad del español.",
+              "correction_md": "Modelo posible: «El pódcast muestra la diversidad del español mediante tres voces concretas. Ana distingue *cocer* y *coser*, mientras que Luis y Camila son seseantes. Los tres son yeístas, lo que prueba que un mismo rasgo puede aparecer en zonas muy alejadas. La /s/ final de sílaba ofrece otra diferencia: Luis menciona realizaciones aspiradas y Camila dice que suele conservarla. La dispersión geográfica contribuye, por tanto, a la existencia de distintas variedades. Los niveles socioculturales de los hablantes también pueden influir en determinados usos, aunque el extracto no permite describirlos individualmente. A pesar de sus diferencias, Ana, Luis y Camila son hispanohablantes, comparten el mismo idioma y conversan sin problema. La comprensión mutua se mantiene porque tienen en común gran parte del vocabulario y de la gramática. El conjunto ilustra así la variedad dentro de la unidad del español.»"
+            }
+          ]
+        },
+        {
+          "numero": 2,
+          "code": "TLE-A-ESP-L01-DIF-E02",
+          "titre": "Explicar una conferencia en Abiyán",
+          "consigne": "Imagina que has asistido a una conferencia sobre las variedades del español. Tus notas dicen: «El español se extiende por España e Hispanoamérica. Las zonas y los niveles socioculturales favorecen diferencias. Se observan el seseo, el yeísmo y distintas realizaciones de la /s/ final de sílaba. Estas variedades no impiden normalmente la comprensión mutua.» Prepara una explicación completa para el club de español de tu instituto.",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Organiza las notas en tres apartados: causas de la variedad, rasgos de pronunciación y elemento de unidad.",
+              "correction_md": "**Causas de la variedad:** la dispersión entre zonas y los distintos niveles socioculturales. **Rasgos de pronunciación:** el seseo, el yeísmo y las realizaciones de la /s/ final de sílaba. **Elemento de unidad:** los hispanohablantes comparten el español y conservan normalmente la comprensión mutua."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Define **seseo** y **yeísmo** y explica la diferencia entre los dos fenómenos.",
+              "correction_md": "El **seseo** afecta a la oposición s/z: las grafías *s*, *z* y *c* ante *e* o *i* se pronuncian con /s/. El **yeísmo** afecta a la oposición ll/y: las dos grafías se pronuncian de la misma manera. Son fenómenos distintos porque no afectan a los mismos sonidos."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Integra **unos cuantos** y **unas cuantas** en dos frases que resuman las notas, y justifica la concordancia.",
+              "correction_md": "Modelo: «La conferencia presenta **unos cuantos rasgos** de pronunciación» y «Compara **unas cuantas zonas** hispanohablantes». **Unos cuantos** concuerda con *rasgos*, masculino plural; **unas cuantas** concuerda con *zonas*, femenino plural. Las expresiones indican cantidades imprecisas."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Redacta para el club una explicación de 130 a 150 palabras basada únicamente en las notas.",
+              "correction_md": "Modelo posible: «El español es un idioma hablado en numerosas zonas de España e Hispanoamérica. Sus usuarios son hispanohablantes, pero no todos pronuncian exactamente de la misma manera. La dispersión geográfica y los distintos niveles socioculturales contribuyen a esa variedad. Entre los rasgos estudiados figura el seseo: las letras *s*, *z* y *c* ante *e* o *i* se pronuncian con /s/. También aparece el yeísmo, que iguala la pronunciación de *ll* e *y*. Por último, la /s/ final de sílaba puede conservarse, aspirarse o debilitarse en distintas variedades. En la conferencia conocimos unos cuantos ejemplos de España y unas cuantas zonas de Hispanoamérica. Estas diferencias no crean idiomas separados. Los hablantes comparten gran parte de la gramática y del vocabulario, de modo que normalmente existe comprensión mutua entre ellos. Los miembros del club pueden comparar estos fenómenos y explicar claramente lo aprendido.»"
+            }
+          ]
+        },
+        {
+          "numero": 3,
+          "code": "TLE-A-ESP-L01-DIF-E03",
+          "titre": "Síntesis final: unidad y variedades",
+          "consigne": "Estudia tres documentos originales. Documento 1: «La dispersión geográfica y los niveles socioculturales explican que el español presente variedades en España e Hispanoamérica». Documento 2: «Las diferencias pueden afectar a la oposición s/z, a la pronunciación de ll/y y a la /s/ final de sílaba». Documento 3: «Unos cuantos rasgos cambian entre zonas, pero unas cuantas diferencias no impiden que los hispanohablantes se comprendan».",
+          "questions": [
+            {
+              "ordre": 1,
+              "enonce_md": "Construye un esquema con tres apartados: causas, manifestaciones y resultado para la comunicación.",
+              "correction_md": "**Causas:** dispersión por zonas geográficas y distintos niveles socioculturales. **Manifestaciones:** distinción o seseo para s/z, yeísmo para ll/y y diversas realizaciones de la /s/ final de sílaba. **Resultado para la comunicación:** pese a esas diferencias, los hispanohablantes comparten el español y normalmente mantienen la comprensión mutua."
+            },
+            {
+              "ordre": 2,
+              "enonce_md": "Analiza estos tres pares: *casa/caza*, *valla/vaya* y *las mesas/lah mesah*.",
+              "correction_md": "En *casa/caza*, la distinción mantiene dos sonidos y el seseo emplea /s/ en ambas palabras. En *valla/vaya*, un hablante yeísta pronuncia igual *ll* e *y*. En *las mesas/lah mesah*, la segunda representación muestra aspiración de la /s/ final de sílaba. Los ejemplos corresponden a tres rasgos diferentes."
+            },
+            {
+              "ordre": 3,
+              "enonce_md": "Reescribe con **unos cuantos** o **unas cuantas**: «Algunos rasgos afectan a la pronunciación»; «Algunas zonas presentan seseo»; «Algunos hispanohablantes aspiran la /s/»; «Algunas diferencias necesitan una explicación».",
+              "correction_md": "Se obtiene: «**Unos cuantos rasgos** afectan a la pronunciación»; «**Unas cuantas zonas** presentan seseo»; «**Unos cuantos hispanohablantes** aspiran la /s/»; «**Unas cuantas diferencias** necesitan una explicación». Cada expresión concuerda en género y número con el sustantivo que la sigue."
+            },
+            {
+              "ordre": 4,
+              "enonce_md": "Redacta un texto de 180 a 220 palabras titulado «Variedades del español y comprensión mutua».",
+              "correction_md": "Modelo posible: «El español es un idioma hablado por hispanohablantes de España y de numerosos países de Hispanoamérica. Como se extiende por zonas muy alejadas y lo utilizan personas de niveles socioculturales diversos, no se habla exactamente de la misma manera en todas partes. Unas cuantas diferencias afectan a la pronunciación. En buena parte del centro y del norte de España, muchos hablantes distinguen *casa* y *caza*. En Canarias, Hispanoamérica y zonas de Andalucía es frecuente el seseo, que emplea /s/ en los dos casos. El yeísmo iguala la pronunciación de *ll* e *y*, por lo que *valla* y *vaya* pueden sonar igual. También cambia la /s/ final de sílaba: puede conservarse, aspirarse o debilitarse según la variedad. Los niveles socioculturales contribuyen igualmente a que aparezcan diferencias de vocabulario y de uso. Sin embargo, estos rasgos no dividen el español en idiomas separados. Los hispanohablantes comparten gran parte de la gramática y del léxico. El contexto permite reconocer palabras que suenan igual y, cuando surge una duda, una explicación aclara el sentido. Por eso las variedades no impiden normalmente la comprensión mutua: muestran distintas maneras de hablar un idioma compartido.»"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

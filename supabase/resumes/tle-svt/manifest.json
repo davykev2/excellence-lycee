@@ -1,0 +1,22 @@
+{
+  "matiere_slug": "svt",
+  "niveau": "Terminale",
+  "series": ["C", "D"],
+  "output": "../../resumes_tle_svt.sql",
+  "lecons": [
+    { "file": "L01.md", "ordre": 1,  "titre": "L1 — Le réflexe conditionnel", "description": "La communication dans l'organisme · réflexes acquis, apprentissage" },
+    { "file": "L02.md", "ordre": 2,  "titre": "L2 — Le fonctionnement du tissu nerveux", "description": "La communication dans l'organisme · potentiel de repos et d'action, synapse" },
+    { "file": "L03.md", "ordre": 3,  "titre": "L3 — Le fonctionnement du muscle strié squelettique", "description": "La communication dans l'organisme · contraction, actine-myosine, énergie" },
+    { "file": "L04.md", "ordre": 4,  "titre": "L4 — Le fonctionnement du cœur", "description": "La communication dans l'organisme · automatisme cardiaque, contrôle nerveux et hormonal" },
+    { "file": "L05.md", "ordre": 5,  "titre": "L5 — Le maintien de la constance du milieu intérieur", "description": "Le milieu intérieur · rein, homéostasie, ADH, aldostérone" },
+    { "file": "L06.md", "ordre": 6,  "titre": "L6 — Le système de défense de l'organisme", "description": "La défense de l'organisme · immunité non spécifique et spécifique" },
+    { "file": "L07.md", "ordre": 7,  "titre": "L7 — L'infection de l'organisme par le VIH", "description": "La défense de l'organisme · VIH-SIDA, lymphocytes T4" },
+    { "file": "L08.md", "ordre": 8,  "titre": "L8 — Le devenir des cellules sexuelles chez les mammifères", "description": "La reproduction chez les mammifères · fécondation, cellule-œuf, nidation" },
+    { "file": "L09.md", "ordre": 9,  "titre": "L9 — Le fonctionnement des organes sexuels chez l'Homme", "description": "La reproduction · cycles sexuels, hormones, contraception" },
+    { "file": "L10.md", "ordre": 10, "titre": "L10 — La reproduction chez les spermaphytes", "description": "La reproduction chez les spermaphytes · pollen, ovule, double fécondation" },
+    { "file": "L11.md", "ordre": 11, "titre": "L11 — La transmission d'un caractère héréditaire chez l'Homme", "description": "La transmission des caractères héréditaires · monohybridisme, pedigree" },
+    { "file": "L12.md", "ordre": 12, "titre": "L12 — La transmission de deux caractères héréditaires", "description": "La transmission des caractères héréditaires · dihybridisme, gènes liés/indépendants" },
+    { "file": "L14.md", "ordre": 14, "titre": "L14 — L'exploitation des gisements miniers", "description": "Les ressources minières · prospection, exploitation, impacts" },
+    { "file": "L15.md", "ordre": 15, "titre": "L15 — L'amélioration et la protection des sols", "description": "La gestion des sols · amendements, techniques de protection" }
+  ]
+}
