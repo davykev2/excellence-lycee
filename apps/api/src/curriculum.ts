@@ -1,3 +1,5 @@
+import { terminalCMathLessonIds, terminalCMathRewardWeight } from "./terminalCMathRewards.js";
+
 export const XP_PER_LESSON = 10_000;
 const XP_ALLOCATION_UNIT = 10;
 
@@ -238,6 +240,12 @@ const svtLessonSuffixes = [
 for (const [pathId, suffixes] of svtLessonSuffixes) {
   suffixes.forEach((suffix, index) => {
     lessonRewards.set(`${pathId}:${pathId}-${suffix}`, humanitiesMasteryRewards[index]);
+  });
+}
+
+for (const [pathId, lessonIds] of terminalCMathLessonIds) {
+  lessonIds.forEach((lessonId, index) => {
+    lessonRewards.set(`${pathId}:${lessonId}`, terminalCMathRewardWeight(index));
   });
 }
 
