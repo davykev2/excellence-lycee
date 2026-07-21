@@ -1,5 +1,5 @@
 import type { LearningPath } from "../domain/paths";
-import { terminalAAdditionalMathPaths } from "./terminalAMathCoursePaths";
+import { terminalAAdditionalMathPaths } from "./terminalAMathFaithfulCoursePaths";
 import { terminalAPolynomialRationalPath } from "./terminalAPolynomialRationalPath";
 
 export { terminalAPolynomialRationalPath };
