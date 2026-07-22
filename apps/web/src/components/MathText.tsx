@@ -33,6 +33,12 @@ interface MathTextProps {
 
 const explicitMathPattern = /(\$\$[\s\S]+?\$\$|\$[^$]+\$)/g;
 
+function normalizeExplicitLatexDelimiters(value: string) {
+  return value
+    .replace(/\\\[([\s\S]+?)\\\]/g, (_, formula: string) => `$$${formula}$$`)
+    .replace(/\\\(([\s\S]+?)\\\)/g, (_, formula: string) => `$${formula}$`);
+}
+
 function replaceOutsideMath(value: string, pattern: RegExp, block = false) {
   return value
     .split(explicitMathPattern)
@@ -54,7 +60,7 @@ function delimitImplicitLatex(value: string) {
 }
 
 function normalizeMathDelimiters(value: string) {
-  return value
+  return normalizeExplicitLatexDelimiters(value)
     .split(explicitMathPattern)
     .map((part) => part.startsWith("$") && part.endsWith("$") ? part : delimitImplicitLatex(part))
     .join("");

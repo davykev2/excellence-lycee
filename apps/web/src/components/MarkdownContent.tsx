@@ -97,6 +97,13 @@ function parseBlocks(markdown: string) {
   return blocks;
 }
 
+function normalizePastedExerciseLayout(markdown: string) {
+  return markdown.replace(
+    /(^|[^\n])\s*([a-h]\))\s*(?=\\\(|\$\$?)/gi,
+    (_, prefix: string, label: string) => `${prefix}${prefix ? "\n" : ""}${label} `,
+  );
+}
+
 export function MarkdownContent({
   markdown,
   emptyState,
@@ -106,7 +113,7 @@ export function MarkdownContent({
   emptyState?: ReactNode;
   preserveLineBreaks?: boolean;
 }) {
-  const blocks = parseBlocks(markdown);
+  const blocks = parseBlocks(preserveLineBreaks ? normalizePastedExerciseLayout(markdown) : markdown);
   if (!blocks.length) return <>{emptyState ?? null}</>;
   return (
     <div className="lesson-rich-content">
