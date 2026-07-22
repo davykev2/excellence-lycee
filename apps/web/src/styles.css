@@ -7603,6 +7603,19 @@ textarea:focus-visible {
 .arena-level-grid p { margin: 5px 0 0; color: #6f7e91; font-size: 10px; }
 .arena-level-grid svg { color: var(--green-600); }
 
+.arena-level-journey { max-width: 1160px; margin: 4px auto 0; padding-top: 42px; }
+.arena-level-journey .mastery-road-line { top: 54px; bottom: 70px; }
+.arena-level-journey > ol { gap: 18px; }
+.arena-level-stop { min-height: 165px; }
+.arena-level-stop .mastery-level-card { min-height: 148px; display: grid; align-content: center; }
+.arena-level-stop .mastery-level-meta span:first-child { color: var(--green-600); }
+.arena-level-stop .mastery-level-meta span:last-child { color: var(--orange-600); }
+.arena-level-stop .mastery-level-card h2 { margin-top: 9px; }
+.arena-level-stop .mastery-level-card > p { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.arena-level-stop .mastery-level-footer { min-height: 31px; }
+.arena-level-card-action { padding: 0; border: 0; background: transparent; color: var(--orange-600); font: inherit; font-size: 10px; font-weight: 900; cursor: pointer; }
+.arena-level-card-action:hover { color: #b7440c; text-decoration: underline; text-underline-offset: 3px; }
+
 .arena-bank-empty, .arena-bank-feedback { max-width: 1240px; min-height: 230px; display: grid; place-items: center; align-content: center; gap: 8px; margin: 18px auto 0; padding: 30px; border: 1px dashed #d1d9d0; border-radius: 18px; background: #fff; color: #758397; text-align: center; }
 .arena-bank-empty h3, .arena-bank-empty p { margin: 0; }
 .arena-bank-empty h3 { color: var(--navy-800); }
@@ -7737,6 +7750,7 @@ textarea:focus-visible {
   .arena-editor-view-toggle { display: flex; }
   .arena-editor-layout.show-edit .arena-editor-preview, .arena-editor-layout.show-preview .arena-editor-form { display: none; }
   .arena-editor-preview { position: static; max-height: none; }
+  .arena-level-journey { padding: 28px 14px 40px; }
 }
 
 @media (max-width: 680px) {
@@ -7751,6 +7765,8 @@ textarea:focus-visible {
   .arena-target-fields .is-lesson { grid-column: auto; }
   .arena-difficulty-tabs { grid-template-columns: 1fr; }
   .arena-level-grid { grid-template-columns: 1fr; }
+  .arena-level-journey { padding: 25px 10px 34px; }
+  .arena-level-stop { min-height: 150px; }
   .arena-exercise-player > header { grid-template-columns: auto 1fr; }
   .arena-exercise-player > header > div { text-align: left; }
   .arena-exercise-player > header > strong { display: none; }

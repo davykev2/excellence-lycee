@@ -14,6 +14,37 @@ interface ArenaExerciseFilters {
   lessonKey?: string;
 }
 
+function previewPublishedLevels(filters: ArenaExerciseFilters): PublishedArenaExerciseLevel[] {
+  if (!filters.lessonKey) return [];
+  const titles = ["Comprendre les bases", "Applications guidées", "Méthodes combinées", "Défi de synthèse"];
+  const instructions = [
+    "Applique directement les notions essentielles de la leçon.",
+    "Repère les informations utiles puis avance étape par étape.",
+    "Combine plusieurs propriétés pour construire ton raisonnement.",
+    "Mobilise toute la leçon dans des situations proches de l’examen.",
+  ];
+  const now = new Date().toISOString();
+  return titles.map((title, index) => ({
+    id: `arena-preview-level-${index + 1}`,
+    levelId: filters.levelId,
+    subjectId: filters.subjectId,
+    lessonKey: filters.lessonKey!,
+    lessonTitle: "Leçon sélectionnée",
+    difficulty: "easy",
+    stageNumber: index + 1,
+    title,
+    instructionsMarkdown: instructions[index],
+    exercises: [{
+      id: `arena-preview-exercise-${index + 1}`,
+      title: `Exercice ${index + 1}`,
+      statementMarkdown: "Résous cette situation en justifiant clairement chaque étape.",
+      correctionMarkdown: "La correction expliquée détaille ici la méthode attendue.",
+    }],
+    version: 1,
+    publishedAt: now,
+  }));
+}
+
 function previewDocument(payload: ArenaExerciseLevelPayload, id: string = crypto.randomUUID()): ArenaExerciseLevelDocument {
   return {
     id,
@@ -42,6 +73,7 @@ export function useArenaExercises({
 
   const reload = useCallback(async () => {
     if (localOnly) {
+      if (!canEdit) setPublishedLevels(previewPublishedLevels(filters));
       setLoading(false);
       setError(null);
       return;

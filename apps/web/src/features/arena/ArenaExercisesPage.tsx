@@ -8,15 +8,18 @@ import {
   CheckCircle,
   ClipboardText,
   Eye,
+  FlagCheckered,
   FloppyDisk,
   Lightbulb,
   LockKey,
   Monitor,
   NotePencil,
   Plus,
+  Play,
   RocketLaunch,
   Sparkle,
   DeviceMobile,
+  Target,
   Trash,
   WarningCircle,
 } from "@phosphor-icons/react";
@@ -70,6 +73,18 @@ function lessonKey(lesson: CurriculumLessonTitle) {
 
 function difficultyLabel(difficulty: ArenaExerciseDifficulty) {
   return difficulties.find((item) => item.id === difficulty)?.label ?? difficulty;
+}
+
+const journeyIcons = [Play, Target, RocketLaunch, FlagCheckered];
+
+function levelSummary(level: PublishedArenaExerciseLevel) {
+  const plainText = level.instructionsMarkdown
+    .replace(/\$([^$]+)\$/g, "$1")
+    .replace(/[#*_`>\\]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  const fallback = `${level.exercises.length} exercice${level.exercises.length > 1 ? "s" : ""} avec des corrections détaillées.`;
+  return plainText.length > 165 ? `${plainText.slice(0, 162).trim()}…` : plainText || fallback;
 }
 
 function formatDate(value: string) {
@@ -148,14 +163,29 @@ function ExerciseLibrary({
     );
   }
   return (
-    <div className="arena-level-grid">
-      {visibleLevels.map((level) => (
-        <button type="button" key={level.id} onClick={() => setActiveLevel(level)}>
-          <span className={`is-${level.difficulty}`}>{String(level.stageNumber).padStart(2, "0")}</span>
-          <div><small>{difficultyLabel(level.difficulty)} • Niveau {level.stageNumber}</small><strong>{level.title}</strong><p>{level.exercises.length} exercice{level.exercises.length > 1 ? "s" : ""} avec correction</p></div>
-          <RocketLaunch size={22} weight="duotone" />
-        </button>
-      ))}
+    <div className="mastery-road arena-level-journey" aria-label={`Parcours ${difficultyLabel(difficulty)}`}>
+      <span className="mastery-road-line" aria-hidden="true" />
+      <ol>
+        {visibleLevels.map((level, index) => {
+          const Icon = journeyIcons[index % journeyIcons.length];
+          return (
+            <li className={`mastery-stop arena-level-stop is-available ${index % 2 === 0 ? "is-left" : "is-right"}`} key={level.id}>
+              <button className="mastery-level-node" type="button" onClick={() => setActiveLevel(level)} aria-label={`Commencer le niveau ${level.stageNumber} : ${level.title}`}>
+                <Icon size={34} weight="duotone" />
+              </button>
+              <article className="mastery-level-card">
+                <div className="mastery-level-meta"><span>Niveau {level.stageNumber}</span><span>{level.exercises.length} exercice{level.exercises.length > 1 ? "s" : ""}</span></div>
+                <h2>{level.title}</h2>
+                <p>{levelSummary(level)}</p>
+                <div className="mastery-level-footer">
+                  <span>Corrections expliquées</span>
+                  <button className="arena-level-card-action" type="button" onClick={() => setActiveLevel(level)}>Commencer</button>
+                </div>
+              </article>
+            </li>
+          );
+        })}
+      </ol>
     </div>
   );
 }
