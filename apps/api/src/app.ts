@@ -13,6 +13,7 @@ import { contentRoutes } from "./routes/content.js";
 import { companionRoutes } from "./routes/companion.js";
 import { messageRoutes } from "./routes/messages.js";
 import { statsRoutes } from "./routes/stats.js";
+import { arenaExerciseRoutes } from "./routes/arenaExercises.js";
 import { authenticateWithSupabase, supabaseConfigured } from "./supabase.js";
 
 export async function buildApp() {
@@ -67,6 +68,7 @@ export async function buildApp() {
   await app.register(companionRoutes, { prefix: "/companion" });
   await app.register(messageRoutes, { prefix: "/messages" });
   await app.register(statsRoutes, { prefix: "/stats" });
+  await app.register(arenaExerciseRoutes, { prefix: "/arena-exercises" });
 
   app.setErrorHandler((error, _request, reply) => {
     app.log.error(error);

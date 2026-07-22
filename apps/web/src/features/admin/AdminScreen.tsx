@@ -140,16 +140,17 @@ function CreateContentDialog({ onClose, onCreate }: CreateContentDialogProps) {
   );
 }
 
-function EditUserLevelDialog({
+function EditUserAccessDialog({
   user,
   onClose,
   onSave,
 }: {
   user: AdminUser;
   onClose: () => void;
-  onSave: (userId: string, levelId: string) => Promise<void>;
+  onSave: (userId: string, levelId: string, role: UserRole) => Promise<void>;
 }) {
   const [levelId, setLevelId] = useState(user.levelId ?? "seconde-c");
+  const [role, setRole] = useState<UserRole>(user.role);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -158,7 +159,7 @@ function EditUserLevelDialog({
     setSaving(true);
     setError(null);
     try {
-      await onSave(user.id, levelId);
+      await onSave(user.id, levelId, role);
       onClose();
     } catch (saveError) {
       setError(saveError instanceof Error ? saveError.message : "La modification n’a pas pu être enregistrée.");
@@ -172,8 +173,8 @@ function EditUserLevelDialog({
       <section className="admin-dialog admin-level-dialog" role="dialog" aria-modal="true" aria-labelledby="admin-level-dialog-title">
         <header>
           <div>
-            <span>Profil scolaire</span>
-            <h2 id="admin-level-dialog-title">Modifier le niveau de {user.name}</h2>
+            <span>Accès et profil</span>
+            <h2 id="admin-level-dialog-title">Gérer le compte de {user.name}</h2>
           </div>
           <button className="icon-button" type="button" onClick={onClose} aria-label="Fermer" disabled={saving}>
             <X size={21} weight="bold" />
@@ -190,12 +191,21 @@ function EditUserLevelDialog({
               {schoolLevels.map((level) => <option key={level.id} value={level.id}>{level.label}</option>)}
             </select>
           </label>
-          <p className="admin-level-note is-wide">Les parcours, l’Arène et les classements de cet utilisateur suivront désormais ce niveau et cette série. Sa progression déjà acquise reste conservée.</p>
+          <label className="admin-field is-wide">
+            <span>Rôle et autorisations</span>
+            <select value={role} onChange={(event) => setRole(event.target.value as UserRole)} disabled={saving}>
+              <option value="student">Élève</option>
+              <option value="teacher">Enseignant</option>
+              <option value="content_editor">Éditeur de contenus — peut alimenter l’Arène</option>
+              <option value="admin">Administrateur — accès complet</option>
+            </select>
+          </label>
+          <p className="admin-level-note is-wide">Le rôle « Éditeur de contenus » donne accès à l’atelier des exercices. Seul un administrateur peut publier les brouillons dans l’Arène.</p>
           {error && <p className="admin-dialog-error is-wide" role="alert">{error}</p>}
           <div className="admin-dialog-actions">
             <button className="secondary-action" type="button" onClick={onClose} disabled={saving}>Annuler</button>
-            <button className="primary-action is-compact" type="submit" disabled={saving || levelId === user.levelId}>
-              {saving ? "Enregistrement…" : "Enregistrer le niveau"}
+            <button className="primary-action is-compact" type="submit" disabled={saving || (levelId === user.levelId && role === user.role)}>
+              {saving ? "Enregistrement…" : "Enregistrer les accès"}
             </button>
           </div>
         </form>
@@ -254,6 +264,7 @@ export function AdminScreen({
     updatingUserId,
     reload: reloadUsers,
     updateUserLevel,
+    updateUserRole,
   } = useAdminUsers();
   const lessonContents = useAdminLessonContents({ disabled: preview });
   const [internalActiveSection, setInternalActiveSection] = useState<AdminSection>("overview");
@@ -320,9 +331,11 @@ export function AdminScreen({
     notify(status === "published" ? "Contenu publié." : status === "review" ? "Contenu envoyé en validation." : "Contenu replacé en brouillon.");
   };
 
-  const saveUserLevel = async (userId: string, levelId: string) => {
-    await updateUserLevel(userId, levelId);
-    notify("Niveau et série mis à jour.");
+  const saveUserAccess = async (userId: string, levelId: string, role: UserRole) => {
+    const current = adminUsers.find((user) => user.id === userId);
+    if (current?.levelId !== levelId) await updateUserLevel(userId, levelId);
+    if (current?.role !== role) await updateUserRole(userId, role);
+    notify(role === "content_editor" ? "Utilisateur promu éditeur de contenus." : "Accès utilisateur mis à jour.");
   };
 
   if (showContentStudio) {
@@ -519,7 +532,7 @@ export function AdminScreen({
                 <div className="admin-user-action">
                   <span className={`admin-user-state is-${user.status}`}>{user.status === "active" ? "Actif" : "Suspendu"}</span>
                   <button type="button" disabled={updatingUserId === user.id} onClick={() => setEditingUser(user)}>
-                    Modifier le niveau
+                    Gérer l’accès
                   </button>
                 </div>
               </div>
@@ -583,7 +596,7 @@ export function AdminScreen({
       )}
 
       {showCreateDialog && <CreateContentDialog onClose={() => setShowCreateDialog(false)} onCreate={(content) => { createContent(content); notify("Nouveau brouillon créé."); }} />}
-      {editingUser && <EditUserLevelDialog user={editingUser} onClose={() => setEditingUser(null)} onSave={saveUserLevel} />}
+      {editingUser && <EditUserAccessDialog user={editingUser} onClose={() => setEditingUser(null)} onSave={saveUserAccess} />}
       {notice && <div className="toast" role="status">{notice}</div>}
     </main>
   );

@@ -51,7 +51,6 @@ export const subjects: Record<SubjectId, SubjectDefinition> = {
     label: "SVT",
     shortLabel: "SVT",
     enabled: true,
-    levelIds: ["terminale-a"],
     theme: { accent: "#2f8b67", accentSoft: "#e4f2ec" },
   },
   philosophy: {

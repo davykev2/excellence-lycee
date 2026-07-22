@@ -7,6 +7,7 @@ import {
   listSupabaseAdminUsers,
   supabaseConfigured,
   updateSupabaseAdminProfileLevel,
+  updateSupabaseAdminProfileRole,
   updateSupabaseProfile,
   uploadSupabaseProfilePhoto,
   writeSupabaseAudit,
@@ -42,6 +43,10 @@ function decodeProfilePhoto(dataUrl: string) {
 
 const adminUpdateLevelSchema = z.object({
   levelId: z.string().refine((value) => validLevels.has(value), "Niveau ou série invalide."),
+});
+
+const adminUpdateRoleSchema = z.object({
+  role: z.enum(["student", "teacher", "content_editor", "admin"]),
 });
 
 const userIdParamsSchema = z.object({
@@ -124,6 +129,35 @@ export async function userRoutes(app: FastifyInstance) {
       levelId: body.data.levelId,
     });
     return { user: { id: params.data.userId, levelId: body.data.levelId, updatedAt: now } };
+  });
+
+  app.patch("/:userId/role", { preHandler: app.authenticate }, async (request, reply) => {
+    if (request.authContext.role !== "admin") {
+      return reply.code(403).send({ error: "FORBIDDEN", message: "Accès administrateur requis." });
+    }
+    const params = userIdParamsSchema.safeParse(request.params);
+    const body = adminUpdateRoleSchema.safeParse(request.body);
+    if (!params.success || !body.success) {
+      return reply.code(400).send({ error: "VALIDATION_ERROR", message: params.error?.issues[0]?.message ?? body.error?.issues[0]?.message });
+    }
+    if (params.data.userId === request.authContext.id && body.data.role !== "admin") {
+      return reply.code(400).send({ error: "SELF_DEMOTION_BLOCKED", message: "Tu ne peux pas retirer ton propre accès administrateur." });
+    }
+    if (supabaseConfigured) {
+      const user = await updateSupabaseAdminProfileRole(
+        request.authContext.accessToken!,
+        params.data.userId,
+        body.data.role,
+      );
+      return { user };
+    }
+
+    const now = new Date().toISOString();
+    const result = database.prepare("UPDATE users SET role = ?, updated_at = ? WHERE id = ?")
+      .run(body.data.role, now, params.data.userId);
+    if (result.changes === 0) return reply.code(404).send({ error: "USER_NOT_FOUND", message: "Profil introuvable." });
+    writeAuditLog(request.authContext.id, "admin.profile.role.update", params.data.userId, { role: body.data.role });
+    return { user: { id: params.data.userId, role: body.data.role, updatedAt: now } };
   });
 
   app.get("/me", { preHandler: app.authenticate }, async (request, reply) => {

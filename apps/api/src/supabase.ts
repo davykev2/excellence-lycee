@@ -8,6 +8,12 @@ import type {
   LessonContentStatus,
   PublishedLessonContent,
 } from "./content.js";
+import type {
+  ArenaExerciseLevelDocument,
+  ArenaExerciseLevelPayload,
+  ArenaExerciseStatus,
+  PublishedArenaExerciseLevel,
+} from "./arenaExercises.js";
 import type { GlobalMessageSummary, MessageRecipientSummary, MessageThreadSummary, ThreadMessageSummary } from "./messaging.js";
 
 export interface PublicAuthUser {
@@ -70,6 +76,25 @@ interface LessonContentRevisionRow {
   note: string | null;
   created_by: string | null;
   created_at: string;
+}
+
+interface ArenaExerciseLevelRow {
+  id: string;
+  level_id: string;
+  subject_id: string;
+  lesson_key: string;
+  difficulty: "easy" | "medium" | "hard";
+  stage_number: number;
+  payload: ArenaExerciseLevelPayload;
+  status: ArenaExerciseStatus;
+  draft_version: number;
+  published_version: number | null;
+  published_payload: ArenaExerciseLevelPayload | null;
+  created_by: string | null;
+  updated_by: string | null;
+  created_at: string;
+  updated_at: string;
+  published_at: string | null;
 }
 
 export interface AdminUserSummary {
@@ -182,6 +207,20 @@ function asLessonContentRevision(row: LessonContentRevisionRow): LessonContentRe
     payload: row.payload,
     note: row.note ?? undefined,
     createdAt: row.created_at,
+  };
+}
+
+function asArenaExerciseLevelDocument(row: ArenaExerciseLevelRow): ArenaExerciseLevelDocument {
+  return {
+    id: row.id,
+    ...row.payload,
+    status: row.status,
+    draftVersion: row.draft_version,
+    publishedVersion: row.published_version ?? undefined,
+    hasPublishedVersion: Boolean(row.published_payload),
+    createdBy: row.created_by ?? undefined,
+    updatedAt: row.updated_at,
+    publishedAt: row.published_at ?? undefined,
   };
 }
 
@@ -418,6 +457,25 @@ export async function updateSupabaseAdminProfileLevel(
   };
 }
 
+export async function updateSupabaseAdminProfileRole(
+  accessToken: string,
+  userId: string,
+  role: UserRole,
+) {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("admin_update_profile_role", {
+    p_user_id: userId,
+    p_role: role,
+  });
+  if (error) {
+    const status = error.code === "42501" ? 403 : error.code === "P0002" ? 404 : 400;
+    throw new SupabaseOperationError(error.message, status, error.code);
+  }
+  const result = (data as Array<{ user_id: string; new_role: UserRole; changed_at: string }> | null)?.[0];
+  if (!result) throw new SupabaseOperationError("Le rôle n’a pas pu être modifié.", 500);
+  return { id: result.user_id, role: result.new_role, updatedAt: result.changed_at };
+}
+
 const lessonContentSelect = "id,path_id,lesson_id,payload,status,draft_version,published_version,published_payload,created_by,updated_by,created_at,updated_at,published_at";
 
 export async function listSupabasePublishedLessonContents(accessToken: string): Promise<PublishedLessonContent[]> {
@@ -591,6 +649,88 @@ export async function restoreSupabaseLessonContentRevision(
   });
   if (historyResult.error) throw new SupabaseOperationError(historyResult.error.message, 400, historyResult.error.code);
   return asLessonContentDocument(data as unknown as LessonContentRow);
+}
+
+const arenaExerciseLevelSelect = "id,level_id,subject_id,lesson_key,difficulty,stage_number,payload,status,draft_version,published_version,published_payload,created_by,updated_by,created_at,updated_at,published_at";
+
+export async function listSupabasePublishedArenaExerciseLevels(
+  accessToken: string,
+  filters: { levelId: string; subjectId: string; lessonKey?: string },
+): Promise<PublishedArenaExerciseLevel[]> {
+  const client = userDataClient(accessToken);
+  let query = client
+    .from("arena_exercise_levels")
+    .select(arenaExerciseLevelSelect)
+    .eq("level_id", filters.levelId)
+    .eq("subject_id", filters.subjectId)
+    .not("published_payload", "is", null)
+    .order("difficulty", { ascending: true })
+    .order("stage_number", { ascending: true });
+  if (filters.lessonKey) query = query.eq("lesson_key", filters.lessonKey);
+  const { data, error } = await query;
+  if (error) throw new SupabaseOperationError(error.message, 500, error.code);
+  return ((data ?? []) as unknown as ArenaExerciseLevelRow[]).flatMap((row) => row.published_payload
+    ? [{
+        id: row.id,
+        ...row.published_payload,
+        version: row.published_version ?? row.draft_version,
+        publishedAt: row.published_at ?? row.updated_at,
+      }]
+    : []);
+}
+
+export async function listSupabaseEditorArenaExerciseLevels(accessToken: string): Promise<ArenaExerciseLevelDocument[]> {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client
+    .from("arena_exercise_levels")
+    .select(arenaExerciseLevelSelect)
+    .order("updated_at", { ascending: false });
+  if (error) throw new SupabaseOperationError(error.message, 500, error.code);
+  return ((data ?? []) as unknown as ArenaExerciseLevelRow[]).map(asArenaExerciseLevelDocument);
+}
+
+export async function saveSupabaseArenaExerciseLevel(
+  accessToken: string,
+  documentId: string | undefined,
+  payload: ArenaExerciseLevelPayload,
+  note?: string,
+) {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("save_arena_exercise_level", {
+    p_document_id: documentId ?? null,
+    p_payload: payload,
+    p_note: note ?? "Sauvegarde du brouillon",
+  });
+  if (error) {
+    const status = error.code === "42501" ? 403 : error.code === "P0002" ? 404 : 400;
+    throw new SupabaseOperationError(error.message, status, error.code);
+  }
+  const savedId = data as string | null;
+  if (!savedId) throw new SupabaseOperationError("Le niveau d’exercices n’a pas pu être enregistré.", 500);
+  const saved = await client.from("arena_exercise_levels").select(arenaExerciseLevelSelect).eq("id", savedId).single();
+  if (saved.error) throw new SupabaseOperationError(saved.error.message, 500, saved.error.code);
+  return asArenaExerciseLevelDocument(saved.data as unknown as ArenaExerciseLevelRow);
+}
+
+export async function updateSupabaseArenaExerciseLevelStatus(
+  accessToken: string,
+  documentId: string,
+  status: ArenaExerciseStatus,
+) {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("set_arena_exercise_level_status", {
+    p_document_id: documentId,
+    p_status: status,
+  });
+  if (error) {
+    const code = error.code === "42501" ? 403 : error.code === "P0002" ? 404 : 400;
+    throw new SupabaseOperationError(error.message, code, error.code);
+  }
+  const savedId = data as string | null;
+  if (!savedId) throw new SupabaseOperationError("Le statut n’a pas pu être modifié.", 500);
+  const saved = await client.from("arena_exercise_levels").select(arenaExerciseLevelSelect).eq("id", savedId).single();
+  if (saved.error) throw new SupabaseOperationError(saved.error.message, 500, saved.error.code);
+  return asArenaExerciseLevelDocument(saved.data as unknown as ArenaExerciseLevelRow);
 }
 
 export async function getSupabaseProgress(accessToken: string, userId: string) {

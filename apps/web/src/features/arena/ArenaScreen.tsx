@@ -20,8 +20,10 @@ import {
   UsersThree,
 } from "@phosphor-icons/react";
 import type { LearnerProfile, SchoolLevel, SubjectDefinition, SubjectId } from "../../domain/learning";
+import type { UserRole } from "../../domain/auth";
 import { formatXp } from "../../data/xpRewards";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
+import { ArenaExercisesPage } from "./ArenaExercisesPage";
 
 interface ArenaScreenProps {
   profile: LearnerProfile;
@@ -29,8 +31,16 @@ interface ArenaScreenProps {
   subject: SubjectDefinition;
   subjects: SubjectDefinition[];
   totalXp: number;
+  role: UserRole;
+  exercisesOpen: boolean;
+  exerciseEditorOpen: boolean;
+  localOnly?: boolean;
   onSubjectChange: (subjectId: SubjectId) => void;
   onBackHome: () => void;
+  onOpenExercises: () => void;
+  onBackArena: () => void;
+  onOpenExerciseEditor: () => void;
+  onCloseExerciseEditor: () => void;
 }
 
 const arenaModes = [
@@ -121,7 +131,23 @@ const subjectIcons: Partial<Record<SubjectId, typeof Calculator>> = {
   "physics-chemistry": Atom,
 };
 
-export function ArenaScreen({ profile, level, subject, subjects, totalXp, onSubjectChange, onBackHome }: ArenaScreenProps) {
+export function ArenaScreen({
+  profile,
+  level,
+  subject,
+  subjects,
+  totalXp,
+  role,
+  exercisesOpen,
+  exerciseEditorOpen,
+  localOnly = false,
+  onSubjectChange,
+  onBackHome,
+  onOpenExercises,
+  onBackArena,
+  onOpenExerciseEditor,
+  onCloseExerciseEditor,
+}: ArenaScreenProps) {
   const [selectedModeId, setSelectedModeId] = useState<ArenaModeId>("exercises");
   const [selectionMessage, setSelectionMessage] = useState<string | null>(null);
   const selectedMode = useMemo(() => arenaModes.find((mode) => mode.id === selectedModeId) ?? arenaModes[0], [selectedModeId]);
@@ -134,8 +160,29 @@ export function ArenaScreen({ profile, level, subject, subjects, totalXp, onSubj
   };
 
   const confirmMode = () => {
+    if (selectedMode.id === "exercises") {
+      onOpenExercises();
+      return;
+    }
     setSelectionMessage(`Mode « ${selectedMode.title} » sélectionné pour ${subject.label}. La prochaine étape sera de connecter sa banque d’épreuves.`);
   };
+
+  if (exercisesOpen) {
+    return (
+      <ArenaExercisesPage
+        profile={profile}
+        level={level}
+        subject={subject}
+        canEdit={role === "admin" || role === "content_editor"}
+        canPublish={role === "admin"}
+        editorOpen={exerciseEditorOpen}
+        localOnly={localOnly}
+        onBackArena={onBackArena}
+        onOpenEditor={onOpenExerciseEditor}
+        onCloseEditor={onCloseExerciseEditor}
+      />
+    );
+  }
 
   return (
     <main className="arena-page">

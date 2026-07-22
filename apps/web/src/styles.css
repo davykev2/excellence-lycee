@@ -7544,6 +7544,218 @@ textarea:focus-visible {
   .davy-tour-audio-controls { grid-template-columns: repeat(3, 37px) 1fr; }
 }
 
+/* Arena exercise bank and contributor studio */
+.arena-exercises-page {
+  min-height: 100vh;
+  padding: 28px clamp(22px, 4vw, 64px) 80px;
+  background: #fbfaf6;
+  color: var(--navy-800);
+}
+
+.arena-exercises-page.is-editor { padding-inline: clamp(16px, 2.5vw, 38px); }
+.arena-exercises-topbar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 18px; margin-bottom: 24px; }
+.arena-exercises-topbar > button:first-child { justify-self: start; display: inline-flex; align-items: center; gap: 7px; padding: 9px 0; border: 0; background: transparent; color: #54657d; font-weight: 850; cursor: pointer; }
+.arena-exercises-topbar > div { text-align: center; }
+.arena-exercises-topbar p, .arena-exercises-topbar h1 { margin: 0; }
+.arena-exercises-topbar p { color: var(--green-700); font-size: 10px; font-weight: 950; letter-spacing: .11em; text-transform: uppercase; }
+.arena-exercises-topbar h1 { margin-top: 2px; font-size: clamp(25px, 3vw, 38px); letter-spacing: -.035em; }
+.arena-editor-entry { justify-self: end; display: inline-flex; align-items: center; gap: 8px; padding: 11px 15px; border: 1px solid #bfdab8; border-radius: 12px; background: #eff8ed; color: #257b30; font-weight: 900; cursor: pointer; }
+.arena-editor-secure { justify-self: end; display: inline-flex; align-items: center; gap: 7px; color: #66768a; font-size: 11px; font-weight: 850; }
+
+.arena-exercise-target { max-width: 1240px; margin: 0 auto; padding: 22px; border: 1px solid #e0e4de; border-radius: 21px; background: #fff; box-shadow: 0 12px 34px rgb(5 37 81 / 6%); }
+.arena-target-heading { display: flex; align-items: center; gap: 11px; }
+.arena-target-heading > span { width: 45px; height: 45px; display: grid; place-items: center; border-radius: 13px; background: var(--green-100); color: var(--green-700); }
+.arena-target-heading p, .arena-target-heading h2 { margin: 0; }
+.arena-target-heading p { color: #758297; font-size: 10px; font-weight: 900; text-transform: uppercase; }
+.arena-target-heading h2 { margin-top: 2px; font-size: 20px; }
+.arena-target-fields { display: grid; grid-template-columns: 190px 210px minmax(280px, 1fr); gap: 12px; margin-top: 18px; }
+.arena-target-fields label { min-width: 0; display: grid; gap: 6px; }
+.arena-target-fields label > span { color: #68768a; font-size: 9px; font-weight: 950; letter-spacing: .06em; text-transform: uppercase; }
+.arena-target-fields select { min-width: 0; width: 100%; height: 44px; padding: 0 12px; border: 1px solid #d9dfd9; border-radius: 11px; background: #fafbf9; color: var(--navy-800); font: inherit; font-size: 12px; font-weight: 750; outline: 0; }
+.arena-target-fields select:focus { border-color: var(--green-600); box-shadow: 0 0 0 3px rgb(73 173 63 / 12%); }
+.arena-target-fields select:disabled { color: #66768a; background: #f2f3f0; opacity: 1; }
+
+.arena-difficulty-section { max-width: 1240px; margin: 27px auto 0; }
+.arena-difficulty-section > div:first-child p, .arena-difficulty-section > div:first-child h2 { margin: 0; }
+.arena-difficulty-section > div:first-child p { color: var(--green-700); font-size: 10px; font-weight: 950; text-transform: uppercase; }
+.arena-difficulty-section > div:first-child h2 { margin-top: 3px; font-size: 23px; }
+.arena-difficulty-tabs { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 11px; margin-top: 14px; }
+.arena-difficulty-tabs button { position: relative; min-width: 0; display: grid; gap: 3px; padding: 16px 18px; border: 1px solid #dce1dc; border-radius: 15px; background: #fff; color: var(--navy-800); text-align: left; cursor: pointer; transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease; }
+.arena-difficulty-tabs button:hover { transform: translateY(-2px); }
+.arena-difficulty-tabs button.is-active { border-color: var(--difficulty-color); box-shadow: 0 9px 24px color-mix(in srgb, var(--difficulty-color) 15%, transparent); }
+.arena-difficulty-tabs button.is-active::before { content: ""; position: absolute; inset: -1px auto -1px -1px; width: 5px; border-radius: 15px 0 0 15px; background: var(--difficulty-color); }
+.arena-difficulty-tabs .is-green { --difficulty-color: #45a941; }
+.arena-difficulty-tabs .is-orange { --difficulty-color: #ed7a23; }
+.arena-difficulty-tabs .is-navy { --difficulty-color: #123866; }
+.arena-difficulty-tabs button > span { font-size: 17px; font-weight: 950; }
+.arena-difficulty-tabs button > small { overflow: hidden; color: #718095; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.arena-difficulty-tabs button > b { margin-top: 7px; color: var(--difficulty-color); font-size: 9px; text-transform: uppercase; }
+
+.arena-level-grid { max-width: 1240px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 13px; margin: 18px auto 0; }
+.arena-level-grid > button { display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: 13px; min-height: 122px; padding: 17px; border: 1px solid #dfe3dd; border-radius: 17px; background: #fff; color: var(--navy-800); text-align: left; cursor: pointer; box-shadow: 0 8px 24px rgb(8 36 73 / 5%); }
+.arena-level-grid > button:hover { border-color: #acd2a6; transform: translateY(-2px); }
+.arena-level-grid > button > span { width: 47px; height: 47px; display: grid; place-items: center; border-radius: 14px; background: #eaf5e7; color: #2c9136; font-weight: 950; }
+.arena-level-grid > button > span.is-medium { background: #fff0e4; color: #c7661d; }
+.arena-level-grid > button > span.is-hard { background: #e8eef7; color: #163f73; }
+.arena-level-grid > button > div { min-width: 0; display: grid; }
+.arena-level-grid small { color: #708095; font-size: 9px; font-weight: 850; text-transform: uppercase; }
+.arena-level-grid strong { overflow: hidden; margin-top: 4px; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
+.arena-level-grid p { margin: 5px 0 0; color: #6f7e91; font-size: 10px; }
+.arena-level-grid svg { color: var(--green-600); }
+
+.arena-bank-empty, .arena-bank-feedback { max-width: 1240px; min-height: 230px; display: grid; place-items: center; align-content: center; gap: 8px; margin: 18px auto 0; padding: 30px; border: 1px dashed #d1d9d0; border-radius: 18px; background: #fff; color: #758397; text-align: center; }
+.arena-bank-empty h3, .arena-bank-empty p { margin: 0; }
+.arena-bank-empty h3 { color: var(--navy-800); }
+.arena-bank-empty p { max-width: 460px; font-size: 12px; line-height: 1.5; }
+.arena-bank-feedback { grid-template-columns: auto auto auto; min-height: 100px; }
+.arena-bank-feedback > span:first-child { width: 18px; height: 18px; border: 2px solid #d0d8d0; border-top-color: var(--green-600); border-radius: 50%; animation: spin .8s linear infinite; }
+.arena-bank-feedback.is-error { color: #a24532; background: #fff4ef; }
+.arena-bank-feedback button { border: 0; background: transparent; color: inherit; font-weight: 900; cursor: pointer; }
+
+.arena-exercise-player { max-width: 1000px; margin: 18px auto 0; }
+.arena-exercise-player > header { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 14px; margin-bottom: 16px; }
+.arena-exercise-player > header > button { justify-self: start; display: inline-flex; align-items: center; gap: 6px; border: 0; background: transparent; color: #5f7087; font-weight: 850; cursor: pointer; }
+.arena-exercise-player > header > div { text-align: center; }
+.arena-exercise-player > header span, .arena-exercise-player > header h2 { display: block; margin: 0; }
+.arena-exercise-player > header span { color: var(--green-700); font-size: 9px; font-weight: 950; text-transform: uppercase; }
+.arena-exercise-player > header h2 { margin-top: 2px; font-size: 25px; }
+.arena-exercise-player > header > strong { justify-self: end; padding: 7px 10px; border-radius: 9px; background: #eef5eb; color: #3a7b3f; font-size: 10px; }
+.arena-level-instructions { display: grid; grid-template-columns: auto 1fr; align-items: start; gap: 10px; margin-bottom: 14px; padding: 14px 16px; border-radius: 13px; background: #edf5e9; color: #3c6242; }
+.arena-level-instructions .lesson-rich-content p { margin: 0; }
+.arena-player-exercises { display: grid; gap: 15px; }
+.arena-player-exercises > article { padding: clamp(18px, 3vw, 30px); border: 1px solid #dfe4df; border-radius: 19px; background: #fff; box-shadow: 0 9px 26px rgb(7 38 78 / 5%); }
+.arena-player-exercise-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 17px; }
+.arena-player-exercise-heading span { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: var(--green-600); color: #fff; font-weight: 950; }
+.arena-player-exercise-heading h3 { margin: 0; font-size: 18px; }
+.arena-player-statement { min-height: 80px; padding: 18px; border-radius: 13px; background: #fafbf9; }
+.arena-correction-toggle { display: inline-flex; align-items: center; gap: 7px; margin-top: 17px; padding: 11px 14px; border: 1px solid var(--navy-800); border-radius: 11px; background: #fff; color: var(--navy-800); font-weight: 900; cursor: pointer; }
+.arena-player-correction { margin-top: 13px; padding: 18px; border: 1px solid #bcdab6; border-radius: 13px; background: #f0f8ed; }
+.arena-player-correction > strong { display: flex; align-items: center; gap: 7px; color: #287f32; }
+
+.arena-stage-picker { max-width: 1240px; display: flex; align-items: center; justify-content: space-between; gap: 18px; margin: 18px auto 0; padding: 15px 17px; border: 1px solid #dde2dd; border-radius: 15px; background: #fff; }
+.arena-stage-picker > div:first-child { display: flex; align-items: center; gap: 10px; }
+.arena-stage-picker > div:first-child > span { width: 31px; height: 31px; display: grid; place-items: center; border-radius: 9px; background: var(--navy-800); color: #fff; font-size: 12px; font-weight: 950; }
+.arena-stage-picker > div:first-child > div { display: grid; }
+.arena-stage-picker small { margin-top: 2px; color: #778498; font-size: 9px; }
+.arena-stage-buttons { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px; }
+.arena-stage-buttons button { display: inline-flex; align-items: center; gap: 5px; padding: 8px 10px; border: 1px solid #dce1dc; border-radius: 9px; background: #fff; color: #66758a; font-size: 9px; font-weight: 850; cursor: pointer; }
+.arena-stage-buttons button.is-active { border-color: var(--green-600); background: #edf7eb; color: #2e8134; }
+.arena-stage-buttons button.is-new { border-style: dashed; }
+.arena-stage-buttons i { width: 6px; height: 6px; border-radius: 50%; background: #b7c0ca; }
+.arena-stage-buttons i.is-review { background: #3f81c9; }
+.arena-stage-buttons i.is-published { background: var(--green-600); }
+
+.arena-editor-shell { max-width: 1460px; margin: 16px auto 0; border: 1px solid #dce2dc; border-radius: 18px; background: #f7f8f5; overflow: hidden; box-shadow: 0 16px 46px rgb(5 32 69 / 7%); }
+.arena-editor-header { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 13px 16px; border-bottom: 1px solid #dde2dd; background: #fff; }
+.arena-editor-header > div:first-child { min-width: 0; display: flex; align-items: center; gap: 10px; }
+.arena-editor-header > div:first-child > div { min-width: 0; display: grid; }
+.arena-editor-header small, .arena-editor-header strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.arena-editor-header small { color: #7a8697; font-size: 9px; }
+.arena-editor-status { flex: 0 0 auto; padding: 6px 8px; border-radius: 8px; background: #f4ead1; color: #9a6915; font-size: 9px; font-weight: 950; text-transform: uppercase; }
+.arena-editor-status.is-review { background: #e6f0fb; color: #2d6ba8; }
+.arena-editor-status.is-published { background: #e6f4e3; color: #287a31; }
+.arena-editor-actions { display: flex; align-items: center; gap: 7px; }
+.arena-editor-actions button { display: inline-flex; align-items: center; gap: 6px; padding: 9px 11px; border: 1px solid #d9dfd9; border-radius: 9px; background: #fff; color: var(--navy-800); font-size: 10px; font-weight: 900; cursor: pointer; }
+.arena-editor-actions button.is-review { border-color: #93b9e2; color: #2867a7; }
+.arena-editor-actions button.is-publish { border-color: var(--green-600); background: var(--green-600); color: #fff; }
+.arena-editor-actions button:disabled { opacity: .5; cursor: not-allowed; }
+.arena-editor-message { display: flex; align-items: center; gap: 7px; margin: 12px 14px 0; padding: 10px 12px; border-radius: 10px; background: #e9f5e6; color: #2f7a35; font-size: 10px; font-weight: 850; }
+.arena-editor-message.is-error { background: #fff0ea; color: #a14631; }
+.arena-editor-view-toggle { display: none; justify-content: center; gap: 3px; margin: 10px auto 0; width: max-content; padding: 3px; border: 1px solid #dce1dc; border-radius: 9px; background: #fff; }
+.arena-editor-view-toggle button { display: flex; align-items: center; gap: 5px; padding: 7px 11px; border: 0; border-radius: 7px; background: transparent; color: #68778b; font-size: 9px; font-weight: 900; }
+.arena-editor-view-toggle button.is-active { background: var(--navy-800); color: #fff; }
+.arena-editor-layout { display: grid; grid-template-columns: minmax(430px, .94fr) minmax(440px, 1.06fr); align-items: start; gap: 14px; padding: 14px; }
+.arena-editor-form { min-width: 0; display: grid; gap: 12px; }
+.arena-editor-card { padding: 16px; border: 1px solid #dfe3df; border-radius: 14px; background: #fff; }
+.arena-editor-card-title { display: flex; align-items: center; gap: 9px; margin-bottom: 14px; }
+.arena-editor-card-title > span { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; background: var(--green-100); color: var(--green-700); font-size: 11px; font-weight: 950; }
+.arena-editor-card-title > div { display: grid; }
+.arena-editor-card-title small { margin-top: 2px; color: #7c8999; font-size: 9px; }
+.arena-editor-card-title > b { margin-left: auto; padding: 5px 8px; border-radius: 8px; background: #eef2ed; color: #627167; font-size: 10px; }
+.arena-editor-card label, .arena-editor-exercise-list label { display: grid; gap: 5px; margin-top: 10px; }
+.arena-editor-card label > span { display: flex; justify-content: space-between; gap: 8px; color: #66758a; font-size: 9px; font-weight: 950; text-transform: uppercase; }
+.arena-editor-card label > span small { color: #98a1ad; font-size: 8px; font-weight: 700; text-transform: none; }
+.arena-editor-card input, .arena-editor-card textarea { width: 100%; border: 1px solid #d9dfda; border-radius: 9px; background: #fbfcfa; color: var(--navy-800); font: inherit; font-size: 12px; outline: 0; resize: vertical; }
+.arena-editor-card input { height: 40px; padding: 0 10px; }
+.arena-editor-card textarea { min-height: 90px; padding: 10px 11px; line-height: 1.55; }
+.arena-editor-card input:focus, .arena-editor-card textarea:focus { border-color: var(--green-600); box-shadow: 0 0 0 3px rgb(73 173 63 / 10%); }
+.arena-editor-exercise-list { display: grid; gap: 11px; }
+.arena-editor-exercise-list > article { padding: 13px; border: 1px solid #e0e4e0; border-radius: 12px; background: #fafbf9; }
+.arena-editor-exercise-list > article > header { display: flex; align-items: center; gap: 8px; }
+.arena-editor-exercise-list > article > header > span { width: 25px; height: 25px; display: grid; place-items: center; border-radius: 7px; background: var(--navy-800); color: #fff; font-size: 9px; font-weight: 950; }
+.arena-editor-exercise-list > article > header > strong { overflow: hidden; flex: 1; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.arena-editor-exercise-list > article > header > div { display: flex; gap: 3px; }
+.arena-editor-exercise-list > article > header button { width: 27px; height: 27px; display: grid; place-items: center; border: 1px solid #dce1dc; border-radius: 7px; background: #fff; color: #65758a; cursor: pointer; }
+.arena-editor-exercise-list > article > header button.is-delete { color: #b64d36; }
+.arena-editor-exercise-list > article > header button:disabled { opacity: .3; }
+.arena-add-exercise { width: 100%; display: flex; align-items: center; justify-content: center; gap: 7px; margin-top: 11px; padding: 11px; border: 1px dashed #94c68d; border-radius: 10px; background: #f1f8ef; color: #2f8235; font-weight: 900; cursor: pointer; }
+
+.arena-editor-preview { position: sticky; top: 12px; min-width: 0; max-height: calc(100vh - 45px); overflow: auto; border: 1px solid #dce1dc; border-radius: 14px; background: #eef0ed; scrollbar-width: thin; }
+.arena-preview-browser { position: sticky; z-index: 2; top: 0; display: flex; align-items: center; gap: 5px; padding: 10px 12px; border-bottom: 1px solid #d9ded9; background: #f7f8f6; }
+.arena-preview-browser i { width: 8px; height: 8px; border-radius: 50%; background: #e26b55; }
+.arena-preview-browser i:nth-child(2) { background: #e9b340; }
+.arena-preview-browser i:nth-child(3) { background: #59a95a; }
+.arena-preview-browser span { margin-left: auto; color: #728093; font-size: 8px; font-weight: 900; text-transform: uppercase; }
+.arena-preview-sheet { min-height: 700px; margin: 12px; padding: clamp(18px, 3vw, 34px); border-radius: 13px; background: #fff; box-shadow: 0 6px 18px rgb(8 32 63 / 7%); }
+.arena-preview-sheet > header { padding-bottom: 18px; border-bottom: 1px solid #e2e6e1; }
+.arena-preview-sheet > header p, .arena-preview-sheet > header h2, .arena-preview-sheet > header span { margin: 0; }
+.arena-preview-sheet > header p { color: var(--green-700); font-size: 9px; font-weight: 950; text-transform: uppercase; }
+.arena-preview-sheet > header h2 { margin-top: 5px; font-size: clamp(24px, 3vw, 35px); letter-spacing: -.035em; }
+.arena-preview-sheet > header span { display: block; margin-top: 6px; color: #778497; font-size: 10px; }
+.arena-preview-instructions { margin-top: 14px; padding: 13px; border-radius: 10px; background: #edf5e9; color: #3d6343; }
+.arena-preview-instructions .lesson-rich-content p { margin: 0; }
+.arena-preview-exercises { display: grid; gap: 14px; margin-top: 14px; }
+.arena-preview-exercises > section { padding: 16px; border: 1px solid #e0e4df; border-radius: 12px; }
+.arena-preview-exercises > section > div:first-child { display: flex; align-items: center; gap: 8px; margin-bottom: 11px; }
+.arena-preview-exercises > section > div:first-child span { width: 29px; height: 29px; display: grid; place-items: center; border-radius: 8px; background: var(--navy-800); color: #fff; font-size: 9px; font-weight: 950; }
+.arena-preview-exercises h3 { margin: 0; font-size: 14px; }
+.arena-preview-exercises .is-empty { color: #9aa3ae; font-style: italic; }
+.arena-preview-exercises details { margin-top: 13px; padding: 11px; border-radius: 9px; background: #f0f7ee; }
+.arena-preview-exercises summary { color: #2d7d34; font-size: 10px; font-weight: 900; cursor: pointer; }
+.arena-preview-exercises .lesson-rich-content { margin-top: 9px; }
+
+@media (max-width: 1180px) {
+  .arena-editor-layout { grid-template-columns: minmax(360px, .9fr) minmax(380px, 1.1fr); }
+  .arena-level-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .arena-stage-picker { align-items: flex-start; flex-direction: column; }
+  .arena-stage-buttons { justify-content: flex-start; }
+}
+
+@media (max-width: 900px) {
+  .arena-target-fields { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .arena-target-fields .is-lesson { grid-column: 1 / -1; }
+  .arena-editor-layout { display: block; }
+  .arena-editor-view-toggle { display: flex; }
+  .arena-editor-layout.show-edit .arena-editor-preview, .arena-editor-layout.show-preview .arena-editor-form { display: none; }
+  .arena-editor-preview { position: static; max-height: none; }
+}
+
+@media (max-width: 680px) {
+  .arena-exercises-page { padding: 16px 12px 110px; }
+  .arena-exercises-topbar { grid-template-columns: auto 1fr; }
+  .arena-exercises-topbar > div { text-align: left; }
+  .arena-exercises-topbar > button:first-child { font-size: 0; }
+  .arena-exercises-topbar > button:first-child svg { width: 23px; height: 23px; }
+  .arena-editor-entry, .arena-editor-secure { grid-column: 1 / -1; justify-self: stretch; justify-content: center; }
+  .arena-exercise-target { padding: 16px; border-radius: 16px; }
+  .arena-target-fields { grid-template-columns: 1fr; }
+  .arena-target-fields .is-lesson { grid-column: auto; }
+  .arena-difficulty-tabs { grid-template-columns: 1fr; }
+  .arena-level-grid { grid-template-columns: 1fr; }
+  .arena-exercise-player > header { grid-template-columns: auto 1fr; }
+  .arena-exercise-player > header > div { text-align: left; }
+  .arena-exercise-player > header > strong { display: none; }
+  .arena-editor-header { align-items: flex-start; flex-direction: column; }
+  .arena-editor-actions { width: 100%; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .arena-editor-actions button { justify-content: center; }
+  .arena-stage-picker { padding: 13px; }
+  .arena-stage-buttons { width: 100%; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .arena-stage-buttons button { justify-content: center; }
+  .arena-editor-layout { padding: 8px; }
+  .arena-editor-card { padding: 12px; }
+  .arena-preview-sheet { margin: 8px; padding: 16px 12px; }
+}
+
 @media (max-width: 410px) {
   .davy-tour-audio-controls > span { display: none; }
   .davy-tour-audio-controls { grid-template-columns: repeat(3, 37px); }

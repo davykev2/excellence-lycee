@@ -95,6 +95,45 @@ database.exec(`
   CREATE INDEX IF NOT EXISTS lesson_content_revisions_document_idx
     ON lesson_content_revisions(document_id, version DESC);
 
+  CREATE TABLE IF NOT EXISTS arena_exercise_levels (
+    id TEXT PRIMARY KEY,
+    level_id TEXT NOT NULL,
+    subject_id TEXT NOT NULL,
+    lesson_key TEXT NOT NULL,
+    difficulty TEXT NOT NULL CHECK (difficulty IN ('easy', 'medium', 'hard')),
+    stage_number INTEGER NOT NULL CHECK (stage_number > 0),
+    payload_json TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'review', 'published')),
+    draft_version INTEGER NOT NULL DEFAULT 1 CHECK (draft_version > 0),
+    published_version INTEGER,
+    published_payload_json TEXT,
+    created_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+    updated_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL,
+    published_at TEXT,
+    UNIQUE(level_id, subject_id, lesson_key, difficulty, stage_number)
+  );
+
+  CREATE INDEX IF NOT EXISTS arena_exercise_levels_target_idx
+    ON arena_exercise_levels(level_id, subject_id, lesson_key, difficulty, stage_number);
+  CREATE INDEX IF NOT EXISTS arena_exercise_levels_status_idx
+    ON arena_exercise_levels(status, updated_at DESC);
+
+  CREATE TABLE IF NOT EXISTS arena_exercise_level_revisions (
+    id TEXT PRIMARY KEY,
+    document_id TEXT NOT NULL REFERENCES arena_exercise_levels(id) ON DELETE CASCADE,
+    version INTEGER NOT NULL,
+    payload_json TEXT NOT NULL,
+    note TEXT,
+    created_by TEXT REFERENCES users(id) ON DELETE SET NULL,
+    created_at TEXT NOT NULL,
+    UNIQUE(document_id, version)
+  );
+
+  CREATE INDEX IF NOT EXISTS arena_exercise_level_revisions_document_idx
+    ON arena_exercise_level_revisions(document_id, version DESC);
+
   CREATE TABLE IF NOT EXISTS message_threads (
     id TEXT PRIMARY KEY,
     subject TEXT NOT NULL CHECK (length(subject) BETWEEN 1 AND 120),

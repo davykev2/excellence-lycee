@@ -90,6 +90,21 @@ export function useAdminUsers() {
     }
   };
 
+  const updateUserRole = async (userId: string, role: UserRole) => {
+    setUpdatingUserId(userId);
+    try {
+      const response = await apiRequest<{ user: { id: string; role: UserRole; updatedAt: string } }>(
+        `/users/${encodeURIComponent(userId)}/role`,
+        { method: "PATCH", body: JSON.stringify({ role }) },
+      );
+      setUsers((current) => current.map((user) => user.id === response.user.id
+        ? { ...user, role: response.user.role, lastActive: formatLastActive(response.user.updatedAt) }
+        : user));
+    } finally {
+      setUpdatingUserId(null);
+    }
+  };
+
   return {
     users,
     loading,
@@ -97,5 +112,6 @@ export function useAdminUsers() {
     updatingUserId,
     reload,
     updateUserLevel,
+    updateUserRole,
   };
 }

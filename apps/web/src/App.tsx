@@ -42,6 +42,7 @@ const emptyCompletedLessons = new Set<string>();
 const previewParams = new URLSearchParams(window.location.search);
 const isPathPreview = import.meta.env.DEV && previewParams.has("__paths-preview");
 const isAdminContentPreview = import.meta.env.DEV && previewParams.has("__admin-content-preview");
+const isArenaExerciseEditorPreview = import.meta.env.DEV && previewParams.has("__arena-exercise-editor-preview");
 const forceDavyTourPreview = import.meta.env.DEV && previewParams.has("__davy-tour-preview");
 const requestedPreviewLevel = previewParams.get("__level-preview");
 const previewLevelId = schoolLevels.some((level) => level.id === requestedPreviewLevel) ? requestedPreviewLevel! : "seconde-c";
@@ -71,8 +72,18 @@ const adminPreviewUser: AuthUser = {
   role: "admin",
   accountType: "teacher",
 };
+const arenaEditorPreviewUser: AuthUser = {
+  ...previewUser,
+  id: "arena-editor-preview-user",
+  email: "editeur@excellence.local",
+  name: "Éditeur pédagogique",
+  role: "content_editor",
+  accountType: "teacher",
+};
 
-const routeFallback: AppRoute = isAdminContentPreview
+const routeFallback: AppRoute = isArenaExerciseEditorPreview
+  ? { navigation: "arena", subjectId: "mathematics", arenaMode: "exercises", arenaEditor: true }
+  : isAdminContentPreview
   ? { navigation: "admin", subjectId: "mathematics", adminSection: "content", adminStudio: true }
   : isPathPreview
     ? {
@@ -87,11 +98,15 @@ function routeAllowedForUser(route: AppRoute, user: AuthUser): AppRoute {
   if (route.navigation === "admin" && user.role !== "admin") {
     return { navigation: "home", subjectId: route.subjectId };
   }
+  if (route.navigation === "arena" && route.arenaEditor && user.role !== "admin" && user.role !== "content_editor") {
+    return { ...route, arenaEditor: false };
+  }
   return route;
 }
 
 export function App() {
   const { user, loading } = useAuth();
+  if (isArenaExerciseEditorPreview) return <LearningApp user={arenaEditorPreviewUser} />;
   if (isAdminContentPreview) return <LearningApp user={adminPreviewUser} />;
   if (isPathPreview) return <LearningApp user={previewUser} />;
   if (loading) return <main className="session-loading" role="status"><span className="session-loading-mark" />Préparation de ton espace…</main>;
@@ -105,7 +120,7 @@ function LearningApp({ user }: { user: AuthUser }) {
   const [notice, setNotice] = useState<string | null>(null);
   const [tourReplayKey, setTourReplayKey] = useState(0);
   const { logout, updateUser } = useAuth();
-  const localPreview = isPathPreview || isAdminContentPreview;
+  const localPreview = isPathPreview || isAdminContentPreview || isArenaExerciseEditorPreview;
   const { progressByPath, completedLessonsByPath, submitAttempt, totalXp, loading: progressLoading } = useLearningProgress({ localOnly: localPreview });
   const availablePaths = usePublishedLessonContents(learningPaths, localPreview);
   const platformStats = usePlatformStats(availablePaths, localPreview);
@@ -312,8 +327,16 @@ function LearningApp({ user }: { user: AuthUser }) {
           subject={subject}
           subjects={subjectOptions}
           totalXp={totalXp}
+          role={user.role}
+          exercisesOpen={route.arenaMode === "exercises"}
+          exerciseEditorOpen={Boolean(route.arenaEditor)}
+          localOnly={localPreview}
           onSubjectChange={handleSubjectChange}
           onBackHome={() => handleNavigate("home")}
+          onOpenExercises={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "exercises" })}
+          onBackArena={() => navigate({ navigation: "arena", subjectId: subject.id })}
+          onOpenExerciseEditor={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "exercises", arenaEditor: true })}
+          onCloseExerciseEditor={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "exercises" })}
         />
       ) : activeNavigation === "messages" ? (
         <MessagesScreen key={level.id} profile={profile} level={level} />
