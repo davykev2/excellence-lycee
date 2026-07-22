@@ -11,10 +11,12 @@ import {
   FloppyDisk,
   Lightbulb,
   LockKey,
+  Monitor,
   NotePencil,
   Plus,
   RocketLaunch,
   Sparkle,
+  DeviceMobile,
   Trash,
   WarningCircle,
 } from "@phosphor-icons/react";
@@ -183,6 +185,7 @@ function ExerciseEditor({ document, target, canPublish, onSave, onSetStatus, onS
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [mobileView, setMobileView] = useState<"edit" | "preview">("edit");
+  const [previewDevice, setPreviewDevice] = useState<"desktop" | "mobile">("desktop");
 
   useEffect(() => {
     setDocumentId(document?.id);
@@ -314,8 +317,15 @@ function ExerciseEditor({ document, target, canPublish, onSave, onSetStatus, onS
           </section>
         </div>
 
-        <aside className="arena-editor-preview">
-          <div className="arena-preview-browser"><i /><i /><i /><span>Aperçu élève • actualisé instantanément</span></div>
+        <aside className={`arena-editor-preview is-${previewDevice}-device`}>
+          <div className="arena-preview-browser">
+            <div className="arena-preview-lights" aria-hidden="true"><i /><i /><i /></div>
+            <span>Aperçu élève • actualisé instantanément</span>
+            <div className="arena-preview-device-toggle" role="tablist" aria-label="Format de l’aperçu">
+              <button type="button" role="tab" aria-selected={previewDevice === "desktop"} className={previewDevice === "desktop" ? "is-active" : ""} onClick={() => setPreviewDevice("desktop")}><Monitor size={15} weight="duotone" />Ordinateur</button>
+              <button type="button" role="tab" aria-selected={previewDevice === "mobile"} className={previewDevice === "mobile" ? "is-active" : ""} onClick={() => setPreviewDevice("mobile")}><DeviceMobile size={15} weight="duotone" />Mobile</button>
+            </div>
+          </div>
           <article className="arena-preview-sheet">
             <header><p>{difficultyLabel(target.difficulty)} • Niveau {target.stageNumber}</p><h2>{title || "Titre du niveau"}</h2><span>{target.lesson.title}</span></header>
             <div className="arena-preview-instructions"><MarkdownContent markdown={instructionsMarkdown} emptyState={<p>La consigne apparaîtra ici.</p>} /></div>

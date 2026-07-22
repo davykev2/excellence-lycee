@@ -7691,12 +7691,21 @@ textarea:focus-visible {
 .arena-add-exercise { width: 100%; display: flex; align-items: center; justify-content: center; gap: 7px; margin-top: 11px; padding: 11px; border: 1px dashed #94c68d; border-radius: 10px; background: #f1f8ef; color: #2f8235; font-weight: 900; cursor: pointer; }
 
 .arena-editor-preview { position: sticky; top: 12px; min-width: 0; max-height: calc(100vh - 45px); overflow: auto; border: 1px solid #dce1dc; border-radius: 14px; background: #eef0ed; scrollbar-width: thin; }
-.arena-preview-browser { position: sticky; z-index: 2; top: 0; display: flex; align-items: center; gap: 5px; padding: 10px 12px; border-bottom: 1px solid #d9ded9; background: #f7f8f6; }
-.arena-preview-browser i { width: 8px; height: 8px; border-radius: 50%; background: #e26b55; }
-.arena-preview-browser i:nth-child(2) { background: #e9b340; }
-.arena-preview-browser i:nth-child(3) { background: #59a95a; }
-.arena-preview-browser span { margin-left: auto; color: #728093; font-size: 8px; font-weight: 900; text-transform: uppercase; }
-.arena-preview-sheet { min-height: 700px; margin: 12px; padding: clamp(18px, 3vw, 34px); border-radius: 13px; background: #fff; box-shadow: 0 6px 18px rgb(8 32 63 / 7%); }
+.arena-preview-browser { position: sticky; z-index: 2; top: 0; display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-bottom: 1px solid #d9ded9; background: #f7f8f6; }
+.arena-preview-lights { display: flex; align-items: center; gap: 5px; }
+.arena-preview-lights i { width: 8px; height: 8px; border-radius: 50%; background: #e26b55; }
+.arena-preview-lights i:nth-child(2) { background: #e9b340; }
+.arena-preview-lights i:nth-child(3) { background: #59a95a; }
+.arena-preview-browser > span { margin-left: auto; color: #728093; font-size: 8px; font-weight: 900; text-transform: uppercase; }
+.arena-preview-device-toggle { display: flex; gap: 2px; padding: 2px; border: 1px solid #d9dfda; border-radius: 8px; background: #fff; }
+.arena-preview-device-toggle button { display: inline-flex; align-items: center; gap: 4px; padding: 5px 7px; border: 0; border-radius: 6px; background: transparent; color: #718095; font-size: 8px; font-weight: 900; cursor: pointer; }
+.arena-preview-device-toggle button.is-active { background: var(--navy-800); color: #fff; }
+.arena-preview-sheet { position: relative; min-height: 700px; margin: 12px; padding: clamp(18px, 3vw, 34px); border-radius: 13px; background: #fff; box-shadow: 0 6px 18px rgb(8 32 63 / 7%); transition: width .2s ease, border-radius .2s ease, padding .2s ease; }
+.arena-editor-preview.is-mobile-device { background: radial-gradient(circle at 50% 10%, #f8f4e9 0, #e8ece8 72%); }
+.arena-editor-preview.is-mobile-device .arena-preview-sheet { width: min(390px, calc(100% - 24px)); min-height: 720px; margin: 18px auto; padding: 48px 16px 25px; border: 8px solid var(--navy-900); border-radius: 34px; box-shadow: 0 18px 42px rgb(5 29 62 / 20%); }
+.arena-editor-preview.is-mobile-device .arena-preview-sheet::before { content: ""; position: absolute; top: 10px; left: 50%; width: 74px; height: 18px; border-radius: 12px; background: var(--navy-900); transform: translateX(-50%); }
+.arena-editor-preview.is-mobile-device .arena-preview-sheet > header h2 { font-size: 24px; }
+.arena-editor-preview.is-mobile-device .arena-preview-exercises > section { padding: 13px; }
 .arena-preview-sheet > header { padding-bottom: 18px; border-bottom: 1px solid #e2e6e1; }
 .arena-preview-sheet > header p, .arena-preview-sheet > header h2, .arena-preview-sheet > header span { margin: 0; }
 .arena-preview-sheet > header p { color: var(--green-700); font-size: 9px; font-weight: 950; text-transform: uppercase; }
@@ -7754,6 +7763,10 @@ textarea:focus-visible {
   .arena-editor-layout { padding: 8px; }
   .arena-editor-card { padding: 12px; }
   .arena-preview-sheet { margin: 8px; padding: 16px 12px; }
+  .arena-preview-browser { flex-wrap: wrap; }
+  .arena-preview-browser > span { order: 3; width: 100%; margin-left: 0; text-align: center; }
+  .arena-preview-device-toggle { margin-left: auto; }
+  .arena-editor-preview.is-mobile-device .arena-preview-sheet { width: min(390px, calc(100% - 12px)); margin: 8px auto; padding: 44px 12px 20px; border-width: 6px; border-radius: 29px; }
 }
 
 @media (max-width: 410px) {
