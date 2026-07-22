@@ -47,7 +47,7 @@ function delimitImplicitLatex(value: string) {
   if (!value.includes("\\")) return value;
 
   let normalized = replaceOutsideMath(value, /\\begin\{([a-zA-Z*]+)\}[\s\S]*?\\end\{\1\}/g, true);
-  normalized = replaceOutsideMath(normalized, /\\lim(?:_\{[^{}]*\})?\s*\\frac\{(?:[^{}]|\{[^{}]*\})*\}\{(?:[^{}]|\{[^{}]*\})*\}(?:\s*=\s*[-+]?[^,;.()]+)?/g);
+  normalized = replaceOutsideMath(normalized, /\\lim(?:_\{(?:[^{}]|\{[^{}]*\})*\})?\s*\\frac\{(?:[^{}]|\{[^{}]*\})*\}\{(?:[^{}]|\{[^{}]*\})*\}(?:\s*=\s*[-+]?[^,;.()]+)?/g);
   normalized = replaceOutsideMath(normalized, /\\(?:d?frac)\{(?:[^{}]|\{[^{}]*\})*\}\{(?:[^{}]|\{[^{}]*\})*\}|\\sqrt\{(?:[^{}]|\{[^{}]*\})*\}/g);
   normalized = replaceOutsideMath(normalized, /\\(?:mathbb|mathcal|mathbf|mathrm|operatorname)\{[^{}]+\}/g);
   return replaceOutsideMath(normalized, /[A-Za-z0-9]+(?:_\{[^{}]+\}|\^\{[^{}]+\})+/g);
