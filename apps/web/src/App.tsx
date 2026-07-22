@@ -329,11 +329,13 @@ function LearningApp({ user }: { user: AuthUser }) {
           totalXp={totalXp}
           role={user.role}
           exercisesOpen={route.arenaMode === "exercises"}
+          codexOpen={route.arenaMode === "codex"}
           exerciseEditorOpen={Boolean(route.arenaEditor)}
           localOnly={localPreview}
           onSubjectChange={handleSubjectChange}
           onBackHome={() => handleNavigate("home")}
           onOpenExercises={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "exercises" })}
+          onOpenCodex={() => navigate({ navigation: "arena", subjectId: "mathematics", arenaMode: "codex" })}
           onBackArena={() => navigate({ navigation: "arena", subjectId: subject.id })}
           onOpenExerciseEditor={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "exercises", arenaEditor: true })}
           onCloseExerciseEditor={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "exercises" })}

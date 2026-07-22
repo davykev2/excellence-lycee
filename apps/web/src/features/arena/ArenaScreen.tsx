@@ -6,6 +6,7 @@ import {
   BookOpenText,
   Brain,
   Calculator,
+  ChartLine,
   CheckCircle,
   ClipboardText,
   Clock,
@@ -24,6 +25,7 @@ import type { UserRole } from "../../domain/auth";
 import { formatXp } from "../../data/xpRewards";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
 import { ArenaExercisesPage } from "./ArenaExercisesPage";
+import { MathCodexPage } from "../codex/MathCodexPage";
 
 interface ArenaScreenProps {
   profile: LearnerProfile;
@@ -33,11 +35,13 @@ interface ArenaScreenProps {
   totalXp: number;
   role: UserRole;
   exercisesOpen: boolean;
+  codexOpen: boolean;
   exerciseEditorOpen: boolean;
   localOnly?: boolean;
   onSubjectChange: (subjectId: SubjectId) => void;
   onBackHome: () => void;
   onOpenExercises: () => void;
+  onOpenCodex: () => void;
   onBackArena: () => void;
   onOpenExerciseEditor: () => void;
   onCloseExerciseEditor: () => void;
@@ -56,6 +60,19 @@ const arenaModes = [
     featured: "Série ciblée • Fonctions et vecteurs",
     featuredDescription: "8 exercices du niveau fondamental au niveau défi.",
     highlights: ["Difficulté progressive", "Correction expliquée", "Tentatives illimitées"],
+  },
+  {
+    id: "codex",
+    title: "Codex",
+    label: "Laboratoire interactif",
+    description: "Trace des fonctions et explore les constructions de géométrie, les similitudes et les nombres complexes.",
+    icon: ChartLine,
+    tone: "blue",
+    metric: "4 outils",
+    action: "Ouvrir le Codex",
+    featured: "Codex Mathématiques",
+    featuredDescription: "Manipule les objets mathématiques et observe immédiatement ce qui change.",
+    highlights: ["Courbes et tangentes", "Constructions dynamiques", "Calculs expliqués"],
   },
   {
     id: "homework",
@@ -139,11 +156,13 @@ export function ArenaScreen({
   totalXp,
   role,
   exercisesOpen,
+  codexOpen,
   exerciseEditorOpen,
   localOnly = false,
   onSubjectChange,
   onBackHome,
   onOpenExercises,
+  onOpenCodex,
   onBackArena,
   onOpenExerciseEditor,
   onCloseExerciseEditor,
@@ -162,6 +181,10 @@ export function ArenaScreen({
   const confirmMode = () => {
     if (selectedMode.id === "exercises") {
       onOpenExercises();
+      return;
+    }
+    if (selectedMode.id === "codex") {
+      onOpenCodex();
       return;
     }
     setSelectionMessage(`Mode « ${selectedMode.title} » sélectionné pour ${subject.label}. La prochaine étape sera de connecter sa banque d’épreuves.`);
@@ -184,6 +207,8 @@ export function ArenaScreen({
     );
   }
 
+  if (codexOpen) return <MathCodexPage onBackArena={onBackArena} />;
+
   return (
     <main className="arena-page">
       <header className="arena-page-header">
@@ -198,7 +223,7 @@ export function ArenaScreen({
           <p>Choisis ton défi, mesure tes progrès et deviens meilleur à chaque tentative.</p>
           <div className="arena-hero-stats">
             <span><Medal size={20} weight="duotone" /><strong>{formatXp(totalXp)}</strong> XP gagnés</span>
-            <span><Sparkle size={20} weight="duotone" /><strong>6</strong> modes</span>
+            <span><Sparkle size={20} weight="duotone" /><strong>7</strong> modes</span>
             <span><UsersThree size={20} weight="duotone" /><strong>{level.label}</strong></span>
           </div>
         </div>

@@ -6,7 +6,7 @@ export interface AppRoute {
   subjectId?: SubjectId;
   pathId?: string;
   lessonId?: string;
-  arenaMode?: "exercises";
+  arenaMode?: "exercises" | "codex";
   arenaEditor?: boolean;
   adminSection?: AdminSection;
   adminStudio?: boolean;
@@ -75,7 +75,7 @@ export function readAppRoute(location: Pick<Location, "pathname" | "search">, fa
   }
 
   if (section === "arene") {
-    const arenaMode = second === "exercices" ? "exercises" as const : undefined;
+    const arenaMode = second === "exercices" ? "exercises" as const : second === "codex" ? "codex" as const : undefined;
     const arenaEditor = arenaMode === "exercises" && third === "editeur";
     return { navigation: "arena", subjectId, arenaMode, arenaEditor };
   }
@@ -101,6 +101,7 @@ function pathnameFor(route: AppRoute) {
 
   if (route.navigation === "arena") {
     if (route.arenaMode === "exercises") return route.arenaEditor ? "/arene/exercices/editeur" : "/arene/exercices";
+    if (route.arenaMode === "codex") return "/arene/codex";
     return "/arene";
   }
   if (route.navigation === "ranking") return "/classement";
