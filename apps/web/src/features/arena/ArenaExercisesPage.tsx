@@ -164,12 +164,12 @@ function ExerciseLevelPlayer({ level, onClose }: { level: PublishedArenaExercise
           return (
             <article key={exercise.id}>
               <div className="arena-player-exercise-heading"><span>{index + 1}</span><h3>{exercise.title}</h3></div>
-              <div className="arena-player-statement"><MarkdownContent markdown={exercise.statementMarkdown} /></div>
+              <div className="arena-player-statement"><MarkdownContent markdown={exercise.statementMarkdown} preserveLineBreaks /></div>
               <button className="arena-correction-toggle" type="button" onClick={() => toggleCorrection(exercise.id)} aria-expanded={correctionVisible}>
                 {correctionVisible ? <Eye size={18} weight="fill" /> : <CheckCircle size={18} weight="duotone" />}
                 {correctionVisible ? "Masquer la correction" : "J’ai terminé — voir la correction"}
               </button>
-              {correctionVisible && <div className="arena-player-correction"><strong><Check size={18} weight="bold" />Correction expliquée</strong><MarkdownContent markdown={exercise.correctionMarkdown} /></div>}
+              {correctionVisible && <div className="arena-player-correction"><strong><Check size={18} weight="bold" />Correction expliquée</strong><MarkdownContent markdown={exercise.correctionMarkdown} preserveLineBreaks /></div>}
             </article>
           );
         })}
@@ -406,8 +406,8 @@ function ExerciseEditor({ document, journeyLevels, target, canPublish, onSave, o
                   {exercises.map((exercise, index) => (
                     <section key={exercise.id}>
                       <div><span>{index + 1}</span><h3>{exercise.title || `Exercice ${index + 1}`}</h3></div>
-                      <MarkdownContent markdown={exercise.statementMarkdown} emptyState={<p className="is-empty">L’énoncé apparaîtra ici pendant la saisie.</p>} />
-                      <details open><summary>Correction (visible dans l’aperçu)</summary><MarkdownContent markdown={exercise.correctionMarkdown} emptyState={<p className="is-empty">La correction apparaîtra ici.</p>} /></details>
+                      <MarkdownContent markdown={exercise.statementMarkdown} preserveLineBreaks emptyState={<p className="is-empty">L’énoncé apparaîtra ici pendant la saisie.</p>} />
+                      <details open><summary>Correction (visible dans l’aperçu)</summary><MarkdownContent markdown={exercise.correctionMarkdown} preserveLineBreaks emptyState={<p className="is-empty">La correction apparaîtra ici.</p>} /></details>
                     </section>
                   ))}
                 </div>

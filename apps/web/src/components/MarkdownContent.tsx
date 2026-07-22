@@ -35,7 +35,7 @@ function parseBlocks(markdown: string) {
 
   const flushParagraph = () => {
     if (!paragraph.length) return;
-    blocks.push({ kind: "paragraph", lines: [paragraph.join(" ")] });
+    blocks.push({ kind: "paragraph", lines: [...paragraph] });
     paragraph = [];
   };
 
@@ -97,7 +97,15 @@ function parseBlocks(markdown: string) {
   return blocks;
 }
 
-export function MarkdownContent({ markdown, emptyState }: { markdown: string; emptyState?: ReactNode }) {
+export function MarkdownContent({
+  markdown,
+  emptyState,
+  preserveLineBreaks = false,
+}: {
+  markdown: string;
+  emptyState?: ReactNode;
+  preserveLineBreaks?: boolean;
+}) {
   const blocks = parseBlocks(markdown);
   if (!blocks.length) return <>{emptyState ?? null}</>;
   return (
@@ -121,7 +129,17 @@ export function MarkdownContent({ markdown, emptyState }: { markdown: string; em
         }
         if (block.kind === "unordered") return <ul key={key}>{block.lines.map((line, index) => <li key={`${line}-${index}`}>{inline(line)}</li>)}</ul>;
         if (block.kind === "ordered") return <ol key={key}>{block.lines.map((line, index) => <li key={`${line}-${index}`}>{inline(line)}</li>)}</ol>;
-        return <p key={key}>{inline(block.lines[0])}</p>;
+        if (!preserveLineBreaks) return <p key={key}>{inline(block.lines.join(" "))}</p>;
+        return (
+          <p key={key}>
+            {block.lines.map((line, lineIndex) => (
+              <Fragment key={`${line}-${lineIndex}`}>
+                {inline(line)}
+                {lineIndex < block.lines.length - 1 ? <br /> : null}
+              </Fragment>
+            ))}
+          </p>
+        );
       })}
     </div>
   );
