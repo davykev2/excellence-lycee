@@ -12,6 +12,7 @@ import {
   FloppyDisk,
   Lightbulb,
   LockKey,
+  MapTrifold,
   Monitor,
   NotePencil,
   Plus,
@@ -77,7 +78,7 @@ function difficultyLabel(difficulty: ArenaExerciseDifficulty) {
 
 const journeyIcons = [Play, Target, RocketLaunch, FlagCheckered];
 
-function levelSummary(level: PublishedArenaExerciseLevel) {
+function levelSummary(level: Pick<PublishedArenaExerciseLevel, "instructionsMarkdown" | "exercises">) {
   const plainText = level.instructionsMarkdown
     .replace(/\$([^$]+)\$/g, "$1")
     .replace(/[#*_`>\\]/g, "")
@@ -85,6 +86,52 @@ function levelSummary(level: PublishedArenaExerciseLevel) {
     .trim();
   const fallback = `${level.exercises.length} exercice${level.exercises.length > 1 ? "s" : ""} avec des corrections détaillées.`;
   return plainText.length > 165 ? `${plainText.slice(0, 162).trim()}…` : plainText || fallback;
+}
+
+type ArenaJourneyLevel = Pick<
+  PublishedArenaExerciseLevel,
+  "id" | "stageNumber" | "title" | "instructionsMarkdown" | "exercises"
+>;
+
+function ArenaLevelJourney({
+  levels,
+  onSelect,
+  preview = false,
+}: {
+  levels: ArenaJourneyLevel[];
+  onSelect?: (level: ArenaJourneyLevel) => void;
+  preview?: boolean;
+}) {
+  const orderedLevels = [...levels].sort((left, right) => left.stageNumber - right.stageNumber);
+  return (
+    <div className={`mastery-road arena-level-journey ${preview ? "is-editor-preview" : ""}`} aria-label="Aperçu du parcours des niveaux">
+      <span className="mastery-road-line" aria-hidden="true" />
+      <ol>
+        {orderedLevels.map((level, index) => {
+          const Icon = journeyIcons[index % journeyIcons.length];
+          const selectLevel = () => onSelect?.(level);
+          return (
+            <li className={`mastery-stop arena-level-stop is-available ${index % 2 === 0 ? "is-left" : "is-right"}`} key={level.id}>
+              <button className="mastery-level-node" type="button" onClick={selectLevel} disabled={!onSelect} aria-label={`Niveau ${level.stageNumber} : ${level.title}`}>
+                <Icon size={34} weight="duotone" />
+              </button>
+              <article className="mastery-level-card">
+                <div className="mastery-level-meta"><span>Niveau {level.stageNumber}</span><span>{level.exercises.length} exercice{level.exercises.length > 1 ? "s" : ""}</span></div>
+                <h2>{level.title}</h2>
+                <p>{levelSummary(level)}</p>
+                <div className="mastery-level-footer">
+                  <span>Corrections expliquées</span>
+                  {onSelect
+                    ? <button className="arena-level-card-action" type="button" onClick={selectLevel}>Commencer</button>
+                    : <strong>Aperçu en direct</strong>}
+                </div>
+              </article>
+            </li>
+          );
+        })}
+      </ol>
+    </div>
+  );
 }
 
 function formatDate(value: string) {
@@ -162,36 +209,12 @@ function ExerciseLibrary({
       </div>
     );
   }
-  return (
-    <div className="mastery-road arena-level-journey" aria-label={`Parcours ${difficultyLabel(difficulty)}`}>
-      <span className="mastery-road-line" aria-hidden="true" />
-      <ol>
-        {visibleLevels.map((level, index) => {
-          const Icon = journeyIcons[index % journeyIcons.length];
-          return (
-            <li className={`mastery-stop arena-level-stop is-available ${index % 2 === 0 ? "is-left" : "is-right"}`} key={level.id}>
-              <button className="mastery-level-node" type="button" onClick={() => setActiveLevel(level)} aria-label={`Commencer le niveau ${level.stageNumber} : ${level.title}`}>
-                <Icon size={34} weight="duotone" />
-              </button>
-              <article className="mastery-level-card">
-                <div className="mastery-level-meta"><span>Niveau {level.stageNumber}</span><span>{level.exercises.length} exercice{level.exercises.length > 1 ? "s" : ""}</span></div>
-                <h2>{level.title}</h2>
-                <p>{levelSummary(level)}</p>
-                <div className="mastery-level-footer">
-                  <span>Corrections expliquées</span>
-                  <button className="arena-level-card-action" type="button" onClick={() => setActiveLevel(level)}>Commencer</button>
-                </div>
-              </article>
-            </li>
-          );
-        })}
-      </ol>
-    </div>
-  );
+  return <ArenaLevelJourney levels={visibleLevels} onSelect={(level) => setActiveLevel(level as PublishedArenaExerciseLevel)} />;
 }
 
 interface ExerciseEditorProps {
   document?: ArenaExerciseLevelDocument;
+  journeyLevels: ArenaJourneyLevel[];
   target: {
     levelId: string;
     subjectId: SubjectId;
@@ -205,7 +228,7 @@ interface ExerciseEditorProps {
   onSaved: (document: ArenaExerciseLevelDocument) => void;
 }
 
-function ExerciseEditor({ document, target, canPublish, onSave, onSetStatus, onSaved }: ExerciseEditorProps) {
+function ExerciseEditor({ document, journeyLevels, target, canPublish, onSave, onSetStatus, onSaved }: ExerciseEditorProps) {
   const [title, setTitle] = useState("");
   const [instructionsMarkdown, setInstructionsMarkdown] = useState("");
   const [exercises, setExercises] = useState<ArenaExerciseItem[]>([emptyExercise()]);
@@ -216,6 +239,7 @@ function ExerciseEditor({ document, target, canPublish, onSave, onSetStatus, onS
   const [error, setError] = useState<string | null>(null);
   const [mobileView, setMobileView] = useState<"edit" | "preview">("edit");
   const [previewDevice, setPreviewDevice] = useState<"desktop" | "mobile">("desktop");
+  const [previewMode, setPreviewMode] = useState<"journey" | "content">("journey");
 
   useEffect(() => {
     setDocumentId(document?.id);
@@ -244,6 +268,19 @@ function ExerciseEditor({ document, target, canPublish, onSave, onSetStatus, onS
       return next;
     });
   };
+
+  const journeyPreviewLevels = useMemo<ArenaJourneyLevel[]>(() => {
+    const otherLevels = journeyLevels
+      .filter((item) => item.stageNumber !== target.stageNumber)
+      .map((item) => ({ ...item }));
+    return [...otherLevels, {
+      id: documentId ?? `arena-editor-preview-${target.stageNumber}`,
+      stageNumber: target.stageNumber,
+      title: title || `Niveau ${target.stageNumber}`,
+      instructionsMarkdown,
+      exercises,
+    }].sort((left, right) => left.stageNumber - right.stageNumber);
+  }, [documentId, exercises, instructionsMarkdown, journeyLevels, target.stageNumber, title]);
 
   const payload = (): ArenaExerciseLevelPayload => ({
     levelId: target.levelId,
@@ -328,7 +365,7 @@ function ExerciseEditor({ document, target, canPublish, onSave, onSetStatus, onS
           <section className="arena-editor-card">
             <div className="arena-editor-card-title"><span>1</span><div><strong>Présentation du niveau</strong><small>Ce que l’élève verra avant les exercices</small></div></div>
             <label><span>Titre du niveau</span><input value={title} onChange={(event) => setTitle(event.target.value)} maxLength={180} placeholder="Ex. Applications directes" /></label>
-            <label><span>Consigne générale <small>Markdown et formules $...$ acceptés</small></span><textarea value={instructionsMarkdown} onChange={(event) => setInstructionsMarkdown(event.target.value)} rows={4} placeholder="Explique brièvement comment aborder ce niveau…" /></label>
+            <label><span>Consigne générale <small>Markdown et formules LaTeX détectés automatiquement</small></span><textarea value={instructionsMarkdown} onChange={(event) => setInstructionsMarkdown(event.target.value)} rows={4} placeholder="Explique brièvement comment aborder ce niveau…" /></label>
           </section>
 
           <section className="arena-editor-card">
@@ -338,7 +375,7 @@ function ExerciseEditor({ document, target, canPublish, onSave, onSetStatus, onS
                 <article key={exercise.id}>
                   <header><span>{index + 1}</span><strong>{exercise.title || `Exercice ${index + 1}`}</strong><div><button type="button" aria-label="Monter l’exercice" disabled={index === 0} onClick={() => moveExercise(index, -1)}><ArrowUp size={15} /></button><button type="button" aria-label="Descendre l’exercice" disabled={index === exercises.length - 1} onClick={() => moveExercise(index, 1)}><ArrowDown size={15} /></button><button className="is-delete" type="button" aria-label="Supprimer l’exercice" onClick={() => removeExercise(exercise.id)}><Trash size={15} /></button></div></header>
                   <label><span>Titre</span><input value={exercise.title} onChange={(event) => updateExercise(exercise.id, { title: event.target.value })} maxLength={160} /></label>
-                  <label><span>Énoncé <small>Colle le texte ici</small></span><textarea value={exercise.statementMarkdown} onChange={(event) => updateExercise(exercise.id, { statementMarkdown: event.target.value })} rows={7} placeholder={"## Situation\n\nÉcris l’énoncé complet. Utilise $x^2$ pour les formules."} /></label>
+                  <label><span>Énoncé <small>Colle le texte et les formules directement</small></span><textarea value={exercise.statementMarkdown} onChange={(event) => updateExercise(exercise.id, { statementMarkdown: event.target.value })} rows={7} placeholder={"## Situation\n\nÉcris l’énoncé complet. Les commandes LaTeX comme \\frac ou \\lim sont détectées."} /></label>
                   <label><span>Correction expliquée</span><textarea value={exercise.correctionMarkdown} onChange={(event) => updateExercise(exercise.id, { correctionMarkdown: event.target.value })} rows={7} placeholder={"## Correction\n\n1. Première étape…\n2. Calcul…\n\n**Réponse :** ..."} /></label>
                 </article>
               ))}
@@ -356,19 +393,25 @@ function ExerciseEditor({ document, target, canPublish, onSave, onSetStatus, onS
               <button type="button" role="tab" aria-selected={previewDevice === "mobile"} className={previewDevice === "mobile" ? "is-active" : ""} onClick={() => setPreviewDevice("mobile")}><DeviceMobile size={15} weight="duotone" />Mobile</button>
             </div>
           </div>
-          <article className="arena-preview-sheet">
-            <header><p>{difficultyLabel(target.difficulty)} • Niveau {target.stageNumber}</p><h2>{title || "Titre du niveau"}</h2><span>{target.lesson.title}</span></header>
-            <div className="arena-preview-instructions"><MarkdownContent markdown={instructionsMarkdown} emptyState={<p>La consigne apparaîtra ici.</p>} /></div>
-            <div className="arena-preview-exercises">
-              {exercises.map((exercise, index) => (
-                <section key={exercise.id}>
-                  <div><span>{index + 1}</span><h3>{exercise.title || `Exercice ${index + 1}`}</h3></div>
-                  <MarkdownContent markdown={exercise.statementMarkdown} emptyState={<p className="is-empty">L’énoncé apparaîtra ici pendant la saisie.</p>} />
-                  <details open><summary>Correction (visible dans l’aperçu)</summary><MarkdownContent markdown={exercise.correctionMarkdown} emptyState={<p className="is-empty">La correction apparaîtra ici.</p>} /></details>
-                </section>
-              ))}
-            </div>
-          </article>
+          <div className="arena-preview-mode-toggle" role="tablist" aria-label="Type d’aperçu">
+            <button type="button" role="tab" aria-selected={previewMode === "journey"} className={previewMode === "journey" ? "is-active" : ""} onClick={() => setPreviewMode("journey")}><MapTrifold size={16} weight="duotone" />Parcours</button>
+            <button type="button" role="tab" aria-selected={previewMode === "content"} className={previewMode === "content" ? "is-active" : ""} onClick={() => setPreviewMode("content")}><BookOpenText size={16} weight="duotone" />Contenu du niveau</button>
+          </div>
+          {previewMode === "journey"
+            ? <div className="arena-editor-journey-preview"><ArenaLevelJourney levels={journeyPreviewLevels} preview /></div>
+            : <article className="arena-preview-sheet">
+                <header><p>{difficultyLabel(target.difficulty)} • Niveau {target.stageNumber}</p><h2>{title || "Titre du niveau"}</h2><span>{target.lesson.title}</span></header>
+                <div className="arena-preview-instructions"><MarkdownContent markdown={instructionsMarkdown} emptyState={<p>La consigne apparaîtra ici.</p>} /></div>
+                <div className="arena-preview-exercises">
+                  {exercises.map((exercise, index) => (
+                    <section key={exercise.id}>
+                      <div><span>{index + 1}</span><h3>{exercise.title || `Exercice ${index + 1}`}</h3></div>
+                      <MarkdownContent markdown={exercise.statementMarkdown} emptyState={<p className="is-empty">L’énoncé apparaîtra ici pendant la saisie.</p>} />
+                      <details open><summary>Correction (visible dans l’aperçu)</summary><MarkdownContent markdown={exercise.correctionMarkdown} emptyState={<p className="is-empty">La correction apparaîtra ici.</p>} /></details>
+                    </section>
+                  ))}
+                </div>
+              </article>}
         </aside>
       </div>
     </section>
@@ -439,7 +482,22 @@ export function ArenaExercisesPage({
   );
   const targetDocuments = allTargetDocuments.filter((document) => document.difficulty === difficulty);
   const selectedDocument = targetDocuments.find((document) => document.stageNumber === stageNumber);
-  const nextStage = Math.max(0, ...targetDocuments.map((document) => document.stageNumber)) + 1;
+  const publishedDifficultyLevels = exerciseData.publishedLevels.filter((item) => item.difficulty === difficulty);
+  const nextStage = Math.max(
+    0,
+    ...targetDocuments.map((document) => document.stageNumber),
+    ...publishedDifficultyLevels.map((document) => document.stageNumber),
+  ) + 1;
+  const journeyLevelsByStage = new Map<number, ArenaJourneyLevel>();
+  publishedDifficultyLevels.forEach((item) => journeyLevelsByStage.set(item.stageNumber, item));
+  targetDocuments.forEach((item) => journeyLevelsByStage.set(item.stageNumber, {
+    id: item.id,
+    stageNumber: item.stageNumber,
+    title: item.title,
+    instructionsMarkdown: item.instructionsMarkdown,
+    exercises: item.exercises,
+  }));
+  const journeyPreviewSources = [...journeyLevelsByStage.values()];
 
   useEffect(() => { setStageNumber(1); }, [difficulty, selectedLessonKey, selectedLevelId, selectedSubjectId]);
 
@@ -495,6 +553,7 @@ export function ArenaExercisesPage({
               <ExerciseEditor
                 key={`${selectedLevelId}-${selectedSubjectId}-${selectedLessonKey}-${difficulty}-${stageNumber}-${selectedDocument?.id ?? "new"}`}
                 document={selectedDocument}
+                journeyLevels={journeyPreviewSources}
                 target={{ levelId: selectedLevelId, subjectId: selectedSubjectId, lesson: selectedLesson, difficulty, stageNumber }}
                 canPublish={canPublish}
                 onSave={exerciseData.save}
