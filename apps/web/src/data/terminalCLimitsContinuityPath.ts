@@ -208,6 +208,8 @@ Si $f$ est **décroissante et minorée** par un nombre réel $m$ sur $]a,b[$, al
 
 > **Pourquoi ça marche.** Une fonction croissante ne peut que monter ; si un plafond l’empêche de dépasser $M$, elle est obligée de se stabiliser. La monotonie donne le sens, la borne empêche de partir à l’infini. **Les deux hypothèses sont indispensables** : croissante sans majorant, $f$ peut tendre vers $+\infty$.
 
+> **Astuce mémoire de Davy.** « Elle monte avec un plafond, elle se stabilise ; elle descend avec un plancher, elle se stabilise. » Associe toujours **croissante** à **majorée**, et **décroissante** à **minorée**.
+
 ### Exemple du cours
 
 Soit $f$ définie sur $\mathbb{R}$ avec $f(0)=0$ et $f'(x)=\dfrac{1}{1+x^2}$. On sait que pour tout $x\in[1;+\infty[$ :
@@ -286,6 +288,8 @@ $$\lim_{x\to+\infty}f(x)=\pm\infty\quad\text{et}\quad\lim_{x\to+\infty}\frac{f(x
 
 > **Comment l’interpréter ?** Le rapport $\dfrac{f(x)}{x}$ mesure la **pente moyenne** depuis l’origine. S’il tend vers $0$, la courbe s’aplatit et se couche vers l’axe des abscisses. S’il tend vers l’infini, elle se redresse vers l’axe des ordonnées.
 
+> **Astuce mémoire de Davy.** Regarde seulement $\dfrac{f(x)}{x}$ : **0 couche** la branche vers $(OI)$ ; **l’infini redresse** la branche vers $(OJ)$.
+
 ### Exemple du cours
 
 Soit $f(x)=\dfrac{2}{x-1}-\sqrt{x+1}$, définie sur $[-1;1[\cup]1;+\infty[$.
@@ -361,6 +365,8 @@ est continue en $a$ : c’est le **prolongement par continuité** de $f$ en $a$.
 | $f$ admet une limite **finie** en $a$ | C’est cette valeur que l’on donne à $g(a)$ |
 
 > **Erreur fréquente.** Une limite infinie ne permet **aucun** prolongement : la courbe part vers l’infini, il n’y a pas un simple trou à combler mais une asymptote.
+
+> **Astuce mémoire de Davy.** **Trou + limite finie = on remplit le trou.** La valeur ajoutée est exactement $\ell$ : on pose $g(a)=\ell$. Si la limite est infinie, pense plutôt « asymptote ».
 
 ### Exemple du cours
 
@@ -503,6 +509,8 @@ Si $f$ est continue sur un intervalle $I$ et $g$ continue sur l’ensemble $f(I)
 
 > **Le point de vigilance.** Pour une composée, il ne suffit pas que $g$ soit continue « quelque part » : elle doit l’être **sur l’image $f(I)$**. C’est pourquoi on calcule d’abord $f(I)$ — d’où l’utilité du niveau précédent.
 
+> **Astuce mémoire de Davy.** Pour les opérations, retiens les deux feux rouges : **quotient $\Rightarrow$ dénominateur non nul** ; **racine carrée $\Rightarrow$ contenu positif ou nul**. Pour une composée, contrôle le trajet $I\to f(I)\to g(f(I))$.
+
 ### Exemples du cours
 
 **1.** $g(x)=x^3+\sin x$ est la somme des fonctions $x\mapsto x^3$ et $x\mapsto\sin x$, continues sur $\mathbb{R}$. Donc $g$ est continue sur $\mathbb{R}$.
@@ -561,6 +569,8 @@ Si $f$ est une fonction **continue et strictement monotone** sur un intervalle $
 | Stricte monotonie | Chaque valeur est atteinte **au plus une fois** : l’injectivité |
 
 Réunies, elles donnent la bijection : tout élément de $f(I)$ possède **exactement un** antécédent dans $I$.
+
+> **Astuce mémoire de Davy.** La réciproque **échange les rôles de $x$ et de $y$** : le domaine $I$ de $f$ devient l’image de $f^{-1}$, et l’image $f(I)$ devient son domaine. Sur le graphique, cet échange produit la symétrie par rapport à $y=x$.
 
 ### Exemple 1 du cours
 
@@ -691,6 +701,8 @@ On calcule $f(a)$ et $f\!\left(\dfrac{a+b}{2}\right)$, puis on conserve la moiti
 | 4 | $[0,25;0,375]$ | $0,3125$ | $-0,0014<0$ | $[0,3125;0,375]$ |
 
 À l’ordre 1, on retrouve $\alpha\in[0,3;0,4]$ : la valeur approchée à $10^{-1}$ près est $0,3$.
+
+> **Astuce mémoire de Davy.** Pour une solution unique, retiens **C-M-S** : **Continuité** pour l’existence, **Monotonie stricte** pour l’unicité, **Signes contraires** pour encadrer la solution.
 
 > **Balayage ou dichotomie ?** Le balayage avance d’un pas fixe et donne directement la précision voulue. La dichotomie divise l’incertitude par deux à chaque étape : elle converge plus vite, mais les calculs sont moins réguliers.`,
     keyPoint: "Continuité ⇒ existence ; stricte monotonie ⇒ unicité ; f(a)×f(b)<0 place la racine dans ]a;b[.",
@@ -831,6 +843,8 @@ Pour étudier une fonction et représenter sa courbe, l’ordre suivant ne chang
 5. dresser le tableau de variations ;
 6. déterminer une tangente remarquable et la position de la courbe par rapport à elle ;
 7. tracer la courbe.
+
+> **Astuce mémoire de Davy.** Retiens la chaîne **D-L-A-D-V-T** : **D**omaine, **L**imites, **A**symptotes, **D**érivée, **V**ariations, **T**angente — puis le tracé. C’est ton ordre de marche pour une étude complète au BAC.
 
 Lorsque le signe de la dérivée n’est pas immédiat, on **étudie d’abord une fonction auxiliaire** : c’est tout l’objet de la partie A ci-dessous.
 
