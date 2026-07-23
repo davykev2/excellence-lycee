@@ -273,6 +273,57 @@ Le non-respect des droits humains reste fréquent : oppression des libertés, no
         summary: "Relier rupture de 1947, doctrines, alliances militaires et organisations économiques.",
         conceptTitle: "Deux modèles idéologiques s’organisent",
         explanation: "Les tensions sur l’Europe libérée et l’Allemagne rompent la Grande Alliance. Les États-Unis répondent par la doctrine Truman et le plan Marshall ; l’URSS par la doctrine Jdanov. Chaque camp construit ensuite ses alliances militaires et économiques.",
+        bodyMarkdown: String.raw`## Pourquoi la Grande Alliance se brise-t-elle ?
+
+Unis contre l’Axe jusqu’en 1945, les Alliés se divisent très vite. Deux dossiers cristallisent la rupture.
+
+**La question polonaise.** Le glissement de la frontière polonaise vers l’ouest — la **ligne Oder-Neisse** — n’est pas reconnu par les Anglais et les Américains. Après des irrégularités électorales, les prosoviétiques évincent les modérés : la Pologne bascule dans l’orbite de Moscou.
+
+**La question allemande.** Le sort du vaincu divise les vainqueurs. Les Occidentaux arrêtent le démantèlement des industries et la dénazification, redoutant une révolution sociale ; les Soviétiques, eux, continuent de démonter les usines de leur zone et amorcent la collectivisation. Dès les élections régionales de 1946, chaque zone vote pour son camp : **la coupure de l’Allemagne est déjà un fait accompli**.
+
+## Les démocraties populaires
+
+Dans les pays libérés par l’Armée rouge, les communistes — pourtant minoritaires — accaparent les **ministères clés** (défense, sécurité, intérieur), noyautent l’armée et l’administration, absorbent les partis socialistes et éliminent les autres.
+
+Entre **1947 et 1949**, la Bulgarie, la Tchécoslovaquie, la Roumanie, la Pologne, la Hongrie et l’Allemagne de l’Est deviennent des **démocraties populaires** alignées sur l’URSS. Churchill dénonce alors, dans son discours de Fulton, « le rideau de fer descendu à travers le continent ».
+
+> **Précision.** Le document source écrit « Wilson Churchill » : il faut lire **Winston Churchill**, Premier ministre britannique. Son discours de Fulton (Missouri) date de **mars 1946**.
+
+## La riposte américaine : la politique du « containment »
+
+| | Doctrine Truman | Plan Marshall |
+|---|---|---|
+| **Date** | 12 mars 1947 | 5 juin 1947 |
+| **Auteur** | Harry Truman, président | George C. Marshall, secrétaire d’État |
+| **Lieu** | devant le Congrès | université Harvard |
+| **Nature** | politique de **fermeté** | aide **économique et financière** |
+| **Objectif** | empêcher l’expansion soviétique au-delà de 1947 | « endiguer » le communisme en combattant la pauvreté |
+| **Application** | Grèce et Turquie | 16 pays européens |
+
+Staline **refuse** le plan Marshall et l’interdit aux pays occupés par l’Armée rouge. Les 16 pays qui l’acceptent créent l’**O.E.C.E.** le 16 avril 1948 pour répartir l’aide : c’est la naissance de l’Europe occidentale.
+
+## La riposte soviétique : la doctrine Jdanov
+
+Andreï Jdanov, bras droit de Staline, présente sa doctrine du **22 au 27 septembre 1947** à Szklarska Poreba (Pologne), devant les délégués de **9 partis communistes**. Pour lui, la division du monde en deux camps est **irréversible** : il appelle à mobiliser les pays anti-impérialistes derrière l’URSS.
+
+> **La définition à retenir.** La **bipolarisation** est la division du monde en deux blocs opposés **idéologiquement, politiquement, économiquement et militairement** : le bloc capitaliste (occidental) et le bloc socialiste (oriental).
+
+## La structuration des deux blocs
+
+| | Bloc occidental | Bloc oriental |
+|---|---|---|
+| **Alliance militaire** | **OTAN** — traité de Washington, 4 avril 1949 | **Pacte de Varsovie** — 14 mai 1955 |
+| **Autres alliances** | OTASE, CENTO, ANZUS | alliances bilatérales remplacées par le Pacte |
+| **Organisation économique** | O.E.C.E. (1948) puis **OCDE** (1961, Paris) | **CAEM / COMECON** — 25 janvier 1949, Moscou |
+| **Commandement** | parapluie nucléaire des États-Unis | confié à l’URSS |
+
+L’**article 5** de la charte de l’OTAN pose le principe de sécurité collective : une attaque contre l’un des membres « sera considérée comme une attaque dirigée contre toutes les parties ». L’alliance s’élargit ensuite à la Grèce et la Turquie (1952), à l’Allemagne de l’Ouest (1955) et à l’Espagne (1982).
+
+Le **CAEM** organise la « division socialiste du travail » et impose le rouble transférable — renforçant surtout la dépendance des satellites envers Moscou.
+
+> **Précision.** Le document annonce « 13 pays » fondateurs de l’OTAN mais n’en cite que neuf. L’Alliance atlantique compte en réalité **12 membres fondateurs** en 1949.
+
+> **Erreur fréquente.** Ne confonds pas les couples : **doctrine Truman → bloc de l’Ouest → USA** ; **doctrine Jdanov → bloc de l’Est → URSS**. De même, l’**OTAN** est occidentale et le **CAEM** oriental — l’activité d’application 1 du cours porte exactement sur cette distinction.`,
         keyPoint: "La bipolarisation organise le monde autour d’un bloc occidental dirigé par les États-Unis et d’un bloc oriental dirigé par l’URSS.",
         example: "L’OTAN structure militairement l’Ouest ; le Pacte de Varsovie répond à l’Est. L’OECE puis l’OCDE et le CAEM organisent les coopérations économiques.",
         timelineTitle: "La structuration des blocs",
@@ -284,6 +335,16 @@ Le non-respect des droits humains reste fréquent : oppression des libertés, no
         ],
         observation: "La guerre froide oppose deux systèmes sans affrontement militaire direct entre les deux superpuissances.",
         check: { prompt: "Quelle doctrine américaine cherche à contenir l’expansion du communisme ?", options: ["La doctrine Truman", "La doctrine Jdanov", "La perestroïka", "La doctrine de Bandung"], correctIndex: 0, explanation: "La doctrine Truman de mars 1947 fonde la politique de containment." },
+        extraQuestions: [
+          { prompt: "À quel bloc et à quel leader appartient la doctrine Jdanov ?", options: ["Bloc de l’Est — URSS", "Bloc de l’Ouest — USA", "Bloc de l’Est — USA", "Bloc de l’Ouest — URSS"], correctIndex: 0, explanation: "Jdanov est le bras droit de Staline : sa doctrine est la riposte soviétique.", sourceLabel: "Activité d’application 1", points: 1 },
+          { prompt: "Le plan Marshall a été annoncé le 5 juin 1947 à l’université Harvard.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "C’est le discours du secrétaire d’État George C. Marshall.", sourceLabel: "Cours I-1-c", points: 1 },
+          { prompt: "Combien de pays européens ont accepté l’aide du plan Marshall ?", options: ["16", "9", "26", "50"], correctIndex: 0, explanation: "Staline l’ayant refusé pour son bloc, 16 pays l’acceptent et créent l’O.E.C.E. en 1948.", sourceLabel: "Cours I-1-c", points: 2 },
+          { prompt: "La doctrine Truman et le plan Marshall ont permis de freiner la propagation du communisme en Europe.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "C’est précisément l’objectif de la politique de « containment ».", sourceLabel: "Activité d’application 2, affirmation 2", points: 1 },
+          { prompt: "L’OTAN et le COMECON visent tous deux à sécuriser les pays de l’Atlantique Nord.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "L’OTAN est occidentale ; le COMECON (CAEM) est l’organisation économique du bloc oriental.", sourceLabel: "Activité d’application 2, affirmation 3", points: 2 },
+          { prompt: "La bipolarisation est la division du monde entre un bloc capitaliste et un bloc libéral.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "L’opposition est entre le bloc capitaliste (occidental) et le bloc socialiste (oriental) — « capitaliste » et « libéral » désignent le même camp.", sourceLabel: "Activité d’application 2, affirmation 4", points: 2 },
+          { prompt: "Quelle organisation militaire structure le bloc oriental à partir de 1955 ?", options: ["Le Pacte de Varsovie", "L’OTAN", "Le CAEM", "L’OECE"], correctIndex: 0, explanation: "Signé le 14 mai 1955, il répond à l’entrée de la RFA dans l’OTAN.", sourceLabel: "Cours I-2-b", points: 1 },
+          { prompt: "En quelle année le Pacte de Varsovie est-il dissous ?", options: ["1991", "1989", "1985", "1968"], correctIndex: 0, explanation: "L’alliance militaire est dissoute le 25 février 1991.", sourceLabel: "Cours I-2-b", points: 2 },
+        ],
         distractors: ["Le Pacte de Varsovie appartient au bloc occidental.", "Le plan Marshall est imposé par l’URSS à l’Europe de l’Est.", "La bipolarisation supprime toutes les alliances militaires."],
       },
       {
@@ -297,12 +358,133 @@ Le non-respect des droits humains reste fréquent : oppression des libertés, no
         timelineTitle: "Les grandes crises de la guerre froide",
         timelineInstruction: "Parcours trois moments où la rivalité des blocs atteint une forte intensité.",
         timeline: [
-          { label: "1948-1949", detail: "Blocus de Berlin par l’URSS et pont aérien organisé par les Occidentaux." },
-          { label: "1961", detail: "Construction du mur de Berlin, symbole de la division de l’Europe et du monde." },
-          { label: "1962", detail: "Crise des missiles de Cuba : confrontation nucléaire évitée par un compromis." },
+          { label: "1948-1949 — Le blocus de Berlin", shortLabel: "La première crise de Berlin", detail: "Blocus de Berlin par l’URSS et pont aérien organisé par les Occidentaux." },
+          { label: "1961 — Le mur de Berlin", shortLabel: "Le mur de Berlin", detail: "Construction du mur de Berlin, symbole de la division de l’Europe et du monde." },
+          { label: "1962 — La crise de Cuba", shortLabel: "la crise de Cuba", detail: "Crise des missiles de Cuba : confrontation nucléaire évitée par un compromis." },
         ],
         observation: "Les crises montrent la puissance des blocs ; les compromis montrent aussi leur volonté d’éviter une guerre nucléaire.",
         check: { prompt: "Quelle crise de 1962 place le monde au bord d’une guerre nucléaire ?", options: ["La crise de Cuba", "La crise de Suez", "La guerre du Golfe", "La conférence de Bandung"], correctIndex: 0, explanation: "L’installation de missiles soviétiques à Cuba provoque une confrontation avec les États-Unis." },
+        parts: [
+          {
+            bodyMarkdown: String.raw`## Berlin, premier terrain de la guerre froide
+
+L’Allemagne vaincue est divisée en **quatre zones d’occupation** (USA, Grande-Bretagne, France à l’Ouest ; URSS à l’Est), et Berlin — pourtant située en zone soviétique — l’est également. Cette enclave occidentale au cœur du bloc de l’Est devient le premier foyer de crise.
+
+## La cause : la conférence de Londres (février 1948)
+
+Les trois Occidentaux se réunissent à Londres et décident de :
+
+- convoquer une **assemblée constituante** pour le 1ᵉʳ septembre 1948 ;
+- créer une autorité internationale **sans l’URSS** pour contrôler la Ruhr ;
+- **fusionner leurs zones** et les doter d’une monnaie commune, le *Deutschemark*.
+
+Pour Staline, ces décisions violent les accords de Yalta et Potsdam. La riposte sera le blocus.
+
+## Le blocus et le pont aérien
+
+Le **23 juin 1948**, Staline fait couper toutes les communications routières et ferroviaires vers Berlin-Ouest et interrompt l’approvisionnement en électricité. Son espoir : asphyxier la ville pour la faire tomber dans sa zone.
+
+Les États-Unis refusent l’épreuve de force armée et choisissent le **pont aérien** :
+
+| Le pont aérien en chiffres | |
+|---|---|
+| Durée | **318 jours** |
+| Vols | **275 000** |
+| Tonnage | **2 323 000 tonnes** de vivres et non-vivres |
+| Avions | une centaine |
+
+Le **12 mai 1949**, Staline prend acte de son échec et lève le blocus.
+
+## Les conséquences : deux Allemagnes
+
+| | RFA | RDA |
+|---|---|---|
+| **Date de naissance** | 23 mai 1949 | 7 octobre 1949 |
+| **Zones** | les 3 zones occidentales | zone soviétique |
+| **Dirigeant** | Konrad Adenauer, chancelier | Otto Grotewohl, président du conseil |
+| **Capitale** | Bonn | Pankow (Berlin-Est) |
+| **Monnaie** | Deutschemark | Ost mark |
+
+> **La leçon de la crise.** Elle démontre la **puissance logistique** des États-Unis et resserre les liens entre les Allemands de l’Ouest et les Occidentaux. Surtout, elle **accélère la division de l’Allemagne** — une division qui durera quarante ans.
+
+> **Erreur fréquente.** La première crise de Berlin **précède** la création des deux États allemands : c’est elle qui les provoque, et non l’inverse. Retiens l’ordre : blocus (juin 1948) → levée (mai 1949) → RFA (mai 1949) → RDA (octobre 1949).`,
+            extraQuestions: [
+              { prompt: "Combien de jours a duré le pont aérien de Berlin ?", options: ["318 jours", "100 jours", "30 jours", "2 ans"], correctIndex: 0, explanation: "275 000 vols ont transporté 2 323 000 tonnes en 318 jours.", sourceLabel: "Cours II-1-a", points: 2 },
+              { prompt: "Quelle décision de la conférence de Londres a provoqué la riposte soviétique ?", options: ["La fusion des zones occidentales et la création du Deutschemark", "La création de l’ONU", "Le retrait des troupes américaines", "La reconnaissance de la RDA"], correctIndex: 0, explanation: "Staline y voit une violation des accords de Yalta et Potsdam.", sourceLabel: "Cours II-1-a", points: 2 },
+              { prompt: "Quelle est la capitale de la RFA créée en 1949 ?", options: ["Bonn", "Berlin", "Pankow", "Francfort"], correctIndex: 0, explanation: "La RFA, née le 23 mai 1949, a Bonn pour capitale.", sourceLabel: "Cours II-1-a", points: 1 },
+              { prompt: "Les conférences de Yalta et de Potsdam ont divisé l’Allemagne en zones d’occupation.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Quatre zones : américaine, britannique, française et soviétique.", sourceLabel: "Activité d’application 2, affirmation 1", points: 1 },
+            ],
+          },
+          {
+            bodyMarkdown: String.raw`## La deuxième crise de Berlin : le mur
+
+**La cause.** Berlin-Ouest est une vitrine prospère au cœur de la RDA. De **1952 à 1961**, **2 245 000 réfugiés** en âge de travailler quittent l’Est — une saignée démographique qui prive l’industrie est-allemande de main-d’œuvre.
+
+Khrouchtchev exige un changement de statut, qualifiant Berlin-Ouest de « tumeur cancérigène » nécessitant une « opération chirurgicale ». L’échec de la conférence de Paris — provoqué par l’affaire de l’avion espion **U2** abattu le 1ᵉʳ mai 1960 — relance la tension.
+
+**La solution soviétique.** Dans la nuit du **12 au 13 août 1961**, un mur est construit en plein Berlin. « Mur de la honte » pour l’Ouest, « mur de protection antifasciste » pour le gouvernement est-allemand, il séparera la ville pendant plus de **vingt-huit ans**.
+
+> **La conséquence paradoxale.** Les Occidentaux n’ont rien cédé, mais la crise consacre l’URSS comme **grande puissance capable de discuter d’égal à égal** avec les États-Unis. Le statu quo enracine définitivement la RFA à l’Ouest et la RDA à l’Est.
+
+## La crise de Cuba (1962) : le paroxysme
+
+**L’enchaînement des causes**
+
+| Étape | Date | Fait |
+|---|---|---|
+| 1 | 1ᵉʳ janvier 1959 | **Fidel Castro** renverse Batista et nationalise les entreprises américaines |
+| 2 | 1960 | Riposte américaine : rupture diplomatique, **embargo**, refus d’acheter le sucre |
+| 3 | 13 février 1960 | L’URSS achète **5 millions de tonnes** de sucre cubain sur 5 ans |
+| 4 | 17 avril 1961 | Échec du débarquement de la **baie des Cochons** (1500 exilés soutenus par la CIA) |
+| 5 | 1962 | Castro obtient de Khrouchtchev l’installation de **missiles offensifs** |
+
+**Le bras de fer.** Le **22 octobre 1962**, preuves photographiques en main (avions U2), Kennedy décrète un **blocus** de Cuba et prévient que tout tir depuis l’île sera considéré comme une attaque de l’URSS.
+
+**Le dénouement.** Le 26 octobre, Khrouchtchev propose un compromis : retrait des missiles soviétiques sous contrôle de l’ONU, contre l’engagement américain de ne pas envahir Cuba et de retirer les fusées « Jupiter » de Turquie. Kennedy accepte. Le **28 octobre**, Khrouchtchev ordonne le démantèlement des **42 rampes de lancement**. Le secrétaire général **U Thant** a joué un rôle efficace de médiateur.
+
+**Les conséquences**
+
+- **Baisse du prestige de l’URSS**, humiliée ; Cuba, déçu, se rapproche de la Chine.
+- **Validation de la « dissuasion graduée »** américaine (Robert McNamara, 1961), qui remplace les « représailles massives ».
+- **Nécessité du dialogue** : installation du « téléphone rouge » le 23 juin 1963 et signature des accords de Moscou sur l’arrêt des essais nucléaires.
+
+## La coexistence pacifique
+
+Élaborée au **XX·e congrès du PCUS (février 1956)**, la coexistence pacifique signifie que **chaque camp accepte l’existence de l’autre**. Elle intègre la *détente*, période d’apaisement du début des années 1960 à la fin des années 1970.
+
+**Ses facteurs**
+
+1. **De nouveaux hommes** : après la mort de Staline, Khrouchtchev assouplit les positions soviétiques ; puis Brejnev/Nixon, Carter, Gorbatchev/Reagan poursuivent cette ligne.
+2. **L’équilibre de la terreur** : le missile intercontinental (août 1957) puis le *Spoutnik* (octobre 1957) montrent que l’URSS a rattrapé son retard. Chacun peut désormais anéantir l’autre.
+3. **Les fissures dans les blocs** : à l’Ouest, la France de De Gaulle quitte le commandement de l’OTAN et reconnaît la Chine (1964) ; à l’Est, le **schisme sino-soviétique**, la révolte hongroise (1956) et le **printemps de Prague** brisent l’unité.
+4. **L’intérêt économique** : les États-Unis visent les marchés de l’Est, l’URSS a besoin de technologie et de blé américains.
+
+**Ses manifestations : les grands accords de désarmement**
+
+| Accord | Date | Contenu |
+|---|---|---|
+| Traité de Moscou | août 1963 | interdit les essais nucléaires dans l’atmosphère |
+| Non-prolifération (TNP) | juillet 1968 | 115 nations ; distingue États dotés et non dotés |
+| **SALT 1** | 1972 | limite ICBM, ABM et sous-marins lanceurs d’engins |
+| **SALT 2** | juin 1979 | limite les missiles à longue portée (non ratifié par le Sénat) |
+| Traité de Washington | 1987 | détruit les missiles de courte et moyenne portée en Europe |
+| **START** | 31 juillet 1991 | réduit d’un tiers les missiles stratégiques |
+
+> **Précision.** Le document date la mort de Staline du « 5 mars 1955 » : il faut lire **5 mars 1953**. De même, le printemps de Prague d’Alexandre Dubček date de **1968** (et non 1958), et les accords de Paris sur le Viêtnam ont été signés le **27 janvier 1973** — le document donne aussi, par erreur, la date du 23 juin.
+
+> **Erreur fréquente.** La coexistence pacifique **ne met pas fin à la guerre froide**. Elle en change les formes : le dialogue remplace l’épreuve de force directe, mais la rivalité se poursuit par conflits périphériques interposés — le Viêtnam en est la démonstration.`,
+            extraQuestions: [
+              { prompt: "Combien d’Allemands de l’Est ont fui vers l’Ouest entre 1952 et 1961 ?", options: ["2 245 000", "500 000", "56 000", "42 000"], correctIndex: 0, explanation: "Cette saignée démographique motive la construction du mur.", sourceLabel: "Cours II-1-b", points: 2 },
+              { prompt: "Dans quelle nuit le mur de Berlin a-t-il été construit ?", options: ["Du 12 au 13 août 1961", "Le 9 novembre 1989", "Le 23 juin 1948", "Le 22 octobre 1962"], correctIndex: 0, explanation: "Le 9 novembre 1989 est au contraire la date de sa chute.", sourceLabel: "Cours II-1-b", points: 1 },
+              { prompt: "Quel événement de 1961 a renforcé les liens entre Cuba et l’URSS ?", options: ["L’échec du débarquement de la baie des Cochons", "La construction du mur de Berlin", "Le blocus américain", "Le lancement du Spoutnik"], correctIndex: 0, explanation: "Ce fiasco de la CIA pousse Castro vers Moscou.", sourceLabel: "Cours II-1-c", points: 2 },
+              { prompt: "Que propose Khrouchtchev le 26 octobre 1962 pour dénouer la crise ?", options: ["Retirer ses missiles contre l’engagement américain de ne pas envahir Cuba", "Déclarer la guerre aux États-Unis", "Annexer Berlin-Ouest", "Quitter le Pacte de Varsovie"], correctIndex: 0, explanation: "Kennedy accepte et retire aussi les fusées « Jupiter » de Turquie.", sourceLabel: "Cours II-1-c", points: 2 },
+              { prompt: "Classe : « le téléphone rouge entre le Kremlin et la Maison-Blanche » est…", options: ["une conséquence de la crise de Cuba", "une cause de la crise de Cuba", "une cause de la crise de Berlin", "sans rapport avec la guerre froide"], correctIndex: 0, explanation: "Installé le 23 juin 1963, il naît de la prise de conscience du risque nucléaire.", sourceLabel: "Activité d’application 2", points: 2 },
+              { prompt: "En quelle année la coexistence pacifique est-elle élaborée, et par qui ?", options: ["1956, au XXᵉ congrès du PCUS", "1947, par la doctrine Truman", "1962, par Kennedy", "1985, par Gorbatchev"], correctIndex: 0, explanation: "Le XXᵉ congrès du PCUS de février 1956 en pose le principe.", sourceLabel: "Cours II-2", points: 2 },
+              { prompt: "L’équilibre de la terreur seul justifie la coexistence pacifique.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Il s’y ajoute l’arrivée de nouveaux dirigeants, les fissures dans les blocs et l’intérêt économique.", sourceLabel: "Activité d’application 2, affirmation 8", points: 2 },
+              { prompt: "La seconde guerre du Viêtnam a montré l’échec de la coexistence pacifique.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "La détente n’empêche pas les conflits périphériques : c’est la « détente contrariée ».", sourceLabel: "Activité d’application 2, affirmation 9", points: 2 },
+            ],
+          },
+        ],
         distractors: ["La coexistence pacifique supprime immédiatement les deux blocs.", "Berlin n’a aucun rôle dans la guerre froide.", "La guerre du Vietnam est un affrontement direct entre armées américaine et soviétique."],
       },
       {
@@ -311,6 +493,48 @@ Le non-respect des droits humains reste fréquent : oppression des libertés, no
         summary: "Expliquer réformes de Gorbatchev, chute du rideau de fer et fin du monde bipolaire.",
         conceptTitle: "Les réformes accélèrent l’effondrement du bloc de l’Est",
         explanation: "Mikhaïl Gorbatchev lance la perestroïka et la glasnost pour réformer un système en crise. La libéralisation affaiblit le contrôle soviétique, favorise les révolutions d’Europe de l’Est, la chute du mur de Berlin et les indépendances des républiques soviétiques.",
+        bodyMarkdown: String.raw`## L’expérience Gorbatchev
+
+Au **XXVIIᵉ congrès du PCUS, en février 1986**, Gorbatchev dénonce les blocages de l’économie soviétique. Il engage une réforme radicale — non pour abattre le communisme, mais pour **le sauver** de la stagnation.
+
+| | **Perestroïka** | **Glasnost** |
+|---|---|---|
+| **Traduction** | restructuration | transparence |
+| **Domaine** | **économique** | **politique** |
+| **Objectif** | ranimer l’innovation et l’esprit d’entreprise | lever les blocages du système politique |
+| **Mesures** | travail individuel autorisé (1986) ; autonomie des entreprises d’État ; terre louée aux paysans pour 50 ans ; sociétés mixtes et commerce extérieur libéralisé (1988) | suppression de la censure ; rétablissement de la vérité historique ; démocratisation et réforme des institutions |
+
+> **Erreur fréquente.** C’est le piège numéro un de la leçon : la **perestroïka est économique**, la **glasnost est politique**. L’activité d’application 4 du cours inverse volontairement les deux définitions pour vérifier que tu ne les confonds pas.
+
+## L’effondrement du rideau de fer
+
+Dès **1987**, Gorbatchev abandonne la **doctrine de la souveraineté limitée** énoncée par Brejnev en 1968. Conséquence décisive : l’Armée rouge **ne sortira pas de ses casernes** pendant les bouleversements d’Europe de l’Est.
+
+Les démocraties populaires basculent alors les unes après les autres — Pologne, Tchécoslovaquie, Roumanie, Hongrie, RDA :
+
+- abandon du système économique de l’Est au profit du libéralisme ;
+- abolition du rôle dirigeant du parti communiste ;
+- introduction du pluralisme politique.
+
+Le **9 novembre 1989**, le mur de Berlin est démantelé ; la **réunification allemande** est acquise en **octobre 1990**. Un demi-siècle après sa constitution, le rideau de fer s’effondre.
+
+## La fin de l’URSS (1991)
+
+**Les difficultés.** Privés des appuis financiers occidentaux espérés, les réformateurs sont submergés : déficit budgétaire, flambée des prix, pénuries, paupérisation, grèves massives. S’y ajoute le **réveil des nationalismes** au Kazakhstan, en Azerbaïdjan, en Arménie, en Géorgie et dans les pays baltes.
+
+**Le putsch manqué.** Du **18 au 23 août 1991**, alors que Gorbatchev est en vacances en Crimée, les conservateurs tentent un coup d’État. Il échoue grâce à la mobilisation populaire conduite par **Boris Eltsine**, président de la Fédération de Russie. Eltsine en profite pour **interdire le PCUS** et reconnaître l’indépendance des républiques baltes.
+
+**La dislocation.** Les républiques proclament leur indépendance les unes après les autres au cours de 1991. Le **21 décembre 1991**, Eltsine crée la **Communauté des États indépendants (CEI)**, regroupant 11 anciennes républiques. L’URSS ayant disparu, Gorbatchev démissionne.
+
+> **Précision.** Le document indique que Gorbatchev démissionne « le 25 août 1911 » : il faut lire le **25 décembre 1991**, après la création de la CEI.
+
+> **Le paradoxe à retenir.** Lancées **pour sauver** le communisme soviétique, la perestroïka et la glasnost ont **provoqué** la disparition du bloc soviétique et de l’URSS. Les réformes destinées à consolider le système ont libéré les forces qui l’ont désagrégé.
+
+## Un monde unipolaire
+
+La disparition de l’URSS consacre l’avènement d’une **« hyperpuissance »** : les États-Unis. Ils se considèrent désormais comme les « gendarmes du monde » — guerres du Golfe (1991, 2003), interventions en Somalie (1992), en Haïti (1994), en Afghanistan (2001).
+
+> **Attention au vocabulaire.** La désagrégation de l’URSS fait naître un monde **unipolaire** (un seul pôle dominant), et non *multipolaire*. Le passage au multipolaire viendra plus tard — c’est l’objet de la leçon suivante.`,
         keyPoint: "L’effondrement du bloc de l’Est et la disparition de l’URSS en 1991 mettent fin à la bipolarisation.",
         example: "La chute du mur de Berlin le 9 novembre 1989 ouvre la voie à la réunification allemande et symbolise la fin du rideau de fer.",
         timelineTitle: "De la réforme à la disparition de l’URSS",
@@ -322,6 +546,16 @@ Le non-respect des droits humains reste fréquent : oppression des libertés, no
         ],
         observation: "Les réformes destinées à sauver le système contribuent finalement à libérer les forces qui le désagrègent.",
         check: { prompt: "Que signifie la glasnost ?", options: ["Une politique de transparence", "Une alliance militaire", "Un plan d’aide américain", "Une monnaie commune"], correctIndex: 0, explanation: "La glasnost vise l’ouverture et la transparence de la vie publique soviétique." },
+        extraQuestions: [
+          { prompt: "La glasnost est une politique de restructuration économique.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "La glasnost est politique (transparence) ; c’est la perestroïka qui est économique.", sourceLabel: "Activité d’application 4, affirmation 4", points: 2 },
+          { prompt: "La perestroïka, ou transparence, est destinée à lutter contre les blocages du système politique.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Les deux termes sont inversés : la perestroïka est la restructuration économique.", sourceLabel: "Activité d’application 4, affirmation 5", points: 2 },
+          { prompt: "Quelle doctrine Gorbatchev abandonne-t-il en 1987, permettant les révolutions à l’Est ?", options: ["La doctrine de la souveraineté limitée de Brejnev", "La doctrine Truman", "La doctrine Jdanov", "La doctrine de dissuasion graduée"], correctIndex: 0, explanation: "Sans elle, l’Armée rouge n’intervient plus : les démocraties populaires basculent librement.", sourceLabel: "Cours III-1-b", points: 2 },
+          { prompt: "Le 9 novembre 1989, le mur de Berlin est démantelé et la réunification allemande est faite en octobre 1990.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Les deux dates sont exactes.", sourceLabel: "Activité d’application 4, affirmation 3", points: 1 },
+          { prompt: "Qui conduit la mobilisation qui fait échouer le putsch d’août 1991 ?", options: ["Boris Eltsine", "Mikhaïl Gorbatchev", "Léonid Brejnev", "Walter Ulbricht"], correctIndex: 0, explanation: "Président de la Fédération de Russie, il en profite pour interdire le PCUS.", sourceLabel: "Cours III-1-c", points: 2 },
+          { prompt: "Que crée Boris Eltsine le 21 décembre 1991 ?", options: ["La Communauté des États indépendants (CEI)", "Le Pacte de Varsovie", "La CEDEAO", "L’Union européenne"], correctIndex: 0, explanation: "La CEI regroupe 11 des anciennes républiques soviétiques.", sourceLabel: "Cours III-1-c", points: 2 },
+          { prompt: "Les réformes de Gorbatchev avaient pour objectif l’éclatement de l’URSS.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Elles visaient au contraire à sauver le communisme soviétique : l’éclatement est un effet non voulu.", sourceLabel: "Activité d’application 2, affirmation 10", points: 2 },
+          { prompt: "La désagrégation de l’URSS consacre la naissance d’un monde multipolaire.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Elle fait naître un monde **unipolaire** dominé par les États-Unis.", sourceLabel: "Activité d’application 2, affirmation 12", points: 2 },
+        ],
         distractors: ["L’URSS disparaît en 1947.", "La chute du mur de Berlin renforce définitivement le bloc soviétique.", "La perestroïka est la doctrine de politique étrangère de Truman."],
       },
     ],

@@ -153,6 +153,46 @@ Ce discours est **nuancé** : il reconnaît d’abord la fidélité de l’ONU �
       title: "De l’affrontement à la fin de la bipolarisation",
       scenario: "Des élèves débattent des crises de la guerre froide et se demandent si la coexistence pacifique a réellement mis fin aux tensions entre les deux blocs.",
       modelAnswer: "La coexistence pacifique réduit le risque d’affrontement direct, mais les crises de Berlin, Cuba et les conflits périphériques montrent que la rivalité se poursuit jusqu’à l’affaiblissement de l’URSS.",
+      bodyMarkdown: String.raw`## La situation d’évaluation
+
+> Tu assistes à une conférence sur les conséquences de la Deuxième Guerre mondiale, organisée lors de la journée « porte ouverte » de la promotion Terminale.
+>
+> Le conférencier affirme : « **Le monde a été divisé en deux blocs antagonistes sans affrontement direct. Ils connaîtront des moments de crises et de détentes qui vont marquer les relations internationales. Aussi, cette situation de ni paix ni guerre résulte des intérêts idéologiques, politiques et économiques des Deux Grands issus du second conflit mondial.** »
+>
+> Il conclut : « **Mikhaïl Gorbatchev a sans aucun doute contribué à changer cette situation.** »
+
+## Le document d’appui
+
+*Extrait de Pierre Thibaut,* Le temps de la contestation (1947-1969), *Histoire Universelle, 1971 :*
+
+> « La volonté déterminée de Washington de mettre un terme définitif à l’expansion du communisme international […] C’est pour se prémunir contre ce double danger que le président des États-Unis élabore la “doctrine Truman” qu’il définit devant le Congrès le **12 mars 1947**. […] Cette politique de “containment” aboutit dans l’immédiat à accorder une aide militaire à la Turquie et surtout à la Grèce […] elle entraîne l’élaboration du Plan Marshall d’aide à l’Europe, annoncé […] à l’Université Harvard le **5 juin 1947**. […] Le gouvernement de Moscou […] riposte d’abord en décidant de constituer dès le **5 octobre 1947** un bureau d’information, le **Kominform**. […] Passant ensuite à l’offensive, il engage avec les États-Unis une épreuve de force qui dure près d’un an, **du 24 juin 1948 au 12 mai 1949**. »
+
+## Comment construire ta réponse
+
+**Consigne 1 — Dégager le problème.** Une seule phrase suffit : « Il s’agit de… ». Ici, l’évolution des relations entre les deux blocs de 1947 à 1991.
+
+**Consigne 2 — Expliquer la phrase soulignée.** Montre que l’opposition est **globale**, en traitant les trois plans annoncés :
+
+| Plan | Bloc de l’Ouest | Bloc de l’Est |
+|---|---|---|
+| **Idéologique** | démocratie libérale, libertés individuelles | parti unique, marxisme-léninisme |
+| **Politique** | doctrine Truman, alliances (OTAN) | doctrine Jdanov, Pacte de Varsovie |
+| **Économique** | capitalisme, plan Marshall, OECE puis OCDE | économie planifiée, CAEM |
+
+Puis explique pourquoi l’on parle de « ni paix ni guerre » : l’arme nucléaire rend l’affrontement direct **suicidaire**, d’où une confrontation par crises et conflits périphériques interposés.
+
+**Consigne 3 — Prendre position sur Gorbatchev.** Annonce clairement ton avis, puis justifie-le par le cours, et nuance :
+
+- *Ce qui va dans le sens du conférencier* : la perestroïka et la glasnost (1986), l’abandon de la doctrine de souveraineté limitée (1987), le non-recours à l’Armée rouge en 1989, le traité de Washington (1987) et START (1991).
+- *La nuance indispensable* : Gorbatchev voulait **sauver** le communisme, pas le détruire. Et l’effondrement tient aussi à des causes profondes — échec économique, pénuries, réveil des nationalismes — qui le dépassent.
+
+> **Astuce mémoire de Davy.** Une opinion sans connaissance du cours n’est pas une justification. Pour la consigne 3, la meilleure réponse **partage** le point de vue tout en le nuançant : « Je partage cet avis, car… Cependant, il faut préciser que… ».`,
+      extraQuestions: [
+        { prompt: "Selon le document 2, à quelle date la doctrine Truman est-elle définie devant le Congrès ?", options: ["Le 12 mars 1947", "Le 5 juin 1947", "Le 5 octobre 1947", "Le 12 mai 1949"], correctIndex: 0, explanation: "Le document distingue nettement cette date de celle du plan Marshall (5 juin 1947).", sourceLabel: "Document 2 — Pierre Thibaut", points: 2 },
+        { prompt: "Quelle est la première riposte soviétique citée par le document 2 ?", options: ["La création du Kominform le 5 octobre 1947", "La construction du mur de Berlin", "Le Pacte de Varsovie", "La crise de Cuba"], correctIndex: 0, explanation: "Le bureau d’information communiste précède l’épreuve de force du blocus de Berlin.", sourceLabel: "Document 2 — Pierre Thibaut", points: 2 },
+        { prompt: "À quelle « épreuve de force » du 24 juin 1948 au 12 mai 1949 le document fait-il allusion ?", options: ["Le blocus de Berlin", "La guerre de Corée", "La crise de Cuba", "La guerre du Viêtnam"], correctIndex: 0, explanation: "C’est la première crise de Berlin, contournée par le pont aérien américain.", sourceLabel: "Document 2 — Pierre Thibaut", points: 2 },
+        { prompt: "Pour la consigne 3, quelle réponse est la mieux construite ?", options: ["Je partage cet avis car ses réformes ont libéré l’Est ; cependant l’effondrement a aussi des causes économiques profondes", "Je ne suis pas d’accord, sans donner d’argument", "Gorbatchev était un bon dirigeant, c’est mon opinion", "La question ne peut pas être tranchée"], correctIndex: 0, explanation: "Une position claire, justifiée par le cours, puis nuancée : c’est exactement la méthode attendue.", sourceLabel: "Méthode BAC — consigne 3", points: 2 },
+      ],
       questions: [
         question("Quel est le problème historique posé ?", "L’évolution des relations entre les blocs américain et soviétique de 1947 à 1991", ["La naissance de l’Union africaine", "Le développement de la pêche ivoirienne", "La colonisation de l’Algérie au XIXe siècle"], "La situation porte sur les phases successives de la bipolarisation.", 1),
         question("Pourquoi la crise de Cuba est-elle un sommet de la guerre froide ?", "Elle place directement les deux superpuissances au bord d’un affrontement nucléaire", ["Elle provoque immédiatement la disparition de l’URSS", "Elle crée l’OTAN", "Elle met fin à toutes les rivalités"], "En octobre 1962, l’installation de missiles soviétiques à Cuba crée un risque nucléaire majeur.", 2),
