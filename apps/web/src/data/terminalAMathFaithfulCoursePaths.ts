@@ -136,168 +136,6 @@ function buildPath(seed: PathSeed): LearningPath {
   };
 }
 
-const sequencesDocument = "TA Maths leçon 05 Suites numériques.pdf";
-
-const sequenceLevels: FaithfulLevelSeed[] = [
-  {
-    id: "arithmetic-sequences",
-    title: "Définition d’une suite arithmétique",
-    summary: "Reconnaître une relation de récurrence à différence constante.",
-    pages: "1-2",
-    section: "I-1. Définition",
-    body: String.raw`Une suite $(u_n)$ est arithmétique lorsqu’il existe un réel $r$ tel que $u_{n+1}=u_n+r$. Le nombre $r$ est la **raison**.
-
-On peut aussi vérifier que $u_{n+1}-u_n=r$ pour tout rang considéré. La suite peut commencer à un rang $n_0>0$.`,
-    keyPoint: "Suite arithmétique : u_(n+1) = u_n + r.",
-    example: "$u_3=2$ et $u_{n+1}=u_n+7$ donnent $u_4=9$ et $u_5=16$.",
-    steps: ["Repère le premier terme donné.", "Calcule les termes suivants avec la récurrence.", "Identifie la raison constante."],
-    questions: [
-      short("Avec $u_3=2$ et $u_{n+1}=u_n+7$, calcule $u_4$.", ["9"], "$2+7=9$.", "Exercice de fixation, question 1, page 1"),
-      short("Calcule $u_5$.", ["16"], "$u_5=u_4+7=16$.", "Exercice de fixation, question 1, pages 1-2"),
-      short("Quelle est la raison de cette suite ?", ["7"], "Le nombre ajouté à chaque étape est 7.", "Exercice de fixation, question 2, page 2"),
-    ],
-    weight: 50,
-  },
-  {
-    id: "arithmetic-general-term",
-    title: "Terme général d’une suite arithmétique",
-    summary: "Exprimer un terme en fonction du rang à partir d’un terme connu.",
-    pages: "2",
-    section: "I-2. Expression du terme général",
-    body: String.raw`Si $(u_n)$ est arithmétique de premier terme $u_0$ et de raison $r$, alors $u_n=u_0+nr$.
-
-Plus généralement, pour tous rangs $p\le n$ : $u_n=u_p+(n-p)r$.`,
-    keyPoint: "u_n = u_p + (n-p)r.",
-    example: "$v_1=1350$, $r=200$ : $v_n=1350+(n-1)200=1150+200n$.",
-    steps: ["Choisis le terme connu $u_p$.", "Compte $n-p$ pas de raison.", "Applique $u_n=u_p+(n-p)r$."],
-    questions: [
-      choice("Pour $v_1=1350$ et $r=200$, quelle expression donne $v_n$ ?", ["$1350+200n$", "$1150+200n$", "$1550+200n$", "$1350n+200$"], 1, "$v_n=1350+(n-1)200$.", "Exercice de fixation, page 2"),
-      short("Calcule $v_{21}$.", ["5350", "5 350"], "$1150+200\times21=5350$.", "Exercice de fixation, page 2"),
-    ],
-    weight: 55,
-  },
-  {
-    id: "arithmetic-variation",
-    title: "Sens de variation d’une suite arithmétique",
-    summary: "Déduire les variations du signe de la raison.",
-    pages: "2",
-    section: "I-3. Sens de variation",
-    body: String.raw`Une suite arithmétique est croissante si $r>0$, décroissante si $r<0$ et constante si $r=0$.
-
-Cette conclusion vient de $u_{n+1}-u_n=r$.`,
-    keyPoint: "Le signe de r détermine entièrement les variations.",
-    example: "$r=-2$ : décroissante ; $r=0$ : constante ; $r=10$ : croissante.",
-    steps: ["Identifie la raison.", "Compare-la à zéro.", "Annonce le sens de variation."],
-    questions: [
-      choice("Si $r=-2$, la suite est :", ["Croissante", "Décroissante", "Constante", "Alternée"], 1, "Une raison négative donne une suite décroissante.", "Exercice de fixation a, page 2"),
-      choice("Si $r=0$, la suite est :", ["Croissante", "Décroissante", "Constante", "Non définie"], 2, "Tous les termes sont égaux.", "Exercice de fixation b, page 2"),
-      choice("Si $r=10$, la suite est :", ["Croissante", "Décroissante", "Constante", "Alternée"], 0, "La raison est positive.", "Exercice de fixation c, page 2"),
-    ],
-    weight: 45,
-  },
-  {
-    id: "arithmetic-sums",
-    title: "Somme de termes arithmétiques consécutifs",
-    summary: "Calculer une somme avec le nombre de termes et la moyenne du premier et du dernier.",
-    pages: "2-3",
-    section: "I-4. Somme de termes consécutifs",
-    body: String.raw`Pour $n\ge p$ :
-
-$u_p+u_{p+1}+\cdots+u_n=(n-p+1)\dfrac{u_p+u_n}{2}$.
-
-Il faut donc déterminer le nombre de termes, le premier et le dernier.`,
-    keyPoint: "Somme = nombre de termes × (premier + dernier)/2.",
-    example: "$u_1=-1$, $r=3$ donnent $u_{26}=74$ et $u_1+\cdots+u_{26}=949$.",
-    steps: ["Calcule le dernier terme.", "Compte les termes avec $n-p+1$.", "Multiplie par la demi-somme des extrêmes."],
-    questions: [
-      short("Avec $u_1=-1$ et $r=3$, calcule $u_{26}$.", ["74"], "$-1+25\times3=74$.", "Exercice de fixation, page 3"),
-      short("Calcule $u_1+u_2+\cdots+u_{26}$.", ["949"], "$26\times(-1+74)/2=949$.", "Exercice de fixation, page 3", 2),
-    ],
-    weight: 65,
-  },
-  {
-    id: "geometric-sequences",
-    title: "Définition d’une suite géométrique",
-    summary: "Reconnaître une relation de récurrence à quotient constant.",
-    pages: "3",
-    section: "II-1. Définition",
-    body: String.raw`Une suite $(v_n)$ est géométrique lorsqu’il existe un réel $q$ tel que $v_{n+1}=qv_n$. Le nombre $q$ est la **raison**.
-
-Lorsque les termes ne sont pas nuls, on peut vérifier $v_{n+1}/v_n=q$.`,
-    keyPoint: "Suite géométrique : v_(n+1) = q v_n.",
-    example: "$t_0=1\,000\,000$ et $t_{n+1}=0,9t_n$ donnent $t_1=900\,000$, $t_2=810\,000$.",
-    steps: ["Repère le premier terme.", "Multiplie par $q$ pour avancer d’un rang.", "Identifie la raison constante."],
-    questions: [
-      short("Avec $t_0=1\,000\,000$ et $q=0,9$, calcule $t_1$.", ["900000", "900 000"], "$0,9\times1\,000\,000=900\,000$.", "Exercice de fixation, question 1, page 3"),
-      short("Calcule $t_2$.", ["810000", "810 000"], "$0,9\times900\,000=810\,000$.", "Exercice de fixation, question 1, page 3"),
-      short("Quelle est la raison de cette suite ?", ["0,9", "0.9"], "Chaque terme est multiplié par 0,9.", "Exercice de fixation, question 2, page 3"),
-    ],
-    weight: 50,
-  },
-  {
-    id: "geometric-general-term",
-    title: "Terme général d’une suite géométrique",
-    summary: "Exprimer un terme à partir d’un terme connu et de la raison.",
-    pages: "3-4",
-    section: "II-2. Expression du terme général",
-    body: String.raw`Si $(v_n)$ est géométrique de premier terme $v_0$ et de raison $q$, alors $v_n=v_0q^n$.
-
-Plus généralement, $v_n=v_pq^{n-p}$.`,
-    keyPoint: "v_n = v_p q^(n-p).",
-    example: "Si $q=1/2$ et $v_3=12$, alors $v_7=12(1/2)^4=3/4$.",
-    steps: ["Repère $v_p$, $q$, $p$ et $n$.", "Calcule l’exposant $n-p$.", "Applique puis simplifie."],
-    questions: [
-      short("Si $q=1/2$ et $v_3=12$, calcule $v_7$.", ["3/4", "0,75", "0.75"], "$12(1/2)^{7-3}=12/16=3/4$.", "Exercice de fixation, pages 3-4", 2),
-      choice("Quelle formule générale est correcte ?", ["$v_n=v_p+q^{n-p}$", "$v_n=v_pq^{n-p}$", "$v_n=qv_p+n-p$", "$v_n=v_p(n-p)q$"], 1, "Chaque pas multiplie par $q$.", "Propriété, page 3"),
-    ],
-    weight: 55,
-  },
-  {
-    id: "geometric-variation",
-    title: "Sens de variation d’une suite géométrique positive",
-    summary: "Étudier les variations selon la position de la raison positive par rapport à 1.",
-    pages: "4",
-    section: "II-3. Sens de variation",
-    body: String.raw`Pour une suite géométrique à termes positifs :
-
-- si $0<q<1$, elle est décroissante ;
-- si $q>1$, elle est croissante ;
-- si $q=1$, elle est constante.
-
-Si $q<0$, elle n’est en général ni croissante, ni décroissante, ni constante.`,
-    keyPoint: "Pour des termes positifs, comparer q à 1.",
-    example: "$q=7$ : croissante ; $q=0,6$ : décroissante ; $q=1$ : constante.",
-    steps: ["Vérifie que les termes sont positifs.", "Compare $q$ à 0 et à 1.", "Conclue sans oublier le cas $q<0$."],
-    questions: [
-      choice("Avec $v_0=0,5$ et $q=7$, la suite est :", ["Croissante", "Décroissante", "Constante", "Alternée"], 0, "$q>1$ et les termes sont positifs.", "Exercice de fixation a, page 4"),
-      choice("Avec $v_0=21$ et $q=0,6$, la suite est :", ["Croissante", "Décroissante", "Constante", "Alternée"], 1, "$0<q<1$.", "Exercice de fixation b, page 4"),
-      choice("Avec $q=1$, la suite est :", ["Croissante", "Décroissante", "Constante", "Impossible"], 2, "Multiplier par 1 ne change pas les termes.", "Exercice de fixation c, page 4"),
-    ],
-    weight: 45,
-  },
-  {
-    id: "geometric-sums-modeling",
-    title: "Somme de termes géométriques consécutifs",
-    summary: "Calculer une somme géométrique finie et reconnaître le nombre de termes.",
-    pages: "4-5",
-    section: "II-4. Somme de termes consécutifs",
-    body: String.raw`Pour $q\ne1$ :
-
-$v_p+\cdots+v_n=v_p\dfrac{1-q^{n-p+1}}{1-q}$.
-
-Le nombre de termes est $n-p+1$. Si la somme commence à $v_0$, on obtient $v_0(1-q^{n+1})/(1-q)$.`,
-    keyPoint: "Somme géométrique = premier terme × (1-q^nombre de termes)/(1-q).",
-    example: "Avec $q=1/2$ et $v_3=12$, on obtient $v_1=48$ puis $S_n=96(1-(1/2)^n)$.",
-    steps: ["Détermine le premier terme de la somme.", "Compte les termes.", "Applique la formule et simplifie."],
-    questions: [
-      short("Avec $q=1/2$ et $v_3=12$, calcule $v_1$.", ["48"], "$v_3=v_1(1/2)^2$, donc $v_1=48$.", "Exercice de fixation, question 1, page 5"),
-      choice("Quelle expression donne $S_n=v_1+\cdots+v_n$ ?", ["$48(1-(1/2)^n)$", "$96(1-(1/2)^n)$", "$96(1+(1/2)^n)$", "$48/(1-(1/2)^n)$"], 1, "$48\,(1-(1/2)^n)/(1-1/2)=96(1-(1/2)^n)$.", "Exercice de fixation, question 2, page 5", 2),
-    ],
-    weight: 70,
-    kind: "challenge",
-  },
-];
-
 const statisticsDocument = "TA Maths leçon 06 Statistiques.pdf";
 
 const statisticsLevels: FaithfulLevelSeed[] = [
@@ -780,19 +618,6 @@ Il faut donc étudier l’ordre des courbes avant d’intégrer, puis appliquer 
   },
 ];
 
-export const terminalASequencesPath = buildPath({
-  id: "terminale-a-sequences",
-  chapterNumber: 5,
-  themeNumber: 1,
-  themeTitle: "Fonctions numériques",
-  title: "Suites numériques",
-  description: "Suites arithmétiques et géométriques : termes généraux, variations, sommes et modélisation.",
-  outcomes: ["Reconnaître une suite arithmétique", "Reconnaître une suite géométrique", "Calculer un terme et une somme"],
-  moduleTitle: "Maîtriser les suites numériques",
-  sourceDocument: sequencesDocument,
-  levels: sequenceLevels,
-});
-
 export const terminalABivariateStatisticsPath = buildPath({
   id: "terminale-a-bivariate-statistics",
   chapterNumber: 6,
@@ -833,7 +658,6 @@ export const terminalAPrimitivesIntegralsPath = buildPath({
 });
 
 export const terminalAAdditionalMathPaths: LearningPath[] = [
-  terminalASequencesPath,
   terminalABivariateStatisticsPath,
   terminalALinearSystemsPath,
   terminalAPrimitivesIntegralsPath,

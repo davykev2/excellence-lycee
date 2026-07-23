@@ -112,6 +112,7 @@ const lessonRewards = new Map<string, number>([
   ["terminale-a-sequences:geometric-general-term", 55],
   ["terminale-a-sequences:geometric-variation", 45],
   ["terminale-a-sequences:geometric-sums-modeling", 70],
+  ["terminale-a-sequences:savings-career-mission", 85],
   ["terminale-a-bivariate-statistics:statistical-series-scatterplot", 45],
   ["terminale-a-bivariate-statistics:mean-point-marginals", 50],
   ["terminale-a-bivariate-statistics:statistical-scatterplot", 50],
