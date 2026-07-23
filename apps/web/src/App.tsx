@@ -250,7 +250,8 @@ function LearningApp({ user }: { user: AuthUser }) {
       const requestedLessons = getPathLessons(requestedPath);
       const requestedLessonIndex = requestedLessons.findIndex((lesson) => lesson.id === route.lessonId);
       const completedForRequestedPath = completedLessonsByPath[requestedPath.id] ?? emptyCompletedLessons;
-      const lessonIsUnlocked = requestedLessonIndex === 0
+      const lessonIsUnlocked = user.role === "admin"
+        || requestedLessonIndex === 0
         || completedForRequestedPath.has(route.lessonId)
         || (requestedLessonIndex > 0 && completedForRequestedPath.has(requestedLessons[requestedLessonIndex - 1].id));
       if (requestedLessonIndex < 0 || !lessonIsUnlocked) {
@@ -265,7 +266,7 @@ function LearningApp({ user }: { user: AuthUser }) {
     if (subjectId !== requestedPath.subjectId) {
       navigate({ ...route, subjectId: requestedPath.subjectId }, { replace: true, scroll: false });
     }
-  }, [availablePaths, completedLessonsByPath, level.id, navigate, progressLoading, route, subject.id, subjectId]);
+  }, [availablePaths, completedLessonsByPath, level.id, navigate, progressLoading, route, subject.id, subjectId, user.role]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -349,6 +350,7 @@ function LearningApp({ user }: { user: AuthUser }) {
           subject={subjects[selectedPath.subjectId]}
           progressByLesson={progressByPath[selectedPath.id] ?? {}}
           completedLessonIds={completedLessonIds}
+          unlockAllLessons={user.role === "admin"}
           onOpenLesson={openPathLesson}
           onBackToLibrary={() => navigate({ navigation: "paths", subjectId: selectedPath.subjectId })}
         />

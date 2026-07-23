@@ -23,6 +23,7 @@ interface MathPathScreenProps {
   subject: SubjectDefinition;
   progressByLesson: Record<string, ProgressLesson>;
   completedLessonIds: Set<string>;
+  unlockAllLessons?: boolean;
   onOpenLesson: (lessonId: string) => void;
   onBackToLibrary: () => void;
 }
@@ -40,8 +41,10 @@ function getLessonState(
   lessonIndex: number,
   lessons: LearningLesson[],
   completedLessonIds: Set<string>,
+  unlockAllLessons: boolean,
 ) {
   if (completedLessonIds.has(lesson.id)) return "completed";
+  if (unlockAllLessons) return "available";
   if (lessonIndex === 0 || completedLessonIds.has(lessons[lessonIndex - 1].id)) return "available";
   return "locked";
 }
@@ -54,6 +57,7 @@ export function MathPathScreen({
   subject,
   progressByLesson,
   completedLessonIds,
+  unlockAllLessons = false,
   onOpenLesson,
   onBackToLibrary,
 }: MathPathScreenProps) {
@@ -98,8 +102,12 @@ export function MathPathScreen({
         <div className="mastery-davy-intro">
           <CompanionAvatar motion="wave" className="mastery-davy-avatar" decorative />
           <div className="mastery-davy-bubble">
-            <strong>On avance ensemble !</strong>
-            <span>Termine un niveau avec au moins 10/20 pour débloquer le suivant. Tu peux le refaire jusqu’à gagner tous ses XP.</span>
+            <strong>{unlockAllLessons ? "Accès administrateur actif" : "On avance ensemble !"}</strong>
+            <span>
+              {unlockAllLessons
+                ? "Tous les niveaux publiés de cette leçon sont accessibles. Les scores et XP restent ceux réellement obtenus."
+                : "Termine un niveau avec au moins 10/20 pour débloquer le suivant. Tu peux le refaire jusqu’à gagner tous ses XP."}
+            </span>
           </div>
         </div>
 
@@ -107,7 +115,7 @@ export function MathPathScreen({
           <span className="mastery-road-line" aria-hidden="true" />
           <ol>
             {lessons.map((lesson, index) => {
-              const state = getLessonState(lesson, index, lessons, completedLessonIds);
+              const state = getLessonState(lesson, index, lessons, completedLessonIds, unlockAllLessons);
               const progressEntry = progressByLesson[lesson.id];
               const Icon = levelIcons[index % levelIcons.length];
               return (
@@ -132,7 +140,7 @@ export function MathPathScreen({
                       <span>{lesson.durationMinutes} min</span>
                       {state === "completed" ? (
                         <strong>{progressEntry?.bestScore ?? 20}/20 • {formatXp(progressEntry?.xpAwarded ?? lesson.xp)}/{formatXp(lesson.xp)} XP</strong>
-                      ) : state === "available" ? <strong>Prêt à commencer</strong> : <strong>Termine le niveau {index}</strong>}
+                      ) : state === "available" ? <strong>{unlockAllLessons && index > 0 ? "Accessible en tant qu’administrateur" : "Prêt à commencer"}</strong> : <strong>Termine le niveau {index}</strong>}
                     </div>
                   </div>
                 </li>
