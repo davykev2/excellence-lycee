@@ -173,6 +173,14 @@ export function ArenaScreen({
   const SelectedIcon = selectedMode.icon;
 
   const selectMode = (modeId: ArenaModeId) => {
+    if (modeId === "exercises") {
+      onOpenExercises();
+      return;
+    }
+    if (modeId === "codex") {
+      onOpenCodex();
+      return;
+    }
     setSelectedModeId(modeId);
     setSelectionMessage(null);
     window.setTimeout(() => document.getElementById("arena-selected-mode")?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 0);

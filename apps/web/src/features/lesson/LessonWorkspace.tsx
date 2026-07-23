@@ -88,6 +88,9 @@ function evaluateCurveRule(rule: CurveRule, input: number): number | null {
     const denominator = input - rule.shift;
     return Math.abs(denominator) < 0.00001 ? null : rule.slope * input + rule.intercept + rule.coefficient / denominator;
   }
+  if (rule.kind === "affine-plus-log") {
+    return input <= 0 ? null : rule.slope * input + rule.intercept + rule.coefficient * Math.log(input);
+  }
   return evaluateRule(rule, input);
 }
 

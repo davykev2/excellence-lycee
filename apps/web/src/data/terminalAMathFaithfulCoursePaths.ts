@@ -136,171 +136,6 @@ function buildPath(seed: PathSeed): LearningPath {
   };
 }
 
-const logarithmDocument = "TA Maths leçon 03 fonction logarithme neperien.pdf";
-
-const logarithmLevels: FaithfulLevelSeed[] = [
-  {
-    id: "log-definition-properties",
-    title: "Définition et domaine du logarithme népérien",
-    summary: "Définir $\ln$, connaître son domaine, sa dérivée et sa valeur en 1.",
-    pages: "1-2",
-    section: "I-1. Définition et notation",
-    body: String.raw`La fonction logarithme népérien, notée $\ln$, est définie sur $]0;+\infty[$. Sa dérivée est la fonction $x\mapsto\frac1x$ et elle s’annule en $1$.
-
-Ainsi, $\ln(1)=0$ et, pour tout $x>0$, $(\ln x)'=\frac1x$. Un réel négatif ou nul n’a pas d’image par $\ln$ dans $\mathbb R$.`,
-    keyPoint: "Domaine : ]0 ; +∞[ ; ln(1)=0 ; (ln x)'=1/x.",
-    example: "La fonction $x\mapsto\ln(x)$ n’est pas définie pour $x=-2$.",
-    steps: ["Impose toujours l’argument strictement positif.", "Utilise $\ln(1)=0$.", "Pour dériver $\ln x$, écris $1/x$."],
-    questions: [
-      choice("L’ensemble de définition de $x\mapsto\ln x$ est $\mathbb R$.", ["Vrai", "Faux"], 1, "Il est $]0;+\infty[$.", "Exercice de fixation, affirmation 1, page 1"),
-      choice("$\ln(1)=0$.", ["Vrai", "Faux"], 0, "C’est une conséquence de la définition.", "Exercice de fixation, affirmation 2, page 1"),
-      choice("Pour $x>0$, $(\ln x)'=1/x$.", ["Vrai", "Faux"], 0, "C’est la dérivée de référence.", "Exercice de fixation, affirmation 3, page 1"),
-      choice("L’image d’un nombre négatif par $\ln$ existe dans $\mathbb R$.", ["Vrai", "Faux"], 1, "Le logarithme réel exige un argument strictement positif.", "Exercice de fixation, affirmation 5, page 2"),
-    ],
-    weight: 50,
-  },
-  {
-    id: "log-algebraic-properties",
-    title: "Propriétés algébriques du logarithme",
-    summary: "Transformer produits, quotients, inverses, racines et puissances.",
-    pages: "2",
-    section: "I-2. Propriétés algébriques",
-    body: String.raw`Pour $a>0$ et $b>0$ :
-
-$\ln(ab)=\ln a+\ln b$, $\ln\left(\frac ab\right)=\ln a-\ln b$, $\ln(1/b)=-\ln b$.
-
-De plus, $\ln(\sqrt a)=\frac12\ln a$ et, pour $n\in\mathbb Z$, $\ln(a^n)=n\ln a$.`,
-    keyPoint: "Un produit devient une somme ; un quotient devient une différence.",
-    example: "$\ln(24)=\ln(2^3\times3)=3\ln2+\ln3$.",
-    steps: ["Factorise l’argument en produits ou quotients.", "Applique la propriété adaptée.", "Regroupe les coefficients de mêmes logarithmes."],
-    questions: [
-      choice("Exprime $\ln(24)$ avec $\ln2$ et $\ln3$.", ["$2\ln2+3\ln3$", "$3\ln2+\ln3$", "$\ln2+3\ln3$", "$24\ln6$"], 1, "$24=2^3\times3$.", "Exercice de fixation 1-A, page 2"),
-      choice("Écris $\ln5+\ln3$ sous la forme $\ln k$.", ["$\ln8$", "$\ln15$", "$\ln(5/3)$", "$\ln2$"], 1, "$\ln a+\ln b=\ln(ab)$.", "Exercice de fixation 2-D, page 2"),
-      short("Dans $4\ln5=\ln k$, calcule $k$.", ["625"], "$4\ln5=\ln(5^4)=\ln625$.", "Exercice de fixation 2-F, page 2"),
-    ],
-    weight: 55,
-  },
-  {
-    id: "log-limits-variations",
-    title: "Limites de référence du logarithme",
-    summary: "Utiliser les quatre limites de référence de $\ln$ en 0 et à l’infini.",
-    pages: "3",
-    section: "II-1. Limites de référence",
-    body: String.raw`Les limites fondamentales sont :
-
-$\lim_{x\to+\infty}\ln x=+\infty$, $\lim_{x\to0^+}\ln x=-\infty$,
-
-$\lim_{x\to0^+}x\ln x=0$ et $\lim_{x\to+\infty}\frac{\ln x}{x}=0$.
-
-Ces deux dernières formes montrent que $\ln x$ croît moins vite que $x$ à l’infini.`,
-    keyPoint: "À droite de 0, ln x → −∞ ; à +∞, ln x → +∞ mais ln x / x → 0.",
-    example: "$x(1+\ln x)=x+x\ln x\to0$ lorsque $x\to0^+$.",
-    steps: ["Identifie la limite de référence utile.", "Réécris le produit ou le quotient si nécessaire.", "Combine les limites puis conclus."],
-    questions: [
-      short("Calcule $\lim_{x\to0^+}(x+\ln x)$.", ["-∞", "-infini"], "$x\to0$ et $\ln x\to-\infty$.", "Exercice de fixation, question 1, page 3"),
-      short("Calcule $\lim_{x\to+\infty}(x+\ln x)$.", ["+∞", "∞", "+infini", "infini"], "Les deux termes tendent vers $+\infty$.", "Exercice de fixation, question 2, page 3"),
-      short("Calcule $\lim_{x\to0^+}x(1+\ln x)$.", ["0"], "$x+x\ln x\to0+0$.", "Exercice de fixation, question 4, page 3"),
-    ],
-    weight: 60,
-  },
-  {
-    id: "log-derivative-variation",
-    title: "Dérivée, variations et courbe de ln",
-    summary: "Justifier que $\ln$ est strictement croissante et étudier une fonction contenant $\ln x$.",
-    pages: "3-4",
-    section: "II-2. Dérivée et sens de variation",
-    body: String.raw`Pour $x>0$, $(\ln x)'=\frac1x>0$. La fonction $\ln$ est donc strictement croissante sur $]0;+\infty[$, de $-\infty$ vers $+\infty$.
-
-Pour une fonction contenant $\ln x$, on commence toujours par imposer $x>0$, puis on calcule la dérivée sur ce domaine.`,
-    keyPoint: "Sur ]0 ; +∞[, 1/x > 0 : ln est strictement croissante.",
-    example: "$f(x)=2x+\ln x$ a pour dérivée $f'(x)=2+1/x>0$.",
-    steps: ["Détermine le domaine avec $x>0$.", "Calcule la dérivée.", "Étudie son signe puis dresse les variations."],
-    questions: [
-      choice("Quel est le domaine de $f(x)=2x+\ln x$ ?", ["$\mathbb R$", "$]-\infty;0[$", "$]0;+\infty[$", "$[0;+\infty[$"], 2, "La présence de $\ln x$ impose $x>0$.", "Exercice de fixation, question 1, page 4"),
-      choice("Quelle est la dérivée de $f(x)=2x+\ln x$ ?", ["$2+\ln x$", "$2+1/x$", "$2x+1/x$", "$1/x$"], 1, "On dérive séparément les deux termes.", "Exercice de fixation, question 2, page 4"),
-      choice("Quel est le sens de variation de $f$ sur son domaine ?", ["Décroissante", "Constante", "Strictement croissante", "Non monotone"], 2, "$2+1/x>0$ pour $x>0$.", "Exercice de fixation, question 3, page 4"),
-    ],
-    weight: 65,
-  },
-  {
-    id: "log-equations-inequalities",
-    title: "Équations comportant ln",
-    summary: "Résoudre une équation logarithmique après avoir déterminé son ensemble de validité.",
-    pages: "4-5",
-    section: "III-1 et III-2. Propriété et équations",
-    body: String.raw`Pour $a>0$ et $b>0$, $\ln a=\ln b\iff a=b$. De plus, $\ln x=0\iff x=1$ et $\ln x=1\iff x=e$.
-
-Toute résolution commence par les contraintes de positivité. Pour une équation polynomiale en $\ln x$, on pose $X=\ln x$, on résout en $X$, puis on revient à $x$.`,
-    keyPoint: "Domaine d’abord, équation ensuite, vérification des solutions à la fin.",
-    example: "$\ln(2x-1)=\ln(x+5)$ donne $x=6$, après vérification de $x>1/2$.",
-    steps: ["Écris l’ensemble de validité.", "Utilise l’injectivité de $\ln$ ou pose $X=\ln x$.", "Résous puis conserve seulement les solutions valides."],
-    questions: [
-      short("Résous $\ln(2x-1)=\ln(x+5)$.", ["6", "{6}"], "Sur $x>1/2$, l’égalité équivaut à $2x-1=x+5$.", "Exemple officiel 1, pages 4-5"),
-      choice("Résous $\ln(x-2)=1$.", ["$x=e-2$", "$x=e+2$", "$x=3$", "$x=2e$"], 1, "$\ln(x-2)=\ln e$ donne $x-2=e$.", "Exemple officiel 2, pages 4-5"),
-      choice("Résous $(\ln x)^2+\ln x-6=0$.", ["$\{e^{-3},e^2\}$", "$\{-3,2\}$", "$\{e^{-2},e^3\}$", "$\{3,-2\}$"], 0, "Avec $X=\ln x$, les racines sont $-3$ et $2$.", "Exemple officiel 3, pages 4-5", 2),
-    ],
-    weight: 75,
-  },
-  {
-    id: "log-inequalities",
-    title: "Inéquations comportant ln",
-    summary: "Exploiter la stricte croissance de $\ln$ et résoudre des inéquations en $\ln x$.",
-    pages: "5",
-    section: "III-3. Inéquations",
-    body: String.raw`Pour $a>0$ et $b>0$, $\ln a<\ln b\iff a<b$ car $\ln$ est strictement croissante.
-
-On a aussi $\ln x<0\iff0<x<1$ et $\ln x>0\iff x>1$. Pour une expression du second degré en $\ln x$, on pose $X=\ln x$, on étudie le signe en $X$, puis on revient à $x$ avec l’exponentielle.`,
-    keyPoint: "Le sens de l’inégalité est conservé par ln sur les réels strictement positifs.",
-    example: "$\ln(2x-3)<1$ donne $3/2<x<(3+e)/2$.",
-    steps: ["Détermine l’ensemble de validité.", "Compare les arguments ou pose $X=\ln x$.", "Intersecte le résultat avec le domaine."],
-    questions: [
-      choice("Résous $\ln x-3\ge0$.", ["$x\ge3$", "$x\ge e^3$", "$0<x\le e^3$", "$x\le3$"], 1, "$\ln x\ge3$ équivaut à $x\ge e^3$.", "Exercice de maison a, page 5"),
-      choice("La solution de $\ln(2x-3)<1$ est :", ["$]3/2;(3+e)/2[$", "$]-\infty;(3+e)/2[$", "$]0;e[$", "$[(3+e)/2;+\infty[$"], 0, "Il faut conserver la contrainte $2x-3>0$.", "Exemple officiel 1, page 5", 2),
-    ],
-    weight: 75,
-  },
-  {
-    id: "log-composite-derivatives",
-    title: "Dérivée d’un logarithme composé",
-    summary: "Dériver $\ln(u)$ sur un intervalle où $u$ est strictement positive.",
-    pages: "5-6",
-    section: "IV-1. Dérivée",
-    body: String.raw`Si $u$ est dérivable et strictement positive sur un intervalle $K$, alors $\ln(u)$ est dérivable sur $K$ et
-
-$(\ln u)'=\dfrac{u'}u$.
-
-La condition $u>0$ n’est pas facultative : elle définit l’intervalle sur lequel la formule a un sens.`,
-    keyPoint: "(ln u)' = u'/u, sur un intervalle où u > 0.",
-    example: "Si $f(x)=\ln(5x+2)$, alors $f'(x)=5/(5x+2)$.",
-    steps: ["Identifie $u(x)$ et vérifie $u(x)>0$ sur l’intervalle.", "Calcule $u'(x)$.", "Écris $u'(x)/u(x)$ et simplifie."],
-    questions: [
-      choice("Dérive $f(x)=\ln(5x+2)$.", ["$1/(5x+2)$", "$5/(5x+2)$", "$5\ln(5x+2)$", "$5x+2$"], 1, "$u'=5$, donc $(\ln u)'=u'/u$.", "Exercice de fixation 1, page 5"),
-      choice("Dérive $f(x)=\ln(2x^2-x-1)$.", ["$1/(2x^2-x-1)$", "$(4x-1)/(2x^2-x-1)$", "$(2x-1)/(2x^2-x-1)$", "$4x-1$"], 1, "La dérivée de $2x^2-x-1$ est $4x-1$.", "Exercice de fixation 2, page 6"),
-    ],
-    weight: 70,
-  },
-  {
-    id: "log-primitives",
-    title: "Primitives de la forme u′/u",
-    summary: "Reconnaître une dérivée logarithmique et déterminer toutes ses primitives.",
-    pages: "6",
-    section: "IV-2. Primitives",
-    body: String.raw`Si $u$ est dérivable et strictement positive sur un intervalle $K$, alors les primitives de $u'/u$ sont
-
-$x\mapsto\ln(u(x))+\alpha$, avec $\alpha\in\mathbb R$.
-
-Un coefficient multiplicatif devant $u'/u$ se conserve devant le logarithme.`,
-    keyPoint: "∫ u'/u = ln(u) + constante, lorsque u > 0.",
-    example: "Une primitive de $(2x+1)/(x^2+x+3)$ est $\ln(x^2+x+3)$.",
-    steps: ["Repère le dénominateur $u$.", "Vérifie que le numérateur est $u'$ ou un multiple de $u'$.", "Écris le logarithme avec le coefficient et la constante."],
-    questions: [
-      choice("Les primitives de $1/x$ sur $]0;+\infty[$ sont :", ["$x^2/2+c$", "$\ln x+c$", "$1/x+c$", "$e^x+c$"], 1, "La dérivée de $\ln x$ vaut $1/x$.", "Exercice de fixation a, page 6"),
-      choice("Une primitive de $(2x+1)/(x^2+x+3)$ est :", ["$\ln(x^2+x+3)$", "$1/(x^2+x+3)$", "$(2x+1)\ln x$", "$e^{x^2+x+3}$"], 0, "Le numérateur est la dérivée du dénominateur.", "Exercice de fixation c, page 6"),
-    ],
-    weight: 75,
-  },
-];
-
 const exponentialDocument = "TA Maths leçon 04 Fonction exponnentielle.pdf";
 
 const exponentialLevels: FaithfulLevelSeed[] = [
@@ -1114,19 +949,6 @@ Il faut donc étudier l’ordre des courbes avant d’intégrer, puis appliquer 
   },
 ];
 
-export const terminalANaturalLogPath = buildPath({
-  id: "terminale-a-natural-logarithm",
-  chapterNumber: 3,
-  themeNumber: 1,
-  themeTitle: "Fonctions numériques",
-  title: "Fonction logarithme népérien",
-  description: "Définition, propriétés algébriques, limites, dérivation, équations, inéquations et primitives logarithmiques.",
-  outcomes: ["Utiliser les propriétés de ln", "Étudier une fonction logarithmique", "Résoudre des équations et inéquations"],
-  moduleTitle: "Maîtriser le logarithme népérien",
-  sourceDocument: logarithmDocument,
-  levels: logarithmLevels,
-});
-
 export const terminalAExponentialPath = buildPath({
   id: "terminale-a-exponential",
   chapterNumber: 4,
@@ -1193,7 +1015,6 @@ export const terminalAPrimitivesIntegralsPath = buildPath({
 });
 
 export const terminalAAdditionalMathPaths: LearningPath[] = [
-  terminalANaturalLogPath,
   terminalAExponentialPath,
   terminalASequencesPath,
   terminalABivariateStatisticsPath,
