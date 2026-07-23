@@ -1,25 +1,10 @@
 import { buildOfficialMathPath, officialMathTopic as t } from "./officialMathPathBuilder";
+import { terminalCConicsPath } from "./terminalCConicsPath";
 import { terminalCPrimitivesPath } from "./terminalCPrimitivesPath";
 
 const levelIds = ["terminale-c"];
 
-export { terminalCPrimitivesPath };
-
-export const terminalCConicsPath = buildOfficialMathPath({
-  id: "terminale-c-math-l07-conics", levelIds, chapterNumber: 7, themeNumber: 2,
-  themeTitle: "Géométrie", title: "Coniques",
-  description: "Définition foyer-directrice, excentricité, paraboles, ellipses, hyperboles et régions du plan.",
-  outcomes: ["Caractériser une conique", "Déterminer ses éléments géométriques", "Reconnaître son équation réduite"],
-  documentTitle: "TC Maths leçon 07 Coniques.pdf",
-  topics: [
-    t("conic-focus-directrix", "Définition foyer-directrice", "1-2", "I. Définition", "Une conique de foyer $F$, de directrice $(D)$ et d’excentricité $e>0$ est le lieu des points $M$ tels que $MF=e\\,d(M,(D))$.", "$e<1$ donne une ellipse, $e=1$ une parabole et $e>1$ une hyperbole.", String.raw`MF=e\,d(M,(D))`, "Quelle nature a une conique d’excentricité $1/3$ ?", "Une ellipse.", 55),
-    t("conic-axis-vertices", "Axe focal et sommets", "2-4", "II. Éléments caractéristiques", "L’axe focal est la droite perpendiculaire à la directrice passant par le foyer. Ses intersections avec la conique donnent les sommets principaux.", "Projeter le foyer sur la directrice puis résoudre l’équation de la conique sur l’axe.", String.raw`MF=e\,MH`, "Pour $F(2,3)$, $(D):x=-4$ et $e=1/3$, quel est l’axe focal ?", "La droite $y=3$.", 65),
-    t("conic-region", "Régions délimitées par une conique", "4-5", "III. Régions du plan", "Le signe de $MF-e\\,d(M,(D))$ distingue l’intérieur, la conique et l’extérieur.", "Tester un point simple permet de repérer le côté correspondant à chaque inégalité.", String.raw`MF\lesseqgtr e\,d(M,(D))`, "Quelle relation caractérise les points de la conique elle-même ?", "$MF=e\\,d(M,(D))$.", 60),
-    t("parabola-reduced-equation", "Parabole et équation réduite", "5-7", "IV-1. Parabole", "Dans un repère adapté, une parabole s’écrit $y^2=2px$ ; son foyer et sa directrice sont symétriques par rapport au sommet.", "Le signe de $p$ indique le sens d’ouverture.", String.raw`y^2=2px,\quad F(p/2,0),\quad(D):x=-p/2`, "Pour $y^2=-4x$, quels sont le foyer et la directrice ?", "$F(-1,0)$ et $(D):x=1$.", 70),
-    t("ellipse-reduced-equation", "Ellipse et équation réduite", "7-9", "IV-2. Ellipse", "Une ellipse centrée d’axes principaux s’écrit $x^2/a^2+y^2/b^2=1$ avec $a>b>0$ et $c^2=a^2-b^2$.", "Les foyers sont $(\\pm c,0)$ et l’excentricité vaut $c/a$.", String.raw`\frac{x^2}{a^2}+\frac{y^2}{b^2}=1,\quad c^2=a^2-b^2`, "Pour $x^2/25+y^2/9=1$, quelle est l’excentricité ?", "$4/5$.", 75),
-    t("hyperbola-reduced-equation", "Hyperbole et équation réduite", "9-11", "IV-3. Hyperbole", "Une hyperbole centrée s’écrit $x^2/a^2-y^2/b^2=1$ et vérifie $c^2=a^2+b^2$.", "Ses asymptotes ont pour équations $y=\\pm(b/a)x$.", String.raw`\frac{x^2}{a^2}-\frac{y^2}{b^2}=1,\quad c^2=a^2+b^2`, "Pour $x^2/4-y^2=1$, quelles sont les asymptotes ?", "$y=x/2$ et $y=-x/2$.", 80, "challenge"),
-  ],
-});
+export { terminalCConicsPath, terminalCPrimitivesPath };
 
 export const terminalCLogarithmsPath = buildOfficialMathPath({
   id: "terminale-c-math-l08-logarithms", levelIds, chapterNumber: 8, themeNumber: 1,

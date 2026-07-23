@@ -34,7 +34,9 @@ export const terminalCMathLessonIds = [
   ]],
   ["terminale-c-math-l07-conics", [
     "conic-focus-directrix", "conic-axis-vertices", "conic-region", "parabola-reduced-equation",
-    "ellipse-reduced-equation", "hyperbola-reduced-equation",
+    "ellipse-reduced-equation", "hyperbola-reduced-equation", "pool-ellipse-mission",
+    "official-fixation-workshop", "parabola-construction-reinforcement",
+    "conic-from-focus-directrix-reinforcement", "complex-hyperbola-mission",
   ]],
   ["terminale-c-math-l08-logarithms", [
     "natural-log-definition", "log-algebra", "log-equations", "log-limits", "log-derivative",
