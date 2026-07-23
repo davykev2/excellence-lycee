@@ -834,6 +834,24 @@
 .mastery-mini-lab .lesson-slider { grid-column: 2; }
 .mastery-mini-lab > span { grid-column: 3; grid-row: 1 / 3; min-width: 100px; padding: 15px; border-radius: 12px; background: var(--subject-accent); color: #fff; font-size: 16px; font-weight: 900; text-align: center; }
 .mastery-mini-lab > span.is-undefined { background: var(--orange-600); }
+.mastery-orbit-lab { display: grid; gap: 11px; justify-items: center; padding: 18px; border-radius: 17px; background: #f4f6f7; }
+.mastery-orbit-lab > strong { justify-self: start; color: var(--navy-950); font-size: 17px; }
+.mastery-orbit-lab svg { width: 100%; max-width: 340px; height: auto; }
+.mastery-orbit-lab > label { justify-self: start; color: var(--subject-accent); font-size: 11px; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
+.mastery-orbit-lab .lesson-slider { width: 100%; }
+.orbit-path { fill: none; stroke: #c9d3db; stroke-width: 2; }
+.orbit-center { fill: #8b98a6; }
+.orbit-radius { stroke: #a2aeba; stroke-width: 1.5; stroke-dasharray: 4 4; }
+.orbit-radius-label { fill: #8b98a6; font-size: 12px; font-weight: 700; }
+.orbit-mobile { fill: var(--navy-800); stroke: #fff; stroke-width: 2.5; }
+.orbit-mobile-label { fill: var(--navy-950); font-size: 14px; font-weight: 800; paint-order: stroke; stroke: #f4f6f7; stroke-width: 3px; }
+.orbit-vector-v { stroke: var(--subject-accent); stroke-width: 3; }
+.orbit-arrow-v { fill: var(--subject-accent); }
+.orbit-vector-a { stroke: var(--orange-600); stroke-width: 3; }
+.orbit-arrow-a { fill: var(--orange-600); }
+.orbit-legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 12px; font-weight: 700; }
+.orbit-key-v { color: var(--subject-accent); }
+.orbit-key-a { color: var(--orange-600); }
 .mastery-diagram-lab { display: grid; gap: 12px; padding: 18px; border-radius: 17px; background: #f4f6f7; }
 .diagram-root { display: grid; gap: 3px; justify-items: center; padding: 13px 18px; border-radius: 13px; background: var(--navy-800); color: #fff; text-align: center; }
 .diagram-root strong { font-size: 17px; }

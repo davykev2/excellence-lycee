@@ -14,7 +14,7 @@ import {
   X,
   XCircle,
 } from "@phosphor-icons/react";
-import type { CurveLessonInteraction, CurveRule, DiagramLessonInteraction, FunctionRule, LearningLesson, LearningPath, LessonQuestion } from "../../domain/paths";
+import type { CurveLessonInteraction, CurveRule, DiagramLessonInteraction, FunctionRule, LearningLesson, LearningPath, LessonQuestion, OrbitLessonInteraction } from "../../domain/paths";
 import type { AttemptResult, ProgressLesson } from "../progress/useLearningProgress";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
 import { MathFormula, MathText } from "../../components/MathText";
@@ -277,6 +277,76 @@ function DiagramLab({ interaction, selectedIndex, onSelect }: {
   );
 }
 
+function OrbitLab({ interaction, angleDegrees, lessonId, onAngleChange }: {
+  interaction: OrbitLessonInteraction;
+  angleDegrees: number;
+  lessonId: string;
+  onAngleChange: (value: number) => void;
+}) {
+  const size = 320;
+  const cx = size / 2;
+  const cy = size / 2;
+  const r = 108;
+  const theta = (angleDegrees * Math.PI) / 180;
+  const mx = cx + r * Math.cos(theta);
+  const my = cy - r * Math.sin(theta);
+  const arrow = 46;
+  // Vitesse : tangente, sens anti-horaire (dérivée de la position par rapport à l'angle).
+  const vx = -Math.sin(theta);
+  const vy = -Math.cos(theta);
+  // Accélération : centripète, dirigée vers le centre.
+  const norm = Math.hypot(cx - mx, cy - my) || 1;
+  const ax = (cx - mx) / norm;
+  const ay = (cy - my) / norm;
+  const showVelocity = interaction.showVelocity ?? true;
+  const showAcceleration = interaction.showAcceleration ?? true;
+  return (
+    <div className="mastery-orbit-lab">
+      <strong>{interaction.formulaTex
+        ? <MathFormula tex={interaction.formulaTex} fallback={interaction.formula} />
+        : <MathText>{interaction.formula}</MathText>}
+      </strong>
+      <svg viewBox={`0 0 ${size} ${size}`} role="img" aria-label={`Mouvement circulaire : ${interaction.formula}`}>
+        <defs>
+          <marker id={`orbit-head-v-${lessonId}`} markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" className="orbit-arrow-v" />
+          </marker>
+          <marker id={`orbit-head-a-${lessonId}`} markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" className="orbit-arrow-a" />
+          </marker>
+        </defs>
+        <circle className="orbit-path" cx={cx} cy={cy} r={r} />
+        <circle className="orbit-center" cx={cx} cy={cy} r={3.5} />
+        <line className="orbit-radius" x1={cx} y1={cy} x2={mx} y2={my} />
+        <text className="orbit-radius-label" x={(cx + mx) / 2 + 6} y={(cy + my) / 2 - 6}>{interaction.radiusLabel ?? "R"}</text>
+        {showAcceleration && (
+          <line className="orbit-vector-a" x1={mx} y1={my} x2={mx + ax * arrow} y2={my + ay * arrow} markerEnd={`url(#orbit-head-a-${lessonId})`} />
+        )}
+        {showVelocity && (
+          <line className="orbit-vector-v" x1={mx} y1={my} x2={mx + vx * arrow} y2={my + vy * arrow} markerEnd={`url(#orbit-head-v-${lessonId})`} />
+        )}
+        <circle className="orbit-mobile" cx={mx} cy={my} r={7} />
+        <text className="orbit-mobile-label" x={mx + (Math.cos(theta) >= 0 ? 12 : -12)} y={my - 10} textAnchor={Math.cos(theta) >= 0 ? "start" : "end"}>M</text>
+      </svg>
+      <div className="orbit-legend">
+        {showVelocity && <span className="orbit-key-v">→ vitesse (tangente)</span>}
+        {showAcceleration && <span className="orbit-key-a">→ accélération (centripète)</span>}
+      </div>
+      <label htmlFor={`mastery-orbit-${lessonId}`}>θ = {formatNumber(angleDegrees)}°</label>
+      <input
+        id={`mastery-orbit-${lessonId}`}
+        className="lesson-slider"
+        type="range"
+        min={interaction.marker.min}
+        max={interaction.marker.max}
+        step={interaction.marker.step}
+        value={angleDegrees}
+        onChange={(event) => onAngleChange(Number(event.target.value))}
+      />
+    </div>
+  );
+}
+
 function formatNumber(value: number) {
   return new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2 }).format(value);
 }
@@ -284,6 +354,7 @@ function formatNumber(value: number) {
 function initialInteractionValue(lesson: LearningLesson) {
   if (lesson.interaction.kind === "timeline" || lesson.interaction.kind === "diagram") return 0;
   if (lesson.interaction.kind === "curve") return lesson.interaction.marker.initial;
+  if (lesson.interaction.kind === "orbit") return lesson.interaction.marker.initial;
   return lesson.interaction.input.initial;
 }
 
@@ -344,7 +415,7 @@ export function LessonWorkspace({
   }, [phase]);
 
   const outputValue = useMemo(() => {
-    if (lesson.interaction.kind === "timeline" || lesson.interaction.kind === "diagram") return null;
+    if (lesson.interaction.kind === "timeline" || lesson.interaction.kind === "diagram" || lesson.interaction.kind === "orbit") return null;
     if (lesson.interaction.kind === "curve") return evaluateCurveRule(lesson.interaction.rule, inputValue);
     return evaluateRule(lesson.interaction.rule, inputValue);
   }, [inputValue, lesson.interaction]);
@@ -456,6 +527,13 @@ export function LessonWorkspace({
                   interaction={lesson.interaction}
                   selectedIndex={Math.round(inputValue)}
                   onSelect={setInputValue}
+                />
+              ) : lesson.interaction.kind === "orbit" ? (
+                <OrbitLab
+                  interaction={lesson.interaction}
+                  angleDegrees={inputValue}
+                  lessonId={lesson.id}
+                  onAngleChange={setInputValue}
                 />
               ) : lesson.interaction.kind === "curve" ? (
                 <CurveLab

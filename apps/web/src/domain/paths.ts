@@ -116,11 +116,30 @@ export interface DiagramLessonInteraction extends LessonInteractionBase {
   nodes: [DiagramNodeItem, DiagramNodeItem, ...DiagramNodeItem[]];
 }
 
+/**
+ * Animation d'un mouvement circulaire : un point parcourt un cercle sous le
+ * contrôle d'un curseur d'angle, avec ses vecteurs vitesse (tangent) et
+ * accélération (centripète). Pensé pour la cinématique, là où la courbe sert
+ * les graphes horaires.
+ */
+export interface OrbitLessonInteraction extends LessonInteractionBase {
+  kind: "orbit";
+  formula: string;
+  formulaTex?: string;
+  /** Étiquette du rayon affichée sur la figure, par exemple « R = 20 cm ». */
+  radiusLabel?: string;
+  showVelocity?: boolean;
+  showAcceleration?: boolean;
+  /** Angle du point mobile, en degrés, piloté au curseur. */
+  marker: { min: number; max: number; step: number; initial: number };
+}
+
 export type LessonInteraction =
   | NumericLessonInteraction
   | TimelineLessonInteraction
   | CurveLessonInteraction
-  | DiagramLessonInteraction;
+  | DiagramLessonInteraction
+  | OrbitLessonInteraction;
 
 export interface LessonMethod {
   eyebrow: string;
