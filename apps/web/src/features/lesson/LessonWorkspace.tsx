@@ -21,12 +21,16 @@ import { MathFormula, MathText } from "../../components/MathText";
 import { MarkdownContent } from "../../components/MarkdownContent";
 import { ApiError } from "../../lib/api";
 import { formatXp } from "../../data/xpRewards";
+import type { AuthUser } from "../../domain/auth";
+import { LessonFeedbackPanel } from "./LessonFeedbackPanel";
 
 interface LessonWorkspaceProps {
   lesson: LearningLesson;
   path: LearningPath;
   nextLesson?: LearningLesson;
   currentProgress?: ProgressLesson;
+  currentUser: Pick<AuthUser, "id" | "name" | "photoUrl" | "role">;
+  localOnly?: boolean;
   onClose: () => void;
   onSubmitAttempt: (lessonId: string, scoreOutOf20: number) => Promise<AttemptResult>;
   onOpenNext: (lessonId: string) => void;
@@ -96,7 +100,17 @@ function synchronizationErrorMessage(reason: unknown) {
   return "La progression n’a pas pu être enregistrée. Réessaie la synchronisation dans quelques instants.";
 }
 
-export function LessonWorkspace({ lesson, path, nextLesson, currentProgress, onClose, onSubmitAttempt, onOpenNext }: LessonWorkspaceProps) {
+export function LessonWorkspace({
+  lesson,
+  path,
+  nextLesson,
+  currentProgress,
+  currentUser,
+  localOnly = false,
+  onClose,
+  onSubmitAttempt,
+  onOpenNext,
+}: LessonWorkspaceProps) {
   const questions = lesson.questions?.length ? lesson.questions : [lesson.question];
   const [phase, setPhase] = useState<Phase>("learn");
   const [answers, setAnswers] = useState<LessonAnswer[]>(() => questions.map(() => null));
@@ -255,6 +269,13 @@ export function LessonWorkspace({ lesson, path, nextLesson, currentProgress, onC
               <ol>{lesson.method.steps.map((methodStep, index) => <li key={methodStep}><span>{index + 1}</span><p><MathText>{methodStep}</MathText></p></li>)}</ol>
               <div className="mastery-worked-example"><strong><MathText>{lesson.method.example.prompt}</MathText></strong><span><MathText>{lesson.method.example.work}</MathText></span><b><MathText>{lesson.method.example.result}</MathText></b></div>
             </section>
+
+            <LessonFeedbackPanel
+              pathId={path.id}
+              lessonId={lesson.id}
+              currentUser={currentUser}
+              localOnly={localOnly}
+            />
 
             <div className="mastery-understood-card">
               <CompanionAvatar motion="wave" className="mastery-understood-davy" decorative />

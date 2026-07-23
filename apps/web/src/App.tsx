@@ -429,6 +429,13 @@ function LearningApp({ user }: { user: AuthUser }) {
           path={activePath}
           nextLesson={nextLesson}
           currentProgress={progressByLesson[activeLesson.id]}
+          currentUser={{
+            id: user.id,
+            name: profile.name,
+            photoUrl: profile.photoUrl,
+            role: user.role,
+          }}
+          localOnly={localPreview}
           onClose={() => navigate({
             navigation: "paths",
             subjectId: activePath.subjectId,

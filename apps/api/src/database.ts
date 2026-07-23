@@ -186,6 +186,32 @@ database.exec(`
     ON global_messages(created_at DESC);
   CREATE INDEX IF NOT EXISTS global_messages_sender_idx
     ON global_messages(sender_id, created_at DESC);
+
+  CREATE TABLE IF NOT EXISTS lesson_reactions (
+    user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    path_id TEXT NOT NULL,
+    lesson_id TEXT NOT NULL,
+    reaction TEXT NOT NULL CHECK (reaction IN ('useful', 'love', 'clear', 'confusing')),
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL,
+    PRIMARY KEY (user_id, path_id, lesson_id)
+  );
+
+  CREATE INDEX IF NOT EXISTS lesson_reactions_target_idx
+    ON lesson_reactions(path_id, lesson_id);
+
+  CREATE TABLE IF NOT EXISTS lesson_comments (
+    id TEXT PRIMARY KEY,
+    path_id TEXT NOT NULL,
+    lesson_id TEXT NOT NULL,
+    author_user_id TEXT REFERENCES users(id) ON DELETE SET NULL,
+    body TEXT NOT NULL CHECK (length(trim(body)) BETWEEN 1 AND 1000),
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL
+  );
+
+  CREATE INDEX IF NOT EXISTS lesson_comments_target_idx
+    ON lesson_comments(path_id, lesson_id, created_at DESC);
 `);
 
 const userColumns = database.prepare("PRAGMA table_info(users)").all() as Array<{ name: string }>;

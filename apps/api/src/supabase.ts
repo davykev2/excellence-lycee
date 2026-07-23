@@ -15,6 +15,7 @@ import type {
   PublishedArenaExerciseLevel,
 } from "./arenaExercises.js";
 import type { GlobalMessageSummary, MessageRecipientSummary, MessageThreadSummary, ThreadMessageSummary } from "./messaging.js";
+import type { LessonFeedbackSummary, LessonReaction } from "./lessonFeedback.js";
 
 export interface PublicAuthUser {
   id: string;
@@ -1110,6 +1111,71 @@ export async function editSupabaseGlobalMessage(accessToken: string, messageId: 
 export async function deleteSupabaseGlobalMessage(accessToken: string, messageId: string) {
   const client = userDataClient(accessToken);
   const { data, error } = await client.rpc("delete_global_message", { p_message_id: messageId });
+  if (error) throw new SupabaseOperationError(error.message, 400, error.code);
+  return Boolean(data);
+}
+
+export async function getSupabaseLessonFeedback(
+  accessToken: string,
+  pathId: string,
+  lessonId: string,
+): Promise<LessonFeedbackSummary> {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("get_mastery_lesson_feedback", {
+    p_path_id: pathId,
+    p_lesson_id: lessonId,
+  });
+  if (error) throw new SupabaseOperationError(error.message, error.code === "PGRST202" ? 503 : 500, error.code);
+  return data as unknown as LessonFeedbackSummary;
+}
+
+export async function setSupabaseLessonReaction(
+  accessToken: string,
+  pathId: string,
+  lessonId: string,
+  reaction: LessonReaction | null,
+): Promise<LessonFeedbackSummary> {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("set_mastery_lesson_reaction", {
+    p_path_id: pathId,
+    p_lesson_id: lessonId,
+    p_reaction: reaction,
+  });
+  if (error) throw new SupabaseOperationError(error.message, 400, error.code);
+  return data as unknown as LessonFeedbackSummary;
+}
+
+export async function createSupabaseLessonComment(
+  accessToken: string,
+  pathId: string,
+  lessonId: string,
+  body: string,
+) {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("create_mastery_lesson_comment", {
+    p_path_id: pathId,
+    p_lesson_id: lessonId,
+    p_body: body,
+  });
+  if (error) throw new SupabaseOperationError(error.message, 400, error.code);
+  return data as string;
+}
+
+export async function editSupabaseLessonComment(accessToken: string, commentId: string, body: string) {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("edit_mastery_lesson_comment", {
+    p_comment_id: commentId,
+    p_body: body,
+  });
+  if (error) throw new SupabaseOperationError(error.message, 400, error.code);
+  return Boolean(data);
+}
+
+export async function deleteSupabaseLessonComment(accessToken: string, commentId: string) {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("delete_mastery_lesson_comment", {
+    p_comment_id: commentId,
+  });
   if (error) throw new SupabaseOperationError(error.message, 400, error.code);
   return Boolean(data);
 }
