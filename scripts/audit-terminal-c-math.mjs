@@ -20,21 +20,34 @@ function loadTypeScript(relativePath, dependencies = {}) {
 }
 
 const builder = loadTypeScript("apps/web/src/data/officialMathPathBuilder.ts");
+const limitsPath = loadTypeScript("apps/web/src/data/terminalCLimitsContinuityPath.ts");
+const barycenterPath = loadTypeScript("apps/web/src/data/terminalCBarycenterPath.ts");
 const pathModules = [
-  "apps/web/src/data/terminalCMathPaths01to05.ts",
-  "apps/web/src/data/terminalCMathPaths06to10.ts",
-  "apps/web/src/data/terminalCMathPaths11to15.ts",
-  "apps/web/src/data/terminalCMathPaths16to19.ts",
-].map((file) => loadTypeScript(file, { "./officialMathPathBuilder": builder }));
+  loadTypeScript("apps/web/src/data/terminalCMathPaths01to05.ts", {
+    "./officialMathPathBuilder": builder,
+    "./terminalCLimitsContinuityPath": limitsPath,
+    "./terminalCBarycenterPath": barycenterPath,
+  }),
+  loadTypeScript("apps/web/src/data/terminalCMathPaths06to10.ts", { "./officialMathPathBuilder": builder }),
+  loadTypeScript("apps/web/src/data/terminalCMathPaths11to15.ts", { "./officialMathPathBuilder": builder }),
+  loadTypeScript("apps/web/src/data/terminalCMathPaths16to19.ts", { "./officialMathPathBuilder": builder }),
+];
 
 const paths = pathModules.flatMap((module, index) => module[`terminalCMathPaths${index === 0 ? "01to05" : index === 1 ? "06to10" : index === 2 ? "11to15" : "16to19"}`]);
 const apiRegistry = loadTypeScript("apps/api/src/terminalCMathRewards.ts");
 const apiPaths = new Map(apiRegistry.terminalCMathLessonIds.map(([pathId, ids]) => [pathId, [...ids]]));
 
-const migration = readFileSync(resolve(root, "supabase/migrations/20260721235900_terminal_c_math_complete_courses.sql"), "utf8");
 const sqlPaths = new Map();
-for (const match of migration.matchAll(/\('([^']+)',\s*'(\[[^']+\])'\)/g)) {
-  sqlPaths.set(match[1], JSON.parse(match[2]));
+const migrationFiles = [
+  "supabase/migrations/20260721235900_terminal_c_math_complete_courses.sql",
+  "supabase/migrations/20260723120000_terminal_c_limits_continuity_mission.sql",
+  "supabase/migrations/20260723213000_terminal_c_barycenter_mission.sql",
+];
+for (const migrationFile of migrationFiles) {
+  const migration = readFileSync(resolve(root, migrationFile), "utf8");
+  for (const match of migration.matchAll(/\('([^']+)',\s*'(\[[^']+\])'\)/g)) {
+    if (match[1].startsWith("terminale-c-math-")) sqlPaths.set(match[1], JSON.parse(match[2]));
+  }
 }
 
 if (paths.length !== 19) throw new Error(`19 parcours attendus, ${paths.length} reçus.`);
@@ -72,9 +85,15 @@ paths.forEach((path, pathIndex) => {
 
   const totalXp = normalizedTotal(levels);
   if (totalXp !== 10_000) throw new Error(`Budget incorrect pour ${path.id}: ${totalXp} XP.`);
-  report.push({ lesson: path.chapterNumber, path: path.id, levels: levels.length, exercises: levels.length, totalXp });
+  report.push({
+    lesson: path.chapterNumber,
+    path: path.id,
+    levels: levels.length,
+    questions: levels.reduce((sum, level) => sum + (level.questions?.length ?? 0), 0),
+    totalXp,
+  });
 });
 
-if (allLevelKeys.size !== 147) throw new Error(`147 niveaux attendus, ${allLevelKeys.size} reçus.`);
+if (allLevelKeys.size !== 149) throw new Error(`149 niveaux attendus, ${allLevelKeys.size} reçus.`);
 console.table(report);
-console.log(`Audit réussi : 19 leçons, ${allLevelKeys.size} niveaux, 147 exercices et 190 000 XP.`);
+console.log(`Audit réussi : 19 leçons, ${allLevelKeys.size} niveaux et 190 000 XP.`);

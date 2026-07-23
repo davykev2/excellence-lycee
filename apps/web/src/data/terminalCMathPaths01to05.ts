@@ -1,4 +1,5 @@
 import { buildOfficialMathPath, officialMathTopic as t } from "./officialMathPathBuilder";
+import { terminalCBarycenterPath } from "./terminalCBarycenterPath";
 import { terminalCLimitsContinuityPath } from "./terminalCLimitsContinuityPath";
 
 const levelIds = ["terminale-c"];
@@ -9,24 +10,7 @@ const levelIds = ["terminale-c"];
 // conservés à l'identique, afin que la répartition des 10 000 XP et le registre
 // XP de l'API restent inchangés.
 export { terminalCLimitsContinuityPath };
-
-export const terminalCBarycenterPath = buildOfficialMathPath({
-  id: "terminale-c-math-l02-barycenter", levelIds, chapterNumber: 2, themeNumber: 2,
-  themeTitle: "Géométrie", title: "Barycentre et lignes de niveau",
-  description: "Barycentres de points pondérés, réductions vectorielles et lieux géométriques.",
-  outcomes: ["Construire un barycentre", "Réduire des sommes vectorielles", "Déterminer des lignes de niveau"],
-  documentTitle: "TC Maths leçon 02 Barycentre.pdf",
-  topics: [
-    t("weighted-barycenter", "Barycentre de points pondérés", "1-2", "I-1. Définition", "Des points pondérés $(A_i,\\alpha_i)$ admettent un barycentre lorsque la somme des coefficients est non nulle.", "Le barycentre $G$ annule la somme pondérée des vecteurs $\\overrightarrow{GA_i}$.", String.raw`\sum_i\alpha_i\overrightarrow{GA_i}=\vec0`, "Les coefficients $-1,1,1,4$ admettent-ils un barycentre ?", "Oui, car leur somme vaut $5\\ne0$.", 55),
-    t("isobarycenter-homogeneity", "Isobarycentre et homogénéité", "2-3", "I-2 et I-3-a", "L’isobarycentre correspond à des coefficients égaux. Multiplier tous les coefficients par un même réel non nul ne change pas le barycentre.", "Seuls les rapports entre coefficients comptent.", String.raw`\operatorname{bar}(A_i,\alpha_i)=\operatorname{bar}(A_i,k\alpha_i)`, "Si $\\overrightarrow{AG}=\\tfrac34\\overrightarrow{AB}$, quels coefficients du cours conviennent ?", "$(A,2)$ et $(B,6)$, ainsi que les coefficients proportionnels.", 55),
-    t("weighted-vector-reduction", "Réduction d’une somme vectorielle", "3-4", "I-3-b", "Lorsque $s=\\sum\\alpha_i\\ne0$, une somme $\\sum\\alpha_i\\overrightarrow{MA_i}$ se réduit à $s\\overrightarrow{MG}$, où $G$ est le barycentre.", "Si la somme des coefficients est nulle, la somme vectorielle est indépendante de $M$.", String.raw`\sum_i\alpha_i\overrightarrow{MA_i}=\left(\sum_i\alpha_i\right)\overrightarrow{MG}`, "À quoi se réduit $3\\overrightarrow{MA}+\\overrightarrow{MB}+\\overrightarrow{MC}-2\\overrightarrow{MD}$ ?", "$3\\overrightarrow{MG}$.", 65),
-    t("barycenter-coordinates", "Coordonnées du barycentre", "4-5", "I-3-c", "Les coordonnées du barycentre sont les moyennes pondérées des coordonnées, divisées par la somme des coefficients.", "Appliquer séparément la formule aux trois coordonnées.", String.raw`x_G=\frac{\sum\alpha_ix_i}{\sum\alpha_i},\ y_G=\frac{\sum\alpha_iy_i}{\sum\alpha_i}`, "Quel triplet donne le cours pour le barycentre de $(A,-1),(B,1),(C,-1)$ ?", "$(0;-11;1)$.", 60),
-    t("partial-barycenter", "Barycentre partiel", "5", "I-3-d", "On peut remplacer plusieurs points pondérés par leur barycentre affecté de la somme de leurs coefficients, si cette somme est non nulle.", "Regrouper les points rend la construction plus simple sans changer $G$.", String.raw`G=\operatorname{bar}\{(H,\sum_{i\in E}\alpha_i),\ldots\}`, "Dans la construction officielle, que devient $G$ après avoir posé $I=\\operatorname{bar}\\{(A,-2),(C,3)\\}$ ?", "Le milieu de $[IB]$.", 65),
-    t("quadratic-level-sets", "Lignes de niveau de sommes de carrés", "5-7", "II-2-a", "La réduction barycentrique d’une expression en $MA_i^2$ transforme l’équation de niveau en cercle, droite ou ensemble vide selon le coefficient de $MG^2$.", "Réduire l’expression avant d’identifier le lieu.", String.raw`\sum_i\alpha_iMA_i^2=\left(\sum_i\alpha_i\right)MG^2+\text{constante}`, "Quel lieu vérifie $MA^2-2MB^2=4$ lorsque $AB=2$ ?", "Le cercle de centre $G$ et de rayon $2$.", 75),
-    t("apollonius-level-set", "Ligne de niveau d’un rapport de distances", "7-8", "II-2-b", "Pour $k>0$, $k\\ne1$, le lieu $MA/MB=k$ est un cercle d’Apollonius ; pour $k=1$, c’est la médiatrice de $[AB]$.", "Mettre au carré puis utiliser les barycentres associés à $k$ et $-k$.", String.raw`\frac{MA}{MB}=k`, "Quelle est la nature du lieu $MA/MB=1/2$ ?", "Un cercle d’Apollonius.", 70),
-    t("oriented-angle-level-set", "Lignes de niveau d’un angle orienté", "8-9", "II-2-c", "Les points d’où le segment $[AB]$ est vu sous un angle orienté fixé appartiennent à une droite privée d’un segment ou à un arc capable.", "Exclure toujours les points $A$ et $B$, où les vecteurs ne sont pas définis.", String.raw`\operatorname{Mes}(\overrightarrow{MA},\overrightarrow{MB})=\theta`, "Pour une mesure $\\pi$, quel lieu obtient-on ?", "Le segment $[AB]$ privé de $A$ et $B$.", 75, "challenge"),
-  ],
-});
+export { terminalCBarycenterPath };
 
 export const terminalCDivisibilityPath = buildOfficialMathPath({
   id: "terminale-c-math-l03-divisibility", levelIds, chapterNumber: 3, themeNumber: 3,

@@ -7,6 +7,7 @@ export const terminalCMathLessonIds = [
   ["terminale-c-math-l02-barycenter", [
     "weighted-barycenter", "isobarycenter-homogeneity", "weighted-vector-reduction", "barycenter-coordinates",
     "partial-barycenter", "quadratic-level-sets", "apollonius-level-set", "oriented-angle-level-set",
+    "barycenter-level-set-mission",
   ]],
   ["terminale-c-math-l03-divisibility", [
     "integer-divisibility", "euclidean-division-z", "remainders-operations", "congruences",
