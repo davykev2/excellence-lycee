@@ -122,6 +122,7 @@ const lessonRewards = new Map<string, number>([
   ["terminale-a-bivariate-statistics:covariance-correlation-regression", 65],
   ["terminale-a-bivariate-statistics:correlation-regression-a1", 80],
   ["terminale-a-bivariate-statistics:statistical-estimation", 75],
+  ["terminale-a-bivariate-statistics:weather-correlation-mission", 90],
   ["terminale-a-linear-systems:substitution-elimination", 60],
   ["terminale-a-linear-systems:log-exp-systems", 70],
   ["terminale-a-linear-systems:linear-inequalities-halfplanes", 65],

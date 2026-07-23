@@ -36,6 +36,9 @@ tmp/
 .tmp/
 /design-qa*
 
+# État local du CLI Supabase (lien du projet), à ne jamais versionner
+supabase/.temp/
+
 # Préférences locales
 .claude/settings.local.json
 
