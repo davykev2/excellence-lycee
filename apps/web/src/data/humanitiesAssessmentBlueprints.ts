@@ -5,6 +5,10 @@ interface HumanitiesMissionSeed {
   scenario: string;
   modelAnswer: string;
   questions: [LessonQuestion, LessonQuestion, LessonQuestion];
+  /** Document d'appui (extrait officiel, discours…) affiché avant les consignes. */
+  bodyMarkdown?: string;
+  /** Consignes supplémentaires, par exemple une étude de document. */
+  extraQuestions?: LessonQuestion[];
 }
 
 export interface HumanitiesAssessmentBlueprint {
@@ -115,12 +119,30 @@ export const humanitiesAssessmentBlueprints: Record<string, HumanitiesAssessment
     memorySentence: "Pour juger l’ONU, il faut relier ses objectifs, ses organes, ses succès et ses limites.",
     mission: {
       title: "L’ONU a-t-elle rempli sa mission ?",
-      scenario: "Un officiel affirme que l’ONU est née de la volonté des vainqueurs de 1945 et qu’après plusieurs décennies, son bilan demeure mitigé.",
+      scenario: "Lors de la célébration du 74e anniversaire de l’ONU, un officiel affirme : « L’ONU est née de la volonté des vainqueurs de la seconde guerre mondiale. Après environ 75 ans d’existence, il faut avoir le courage de l’avouer, elle ne reflète plus la réalité du moment. Au-delà de cet aspect, le bilan de l’organisation est mitigé. De nombreux défis restent à relever. »",
       modelAnswer: "L’ONU a favorisé la coopération, la décolonisation et plusieurs opérations de paix, mais le veto, les rivalités des puissances et certains conflits non résolus limitent son action.",
+      bodyMarkdown: String.raw`## Document d’appui — discours d’Emmanuel Macron (75e Assemblée générale, 21 septembre 2020)
+
+> « Le 26 juin 1945 à San Francisco, alors que la guerre faisait encore rage dans le Pacifique, nos prédécesseurs se sont accordés sur une **triple promesse** : préserver les générations futures du fléau de la guerre ; affirmer les droits de l’homme et l’égalité des nations et favoriser le progrès social dans une liberté plus grande. En 75 ans d’existence, l’organisation des Nations Unies, notre maison commune, est restée fidèle à cette promesse. »
+>
+> Et il ajoute plus loin : « Notre maison commune est en désordre, à l’image de notre monde. Ses **fondations s’érodent** et ses **murs se lézardent**, parfois sous les coups de boutoir de ceux-là mêmes qui l’ont construite. »
+>
+> *Source : onu.delegfrance.org — commémoration du 75e anniversaire.*
+
+## Comment lire ce document
+
+Ce discours est **nuancé** : il reconnaît d’abord la fidélité de l’ONU à sa « triple promesse » (paix, droits, progrès social), puis en pointe les fragilités (« fondations s’érodent », « murs se lézardent »). L’image de la « maison commune en désordre » résume le **bilan mitigé** du cours.
+
+> **Méthode — expliquer une citation.** Ne la paraphrase pas : cite le passage entre guillemets, puis explique-le avec une connaissance précise du cours. « Quand Macron dit que “ceux-là mêmes qui l’ont construite” affaiblissent l’ONU, il désigne les cinq membres permanents qui usent abusivement du droit de veto. »`,
       questions: [
         question("Quel problème cette affirmation soulève-t-elle ?", "L’efficacité et le bilan de l’ONU dans le maintien de la paix", ["La production agricole mondiale", "La création de la Corée du Sud", "Le climat de Côte d’Ivoire"], "La situation invite à confronter les objectifs de l’ONU à ses résultats.", 1),
         question("Pourquoi dit-on que l’ONU reflète la volonté des vainqueurs de 1945 ?", "Les principales puissances victorieuses disposent d’un siège permanent et du veto", ["Elles sont les seules à siéger à l’Assemblée générale", "Elles contrôlent toutes les ONG", "Elles ont supprimé la Charte"], "La composition permanente du Conseil de sécurité traduit le rapport de forces de 1945.", 2),
         question("Quel jugement est le plus équilibré ?", "L’ONU a obtenu des succès réels, mais ses moyens et les rivalités limitent son efficacité", ["L’ONU n’a jamais rien accompli", "L’ONU a supprimé toutes les guerres", "Le veto garantit toujours une action rapide"], "Le bilan doit présenter à la fois les acquis et les échecs.", 0),
+      ],
+      extraQuestions: [
+        question("Dans le discours, quelle est la « triple promesse » de 1945 ?", "Préserver de la guerre, affirmer les droits de l’homme, favoriser le progrès social", ["Créer une armée, une monnaie et un drapeau communs", "Diviser le monde en trois blocs", "Supprimer les frontières, les États et les impôts"], "Macron reprend les trois grands objectifs inscrits dans la Charte.", 0),
+        question("Que désigne l’image des « murs qui se lézardent, sous les coups de ceux qui l’ont construite » ?", "Les grandes puissances fondatrices qui affaiblissent l’ONU, notamment par le veto", ["Les nouveaux États membres africains", "Les organismes spécialisés comme l’OMS", "Les casques bleus sur le terrain"], "« Ceux qui l’ont construite » sont les membres permanents du Conseil de sécurité.", 0),
+        question("Le point de vue « le bilan de l’ONU est mitigé » est-il défendable ?", "Oui : l’ONU a des succès réels mais aussi des limites persistantes", ["Non : l’ONU n’a que des succès", "Non : l’ONU n’a que des échecs", "Non : l’ONU n’a jamais agi"], "Un bilan mitigé combine acquis et échecs : c’est la conclusion attendue du cours.", 0),
       ],
     },
   },

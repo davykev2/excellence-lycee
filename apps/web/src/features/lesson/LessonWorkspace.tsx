@@ -14,7 +14,7 @@ import {
   X,
   XCircle,
 } from "@phosphor-icons/react";
-import type { CurveLessonInteraction, CurveRule, FunctionRule, LearningLesson, LearningPath, LessonQuestion } from "../../domain/paths";
+import type { CurveLessonInteraction, CurveRule, DiagramLessonInteraction, FunctionRule, LearningLesson, LearningPath, LessonQuestion } from "../../domain/paths";
 import type { AttemptResult, ProgressLesson } from "../progress/useLearningProgress";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
 import { MathFormula, MathText } from "../../components/MathText";
@@ -226,12 +226,63 @@ function CurveLab({ interaction, inputValue, outputValue, lessonId, onInputChang
   );
 }
 
+function DiagramLab({ interaction, selectedIndex, onSelect }: {
+  interaction: DiagramLessonInteraction;
+  selectedIndex: number;
+  onSelect: (index: number) => void;
+}) {
+  const selected = interaction.nodes[Math.min(selectedIndex, interaction.nodes.length - 1)];
+  const groups = interaction.nodes.reduce<Array<{ name: string; items: Array<{ node: DiagramLessonInteraction["nodes"][number]; index: number }> }>>(
+    (accumulator, node, index) => {
+      const name = node.group ?? "";
+      const existing = accumulator.find((entry) => entry.name === name);
+      if (existing) existing.items.push({ node, index });
+      else accumulator.push({ name, items: [{ node, index }] });
+      return accumulator;
+    },
+    [],
+  );
+
+  return (
+    <div className="mastery-diagram-lab">
+      <div className="diagram-root">
+        <strong>{interaction.rootLabel}</strong>
+        {interaction.rootDetail && <span>{interaction.rootDetail}</span>}
+      </div>
+      <div className="diagram-stem" aria-hidden="true" />
+      {groups.map((group) => (
+        <div className="diagram-group" key={group.name || "principal"}>
+          {group.name && <p className="diagram-group-title">{group.name}</p>}
+          <div className="diagram-grid">
+            {group.items.map(({ node, index }) => (
+              <button
+                aria-pressed={index === selectedIndex}
+                className={index === selectedIndex ? "is-active" : ""}
+                key={node.id}
+                onClick={() => onSelect(index)}
+                type="button"
+              >
+                <strong>{node.label}</strong>
+                <span>{node.role}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      ))}
+      <div className="diagram-focus" aria-live="polite">
+        <strong>{selected.label}</strong>
+        <p><MathText>{selected.detail}</MathText></p>
+      </div>
+    </div>
+  );
+}
+
 function formatNumber(value: number) {
   return new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2 }).format(value);
 }
 
 function initialInteractionValue(lesson: LearningLesson) {
-  if (lesson.interaction.kind === "timeline") return 0;
+  if (lesson.interaction.kind === "timeline" || lesson.interaction.kind === "diagram") return 0;
   if (lesson.interaction.kind === "curve") return lesson.interaction.marker.initial;
   return lesson.interaction.input.initial;
 }
@@ -293,7 +344,7 @@ export function LessonWorkspace({
   }, [phase]);
 
   const outputValue = useMemo(() => {
-    if (lesson.interaction.kind === "timeline") return null;
+    if (lesson.interaction.kind === "timeline" || lesson.interaction.kind === "diagram") return null;
     if (lesson.interaction.kind === "curve") return evaluateCurveRule(lesson.interaction.rule, inputValue);
     return evaluateRule(lesson.interaction.rule, inputValue);
   }, [inputValue, lesson.interaction]);
@@ -400,6 +451,12 @@ export function LessonWorkspace({
                   <input id={`mastery-timeline-${lesson.id}`} className="lesson-slider" type="range" min={0} max={lesson.interaction.items.length - 1} step={1} value={inputValue} onInput={(event) => setInputValue(Number(event.currentTarget.value))} />
                   <div className="mastery-timeline-markers">{lesson.interaction.items.map((item, index) => <button aria-pressed={index === Math.round(inputValue)} className={index === Math.round(inputValue) ? "is-active" : ""} key={`${item.label}-${index}`} onClick={() => setInputValue(index)} type="button">{item.shortLabel ?? item.label}</button>)}</div>
                 </div>
+              ) : lesson.interaction.kind === "diagram" ? (
+                <DiagramLab
+                  interaction={lesson.interaction}
+                  selectedIndex={Math.round(inputValue)}
+                  onSelect={setInputValue}
+                />
               ) : lesson.interaction.kind === "curve" ? (
                 <CurveLab
                   interaction={lesson.interaction}

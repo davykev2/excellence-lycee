@@ -1,4 +1,4 @@
-import type { LearningLesson, LearningPath, LessonKind, LessonQuestion, TimelineInteractionItem } from "../domain/paths";
+import type { LearningLesson, LearningPath, LessonInteraction, LessonKind, LessonQuestion, TimelineInteractionItem } from "../domain/paths";
 import { humanitiesAssessmentBlueprints } from "./humanitiesAssessmentBlueprints";
 
 export interface HumanitiesSectionSeed {
@@ -7,6 +7,18 @@ export interface HumanitiesSectionSeed {
   summary: string;
   conceptTitle: string;
   explanation: string;
+  /** Cours rédigé : tableaux du document, encadrés et exemples développés. */
+  bodyMarkdown?: string;
+  /** Remplace la frise par une autre interaction, par exemple un organigramme. */
+  interaction?: LessonInteraction;
+  /** Exercices supplémentaires tirés du document, en plus du contrôle `check`. */
+  extraQuestions?: LessonQuestion[];
+  /**
+   * Contenus propres à chaque moitié lorsque cette section est celle que le
+   * plan d'évaluation découpe en deux niveaux. Sans ces surcharges, le cours
+   * rédigé et l'interaction ne seraient pas dupliqués mais simplement absents.
+   */
+  parts?: [Partial<HumanitiesSectionSeed>, Partial<HumanitiesSectionSeed>];
   keyPoint: string;
   example: string;
   timelineTitle: string;
@@ -69,10 +81,11 @@ const sectionToLesson = (
     eyebrow: `Niveau ${lessonIndex + 1} • ${course.strand}`,
     title: section.conceptTitle,
     explanation: section.explanation,
+    bodyMarkdown: section.bodyMarkdown,
     notation: section.keyPoint,
     example: section.example,
   },
-  interaction: {
+  interaction: section.interaction ?? {
     kind: "timeline",
     eyebrow: "Explorer",
     title: section.timelineTitle,
@@ -84,6 +97,7 @@ const sectionToLesson = (
   question: section.check,
   questions: [
     section.check,
+    ...(section.extraQuestions ?? []),
     {
       prompt: "Quel énoncé résume correctement cette partie du cours ?",
       options: [section.distractors[0], section.keyPoint, section.distractors[1], section.distractors[2]],
@@ -94,6 +108,10 @@ const sectionToLesson = (
 });
 
 const splitSection = (section: HumanitiesSectionSeed): [HumanitiesSectionSeed, HumanitiesSectionSeed] => {
+  // Les contenus longs ne sont jamais recopiés tels quels dans les deux moitiés :
+  // chaque partie reçoit les siens via `section.parts`.
+  const { bodyMarkdown: _body, interaction: _interaction, extraQuestions: _extra, parts, ...shared } = section;
+  const base = shared as HumanitiesSectionSeed;
   const [first, ...remaining] = section.timeline;
   const secondPartItems = remaining.length >= 2
     ? remaining
@@ -103,7 +121,8 @@ const splitSection = (section: HumanitiesSectionSeed): [HumanitiesSectionSeed, H
 
   return [
     {
-      ...section,
+      ...base,
+      ...(parts?.[0] ?? {}),
       id: `${section.id}-part-1`,
       title: firstTitle,
       summary: `Comprendre le repère « ${first.label} » et son rôle dans la leçon.`,
@@ -115,7 +134,8 @@ const splitSection = (section: HumanitiesSectionSeed): [HumanitiesSectionSeed, H
       observation: section.keyPoint,
     },
     {
-      ...section,
+      ...base,
+      ...(parts?.[1] ?? {}),
       id: `${section.id}-part-2`,
       title: secondTitle,
       summary: `Relier ${secondTitle} pour compléter cette partie du cours.`,
@@ -213,6 +233,7 @@ const missionLesson = (course: HumanitiesCourseSeed): LearningLesson => {
       eyebrow: `Niveau 6 • Mission ${course.strand}`,
       title: mission.title,
       explanation: mission.scenario,
+      bodyMarkdown: mission.bodyMarkdown,
       notation: "Identifier le problème → expliquer avec le cours → prendre position ou proposer → justifier.",
       example: "Lis les trois consignes avant de répondre : elles indiquent quelles parties de la leçon mobiliser.",
     },
@@ -246,7 +267,7 @@ const missionLesson = (course: HumanitiesCourseSeed): LearningLesson => {
       tip: "Une opinion sans connaissance du cours n’est pas une justification.",
     },
     question: mission.questions[0],
-    questions: mission.questions,
+    questions: [...mission.questions, ...(mission.extraQuestions ?? [])],
   };
 };
 

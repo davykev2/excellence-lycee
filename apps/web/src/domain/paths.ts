@@ -93,7 +93,34 @@ export interface CurveLessonInteraction extends LessonInteractionBase {
   marker: { min: number; max: number; step: number; initial: number };
 }
 
-export type LessonInteraction = NumericLessonInteraction | TimelineLessonInteraction | CurveLessonInteraction;
+export interface DiagramNodeItem {
+  id: string;
+  label: string;
+  /** Rôle court affiché sur la carte, avant sélection. */
+  role: string;
+  /** Détail complet affiché dans le panneau lorsque la carte est sélectionnée. */
+  detail: string;
+  /** Regroupe les cartes par famille (organes principaux, organismes spécialisés…). */
+  group?: string;
+}
+
+/**
+ * Schéma explorable : une entité racine et des cartes que l'élève sélectionne pour
+ * révéler leur rôle détaillé. Pensé pour les organigrammes d'institutions en
+ * Histoire-Géographie, là où la courbe interactive sert les mathématiques.
+ */
+export interface DiagramLessonInteraction extends LessonInteractionBase {
+  kind: "diagram";
+  rootLabel: string;
+  rootDetail?: string;
+  nodes: [DiagramNodeItem, DiagramNodeItem, ...DiagramNodeItem[]];
+}
+
+export type LessonInteraction =
+  | NumericLessonInteraction
+  | TimelineLessonInteraction
+  | CurveLessonInteraction
+  | DiagramLessonInteraction;
 
 export interface LessonMethod {
   eyebrow: string;
