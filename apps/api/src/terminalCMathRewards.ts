@@ -21,8 +21,10 @@ export const terminalCMathLessonIds = [
     "cocoa-profit-mission", "corrected-exercises-workshop", "reinforcement-exercises-mission",
   ]],
   ["terminale-c-math-l05-space-analytic-geometry", [
-    "plane-normal-vector", "plane-cartesian-equation", "line-parametric-form", "relative-lines-space",
-    "line-plane-position", "relative-planes",
+    "plane-normal-vector", "plane-cartesian-equation", "point-plane-distance", "line-parametric-form",
+    "relative-lines-space", "line-plane-position", "relative-planes", "sculpture-orthogonality-mission",
+    "official-applications-workshop", "orthogonal-planes-reinforcement", "containing-plane-reinforcement",
+    "parameterized-planes-mission",
   ]],
   ["terminale-c-math-l06-primitives", [
     "primitive-definition", "primitive-existence", "primitive-initial-value", "usual-primitives",

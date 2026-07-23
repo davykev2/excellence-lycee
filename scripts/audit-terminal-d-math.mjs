@@ -24,12 +24,14 @@ const limitsPath = loadTypeScript("apps/web/src/data/terminalCLimitsContinuityPa
 const barycenterPath = loadTypeScript("apps/web/src/data/terminalCBarycenterPath.ts");
 const divisibilityPath = loadTypeScript("apps/web/src/data/terminalCDivisibilityPath.ts");
 const derivativesPath = loadTypeScript("apps/web/src/data/terminalCDerivativesPath.ts");
+const spaceGeometryPath = loadTypeScript("apps/web/src/data/terminalCSpaceGeometryPath.ts");
 const c01to05 = loadTypeScript("apps/web/src/data/terminalCMathPaths01to05.ts", {
   "./officialMathPathBuilder": builder,
   "./terminalCLimitsContinuityPath": limitsPath,
   "./terminalCBarycenterPath": barycenterPath,
   "./terminalCDivisibilityPath": divisibilityPath,
   "./terminalCDerivativesPath": derivativesPath,
+  "./terminalCSpaceGeometryPath": spaceGeometryPath,
 });
 const c06to10 = loadTypeScript("apps/web/src/data/terminalCMathPaths06to10.ts", { "./officialMathPathBuilder": builder });
 const c11to15 = loadTypeScript("apps/web/src/data/terminalCMathPaths11to15.ts", { "./officialMathPathBuilder": builder });
