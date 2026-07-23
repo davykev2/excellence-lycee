@@ -513,6 +513,13 @@ export function LessonWorkspace({
                 );
               })}
             </ol>
+            <LessonFeedbackPanel
+              pathId={path.id}
+              lessonId={lesson.id}
+              currentUser={currentUser}
+              localOnly={localOnly}
+              context="correction"
+            />
             <div className={`mastery-reward ${resultSynced ? "is-synced" : "is-pending"}`}>
               <Medal size={25} weight="duotone" />
               <span>{resultSynced

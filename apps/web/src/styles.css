@@ -872,6 +872,7 @@
 .mastery-worked-example b { color: var(--green-700); }
 
 .mastery-feedback-panel {
+  width: 100%;
   display: grid;
   gap: 20px;
   padding: 26px;
@@ -879,7 +880,10 @@
   border-radius: 22px;
   background: #ffffff;
   box-shadow: 0 8px 25px rgba(13, 37, 74, .045);
+  text-align: left;
 }
+
+.mastery-feedback-panel.is-correction { margin-top: 22px; }
 
 .lesson-feedback-heading {
   display: grid;

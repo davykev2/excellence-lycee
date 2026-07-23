@@ -20,6 +20,7 @@ interface LessonFeedbackPanelProps {
   lessonId: string;
   currentUser: Pick<AuthUser, "id" | "name" | "photoUrl" | "role">;
   localOnly?: boolean;
+  context?: "lesson" | "correction";
 }
 
 const reactions: Array<{
@@ -55,6 +56,7 @@ export function LessonFeedbackPanel({
   lessonId,
   currentUser,
   localOnly = false,
+  context = "lesson",
 }: LessonFeedbackPanelProps) {
   const {
     feedback,
@@ -71,6 +73,7 @@ export function LessonFeedbackPanel({
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editingBody, setEditingBody] = useState("");
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+  const isCorrection = context === "correction";
 
   const submitComment = async () => {
     const body = draft.trim();
@@ -88,13 +91,21 @@ export function LessonFeedbackPanel({
   };
 
   return (
-    <section className="mastery-feedback-panel" aria-labelledby="lesson-feedback-title">
+    <section
+      className={`mastery-feedback-panel${isCorrection ? " is-correction" : ""}`}
+      aria-labelledby={`lesson-feedback-title-${context}`}
+    >
       <header className="lesson-feedback-heading">
         <span><ChatCircleDots size={25} weight="duotone" /></span>
         <div>
-          <p className="path-kicker">Ton avis compte</p>
-          <h2 id="lesson-feedback-title">Aide-nous à améliorer ce niveau</h2>
-          <p>Une réaction ou un commentaire suffit pour guider l’équipe pédagogique.</p>
+          <p className="path-kicker">{isCorrection ? "Retour sur la correction" : "Ton avis compte"}</p>
+          <h2 id={`lesson-feedback-title-${context}`}>
+            {isCorrection ? "Cette correction t’a-t-elle aidé ?" : "Aide-nous à améliorer ce niveau"}
+          </h2>
+          <p>{isCorrection
+            ? "Dis-nous si les explications sont claires ou ce qu’il faudrait détailler davantage."
+            : "Une réaction ou un commentaire suffit pour guider l’équipe pédagogique."}
+          </p>
         </div>
       </header>
 
@@ -135,7 +146,9 @@ export function LessonFeedbackPanel({
                 value={draft}
                 maxLength={1000}
                 rows={3}
-                placeholder="Qu’est-ce qui t’a aidé ou qu’est-ce qui mérite une meilleure explication ?"
+                placeholder={isCorrection
+                  ? "Qu’est-ce qui est clair dans la correction, ou quelle étape faut-il mieux expliquer ?"
+                  : "Qu’est-ce qui t’a aidé ou qu’est-ce qui mérite une meilleure explication ?"}
                 onChange={(event) => setDraft(event.target.value)}
               />
               <small>{draft.length}/1 000</small>
@@ -159,8 +172,14 @@ export function LessonFeedbackPanel({
           {feedback.comments.length === 0 ? (
             <div className="lesson-comment-empty">
               <ChatCircleDots size={30} weight="duotone" />
-              <strong>Sois le premier à donner un avis précis.</strong>
-              <span>Ton retour nous aidera à rendre cette partie plus simple pour les prochains élèves.</span>
+              <strong>{isCorrection
+                ? "Sois le premier à évaluer cette correction."
+                : "Sois le premier à donner un avis précis."}
+              </strong>
+              <span>{isCorrection
+                ? "Ton retour nous aidera à rendre les prochaines corrections plus simples et plus complètes."
+                : "Ton retour nous aidera à rendre cette partie plus simple pour les prochains élèves."}
+              </span>
             </div>
           ) : (
             <ol className="lesson-comment-list">
