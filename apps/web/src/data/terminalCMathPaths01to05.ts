@@ -1,5 +1,6 @@
 import { buildOfficialMathPath, officialMathTopic as t } from "./officialMathPathBuilder";
 import { terminalCBarycenterPath } from "./terminalCBarycenterPath";
+import { terminalCDivisibilityPath } from "./terminalCDivisibilityPath";
 import { terminalCLimitsContinuityPath } from "./terminalCLimitsContinuityPath";
 
 const levelIds = ["terminale-c"];
@@ -11,24 +12,7 @@ const levelIds = ["terminale-c"];
 // XP de l'API restent inchangés.
 export { terminalCLimitsContinuityPath };
 export { terminalCBarycenterPath };
-
-export const terminalCDivisibilityPath = buildOfficialMathPath({
-  id: "terminale-c-math-l03-divisibility", levelIds, chapterNumber: 3, themeNumber: 3,
-  themeTitle: "Arithmétique", title: "Divisibilité dans ℤ",
-  description: "Diviseurs, division euclidienne, congruences, numération et nombres premiers.",
-  outcomes: ["Raisonner par divisibilité", "Calculer avec les congruences", "Décomposer un entier en facteurs premiers"],
-  documentTitle: "TC Maths leçon 03 Divisibilité dans  Z.pdf",
-  topics: [
-    t("integer-divisibility", "Diviseurs et combinaisons linéaires", "1-2", "I-1. Diviseurs", "$a$ divise $b$ s’il existe un entier $k$ tel que $b=ak$. Un diviseur commun divise toute combinaison linéaire des nombres.", "Pour prouver que deux entiers sont premiers entre eux, ramener tout diviseur commun à un diviseur de $1$.", String.raw`d\mid a,\ d\mid b\Rightarrow d\mid(ua+vb)`, "Quelle conclusion donne le calcul du cours pour les deux termes de la fraction en $n$ ?", "Leur PGCD vaut $1$, donc la fraction est irréductible.", 60),
-    t("euclidean-division-z", "Division euclidienne dans ℤ", "2-4", "I-2. Division euclidienne", "Pour $a\\in\\mathbb Z$ et $b\\ne0$, il existe un unique couple $(q,r)$ tel que $a=bq+r$ et $0\\le r<|b|$.", "Le reste est toujours positif ou nul et strictement inférieur à la valeur absolue du diviseur.", String.raw`a=bq+r,\qquad0\le r<|b|`, "Quel quotient et quel reste obtient-on pour $-361$ par $23$ ?", "$q=-16$ et $r=7$.", 60),
-    t("remainders-operations", "Calculs de restes", "4", "I-2. Applications", "On remplace les entiers par leurs restes, puis on réduit à nouveau le résultat modulo le diviseur.", "Somme, produit et puissances peuvent être calculés sur les restes.", String.raw`a\equiv r\ [n],\ b\equiv s\ [n]\Rightarrow ab\equiv rs\ [n]`, "Si $m\\equiv8[17]$ et $n\\equiv12[17]$, quel est le reste de $mn$ par $17$ ?", "$11$", 65),
-    t("congruences", "Congruences modulo n", "4-6", "I-3. Congruences", "$a\\equiv b[n]$ signifie que $n$ divise $a-b$, ou encore que $a$ et $b$ ont le même reste modulo $n$.", "Les congruences sont compatibles avec addition, multiplication et puissances entières.", String.raw`a\equiv b\pmod n\Longleftrightarrow n\mid(a-b)`, "Pour $a=51$, quel est le reste de $a^4$ modulo $8$ ?", "$1$", 65),
-    t("numeration-divisibility-tests", "Bases de numération et critères de divisibilité", "6-9", "I-4. Numération", "L’écriture d’un entier en base $b$ repose sur les puissances successives de $b$. Les critères de divisibilité traduisent ensuite des congruences simples sur les chiffres.", "En base $b$, les chiffres sont compris entre $0$ et $b-1$.", String.raw`N=\sum_{k=0}^{p}a_kb^k`, "Quelle est l’écriture binaire de $222$ ?", "$11011110_2$", 70),
-    t("prime-numbers", "Reconnaître un nombre premier", "9", "II-1. Nombres premiers", "Un entier $p>1$ est premier s’il n’a que deux diviseurs positifs. Pour le tester, il suffit d’essayer les nombres premiers inférieurs ou égaux à $\\sqrt p$.", "Un entier composé possède au moins un diviseur premier au plus égal à sa racine carrée.", String.raw`p\text{ premier}\Longleftrightarrow \forall q\le\sqrt p,\ q\nmid p`, "Le nombre $983$ est-il premier ?", "Oui.", 70),
-    t("prime-factorization", "Décomposition en facteurs premiers", "9-10", "II-2. Décomposition", "Tout entier naturel supérieur à $1$ admet une décomposition unique en produit de puissances de nombres premiers, à l’ordre près.", "Diviser successivement par les plus petits facteurs premiers.", String.raw`n=p_1^{\alpha_1}\cdots p_k^{\alpha_k}`, "Quelle est la décomposition de $1092$ ?", "$2^2\\times3\\times7\\times13$.", 75),
-    t("number-of-divisors", "Nombre de diviseurs positifs", "10", "II-2. Diviseurs", "Si $n=\\prod p_i^{\\alpha_i}$, chaque diviseur choisit indépendamment un exposant entre $0$ et $\\alpha_i$.", "Multiplier le nombre de choix possibles pour chaque exposant.", String.raw`\tau(n)=\prod_i(\alpha_i+1)`, "Combien de diviseurs positifs possède $1092=2^2\\times3\\times7\\times13$ ?", "$24$", 75, "challenge"),
-  ],
-});
+export { terminalCDivisibilityPath };
 
 export const terminalCDerivativesPath = buildOfficialMathPath({
   id: "terminale-c-math-l04-derivatives-functions", levelIds, chapterNumber: 4, themeNumber: 1,

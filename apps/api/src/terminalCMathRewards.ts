@@ -11,7 +11,8 @@ export const terminalCMathLessonIds = [
   ]],
   ["terminale-c-math-l03-divisibility", [
     "integer-divisibility", "euclidean-division-z", "remainders-operations", "congruences",
-    "numeration-divisibility-tests", "prime-numbers", "prime-factorization", "number-of-divisors",
+    "numeration-divisibility-tests", "divisibility-tests", "prime-numbers", "prime-factorization",
+    "number-of-divisors", "modular-strategy-mission", "affine-coding-mission", "exponential-coding-mission",
   ]],
   ["terminale-c-math-l04-derivatives-functions", [
     "one-sided-derivatives", "derivative-at-junction", "vertical-half-tangent", "derivative-composition",
