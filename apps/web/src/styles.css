@@ -862,10 +862,11 @@
 .mastery-observation { display: flex; align-items: flex-start; gap: 9px; padding: 14px 16px; border-radius: 14px; background: var(--subject-accent-soft); color: var(--navy-800) !important; font-size: 13px !important; }
 .mastery-observation svg { flex: 0 0 auto; color: var(--subject-accent); }
 
-.mastery-course-card ol { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
-.mastery-course-card ol li { display: grid; grid-template-columns: 30px 1fr; align-items: center; gap: 10px; }
-.mastery-course-card ol li > span { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; background: var(--navy-800); color: #fff; font-size: 12px; font-weight: 900; }
-.mastery-course-card ol li p { margin: 0; color: #475c73; font-size: 14px; line-height: 1.5; }
+/* Le sélecteur enfant direct est essentiel : sans lui, ces pastilles écrasent les listes numérotées du markdown du cours (.lesson-rich-content ol). */
+.mastery-course-card > ol { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.mastery-course-card > ol li { display: grid; grid-template-columns: 30px 1fr; align-items: center; gap: 10px; }
+.mastery-course-card > ol li > span { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; background: var(--navy-800); color: #fff; font-size: 12px; font-weight: 900; }
+.mastery-course-card > ol li p { margin: 0; color: #475c73; font-size: 14px; line-height: 1.5; }
 .mastery-worked-example { display: grid; gap: 6px; padding: 17px; border-left: 4px solid var(--green-500); border-radius: 0 13px 13px 0; background: #f3f8f1; }
 .mastery-worked-example strong { color: var(--navy-950); }
 .mastery-worked-example span { color: var(--ink-muted); }
