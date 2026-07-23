@@ -95,7 +95,7 @@ Dernier travail livré et déployé en production :
 ### Suites naturelles
 
 1. Appliquer le même traitement d'enrichissement aux **leçons 07 et 08 de Terminale A** (PDF sources dans `C:\Users\krouk\Downloads\Documents\COURS\TA\Maths TA\`). Elles sont aujourd'hui bien plus légères que les leçons 01 à 05 : environ 200 lignes chacune dans `terminalAMathFaithfulCoursePaths.ts`. Les 19 leçons de Terminale C et les 12 de Terminale D sont dans le même cas (générateur compact).
-1b. **Appliquer la migration `20260723160000_terminal_a_sequences_mission.sql` à la base de production Supabase** (voir avec le porteur — le déploiement Vercel ne l'exécute pas).
+1b. **Appliquer la migration `20260723180000_terminal_a_statistics_mission.sql` à la base de production Supabase** (le déploiement Vercel ne l'exécute pas). La migration `20260723160000` des Suites a, elle, été appliquée et vérifiée le 23/07/2026.
 2. Créer le lot d'exercices guidés **`tle-a-maths`** manquant dans `content_pipeline/batches/` (les autres séries et matières en ont un).
 3. Trancher la question des deux frontends (`apps/web` vs `frontend/`).
 4. Migrer le contenu des fichiers TS vers le studio éditorial Supabase.
