@@ -812,6 +812,130 @@ $$\frac{a^3}{\sqrt{a^{0,4}}}=\frac{a^3}{a^{\frac15}}=a^{3-\frac15}=a^{\frac{14}{
       choice("Les règles sur les exposants rationnels s’appliquent pour tout réel $a$.", ["Vrai", "Faux"], 1, "Elles supposent $a$ **strictement positif**.", "Propriétés", 2),
     ],
   },
+  {
+    id: "complete-function-study-mission",
+    title: "Mission finale : conduire une étude complète de fonction",
+    summary: "Mobiliser limites, continuité, TVI, asymptotes et tangente sur l’étude complète du document.",
+    pages: "13-19",
+    section: "C. Situations complexes et D. Exercices résolus",
+    durationMinutes: 45,
+    kind: "challenge",
+    body: String.raw`## Méthode complète d’étude
+
+Pour étudier une fonction et représenter sa courbe, l’ordre suivant ne change jamais :
+
+1. déterminer l’ensemble de définition ;
+2. calculer les limites aux bornes du domaine ;
+3. interpréter ces limites en termes d’asymptotes ou de branches infinies ;
+4. calculer la dérivée et en étudier le signe ;
+5. dresser le tableau de variations ;
+6. déterminer une tangente remarquable et la position de la courbe par rapport à elle ;
+7. tracer la courbe.
+
+Lorsque le signe de la dérivée n’est pas immédiat, on **étudie d’abord une fonction auxiliaire** : c’est tout l’objet de la partie A ci-dessous.
+
+## Partie A — la fonction auxiliaire $g(x)=2x^3-3x^2-1$
+
+### Limites
+
+$$\lim_{x\to-\infty}g(x)=\lim_{x\to-\infty}2x^3=-\infty,\qquad \lim_{x\to+\infty}g(x)=\lim_{x\to+\infty}2x^3=+\infty$$
+
+### Variations
+
+$g$ est dérivable sur $\mathbb{R}$ et $g'(x)=6x^2-6x=6x(x-1)$, qui s’annule en $0$ et en $1$.
+
+| $x$ | $-\infty\to0$ | $0$ | $0\to1$ | $1$ | $1\to+\infty$ |
+|---|---|---|---|---|---|
+| $g'(x)$ | $+$ | $0$ | $-$ | $0$ | $+$ |
+| $g$ | ↗ | $-1$ | ↘ | $-2$ | ↗ |
+
+### Existence et unicité de la racine $\alpha$
+
+Sur $]-\infty;1]$, le maximum de $g$ est $g(0)=-1<0$, donc $g$ y reste **strictement négative** : aucune racine.
+
+Sur $[1;+\infty[$, $g$ est continue et strictement croissante avec $g([1;+\infty[)=[-2;+\infty[$. Comme $0\in[-2;+\infty[$, l’équation $g(x)=0$ admet une **unique solution** $\alpha$.
+
+Enfin $g(1{,}6)\approx-0{,}49$ et $g(1{,}7)\approx0{,}16$ sont de signes contraires, donc :
+
+$$1{,}6<\alpha<1{,}7$$
+
+### Signe de $g$
+
+$$\forall x\in\,]-\infty;\alpha[,\ g(x)<0\qquad\text{et}\qquad\forall x\in\,]\alpha;+\infty[,\ g(x)>0$$
+
+## Partie B — l’étude de $f(x)=\dfrac{1-x}{1+x^3}$ sur $]-1;+\infty[$
+
+### Limites et asymptotes
+
+Pour $x>-1$, on a $x^3>-1$ donc $1+x^3>0$, et $\lim_{x\to-1^+}\dfrac{1}{1+x^3}=+\infty$. Comme $\lim_{x\to-1}(1-x)=2$ :
+
+$$\lim_{x\to-1^+}f(x)=+\infty\ \Longrightarrow\ \text{la droite } x=-1 \text{ est asymptote verticale}$$
+
+$$\lim_{x\to+\infty}f(x)=\lim_{x\to+\infty}\frac{-x}{x^3}=\lim_{x\to+\infty}\frac{-1}{x^2}=0\ \Longrightarrow\ \text{la droite } y=0 \text{ est asymptote horizontale}$$
+
+### Dérivée et variations
+
+$$f'(x)=\frac{-(1+x^3)-3x^2(1-x)}{(1+x^3)^2}=\frac{2x^3-3x^2-1}{(1+x^3)^2}=\frac{g(x)}{(1+x^3)^2}$$
+
+Comme $(1+x^3)^2>0$, le signe de $f'$ est exactement celui de $g$, étudié en partie A. Donc $f$ est strictement **décroissante** sur $]-1;\alpha]$ et strictement **croissante** sur $[\alpha;+\infty[$.
+
+### Tangente au point d’abscisse 0 et position relative
+
+$f(0)=1$ et $f'(0)=\dfrac{g(0)}{1}=-1$, donc la tangente $(T)$ a pour équation :
+
+$$y=-x+1$$
+
+Pour tout $x>-1$ : $f(x)-(-x+1)=\dfrac{x^2-x}{1+x^3}=\dfrac{x(x-1)}{1+x^3}$. Comme $1+x^3>0$, le signe est celui de $x(x-1)$ :
+
+- $(C)$ est **au-dessus** de $(T)$ sur $]-1;0[\,\cup\,]1;+\infty[$ ;
+- $(C)$ est **en dessous** de $(T)$ sur $]0;1[$ ;
+- $(C)$ et $(T)$ se coupent aux points d’abscisses $0$ et $1$.
+
+> **Ce qu’il faut retenir de cette mission.** Le signe d’une dérivée compliquée s’obtient en isolant une **fonction auxiliaire** ; le TVI donne alors la racine qui sépare les variations. C’est le schéma le plus fréquent au Baccalauréat.`,
+    keyPoint: "Étude complète : domaine, limites, asymptotes, dérivée via une fonction auxiliaire, variations, tangente et position.",
+    example: "$f'(x)=\\frac{g(x)}{(1+x^3)^2}$ : le signe de $f'$ est celui de $g$, dont la racine unique $\\alpha$ vérifie $1,6<\\alpha<1,7$.",
+    methodSteps: [
+      "Étudie la fonction auxiliaire : limites, dérivée, variations, racine unique et signe.",
+      "Reviens à f : domaine, limites aux bornes et interprétation en asymptotes.",
+      "Exprime f' en fonction de la fonction auxiliaire pour en déduire son signe.",
+      "Dresse le tableau de variations, puis étudie la tangente et la position relative.",
+    ],
+    timeline: [
+      { label: "Auxiliaire", detail: "Étudier g et localiser sa racine α." },
+      { label: "Limites", detail: "Déterminer les asymptotes de f." },
+      { label: "Dérivée", detail: "Relier le signe de f' à celui de g." },
+      { label: "Synthèse", detail: "Variations, tangente, position et tracé." },
+    ],
+    curve: {
+      kind: "curve",
+      eyebrow: "Manipuler",
+      title: "La fonction auxiliaire g et sa racine α",
+      instruction: "Balaye entre 1,6 et 1,7 : entre quelles bornes g change-t-elle de signe ?",
+      observation: "g reste négative jusqu’à α, puis devient positive. g(1,6) ≈ -0,49 et g(1,7) ≈ 0,16 : la racine unique α est coincée entre les deux droites rouges. C’est elle qui sépare les variations de f.",
+      formula: "g(x) = 2x³ - 3x² - 1",
+      formulaTex: "g(x)=2x^3-3x^2-1",
+      rule: { kind: "polynomial", coefficients: [-1, 0, -3, 2] },
+      window: { xMin: -1, xMax: 2.5, yMin: -8, yMax: 8 },
+      guides: [
+        { kind: "vertical", value: 1.6, label: "1,6" },
+        { kind: "vertical", value: 1.7, label: "1,7" },
+      ],
+      marker: { min: -1, max: 2.5, step: 0.05, initial: 0 },
+    },
+    questions: [
+      short("Pour $g(x)=2x^3-3x^2-1$, calcule $\\lim_{x\\to-\\infty}g(x)$.", ["-∞", "-infini"], "Le monôme dominant $2x^3$ tend vers $-\\infty$.", "D-Exercice résolu 5 - partie A"),
+      short("Donne $g'(x)$ sous forme factorisée.", ["6x(x-1)", "6x(x - 1)"], "$g'(x)=6x^2-6x=6x(x-1)$.", "D-Exercice résolu 5 - partie A", 2),
+      short("Calcule $g(0)$, le maximum de $g$ sur $]-\\infty;1]$.", ["-1"], "$g(0)=-1$, et comme c’est le maximum, $g<0$ sur tout cet intervalle.", "D-Exercice résolu 5 - partie A"),
+      short("Donne l’encadrement de la racine unique $\\alpha$ à $10^{-1}$ près.", ["1,6<α<1,7", "1.6<alpha<1.7", "1,6<alpha<1,7"], "$g(1,6)\\approx-0,49$ et $g(1,7)\\approx0,16$ sont de signes contraires.", "D-Exercice résolu 5 - partie A", 3),
+      short("Pour $f(x)=\\frac{1-x}{1+x^3}$, donne l’équation de l’asymptote verticale.", ["x=-1", "x = -1"], "$\\lim_{x\\to-1^+}f(x)=+\\infty$.", "D-Exercice résolu 5 - partie B", 2),
+      short("Donne l’équation de l’asymptote horizontale en $+\\infty$.", ["y=0", "y = 0"], "$f(x)\\sim\\frac{-1}{x^2}\\to0$.", "D-Exercice résolu 5 - partie B", 2),
+      short("Complète : $f'(x)=\\frac{\\dots}{(1+x^3)^2}$. Donne le numérateur.", ["g(x)", "2x^3-3x^2-1", "2x³-3x²-1"], "Le calcul du quotient redonne exactement $g(x)$.", "D-Exercice résolu 5 - partie B", 3),
+      short("Donne l’équation de la tangente $(T)$ à $(C)$ au point d’abscisse 0.", ["y=-x+1", "y = -x + 1"], "$f(0)=1$ et $f'(0)=-1$.", "D-Exercice résolu 5 - partie B", 2),
+      choice("Sur $]0;1[$, la courbe $(C)$ est située…", ["en dessous de $(T)$", "au-dessus de $(T)$"], 0, "Sur cet intervalle, $x(x-1)<0$.", "D-Exercice résolu 5 - partie B", 2),
+      short("En quels points $(C)$ et $(T)$ se coupent-elles ? Donne les deux abscisses.", ["0 et 1", "0;1", "0 et 1", "0,1"], "$x(x-1)=0$ pour $x=0$ ou $x=1$.", "D-Exercice résolu 5 - partie B", 2),
+      short("Un objet refroidit selon $f(t)=\\frac{200}{t}+10$. Quelle température atteint-il après une très longue période, en °C ?", ["10", "10°C", "10 °C"], "$\\lim_{t\\to+\\infty}f(t)=10$ : la température se stabilise à 10 °C.", "C-Situation complexe 1", 2),
+    ],
+  },
 ];
 
 const builtLevels = levels.map((seed, index) => officialLevel(index, seed));

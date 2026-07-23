@@ -2,7 +2,7 @@ export const terminalCMathLessonIds = [
   ["terminale-c-math-l01-limits-continuity", [
     "limit-composition", "monotone-finite-limit", "parabolic-branches", "continuous-extension",
     "continuous-image-interval", "continuity-operations", "continuous-bijection-inverse",
-    "intermediate-value-theorem", "rational-powers",
+    "intermediate-value-theorem", "rational-powers", "complete-function-study-mission",
   ]],
   ["terminale-c-math-l02-barycenter", [
     "weighted-barycenter", "isobarycenter-homogeneity", "weighted-vector-reduction", "barycenter-coordinates",
