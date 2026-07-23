@@ -1,25 +1,14 @@
 import { buildOfficialMathPath, officialMathTopic as t } from "./officialMathPathBuilder";
+import { terminalCLimitsContinuityPath } from "./terminalCLimitsContinuityPath";
 
 const levelIds = ["terminale-c"];
 
-export const terminalCLimitsContinuityPath = buildOfficialMathPath({
-  id: "terminale-c-math-l01-limits-continuity", levelIds, chapterNumber: 1, themeNumber: 1,
-  themeTitle: "Fonctions numériques", title: "Limites et continuité",
-  description: "Limites composées, branches infinies, continuité, bijections et théorème des valeurs intermédiaires.",
-  outcomes: ["Calculer des limites composées", "Étudier la continuité", "Justifier l’existence et l’unicité d’une solution"],
-  documentTitle: "TC Maths leçon 01 Limite et continuité.pdf",
-  topics: [
-    t("limit-composition", "Limite d’une fonction composée", "1-2", "1. Limite d’une fonction composée", "Pour une composée $g\\circ f$, on suit successivement la limite de $f(x)$ puis celle de $g$ au point obtenu, en vérifiant les domaines.", "Si $f(x)\\to b$ et $g(t)\\to L$ lorsque $t\\to b$, alors $g(f(x))\\to L$.", String.raw`\lim g(f(x))=\lim_{t\to b}g(t)`, "Dans l’exercice officiel, quelle est la limite de $\\sqrt{4+2/(x^2+1)}$ en $+\\infty$ ?", "$2$", 55),
-    t("monotone-finite-limit", "Limite d’une fonction monotone", "2-3", "2. Limite d’une fonction monotone", "Une fonction croissante et majorée, ou décroissante et minorée, sur un intervalle ouvert admet une limite finie à l’extrémité considérée.", "La monotonie donne l’ordre ; la borne empêche la fonction de diverger.", String.raw`f\nearrow,\ f\le M\Longrightarrow \lim f=\ell\le M`, "Que peut-on conclure pour la fonction croissante du cours, majorée par $1+f(1)$ ?", "Elle admet une limite finie $\\ell$ avec $f(1)\\le\\ell\\le1+f(1)$.", 60),
-    t("parabolic-branches", "Branches paraboliques", "3", "3. Branches paraboliques", "Le comportement conjoint de $f(x)$ et de $f(x)/x$ précise la direction d’une branche parabolique à l’infini.", "Si $f(x)\\to\\pm\\infty$ et $f(x)/x\\to0$, la branche a la direction de l’axe des abscisses.", String.raw`f(x)\to\pm\infty,\quad \frac{f(x)}x\to0`, "Quelle direction obtient-on dans l’exercice où $f(x)\\to-\\infty$ et $f(x)/x\\to0$ ?", "La direction de l’axe des abscisses $(OI)$.", 65),
-    t("continuous-extension", "Prolongement par continuité", "4-5", "4.2. Prolongement par continuité", "Lorsqu’une fonction n’est pas définie en $a$ mais possède une limite finie $L$ en $a$, on la prolonge en posant $\\varphi(a)=L$.", "Le trou disparaît si la limite existe et est finie.", String.raw`\varphi(x)=f(x)\ (x\ne a),\qquad \varphi(a)=\lim_{x\to a}f(x)`, "Quelle valeur faut-il donner au prolongement de $(x-9)/(\\sqrt{x-5}-2)$ en $9$ ?", "$4$", 65),
-    t("continuous-image-interval", "Image d’un intervalle", "5-6", "4.3. Image d’un intervalle", "Une fonction continue transforme un intervalle en un intervalle. Si elle est monotone, les images des bornes et leurs limites donnent directement les extrémités.", "Respecte le sens de variation et l’ouverture des bornes.", String.raw`f([a,b])=[\min(f(a),f(b)),\max(f(a),f(b))]`, "Quelle est l’image de $]-\\pi;\\pi]$ par la fonction cosinus ?", "$[-1;1]$", 60),
-    t("continuity-operations", "Opérations et composition de fonctions continues", "6-7", "4.4. Opérations", "Somme, produit, puissance entière, valeur absolue et quotient à dénominateur non nul conservent la continuité. Une composée est continue si la seconde fonction l’est sur l’image de la première.", "Pour $g\\circ f$, contrôler que $f(I)$ est contenu dans le domaine de continuité de $g$.", String.raw`f\text{ continue sur }I,\ g\text{ continue sur }f(I)\Rightarrow g\circ f\text{ continue}`, "Pourquoi $x^3+\\sin x$ est-elle continue sur $\\mathbb R$ ?", "C’est la somme de deux fonctions continues sur $\\mathbb R$.", 60),
-    t("continuous-bijection-inverse", "Bijection réciproque continue", "7-9", "5.1. Fonction continue strictement monotone", "Une fonction continue et strictement monotone sur un intervalle réalise une bijection sur son image. Sa réciproque est continue et varie dans le même sens.", "Les courbes de $f$ et $f^{-1}$ sont symétriques par rapport à $y=x$.", String.raw`(f^{-1})'(y_0)=\frac1{f'(x_0)}\quad\text{si }y_0=f(x_0)`, "Si $g(-1)=2$ et $g'(-1)=-3$, combien vaut $(g^{-1})'(2)$ ?", "$-1/3$", 70),
-    t("intermediate-value-theorem", "Théorème des valeurs intermédiaires", "9-10", "5.1. TVI", "La continuité garantit l’existence d’un antécédent entre deux valeurs. La stricte monotonie ajoute l’unicité ; un balayage ou une dichotomie fournit ensuite un encadrement.", "Continuité + changement de signe + stricte monotonie donnent une unique racine.", String.raw`f(a)f(b)<0\Longrightarrow \exists!\,\alpha\in]a,b[,\ f(\alpha)=0`, "Pourquoi $2x^3+3x-1=0$ possède-t-elle une unique solution dans $]0;1[$ ?", "$f$ est continue, strictement croissante et $f(0)f(1)<0$.", 80, "challenge"),
-    t("rational-powers", "Racines n-ièmes et puissances rationnelles", "10-12", "6. Racines et puissances rationnelles", "Pour $a>0$, les racines imbriquées et quotients de puissances se réécrivent avec les règles sur les exposants rationnels.", "Transformer d’abord chaque radical en puissance puis additionner ou soustraire les exposants.", String.raw`\sqrt[n]{a^p}=a^{p/n}`, "Sous quelle forme s’écrit $\\sqrt[3]{a}\\times\\sqrt[4]{a}$ pour $a>0$ ?", "$a^{7/12}$", 70),
-  ],
-});
+// La leçon 01 est rédigée en toutes lettres dans son propre fichier, sur le modèle
+// de la leçon 01 de Terminale A : contenu fidèle enrichi, exercices multiples et
+// courbes interactives. Les identifiants et les poids de progression y sont
+// conservés à l'identique, afin que la répartition des 10 000 XP et le registre
+// XP de l'API restent inchangés.
+export { terminalCLimitsContinuityPath };
 
 export const terminalCBarycenterPath = buildOfficialMathPath({
   id: "terminale-c-math-l02-barycenter", levelIds, chapterNumber: 2, themeNumber: 2,
