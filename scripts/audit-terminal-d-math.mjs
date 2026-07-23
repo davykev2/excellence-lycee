@@ -20,7 +20,17 @@ function loadTypeScript(relativePath, dependencies = {}) {
 }
 
 const builder = loadTypeScript("apps/web/src/data/officialMathPathBuilder.ts");
-const c01to05 = loadTypeScript("apps/web/src/data/terminalCMathPaths01to05.ts", { "./officialMathPathBuilder": builder });
+const limitsPath = loadTypeScript("apps/web/src/data/terminalCLimitsContinuityPath.ts");
+const barycenterPath = loadTypeScript("apps/web/src/data/terminalCBarycenterPath.ts");
+const divisibilityPath = loadTypeScript("apps/web/src/data/terminalCDivisibilityPath.ts");
+const derivativesPath = loadTypeScript("apps/web/src/data/terminalCDerivativesPath.ts");
+const c01to05 = loadTypeScript("apps/web/src/data/terminalCMathPaths01to05.ts", {
+  "./officialMathPathBuilder": builder,
+  "./terminalCLimitsContinuityPath": limitsPath,
+  "./terminalCBarycenterPath": barycenterPath,
+  "./terminalCDivisibilityPath": divisibilityPath,
+  "./terminalCDerivativesPath": derivativesPath,
+});
 const c06to10 = loadTypeScript("apps/web/src/data/terminalCMathPaths06to10.ts", { "./officialMathPathBuilder": builder });
 const c11to15 = loadTypeScript("apps/web/src/data/terminalCMathPaths11to15.ts", { "./officialMathPathBuilder": builder });
 const c16to19 = loadTypeScript("apps/web/src/data/terminalCMathPaths16to19.ts", { "./officialMathPathBuilder": builder });
@@ -72,6 +82,6 @@ paths.forEach((path, index) => {
   report.push({ lesson: index + 1, path: path.id, levels: levels.length, exercises: levels.length, totalXp });
 });
 
-if (levelCount !== 94) throw new Error(`94 niveaux attendus, ${levelCount} reçus.`);
+if (levelCount !== 102) throw new Error(`102 niveaux attendus, ${levelCount} reçus.`);
 console.table(report);
 console.log(`Audit réussi : 12 leçons, ${levelCount} niveaux, ${levelCount} exercices et 120 000 XP.`);

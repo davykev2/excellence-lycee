@@ -1,6 +1,7 @@
 import { buildOfficialMathPath, officialMathTopic as t } from "./officialMathPathBuilder";
 import { terminalCBarycenterPath } from "./terminalCBarycenterPath";
 import { terminalCDivisibilityPath } from "./terminalCDivisibilityPath";
+import { terminalCDerivativesPath } from "./terminalCDerivativesPath";
 import { terminalCLimitsContinuityPath } from "./terminalCLimitsContinuityPath";
 
 const levelIds = ["terminale-c"];
@@ -13,24 +14,7 @@ const levelIds = ["terminale-c"];
 export { terminalCLimitsContinuityPath };
 export { terminalCBarycenterPath };
 export { terminalCDivisibilityPath };
-
-export const terminalCDerivativesPath = buildOfficialMathPath({
-  id: "terminale-c-math-l04-derivatives-functions", levelIds, chapterNumber: 4, themeNumber: 1,
-  themeTitle: "Fonctions numériques", title: "Dérivabilité et étude de fonctions",
-  description: "Dérivabilité latérale, fonctions composées et réciproques, dérivées successives et accroissements finis.",
-  outcomes: ["Étudier une dérivabilité", "Dériver une composée ou une réciproque", "Appliquer les accroissements finis"],
-  documentTitle: "TC Maths leçon 04 DERIVABILITE ET ETUDE DE FONCTIONS.pdf",
-  topics: [
-    t("one-sided-derivatives", "Dérivées à gauche et à droite", "1-2", "I-1-a", "La dérivabilité en un point de raccord exige l’existence et l’égalité des taux d’accroissement à gauche et à droite.", "Deux dérivées latérales finies mais différentes donnent deux demi-tangentes distinctes.", String.raw`f'_g(a)=\lim_{x\to a^-}\frac{f(x)-f(a)}{x-a}`, "Dans l’exercice en $1$, quelles sont les dérivées latérales ?", "$f'_g(1)=-1$ et $f'_d(1)=1$.", 60),
-    t("derivative-at-junction", "Dérivabilité en un point de raccord", "2-3", "I-1-b", "Pour une fonction définie par morceaux, on vérifie d’abord la continuité, puis on compare les deux dérivées latérales.", "La fonction est dérivable si les deux taux tendent vers le même réel.", String.raw`f'_g(a)=f'_d(a)\Longrightarrow f'(a)\text{ existe}`, "La fonction $x^2$ à gauche et $x^3$ à droite est-elle dérivable en $0$ ?", "Oui, et $f'(0)=0$.", 60),
-    t("vertical-half-tangent", "Demi-tangente verticale", "3", "I-1-c", "Une limite infinie du taux d’accroissement signale une demi-tangente verticale du côté étudié.", "Une dérivée infinie n’est pas une dérivée réelle : la fonction n’est pas dérivable de ce côté.", String.raw`\frac{f(x)-f(a)}{x-a}\to\pm\infty`, "Quelle interprétation obtient-on pour $f(x)=\\sqrt x-x$ en $0$ ?", "Une demi-tangente verticale à droite.", 65),
-    t("derivative-composition", "Dérivée d’une composée", "4-5", "I-3. Composition", "Si $g$ est dérivable en $a$ et $f$ dérivable en $g(a)$, alors $f\\circ g$ est dérivable en $a$.", "Multiplier la dérivée extérieure évaluée en $g(a)$ par la dérivée intérieure.", String.raw`(f\circ g)'(a)=g'(a)f'(g(a))`, "Quelle valeur donne le cours pour $(f\\circ g)'(3)$ ?", "$-5/32$", 70),
-    t("inverse-function-derivative", "Dérivée d’une bijection réciproque", "5-6", "I-4", "Si $f$ est bijective, dérivable en $x_0$ et $f'(x_0)\\ne0$, alors $f^{-1}$ est dérivable en $y_0=f(x_0)$.", "La dérivée de la réciproque est l’inverse de la dérivée au bon antécédent.", String.raw`(f^{-1})'(y_0)=\frac1{f'(x_0)}`, "Pour $g(-1)=2$ et $g'(-1)=-3$, combien vaut $(g^{-1})'(2)$ ?", "$-1/3$", 70),
-    t("successive-derivatives", "Dérivées successives", "6-7", "I-5", "On note $f^{(n)}$ la dérivée d’ordre $n$ et on la calcule en dérivant successivement tant que cela est possible.", "Un polynôme de degré $p$ a une dérivée d’ordre $p+1$ identiquement nulle.", String.raw`f^{(n+1)}=(f^{(n)})'`, "Pour $f(x)=x^3-2x^2+3$, quelle est la quatrième dérivée ?", "$f^{(4)}(x)=0$.", 60),
-    t("finite-increments", "Inégalité des accroissements finis", "7", "I-6. Accroissements finis", "Un encadrement de $f'$ sur $[a;b]$ donne un encadrement de l’accroissement $f(b)-f(a)$.", "Intégrer mentalement les bornes de la dérivée sur la longueur $b-a$.", String.raw`m(b-a)\le f(b)-f(a)\le M(b-a)`, "Quelle fonction permet d’encadrer $\\sqrt{19}-\\sqrt{17}$ dans le cours ?", "$f(x)=\\sqrt x$.", 75),
-    t("lipschitz-bound", "Majoration d’un accroissement", "7-8", "I-6. Propriété 2", "Si $|f'|\\le M$ sur un intervalle, alors $f$ est $M$-lipschitzienne : l’écart des images est contrôlé par celui des antécédents.", "Pour le cosinus, $|-\\sin t|\\le1$.", String.raw`|f(b)-f(a)|\le M|b-a|`, "Quelle inégalité en déduit-on pour le cosinus ?", "$|\\cos x-\\cos y|\\le|x-y|$.", 80, "challenge"),
-  ],
-});
+export { terminalCDerivativesPath };
 
 export const terminalCSpaceGeometryPath = buildOfficialMathPath({
   id: "terminale-c-math-l05-space-analytic-geometry", levelIds, chapterNumber: 5, themeNumber: 2,

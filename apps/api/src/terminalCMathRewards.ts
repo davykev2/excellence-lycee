@@ -15,8 +15,10 @@ export const terminalCMathLessonIds = [
     "number-of-divisors", "modular-strategy-mission", "affine-coding-mission", "exponential-coding-mission",
   ]],
   ["terminale-c-math-l04-derivatives-functions", [
-    "one-sided-derivatives", "derivative-at-junction", "vertical-half-tangent", "derivative-composition",
-    "inverse-function-derivative", "successive-derivatives", "finite-increments", "lipschitz-bound",
+    "one-sided-derivatives", "derivative-at-junction", "vertical-half-tangent", "derivative-on-interval-and-rules",
+    "derivative-composition", "inverse-function-derivative", "successive-derivatives", "finite-increments",
+    "lipschitz-bound", "complete-piecewise-function-study", "radical-function-study", "periodic-tangent-study",
+    "cocoa-profit-mission", "corrected-exercises-workshop", "reinforcement-exercises-mission",
   ]],
   ["terminale-c-math-l05-space-analytic-geometry", [
     "plane-normal-vector", "plane-cartesian-equation", "line-parametric-form", "relative-lines-space",

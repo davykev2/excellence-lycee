@@ -1,5 +1,10 @@
 # Prototype Instructions
 
+## État pédagogique - Terminale C, leçon 04
+
+- La leçon « Dérivabilité et étude de fonctions » vit désormais dans `terminalCDerivativesPath.ts` : 15 niveaux, 101 questions et exactement 10 000 XP. Les huit identifiants historiques restent stables ; sept niveaux séparent les règles usuelles, les études complètes, l’optimisation du cacao et les ateliers d’exercices. La leçon 03 de Terminale D réutilise ce contenu et le même manifeste de récompenses.
+- Corrections sources à conserver : couverture « Leçon 3 » classée comme leçon 04 dans le fichier/catalogue ; intervalle `[√17;√19]` corrigé en `[17;19]` pour l’inégalité des accroissements finis ; tableau de signes de `B'` page 16 inversé alors que le calcul et la conclusion écrite sont corrects.
+
 Run the local server yourself and open the preview in the browser available to this environment. Do not give the user server-start instructions when you can run it.
 
 Before making substantial visual changes, use the Product Design plugin's `get-context` skill when the visual source is unclear or no longer matches the current goal. When the user gives durable prototype-specific design feedback, preferences, or decisions, record them in `AGENTS.md`.
