@@ -74,12 +74,15 @@ Dernier travail livré et déployé en production :
 
 - Refonte de la **leçon 01 de Terminale C** (« Limites et continuité »), sortie du générateur compact `buildOfficialMathPath` vers son propre fichier `terminalCLimitsContinuityPath.ts`, sur le modèle de la leçon 01 de Terminale A. Les **9 identifiants de niveaux et la formule de poids `50 + min(index,7)*5` y sont conservés à l'identique**, si bien que la répartition des 10 000 XP est inchangée et qu'aucune migration Supabase ni modification du registre XP de l'API n'a été nécessaire.
 
+- Mission finale ajoutée à la leçon 01 de Terminale C et D (nouveaux identifiants de niveaux : modification coordonnée données web + `terminalCMathRewards.ts` + migration Supabase du manifeste), puis astuces mémoire de Davy ajoutées dans la leçon 01 de Terminale C.
+
+- Refonte de la **leçon 02 de Terminale A** (« Probabilité »), sortie du générateur compact vers son propre fichier `terminalAProbabilityPath.ts`, sur le modèle de la leçon 01. Les **7 identifiants de niveaux et les poids XP (45/45/55/60/60/75/85, registre `apps/api/src/curriculum.ts`) sont conservés à l'identique** : aucune migration Supabase nécessaire. Les parcours A1 (7 niveaux) et A2 (6 niveaux, sans la partie « Variables aléatoires ») sont bâtis sur les mêmes niveaux et restent câblés dans `terminalMathPaths.ts`. La situation complexe de la kermesse de Mariam sert de mission finale au niveau 7, qui gagne une courbe interactive (fiabilité d'un test de dépistage, règle `rational-linear`). Coquilles du PDF corrigées et annotées dans `corrections` (20 474/20 457 → 20 475 ; conclusion « 17 % » → seuil exact 19/117 ≈ 16,3 %).
+
 > **Modèle à suivre pour les prochaines leçons.** Le générateur `buildOfficialMathPath` **ignore** le paramètre `weight` passé dans chaque `officialMathTopic` : il applique `50 + Math.min(index, 7) * 5`, exactement la même formule que `terminalCMathRewardWeight` côté API. Toute réécriture d'une leçon générée doit donc reproduire cette formule et conserver l'ordre des identifiants pour ne rien casser.
 
 ### Suites naturelles
 
-1. Appliquer le même traitement d'enrichissement aux **leçons 02 à 08 de Terminale A** (PDF sources fournis par le porteur du projet). Elles sont aujourd'hui bien plus légères que la leçon 01 : environ 200 lignes chacune dans `terminalAMathFaithfulCoursePaths.ts`, contre ~1 000 pour la leçon 01. Les 19 leçons de Terminale C et les 12 de Terminale D sont dans le même cas (générateur compact).
-2. Ajouter à la leçon 01 de Terminale C une **mission finale** et un niveau dédié aux méthodes d'approximation. Ces ajouts créent de nouveaux identifiants de niveaux : ils imposent une modification coordonnée en trois endroits — données web, `apps/api/src/terminalCMathRewards.ts`, et une nouvelle migration Supabase mettant à jour le manifeste `terminal_c_math_manifest`.
+1. Appliquer le même traitement d'enrichissement aux **leçons 03 à 08 de Terminale A** (PDF sources dans `C:\Users\krouk\Downloads\Documents\COURS\TA\Maths TA\`). Elles sont aujourd'hui bien plus légères que les leçons 01 et 02 : environ 200 lignes chacune dans `terminalAMathFaithfulCoursePaths.ts`. Les 19 leçons de Terminale C et les 12 de Terminale D sont dans le même cas (générateur compact).
 2. Créer le lot d'exercices guidés **`tle-a-maths`** manquant dans `content_pipeline/batches/` (les autres séries et matières en ont un).
 3. Trancher la question des deux frontends (`apps/web` vs `frontend/`).
 4. Migrer le contenu des fichiers TS vers le studio éditorial Supabase.
