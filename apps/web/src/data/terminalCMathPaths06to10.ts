@@ -1,22 +1,9 @@
 import { buildOfficialMathPath, officialMathTopic as t } from "./officialMathPathBuilder";
+import { terminalCPrimitivesPath } from "./terminalCPrimitivesPath";
 
 const levelIds = ["terminale-c"];
 
-export const terminalCPrimitivesPath = buildOfficialMathPath({
-  id: "terminale-c-math-l06-primitives", levelIds, chapterNumber: 6, themeNumber: 1,
-  themeTitle: "Analyse", title: "Primitives",
-  description: "Définition, existence, condition initiale et calcul des primitives usuelles ou composées.",
-  outcomes: ["Reconnaître une primitive", "Déterminer une primitive avec condition initiale", "Calculer des primitives usuelles et composées"],
-  documentTitle: "TC Maths leçon 06 PRIMITIVES.pdf",
-  topics: [
-    t("primitive-definition", "Reconnaître une primitive", "1-2", "I. Définition", "Une fonction $F$ est une primitive de $f$ sur un intervalle $I$ lorsque $F$ est dérivable sur $I$ et $F'=f$.", "Deux primitives d’une même fonction sur un intervalle diffèrent d’une constante.", String.raw`F'=f\quad\Longrightarrow\quad\{\text{primitives de }f\}=\{F+C\}`, "Parmi $G(x)=x^2+5x+1$ et $H(x)=x^2+5x-4$, lesquelles sont des primitives de $2x+5$ ?", "Les deux fonctions.", 55),
-    t("primitive-existence", "Existence des primitives", "2-3", "II. Existence", "Toute fonction continue sur un intervalle admet des primitives sur cet intervalle.", "Avant de chercher une primitive, préciser un intervalle où la fonction est continue.", String.raw`f\text{ continue sur }I\Longrightarrow\exists F,\ F'=f`, "Les fonctions $x\\mapsto x^3-1$ et $x\\mapsto x/(x^2+1)$ admettent-elles des primitives sur $\\mathbb R$ ?", "Oui, elles sont continues sur $\\mathbb R$.", 55),
-    t("primitive-initial-value", "Primitive avec condition initiale", "3-4", "III. Condition initiale", "La constante d’une primitive est déterminée par la valeur imposée en un point.", "Calculer d’abord la famille $F+C$, puis remplacer la condition initiale.", String.raw`G(x)=F(x)+C,\quad G(x_0)=y_0`, "Si $F(x)=x^2-x$ et $H(-1)=5$, quelle primitive $H$ obtient-on ?", "$H(x)=x^2-x+3$.", 65),
-    t("usual-primitives", "Primitives usuelles", "4-6", "IV-1. Tableau des primitives", "Les puissances, l’inverse, les racines, le sinus, le cosinus et l’exponentielle possèdent des primitives de référence à connaître.", "Pour $x^\\alpha$, ajouter $1$ à l’exposant puis diviser par le nouvel exposant, sauf pour $\\alpha=-1$.", String.raw`\int x^\alpha\,dx=\frac{x^{\alpha+1}}{\alpha+1}+C\quad(\alpha\ne-1)`, "Quelle primitive de $x^3$ s’annule en $0$ ?", "$x^4/4$.", 65),
-    t("primitive-linearity", "Sommes et combinaisons de primitives", "6-7", "IV-2. Opérations", "La dérivation étant linéaire, une combinaison linéaire de primitives est une primitive de la combinaison correspondante.", "Décomposer la fonction en termes simples, intégrer terme à terme, puis ajouter une seule constante.", String.raw`\int(af+bg)=a\int f+b\int g`, "Une primitive de $3x^2-4x+5$ est-elle $x^3-2x^2+5x$ ?", "Oui.", 65),
-    t("composite-primitives", "Primitives de formes composées", "7-9", "IV-3. Formes composées", "Les formes $u'u^n$, $u'/u$, $u'e^u$ ou $u'/\\sqrt u$ se reconnaissent par la présence de la dérivée intérieure.", "Identifier $u$, vérifier son domaine, puis ajuster le coefficient manquant.", String.raw`\int u'(x)u(x)^n\,dx=\frac{u(x)^{n+1}}{n+1}+C`, "Quelle primitive convient à $2x(x^2+1)^3$ ?", "$(x^2+1)^4/4+C$.", 80, "challenge"),
-  ],
-});
+export { terminalCPrimitivesPath };
 
 export const terminalCConicsPath = buildOfficialMathPath({
   id: "terminale-c-math-l07-conics", levelIds, chapterNumber: 7, themeNumber: 2,

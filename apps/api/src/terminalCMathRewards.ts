@@ -27,8 +27,10 @@ export const terminalCMathLessonIds = [
     "parameterized-planes-mission",
   ]],
   ["terminale-c-math-l06-primitives", [
-    "primitive-definition", "primitive-existence", "primitive-initial-value", "usual-primitives",
-    "primitive-linearity", "composite-primitives",
+    "primitive-definition", "primitive-existence", "primitive-family", "primitive-initial-value",
+    "usual-primitives", "primitive-linearity", "composite-primitives", "bus-cost-mission",
+    "official-applications-workshop", "radical-coefficients-reinforcement",
+    "derivative-links-reinforcement", "composite-reinforcement-workshop", "advanced-primitives-mission",
   ]],
   ["terminale-c-math-l07-conics", [
     "conic-focus-directrix", "conic-axis-vertices", "conic-region", "parabola-reduced-equation",
