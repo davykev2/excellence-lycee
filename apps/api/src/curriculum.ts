@@ -127,6 +127,8 @@ const lessonRewards = new Map<string, number>([
   ["terminale-a-linear-systems:log-exp-systems", 70],
   ["terminale-a-linear-systems:linear-inequalities-halfplanes", 65],
   ["terminale-a-linear-systems:inequality-systems-modeling", 75],
+  ["terminale-a-linear-systems:awale-mission", 80],
+  ["terminale-a-linear-systems:cocktail-programming-mission", 90],
   ["terminale-a-primitives-integrals:primitive-definition-usual-functions", 50],
   ["terminale-a-primitives-integrals:primitive-initial-condition", 55],
   ["terminale-a-primitives-integrals:primitive-usual-functions", 60],

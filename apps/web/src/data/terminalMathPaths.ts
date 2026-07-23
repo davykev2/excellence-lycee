@@ -6,6 +6,7 @@ import { terminalANaturalLogPath } from "./terminalANaturalLogPath";
 import { terminalAExponentialPath } from "./terminalAExponentialPath";
 import { terminalASequencesPath } from "./terminalASequencesPath";
 import { terminalABivariateStatisticsPath } from "./terminalAStatisticsPath";
+import { terminalALinearSystemsPath } from "./terminalALinearSystemsPath";
 import { terminalCMathematicsPaths } from "./terminalCMathPaths";
 import { terminalDMathematicsPaths } from "./terminalDMathPaths";
 
@@ -19,6 +20,7 @@ export const terminalMathematicsPaths: LearningPath[] = [
   terminalAExponentialPath,
   terminalASequencesPath,
   terminalABivariateStatisticsPath,
+  terminalALinearSystemsPath,
   ...terminalAAdditionalMathPaths,
   ...terminalCMathematicsPaths,
   ...terminalDMathematicsPaths,

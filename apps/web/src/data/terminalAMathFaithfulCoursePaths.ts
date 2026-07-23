@@ -136,87 +136,6 @@ function buildPath(seed: PathSeed): LearningPath {
   };
 }
 
-const systemsDocument = "TA Maths leçon 07 Systèmes linéaires.pdf";
-
-const systemLevels: FaithfulLevelSeed[] = [
-  {
-    id: "substitution-elimination",
-    title: "Systèmes linéaires : substitution et combinaison",
-    summary: "Résoudre un système de deux équations à deux inconnues par deux méthodes classiques.",
-    pages: "1",
-    section: "B-1. Systèmes d’équations linéaires",
-    body: String.raw`La **substitution** consiste à isoler une inconnue dans une équation puis à la remplacer dans l’autre. La **combinaison** consiste à multiplier éventuellement une équation puis à additionner membre à membre pour éliminer une inconnue.
-
-Une solution est un couple $(x,y)$ qui vérifie simultanément les deux équations.`,
-    keyPoint: "Éliminer une inconnue, calculer l’autre, puis remplacer et vérifier.",
-    example: "$\{x-2y=3;\ x+y=-3\}$ a pour solution $(-1,-2)$.",
-    steps: ["Choisis substitution ou combinaison.", "Détermine une première inconnue.", "Remplace pour trouver la seconde puis vérifie le couple."],
-    questions: [
-      short("Pour le système officiel, calcule $y$.", ["-2"], "La combinaison donne $3y=-6$.", "Exemple officiel, page 1"),
-      short("Calcule $x$.", ["-1"], "Dans $x+y=-3$, remplacer $y$ par $-2$ donne $x=-1$.", "Exemple officiel, page 1"),
-      choice("Quel est l’ensemble solution ?", ["$\{(-2,-1)\}$", "$\{(-1,-2)\}$", "$\{(1,2)\}$", "$\varnothing$"], 1, "Le couple est écrit dans l’ordre $(x,y)$.", "Exemple officiel, page 1"),
-    ],
-    weight: 60,
-  },
-  {
-    id: "log-exp-systems",
-    title: "Systèmes logarithmiques et exponentiels",
-    summary: "Linéariser le système par un changement de variables, puis revenir aux inconnues initiales.",
-    pages: "1-2",
-    section: "B-2. Systèmes de type logarithmique ou exponentiel",
-    body: String.raw`Pour un système en $\ln x$ et $\ln y$, on impose $x>0$, $y>0$, puis on pose $X=\ln x$, $Y=\ln y$.
-
-Pour un système en $e^x$ et $e^y$, on pose $X=e^x>0$, $Y=e^y>0$. On résout le système linéaire obtenu avant de revenir avec $x=e^X$ ou $x=\ln X$ selon le cas.`,
-    keyPoint: "Changer de variables, résoudre, vérifier la positivité, revenir à x et y.",
-    example: "$2\ln x-\ln y=-2$, $4\ln x+\ln y=5$ donnent $(x,y)=(e^{1/2},e^3)$.",
-    steps: ["Écris les contraintes.", "Pose les nouvelles variables et résous le système linéaire.", "Reviens aux inconnues et vérifie la positivité."],
-    questions: [
-      choice("Dans le premier système officiel, quelles nouvelles variables utilise-t-on ?", ["$X=x^2$, $Y=y^2$", "$X=\ln x$, $Y=\ln y$", "$X=e^x$, $Y=e^y$", "$X=x+y$, $Y=x-y$"], 1, "Le système est linéaire en $\ln x$ et $\ln y$.", "Exemple S1, page 2"),
-      choice("Quelle solution obtient-on pour ce système ?", ["$(e^2,e^3)$", "$(e^{1/2},e^3)$", "$(1/2,3)$", "$(\ln2,0)$"], 1, "$X=1/2$ et $Y=3$.", "Exemple S1, page 2", 2),
-      choice("Quelle est la solution du système exponentiel officiel ?", ["$(2,1)$", "$(\ln2,0)$", "$(e^2,e)$", "$(0,\ln2)$"], 1, "$e^x=2$ et $e^y=1$ donnent $x=\ln2$, $y=0$.", "Exemple S2, page 2", 2),
-    ],
-    weight: 70,
-  },
-  {
-    id: "linear-inequalities-halfplanes",
-    title: "Inéquation linéaire et demi-plan",
-    summary: "Construire la frontière et sélectionner le demi-plan solution avec un point test.",
-    pages: "3-4",
-    section: "B-3-a. Inéquation dans R × R",
-    body: String.raw`La droite $D:ax+by+c=0$ partage le plan en deux demi-plans. Pour $ax+by+c>0$, la frontière n’est pas incluse ; pour $ax+by+c\ge0$, elle l’est.
-
-On choisit un point test qui n’appartient pas à $D$, souvent $O(0,0)$, puis on calcule $ax_A+by_A+c$ pour sélectionner le bon côté.`,
-    keyPoint: "Strict : frontière exclue ; large : frontière incluse.",
-    example: "$x+y+1>0$ contient l’origine car $0+0+1>0$ ; la droite $x+y+1=0$ est exclue.",
-    steps: ["Trace la droite frontière.", "Teste un point hors de la droite.", "Choisis le demi-plan et précise si la frontière est incluse."],
-    questions: [
-      choice("L’origine vérifie-t-elle $x+y+1>0$ ?", ["Oui", "Non"], 0, "$0+0+1=1>0$.", "Exercice de fixation, page 4"),
-      choice("La droite $x+y+1=0$ appartient-elle à la solution de $x+y+1>0$ ?", ["Oui", "Non"], 1, "L’inégalité est stricte : le demi-plan est ouvert.", "Exercice de fixation, page 4"),
-    ],
-    weight: 65,
-  },
-  {
-    id: "inequality-systems-modeling",
-    title: "Systèmes d’inéquations dans le plan",
-    summary: "Résoudre chaque inéquation puis prendre l’intersection des demi-plans.",
-    pages: "4-5",
-    section: "B-3-b. Systèmes d’inéquations",
-    body: String.raw`Pour un système de plusieurs inéquations, on détermine l’ensemble solution de chacune, puis on conserve leur **intersection**.
-
-Chaque frontière doit être tracée correctement : trait interrompu pour une inégalité stricte, trait continu pour une inégalité large.`,
-    keyPoint: "Solution du système = intersection de tous les demi-plans solutions.",
-    example: "Le système $2x-y+1<0$ et $x-2y+4\ge0$ combine un demi-plan ouvert et un demi-plan fermé.",
-    steps: ["Résous graphiquement chaque inéquation.", "Hachure ou colore chaque demi-plan.", "Garde uniquement leur zone commune."],
-    questions: [
-      choice("Pour $2x-y+1<0$, l’origine est-elle solution ?", ["Oui", "Non"], 1, "$2\times0-0+1=1$, qui n’est pas inférieur à 0.", "Exercice de fixation, page 5"),
-      choice("Pour $x-2y+4\ge0$, l’origine est-elle solution ?", ["Oui", "Non"], 0, "$4\ge0$.", "Exercice de fixation, page 5"),
-      choice("L’ensemble solution du système est :", ["La réunion des demi-plans", "L’intersection des demi-plans", "Uniquement les frontières", "Toujours vide"], 1, "Les deux inéquations doivent être vérifiées simultanément.", "Méthode, page 4"),
-    ],
-    weight: 75,
-    kind: "challenge",
-  },
-];
-
 const primitivesDocument = "TA Maths leçon 08 Primitives et Calcul integral.pdf";
 
 const primitivesLevels: FaithfulLevelSeed[] = [
@@ -440,19 +359,6 @@ Il faut donc étudier l’ordre des courbes avant d’intégrer, puis appliquer 
   },
 ];
 
-export const terminalALinearSystemsPath = buildPath({
-  id: "terminale-a-linear-systems",
-  chapterNumber: 7,
-  themeNumber: 1,
-  themeTitle: "Fonctions numériques",
-  title: "Systèmes linéaires",
-  description: "Systèmes de deux équations, changements de variables, demi-plans et systèmes d’inéquations.",
-  outcomes: ["Résoudre un système linéaire", "Linéariser un système logarithmique ou exponentiel", "Résoudre graphiquement des inéquations"],
-  moduleTitle: "Maîtriser les systèmes linéaires",
-  sourceDocument: systemsDocument,
-  levels: systemLevels,
-});
-
 export const terminalAPrimitivesIntegralsPath = buildPath({
   id: "terminale-a-primitives-integrals",
   chapterNumber: 8,
@@ -467,6 +373,5 @@ export const terminalAPrimitivesIntegralsPath = buildPath({
 });
 
 export const terminalAAdditionalMathPaths: LearningPath[] = [
-  terminalALinearSystemsPath,
   terminalAPrimitivesIntegralsPath,
 ];
