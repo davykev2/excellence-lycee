@@ -140,6 +140,7 @@ const lessonRewards = new Map<string, number>([
   ["terminale-a-primitives-integrals:definite-integral", 70],
   ["terminale-a-primitives-integrals:integral-positive-area", 75],
   ["terminale-a-primitives-integrals:integral-area", 85],
+  ["terminale-a-primitives-integrals:pool-terrace-mission", 90],
 ]);
 
 const humanitiesMasteryRewards = [40, 55, 60, 65, 70, 80] as const;
