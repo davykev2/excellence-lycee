@@ -834,6 +834,20 @@
 .mastery-mini-lab .lesson-slider { grid-column: 2; }
 .mastery-mini-lab > span { grid-column: 3; grid-row: 1 / 3; min-width: 100px; padding: 15px; border-radius: 12px; background: var(--subject-accent); color: #fff; font-size: 16px; font-weight: 900; text-align: center; }
 .mastery-mini-lab > span.is-undefined { background: var(--orange-600); }
+.mastery-curve-lab { display: grid; gap: 11px; padding: 18px; border-radius: 17px; background: #f4f6f7; }
+.mastery-curve-lab > strong { color: var(--navy-950); font-size: 17px; }
+.mastery-curve-lab svg { width: 100%; height: auto; border: 1px solid #e2e8ec; border-radius: 14px; background: #fff; }
+.mastery-curve-lab > label { color: var(--subject-accent); font-size: 11px; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
+.mastery-curve-lab > span { width: fit-content; padding: 9px 16px; border-radius: 12px; background: var(--subject-accent); color: #fff; font-size: 14px; font-weight: 900; }
+.mastery-curve-lab > span.is-undefined { background: var(--orange-600); }
+.curve-grid { stroke: #f0f3f5; stroke-width: 1; }
+.curve-axis { stroke: #a2aeba; stroke-width: 1.5; }
+.curve-tick { fill: #8b98a6; font-size: 10.5px; font-weight: 700; }
+.curve-path { fill: none; stroke: var(--subject-accent); stroke-width: 2.6; stroke-linecap: round; }
+.curve-guide { stroke: #d64545; stroke-width: 1.8; stroke-dasharray: 7 5; }
+.curve-guide-label { fill: #d64545; font-size: 12px; font-weight: 800; }
+.curve-marker { fill: var(--orange-600); stroke: #fff; stroke-width: 2.5; }
+.curve-marker-label { fill: var(--navy-950); font-size: 12.5px; font-weight: 800; paint-order: stroke; stroke: #ffffff; stroke-width: 3.5px; }
 .mastery-timeline-lab { display: grid; gap: 13px; padding: 18px; border-radius: 17px; background: #f4f6f7; }
 .mastery-timeline-focus { min-height: 96px; display: grid; align-content: center; gap: 6px; padding: 16px 18px; border-left: 4px solid var(--subject-accent); border-radius: 12px; background: #fff; }
 .mastery-timeline-focus strong { color: var(--navy-950); font-size: 18px; }
@@ -1165,7 +1179,7 @@
 .mastery-question-card label > span { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; background: #f0f2f3; color: #5d6c7d; font-size: 11px; font-weight: 900; }
 .mastery-question-card label.is-selected > span { background: var(--subject-accent); color: #fff; }
 .mastery-question-card label strong { min-width: 0; color: #314860; font-size: 13px; }
-.mastery-question-source { margin-top: 3px; color: #6f7f91; font-size: 10px; font-weight: 750; line-height: 1.35; }
+.mastery-question-source { display: block; width: fit-content; margin-top: 7px; padding: 2px 9px; border-radius: 999px; background: #eef1f4; color: #5d6c7d; font-size: 10.5px; font-weight: 750; line-height: 1.35; }
 .mastery-short-answer { display: grid !important; grid-template-columns: 1fr !important; }
 .mastery-short-answer label { display: grid; gap: 7px; min-height: auto; padding: 0; border: 0; background: transparent; cursor: text; }
 .mastery-short-answer label:hover { border-color: transparent; }
@@ -7919,6 +7933,22 @@ textarea:focus-visible {
 }
 
 @media (max-width: 520px) {
+  .companion-trigger {
+    width: 52px;
+    height: 52px;
+    border-radius: 17px;
+  }
+
+  .companion-trigger-glow {
+    inset: 5px;
+    border-radius: 12px;
+  }
+
+  .companion-online-dot {
+    right: 5px;
+    bottom: 5px;
+  }
+
   .companion-panel > header {
     min-height: 94px;
     grid-template-columns: 84px 1fr auto;

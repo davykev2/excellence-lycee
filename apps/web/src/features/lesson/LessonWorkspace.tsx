@@ -14,7 +14,7 @@ import {
   X,
   XCircle,
 } from "@phosphor-icons/react";
-import type { FunctionRule, LearningLesson, LearningPath, LessonQuestion } from "../../domain/paths";
+import type { CurveLessonInteraction, CurveRule, FunctionRule, LearningLesson, LearningPath, LessonQuestion } from "../../domain/paths";
 import type { AttemptResult, ProgressLesson } from "../progress/useLearningProgress";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
 import { MathFormula, MathText } from "../../components/MathText";
@@ -78,12 +78,156 @@ function evaluateRule(rule: FunctionRule, input: number) {
   return Math.abs(denominator) < 0.00001 ? null : 1 / denominator;
 }
 
+function evaluateCurveRule(rule: CurveRule, input: number): number | null {
+  if (rule.kind === "polynomial") return rule.coefficients.reduce((sum, coefficient, degree) => sum + coefficient * input ** degree, 0);
+  if (rule.kind === "rational-linear") {
+    const denominator = rule.denominator[0] * input + rule.denominator[1];
+    return Math.abs(denominator) < 0.00001 ? null : (rule.numerator[0] * input + rule.numerator[1]) / denominator;
+  }
+  if (rule.kind === "affine-plus-reciprocal") {
+    const denominator = input - rule.shift;
+    return Math.abs(denominator) < 0.00001 ? null : rule.slope * input + rule.intercept + rule.coefficient / denominator;
+  }
+  return evaluateRule(rule, input);
+}
+
+function niceTicks(min: number, max: number) {
+  const rawStep = (max - min) / 8;
+  const magnitude = 10 ** Math.floor(Math.log10(rawStep));
+  const residual = rawStep / magnitude;
+  const step = (residual >= 5 ? 5 : residual >= 2 ? 2 : 1) * magnitude;
+  const ticks: number[] = [];
+  for (let value = Math.ceil(min / step) * step; value <= max + step / 1000; value += step) ticks.push(Number(value.toFixed(10)));
+  return ticks;
+}
+
+function buildCurveSegments(rule: CurveRule, window: CurveLessonInteraction["window"], samples = 480) {
+  const segments: Array<Array<[number, number]>> = [];
+  let current: Array<[number, number]> = [];
+  const overflow = window.yMax - window.yMin;
+  for (let index = 0; index <= samples; index += 1) {
+    const x = window.xMin + ((window.xMax - window.xMin) * index) / samples;
+    const y = evaluateCurveRule(rule, x);
+    if (y === null || !Number.isFinite(y) || y < window.yMin - overflow || y > window.yMax + overflow) {
+      if (current.length > 1) segments.push(current);
+      current = [];
+      continue;
+    }
+    current.push([x, y]);
+  }
+  if (current.length > 1) segments.push(current);
+  return segments;
+}
+
+function CurveLab({ interaction, inputValue, outputValue, lessonId, onInputChange }: {
+  interaction: CurveLessonInteraction;
+  inputValue: number;
+  outputValue: number | null;
+  lessonId: string;
+  onInputChange: (value: number) => void;
+}) {
+  const { window, guides = [], marker } = interaction;
+  const width = 560;
+  const height = 330;
+  const px = (x: number) => ((x - window.xMin) / (window.xMax - window.xMin)) * width;
+  const py = (y: number) => height - ((y - window.yMin) / (window.yMax - window.yMin)) * height;
+  const segments = useMemo(() => buildCurveSegments(interaction.rule, window), [interaction.rule, window]);
+  const ticksX = useMemo(() => niceTicks(window.xMin, window.xMax), [window.xMin, window.xMax]);
+  const ticksY = useMemo(() => niceTicks(window.yMin, window.yMax), [window.yMin, window.yMax]);
+  const markerVisible = outputValue !== null && outputValue >= window.yMin && outputValue <= window.yMax;
+  return (
+    <div className="mastery-curve-lab">
+      <strong>{interaction.formulaTex
+        ? <MathFormula tex={interaction.formulaTex} fallback={interaction.formula} />
+        : <MathText>{interaction.formula}</MathText>}
+      </strong>
+      <svg viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`Représentation graphique : ${interaction.formula}`}>
+        {ticksX.map((tick) => <line className="curve-grid" key={`gx-${tick}`} x1={px(tick)} y1={0} x2={px(tick)} y2={height} />)}
+        {ticksY.map((tick) => <line className="curve-grid" key={`gy-${tick}`} x1={0} y1={py(tick)} x2={width} y2={py(tick)} />)}
+        {window.yMin < 0 && window.yMax > 0 && <line className="curve-axis" x1={0} y1={py(0)} x2={width} y2={py(0)} />}
+        {window.xMin < 0 && window.xMax > 0 && <line className="curve-axis" x1={px(0)} y1={0} x2={px(0)} y2={height} />}
+        {ticksX.filter((tick) => tick !== 0).map((tick) => window.yMin < 0 && window.yMax > 0
+          ? <text className="curve-tick" key={`tx-${tick}`} x={px(tick)} y={Math.min(py(0) + 15, height - 4)} textAnchor="middle">{formatNumber(tick)}</text>
+          : null)}
+        {ticksY.filter((tick) => tick !== 0).map((tick) => window.xMin < 0 && window.xMax > 0
+          ? <text className="curve-tick" key={`ty-${tick}`} x={Math.max(px(0) - 6, 2)} y={py(tick) + 4} textAnchor="end">{formatNumber(tick)}</text>
+          : null)}
+        {guides.map((guide, index) => {
+          if (guide.kind === "vertical" && guide.value !== undefined) {
+            return (
+              <g key={`guide-${index}`}>
+                <line className="curve-guide" x1={px(guide.value)} y1={0} x2={px(guide.value)} y2={height} />
+                <text className="curve-guide-label" x={px(guide.value) + 7} y={16}>{guide.label}</text>
+              </g>
+            );
+          }
+          if (guide.kind === "horizontal" && guide.value !== undefined) {
+            return (
+              <g key={`guide-${index}`}>
+                <line className="curve-guide" x1={0} y1={py(guide.value)} x2={width} y2={py(guide.value)} />
+                <text className="curve-guide-label" x={width - 6} y={py(guide.value) - 6} textAnchor="end">{guide.label}</text>
+              </g>
+            );
+          }
+          if (guide.kind === "oblique" && guide.slope !== undefined && guide.intercept !== undefined) {
+            const yStart = guide.slope * window.xMin + guide.intercept;
+            const yEnd = guide.slope * window.xMax + guide.intercept;
+            const labelX = window.xMin + (window.xMax - window.xMin) * 0.72;
+            const labelY = guide.slope * labelX + guide.intercept;
+            return (
+              <g key={`guide-${index}`}>
+                <line className="curve-guide" x1={px(window.xMin)} y1={py(yStart)} x2={px(window.xMax)} y2={py(yEnd)} />
+                <text className="curve-guide-label" x={px(labelX)} y={py(labelY) - 8}>{guide.label}</text>
+              </g>
+            );
+          }
+          return null;
+        })}
+        {segments.map((segment, index) => (
+          <path
+            className="curve-path"
+            key={`segment-${index}`}
+            d={segment.map(([x, y], pointIndex) => `${pointIndex === 0 ? "M" : "L"}${px(x).toFixed(1)} ${py(y).toFixed(1)}`).join(" ")}
+          />
+        ))}
+        {markerVisible && outputValue !== null && (
+          <g>
+            <circle className="curve-marker" cx={px(inputValue)} cy={py(outputValue)} r={6.5} />
+            <text
+              className="curve-marker-label"
+              x={Math.min(Math.max(px(inputValue) + 11, 8), width - 8)}
+              y={Math.min(Math.max(py(outputValue) - 11, 16), height - 8)}
+              textAnchor={px(inputValue) > width - 130 ? "end" : "start"}
+            >({formatNumber(inputValue)} ; {formatNumber(outputValue)})</text>
+          </g>
+        )}
+      </svg>
+      <label htmlFor={`mastery-curve-${lessonId}`}>x = {formatNumber(inputValue)}</label>
+      <input
+        id={`mastery-curve-${lessonId}`}
+        className="lesson-slider"
+        type="range"
+        min={marker.min}
+        max={marker.max}
+        step={marker.step}
+        value={inputValue}
+        onChange={(event) => onInputChange(Number(event.target.value))}
+      />
+      <span className={outputValue === null ? "is-undefined" : ""}>
+        {outputValue === null ? "f(x) non définie : valeur interdite !" : `f(${formatNumber(inputValue)}) = ${formatNumber(outputValue)}`}
+      </span>
+    </div>
+  );
+}
+
 function formatNumber(value: number) {
   return new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2 }).format(value);
 }
 
 function initialInteractionValue(lesson: LearningLesson) {
-  return lesson.interaction.kind === "timeline" ? 0 : lesson.interaction.input.initial;
+  if (lesson.interaction.kind === "timeline") return 0;
+  if (lesson.interaction.kind === "curve") return lesson.interaction.marker.initial;
+  return lesson.interaction.input.initial;
 }
 
 function synchronizationErrorMessage(reason: unknown) {
@@ -142,10 +286,11 @@ export function LessonWorkspace({
     mainRef.current?.scrollTo({ top: 0, behavior: "auto" });
   }, [phase]);
 
-  const outputValue = useMemo(
-    () => lesson.interaction.kind === "timeline" ? null : evaluateRule(lesson.interaction.rule, inputValue),
-    [inputValue, lesson.interaction],
-  );
+  const outputValue = useMemo(() => {
+    if (lesson.interaction.kind === "timeline") return null;
+    if (lesson.interaction.kind === "curve") return evaluateCurveRule(lesson.interaction.rule, inputValue);
+    return evaluateRule(lesson.interaction.rule, inputValue);
+  }, [inputValue, lesson.interaction]);
   const timelineItem = lesson.interaction.kind === "timeline"
     ? lesson.interaction.items[Math.min(Math.round(inputValue), lesson.interaction.items.length - 1)]
     : null;
@@ -221,7 +366,7 @@ export function LessonWorkspace({
             <header className="mastery-course-heading">
               <p className="path-kicker">{lesson.concept.eyebrow}</p>
               <h1 id="lesson-player-title">{lesson.title}</h1>
-              <p>{lesson.summary}</p>
+              <p><MathText>{lesson.summary}</MathText></p>
             </header>
 
             <section className="mastery-course-card is-concept">
@@ -249,6 +394,14 @@ export function LessonWorkspace({
                   <input id={`mastery-timeline-${lesson.id}`} className="lesson-slider" type="range" min={0} max={lesson.interaction.items.length - 1} step={1} value={inputValue} onInput={(event) => setInputValue(Number(event.currentTarget.value))} />
                   <div className="mastery-timeline-markers">{lesson.interaction.items.map((item, index) => <button aria-pressed={index === Math.round(inputValue)} className={index === Math.round(inputValue) ? "is-active" : ""} key={`${item.label}-${index}`} onClick={() => setInputValue(index)} type="button">{item.shortLabel ?? item.label}</button>)}</div>
                 </div>
+              ) : lesson.interaction.kind === "curve" ? (
+                <CurveLab
+                  interaction={lesson.interaction}
+                  inputValue={inputValue}
+                  outputValue={outputValue}
+                  lessonId={lesson.id}
+                  onInputChange={setInputValue}
+                />
               ) : lesson.interaction.kind !== "timeline" ? (
                 <div className="mastery-mini-lab">
                   <strong>{lesson.interaction.formulaTex

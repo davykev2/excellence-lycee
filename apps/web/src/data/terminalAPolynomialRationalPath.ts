@@ -1,4 +1,5 @@
 import type {
+  CurveLessonInteraction,
   LearningLesson,
   LearningPath,
   LessonKind,
@@ -48,6 +49,8 @@ interface OfficialLevelSeed {
   example: string;
   methodSteps: string[];
   timeline: [TimelineInteractionItem, TimelineInteractionItem, ...TimelineInteractionItem[]];
+  /** Quand une figure aide à comprendre, la courbe interactive remplace la frise de repères. */
+  curve?: CurveLessonInteraction;
   questions: LessonQuestion[];
   corrections?: string[];
 }
@@ -75,7 +78,7 @@ function officialLevel(index: number, seed: OfficialLevelSeed): LearningLesson {
       notation: seed.keyPoint,
       example: seed.example,
     },
-    interaction: {
+    interaction: seed.curve ?? {
       kind: "timeline",
       eyebrow: "Repères",
       title: "Suivre le raisonnement",
@@ -109,18 +112,21 @@ const levels: OfficialLevelSeed[] = [
     section: "I-1. Limite d’une fonction polynôme en un point",
     durationMinutes: 18,
     xp: 50,
-    body: String.raw`## Situation d’apprentissage
+    body: String.raw`## Notion de limite en un point
 
-Une imprimerie fabrique et vend chaque jour un nombre $x$ d’articles. Son coût de production unitaire est donné par
-$C(x)=x-10+\frac{900}{x}$ et son bénéfice global par $B(x)=-x^2+110x-900$.
+Lorsque les valeurs de $f(x)$ se rapprochent d’un nombre $L$ lorsque $x$ prend des valeurs suffisamment proches de $a$, on dit que $L$ est la **limite** de $f$ en $a$.
 
-Le président du COGES souhaite déterminer le nombre d’articles à fabriquer et à vendre pour obtenir un bénéfice maximal. Cette situation sera résolue à la fin de la leçon grâce à l’étude de fonctions.
+On note : $$\lim_{x\to a}f(x)=L$$
 
-## Notion de limite en un point
+### Observer une limite sur un exemple
 
-Lorsque les valeurs de $f(x)$ se rapprochent d’un nombre $L$ lorsque $x$ prend des valeurs suffisamment proches de $a$, on dit que $L$ est la limite de $f$ en $a$.
+Pour $P(x)=2x+1$, observe les images lorsque $x$ se rapproche de $4$ :
 
-On note : $\lim_{x\to a}f(x)=L$.
+| $x$ | 3,9 | 3,99 | 3,999 | 4 | 4,001 | 4,01 | 4,1 |
+|---|---|---|---|---|---|---|---|
+| $P(x)$ | 8,8 | 8,98 | 8,998 | **9** | 9,002 | 9,02 | 9,2 |
+
+Les images se resserrent autour de $9=P(4)$ : c’est exactement l’idée de limite en un point.
 
 ## Propriété 1 - Unicité
 
@@ -130,11 +136,13 @@ Lorsqu’une fonction admet une limite en un point ou à l’infini, cette limit
 
 La limite d’une fonction polynôme $P$ en un réel $a$ est égale à l’image de $a$ par $P$ :
 
-$\lim_{x\to a}P(x)=P(a)$.
+$$\lim_{x\to a}P(x)=P(a)$$
 
 En particulier, si $k$ est une constante réelle : $\lim_{x\to a}k=k$.
 
-> **Pourquoi ?** Un polynôme est continu sur $\mathbb{R}$. Il ne présente ni rupture ni valeur interdite : au voisinage de $a$, ses images se rapprochent donc de $P(a)$.`,
+> **Pourquoi ?** Un polynôme est continu sur $\mathbb{R}$. Il ne présente ni rupture ni valeur interdite : au voisinage de $a$, ses images se rapprochent donc de $P(a)$.
+
+> **Erreur fréquente.** Ne confonds pas « limite en un réel $a$ » et « limite à l’infini » : ici $x$ se rapproche d’un nombre fixé, et aucun tableau n’est nécessaire — on remplace simplement $x$ par $a$.`,
     keyPoint: "Pour un polynôme en un réel : on remplace x par a. La limite, si elle existe, est unique.",
     example: "Pour $P(x)=2x+1$, $\\lim_{x\\to4}P(x)=P(4)=9$.",
     methodSteps: [
@@ -147,6 +155,22 @@ En particulier, si $k$ est une constante réelle : $\lim_{x\to a}k=k$.
       { label: "Remplacer", detail: "Calculer directement P(a)." },
       { label: "Conclure", detail: "Écrire la limite obtenue, qui est unique." },
     ],
+    curve: {
+      kind: "curve",
+      eyebrow: "Manipuler",
+      title: "Approche x de 4 sur la courbe",
+      instruction: "Déplace le point sur la droite et rapproche x de 4 : que devient f(x) ?",
+      observation: "Plus x est proche de 4, plus f(x) est proche de 9 = P(4) : la limite d’un polynôme en un réel est son image.",
+      formula: "f(x) = 2x + 1",
+      formulaTex: "f(x)=2x+1",
+      rule: { kind: "linear", coefficient: 2, constant: 1 },
+      window: { xMin: -1, xMax: 8, yMin: -2, yMax: 18 },
+      guides: [
+        { kind: "vertical", value: 4, label: "x = 4" },
+        { kind: "horizontal", value: 9, label: "y = 9" },
+      ],
+      marker: { min: 0, max: 8, step: 0.1, initial: 1 },
+    },
     questions: [
       choice("La limite d’une fonction en un réel peut prendre deux valeurs différentes.", ["Vrai", "Faux"], 1, "Lorsqu’elle existe, une limite est unique.", "Exercice de fixation 1 - affirmation 1"),
       choice("La limite d’une fonction en un réel ne peut prendre qu’une seule valeur.", ["Vrai", "Faux"], 0, "C’est la propriété d’unicité de la limite.", "Exercice de fixation 1 - affirmation 2"),
@@ -173,30 +197,37 @@ En particulier, si $k$ est une constante réelle : $\lim_{x\to a}k=k$.
 
 Dire que $f(x)$ tend vers $+\infty$ lorsque $x$ tend vers $+\infty$ signifie que les valeurs de $f(x)$ deviennent aussi grandes que l’on veut lorsque $x$ prend des valeurs suffisamment grandes.
 
-On note : $\lim_{x\to+\infty}f(x)=+\infty$.
+On note : $$\lim_{x\to+\infty}f(x)=+\infty$$
 
 ## Limite d’un monôme $ax^n$
 
-Soient $a\neq0$ et $n$ un entier naturel.
+Soient $a\neq0$ et $n$ un entier naturel non nul.
 
-### Si $n$ est pair
+### Cas où $n$ est pair ($x^n$ positif aux deux infinis)
 
-- aux deux infinis, $x^n$ est positif ;
-- si $a>0$, $ax^n\to+\infty$ ;
-- si $a<0$, $ax^n\to-\infty$.
+| | $x\to+\infty$ | $x\to-\infty$ |
+|---|---|---|
+| $a>0$ | $+\infty$ | $+\infty$ |
+| $a<0$ | $-\infty$ | $-\infty$ |
 
-### Si $n$ est impair
+### Cas où $n$ est impair ($x^n$ change de signe)
 
-- en $+\infty$, le signe de $ax^n$ est celui de $a$ ;
-- en $-\infty$, le signe est opposé à celui de $a$.
+| | $x\to+\infty$ | $x\to-\infty$ |
+|---|---|---|
+| $a>0$ | $+\infty$ | $-\infty$ |
+| $a<0$ | $-\infty$ | $+\infty$ |
 
-Une constante $k$ garde pour limite $k$, aussi bien en $+\infty$ qu’en $-\infty$.
+Une constante $k$ garde pour limite $k$, aussi bien en $+\infty$ qu’en $-\infty$ : $\lim_{x\to+\infty}k=\lim_{x\to-\infty}k=k$.
 
 ## Propriété fondamentale
 
 La limite d’une fonction polynôme à l’infini est égale à la limite de son monôme de plus haut degré.
 
-> Le terme de plus haut degré impose le comportement final, car les autres termes deviennent négligeables devant lui.`,
+### Pourquoi le terme dominant gagne
+
+Compare les termes de $-3x^3+2x$ pour $x=100$ : $-3x^3=-3\,000\,000$ tandis que $2x=200$ seulement. Dès que $x$ devient grand, le monôme de plus haut degré écrase tous les autres.
+
+> **Erreur fréquente.** N’additionne pas les limites de chaque terme — tu tomberais sur la forme indéterminée $+\infty-\infty$. Remplace directement le polynôme par son monôme dominant.`,
     keyPoint: "À l’infini, conserve uniquement le monôme de plus haut degré puis étudie son signe.",
     example: "Pour $P(x)=-3x^2+10$, le terme dominant est $-3x^2$ ; ainsi $P(x)\\to-\\infty$ quand $x\\to+\\infty$.",
     methodSteps: [
@@ -209,6 +240,18 @@ La limite d’une fonction polynôme à l’infini est égale à la limite de so
       { label: "Parité", detail: "Un degré pair garde le même signe aux deux infinis." },
       { label: "Coefficient", detail: "Le signe du coefficient confirme ou inverse le résultat." },
     ],
+    curve: {
+      kind: "curve",
+      eyebrow: "Manipuler",
+      title: "Le monôme dominant impose la direction",
+      instruction: "Pousse x vers les bords de la fenêtre : dans quelle direction part la courbe ?",
+      observation: "Aux extrémités, la courbe suit son monôme dominant -3x³ : il monte vers +∞ en -∞ et plonge vers -∞ en +∞.",
+      formula: "f(x) = -3x³ + 2x",
+      formulaTex: "f(x)=-3x^3+2x",
+      rule: { kind: "polynomial", coefficients: [0, 2, 0, -3] },
+      window: { xMin: -3, xMax: 3, yMin: -70, yMax: 70 },
+      marker: { min: -3, max: 3, step: 0.1, initial: 0.5 },
+    },
     questions: [
       choice("$\\lim_{x\\to+\\infty}(-3x^3)=-\\infty$.", ["Vrai", "Faux"], 0, "Un cube tend vers +∞ en +∞ ; multiplié par -3, il tend vers -∞.", "Exercice de fixation 1 - affirmation 1"),
       choice("$\\lim_{x\\to+\\infty}(-4x^2)=+\\infty$.", ["Vrai", "Faux"], 1, "$x^2$ est positif et le coefficient -4 impose -∞.", "Exercice de fixation 1 - affirmation 2"),
@@ -230,15 +273,25 @@ La limite d’une fonction polynôme à l’infini est égale à la limite de so
     section: "II-1.1. Limite en un nombre où la fonction est définie",
     durationMinutes: 12,
     xp: 40,
-    body: String.raw`## Propriété admise
+    body: String.raw`## Qu’est-ce qu’une fonction rationnelle ?
 
-Soit $f$ une fonction rationnelle et $a$ un élément de son ensemble de définition.
+Une fonction rationnelle est un quotient de deux fonctions polynômes : $f(x)=\frac{P(x)}{Q(x)}$. Elle est définie pour tous les réels qui n’annulent pas son dénominateur $Q$.
 
-Alors : $\lim_{x\to a}f(x)=f(a)$.
+## Propriété admise
+
+Soit $f$ une fonction rationnelle et $a$ un élément de son ensemble de définition. Alors :
+
+$$\lim_{x\to a}f(x)=f(a)$$
 
 Pour une écriture $f(x)=\frac{P(x)}{Q(x)}$, la condition essentielle est $Q(a)\neq0$.
 
-> Si le dénominateur ne s’annule pas en $a$, aucune étude de signe à gauche et à droite n’est nécessaire : la substitution directe suffit.`,
+### Exemple détaillé
+
+$$\lim_{x\to1}\frac{x}{x+2}=\frac{1}{1+2}=\frac13$$
+
+Le dénominateur vaut $3\neq0$ en $1$ : la substitution directe suffit, exactement comme pour un polynôme.
+
+> Si le dénominateur ne s’annule pas en $a$, aucune étude de signe à gauche et à droite n’est nécessaire. C’est seulement lorsque $Q(a)=0$ que le niveau suivant entre en jeu.`,
     keyPoint: "Si le dénominateur est non nul en a, la limite du quotient est sa valeur f(a).",
     example: "Pour $f(x)=\\frac{x}{x+2}$, le dénominateur vaut 3 en 1, donc la limite vaut $\\frac13$.",
     methodSteps: ["Calcule le dénominateur en a.", "S’il est non nul, remplace x par a au numérateur et au dénominateur.", "Simplifie la fraction obtenue."],
@@ -265,17 +318,24 @@ Pour une écriture $f(x)=\frac{P(x)}{Q(x)}$, la condition essentielle est $Q(a)\
 
 Lorsque $x<a$ et se rapproche de $a$, $x-a$ est négatif et se rapproche de zéro. Ainsi :
 
-$\lim_{x\to a^-}\frac{1}{x-a}=-\infty$.
+$$\lim_{x\to a^-}\frac{1}{x-a}=-\infty$$
 
 ## Limite à droite
 
 Lorsque $x>a$ et se rapproche de $a$, $x-a$ est positif et se rapproche de zéro. Ainsi :
 
-$\lim_{x\to a^+}\frac{1}{x-a}=+\infty$.
+$$\lim_{x\to a^+}\frac{1}{x-a}=+\infty$$
 
 La notation $a^-$ signifie « vers $a$ avec $x<a$ » ; la notation $a^+$ signifie « vers $a$ avec $x>a$ ».
 
-> Une très petite quantité négative a un inverse très grand en valeur absolue et négatif ; une très petite quantité positive a un inverse très grand et positif.`,
+### Résumé sur l’exemple $a=1$
+
+| $x$ | à gauche de 1 ($x<1$) | $1$ | à droite de 1 ($x>1$) |
+|---|---|---|---|
+| Signe de $x-1$ | $-$ | $0$ | $+$ |
+| $\frac1{x-1}$ | tend vers $-\infty$ | non définie | tend vers $+\infty$ |
+
+> Une très petite quantité négative a un inverse très grand en valeur absolue et négatif ; une très petite quantité positive a un inverse très grand et positif. Par exemple $\frac1{-0{,}001}=-1000$ et $\frac1{0{,}001}=1000$.`,
     keyPoint: "Pour 1/(x-a) : à gauche la limite vaut -∞ ; à droite elle vaut +∞.",
     example: "Pour $\\frac1{x-1}$ : la limite en $1^-$ vaut $-\\infty$ et la limite en $1^+$ vaut $+\\infty$.",
     methodSteps: ["Repère la valeur interdite a.", "Détermine le signe de x-a à gauche puis à droite.", "Utilise le signe du numérateur et celui du dénominateur pour conclure."],
@@ -284,6 +344,19 @@ La notation $a^-$ signifie « vers $a$ avec $x<a$ » ; la notation $a^+$ signifi
       { label: "Point interdit", detail: "La fonction n’est pas définie en a." },
       { label: "À droite", detail: "x-a>0 et se rapproche de 0." },
     ],
+    curve: {
+      kind: "curve",
+      eyebrow: "Manipuler",
+      title: "Traverse la valeur interdite x = 1",
+      instruction: "Fais glisser le point de gauche à droite de la valeur interdite : observe le saut de -∞ à +∞.",
+      observation: "À gauche de 1 la courbe plonge vers -∞ ; à droite elle redescend de +∞. En x = 1, f n’est pas définie : c’est le mur vertical.",
+      formula: "f(x) = 1/(x - 1)",
+      formulaTex: "f(x)=\\frac{1}{x-1}",
+      rule: { kind: "reciprocal", shift: 1 },
+      window: { xMin: -2, xMax: 4, yMin: -8, yMax: 8 },
+      guides: [{ kind: "vertical", value: 1, label: "x = 1" }],
+      marker: { min: -1.95, max: 3.95, step: 0.05, initial: 0 },
+    },
     corrections: ["La conclusion du PDF affichait -∞ pour la limite à droite ; le signe correct est +∞."],
     questions: [
       choice("$\\lim_{x\\to3^-}\\frac1{x-3}=-\\infty$.", ["Vrai", "Faux"], 0, "À gauche de 3, x-3 est négatif.", "Exercice de fixation 1 - a"),
@@ -310,9 +383,19 @@ La limite à l’infini d’une fonction rationnelle est égale à la limite du 
 
 Pour $f(x)=\frac{P(x)}{Q(x)}$, on conserve le monôme dominant de $P$ et celui de $Q$.
 
-- si le degré du numérateur est inférieur à celui du dénominateur, la limite vaut $0$ ;
-- si les degrés sont égaux, la limite est le quotient des coefficients dominants ;
-- si le degré du numérateur est supérieur, le quotient se comporte comme une puissance de $x$ dont il faut étudier le signe.
+### Les trois situations possibles
+
+| Comparaison des degrés | Limite à l’infini |
+|---|---|
+| degré de $P$ < degré de $Q$ | $0$ |
+| degré de $P$ = degré de $Q$ | quotient des coefficients dominants |
+| degré de $P$ > degré de $Q$ | $+\infty$ ou $-\infty$ selon le signe du monôme quotient |
+
+### Exemple du cours entièrement rédigé
+
+$$\lim_{x\to-\infty}\frac{7x^3-x^2+5}{4x^2-2x+3}=\lim_{x\to-\infty}\frac{7x^3}{4x^2}=\lim_{x\to-\infty}\frac{7x}{4}=-\infty$$
+
+On simplifie le quotient des monômes dominants avant de conclure : $\frac{7x^3}{4x^2}=\frac{7x}{4}$, puis on étudie son signe en $-\infty$.
 
 > Cette présentation détaille les trois situations contenues dans la propriété générale du PDF.`,
     keyPoint: "À l’infini, remplace le numérateur et le dénominateur par leurs monômes dominants.",
@@ -355,7 +438,15 @@ Soient $\lim f(x)=L$ et $\lim g(x)=L'$ au même point.
 | $-\infty$ | $-\infty$ | $-\infty$ |
 | $+\infty$ | $-\infty$ | on ne peut pas conclure |
 
-L’écriture $+\infty-\infty$ est une **forme indéterminée**. Elle ne vaut pas automatiquement zéro : il faut transformer l’expression.`,
+L’écriture $+\infty-\infty$ est une **forme indéterminée**. Elle ne vaut pas automatiquement zéro : il faut transformer l’expression.
+
+### Lever la forme indéterminée sur un exemple
+
+Pour $\lim_{x\to+\infty}(x^2-x)$, l’écriture $+\infty-\infty$ ne permet pas de conclure. Mais $x^2-x$ est un polynôme : son monôme dominant $x^2$ donne directement
+
+$$\lim_{x\to+\infty}(x^2-x)=\lim_{x\to+\infty}x^2=+\infty$$
+
+> Retiens le réflexe : face à $+\infty-\infty$, transforme l’expression (monôme dominant, factorisation…) avant de conclure.`,
     keyPoint: "+∞ + (-∞) est indéterminé ; toutes les autres sommes du tableau se calculent directement.",
     example: "Si $f(x)\\to L$ et $h(x)\\to-\\infty$, alors $f(x)+h(x)\\to-\\infty$.",
     methodSteps: ["Calcule séparément chaque limite.", "Reporte-les dans le tableau des sommes.", "Si tu obtiens +∞-∞, transforme l’expression avant de conclure."],
@@ -382,22 +473,31 @@ L’écriture $+\infty-\infty$ est une **forme indéterminée**. Elle ne vaut pa
     xp: 45,
     body: String.raw`## Propriété
 
-Le produit de deux limites finies $L$ et $L'$ a pour limite $L\times L'$.
+Le tableau du cours rassemble tous les cas du produit $f\times g$ :
 
-Pour un réel non nul multiplié par une limite infinie, le signe du résultat dépend des deux signes :
-
-| Premier facteur | Second facteur | Produit |
+| Limite de $f$ | Limite de $g$ | Limite de $f\times g$ |
 |---|---|---|
+| $L$ | $L'$ | $L\times L'$ |
 | $L>0$ | $+\infty$ | $+\infty$ |
 | $L<0$ | $+\infty$ | $-\infty$ |
 | $L>0$ | $-\infty$ | $-\infty$ |
 | $L<0$ | $-\infty$ | $+\infty$ |
+| $+\infty$ | $+\infty$ | $+\infty$ |
+| $-\infty$ | $-\infty$ | $+\infty$ |
+| $+\infty$ | $-\infty$ | $-\infty$ |
+| $0$ | $+\infty$ ou $-\infty$ | on ne peut pas conclure |
 
-Les produits $+\infty\times+\infty$ et $-\infty\times-\infty$ tendent vers $+\infty$ ; les produits de signes contraires tendent vers $-\infty$.
+> **Astuce mémoire.** C’est la règle des signes de la multiplication : deux facteurs de même signe donnent $+\infty$, deux facteurs de signes contraires donnent $-\infty$.
 
 ## Forme indéterminée
 
-L’écriture $0\times\infty$ ne permet pas de conclure. Il faut transformer l’expression avant de calculer sa limite.`,
+L’écriture $0\times\infty$ ne permet pas de conclure. Il faut transformer l’expression avant de calculer sa limite.
+
+### Exemple du cours entièrement rédigé
+
+$$\lim_{x\to+\infty}\left[\frac{x+6}{x-4}\times(6-x)\right]=-\infty$$
+
+car $\lim_{x\to+\infty}\frac{x+6}{x-4}=1$ (degrés égaux, quotient $\frac11$) et $\lim_{x\to+\infty}(6-x)=-\infty$ : un facteur positif multiplié par $-\infty$ donne $-\infty$.`,
     keyPoint: "Pour un produit, combine les signes ; 0×∞ est une forme indéterminée.",
     example: "Si $\\frac{x+6}{x-4}\\to1$ et $6-x\\to-\\infty$, leur produit tend vers $-\\infty$.",
     methodSteps: ["Calcule les limites des deux facteurs.", "Si aucune forme indéterminée n’apparaît, applique la règle des signes.", "Si tu obtiens 0×∞, transforme ou simplifie l’expression."],
@@ -425,14 +525,14 @@ L’écriture $0\times\infty$ ne permet pas de conclure. Il faut transformer l�
     xp: 60,
     body: String.raw`## Limite de l’inverse
 
-Si $g(x)\to L$ avec $L\neq0$, alors $\frac1{g(x)}\to\frac1L$.
+| Limite de $g$ | Limite de $\dfrac1g$ |
+|---|---|
+| $L\neq0$ | $\dfrac1L$ |
+| $+\infty$ ou $-\infty$ | $0$ |
+| $0$ avec $g(x)>0$ | $+\infty$ |
+| $0$ avec $g(x)<0$ | $-\infty$ |
 
-Si $g(x)\to+\infty$ ou $g(x)\to-\infty$, alors $\frac1{g(x)}\to0$.
-
-Si $g(x)\to0$ :
-
-- par valeurs positives, $\frac1{g(x)}\to+\infty$ ;
-- par valeurs négatives, $\frac1{g(x)}\to-\infty$.
+> Quand $g$ tend vers $0$, tout dépend du **signe** de $g$ près du point étudié : c’est pour cela que les limites à gauche et à droite du niveau 4 sont indispensables ici.
 
 ## Limite d’un quotient lorsque le dénominateur tend vers zéro
 
@@ -442,6 +542,12 @@ Pour étudier $\frac{f(x)}{g(x)}$ lorsque $g(x)\to0$ et $f(x)\to L\neq0$ :
 2. calculer séparément la limite de $f(x)$ ;
 3. déterminer le signe de $g(x)$ et la limite de son inverse ;
 4. appliquer la règle du produit.
+
+### Exemple du cours entièrement rédigé
+
+$$\lim_{x\to6^+}\frac{x-8}{x-6}=\lim_{x\to6^+}(x-8)\times\frac{1}{x-6}=-\infty$$
+
+car $\lim_{x\to6^+}(x-8)=-2$ et $\lim_{x\to6^+}\frac1{x-6}=+\infty$ : un facteur négatif multiplié par $+\infty$ donne $-\infty$.
 
 > Les formes $\frac00$ et $\frac\infty\infty$ sont indéterminées et demandent une transformation.`,
     keyPoint: "Un quotient s’étudie comme le produit du numérateur par l’inverse du dénominateur.",
@@ -484,6 +590,10 @@ Lorsque la fonction $f$ admet une limite finie $b$ en $+\infty$ ou en $-\infty$,
 
 Une même droite peut être asymptote aux deux infinis.
 
+### Lire l’asymptote sur la courbe
+
+Pour $f(x)=\frac{3x-2}{x-1}$ : les degrés du numérateur et du dénominateur sont égaux, donc $\lim_{x\to+\infty}f(x)=\lim_{x\to-\infty}f(x)=\frac31=3$. La droite $y=3$ est asymptote horizontale aux deux infinis : plus $|x|$ grandit, plus la courbe se colle à cette droite sans l’atteindre.
+
 > Une asymptote horizontale concerne le comportement de la courbe lorsque l’abscisse devient très grande en valeur absolue.`,
     keyPoint: "Limite finie b à l’infini ⇔ asymptote horizontale d’équation y=b.",
     example: "Si $\\lim_{x\\to+\\infty}f(x)=3$, alors $y=3$ est asymptote horizontale en +∞.",
@@ -493,6 +603,22 @@ Une même droite peut être asymptote aux deux infinis.
       { label: "Limite finie", detail: "Repérer la valeur b." },
       { label: "Droite", detail: "Conclure avec y=b." },
     ],
+    curve: {
+      kind: "curve",
+      eyebrow: "Manipuler",
+      title: "La courbe se colle à la droite y = 3",
+      instruction: "Éloigne le point vers la droite ou vers la gauche : que devient l’écart entre la courbe et la droite rouge ?",
+      observation: "Quand |x| grandit, f(x) se rapproche de 3 sans jamais l’atteindre : c’est l’asymptote horizontale y = 3.",
+      formula: "f(x) = (3x - 2)/(x - 1)",
+      formulaTex: "f(x)=\\frac{3x-2}{x-1}",
+      rule: { kind: "rational-linear", numerator: [3, -2], denominator: [1, -1] },
+      window: { xMin: -7, xMax: 9, yMin: -3, yMax: 9 },
+      guides: [
+        { kind: "horizontal", value: 3, label: "y = 3" },
+        { kind: "vertical", value: 1, label: "x = 1" },
+      ],
+      marker: { min: -6.9, max: 8.9, step: 0.1, initial: 4 },
+    },
     questions: [
       choice("Pour $f(x)=\\frac{3x-2}{x-1}$ et $\\lim_{x\\to+\\infty}f(x)=3$, la courbe n’admet aucune asymptote horizontale en +∞.", ["Vrai", "Faux"], 1, "La droite y=3 est asymptote horizontale.", "Exercice de fixation - affirmation 1"),
       choice("La droite $y=3$ est asymptote horizontale à la courbe de $f$ en +∞.", ["Vrai", "Faux"], 0, "Une limite finie égale à 3 donne l’asymptote y=3.", "Exercice de fixation - affirmation 2"),
@@ -517,6 +643,10 @@ Il suffit qu’au moins une limite latérale soit infinie :
 
 $\lim_{x\to a^-}f(x)=\pm\infty$ ou $\lim_{x\to a^+}f(x)=\pm\infty$.
 
+### Exemple du cours
+
+Pour $f(x)=\frac{3x-4}{x-5}$, définie sur $\mathbb{R}\setminus\{5\}$ : on admet que $\lim_{x\to5^-}f(x)=-\infty$ et $\lim_{x\to5^+}f(x)=+\infty$. La droite d’équation $x=5$ est donc asymptote verticale à la courbe.
+
 > La droite verticale passe par la valeur interdite a sur l’axe des abscisses ; son équation commence donc par x, jamais par y.`,
     keyPoint: "Limite infinie en a ⇔ asymptote verticale d’équation x=a.",
     example: "Si les limites à gauche et à droite en 5 sont infinies, la droite $x=5$ est asymptote verticale.",
@@ -526,6 +656,23 @@ $\lim_{x\to a^-}f(x)=\pm\infty$ ou $\lim_{x\to a^+}f(x)=\pm\infty$.
       { label: "Limite infinie", detail: "Observer +∞ ou -∞ au moins d’un côté." },
       { label: "Droite", detail: "Conclure avec x=a." },
     ],
+    curve: {
+      kind: "curve",
+      eyebrow: "Manipuler",
+      title: "Le mur vertical en x = 5",
+      instruction: "Rapproche le point de la valeur interdite 5, par la gauche puis par la droite.",
+      observation: "La courbe longe la droite rouge x = 5 sans jamais la toucher : limite -∞ à gauche, +∞ à droite.",
+      formula: "f(x) = (3x - 4)/(x - 5)",
+      formulaTex: "f(x)=\\frac{3x-4}{x-5}",
+      rule: { kind: "rational-linear", numerator: [3, -4], denominator: [1, -5] },
+      window: { xMin: -2, xMax: 12, yMin: -8, yMax: 14 },
+      guides: [
+        { kind: "vertical", value: 5, label: "x = 5" },
+        { kind: "horizontal", value: 3, label: "y = 3" },
+      ],
+      marker: { min: -1.9, max: 11.9, step: 0.05, initial: 3 },
+    },
+    corrections: ["L’énoncé de fixation du PDF écrit « définie sur ℝ∖{1} » pour f(x)=(3x-4)/(x-5) ; le domaine correct est ℝ∖{5}."],
     questions: [
       choice("Si $f(x)\\to-\\infty$ lorsque $x\\to5^-$ et $x\\to5^+$, la droite $x=5$ est asymptote verticale.", ["Vrai", "Faux"], 0, "La limite infinie en 5 donne x=5.", "Exercice de fixation - affirmation 1"),
       choice("Dans la situation précédente, la droite $y=3$ est l’asymptote verticale.", ["Vrai", "Faux"], 1, "Une asymptote verticale a une équation x=a.", "Exercice de fixation - affirmation 2"),
@@ -546,13 +693,21 @@ $\lim_{x\to a^-}f(x)=\pm\infty$ ou $\lim_{x\to a^+}f(x)=\pm\infty$.
 
 La droite d’équation $y=ax+b$, avec $a\neq0$, est asymptote oblique à la courbe de $f$ en $+\infty$ si et seulement si :
 
-$\lim_{x\to+\infty}[f(x)-(ax+b)]=0$.
+$$\lim_{x\to+\infty}[f(x)-(ax+b)]=0$$
 
 La même propriété s’applique en $-\infty$.
 
 ## Vérification pratique
 
 Lorsqu’une fraction rationnelle peut s’écrire $f(x)=ax+b+r(x)$ avec $r(x)\to0$, la droite $y=ax+b$ est asymptote oblique.
+
+### Faire apparaître la forme $ax+b+r(x)$
+
+Pour $f(x)=\frac{2x^2+3x-1}{x+2}$, on vérifie que $2x^2+3x-1=(x+2)(2x-1)+1$. En divisant par $x+2$ :
+
+$$f(x)=2x-1+\frac{1}{x+2}\quad\text{pour }x\neq-2$$
+
+Le reste $\frac1{x+2}$ tend vers $0$ aux deux infinis : la droite $y=2x-1$ est asymptote oblique en $-\infty$ et en $+\infty$.
 
 ## Position relative
 
@@ -570,6 +725,22 @@ Le signe de $f(x)-(ax+b)$ indique la position de la courbe :
       { label: "Limite du reste", detail: "Vérifier que le reste tend vers 0." },
       { label: "Position", detail: "Étudier le signe du reste." },
     ],
+    curve: {
+      kind: "curve",
+      eyebrow: "Manipuler",
+      title: "La courbe épouse la droite y = 2x − 1",
+      instruction: "Éloigne le point vers les infinis, puis reviens près de la valeur interdite -2.",
+      observation: "Loin de -2, la courbe se confond presque avec la droite oblique : l’écart 1/(x+2) tend vers 0. Près de -2, le mur vertical reprend le dessus.",
+      formula: "f(x) = (2x² + 3x - 1)/(x + 2)",
+      formulaTex: "f(x)=\\frac{2x^2+3x-1}{x+2}",
+      rule: { kind: "affine-plus-reciprocal", slope: 2, intercept: -1, coefficient: 1, shift: -2 },
+      window: { xMin: -9, xMax: 5, yMin: -24, yMax: 12 },
+      guides: [
+        { kind: "oblique", slope: 2, intercept: -1, label: "y = 2x − 1" },
+        { kind: "vertical", value: -2, label: "x = −2" },
+      ],
+      marker: { min: -8.9, max: 4.9, step: 0.1, initial: 2 },
+    },
     corrections: ["Dans la solution finale du PDF, la valeur 3 était parfois remplacée par -3 et les positions au-dessus/en dessous étaient inversées ; elles sont corrigées ici."],
     questions: [
       short("Pour $f(x)=\\frac{2x^2+3x-1}{x+2}=2x-1+\\frac1{x+2}$, donne l’asymptote oblique.", ["y=2x-1", "y = 2x - 1"], "Le reste 1/(x+2) tend vers 0 aux deux infinis.", "Exercice de fixation", 2),
@@ -589,18 +760,24 @@ Le signe de $f(x)-(ax+b)$ indique la position de la courbe :
     section: "IV-1. Dérivée de fonctions élémentaires",
     durationMinutes: 20,
     xp: 50,
-    body: String.raw`## Tableau des dérivées élémentaires
+    body: String.raw`## À quoi sert la dérivée ?
 
-| Fonction $f(x)$ | Ensemble | Dérivée $f'(x)$ |
-|---|---|---|
-| $a$ | $\mathbb{R}$ | $0$ |
-| $ax$ | $\mathbb{R}$ | $a$ |
-| $x^2$ | $\mathbb{R}$ | $2x$ |
-| $x^n$, $n\ge1$ | $\mathbb{R}$ | $nx^{n-1}$ |
-| $\frac1x$ | $\mathbb{R}\setminus\{0\}$ | $-\frac1{x^2}$ |
-| $\frac1{x^n}$ | $\mathbb{R}\setminus\{0\}$ | $-\frac{n}{x^{n+1}}$ |
+La dérivée mesure la **vitesse de variation** d’une fonction : le nombre dérivé $f'(a)$ est le coefficient directeur de la tangente à la courbe au point d’abscisse $a$. Toute la fin de la leçon — variations, extremums, tangente — repose sur elle.
 
-Il faut toujours préciser l’ensemble sur lequel la fonction est dérivable, en particulier pour les fonctions contenant une puissance de $x$ au dénominateur.`,
+## Tableau des dérivées élémentaires
+
+| Fonction $f(x)$ | Définie sur | Dérivée $f'(x)$ | Dérivable sur |
+|---|---|---|---|
+| $a$ (constante) | $\mathbb{R}$ | $0$ | $\mathbb{R}$ |
+| $ax$ | $\mathbb{R}$ | $a$ | $\mathbb{R}$ |
+| $x^2$ | $\mathbb{R}$ | $2x$ | $\mathbb{R}$ |
+| $x^n$, $n\ge1$ | $\mathbb{R}$ | $nx^{n-1}$ | $\mathbb{R}$ |
+| $\frac1x$ | $\mathbb{R}\setminus\{0\}$ | $-\frac1{x^2}$ | $\mathbb{R}\setminus\{0\}$ |
+| $\frac1{x^n}$, $n\ge1$ | $\mathbb{R}\setminus\{0\}$ | $-\frac{n}{x^{n+1}}$ | $\mathbb{R}\setminus\{0\}$ |
+
+Il faut toujours préciser l’ensemble sur lequel la fonction est dérivable, en particulier pour les fonctions contenant une puissance de $x$ au dénominateur.
+
+> **Astuce mémoire.** Pour $x^n$ : « l’exposant descend devant, puis perd 1 » — c’est la même formule qui donne $(x^2)'=2x$ et $(x^3)'=3x^2$.`,
     keyPoint: "$(x^n)'=nx^{n-1}$ et $(1/x^n)'=-n/x^{n+1}$.",
     example: "Si $l(x)=x^3$, alors $l'(x)=3x^2$ ; si $k(x)=1/x^3$, alors $k'(x)=-3/x^4$.",
     methodSteps: ["Identifie la forme élémentaire.", "Applique la formule correspondante.", "Précise le domaine de dérivabilité si la fonction possède un dénominateur."],
@@ -630,14 +807,24 @@ Il faut toujours préciser l’ensemble sur lequel la fonction est dérivable, e
 
 Soient $u$ et $v$ deux fonctions dérivables sur un intervalle ouvert $I$, et $n$ un entier naturel non nul.
 
-- $(u+v)'=u'+v'$ ;
-- $(ku)'=ku'$ pour toute constante réelle $k$ ;
-- $(uv)'=u'v+uv'$ ;
-- $(u^n)'=nu'u^{n-1}$ ;
-- si $u$ ne s’annule pas, $\left(\frac1u\right)'=-\frac{u'}{u^2}$ ;
-- si $v$ ne s’annule pas, $\left(\frac uv\right)'=\frac{u'v-uv'}{v^2}$.
+| Fonction | Dérivée | Condition |
+|---|---|---|
+| $u+v$ | $u'+v'$ | — |
+| $ku$, $k$ constante | $ku'$ | — |
+| $u\times v$ | $u'v+uv'$ | — |
+| $u^n$ | $nu'u^{n-1}$ | — |
+| $\dfrac1u$ | $-\dfrac{u'}{u^2}$ | $u$ ne s’annule pas sur $I$ |
+| $\dfrac uv$ | $\dfrac{u'v-uv'}{v^2}$ | $v$ ne s’annule pas sur $I$ |
 
-Le domaine de dérivabilité doit être compatible avec les dénominateurs présents dans l’expression.`,
+Le domaine de dérivabilité doit être compatible avec les dénominateurs présents dans l’expression.
+
+### Exemple du cours entièrement rédigé
+
+Pour $g(x)=\frac{x-4}{5x+3}$ avec $u(x)=x-4$ et $v(x)=5x+3$ :
+
+$$g'(x)=\frac{1\times(5x+3)-5\times(x-4)}{(5x+3)^2}=\frac{5x+3-5x+20}{(5x+3)^2}=\frac{23}{(5x+3)^2}$$
+
+> **Astuce mémoire pour le quotient.** « Dérivée du haut × bas, moins haut × dérivée du bas, le tout sur bas au carré. » L’ordre des deux termes du numérateur ne se change jamais.`,
     keyPoint: "Pour un quotient : dérivée du haut × bas - haut × dérivée du bas, le tout sur bas².",
     example: "Pour $g(x)=\\frac{x-4}{5x+3}$, $g'(x)=\\frac{(5x+3)-5(x-4)}{(5x+3)^2}=\\frac{23}{(5x+3)^2}$.",
     methodSteps: ["Identifie l’opération principale de l’expression.", "Écris la formule de dérivation avant de remplacer u et v.", "Simplifie le numérateur et conserve le carré du dénominateur pour un quotient."],
@@ -681,7 +868,7 @@ Soit $x_0\in K$. La valeur $f(x_0)$ est un extremum relatif lorsque $f'$ s’ann
 ## Étude de $f(x)=x-2+\frac1x$
 
 Le domaine est $\mathbb{R}\setminus\{0\}$ et
-$f'(x)=\frac{(x-1)(x+1)}{x^2}$.
+$$f'(x)=\frac{(x-1)(x+1)}{x^2}$$
 
 Comme $x^2>0$ pour $x\neq0$, le signe de $f'$ est celui de $(x-1)(x+1)$ :
 
@@ -690,7 +877,20 @@ Comme $x^2>0$ pour $x\neq0$, le signe de $f'$ est celui de $(x-1)(x+1)$ :
 | Signe de $f'$ | $+$ | $-$ | $-$ | $+$ |
 | Variation de $f$ | croissante | décroissante | décroissante | croissante |
 
-Ainsi $f(-1)=-4$ est un maximum relatif sur la branche gauche et $f(1)=0$ un minimum relatif sur la branche droite.`,
+### Tableau de variation
+
+Aux bornes : $\lim_{x\to-\infty}f(x)=-\infty$, $\lim_{x\to0^-}f(x)=-\infty$, $\lim_{x\to0^+}f(x)=+\infty$ et $\lim_{x\to+\infty}f(x)=+\infty$.
+
+| $x$ | $-\infty\to-1$ | $-1$ | $-1\to0$ | $0$ | $0\to1$ | $1$ | $1\to+\infty$ |
+|---|---|---|---|---|---|---|---|
+| $f'(x)$ | $+$ | $0$ | $-$ | ‖ | $-$ | $0$ | $+$ |
+| $f$ | ↗ | $-4$ | ↘ vers $-\infty$ | ‖ | $+\infty$ ↘ | $0$ | ↗ |
+
+La double barre ‖ marque la valeur interdite $0$ : la fonction n’y est pas définie.
+
+Ainsi $f(-1)=-4$ est un maximum relatif sur la branche gauche et $f(1)=0$ un minimum relatif sur la branche droite.
+
+> **Lecture du tableau.** Chaque flèche ↗ ou ↘ traduit le signe de $f'$ juste au-dessus ; les valeurs $-4$ et $0$ aux changements de flèche sont les extremums relatifs.`,
     keyPoint: "Le signe de f' donne les variations ; un changement +→- donne un maximum et -→+ un minimum.",
     example: "Pour $f(x)=x-2+1/x$, la dérivée s’annule en -1 et 1 ; elle change de signe à ces deux points.",
     methodSteps: ["Détermine le domaine et les limites aux bornes.", "Calcule puis factorise f'.", "Étudie le signe de f' et place ses zéros.", "Construis le tableau et lis les extrema."],
@@ -700,6 +900,22 @@ Ainsi $f(-1)=-4$ est un maximum relatif sur la branche gauche et $f(1)=0$ un min
       { label: "Variations", detail: "Traduire + par croissante et - par décroissante." },
       { label: "Extrema", detail: "Repérer les changements de signe." },
     ],
+    curve: {
+      kind: "curve",
+      eyebrow: "Manipuler",
+      title: "Visualise les deux branches de f(x) = x − 2 + 1/x",
+      instruction: "Parcours la courbe : repère le sommet de la branche gauche et le creux de la branche droite.",
+      observation: "Le sommet (-1 ; -4) est le maximum relatif, le creux (1 ; 0) le minimum relatif : exactement les changements de signe de f'.",
+      formula: "f(x) = x - 2 + 1/x",
+      formulaTex: "f(x)=x-2+\\frac1x",
+      rule: { kind: "affine-plus-reciprocal", slope: 1, intercept: -2, coefficient: 1, shift: 0 },
+      window: { xMin: -5, xMax: 6, yMin: -10, yMax: 7 },
+      guides: [
+        { kind: "vertical", value: 0, label: "x = 0" },
+        { kind: "oblique", slope: 1, intercept: -2, label: "y = x − 2" },
+      ],
+      marker: { min: -4.9, max: 5.9, step: 0.05, initial: -2 },
+    },
     corrections: ["La propriété d’extremum est formulée avec la condition correcte de changement de signe de la dérivée."],
     questions: [
       short("Pour $f(x)=x-2+1/x$, donne son ensemble de définition.", ["R\\{0}", "R\\{0}", "]-∞;0[∪]0;+∞[", "x≠0"], "Le dénominateur x ne doit pas être nul.", "Exercice de fixation - question 1"),
@@ -734,9 +950,17 @@ La tangente à la courbe $(C_f)$ d’une fonction $f$ au point $A$ d’abscisse 
 
 Une équation de cette tangente est :
 
-$y=f'(a)(x-a)+f(a)$.
+$$y=f'(a)(x-a)+f(a)$$
 
-Pour développer l’équation, distribue $f'(a)$ dans la parenthèse puis réduis les termes constants.`,
+Pour développer l’équation, distribue $f'(a)$ dans la parenthèse puis réduis les termes constants.
+
+### Exemple du cours corrigé, pas à pas
+
+Pour $f(x)=-x^2-2$ au point d’abscisse $1$ : $f'(x)=-2x$ donc $f'(1)=-2$, et $f(1)=-1-2=-3$.
+
+$$y=f'(1)(x-1)+f(1)=-2(x-1)+(-3)=-2x+2-3=-2x-1$$
+
+La tangente est la droite $y=-2x-1$ : elle touche la courbe en $A(1;-3)$ et sa pente $-2$ traduit la descente de la parabole en ce point.`,
     keyPoint: "Tangente en a : y=f'(a)(x-a)+f(a).",
     example: "Pour $f(x)=-x^2-2$, $f'(1)=-2$ et $f(1)=-3$ ; la tangente est $y=-2(x-1)-3=-2x-1$.",
     methodSteps: ["Calcule f(a), l’ordonnée du point de contact.", "Calcule f'(a), le coefficient directeur.", "Remplace dans y=f'(a)(x-a)+f(a), puis développe."],
@@ -745,6 +969,19 @@ Pour développer l’équation, distribue $f'(a)$ dans la parenthèse puis rédu
       { label: "Pente", detail: "La pente de la tangente vaut f'(a)." },
       { label: "Équation", detail: "Remplacer dans la formule et réduire." },
     ],
+    curve: {
+      kind: "curve",
+      eyebrow: "Manipuler",
+      title: "La tangente touche la parabole en A(1 ; −3)",
+      instruction: "Place le point en x = 1 : la droite rouge frôle la courbe exactement là, avec la pente f'(1) = −2.",
+      observation: "En x = 1, la tangente et la parabole se confondent localement : c’est la meilleure approximation de la courbe par une droite.",
+      formula: "f(x) = -x² - 2",
+      formulaTex: "f(x)=-x^2-2",
+      rule: { kind: "polynomial", coefficients: [-2, 0, -1] },
+      window: { xMin: -3.5, xMax: 3.5, yMin: -13, yMax: 2 },
+      guides: [{ kind: "oblique", slope: -2, intercept: -1, label: "tangente : y = −2x − 1" }],
+      marker: { min: -3.4, max: 3.4, step: 0.05, initial: 1 },
+    },
     corrections: ["Le PDF indique f'(1)=2 pour f(x)=-x²-2 ; la dérivée correcte vaut f'(1)=-2, et l’équation est corrigée en conséquence."],
     questions: [
       short("Pour $f(x)=-x^2-2$, détermine une équation de la tangente au point d’abscisse 1.", ["y=-2x-1", "y = -2x - 1"], "$f'(x)=-2x$, donc $f'(1)=-2$ et $f(1)=-3$.", "Exercice de fixation corrigé", 3),
@@ -772,7 +1009,16 @@ Ainsi, si $f$ est continue et strictement croissante ou décroissante sur $[a,b]
 
 ## Affiner l’encadrement
 
-Pour prouver $u<\alpha<v$, vérifie que $u$ et $v$ appartiennent à l’intervalle étudié et que $f(u)f(v)<0$.`,
+Pour prouver $u<\alpha<v$, vérifie que $u$ et $v$ appartiennent à l’intervalle étudié et que $f(u)f(v)<0$.
+
+### Application du cours : $f(x)=x^3-12x+10$ sur $[0;1]$
+
+| $x$ | $0$ | $0{,}8$ | $0{,}9$ | $1$ |
+|---|---|---|---|---|
+| $f(x)$ | $10$ | $0{,}912$ | $-0{,}071$ | $-1$ |
+| Signe | $+$ | $+$ | $-$ | $-$ |
+
+$f$ est continue et strictement décroissante sur $[0;1]$, avec $f(0)f(1)<0$ : l’équation $f(x)=0$ admet une **unique** solution $\alpha$, et comme $f(0{,}8)f(0{,}9)<0$, on conclut $0{,}8<\alpha<0{,}9$.`,
     keyPoint: "Continuité + changement de signe donnent l’existence ; la stricte monotonie ajoute l’unicité.",
     example: "Pour $f(x)=x^3-12x+10$ sur [0;1], $f(0)=10>0$, $f(1)=-1<0$ et f est strictement décroissante : il existe une unique racine.",
     methodSteps: ["Vérifie la continuité sur l’intervalle.", "Calcule f(a) et f(b) et montre que leur produit est négatif.", "Ajoute la stricte monotonie pour conclure à l’unicité.", "Teste deux nouvelles bornes pour affiner l’encadrement."],
@@ -782,6 +1028,18 @@ Pour prouver $u<\alpha<v$, vérifie que $u$ et $v$ appartiennent à l’interval
       { label: "Monotonie", detail: "Elle garantit l’unicité de la racine." },
       { label: "Encadrement", detail: "Tester des bornes plus proches." },
     ],
+    curve: {
+      kind: "curve",
+      eyebrow: "Manipuler",
+      title: "La courbe traverse l’axe des abscisses",
+      instruction: "Déplace le point entre 0 et 1 : repère l’endroit exact où f(x) change de signe.",
+      observation: "f(0) = 10 > 0 et f(1) = -1 < 0 : la courbe est obligée de couper l’axe entre les deux. Cette traversée est la solution α.",
+      formula: "f(x) = x³ - 12x + 10",
+      formulaTex: "f(x)=x^3-12x+10",
+      rule: { kind: "polynomial", coefficients: [10, -12, 0, 1] },
+      window: { xMin: -4.5, xMax: 4.5, yMin: -16, yMax: 28 },
+      marker: { min: -4.4, max: 4.4, step: 0.05, initial: 0 },
+    },
     corrections: ["Le PDF attribue l’unicité à la seule continuité et au changement de signe ; la stricte monotonie est ajoutée comme condition nécessaire."],
     questions: [
       choice("La continuité et un changement de signe suffisent toujours à garantir l’unicité de la solution.", ["Vrai", "Faux"], 1, "Ces conditions garantissent l’existence ; l’unicité demande ici la stricte monotonie.", "Contrôle de la propriété corrigée"),
@@ -811,7 +1069,23 @@ Soit $f$ continue sur $[a,b]$, avec $f(a)$ et $f(b)$ de signes contraires. On ch
 4. sinon, si $f(m)f(b)<0$, conserver $[m,b]$ ;
 5. recommencer sur le nouvel intervalle jusqu’à la précision demandée.
 
-À chaque étape, la longueur de l’intervalle est divisée par deux.`,
+À chaque étape, la longueur de l’intervalle est divisée par deux.
+
+### L’exemple du cours en tableau
+
+Pour $f(x)=x^3-12x+10$ sur $[0;1]$, avec $f(0)=10$ et $f(1)=-1$ :
+
+| Étape | Intervalle | Milieu $m$ | $f(m)$ | Conclusion |
+|---|---|---|---|---|
+| 1 | $[0;1]$ | $0{,}5$ | $4{,}125>0$ | $\alpha\in\left]0{,}5;1\right[$ |
+
+### Pour aller plus loin (étape supplémentaire)
+
+| Étape | Intervalle | Milieu $m$ | $f(m)$ | Conclusion |
+|---|---|---|---|---|
+| 2 | $[0{,}5;1]$ | $0{,}75$ | $1{,}42>0$ | $\alpha\in\left]0{,}75;1\right[$ |
+
+En répétant, l’encadrement se resserre : chaque étape divise l’incertitude par deux.`,
     keyPoint: "La dichotomie conserve toujours la moitié d’intervalle dont les images aux extrémités sont de signes contraires.",
     example: "Pour $f(x)=x^3-12x+10$ sur [0;1], $m=0,5$ et $f(0,5)=4,125>0$ ; comme $f(1)<0$, la racine est dans ]0,5;1[.",
     methodSteps: ["Calcule le milieu de l’intervalle.", "Évalue la fonction aux extrémités et au milieu.", "Conserve la moitié où le produit des images est négatif.", "Répète jusqu’à obtenir la précision voulue."],
@@ -821,6 +1095,18 @@ Soit $f$ continue sur $[a,b]$, avec $f(a)$ et $f(b)$ de signes contraires. On ch
       { label: "Moitié utile", detail: "Conserver l’intervalle avec changement de signe." },
       { label: "Répéter", detail: "Recommencer sur l’intervalle réduit." },
     ],
+    curve: {
+      kind: "curve",
+      eyebrow: "Manipuler",
+      title: "Zoom sur [0 ; 1] : coince la racine",
+      instruction: "Teste le milieu 0,5 puis 0,75 : de quel côté la courbe change-t-elle de signe ?",
+      observation: "f(0,5) = 4,125 > 0 et f(1) = -1 < 0 : la racine se cache dans la moitié droite ]0,5 ; 1[. Chaque coup de ciseaux divise l’intervalle par deux.",
+      formula: "f(x) = x³ - 12x + 10",
+      formulaTex: "f(x)=x^3-12x+10",
+      rule: { kind: "polynomial", coefficients: [10, -12, 0, 1] },
+      window: { xMin: -0.2, xMax: 1.3, yMin: -3, yMax: 11 },
+      marker: { min: 0, max: 1.25, step: 0.025, initial: 0.5 },
+    },
     corrections: ["La valeur f(0) indiquée 12 dans la solution du PDF est corrigée en 10."],
     questions: [
       short("Pour $f(x)=x^3-12x+10$ sur [0;1], calcule le premier milieu.", ["0,5", "0.5", "1/2"], "Le milieu est (0+1)/2=0,5.", "Exercice de fixation - étape 1"),
@@ -849,7 +1135,17 @@ On s’arrête lorsque deux résultats consécutifs sont de signes contraires. S
 
 $u<\alpha<u+0,1$.
 
-Un pas plus petit permet d’obtenir un encadrement plus précis, mais demande davantage de calculs.`,
+Un pas plus petit permet d’obtenir un encadrement plus précis, mais demande davantage de calculs.
+
+### Le tableau du cours pour $f(x)=x^3-3x$ sur $[1;2]$
+
+| $x$ | 1,1 | 1,2 | 1,3 | 1,4 | 1,5 | 1,6 | 1,7 | 1,8 |
+|---|---|---|---|---|---|---|---|---|
+| Signe de $f(x)$ | $-$ | $-$ | $-$ | $-$ | $-$ | $-$ | $-$ | $+$ |
+
+Le premier changement de signe apparaît entre $1{,}7$ et $1{,}8$ : comme $f(1{,}7)f(1{,}8)<0$, on conclut $1{,}7<\alpha<1{,}8$.
+
+> **Dichotomie ou balayage ?** La dichotomie coupe l’intervalle en deux à chaque étape ; le balayage avance régulièrement d’un pas fixe. Les deux s’appuient sur le même principe : encadrer le changement de signe.`,
     keyPoint: "Au balayage, la racine est comprise entre les deux valeurs consécutives dont les images changent de signe.",
     example: "Pour $f(x)=x^3-3x$, $f(1,7)<0$ et $f(1,8)>0$, donc $1,7<\\alpha<1,8$.",
     methodSteps: ["Choisis le pas demandé.", "Calcule les images dans l’ordre croissant.", "Repère le premier changement de signe entre deux valeurs consécutives.", "Écris l’encadrement correspondant."],
@@ -859,6 +1155,18 @@ Un pas plus petit permet d’obtenir un encadrement plus précis, mais demande d
       { label: "Changement", detail: "Repérer deux signes consécutifs opposés." },
       { label: "Encadrement", detail: "Placer α entre ces deux abscisses." },
     ],
+    curve: {
+      kind: "curve",
+      eyebrow: "Manipuler",
+      title: "Balaye [1 ; 2] au pas de 0,1",
+      instruction: "Le curseur avance exactement de 0,1 en 0,1, comme la méthode : trouve les deux positions où f(x) change de signe.",
+      observation: "De 1,0 à 1,7 les images restent négatives ; en 1,8 elles deviennent positives. La racine α = √3 ≈ 1,73 est coincée entre 1,7 et 1,8.",
+      formula: "f(x) = x³ - 3x",
+      formulaTex: "f(x)=x^3-3x",
+      rule: { kind: "polynomial", coefficients: [0, -3, 0, 1] },
+      window: { xMin: -2.6, xMax: 2.6, yMin: -4.5, yMax: 4.5 },
+      marker: { min: 1, max: 2, step: 0.1, initial: 1 },
+    },
     corrections: ["La répétition de f(a+0,1) dans le PDF est détaillée en f(a+0,1), f(a+0,2), f(a+0,3), etc."],
     questions: [
       short("Pour $f(x)=x^3-3x$, sachant que $f(1,7)<0$ et $f(1,8)>0$, donne un encadrement de α.", ["1,7<α<1,8", "1.7<alpha<1.8", "1,7<alpha<1,8"], "Le changement de signe se produit entre 1,7 et 1,8.", "Exercice de fixation", 3),
@@ -889,11 +1197,16 @@ Pour étudier une fonction rationnelle et représenter sa courbe :
 ## Situation complexe du COGES
 
 Le bénéfice après six mois est modélisé par
-$B(x)=-x^2+7200x-7\,760\,000$.
+$$B(x)=-x^2+7200x-7\,760\,000$$
 
 Sa dérivée est $B'(x)=-2x+7200$. Elle est positive avant $3600$, nulle en $3600$, puis négative après $3600$. La fonction croît donc jusqu’à $3600$ puis décroît.
 
-Le bénéfice maximal est $B(3600)=5\,200\,000$ F CFA. Il dépasse le coût de construction annoncé : le projet peut être financé selon le modèle proposé.
+| $x$ | $0\to3600$ | $3600$ | $3600\to+\infty$ |
+|---|---|---|---|
+| $B'(x)$ | $+$ | $0$ | $-$ |
+| $B$ | ↗ | $5\,200\,000$ | ↘ |
+
+Le bénéfice maximal est $B(3600)=5\,200\,000$ F CFA. Il dépasse le coût de construction annoncé de $5\,179\,000$ F CFA : le projet peut être financé selon le modèle proposé.
 
 ## Fonction rationnelle de synthèse
 
@@ -916,6 +1229,22 @@ Pour $f(x)=\frac{x^2+3x+3}{x+1}$ :
       { label: "Dérivée", detail: "Déterminer les variations et extrema." },
       { label: "Synthèse", detail: "Placer les points, la symétrie et conclure dans le contexte." },
     ],
+    curve: {
+      kind: "curve",
+      eyebrow: "Manipuler",
+      title: "Trouve le bénéfice maximal du COGES",
+      instruction: "Fais varier le nombre d’articles vendus : où le bénéfice dépasse-t-il la ligne rouge du coût, et où culmine-t-il ?",
+      observation: "Le sommet de la parabole est atteint en x = 3600 articles : le bénéfice maximal de 5 200 000 F dépasse le coût de construction de 5 179 000 F. Le projet est finançable.",
+      formula: "B(x) = -x² + 7200x - 7 760 000",
+      formulaTex: "B(x)=-x^2+7200x-7\\,760\\,000",
+      rule: { kind: "polynomial", coefficients: [-7760000, 7200, -1] },
+      window: { xMin: 0, xMax: 7200, yMin: -8000000, yMax: 6500000 },
+      guides: [
+        { kind: "horizontal", value: 5179000, label: "coût : 5 179 000 F" },
+        { kind: "vertical", value: 3600, label: "x = 3600" },
+      ],
+      marker: { min: 0, max: 7200, step: 50, initial: 800 },
+    },
     corrections: ["Le coût de construction est repris à 5 179 000 F CFA conformément à l’énoncé, malgré une écriture 5 170 000 dans la dernière comparaison."],
     questions: [
       short("Pour $B(x)=-x^2+7200x-7\\,760\\,000$, donne $B'(x)$.", ["-2x+7200", "B'(x)=-2x+7200"], "On dérive le polynôme terme à terme.", "C-Situation complexe", 1),

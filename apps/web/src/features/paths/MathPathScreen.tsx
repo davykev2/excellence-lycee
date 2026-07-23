@@ -15,6 +15,7 @@ import type { LearningLesson, LearningPath } from "../../domain/paths";
 import type { SchoolLevel, SubjectDefinition } from "../../domain/learning";
 import type { ProgressLesson } from "../progress/useLearningProgress";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
+import { MathText } from "../../components/MathText";
 import { formatXp } from "../../data/xpRewards";
 
 interface MathPathScreenProps {
@@ -135,7 +136,7 @@ export function MathPathScreen({
                       <span>+{formatXp(lesson.xp)} XP</span>
                     </div>
                     <h2>{lesson.title}</h2>
-                    <p>{lesson.summary}</p>
+                    <p><MathText>{lesson.summary}</MathText></p>
                     <div className="mastery-level-footer">
                       <span>{lesson.durationMinutes} min</span>
                       {state === "completed" ? (
