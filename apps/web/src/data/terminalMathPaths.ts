@@ -3,6 +3,7 @@ import { terminalAAdditionalMathPaths } from "./terminalAMathFaithfulCoursePaths
 import { terminalAPolynomialRationalPath } from "./terminalAPolynomialRationalPath";
 import { terminalA1ProbabilityPath, terminalA2ProbabilityPath } from "./terminalAProbabilityPath";
 import { terminalANaturalLogPath } from "./terminalANaturalLogPath";
+import { terminalAExponentialPath } from "./terminalAExponentialPath";
 import { terminalCMathematicsPaths } from "./terminalCMathPaths";
 import { terminalDMathematicsPaths } from "./terminalDMathPaths";
 
@@ -13,6 +14,7 @@ export const terminalMathematicsPaths: LearningPath[] = [
   terminalA1ProbabilityPath,
   terminalA2ProbabilityPath,
   terminalANaturalLogPath,
+  terminalAExponentialPath,
   ...terminalAAdditionalMathPaths,
   ...terminalCMathematicsPaths,
   ...terminalDMathematicsPaths,

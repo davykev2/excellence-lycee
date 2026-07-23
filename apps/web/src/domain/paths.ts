@@ -68,7 +68,9 @@ export type CurveRule =
   /** slope·x + intercept + coefficient / (x − shift) : forme canonique des asymptotes obliques. */
   | { kind: "affine-plus-reciprocal"; slope: number; intercept: number; coefficient: number; shift: number }
   /** slope·x + intercept + coefficient·ln(x), définie pour x > 0 : couvre ln x et les études type Bac de Terminale A. */
-  | { kind: "affine-plus-log"; slope: number; intercept: number; coefficient: number };
+  | { kind: "affine-plus-log"; slope: number; intercept: number; coefficient: number }
+  /** slope·x + intercept + coefficient·e^(rate·x) : couvre e^x, 1 − e^(−kt) et les études affines-exponentielles. */
+  | { kind: "affine-plus-exp"; slope: number; intercept: number; coefficient: number; rate: number };
 
 export interface CurveGuide {
   kind: "vertical" | "horizontal" | "oblique";

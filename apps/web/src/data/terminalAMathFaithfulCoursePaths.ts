@@ -136,175 +136,6 @@ function buildPath(seed: PathSeed): LearningPath {
   };
 }
 
-const exponentialDocument = "TA Maths leçon 04 Fonction exponnentielle.pdf";
-
-const exponentialLevels: FaithfulLevelSeed[] = [
-  {
-    id: "exp-definition-properties",
-    title: "Définition et notation de la fonction exponentielle",
-    summary: "Relier exponentielle et logarithme, puis utiliser leurs identités réciproques.",
-    pages: "1-2",
-    section: "I-1. Définition et notation",
-    body: String.raw`La fonction exponentielle népérienne, notée $\exp$, est la fonction réciproque du logarithme népérien. On écrit $\exp(x)=e^x$.
-
-Elle est définie sur $\mathbb R$ et reste strictement positive. On a $e^0=1$, $e^1=e$, $\ln(e^a)=a$ pour tout réel $a$, et $e^{\ln a}=a$ pour $a>0$.
-
-Ainsi, pour $a>0$, $\ln a=b\iff a=e^b$.`,
-    keyPoint: "Pour tout réel x, e^x > 0 ; ln(e^x)=x et e^(ln a)=a pour a>0.",
-    example: "$\ln(e^8)=8$, $e^{\ln3}=3$ et $e^{-\ln2}=1/2$.",
-    steps: ["Repère une composition $\ln(e^x)$ ou $e^{\ln a}$.", "Vérifie $a>0$ lorsque nécessaire.", "Applique directement l’identité réciproque."],
-    questions: [
-      choice("L’ensemble de définition de $x\mapsto e^x$ est $\mathbb R$.", ["Vrai", "Faux"], 0, "L’exponentielle est définie pour tout réel.", "Exercice de fixation 1, page 2"),
-      choice("Le nombre $e^{-10}$ est négatif.", ["Vrai", "Faux"], 1, "$e^x$ est toujours strictement positif.", "Exercice de fixation 1, page 2"),
-      short("Calcule $\ln(e^{-5})$.", ["-5"], "$\ln(e^a)=a$.", "Exercice de fixation 2-B, page 2"),
-      short("Calcule $e^{-\ln2}$.", ["1/2", "0,5", "0.5"], "$e^{-\ln2}=e^{\ln(1/2)}=1/2$.", "Exercice de fixation 2-D, page 2"),
-    ],
-    weight: 50,
-  },
-  {
-    id: "exp-algebraic-properties",
-    title: "Propriétés algébriques de l’exponentielle",
-    summary: "Transformer produits, quotients, puissances et inverses d’exponentielles.",
-    pages: "2",
-    section: "I-2. Propriétés algébriques",
-    body: String.raw`Pour tous réels $a$ et $b$ et tout rationnel $r$ :
-
-$e^ae^b=e^{a+b}$, $\dfrac{e^a}{e^b}=e^{a-b}$, $(e^a)^r=e^{ar}$ et $\dfrac1{e^a}=e^{-a}$.
-
-On simplifie donc les exponentielles en travaillant d’abord sur leurs exposants.`,
-    keyPoint: "Produit → addition des exposants ; quotient → soustraction.",
-    example: "$e^6e^{-4}=e^2$, $(e^{-2})^4=e^{-8}$ et $e^4/e^{-5}=e^9$.",
-    steps: ["Identifie l’opération entre les exponentielles.", "Transforme les exposants.", "Réduis l’expression finale sous la forme $e^k$."],
-    questions: [
-      choice("Écris $e^6e^{-4}$ sous la forme $e^k$.", ["$e^{-24}$", "$e^{10}$", "$e^2$", "$e^{-2}$"], 2, "$6+(-4)=2$.", "Exercice de fixation E, page 2"),
-      choice("Écris $(e^{-2})^4$ sous la forme $e^k$.", ["$e^{-8}$", "$e^8$", "$e^{-6}$", "$e^2$"], 0, "$-2\times4=-8$.", "Exercice de fixation F, page 2"),
-      choice("Écris $e^4/e^{-5}$ sous la forme $e^k$.", ["$e^{-1}$", "$e^9$", "$e^{-9}$", "$e^{20}$"], 1, "$4-(-5)=9$.", "Exercice de fixation G, page 2"),
-    ],
-    weight: 55,
-  },
-  {
-    id: "exp-limits-variations",
-    title: "Limites de référence de l’exponentielle",
-    summary: "Utiliser les limites de $e^x$, $e^x/x$ et $xe^x$ aux infinis.",
-    pages: "2-3",
-    section: "II-1. Limites de référence",
-    body: String.raw`Les limites fondamentales sont :
-
-$\lim_{x\to+\infty}e^x=+\infty$, $\lim_{x\to-\infty}e^x=0$,
-
-$\lim_{x\to+\infty}\dfrac{e^x}{x}=+\infty$ et $\lim_{x\to-\infty}xe^x=0$.
-
-L’exponentielle domine toute expression affine lorsque $x\to+\infty$.`,
-    keyPoint: "À −∞, e^x → 0 ; à +∞, e^x domine x.",
-    example: "$\lim_{x\to-\infty}(e^x+3)=3$ et $\lim_{x\to-\infty}2xe^x=0$.",
-    steps: ["Repère la limite de référence.", "Factorise par $x$ ou $e^x$ si nécessaire.", "Combine les facteurs et conclus."],
-    questions: [
-      short("Calcule $\lim_{x\to-\infty}(e^x+3)$.", ["3"], "$e^x\to0$, donc la somme tend vers 3.", "Exercice de fixation a, page 3"),
-      short("Calcule $\lim_{x\to-\infty}2xe^x$.", ["0"], "$xe^x\to0$ à $-\infty$.", "Exercice de fixation b, page 3"),
-      short("Calcule $\lim_{x\to+\infty}(2x-1-e^x)$.", ["-∞", "-infini"], "$e^x$ domine le terme affine et porte un signe négatif.", "Exercice de fixation c, page 3", 2),
-    ],
-    weight: 65,
-  },
-  {
-    id: "exp-derivative-variation",
-    title: "Dérivée, variations et courbe de l’exponentielle",
-    summary: "Montrer que l’exponentielle est strictement croissante et reconnaître son asymptote.",
-    pages: "3-4",
-    section: "II-2 et II-3. Dérivée, variations, représentation",
-    body: String.raw`La fonction exponentielle est dérivable sur $\mathbb R$ et $(e^x)'=e^x$. Comme $e^x>0$, elle est strictement croissante sur $\mathbb R$, de $0$ vers $+\infty$.
-
-Lorsque $x\to-\infty$, $e^x\to0$ : l’axe des abscisses, d’équation $y=0$, est une asymptote horizontale à sa courbe.`,
-    keyPoint: "(e^x)' = e^x > 0 : exp est strictement croissante sur ℝ.",
-    example: "$f(x)=2x+e^x$ vérifie $f'(x)=2+e^x>0$.",
-    steps: ["Dérive chaque terme.", "Utilise la positivité de $e^x$.", "Conclue sur les variations et l’asymptote si demandée."],
-    questions: [
-      choice("Quelle est la dérivée de $f(x)=2x+e^x$ ?", ["$2+e^x$", "$2x+e^x$", "$2+xe^{x-1}$", "$e^x$"], 0, "La dérivée de $2x$ est 2 et celle de $e^x$ est $e^x$.", "Exercice de fixation, question 1, page 3"),
-      choice("Quel est le sens de variation de cette fonction ?", ["Strictement décroissante", "Strictement croissante", "Constante", "Variable selon x"], 1, "$2+e^x>0$ sur $\mathbb R$.", "Exercice de fixation, question 2, page 3"),
-      choice("Quelle droite est asymptote à $y=e^x$ en $-\infty$ ?", ["$x=0$", "$y=1$", "$y=0$", "$y=x$"], 2, "$e^x\to0$ lorsque $x\to-\infty$.", "Représentation graphique, page 4"),
-    ],
-    weight: 65,
-  },
-  {
-    id: "exp-equations-inequalities",
-    title: "Équations exponentielles",
-    summary: "Résoudre une égalité d’exponentielles ou une équation polynomiale en $e^x$.",
-    pages: "4-5",
-    section: "III-1 et III-2. Propriété et équations",
-    body: String.raw`Pour tous réels $a$ et $b$, $e^a=e^b\iff a=b$. Pour une équation contenant $e^{2x}$ et $e^x$, on pose $X=e^x$ en gardant la contrainte $X>0$.
-
-Si $e^u=k$ avec $k>0$, alors $u=\ln k$.`,
-    keyPoint: "Poser X=e^x impose toujours X>0.",
-    example: "$e^{2x-1}=e^{x+5}$ donne $x=6$.",
-    steps: ["Mets les deux membres sous forme exponentielle ou pose $X=e^x$.", "Résous l’équation obtenue.", "Élimine toute valeur $X\le0$ puis reviens à $x$."],
-    questions: [
-      short("Résous $e^{2x-1}=e^{x+5}$.", ["6", "{6}"], "L’injectivité donne $2x-1=x+5$.", "Exemple officiel 1, pages 4-5"),
-      choice("Résous $e^{x-2}=5$.", ["$x=\ln5-2$", "$x=2+\ln5$", "$x=5e^2$", "$x=7$"], 1, "$x-2=\ln5$.", "Exemple officiel 2, pages 4-5"),
-      choice("Résous $e^{2x}+e^x-6=0$.", ["$x=\ln2$", "$x=\ln3$", "$x=2$", "$x=-3$"], 0, "Avec $X=e^x>0$, $X^2+X-6=0$ ne conserve que $X=2$.", "Exemple officiel 3, page 5", 2),
-    ],
-    weight: 75,
-  },
-  {
-    id: "exp-inequalities",
-    title: "Inéquations exponentielles",
-    summary: "Comparer des exponentielles et résoudre une inéquation polynomiale en $e^x$.",
-    pages: "5",
-    section: "III-3. Inéquations",
-    body: String.raw`La fonction exponentielle étant strictement croissante, $e^a<e^b\iff a<b$ ; les relations $\le$, $>$ et $\ge$ sont également conservées.
-
-Pour un trinôme en $e^x$, on pose $X=e^x>0$, on étudie son signe, puis on revient à $x$ avec le logarithme.`,
-    keyPoint: "L’exponentielle conserve l’ordre et reste strictement positive.",
-    example: "$e^{2x}-5e^x+6\ge0$ donne $x\le\ln2$ ou $x\ge\ln3$.",
-    steps: ["Pose $X=e^x>0$ si l’expression est quadratique.", "Résous l’inéquation en $X$.", "Traduis les intervalles retenus en intervalles de $x$."],
-    questions: [
-      choice("Résous $e^{2x-1}<8$.", ["$x<(1+\ln8)/2$", "$x>\ln8$", "$x<8$", "$x>(1+\ln8)/2$"], 0, "On prend le logarithme puis on isole $x$.", "Exemple officiel 1, page 5"),
-      choice("Résous $e^{2x}-5e^x+6\ge0$.", ["$[\ln2;\ln3]$", "$]-\infty;\ln2]\cup[\ln3;+\infty[$", "$]0;2]\cup[3;+\infty[$", "$]2;3[$"], 1, "Le trinôme $(X-2)(X-3)$ est positif à l’extérieur des racines.", "Exemple officiel 2, page 5", 2),
-    ],
-    weight: 75,
-  },
-  {
-    id: "exp-composite-derivatives",
-    title: "Dérivée d’une exponentielle composée",
-    summary: "Dériver $e^{u(x)}$ puis combiner avec les règles de somme et de produit.",
-    pages: "5-6",
-    section: "IV-1. Dérivée",
-    body: String.raw`Si $u$ est dérivable sur un intervalle $K$, alors $e^u$ est dérivable et
-
-$(e^u)'=u'e^u$.
-
-Pour une expression comme $(2x+1)e^x$, on applique aussi la règle de dérivation d’un produit.`,
-    keyPoint: "(e^u)' = u'e^u.",
-    example: "Si $f(x)=e^{-4x+3}$, alors $f'(x)=-4e^{-4x+3}$.",
-    steps: ["Identifie l’exposant $u(x)$.", "Calcule $u'(x)$.", "Multiplie par $e^{u(x)}$ et applique les autres règles éventuelles."],
-    questions: [
-      choice("Dérive $e^{-4x+3}$.", ["$e^{-4x+3}$", "$-4e^{-4x+3}$", "$(-4x+3)e^{-4x+3}$", "$4e^{-4x+3}$"], 1, "La dérivée de l’exposant est $-4$.", "Exercice de fixation 1, page 6"),
-      choice("Dérive $(2x+1)e^x$.", ["$(2x+1)e^x$", "$(2x+2)e^x$", "$(2x+3)e^x$", "$2e^x$"], 2, "$2e^x+(2x+1)e^x=(2x+3)e^x$.", "Exercice de fixation 3, page 6", 2),
-    ],
-    weight: 75,
-  },
-  {
-    id: "exp-primitives-a1",
-    title: "Primitives exponentielles - extension A1",
-    summary: "Déterminer les primitives de $u'e^u$ ; cette partie du document est réservée à la Terminale A1.",
-    pages: "6",
-    section: "IV-2. Primitives - Terminale A1 uniquement",
-    body: String.raw`Si $u$ est dérivable sur $K$, la fonction $e^u$ est une primitive de $u'e^u$. Ainsi,
-
-$\int u'(x)e^{u(x)}\,dx=e^{u(x)}+\alpha$.
-
-En particulier, une primitive de $e^{ax+b}$, avec $a\ne0$, est $\frac1a e^{ax+b}$.`,
-    keyPoint: "∫u'e^u = e^u + constante.",
-    example: "Les primitives de $e^{-3x+7}$ sont $-\frac13e^{-3x+7}+\alpha$.",
-    steps: ["Identifie $u$ et $u'$.", "Ajuste le coefficient pour obtenir exactement $u'e^u$.", "Écris $e^u$ avec la constante d’intégration."],
-    questions: [
-      choice("Une primitive de $e^x$ est :", ["$xe^x$", "$e^x$", "$\ln x$", "$e^{x+1}$ uniquement"], 1, "La dérivée de $e^x$ est elle-même.", "Exercice de fixation a, page 6"),
-      choice("Une primitive de $e^{-3x+7}$ est :", ["$-3e^{-3x+7}$", "$-\frac13e^{-3x+7}$", "$\frac13e^{-3x+7}$", "$e^{-3x+7}$"], 1, "Le facteur $1/(-3)$ compense la dérivée de l’exposant.", "Exercice de fixation b, page 6"),
-      choice("Une primitive de $xe^{x^2}$ est :", ["$e^{x^2}$", "$\frac12e^{x^2}$", "$x^2e^{x^2}$", "$2e^{x^2}$"], 1, "$u=x^2$ et $u'=2x$, donc $xe^{x^2}=\frac12u'e^u$.", "Exercice de fixation c, page 6", 2),
-    ],
-    weight: 80,
-    kind: "challenge",
-  },
-];
-
 const sequencesDocument = "TA Maths leçon 05 Suites numériques.pdf";
 
 const sequenceLevels: FaithfulLevelSeed[] = [
@@ -949,19 +780,6 @@ Il faut donc étudier l’ordre des courbes avant d’intégrer, puis appliquer 
   },
 ];
 
-export const terminalAExponentialPath = buildPath({
-  id: "terminale-a-exponential",
-  chapterNumber: 4,
-  themeNumber: 1,
-  themeTitle: "Fonctions numériques",
-  title: "Fonction exponentielle",
-  description: "Définition, propriétés, limites, dérivation, équations, inéquations et primitives exponentielles.",
-  outcomes: ["Utiliser les propriétés de exp", "Étudier une fonction exponentielle", "Résoudre des équations et inéquations"],
-  moduleTitle: "Maîtriser la fonction exponentielle",
-  sourceDocument: exponentialDocument,
-  levels: exponentialLevels,
-});
-
 export const terminalASequencesPath = buildPath({
   id: "terminale-a-sequences",
   chapterNumber: 5,
@@ -1015,7 +833,6 @@ export const terminalAPrimitivesIntegralsPath = buildPath({
 });
 
 export const terminalAAdditionalMathPaths: LearningPath[] = [
-  terminalAExponentialPath,
   terminalASequencesPath,
   terminalABivariateStatisticsPath,
   terminalALinearSystemsPath,

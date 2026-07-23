@@ -91,6 +91,9 @@ function evaluateCurveRule(rule: CurveRule, input: number): number | null {
   if (rule.kind === "affine-plus-log") {
     return input <= 0 ? null : rule.slope * input + rule.intercept + rule.coefficient * Math.log(input);
   }
+  if (rule.kind === "affine-plus-exp") {
+    return rule.slope * input + rule.intercept + rule.coefficient * Math.exp(rule.rate * input);
+  }
   return evaluateRule(rule, input);
 }
 
