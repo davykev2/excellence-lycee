@@ -61,6 +61,13 @@ export interface TimelineLessonInteraction extends LessonInteractionBase {
 
 export type CurveRule =
   | FunctionRule
+  /**
+   * Points de mesure d'une courbe expérimentale, ordonnés par abscisse croissante.
+   * Le tracé relie les points ; la valeur intermédiaire est interpolée linéairement.
+   * Indispensable pour les enregistrements de laboratoire (potentiel d'action…),
+   * qu'aucune formule ne décrit fidèlement.
+   */
+  | { kind: "samples"; points: Array<[number, number]> }
   /** Coefficients ordonnés par degré croissant : [a0, a1, a2, …] représente a0 + a1·x + a2·x² + … */
   | { kind: "polynomial"; coefficients: number[] }
   /** (a·x + b) / (c·x + d), écrit numerator: [a, b] et denominator: [c, d]. */
@@ -134,12 +141,56 @@ export interface OrbitLessonInteraction extends LessonInteractionBase {
   marker: { min: number; max: number; step: number; initial: number };
 }
 
+/** Primitives de dessin, volontairement sérialisables (aucun JSX dans les données). */
+export type SchemaShape =
+  | { shape: "path"; d: string; tone?: SchemaTone }
+  | { shape: "line"; x1: number; y1: number; x2: number; y2: number; tone?: SchemaTone }
+  | { shape: "circle"; cx: number; cy: number; r: number; tone?: SchemaTone }
+  | { shape: "ellipse"; cx: number; cy: number; rx: number; ry: number; rotate?: number; tone?: SchemaTone }
+  | { shape: "text"; x: number; y: number; content: string; anchor?: "start" | "middle" | "end" };
+
+export type SchemaTone = "outline" | "fill" | "soft" | "accent" | "muted";
+
+export interface SchemaHotspot {
+  id: string;
+  /** Numéro du repère, affiché dans la pastille cliquable. */
+  number: number;
+  label: string;
+  detail: string;
+  x: number;
+  y: number;
+  /** Éléments du dessin mis en évidence quand ce repère est sélectionné. */
+  highlight?: SchemaShape[];
+}
+
+export interface SchemaZone {
+  label: string;
+  xStart: number;
+  xEnd: number;
+}
+
+/**
+ * Figure annotée : un dessin original en SVG et des repères numérotés que l'élève
+ * sélectionne pour éclairer la partie correspondante et lire sa définition.
+ * Pensée pour les schémas de SVT, où savoir situer une structure fait partie du programme.
+ */
+export interface SchemaLessonInteraction extends LessonInteractionBase {
+  kind: "schema";
+  viewBox: string;
+  caption?: string;
+  shapes: SchemaShape[];
+  /** Bandeaux de territoires affichés au-dessus du dessin (substance grise, blanche…). */
+  zones?: SchemaZone[];
+  hotspots: [SchemaHotspot, SchemaHotspot, ...SchemaHotspot[]];
+}
+
 export type LessonInteraction =
   | NumericLessonInteraction
   | TimelineLessonInteraction
   | CurveLessonInteraction
   | DiagramLessonInteraction
-  | OrbitLessonInteraction;
+  | OrbitLessonInteraction
+  | SchemaLessonInteraction;
 
 export interface LessonMethod {
   eyebrow: string;

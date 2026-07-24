@@ -602,7 +602,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       "Contemporary Africa",
     ],
     svt: [
-      "La communication nerveuse",
+      { title: "La communication nerveuse", pathId: "terminale-c-svt-l1-nervous-communication" },
       "Les drogues et le système nerveux",
       "Les cycles sexuels chez la femme",
       "La transmission d’un caractère héréditaire chez l’Homme",

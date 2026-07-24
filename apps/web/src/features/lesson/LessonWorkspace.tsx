@@ -14,7 +14,7 @@ import {
   X,
   XCircle,
 } from "@phosphor-icons/react";
-import type { CurveLessonInteraction, CurveRule, DiagramLessonInteraction, FunctionRule, LearningLesson, LearningPath, LessonQuestion, OrbitLessonInteraction } from "../../domain/paths";
+import type { CurveLessonInteraction, CurveRule, DiagramLessonInteraction, FunctionRule, LearningLesson, LearningPath, LessonQuestion, OrbitLessonInteraction, SchemaLessonInteraction, SchemaShape } from "../../domain/paths";
 import type { AttemptResult, ProgressLesson } from "../progress/useLearningProgress";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
 import { MathFormula, MathText } from "../../components/MathText";
@@ -79,6 +79,22 @@ function evaluateRule(rule: FunctionRule, input: number) {
 }
 
 function evaluateCurveRule(rule: CurveRule, input: number): number | null {
+  if (rule.kind === "samples") {
+    const points = rule.points;
+    if (!points.length) return null;
+    if (input <= points[0][0]) return points[0][1];
+    if (input >= points[points.length - 1][0]) return points[points.length - 1][1];
+    for (let index = 1; index < points.length; index += 1) {
+      const [previousX, previousY] = points[index - 1];
+      const [currentX, currentY] = points[index];
+      if (input <= currentX) {
+        const span = currentX - previousX;
+        // Interpolation linéaire entre deux points de mesure consécutifs.
+        return span === 0 ? currentY : previousY + ((input - previousX) * (currentY - previousY)) / span;
+      }
+    }
+    return points[points.length - 1][1];
+  }
   if (rule.kind === "polynomial") return rule.coefficients.reduce((sum, coefficient, degree) => sum + coefficient * input ** degree, 0);
   if (rule.kind === "rational-linear") {
     const denominator = rule.denominator[0] * input + rule.denominator[1];
@@ -110,6 +126,12 @@ function niceTicks(min: number, max: number) {
 function buildCurveSegments(rule: CurveRule, window: CurveLessonInteraction["window"], samples = 480) {
   const segments: Array<Array<[number, number]>> = [];
   let current: Array<[number, number]> = [];
+  // Une courbe expérimentale se trace directement par ses points de mesure,
+  // sans ré-échantillonnage qui en lisserait la forme.
+  if (rule.kind === "samples") {
+    const measured = rule.points.filter(([x]) => x >= window.xMin && x <= window.xMax);
+    return measured.length > 1 ? [measured] : [];
+  }
   const overflow = window.yMax - window.yMin;
   for (let index = 0; index <= samples; index += 1) {
     const x = window.xMin + ((window.xMax - window.xMin) * index) / samples;
@@ -347,12 +369,100 @@ function OrbitLab({ interaction, angleDegrees, lessonId, onAngleChange }: {
   );
 }
 
+function renderSchemaShape(shape: SchemaShape, key: string, extraClass = "") {
+  const tone = "tone" in shape && shape.tone ? shape.tone : "outline";
+  const className = `schema-${tone} ${extraClass}`.trim();
+  if (shape.shape === "path") return <path className={className} d={shape.d} key={key} />;
+  if (shape.shape === "line") return <line className={className} key={key} x1={shape.x1} y1={shape.y1} x2={shape.x2} y2={shape.y2} />;
+  if (shape.shape === "circle") return <circle className={className} cx={shape.cx} cy={shape.cy} key={key} r={shape.r} />;
+  if (shape.shape === "ellipse") {
+    return (
+      <ellipse
+        className={className}
+        cx={shape.cx}
+        cy={shape.cy}
+        key={key}
+        rx={shape.rx}
+        ry={shape.ry}
+        transform={shape.rotate ? `rotate(${shape.rotate} ${shape.cx} ${shape.cy})` : undefined}
+      />
+    );
+  }
+  return (
+    <text className={`schema-label ${extraClass}`.trim()} key={key} textAnchor={shape.anchor ?? "middle"} x={shape.x} y={shape.y}>
+      {shape.content}
+    </text>
+  );
+}
+
+function SchemaLab({ interaction, selectedIndex, lessonId, onSelect }: {
+  interaction: SchemaLessonInteraction;
+  selectedIndex: number;
+  lessonId: string;
+  onSelect: (index: number) => void;
+}) {
+  const active = interaction.hotspots[Math.min(selectedIndex, interaction.hotspots.length - 1)];
+  const [, , viewWidth] = interaction.viewBox.split(/\s+/).map(Number);
+  return (
+    <div className="mastery-schema-lab">
+      {interaction.zones?.length ? (
+        <div className="schema-zones">
+          {interaction.zones.map((zone) => (
+            <span
+              key={zone.label}
+              style={{
+                left: `${(zone.xStart / viewWidth) * 100}%`,
+                width: `${((zone.xEnd - zone.xStart) / viewWidth) * 100}%`,
+              }}
+            >{zone.label}</span>
+          ))}
+        </div>
+      ) : null}
+      <svg viewBox={interaction.viewBox} role="img" aria-label={interaction.caption ?? interaction.title}>
+        {interaction.shapes.map((shape, index) => renderSchemaShape(shape, `shape-${index}`))}
+        {active.highlight?.map((shape, index) => renderSchemaShape(shape, `highlight-${index}`, "is-highlighted"))}
+        {interaction.hotspots.map((hotspot, index) => (
+          <g
+            aria-label={`Repère ${hotspot.number} : ${hotspot.label}`}
+            className={`schema-hotspot ${index === selectedIndex ? "is-active" : ""}`}
+            key={hotspot.id}
+            onClick={() => onSelect(index)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onSelect(index); } }}
+          >
+            <circle cx={hotspot.x} cy={hotspot.y} r={11} />
+            <text x={hotspot.x} y={hotspot.y + 4} textAnchor="middle">{hotspot.number}</text>
+          </g>
+        ))}
+      </svg>
+      {interaction.caption && <p className="schema-caption">{interaction.caption}</p>}
+      <div className="schema-markers" role="tablist" aria-label="Repères du schéma">
+        {interaction.hotspots.map((hotspot, index) => (
+          <button
+            aria-selected={index === selectedIndex}
+            className={index === selectedIndex ? "is-active" : ""}
+            key={`marker-${hotspot.id}`}
+            onClick={() => onSelect(index)}
+            role="tab"
+            type="button"
+          >{hotspot.number}. {hotspot.label}</button>
+        ))}
+      </div>
+      <div className="schema-focus" aria-live="polite" id={`schema-focus-${lessonId}`}>
+        <strong>{active.number}. {active.label}</strong>
+        <p><MathText>{active.detail}</MathText></p>
+      </div>
+    </div>
+  );
+}
+
 function formatNumber(value: number) {
   return new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2 }).format(value);
 }
 
 function initialInteractionValue(lesson: LearningLesson) {
-  if (lesson.interaction.kind === "timeline" || lesson.interaction.kind === "diagram") return 0;
+  if (lesson.interaction.kind === "timeline" || lesson.interaction.kind === "diagram" || lesson.interaction.kind === "schema") return 0;
   if (lesson.interaction.kind === "curve") return lesson.interaction.marker.initial;
   if (lesson.interaction.kind === "orbit") return lesson.interaction.marker.initial;
   return lesson.interaction.input.initial;
@@ -415,7 +525,7 @@ export function LessonWorkspace({
   }, [phase]);
 
   const outputValue = useMemo(() => {
-    if (lesson.interaction.kind === "timeline" || lesson.interaction.kind === "diagram" || lesson.interaction.kind === "orbit") return null;
+    if (lesson.interaction.kind === "timeline" || lesson.interaction.kind === "diagram" || lesson.interaction.kind === "orbit" || lesson.interaction.kind === "schema") return null;
     if (lesson.interaction.kind === "curve") return evaluateCurveRule(lesson.interaction.rule, inputValue);
     return evaluateRule(lesson.interaction.rule, inputValue);
   }, [inputValue, lesson.interaction]);
@@ -526,6 +636,13 @@ export function LessonWorkspace({
                 <DiagramLab
                   interaction={lesson.interaction}
                   selectedIndex={Math.round(inputValue)}
+                  onSelect={setInputValue}
+                />
+              ) : lesson.interaction.kind === "schema" ? (
+                <SchemaLab
+                  interaction={lesson.interaction}
+                  selectedIndex={Math.round(inputValue)}
+                  lessonId={lesson.id}
                   onSelect={setInputValue}
                 />
               ) : lesson.interaction.kind === "orbit" ? (
