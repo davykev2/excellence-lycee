@@ -1,6 +1,7 @@
 import type {
   LearningLesson,
   LearningPath,
+  LessonInteraction,
   LessonKind,
   LessonQuestion,
   TimelineInteractionItem,
@@ -12,6 +13,12 @@ export interface PhilosophySectionSeed {
   summary: string;
   conceptTitle: string;
   explanation: string;
+  /** Cours rédigé : méthode détaillée, exemples corrigés, encadrés. */
+  bodyMarkdown?: string;
+  /** Remplace la carte mentale par une autre interaction, par exemple un organigramme. */
+  interaction?: LessonInteraction;
+  /** Exercices supplémentaires tirés du document, en plus du contrôle `check`. */
+  extraQuestions?: LessonQuestion[];
   keyPoint: string;
   example: string;
   mapTitle: string;
@@ -33,6 +40,12 @@ export interface PhilosophyMissionSeed {
   plan: [TimelineInteractionItem, TimelineInteractionItem, ...TimelineInteractionItem[]];
   modelAnswer: string;
   questions: [LessonQuestion, LessonQuestion, LessonQuestion];
+  /** Corrigé rédigé du sujet, affiché avant les consignes. */
+  bodyMarkdown?: string;
+  /** Remplace la frise du plan, par exemple par l'organigramme des axes. */
+  interaction?: LessonInteraction;
+  /** Consignes supplémentaires du document. */
+  extraQuestions?: LessonQuestion[];
 }
 
 export interface PhilosophyCourseSeed {
@@ -82,10 +95,11 @@ function sectionLesson(course: PhilosophyCourseSeed, section: PhilosophySectionS
       eyebrow: `Niveau ${index + 1} • Philosophie`,
       title: section.conceptTitle,
       explanation: section.explanation,
+      bodyMarkdown: section.bodyMarkdown,
       notation: section.keyPoint,
       example: section.example,
     },
-    interaction: {
+    interaction: section.interaction ?? {
       kind: "timeline",
       eyebrow: "Mettre les idées en mouvement",
       title: section.mapTitle,
@@ -97,6 +111,7 @@ function sectionLesson(course: PhilosophyCourseSeed, section: PhilosophySectionS
     question: section.check,
     questions: [
       section.check,
+      ...(section.extraQuestions ?? []),
       {
         prompt: "Quelle formulation résume correctement ce niveau ?",
         options: [section.distractors[0], section.keyPoint, section.distractors[1], section.distractors[2]],
@@ -183,10 +198,11 @@ function missionLesson(course: PhilosophyCourseSeed): LearningLesson {
       eyebrow: "Niveau 6 • Mission type BAC",
       title: mission.title,
       explanation: mission.scenario,
+      bodyMarkdown: mission.bodyMarkdown,
       notation: mission.problem,
       example: mission.modelAnswer,
     },
-    interaction: {
+    interaction: mission.interaction ?? {
       kind: "timeline",
       eyebrow: "Préparer la copie",
       title: "Le plan de résolution",
@@ -212,7 +228,7 @@ function missionLesson(course: PhilosophyCourseSeed): LearningLesson {
       tip: "Une référence est utile seulement si tu expliques ce qu’elle prouve.",
     },
     question: mission.questions[0],
-    questions: mission.questions,
+    questions: [...mission.questions, ...(mission.extraQuestions ?? [])],
   };
 }
 

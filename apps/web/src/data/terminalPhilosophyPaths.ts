@@ -15,107 +15,327 @@ const courses: PhilosophyCourseSeed[] = [
     themeNumber: 1,
     themeTitle: "La méthodologie",
     title: "La dissertation philosophique",
-    description: "Comprendre le sujet, faire apparaître son problème puis construire une argumentation cohérente jusqu’à la conclusion.",
-    centralQuestion: "Comment transformer une question en démonstration philosophique ?",
-    memorySentence: "Comprendre le sujet → problématiser → argumenter → répondre clairement.",
+    description: "Comprendre un sujet, en dégager le problème, puis construire une introduction, une argumentation et une conclusion.",
+    centralQuestion: "Comment passer d’un sujet donné à une copie argumentée qui résout un problème ?",
+    memorySentence: "Étudier les mots, reformuler, problématiser, argumenter avec des références, puis conclure.",
     sections: [
       {
         id: "study-subject",
         title: "Comprendre le sujet",
-        summary: "Définir les termes essentiels puis reformuler le sujet sans changer son sens.",
-        conceptTitle: "Étude parcellaire et reformulation",
-        explanation: "L’étude parcellaire repère les mots indispensables et les définit selon leur contexte. La reformulation donne ensuite le sens d’ensemble du sujet avec des mots plus explicites, sans le déformer.",
-        keyPoint: "Définir chaque notion dans le contexte, puis réécrire fidèlement la question.",
-        example: "« Il faut plaindre celui qui vit en société » devient : faut-il avoir de la compassion pour l’être humain qui vit avec les autres sous des règles communes ?",
-        mapTitle: "Du sujet brut au sens précis",
-        mapInstruction: "Observe le rôle de chaque opération préparatoire.",
+        summary: "Mener l’étude parcellaire puis reformuler le sujet sans en altérer le sens.",
+        conceptTitle: "La phase préparatoire : deux étapes avant d’écrire",
+        explanation: "La compréhension du sujet passe par une phase préparatoire en deux étapes : l’étude parcellaire, qui définit les mots essentiels, et la reformulation, qui restitue le sens d’ensemble.",
+        bodyMarkdown: String.raw`## Pourquoi ne jamais écrire tout de suite
+
+La dissertation philosophique est un exercice écrit portant sur un sujet, **à partir duquel on dégage le problème central** en vue de son analyse. Cette analyse doit se faire à travers une argumentation cohérente. Pour parvenir à un bon devoir, il est donc nécessaire de **bien comprendre le sujet** avant toute rédaction.
+
+## A. L’étude parcellaire
+
+Elle consiste à **identifier les mots ou expressions essentiels** — ceux sans lesquels le sujet ne se comprend pas — et à **les définir selon le contexte**.
+
+### Exemple entièrement traité
+
+Sujet : **« Doit-on condamner le progrès technique ? »**
+
+| Mot ou expression | Définition contextuelle |
+|---|---|
+| **Doit-on** | a-t-on le droit, est-il normal, faut-il… |
+| **condamner** | blâmer, rejeter, désapprouver |
+| **le progrès technique** | les avancées, les exploits réalisés par la technique |
+
+> **Le mot « selon le contexte » est décisif.** « Condamner » n’a pas le même sens en droit et en morale. On ne recopie pas une définition de dictionnaire : on choisit celle qu’appelle le sujet.
+
+## B. La reformulation du sujet
+
+Reformuler, c’est **donner la signification d’ensemble** du sujet : le réécrire pour le rendre **plus explicite sans en altérer le sens initial**.
+
+En remplaçant chaque terme par sa définition, le sujet devient :
+
+> **« Faut-il blâmer les avancées réalisées par la technique ? »**
+
+> **Erreur fréquente.** Reformuler n’est ni résumer, ni répondre, ni recopier. Une reformulation qui change le sens — par exemple « La technique est-elle dangereuse ? » — trahit le sujet : elle en oriente déjà la réponse.
+
+### Reconnaître une bonne reformulation
+
+Parmi ces trois propositions pour « Doit-on condamner le progrès technique ? » :
+
+- « L’essor de la technique doit-il susciter la crainte ? » — **oriente** vers la crainte, donc infidèle ;
+- « A-t-on des raisons de se féliciter des prouesses de la technique ? » — **inverse** le sens ;
+- « Est-il nécessaire de craindre les avancées réalisées par l’ensemble des procédés scientifiques employés dans l’investigation et la transformation de la nature ? » — **développe chaque terme** sans trancher : c’est la bonne.`,
+        keyPoint: "Comprendre un sujet, c’est définir ses mots essentiels dans leur contexte, puis le réécrire plus clairement sans en changer le sens.",
+        example: "« Doit-on condamner le progrès technique ? » devient « Faut-il blâmer les avancées réalisées par la technique ? »",
+        mapTitle: "Les deux étapes de la phase préparatoire",
+        mapInstruction: "Parcours les deux opérations à mener avant même de chercher le problème.",
         map: [
-          { label: "Repérer", detail: "Souligner les termes et expressions sans lesquels le sujet perd son sens." },
-          { label: "Définir", detail: "Choisir pour chaque terme une définition adaptée à la question posée." },
-          { label: "Reformuler", detail: "Exprimer le sens global sans ajouter une idée étrangère." },
+          { label: "Étude parcellaire", shortLabel: "Définir", detail: "Repérer les mots essentiels du sujet et les définir selon le contexte, jamais au sens du dictionnaire." },
+          { label: "Reformulation", shortLabel: "Reformuler", detail: "Réécrire le sujet en remplaçant chaque terme par sa définition, pour le rendre explicite sans en altérer le sens." },
         ],
-        observation: "Une mauvaise définition entraîne souvent un hors-sujet ; la reformulation sert de contrôle.",
-        methodTitle: "Faire le brouillon du sujet",
-        methodSteps: ["Souligne le mot interrogatif et les notions.", "Définis chaque notion dans ce contexte précis.", "Relie les définitions en une phrase claire.", "Compare cette phrase au sujet initial pour vérifier sa fidélité."],
-        check: q("À quoi sert la reformulation ?", "À expliciter le sens global sans le modifier", "À donner immédiatement son opinion", "À remplacer le problème par une citation", "À supprimer les termes difficiles"),
-        distractors: ["Reformuler consiste à changer le sujet pour le rendre plus facile.", "Il suffit de donner une définition de dictionnaire.", "L’étude parcellaire remplace toute la dissertation."],
+        observation: "Un sujet mal compris conduit à un hors-sujet, quelles que soient la qualité de l’écriture et la richesse des références.",
+        check: { prompt: "En quoi consiste l’étude parcellaire ?", options: ["Identifier les mots essentiels et les définir selon le contexte", "Rédiger l’introduction", "Chercher des citations d’auteurs", "Annoncer le plan du devoir"], correctIndex: 0, explanation: "C’est la première étape de la phase préparatoire." },
+        extraQuestions: [
+          { prompt: "Reformuler un sujet, c’est…", options: ["le réécrire plus clairement sans en altérer le sens", "y répondre brièvement", "le résumer en trois mots", "le recopier tel quel"], correctIndex: 0, explanation: "La reformulation rend explicite sans trahir.", sourceLabel: "I-B La reformulation", points: 2 },
+          { prompt: "Dans « Doit-on condamner le progrès technique ? », que signifie « condamner » ?", options: ["blâmer, rejeter, désapprouver", "emprisonner", "mesurer", "encourager"], correctIndex: 0, explanation: "C’est la définition contextuelle donnée par le corrigé.", sourceLabel: "Activité d’application 1", points: 1 },
+          { prompt: "Quelle formulation reformule fidèlement « Doit-on condamner le progrès technique ? »", options: ["Est-il nécessaire de craindre les avancées réalisées par les procédés de transformation de la nature ?", "L’essor de la technique doit-il susciter la crainte ?", "A-t-on des raisons de se féliciter des prouesses de la technique ?", "La technique est-elle utile ?"], correctIndex: 0, explanation: "Les autres orientent ou inversent le sens du sujet.", sourceLabel: "Activité d’application 3", points: 3 },
+          { prompt: "Pourquoi définir les mots « selon le contexte » ?", options: ["parce qu’un même mot change de sens selon le sujet posé", "pour allonger la copie", "pour éviter les citations", "parce que le dictionnaire est interdit"], correctIndex: 0, explanation: "« Condamner » n’a pas le même sens en droit et en morale.", sourceLabel: "I-A L’étude parcellaire", points: 2 },
+        ],
+        distractors: ["L’étude parcellaire consiste à recopier le sujet.", "La reformulation sert à donner immédiatement sa réponse.", "On peut rédiger sans définir les termes du sujet."],
       },
       {
         id: "problematisation",
         title: "Faire naître le problème",
-        summary: "Repérer la contradiction centrale et formuler les questions qui annonceront les axes.",
-        conceptTitle: "Problème et aspects du problème",
-        explanation: "Le problème est la difficulté intellectuelle centrale du sujet. Il apparaît lorsqu’une première réponse semble vraie, mais qu’une réponse contraire possède elle aussi de bonnes raisons ; les aspects du problème annoncent alors les axes du développement.",
-        keyPoint: "Problématiser, c’est rendre visible une tension réelle entre au moins deux réponses défendables.",
-        example: "La vie en société peut limiter l’individu par les lois et le regard d’autrui, mais elle permet aussi sécurité, coopération et humanisation.",
-        mapTitle: "Construire la tension",
-        mapInstruction: "Passe de l’opinion immédiate au véritable problème.",
+        summary: "Dégager la difficulté centrale du sujet et la décliner en aspects qui annoncent les axes.",
+        conceptTitle: "Du sujet au problème, puis aux aspects",
+        explanation: "Le problème est la difficulté centrale que soulève le sujet ; il apparaît à partir d’une contradiction ou d’un paradoxe. Les aspects sont les questions que suscite ce problème et annoncent les axes du développement.",
+        bodyMarkdown: String.raw`## Le problème
+
+Le **problème** est la **difficulté centrale** que soulève le sujet. Il apparaît à partir d’une **contradiction** ou d’un **paradoxe** situé au cœur du sujet.
+
+> **Où le trouver ?** Cherche la tension : le sujet oppose deux réponses également défendables. S’il n’y a pas de tension, il n’y a pas de problème — donc pas de dissertation, mais un exposé.
+
+## Les aspects du problème
+
+Les **aspects** sont les **diverses questions que suscite le problème**. Ils **annoncent les axes du développement** : à chaque aspect correspondra une partie.
+
+## Exemple entièrement traité
+
+Sujet : **« Doit-on condamner le progrès technique ? »**
+
+| Étape | Résultat |
+|---|---|
+| Reformulation | Faut-il blâmer les avancées réalisées par la technique ? |
+| **Problème** | **La technique est-elle nuisible ?** |
+| **Aspect 1** | En quoi le progrès technique est-il facteur de développement ? |
+| **Aspect 2** | Le progrès technique ne suscite-t-il pas des inquiétudes ? |
+
+## Deuxième exemple
+
+Sujet : **« Il faut plaindre celui qui vit en société. »**
+
+| Étape | Résultat |
+|---|---|
+| Reformulation | Il est impératif d’avoir de la compassion pour celui qui vit en société. |
+| **Problème** | **Faut-il avoir un sentiment de pitié pour celui qui vit en société ?** |
+| **Aspect 1** | En quel sens peut-on dire qu’il faut plaindre celui qui vit en société ? |
+| **Aspect 2** | Toutefois, ne doit-on pas envier celui qui vit en société ? |
+
+> **Astuce d’écriture.** Le second aspect commence presque toujours par un mot d’opposition : « toutefois », « cependant », « ne… pas au contraire ». C’est cette bascule qui prouve que tu as vu la tension.
+
+> **Erreur fréquente.** Recopier le sujet sous forme de question n’est pas problématiser. « Doit-on condamner le progrès technique ? » n’est pas un problème : c’est encore le sujet.`,
+        keyPoint: "Le problème est la difficulté centrale née d’une contradiction ; les aspects sont les questions qu’il soulève et annoncent les axes.",
+        example: "Pour « Doit-on condamner le progrès technique ? », le problème est : la technique est-elle nuisible ?",
+        mapTitle: "De la reformulation aux axes",
+        mapInstruction: "Suis l’enchaînement qui mène du sujet reformulé jusqu’aux axes du développement.",
         map: [
-          { label: "Réponse spontanée", detail: "La société contraint l’individu ; il faudrait donc le plaindre." },
-          { label: "Objection", detail: "Sans les autres, l’être humain ne développe ni ses capacités ni sa sécurité." },
-          { label: "Problème", detail: "Faut-il plaindre ou envier celui qui vit en société ?" },
+          { label: "Repérer la tension", shortLabel: "Tension", detail: "Chercher la contradiction ou le paradoxe au cœur du sujet : deux réponses opposées semblent également défendables." },
+          { label: "Formuler le problème", shortLabel: "Problème", detail: "Écrire la difficulté centrale sous forme de question, sans recopier le sujet." },
+          { label: "Décliner les aspects", shortLabel: "Aspects", detail: "Poser les questions que soulève le problème : elles annoncent directement les axes du développement." },
         ],
-        observation: "Le plan naît de la tension : un axe examine la première réponse, l’autre sa limite ou son dépassement.",
-        check: q("Qu’est-ce qu’un problème philosophique ?", "Une difficulté centrale qui oppose des réponses argumentables", "Une phrase très longue", "Un mot dont on ignore l’orthographe", "Le titre du cours recopié"),
-        distractors: ["Une problématique est une suite de citations.", "Le problème doit contenir une seule réponse évidente.", "Les aspects du problème n’ont aucun lien avec le plan."],
+        observation: "Sans problème, il n’y a pas de dissertation : seulement un exposé qui juxtapose des connaissances.",
+        check: { prompt: "Qu’est-ce que le problème d’un sujet ?", options: ["La difficulté centrale née d’une contradiction ou d’un paradoxe", "Le premier argument du devoir", "La citation la plus célèbre", "Le plan en deux parties"], correctIndex: 0, explanation: "Le problème est la difficulté intellectuelle à surmonter." },
+        extraQuestions: [
+          { prompt: "À quoi servent les aspects du problème ?", options: ["ils annoncent les axes du développement", "ils remplacent la conclusion", "ils donnent la réponse finale", "ils listent les auteurs à citer"], correctIndex: 0, explanation: "Chaque aspect deviendra une partie du développement.", sourceLabel: "II La problématisation", points: 2 },
+          { prompt: "Pour « Doit-on condamner le progrès technique ? », quel est le problème dégagé par le corrigé ?", options: ["La technique est-elle nuisible ?", "La technique est-elle moderne ?", "Qui a inventé la technique ?", "La technique coûte-t-elle cher ?"], correctIndex: 0, explanation: "C’est la difficulté centrale du sujet.", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "Pour « Il faut plaindre celui qui vit en société », quel est le problème ?", options: ["Faut-il avoir un sentiment de pitié pour celui qui vit en société ?", "La société est-elle ancienne ?", "Comment fonder une société ?", "Qui dirige la société ?"], correctIndex: 0, explanation: "C’est la troisième opération du travail au brouillon.", sourceLabel: "Situation d’évaluation", points: 2 },
+          { prompt: "Recopier le sujet sous forme de question, est-ce problématiser ?", options: ["Non, il faut faire apparaître la difficulté", "Oui, cela suffit", "Oui, si la question est longue", "Non, il faut y répondre d’abord"], correctIndex: 0, explanation: "Le problème doit révéler la tension, pas répéter l’énoncé.", sourceLabel: "II La problématisation", points: 2 },
+        ],
+        distractors: ["Le problème est la conclusion du devoir.", "Les aspects servent à remplir la copie.", "Un sujet sans contradiction donne une bonne dissertation."],
       },
       {
         id: "introduction",
         title: "Rédiger l’introduction",
-        summary: "Amener le sujet, poser le problème puis annoncer ses aspects dans un mouvement continu.",
+        summary: "Construire les trois composantes de l’introduction et les enchaîner en un paragraphe.",
         conceptTitle: "Amorce, problème, aspects",
-        explanation: "L’introduction ne résout pas encore le sujet. Elle part d’une situation ou d’une idée qui conduit au thème, fait surgir la difficulté centrale, puis formule les questions qui guideront la réflexion.",
-        keyPoint: "Une introduction réussie conduit naturellement de l’amorce au problème puis aux aspects.",
-        example: "À propos du progrès technique : ses réussites promettent le développement, mais ses dangers menacent l’humanité ; faut-il alors le condamner ?",
-        mapTitle: "Les trois mouvements de l’introduction",
-        mapInstruction: "Sélectionne les blocs dans l’ordre de rédaction.",
+        explanation: "L’introduction pose clairement le problème du sujet, qui est la difficulté intellectuelle à surmonter. Il est précédé par une amorce et s’achève par ses aspects.",
+        bodyMarkdown: String.raw`## Les trois composantes
+
+L’introduction consiste à **poser clairement le problème** du sujet, c’est-à-dire la difficulté intellectuelle à surmonter. Ce problème est **précédé d’une amorce** et **s’achève par ses aspects**.
+
+| Composante | Rôle |
+|---|---|
+| **L’amorce** | entrer dans le sujet à partir d’un constat, d’une observation ou d’un fait |
+| **Le problème** | énoncer la difficulté centrale |
+| **Les aspects** | annoncer les questions, donc les axes à venir |
+
+## Un modèle rédigé, décortiqué
+
+Sujet : **« Doit-on condamner le progrès technique ? »**
+
+> « **L’expérience quotidienne nous révèle le progrès vertigineux des sciences et techniques dans presque toutes les sphères de la vie. Et cela semble confirmer l’idée selon laquelle l’avenir appartient à la science et à la technique.** *(amorce)* **Malheureusement, cette évolution de la technoscience s’accompagne souvent d’une réelle menace pour l’humanité entière. Dès lors, doit-on souscrire à l’idée selon laquelle la technique est nuisible ?** *(problème)* **Dans quelle mesure la puissance technique constitue-t-elle une menace ? N’est-elle pas au contraire un facteur de développement ?** *(aspects)* »
+
+> **Ce qu’il faut observer.** L’amorce part d’un constat partagé, jamais d’une généralité creuse du type « Depuis la nuit des temps ». Le mot « **Malheureusement** » fait basculer vers la difficulté : c’est la charnière qui fait naître le problème. Enfin, « **N’est-elle pas au contraire** » ouvre le second axe.
+
+> **Erreur fréquente.** Annoncer le plan (« Nous verrons d’abord… puis… ») n’est **pas** annoncer les aspects. Les aspects sont des **questions**, pas un sommaire.`,
+        keyPoint: "L’introduction enchaîne trois composantes : une amorce, le problème, puis les aspects formulés en questions.",
+        example: "« Malheureusement… Dès lors, doit-on souscrire à l’idée selon laquelle la technique est nuisible ? » : la charnière fait naître le problème.",
+        mapTitle: "Les trois composantes de l’introduction",
+        mapInstruction: "Sélectionne chaque composante pour comprendre son rôle et sa place dans le paragraphe.",
         map: [
-          { label: "Amorce", detail: "Présenter une idée ou un constat directement lié au sujet." },
-          { label: "Problème", detail: "Formuler clairement la difficulté intellectuelle à résoudre." },
-          { label: "Aspects", detail: "Poser les questions qui annoncent les axes sans donner encore la réponse." },
+          { label: "L’amorce", shortLabel: "Amorce", detail: "Entrer dans le sujet par un constat concret et partagé, jamais par une généralité vague." },
+          { label: "Le problème", shortLabel: "Problème", detail: "Énoncer la difficulté centrale, souvent introduite par une charnière : « Malheureusement », « Pourtant », « Dès lors »." },
+          { label: "Les aspects", shortLabel: "Aspects", detail: "Poser les questions qui annoncent les axes, la seconde marquant l’opposition : « N’est-elle pas au contraire… ? »" },
         ],
-        observation: "L’amorce prépare le problème ; elle ne doit être ni décorative ni trop éloignée du sujet.",
-        methodTitle: "Tester son introduction",
-        methodSteps: ["Vérifie que l’amorce parle bien du thème.", "Fais apparaître le paradoxe avec un connecteur d’opposition.", "Formule une question centrale unique.", "Ajoute deux questions correspondant aux axes du plan."],
-        check: q("Quel élément vient après le problème dans l’introduction ?", "Les aspects du problème", "La conclusion définitive", "Une bibliographie", "Le corrigé du sujet"),
-        distractors: ["L’introduction donne déjà tous les arguments.", "L’amorce peut être sans rapport avec le thème.", "Les aspects doivent contredire le problème."],
+        observation: "Une introduction réussie donne au correcteur le problème et le chemin, en un seul paragraphe.",
+        check: { prompt: "Quelles sont les trois composantes de l’introduction ?", options: ["L’amorce, le problème et les aspects", "La thèse, l’antithèse et la synthèse", "La définition, la citation et l’exemple", "Le bilan, la réponse et l’ouverture"], correctIndex: 0, explanation: "C’est la réponse exacte du corrigé de l’activité d’application." },
+        extraQuestions: [
+          { prompt: "Par quoi le problème est-il précédé dans l’introduction ?", options: ["une amorce", "une citation", "le plan détaillé", "la conclusion"], correctIndex: 0, explanation: "L’amorce ouvre l’introduction.", sourceLabel: "III-A L’introduction", points: 1 },
+          { prompt: "Par quoi l’introduction s’achève-t-elle ?", options: ["les aspects du problème", "la réponse au problème", "une citation d’auteur", "le bilan de la réflexion"], correctIndex: 0, explanation: "Les aspects annoncent les axes du développement.", sourceLabel: "III-A L’introduction", points: 2 },
+          { prompt: "« Nous verrons d’abord… puis… » : est-ce une annonce des aspects ?", options: ["Non, les aspects sont des questions", "Oui, c’est équivalent", "Oui, si la phrase est longue", "Non, c’est l’amorce"], correctIndex: 0, explanation: "Un sommaire n’est pas une problématisation.", sourceLabel: "III-A L’introduction", points: 3 },
+          { prompt: "Dans l’introduction modèle, quel mot fait basculer vers la difficulté ?", options: ["Malheureusement", "L’expérience", "Toujours", "Enfin"], correctIndex: 0, explanation: "La charnière « Malheureusement » introduit la menace, donc le problème.", sourceLabel: "Activité d’application - corrigé", points: 2 },
+        ],
+        distractors: ["L’introduction doit donner la réponse finale.", "L’amorce se place après le problème.", "Les aspects sont des affirmations, pas des questions."],
       },
       {
         id: "development-conclusion",
         title: "Développer et conclure",
-        summary: "Organiser les axes, défendre chaque argument, assurer les transitions et répondre au problème.",
-        conceptTitle: "Argumentation, transitions et bilan",
-        explanation: "Le développement résout progressivement le problème : chaque axe contient des arguments expliqués, des références et des illustrations. La conclusion fait le bilan, répond précisément au problème et peut ouvrir la réflexion.",
-        keyPoint: "Un axe solide enchaîne idée, explication, référence, exemple et transition vers la difficulté suivante.",
-        example: "Axe 1 : la société aliène parfois l’individu avec Sartre ou Bakounine ; axe 2 : elle l’humanise et protège sa liberté avec Malson ou Spinoza.",
-        mapTitle: "L’architecture d’un devoir",
-        mapInstruction: "Observe comment la réponse se construit jusqu’au bilan.",
+        summary: "Structurer les axes, argumenter avec des références, puis rédiger une conclusion complète.",
+        conceptTitle: "Argumenter, référencer, conclure",
+        explanation: "Le développement résout le problème en structurant les axes, en les argumentant avec des références et des illustrations, reliés par des transitions. La conclusion répond au problème après un bilan, et peut s’ouvrir.",
+        bodyMarkdown: String.raw`## B. Le développement
+
+Le développement consiste à **résoudre le problème**. Cette résolution revient à :
+
+1. **structurer les axes** d’analyse du sujet ;
+2. **les argumenter** en s’appuyant sur des **références** et des **illustrations** ;
+3. relier les arguments et les axes par des **transitions** (mots de liaison, connecteurs logiques).
+
+> **La règle d’or de l’argument complet.** Un argument seul ne vaut rien. La chaîne attendue est : **Axe → Argument → Référence**. L’axe annonce la thèse, l’argument la justifie, la référence l’autorise.
+
+## Un développement entièrement construit
+
+Sujet : **« Il faut plaindre celui qui vit en société. »**
+
+### Axe 1 — Il faut plaindre celui qui vit en société
+
+| Argument | Références |
+|---|---|
+| La vie en société est le lieu où la sécurité n’est pas toujours garantie, à cause de l’agressivité injustifiée d’autrui et de son hypocrisie. | **SARTRE**, *Huis clos* : « L’enfer c’est les autres. » — **HOBBES**, *Léviathan* : « L’homme est un loup pour l’homme. » |
+| Le bonheur de l’homme en société est constamment menacé, car il doit obéissance stricte aux lois et soumission à l’autorité étatique. | **BAKOUNINE**, *Étatisme et anarchisme* : « L’État est un immense cimetière où viennent s’enterrer toutes les manifestations de la vie individuelle. » |
+
+### Axe 2 — Il faut envier celui qui vit en société
+
+| Argument | Références |
+|---|---|
+| Celui qui mène une existence communautaire profite de la société pour combler ses déficiences naturelles, par l’assistance et la coopération. | **GARAUDY**, *Testament philosophique* : « L’enfer, c’est l’absence des autres. » — **MALSON**, *Les enfants sauvages* : « Les hommes ne sont pas des hommes hors de l’ambiance sociale. » |
+| La société moderne, par l’État et les lois issues de la volonté générale, assure la sécurité, l’épanouissement et la liberté du citoyen. | **SPINOZA**, *Traité théologico-politique* : « La fin de l’État est donc en réalité la liberté. » |
+
+> **Regarde le duel.** Sartre écrit « L’enfer c’est les autres » ; Garaudy répond « L’enfer, c’est l’absence des autres ». Les deux citations se répondent **terme à terme**. C’est exactement ce qu’on attend : montrer qu’une thèse appelle son contraire, et non aligner des citations sans lien.
+
+## C. La conclusion
+
+La conclusion consiste à **répondre de façon claire et précise au problème posé dans l’introduction**. Cette réponse est **précédée du bilan** de la réflexion et **peut s’achever par une ouverture**.
+
+| Composante | Rôle |
+|---|---|
+| **Le bilan** | rappeler le chemin parcouru dans les axes |
+| **La réponse** | trancher clairement le problème de l’introduction |
+| **L’ouverture** | facultative : élargir vers une question voisine |
+
+> **Erreur fréquente.** Une conclusion qui ne répond pas au problème posé en introduction, ou qui introduit un argument nouveau, invalide tout le devoir. Le problème ouvert en introduction doit être **refermé** ici.`,
+        keyPoint: "Un développement enchaîne axe, argument et référence, relié par des transitions ; la conclusion fait le bilan, répond au problème, puis peut ouvrir.",
+        example: "Sartre « L’enfer c’est les autres » et Garaudy « L’enfer, c’est l’absence des autres » se répondent terme à terme.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "L’architecture d’une dissertation",
+          instruction: "Sélectionne une partie pour découvrir ce qu’elle doit contenir.",
+          observation: "Chaque partie a un rôle unique : l’introduction ouvre le problème, le développement le résout, la conclusion le referme.",
+          rootLabel: "La dissertation philosophique",
+          rootDetail: "Trois parties, chacune avec ses composantes obligatoires",
+          nodes: [
+            { id: "amorce", group: "Introduction", label: "L’amorce", role: "Entrer dans le sujet", detail: "Un constat concret et partagé qui conduit naturellement au sujet. Jamais une généralité creuse du type « Depuis la nuit des temps ». Dans le modèle : « L’expérience quotidienne nous révèle le progrès vertigineux des sciences et techniques. »" },
+            { id: "probleme-intro", group: "Introduction", label: "Le problème", role: "Poser la difficulté", detail: "La difficulté intellectuelle à surmonter, née d’une contradiction. Souvent introduite par une charnière : « Malheureusement », « Pourtant », « Dès lors ». C’est le cœur de l’introduction." },
+            { id: "aspects-intro", group: "Introduction", label: "Les aspects", role: "Annoncer les axes", detail: "Les questions que soulève le problème, formulées comme telles. La seconde marque l’opposition : « N’est-elle pas au contraire un facteur de développement ? » Ce ne sont pas des annonces de plan." },
+            { id: "axes", group: "Développement", label: "Les axes", role: "Structurer la réponse", detail: "Chaque aspect annoncé en introduction devient un axe. L’axe énonce une thèse : « Il faut plaindre celui qui vit en société », puis « Il faut envier celui qui vit en société »." },
+            { id: "arguments", group: "Développement", label: "Les arguments", role: "Justifier chaque axe", detail: "Deux arguments par axe en général. Chacun explique pourquoi la thèse tient : « La vie en société est le lieu où la sécurité n’est pas toujours garantie à cause de l’agressivité d’autrui. »" },
+            { id: "references", group: "Développement", label: "Les références", role: "Autoriser l’argument", detail: "Une citation avec son auteur et son œuvre, choisie parce qu’elle dit exactement l’argument. Hobbes dans le Léviathan : « L’homme est un loup pour l’homme. » Une citation plaquée sans lien ne compte pas." },
+            { id: "transitions", group: "Développement", label: "Les transitions", role: "Relier les parties", detail: "Mots de liaison et connecteurs logiques qui font passer d’un argument à un autre et d’un axe à un autre. Sans eux, la copie juxtapose au lieu de raisonner." },
+            { id: "bilan", group: "Conclusion", label: "Le bilan", role: "Rappeler le chemin", detail: "Un résumé bref du parcours des axes, sans reprendre les développements. Il prépare la réponse." },
+            { id: "reponse", group: "Conclusion", label: "La réponse", role: "Trancher le problème", detail: "Une réponse claire et précise au problème posé en introduction. C’est l’élément obligatoire : sans elle, le devoir reste ouvert et perd sa cohérence." },
+            { id: "ouverture", group: "Conclusion", label: "L’ouverture", role: "Élargir (facultatif)", detail: "Une question voisine qui prolonge la réflexion. Facultative : mieux vaut pas d’ouverture qu’une ouverture artificielle." },
+          ],
+        },
+        mapTitle: "De l’axe à la référence",
+        mapInstruction: "Suis la chaîne qui rend un argument recevable.",
         map: [
-          { label: "Axe 1", detail: "Défendre une première réponse avec des arguments expliqués." },
-          { label: "Transition", detail: "Faire le bilan provisoire et montrer la limite qui impose un nouvel axe." },
-          { label: "Axe 2", detail: "Examiner la réponse opposée ou dépasser la première." },
-          { label: "Conclusion", detail: "Résumer le raisonnement et répondre sans introduire un nouvel argument." },
+          { label: "L’axe", shortLabel: "Axe", detail: "La thèse défendue dans cette partie, issue directement d’un aspect annoncé en introduction." },
+          { label: "L’argument", shortLabel: "Argument", detail: "La justification qui explique pourquoi la thèse tient." },
+          { label: "La référence", shortLabel: "Référence", detail: "Une citation avec auteur et œuvre, choisie parce qu’elle dit exactement l’argument." },
+          { label: "La transition", shortLabel: "Transition", detail: "Le connecteur logique qui fait passer à l’argument ou à l’axe suivant." },
         ],
-        observation: "La citation ne prouve rien seule : il faut toujours expliquer son lien avec l’argument.",
-        check: q("Quel est le rôle principal d’une transition ?", "Relier deux mouvements en montrant la limite du précédent", "Ajouter une citation sans explication", "Répéter mot pour mot l’introduction", "Changer de sujet"),
-        distractors: ["Le développement est une accumulation d’auteurs.", "La conclusion apporte un nouvel axe complet.", "Une référence remplace l’explication de l’argument."],
+        observation: "Une citation sans argument ne prouve rien ; un argument sans référence reste une opinion.",
+        check: { prompt: "Que doit contenir la conclusion ?", options: ["Un bilan, une réponse au problème, et éventuellement une ouverture", "Un nouvel argument et une citation", "Le rappel des définitions du sujet", "L’annonce du plan"], correctIndex: 0, explanation: "La réponse au problème est précédée du bilan et peut s’achever par une ouverture." },
+        extraQuestions: [
+          { prompt: "En quoi consiste le développement ?", options: ["à résoudre le problème en structurant et argumentant les axes", "à définir les mots du sujet", "à recopier des citations", "à poser le problème"], correctIndex: 0, explanation: "C’est la résolution du problème posé en introduction.", sourceLabel: "III-B Le développement", points: 2 },
+          { prompt: "Qui écrit « L’homme est un loup pour l’homme » ?", options: ["Hobbes, dans le Léviathan", "Sartre, dans Huis clos", "Spinoza, dans le Traité théologico-politique", "Bakounine"], correctIndex: 0, explanation: "Référence de l’axe 1, argument 1.", sourceLabel: "Situation d’évaluation - références", points: 2 },
+          { prompt: "Quelle citation répond terme à terme au « L’enfer c’est les autres » de Sartre ?", options: ["« L’enfer, c’est l’absence des autres » de Garaudy", "« L’homme est un loup pour l’homme » de Hobbes", "« La fin de l’État est la liberté » de Spinoza", "« L’État est un immense cimetière » de Bakounine"], correctIndex: 0, explanation: "Garaudy, dans son Testament philosophique, inverse exactement la formule de Sartre.", sourceLabel: "Situation d’évaluation - références", points: 3 },
+          { prompt: "Qui écrit « La fin de l’État est donc en réalité la liberté » ?", options: ["Spinoza, Traité théologico-politique", "Bakounine, Étatisme et anarchisme", "Malson, Les enfants sauvages", "Hobbes, Léviathan"], correctIndex: 0, explanation: "Référence de l’axe 2, argument 2.", sourceLabel: "Situation d’évaluation - références", points: 2 },
+          { prompt: "À quoi servent les transitions ?", options: ["à relier les arguments et les axes entre eux", "à allonger la copie", "à remplacer les références", "à conclure le devoir"], correctIndex: 0, explanation: "Elles font passer d’un argument à un autre et d’un axe à un autre.", sourceLabel: "III-B Le développement", points: 2 },
+        ],
+        distractors: ["Une citation suffit à prouver un argument.", "La conclusion doit introduire un argument nouveau.", "Les transitions sont facultatives dans une dissertation."],
       },
     ],
     mission: {
-      title: "Atelier BAC : « Il faut plaindre celui qui vit en société »",
-      scenario: "Construis le travail préparatoire d’une dissertation : définitions, reformulation, problème, axes et références, puis choisis la réponse la plus nuancée.",
-      problem: "Faut-il avoir de la compassion pour celui qui vit en société ?",
+      title: "La pluralité des cultures est-elle un obstacle au rapprochement des peuples ?",
+      scenario: "Dans le cadre d’une réflexion sur l’impact des diversités culturelles, les élèves de Terminale sont soumis à ce sujet. Dans une production argumentée, tu dois donner ton point de vue.",
+      problem: "L’égalité entre les hommes est-elle une illusion ?",
+      modelAnswer: "La diversité des cultures nourrit d’abord la méfiance et l’ethnocentrisme, mais elle constitue aussi la richesse du genre humain : le brassage culturel et l’exigence morale du respect font de la pluralité un facteur de rapprochement plutôt qu’un obstacle.",
+      bodyMarkdown: String.raw`## Le corrigé, opération par opération
+
+### I. Définition des termes et expressions essentiels
+
+| Terme | Définition |
+|---|---|
+| **La pluralité des cultures** | la diversité culturelle, la différence entre les cultures |
+| **Être un obstacle à** | constituer une entrave à, s’opposer à, compromettre |
+| **Rapprochement des peuples** | l’unité du genre humain, l’égalité entre les hommes |
+
+### II. Problème à analyser
+
+> **L’égalité entre les hommes est-elle une illusion ?**
+
+### III. Axes d’analyse et références
+
+#### Axe 1 — La diversité culturelle ne favorise pas l’unité du genre humain
+
+**Argument 1.** Les différences culturelles sont sources de conflits entre les hommes.
+
+> **Claude LÉVI-STRAUSS**, *Race et culture* : « L’attitude la plus ancienne, et qui repose sans doute sur des fondements psychologiques solides, consiste à répudier purement et simplement les formes culturelles — morales, religieuses, sociales, esthétiques — qui sont les plus éloignées de celles auxquelles nous nous identifions. »
+
+**Argument 2.** La multiplicité des cultures engendre l’ethnocentrisme et le complexe de supériorité des peuples dits évolués.
+
+> **HEGEL**, *La Raison dans l’histoire*. — **Jules FERRY**, discours sur l’expansion coloniale, 28 juillet 1885 : « Il faut dire ouvertement que les races supérieures ont un droit vis-à-vis des races inférieures. »
+
+#### Axe 2 — La pluralité culturelle peut être facteur de rapprochement
+
+**Argument 1.** L’humanité se définit comme l’ensemble de tous les hommes malgré leurs différences : la multiplicité des cultures est la richesse du genre humain.
+
+> **Auguste COMTE**, *Catéchisme positiviste* : « Vous devez d’abord définir l’humanité comme l’ensemble des êtres humains, passés, futurs et présents. »
+
+**Argument 2.** Le brassage culturel est source d’enrichissement mutuel et permet à l’humanité de progresser.
+
+> **Aimé CÉSAIRE**, *Discours sur le colonialisme* : « J’admets que mettre les civilisations différentes en contact les unes avec les autres est bien ; que marier des mondes différents est excellent. » — **SAINT-EXUPÉRY**, *Terre des hommes* : « Si tu diffères de moi, loin de me léser, tu m’enrichis. »
+
+**Argument 3.** Le respect des autres malgré nos différences est une exigence morale.
+
+> **Emmanuel KANT**, *Fondements de la métaphysique des mœurs* : « Agis de telle sorte que tu traites l’humanité, aussi bien dans ta personne que dans la personne de tout autre, toujours en même temps comme une fin, et jamais simplement comme un moyen. »
+
+> **Ce que ce corrigé enseigne.** L’axe 1 n’est pas une erreur qu’on corrige ensuite : c’est une thèse **sérieusement défendue**, avec ses auteurs. La force d’une dissertation vient de ce que l’on donne à l’adversaire ses meilleures armes avant de lui répondre.`,
       plan: [
-        { label: "Comprendre", detail: "Définir « plaindre » et « vivre en société », puis reformuler fidèlement." },
-        { label: "Axe 1", detail: "La société expose l’individu aux conflits, aux contraintes et à l’aliénation." },
-        { label: "Axe 2", detail: "Elle rend possibles coopération, sécurité, liberté et humanisation." },
-        { label: "Répondre", detail: "Reconnaître les risques sociaux sans oublier que la société demeure indispensable." },
+        { label: "Définir les termes", shortLabel: "Définir", detail: "Pluralité des cultures, être un obstacle à, rapprochement des peuples : chaque expression est définie dans le contexte du sujet." },
+        { label: "Formuler le problème", shortLabel: "Problème", detail: "L’égalité entre les hommes est-elle une illusion ?" },
+        { label: "Axe 1 : la diversité divise", shortLabel: "Axe 1", detail: "Conflits et ethnocentrisme, avec Lévi-Strauss, Hegel et Jules Ferry." },
+        { label: "Axe 2 : la diversité rapproche", shortLabel: "Axe 2", detail: "Richesse du genre humain, brassage et exigence morale, avec Comte, Césaire, Saint-Exupéry et Kant." },
+        { label: "Conclure", shortLabel: "Conclure", detail: "Bilan des deux axes, réponse claire au problème, puis ouverture possible." },
       ],
-      modelAnswer: "La vie sociale peut devenir oppressante, mais elle est aussi la condition de l’humanisation et d’une liberté protégée par le droit ; il faut donc la réformer plutôt que la fuir.",
       questions: [
-        q("Quelle reformulation reste fidèle au sujet ?", "Faut-il compatir avec l’être humain qui vit avec les autres ?", "Toute société rend nécessairement heureux.", "Pourquoi les lois doivent-elles disparaître ?", "L’individu solitaire est toujours libre."),
-        q("Quel couple de références soutient le mieux l’axe critique ?", "Sartre et Bakounine", "Malson et Spinoza", "Descartes et Kant", "Bergson et Claude Bernard"),
-        q("Quelle conclusion répond de façon nuancée ?", "La société contraint parfois, mais demeure nécessaire à l’humanisation et doit garantir la liberté.", "Toute société doit être supprimée.", "Il suffit de vivre seul pour être heureux.", "Les arguments ne permettent aucune réponse."),
+        { prompt: "Quel problème le corrigé dégage-t-il de ce sujet ?", options: ["L’égalité entre les hommes est-elle une illusion ?", "Combien de cultures existe-t-il ?", "La culture est-elle utile ?", "Faut-il voyager ?"], correctIndex: 0, explanation: "C’est la difficulté centrale, formulée à la deuxième opération.", sourceLabel: "Situation d’évaluation 1 - II", points: 2 },
+        { prompt: "Quelle citation soutient l’argument du repli sur sa propre culture ?", options: ["Lévi-Strauss : « répudier les formes culturelles les plus éloignées des nôtres »", "Kant : « traiter l’humanité toujours comme une fin »", "Saint-Exupéry : « Si tu diffères de moi, tu m’enrichis »", "Comte : « l’ensemble des êtres humains »"], correctIndex: 0, explanation: "Lévi-Strauss, dans Race et culture, décrit ce réflexe de répudiation.", sourceLabel: "Situation d’évaluation 1 - Axe 1", points: 3 },
+        { prompt: "Quelle position le corrigé défend-il finalement ?", options: ["La pluralité est un facteur de rapprochement, malgré les tensions qu’elle crée", "La pluralité est un obstacle définitif", "Les cultures doivent disparaître", "La question n’a pas de réponse"], correctIndex: 0, explanation: "L’axe 2 répond à l’axe 1 : la diversité enrichit et le respect est une exigence morale.", sourceLabel: "Situation d’évaluation 1 - Axe 2", points: 2 },
+      ],
+      extraQuestions: [
+        { prompt: "Qui écrit « Si tu diffères de moi, loin de me léser, tu m’enrichis » ?", options: ["Saint-Exupéry, Terre des hommes", "Aimé Césaire, Discours sur le colonialisme", "Auguste Comte, Catéchisme positiviste", "Kant, Fondements de la métaphysique des mœurs"], correctIndex: 0, explanation: "Référence de l’axe 2, argument 2.", sourceLabel: "Situation d’évaluation 1 - références", points: 2 },
+        { prompt: "Quelle citation de Kant fonde l’exigence morale du respect ?", options: ["« Traite l’humanité toujours en même temps comme une fin, et jamais simplement comme un moyen »", "« L’enfer c’est les autres »", "« L’homme est un loup pour l’homme »", "« La fin de l’État est la liberté »"], correctIndex: 0, explanation: "C’est la formule des Fondements de la métaphysique des mœurs.", sourceLabel: "Situation d’évaluation 1 - Axe 2", points: 3 },
+        { prompt: "Pourquoi défendre sérieusement l’axe 1 avant de le réfuter ?", options: ["parce qu’une thèse ne se réfute bien qu’après avoir été présentée avec ses meilleures raisons", "pour allonger la copie", "parce que le correcteur compte les citations", "pour éviter de conclure"], correctIndex: 0, explanation: "C’est le geste philosophique attendu : faire dialoguer les positions.", sourceLabel: "Méthode - développement", points: 3 },
       ],
     },
   },
