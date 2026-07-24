@@ -734,8 +734,53 @@ La conclusion est la dernière partie du devoir. Elle consiste en une **prise de
         summary: "Distinguer conscience psychologique, conscience morale et mémoire.",
         conceptTitle: "Ce qui permet à l’homme de se connaître et de juger",
         explanation: "La conscience psychologique permet de se connaître et de connaître le monde ; la conscience morale juge le bien et le mal. La mémoire conserve le passé et permet à la conscience d’éclairer l’action présente.",
+        bodyMarkdown: String.raw`## Ce qui distingue l’homme
+
+Comme tous les êtres vivants, l’homme a une dimension biologique. Mais il possède une **faculté spécifique** qui le distingue : la **conscience**.
+
+> **Définition.** La conscience est la **faculté psychique qui permet de se connaître, de connaître le monde et de juger**.
+
+De cette définition ressortent **deux dimensions** de la conscience.
+
+## A. La conscience psychologique
+
+C’est la faculté qu’a l’homme de **se connaître et de connaître le monde extérieur**. C’est ce que découvre **René DESCARTES** (1596–1650) à travers l’expérience du *Cogito*.
+
+> **DESCARTES**, *Discours de la méthode* : « **Cogito ergo sum** » — « Je pense donc je suis ».
+
+En soumettant toutes ses certitudes au doute, Descartes découvre que la seule chose dont il ne peut douter, c’est qu’il *pense*. Pour lui, **l’homme est essentiellement conscient**.
+
+## B. La conscience morale
+
+C’est la capacité qu’a l’homme de **juger ses actes**. C’est ce qu’affirme **Jean-Jacques ROUSSEAU** (1712–1778).
+
+> **ROUSSEAU**, *Émile ou de l’éducation*, Livre IV : « **Conscience ! Conscience ! Instinct divin, immortelle et céleste voix (…), juge infaillible du bien et du mal (…), c’est toi qui fais l’excellence de sa nature et la moralité de ses actions.** »
+
+## La mémoire
+
+Au-delà de ces deux dimensions, la conscience a une fonction de **rétention et de restitution** : elle renvoie à la **mémoire**, faculté de conservation des idées et des pensées antérieurement acquises. Pour **Henri BERGSON** (1859–1949) :
+
+> **BERGSON**, *L’énergie spirituelle* : « **Toute conscience est donc mémoire.** »
+
+Pour agir, la conscience **choisit dans les souvenirs ce qui est utile**. Et si elle opère des choix, alors elle fait déjà de l’homme un **être de liberté** — ce sera l’objet du niveau suivant.
+
+> **Astuce mémoire.** Trois noms, trois rôles : **Descartes** (je pense, donc je me connais), **Rousseau** (je juge le bien et le mal), **Bergson** (je me souviens, donc je choisis).`,
         keyPoint: "La conscience connaît et juge ; la mémoire maintient l’unité de la personne dans le temps.",
         example: "Descartes fonde la certitude du sujet sur le cogito ; Rousseau présente la conscience morale comme juge du bien et du mal ; Bergson relie conscience et mémoire.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Conscience et mémoire",
+          instruction: "Sélectionne une fonction pour découvrir sa définition et l’auteur qui l’éclaire.",
+          observation: "La conscience connaît et juge ; la mémoire relie le passé au présent et prépare le choix libre.",
+          rootLabel: "La conscience",
+          rootDetail: "La faculté qui distingue l’homme : se connaître, connaître le monde, juger",
+          nodes: [
+            { id: "psychologique", group: "Deux dimensions de la conscience", label: "Conscience psychologique", role: "Se connaître et connaître le monde", detail: "La faculté de se savoir pensant et de percevoir le monde extérieur. Descartes, par le doute, découvre le Cogito : « Je pense donc je suis » (Discours de la méthode). L’homme est essentiellement conscient." },
+            { id: "morale", group: "Deux dimensions de la conscience", label: "Conscience morale", role: "Juger ses actes", detail: "La capacité de juger le bien et le mal de ses actions. Rousseau : « Conscience ! Instinct divin (…), juge infaillible du bien et du mal » (Émile, Livre IV)." },
+            { id: "memoire", group: "Une troisième fonction", label: "La mémoire", role: "Conserver et restituer", detail: "La faculté de conservation des idées acquises. Bergson : « Toute conscience est mémoire » (L’énergie spirituelle). Pour agir, la conscience choisit dans les souvenirs ce qui est utile." },
+          ],
+        },
         mapTitle: "Trois fonctions du sujet",
         mapInstruction: "Compare ce que chacune apporte à la connaissance de soi.",
         map: [
@@ -745,6 +790,12 @@ La conclusion est la dernière partie du devoir. Elle consiste en une **prise de
         ],
         observation: "Être conscient ne signifie pas seulement percevoir : c’est aussi pouvoir juger et se reconnaître dans son histoire.",
         check: q("Quel philosophe relie explicitement conscience et mémoire ?", "Henri Bergson", "Thomas Hobbes", "Karl Marx", "Auguste Comte"),
+        extraQuestions: [
+          { prompt: "Que découvre Descartes à travers le doute ?", options: ["Qu’il ne peut douter qu’il pense : « Je pense donc je suis »", "Que la conscience est une illusion", "Que l’homme est d’abord un corps", "Que la mémoire précède la pensée"], correctIndex: 0, explanation: "Le Cogito fonde la certitude du sujet conscient.", sourceLabel: "I-A La conscience psychologique", points: 2 },
+          { prompt: "À quoi renvoie la conscience morale selon Rousseau ?", options: ["À la capacité de juger le bien et le mal de ses actes", "À la mémoire des souvenirs", "À la perception des objets", "Au doute méthodique"], correctIndex: 0, explanation: "Rousseau en fait le « juge infaillible du bien et du mal ».", sourceLabel: "I-A La conscience morale", points: 2 },
+          { prompt: "« La conscience définit l’homme » : cette proposition est…", options: ["Vraie : la conscience est la faculté qui le distingue", "Fausse : l’homme et l’animal la partagent", "Fausse : seule la mémoire le définit", "Vraie : parce qu’il ignore ses actes"], correctIndex: 0, explanation: "La conscience est propre à l’homme et le distingue des autres vivants.", sourceLabel: "Activité d’application 3", points: 2 },
+          { prompt: "« La conscience est une faculté que l’homme et l’animal ont en commun » : cette proposition est…", options: ["Fausse : la conscience est propre à l’homme", "Vraie", "Vraie pour la mémoire seulement", "Fausse car l’animal n’a pas de corps"], correctIndex: 0, explanation: "C’est justement la conscience qui distingue l’homme de l’animal.", sourceLabel: "Activité d’application 3", points: 1 },
+        ],
         distractors: ["La conscience morale sert uniquement à percevoir les objets.", "La mémoire détruit l’identité personnelle.", "La conscience ne joue aucun rôle dans le jugement."],
       },
       {
@@ -753,6 +804,29 @@ La conclusion est la dernière partie du devoir. Elle consiste en une **prise de
         summary: "Comprendre l’autodétermination et le lien entre choix conscient et responsabilité.",
         conceptTitle: "Agir par sa propre volonté",
         explanation: "La liberté est la capacité de s’autodéterminer plutôt que de subir une contrainte. Pour un sujet conscient, choisir implique d’assumer ses actes et d’exercer son jugement.",
+        bodyMarkdown: String.raw`## Qu’est-ce qu’être libre ?
+
+> **Définition.** La liberté est la capacité qu’a l’homme de **s’autodéterminer**, d’**agir sans contrainte**, c’est-à-dire de **n’obéir qu’à sa volonté**.
+
+Être libre, pour un être conscient, c’est **agir de façon responsable**, loin de l’emprise de toute force extérieure. C’est ce que dit l’expression courante : *« agir en toute conscience »*. À ce titre, il revient à l’homme d’**assumer ses actes** et de **maîtriser ses opinions**.
+
+> **BERGSON**, *Leçons clermontoises* : « Notre conscience nous avertit (…) que nous sommes des êtres libres (…). Donc, un fait est indiscutable : c’est que **notre conscience témoigne de notre liberté**. »
+
+## Le lien conscience → liberté → responsabilité
+
+La conscience et la mémoire permettent donc à l’homme de s’assumer comme un **être libre, lucide et autonome**.
+
+| Étape | Ce qu’elle engage |
+|---|---|
+| **Délibérer** | comparer plusieurs possibilités d’action |
+| **Choisir** | se déterminer selon une volonté consciente |
+| **Assumer** | répondre des conséquences de l’acte choisi |
+
+## Mais sommes-nous toujours maîtres de nous-mêmes ?
+
+Est-il réaliste de dire que nous sommes **toujours** maîtres de nous ? La conscience est-elle **toujours** présente en nous ? L’homme n’a-t-il pas une autre réalité insoupçonnée qui le détermine ?
+
+> **Transition.** Déjà **LEIBNIZ**, avec sa théorie des *petites perceptions* sans aperception, remettait en cause la surestimation de la conscience. Mais c’est véritablement avec **FREUD** qu’on parvient à la découverte de l’inconscient — le niveau suivant.`,
         keyPoint: "La conscience de choisir fonde l’autonomie, mais rend également l’homme responsable.",
         example: "Bergson soutient que l’expérience de la conscience nous avertit de notre liberté.",
         mapTitle: "De la conscience à la responsabilité",
@@ -764,6 +838,11 @@ La conclusion est la dernière partie du devoir. Elle consiste en une **prise de
         ],
         observation: "La liberté n’est pas l’absence de toute règle : elle suppose une décision que le sujet peut reconnaître comme sienne.",
         check: q("Pourquoi liberté et responsabilité sont-elles liées ?", "Parce qu’assumer un acte suppose qu’on puisse le reconnaître comme son choix", "Parce qu’un acte libre n’a aucune conséquence", "Parce que la liberté supprime la conscience", "Parce que choisir signifie obéir à toute contrainte"),
+        extraQuestions: [
+          { prompt: "Quelle est la bonne définition de la liberté ?", options: ["L’état de l’être qui n’obéit qu’à sa volonté, indépendamment de toute contrainte extérieure", "Faire ce que l’on veut, sain ou malade, sans limite", "Accepter d’être guidé par un directeur de conscience", "Suivre toujours ses pulsions"], correctIndex: 0, explanation: "C’est la seule définition vraie de l’activité 2 : l’autodétermination.", sourceLabel: "Activité d’application 2", points: 2 },
+          { prompt: "Selon Bergson, de quoi notre conscience témoigne-t-elle ?", options: ["De notre liberté", "De notre faiblesse", "De notre inconscient", "De notre mémoire seule"], correctIndex: 0, explanation: "« Notre conscience témoigne de notre liberté » (Leçons clermontoises).", sourceLabel: "I-B L’homme, un être de liberté", points: 2 },
+          { prompt: "Quel penseur, avant Freud, remettait en cause la surestimation de la conscience ?", options: ["Leibniz, avec les petites perceptions", "Descartes, avec le Cogito", "Rousseau, avec la conscience morale", "Valéry, avec la conscience qui règne"], correctIndex: 0, explanation: "Leibniz annonce la critique de la toute-puissance de la conscience.", sourceLabel: "Transition vers l’inconscient", points: 2 },
+        ],
         distractors: ["Être libre signifie n’avoir aucune conséquence à assumer.", "La liberté exclut tout jugement moral.", "La conscience empêche l’autodétermination."],
       },
       {
@@ -772,8 +851,42 @@ La conclusion est la dernière partie du devoir. Elle consiste en une **prise de
         summary: "Identifier les désirs refoulés et leurs manifestations dans les rêves, oublis ou conduites involontaires.",
         conceptTitle: "Une vie psychique qui échappe au moi",
         explanation: "Freud nomme inconscient l’instance dynamique où demeurent pulsions et désirs refoulés. Rêves, lapsus, phobies, oublis et agressivité montrent que la conscience ne maîtrise pas toute la vie psychique.",
+        bodyMarkdown: String.raw`## Les limites de la conscience
+
+L’homme est un être de conscience et de mémoire, mais il existe **beaucoup de faits psychiques qu’il ignore** et qu’il ne peut ni expliquer ni justifier : les **oublis**, les **motivations cachées**, les **phobies**, les **perceptions insensibles**, les **rêves**… Tout cela révèle les limites de la conscience et présuppose l’existence d’un **inconscient psychique**.
+
+> **Définition (FREUD, 1856–1939).** L’inconscient est l’**ensemble des désirs refoulés qui échappent à la conscience** — l’instance psychique dynamique où sont emmagasinés les instincts, les pulsions et les désirs refoulés.
+
+> **FREUD**, *L’Interprétation des rêves* : « Pour bien comprendre la vie psychique, il est indispensable de **cesser de surestimer la conscience**. »
+
+Notre vie psychique est donc faite d’une **petite partie** d’actes conscients et d’une **grande partie** de faits inconnus de la conscience.
+
+> **FREUD**, *Métapsychologie* : « Nous possédons de multiples preuves de l’existence de l’inconscient. »
+
+## La violence, manifestation de l’inconscient
+
+Parmi ces manifestations, la leçon retient la **violence**. Selon la psychanalyse freudienne, l’inconscient est le **siège de la violence** — agressivité, barbarie — qui se manifeste dans nos relations.
+
+> **FREUD**, *Malaise dans la civilisation* : « L’homme n’est point cet être débonnaire, au cœur assoiffé d’amour (…), mais un être au contraire qui doit porter au compte de ses données instinctives une **bonne somme d’agressivité**. »
+
+L’inconscient se présente ainsi comme un **élément déterminant** de la nature humaine. Mais ne révèle-t-il pas un déterminisme qui remet en cause la responsabilité de l’homme ?`,
         keyPoint: "L’inconscient limite la connaissance immédiate de soi : le moi n’est pas maître de toute sa vie psychique.",
         example: "Un lapsus peut révéler une intention ou un désir que le sujet n’avait pas consciemment décidé d’exprimer.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "L’inconscient selon Freud",
+          instruction: "Sélectionne un élément pour comprendre ce que la conscience ne maîtrise pas.",
+          observation: "L’inconscient n’est pas une simple absence de conscience : Freud lui attribue une activité propre.",
+          rootLabel: "L’inconscient",
+          rootDetail: "L’ensemble des désirs refoulés qui échappent à la conscience",
+          nodes: [
+            { id: "definition", group: "La découverte", label: "Les désirs refoulés", role: "La définition", detail: "L’instance psychique dynamique où sont emmagasinés instincts, pulsions et désirs refoulés. Freud invite à « cesser de surestimer la conscience » (L’Interprétation des rêves)." },
+            { id: "oublis", group: "Les manifestations", label: "Oublis et lapsus", role: "Des actes involontaires", detail: "Des faits psychiques que le sujet ne peut expliquer et qui trahissent un contenu inconscient." },
+            { id: "phobies", group: "Les manifestations", label: "Phobies et rêves", role: "Des symptômes révélateurs", detail: "Phobies, perceptions insensibles et rêves montrent que la vie psychique dépasse ce dont on est conscient." },
+            { id: "violence", group: "Les manifestations", label: "La violence", role: "L’agressivité en nous", detail: "L’inconscient est le siège de la violence. Freud : l’homme « doit porter au compte de ses données instinctives une bonne somme d’agressivité » (Malaise dans la civilisation)." },
+          ],
+        },
         mapTitle: "Du refoulement à la manifestation",
         mapInstruction: "Suis le trajet d’un contenu psychique inconscient.",
         map: [
@@ -783,6 +896,11 @@ La conclusion est la dernière partie du devoir. Elle consiste en une **prise de
         ],
         observation: "L’inconscient n’est pas une simple absence de conscience : Freud lui attribue une activité propre.",
         check: q("Quel exemple constitue une manifestation possible de l’inconscient ?", "Un lapsus révélateur", "Une définition apprise", "Un calcul volontaire", "Une loi juridique"),
+        extraQuestions: [
+          { prompt: "Comment Freud définit-il l’inconscient ?", options: ["L’ensemble des désirs refoulés qui échappent à la conscience", "La partie la mieux connue de l’esprit", "Une simple absence de pensée", "La mémoire volontaire"], correctIndex: 0, explanation: "L’inconscient est l’instance des pulsions et désirs refoulés.", sourceLabel: "II-A La découverte de l’inconscient", points: 2 },
+          { prompt: "Quelle citation justifie que l’homme est violent ?", options: ["« …un être qui doit porter au compte de ses données instinctives une bonne somme d’agressivité »", "« La violence est dans la société et non ailleurs »", "« La violence engendre la violence »", "« La conscience règne mais ne gouverne pas »"], correctIndex: 0, explanation: "C’est la formule de Freud dans Malaise dans la civilisation.", sourceLabel: "Activité d’application", points: 3 },
+          { prompt: "Selon Freud, pour comprendre la vie psychique, il faut…", options: ["Cesser de surestimer la conscience", "Ignorer les rêves", "N’étudier que les actes volontaires", "Nier l’existence des pulsions"], correctIndex: 0, explanation: "« Il est indispensable de cesser de surestimer la conscience » (L’Interprétation des rêves).", sourceLabel: "II-A La découverte de l’inconscient", points: 2 },
+        ],
         distractors: ["L’inconscient est seulement ce que l’on n’a pas encore appris.", "Freud affirme que toute la vie psychique est consciente.", "Le refoulement supprime définitivement les désirs."],
       },
       {
@@ -791,8 +909,46 @@ La conclusion est la dernière partie du devoir. Elle consiste en une **prise de
         summary: "Confronter l’explication freudienne aux critiques d’Alain et de Sartre.",
         conceptTitle: "Sommes-nous encore responsables ?",
         explanation: "Si l’inconscient détermine une partie de nos actes, la maîtrise consciente paraît limitée. Pourtant Alain refuse d’en faire un animal caché et Sartre dénonce l’usage de l’inconscient comme alibi de mauvaise foi.",
+        bodyMarkdown: String.raw`## A. Le déterminisme psychologique
+
+> **Définition.** Par le déterminisme psychologique, nos actes psychiques **ne sont pas le fruit de nos choix** : ils sont produits par des **forces indépendantes de l’homme**.
+
+Le moi conscient serait alors si manipulé que sa responsabilité et sa liberté sembleraient **illusoires**. Subissant le déterminisme de l’inconscient, l’homme ne pourrait se prévaloir d’aucune volonté.
+
+> **Paul VALÉRY** (1871–1945), *Mauvaises pensées et autres* : « **La conscience règne mais ne gouverne pas.** »
+
+## B. L’homme, un être responsable
+
+Quoique déterminé par l’inconscient, l’homme **reste un sujet libre qui assume ses actes**. Les philosophes moralistes et existentialistes font le procès de la théorie freudienne.
+
+**ALAIN** fait de l’hypothèse de l’inconscient une irréalité :
+
+> **ALAIN**, *Éléments de philosophie* : « Le freudisme si fameux est un **art d’inventer en chaque homme un animal redoutable**. »
+
+**Jean-Paul SARTRE** (1905–1980) affirme que l’homme est *« condamné à être libre »*. Au nom de cette liberté, l’inconscient relève de la **mauvaise foi** : c’est un prétexte pour justifier nos inconduites.
+
+## Conclusion de la leçon
+
+Connaître l’homme est une **entreprise difficile** : il est tantôt un être conscient et libre, tantôt déterminé par l’inconscient. Au demeurant, l’homme est un **être pluridimensionnel et complexe**.
+
+> **Le bon équilibre.** Éviter les deux excès : **nier l’inconscient** (comme si tout était choix) ou **excuser automatiquement toute conduite** (comme si rien n’était choix).`,
         keyPoint: "Le déterminisme psychique limite la maîtrise de soi, mais ne suffit pas à abolir toute responsabilité.",
         example: "Paul Valéry résume la limite du moi : la conscience règne mais ne gouverne pas ; Sartre rappelle néanmoins que l’homme doit assumer ce qu’il fait.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Le débat sur la responsabilité",
+          instruction: "Sélectionne une position pour voir son argument et son auteur.",
+          observation: "La bonne réponse évite les deux excès : nier l’inconscient, ou en faire une excuse qui annule toute responsabilité.",
+          rootLabel: "L’homme est-il responsable de ses actes ?",
+          rootDetail: "Un débat entre le déterminisme psychique et l’exigence de liberté",
+          nodes: [
+            { id: "determinisme", group: "Le déterminisme (la liberté paraît illusoire)", label: "Nos actes nous échappent", role: "Des forces indépendantes", detail: "Nos faits psychiques ne sont pas nos choix : ils sont produits par des forces inconscientes. Le moi manipulé perd sa maîtrise." },
+            { id: "valery", group: "Le déterminisme (la liberté paraît illusoire)", label: "Paul Valéry", role: "« La conscience règne mais ne gouverne pas »", detail: "Valéry résume la limite du moi conscient : il assiste à sa vie psychique sans la commander (Mauvaises pensées et autres)." },
+            { id: "alain", group: "La responsabilité demeure", label: "Alain", role: "L’inconscient est une irréalité", detail: "Alain refuse d’inventer un « animal redoutable » caché dans l’homme : « Le freudisme si fameux est un art d’inventer en chaque homme un animal redoutable » (Éléments de philosophie)." },
+            { id: "sartre", group: "La responsabilité demeure", label: "Sartre", role: "L’homme est « condamné à être libre »", detail: "Pour Sartre, invoquer l’inconscient relève de la mauvaise foi : c’est un prétexte pour ne pas assumer ses actes. L’homme reste responsable." },
+          ],
+        },
         mapTitle: "Un débat sur la responsabilité",
         mapInstruction: "Compare la thèse déterministe et sa contestation.",
         map: [
@@ -802,6 +958,11 @@ La conclusion est la dernière partie du devoir. Elle consiste en une **prise de
         ],
         observation: "La bonne réponse évite les deux excès : nier l’inconscient ou excuser automatiquement toute conduite.",
         check: q("Quelle position est la plus nuancée ?", "L’inconscient influence l’homme sans supprimer nécessairement toute responsabilité", "L’inconscient n’existe jamais", "L’homme n’est responsable d’aucun acte", "La conscience contrôle absolument tout"),
+        extraQuestions: [
+          { prompt: "Qui affirme que « la conscience règne mais ne gouverne pas » ?", options: ["Paul Valéry", "Sigmund Freud", "Alain", "Jean-Paul Sartre"], correctIndex: 0, explanation: "Valéry résume la limite du moi conscient.", sourceLabel: "III-A Le déterminisme psychologique", points: 2 },
+          { prompt: "Pour Sartre, invoquer l’inconscient pour excuser ses actes, c’est…", options: ["De la mauvaise foi", "Une preuve scientifique", "Une nécessité biologique", "Un acte de liberté"], correctIndex: 0, explanation: "L’homme étant « condamné à être libre », l’alibi de l’inconscient est de la mauvaise foi.", sourceLabel: "III-B L’homme, un être responsable", points: 2 },
+          { prompt: "Quelle citation NE justifie PAS que l’homme n’est pas totalement libre ?", options: ["« L’inconscient est de la mauvaise foi »", "« La conscience règne mais ne gouverne pas »", "« Le moi n’est pas maître dans sa propre maison »", "« L’homme subit le déterminisme psychologique »"], correctIndex: 0, explanation: "La formule sur la mauvaise foi défend au contraire la liberté et la responsabilité.", sourceLabel: "Activité d’application 1", points: 3 },
+        ],
         distractors: ["L’inconscient abolit toujours la responsabilité.", "Sartre utilise l’inconscient pour excuser les actes.", "Alain considère l’hypothèse freudienne comme indiscutable."],
       },
     ],
@@ -809,17 +970,49 @@ La conclusion est la dernière partie du devoir. Elle consiste en une **prise de
       title: "Sujet BAC : « L’inconscient abolit-il la responsabilité humaine ? »",
       scenario: "Analyse le sujet officiel en confrontant le déterminisme psychique à l’exigence de liberté et de responsabilité.",
       problem: "L’existence de forces psychiques inconscientes rend-elle impossible le fait de répondre de ses actes ?",
+      bodyMarkdown: String.raw`## Le corrigé du sujet
+
+### I. Définition des termes essentiels
+
+| Terme | Définition |
+|---|---|
+| **L’inconscient** | l’ensemble des actes qui échappent à la conscience ; l’instance psychique siège des pulsions et désirs refoulés |
+| **Abolir** | supprimer, rendre caduc, rendre illusoire |
+| **La responsabilité de l’homme** | le fait que l’homme réponde de ses actes, les assume |
+
+### II. Problème à analyser
+
+> **L’inconscient rend-il illusoire la responsabilité humaine ?** L’avènement de l’inconscient excuse-t-il l’homme de tous ses actes ?
+
+### III. Axes d’analyse et références
+
+**Axe 1 — La présence de l’inconscient agit sur la responsabilité humaine.**
+
+- L’inconscient détermine les actes de l’homme au détriment de la conscience. *Cf.* **FREUD** : « la conscience n’est pas toujours maître dans sa propre maison ».
+- Avec l’inconscient, l’homme pose des actes involontaires dont il ne peut rendre compte. *Cf.* **Paul VALÉRY** : « la conscience règne mais ne gouverne pas ».
+
+**Axe 2 — La responsabilité de l’homme demeure malgré l’inconscient.**
+
+- L’inconscient étant une partie de l’homme, celui-ci doit en assumer les manifestations. *Cf.* **SARTRE**, pour qui l’alibi de l’inconscient conduit à la mauvaise foi.
+- La présence de l’inconscient ne supprime pas la conscience. *Cf.* **ALAIN** : « Il n’y a pas d’inconvénient à employer couramment le terme d’inconscient (…), mais si on le grossit, alors commence l’erreur, et bien pis, c’est une faute » (Éléments de philosophie).
+
+> **Le geste attendu.** Défendre sérieusement l’Axe 1 (l’inconscient nous détermine) avant de le dépasser par l’Axe 2 (nous restons responsables). La réponse nuancée refuse de confondre **détermination partielle** et **abolition totale** de la responsabilité.`,
       plan: [
-        { label: "Axe 1", detail: "Freud : l’inconscient produit des actes dont le sujet ne peut rendre pleinement compte." },
-        { label: "Limite", detail: "La conscience ne gouverne donc pas absolument la vie psychique." },
-        { label: "Axe 2", detail: "Alain et Sartre : l’inconscient ne doit pas devenir un alibi qui annule la responsabilité." },
-        { label: "Réponse", detail: "Reconnaître l’influence sans confondre détermination partielle et abolition totale." },
+        { label: "Définir", shortLabel: "Définir", detail: "Inconscient : ce qui échappe à la conscience ; abolir : rendre illusoire ; responsabilité : répondre de ses actes." },
+        { label: "Axe 1", shortLabel: "Axe 1", detail: "L’inconscient détermine l’homme : Freud (« pas maître dans sa propre maison ») et Valéry (« la conscience règne mais ne gouverne pas »)." },
+        { label: "Axe 2", shortLabel: "Axe 2", detail: "La responsabilité demeure : Sartre (l’alibi de l’inconscient = mauvaise foi) et Alain (ne pas « grossir » l’inconscient)." },
+        { label: "Réponse", shortLabel: "Réponse", detail: "Reconnaître l’influence sans confondre détermination partielle et abolition totale de la responsabilité." },
       ],
       modelAnswer: "L’inconscient complique l’attribution de responsabilité, mais il ne l’abolit pas automatiquement : le sujet peut reconnaître ses déterminations et travailler à les maîtriser.",
       questions: [
         q("Quel problème le sujet pose-t-il ?", "L’inconscient rend-il illusoire le fait d’assumer ses actes ?", "La mémoire est-elle une science ?", "La société précède-t-elle l’État ?", "Le progrès supprime-t-il le travail ?"),
         q("Quel auteur soutient que l’inconscient peut devenir un alibi de mauvaise foi ?", "Jean-Paul Sartre", "Sigmund Freud", "Henri Bergson", "Aristote"),
         q("Quelle synthèse est défendable ?", "L’inconscient limite la maîtrise consciente sans excuser nécessairement tous les actes", "Tout acte est totalement involontaire", "L’inconscient n’a aucun effet", "La responsabilité suppose de nier la psychologie"),
+      ],
+      extraQuestions: [
+        { prompt: "Quelle référence soutient l’Axe 1 (l’inconscient nous détermine) ?", options: ["Valéry : « la conscience règne mais ne gouverne pas »", "Sartre : l’inconscient est de la mauvaise foi", "Alain : ne pas grossir l’inconscient", "Descartes : « je pense donc je suis »"], correctIndex: 0, explanation: "Valéry illustre la perte de maîtrise du moi conscient.", sourceLabel: "Situation d’évaluation – Axe 1", points: 3 },
+        { prompt: "Que signifie « abolir » dans ce sujet ?", options: ["Supprimer, rendre caduc, rendre illusoire", "Renforcer, consolider", "Mesurer avec précision", "Interroger sans répondre"], correctIndex: 0, explanation: "C’est la définition donnée par le corrigé.", sourceLabel: "Situation d’évaluation – définitions", points: 2 },
+        { prompt: "Comment Alain nuance-t-il l’usage du mot « inconscient » ?", options: ["On peut l’employer, mais le « grossir » devient une erreur et une faute", "Il faut le nier entièrement", "Il faut en faire la seule réalité psychique", "Il faut y voir une preuve scientifique"], correctIndex: 0, explanation: "Alain accepte le terme mais refuse d’en faire une force qui excuserait tout.", sourceLabel: "Situation d’évaluation – Axe 2", points: 3 },
       ],
     },
   },
