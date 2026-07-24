@@ -1335,8 +1335,38 @@ C’est pourquoi la force de l’État se révèle nécessaire à l’harmonie s
         summary: "Définir Dieu comme fondement de la religion et distinguer sacré et profane.",
         conceptTitle: "Le principe supérieur de la croyance",
         explanation: "Dieu désigne l’être suprême, absolu et sacré auquel la foi attribue la création ou le sens ultime du monde. La religion organise les croyances et rites qui relient une communauté à ce sacré.",
+        bodyMarkdown: String.raw`## Dieu, être sacré
+
+Dans la religion, **Dieu est un être surnaturel, sacré, objet de déférence** : admiration, respect, vénération. Ses qualités — **omnipotence, omniscience, omniprésence, bonté, perfection** — font de lui un être **transcendant** qui peut se révéler aux hommes.
+
+## Deux définitions de la religion
+
+> **André LALANDE** : la religion est « une **institution sociale** caractérisée par l’existence d’une communauté d’individus unis par la croyance en une **valeur absolue : Dieu**. »
+
+> **Émile DURKHEIM**, *Les formes élémentaires de la vie religieuse* : « une religion est un **système solidaire de croyances et de pratiques** relatives à des **choses sacrées**, c’est-à-dire séparées, interdites (…), qui unissent en une même communauté morale tous ceux qui y adhèrent. »
+
+## Le sacré et le profane
+
+Ces définitions montrent que la religion ne se réduit pas à une croyance individuelle : elle **relie** (lien vertical à Dieu, lien horizontal entre les hommes) et distingue le **sacré** du **profane**.
+
+> **Astuce mémoire.** Lalande insiste sur la **valeur absolue** (Dieu) ; Durkheim insiste sur le **système collectif** (croyances + pratiques + communauté). Deux angles, une même réalité.`,
         keyPoint: "Dieu est l’objet central de la foi ; la religion est l’ensemble organisé de croyances, rites et obligations liés au sacré.",
         example: "Un rite n’est pas un simple geste habituel : pour le croyant, il met en relation le monde profane et une réalité sacrée.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Dieu et la religion",
+          instruction: "Sélectionne un élément pour voir comment le document définit Dieu et la religion.",
+          observation: "La religion ne se réduit pas à une croyance privée : elle relie une communauté au sacré.",
+          rootLabel: "Dieu, fondement de la religion",
+          rootDetail: "Un être sacré, et deux façons de définir la religion",
+          nodes: [
+            { id: "qualites", group: "Dieu, être sacré", label: "Les qualités de Dieu", role: "Un être transcendant", detail: "Omnipotence, omniscience, omniprésence, bonté, perfection : ces qualités font de Dieu un être surnaturel et transcendant, objet de déférence, qui peut se révéler aux hommes." },
+            { id: "sacre", group: "Dieu, être sacré", label: "Le sacré et le profane", role: "Une réalité séparée", detail: "Le sacré est ce qui est séparé, interdit, doté d’une valeur religieuse particulière, par opposition au profane." },
+            { id: "lalande", group: "Deux définitions de la religion", label: "Lalande", role: "La valeur absolue", detail: "« Une institution sociale caractérisée par l’existence d’une communauté d’individus unis par la croyance en une valeur absolue : Dieu. »" },
+            { id: "durkheim", group: "Deux définitions de la religion", label: "Durkheim", role: "Le système collectif", detail: "« Un système solidaire de croyances et de pratiques relatives à des choses sacrées (…) qui unissent en une même communauté morale tous ceux qui y adhèrent » (Les formes élémentaires de la vie religieuse)." },
+          ],
+        },
         mapTitle: "Du sacré à la pratique",
         mapInstruction: "Distingue les notions essentielles.",
         map: [
@@ -1346,6 +1376,11 @@ C’est pourquoi la force de l’État se révèle nécessaire à l’harmonie s
         ],
         observation: "Définir la religion uniquement comme croyance individuelle ferait oublier sa dimension collective et pratique.",
         check: q("Que comprend une religion au-delà de la foi personnelle ?", "Des rites, des règles et une communauté liés au sacré", "Uniquement une théorie scientifique", "Seulement des émotions privées", "Une absence totale d’obligations"),
+        extraQuestions: [
+          { prompt: "« La religion est une institution sociale basée sur la croyance en Dieu » : vrai ou faux ?", options: ["Vrai", "Faux : elle a l’homme pour objet", "Faux : elle est purement individuelle", "Faux : elle exclut toute communauté"], correctIndex: 0, explanation: "C’est la définition de Lalande.", sourceLabel: "Activité d’application", points: 1 },
+          { prompt: "« La religion se rapporte à des croyances et pratiques ayant l’homme pour objet » : vrai ou faux ?", options: ["Faux : elle a Dieu pour objet", "Vrai", "Vrai selon Durkheim", "Faux : elle n’a aucun objet"], correctIndex: 0, explanation: "La religion a Dieu, non l’homme, pour objet.", sourceLabel: "Activité d’application", points: 2 },
+          { prompt: "Comment Durkheim définit-il la religion ?", options: ["Un système solidaire de croyances et de pratiques relatives à des choses sacrées", "Une simple émotion privée", "Une théorie scientifique du monde", "Une morale sans communauté"], correctIndex: 0, explanation: "Durkheim insiste sur le système collectif et les choses sacrées.", sourceLabel: "I-A Dieu, être sacré", points: 2 },
+        ],
         distractors: ["Dieu et religion sont strictement synonymes.", "Le sacré ne se distingue jamais du profane.", "Toute religion est dépourvue de pratiques collectives."],
       },
       {
@@ -1354,8 +1389,42 @@ C’est pourquoi la force de l’État se révèle nécessaire à l’harmonie s
         summary: "Comprendre les objections qui voient dans l’idée de Dieu une projection ou une aliénation.",
         conceptTitle: "Quand la croyance est mise en question",
         explanation: "La raison ne peut pas vérifier Dieu comme un fait observable. Feuerbach interprète Dieu comme projection des qualités humaines ; Marx critique une religion qui console de la misère au lieu d’en supprimer les causes.",
+        bodyMarkdown: String.raw`## Concept de Dieu ≠ existence de Dieu
+
+Il faut distinguer « **le concept ou l’idée de Dieu** » de « **l’existence de Dieu** ». Pour **KANT** (1724–1804), que Dieu soit conçu comme un être parfait **ne prouve pas** qu’il existe : *l’existence d’un être ne dérive pas de son essence*.
+
+> **KANT**, *Critique de la raison pure* : « Quand je conçois une chose (…), en ajoutant de plus que cette chose existe, **je n’ajoute rien à cette chose** (…). Il nous faut cependant **sortir de ce concept** pour attribuer à l’objet son existence. »
+
+En conséquence, pour Kant, **toute preuve de l’existence de Dieu est une spéculation, une illusion de la raison**.
+
+## Le problème du mal
+
+On comprend difficilement que Dieu soit **parfait**, qu’il ait créé le monde, et que le **mal** s’y trouve pourtant inscrit. **L’existence du mal semble contredire la perfection de Dieu** — argument des **athées** qui nient son existence.
+
+## Feuerbach : la théologie est une anthropologie
+
+Pour **FEUERBACH**, Dieu est une **projection** : l’homme prête à Dieu ses propres qualités idéales, puis s’incline devant sa création.
+
+> **FEUERBACH**, *L’essence du christianisme* : « Ce qui est le propre de l’esprit humain (…), c’est cela son Dieu : Dieu est (…) le soi exprimé de l’homme. »
+
+> **À retenir.** Ces critiques ne visent pas seulement la *preuve* de Dieu : elles demandent si l’homme ne **transfère pas à Dieu sa propre puissance**, au risque de perdre sa liberté.`,
         keyPoint: "La critique ne réfute pas seulement une croyance : elle demande si l’homme transfère à Dieu sa propre puissance et sa liberté.",
-        example: "Qualifier la religion d’« opium du peuple » signifie qu’elle peut apaiser la souffrance tout en détournant de la transformation sociale.",
+        example: "Pour Kant, ajouter « cette chose existe » n’ajoute rien au concept : il faut sortir du concept pour atteindre l’existence.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Peut-on prouver Dieu ?",
+          instruction: "Sélectionne une objection pour comprendre ce qu’elle conteste.",
+          observation: "Les critiques portent tantôt sur la preuve de Dieu, tantôt sur ses effets sur la liberté humaine.",
+          rootLabel: "Les critiques de l’existence de Dieu",
+          rootDetail: "Du concept à l’existence, et de l’existence à la projection",
+          nodes: [
+            { id: "kant-preuve", group: "L’objection de Kant", label: "Concept n’est pas existence", role: "L’existence ne dérive pas de l’essence", detail: "Concevoir Dieu parfait ne prouve pas qu’il existe. « Il nous faut sortir de ce concept pour attribuer à l’objet son existence » (Critique de la raison pure). Toute preuve est une illusion de la raison." },
+            { id: "mal", group: "Le problème du mal", label: "L’existence du mal", role: "Une contradiction", detail: "Si Dieu est parfait et créateur, comment le mal peut-il exister dans le monde ? Le mal semble contredire la perfection divine — argument des athées." },
+            { id: "feuerbach", group: "La projection", label: "Feuerbach", role: "La théologie est une anthropologie", detail: "Dieu est une projection des qualités humaines : « Dieu est (…) le soi exprimé de l’homme » (L’essence du christianisme). L’homme s’incline devant sa propre création." },
+            { id: "athees", group: "La projection", label: "L’athéisme", role: "Nier l’existence de Dieu", detail: "Faute de preuve et devant le problème du mal, les athées nient l’existence de Dieu, qu’ils tiennent pour un produit de l’imagination humaine." },
+          ],
+        },
         mapTitle: "La logique de l’aliénation",
         mapInstruction: "Suis le transfert dénoncé par les critiques.",
         map: [
@@ -1365,6 +1434,11 @@ C’est pourquoi la force de l’État se révèle nécessaire à l’harmonie s
         ],
         observation: "La critique de la religion porte ici sur ses effets humains et politiques, pas seulement sur la preuve de Dieu.",
         check: q("Que signifie l’aliénation religieuse chez Feuerbach ?", "L’homme projette ses qualités en Dieu puis se soumet à cette projection", "La religion augmente toujours la liberté", "Dieu est une expérience scientifique", "Le rite remplace toute société"),
+        extraQuestions: [
+          { prompt: "« Pour Kant, l’idée ou le concept de Dieu coïncide avec son existence » : vrai ou faux ?", options: ["Faux", "Vrai", "Vrai selon la Critique de la raison pure", "Vrai pour les athées"], correctIndex: 0, explanation: "Kant sépare précisément le concept de l’existence.", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "« Pour Feuerbach, la théologie est une anthropologie » : vrai ou faux ?", options: ["Vrai : Dieu est le soi exprimé de l’homme", "Faux", "Faux : Feuerbach défend l’existence de Dieu", "Vrai selon Kant"], correctIndex: 0, explanation: "Pour Feuerbach, parler de Dieu, c’est parler de l’homme projeté.", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "Quel argument les athées opposent-ils à la perfection de Dieu ?", options: ["L’existence du mal dans le monde", "L’absence de fidèles", "La diversité des religions", "La beauté de la nature"], correctIndex: 0, explanation: "Le mal semble incompatible avec un créateur parfait.", sourceLabel: "I-B Les critiques de l’existence de Dieu", points: 2 },
+        ],
         distractors: ["Marx voit dans la religion une transformation politique immédiate.", "Critiquer la religion consiste seulement à interdire les rites.", "La projection rend l’homme plus autonome."],
       },
       {
@@ -1373,8 +1447,44 @@ C’est pourquoi la force de l’État se révèle nécessaire à l’harmonie s
         summary: "Étudier la cohésion sociale, la consolation existentielle et l’éducation morale.",
         conceptTitle: "Relier, rassurer et moraliser",
         explanation: "La religion unit les fidèles par des croyances et rites communs, donne une réponse à l’angoisse de la mort et propose des règles morales. Durkheim insiste sur la cohésion sociale ; Bergson sur la réponse religieuse à la peur de la mort.",
+        bodyMarkdown: String.raw`## A. Facteur de cohésion sociale et de libération
+
+Le mot vient du latin *religio* : un **lien vertical** (l’homme à Dieu) et un **lien horizontal** (les hommes entre eux). La fonction première de la religion est de **rassembler** autour d’un idéal communautaire.
+
+> **PROUDHON** : « C’est la religion qui **cimenta les fondements des sociétés**, qui donna l’unité et la personnalité aux nations. »
+
+**BERGSON** (*Les deux sources de la morale et de la religion*) lui reconnaît une **triple fonction** :
+
+1. une **assurance** contre la désorganisation, grâce aux interdits ;
+2. une **protection** contre la dépression et l’angoisse de la mort ;
+3. une **quiétude** face à l’imprévisibilité de l’existence.
+
+> **HEGEL** : « La religion est la **vraie libération de l’homme** » (Leçons sur la philosophie de la religion). Et **FREUD** : elle « nous éclaire sur l’origine (…) nous assure (…) la protection divine et la béatitude finale » (L’avenir d’une illusion).
+
+## B. Source de moralisation de l’homme
+
+La **morale** — l’ensemble des règles de conduite jugées bonnes — trouve, pour le croyant, son fondement dans la religion (amour du prochain, partage, communion fraternelle). En les pratiquant, le croyant **s’humanise**.
+
+> **KANT**, *La religion dans les limites de la simple raison* : « **La religion est la connaissance de tous nos devoirs comme des commandements divins.** (…) L’homme puise à cette source la claire vision que sa bonne conduite seule le rend digne du bonheur. »
+
+Pour Kant, il n’y a donc **pas de différence entre la morale et la religion**.`,
         keyPoint: "La religion peut soutenir l’individu psychologiquement et la société moralement, sans que ces fonctions prouvent à elles seules la vérité de ses croyances.",
         example: "Une cérémonie collective console une famille tout en renforçant les liens et les obligations d’entraide du groupe.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "À quoi sert la religion ?",
+          instruction: "Sélectionne une fonction pour voir l’auteur qui l’éclaire.",
+          observation: "Cohésion, consolation et morale expliquent la force humaine de la religion — sans prouver à elles seules la vérité de ses croyances.",
+          rootLabel: "Les fonctions de la religion",
+          rootDetail: "Relier les hommes, apaiser leurs angoisses, fonder la morale",
+          nodes: [
+            { id: "proudhon", group: "Cohésion et libération", label: "Proudhon", role: "Cimenter les sociétés", detail: "« C’est la religion qui cimenta les fondements des sociétés, qui donna l’unité et la personnalité aux nations. » Le lien religieux est aussi un lien social." },
+            { id: "bergson", group: "Cohésion et libération", label: "Bergson", role: "La triple fonction", detail: "Assurance contre la désorganisation (les interdits), protection contre l’angoisse de la mort, quiétude face à l’imprévisible (Les deux sources de la morale et de la religion)." },
+            { id: "hegel-freud", group: "Cohésion et libération", label: "Hegel et Freud", role: "Libérer et donner un sens", detail: "Hegel : « la religion est la vraie libération de l’homme ». Freud : elle éclaire sur l’origine du monde et promet « la protection divine et la béatitude finale »." },
+            { id: "kant-morale", group: "Moralisation", label: "Kant", role: "Fonder la morale", detail: "« La religion est la connaissance de tous nos devoirs comme des commandements divins. » Pour Kant, il n’y a pas de différence entre la morale et la religion (La religion dans les limites de la simple raison)." },
+          ],
+        },
         mapTitle: "Trois fonctions concrètes",
         mapInstruction: "Compare les effets individuels et collectifs.",
         map: [
@@ -1384,6 +1494,11 @@ C’est pourquoi la force de l’État se révèle nécessaire à l’harmonie s
         ],
         observation: "Une fonction utile ne suffit pas à établir la vérité philosophique d’une croyance, mais elle explique sa force humaine.",
         check: q("Quelle fonction Bergson associe-t-il à la religion ?", "Opposer à la mort l’image d’une continuation de la vie", "Supprimer toute morale", "Prouver Dieu expérimentalement", "Isoler tous les croyants"),
+        extraQuestions: [
+          { prompt: "Selon Proudhon, quel est le rôle social de la religion ?", options: ["Elle a cimenté les fondements des sociétés et donné l’unité aux nations", "Elle divise systématiquement les peuples", "Elle supprime toute morale", "Elle remplace l’État"], correctIndex: 0, explanation: "La religion est présentée comme génératrice d’organisation sociale.", sourceLabel: "II-A Facteur de cohésion sociale", points: 2 },
+          { prompt: "Pour Kant, quel rapport entre morale et religion ?", options: ["Il n’y a pas de différence : la religion est nos devoirs comme commandements divins", "La morale contredit la religion", "La religion interdit la morale", "La morale n’a aucun fondement"], correctIndex: 0, explanation: "Kant identifie le devoir moral à un commandement divin.", sourceLabel: "II-B Source de moralisation", points: 2 },
+          { prompt: "Relie : « (…) La religion est la vraie libération de l’homme. »", options: ["Hegel", "Voltaire", "Pascal", "Gabriel Marcel"], correctIndex: 0, explanation: "Formule de Hegel (Leçons sur la philosophie de la religion).", sourceLabel: "Activité d’application 2", points: 2 },
+        ],
         distractors: ["La religion ne joue aucun rôle social.", "La cohésion prouve automatiquement toute croyance.", "La religion augmente nécessairement les conflits."],
       },
       {
@@ -1392,8 +1507,42 @@ C’est pourquoi la force de l’État se révèle nécessaire à l’harmonie s
         summary: "Distinguer obligation morale libre, soumission aveugle et fanatisme.",
         conceptTitle: "Croire sans renoncer à soi",
         explanation: "La foi peut orienter librement une conduite morale et donner un sens à l’existence. Elle devient cependant aliénante lorsqu’une autorité interdit l’examen rationnel, impose la peur ou justifie le fanatisme et la violence.",
+        bodyMarkdown: String.raw`## A. La religion, source d’aliénation
+
+La pratique religieuse exige des fidèles **sacrifices, renoncements et privations**, et **l’obéissance sans condition**. C’est en ce sens qu’elle peut apparaître comme un facteur d’**aliénation**.
+
+> **Karl MARX**, *L’Idéologie allemande* : « Les hommes ont organisé leurs rapports en fonction des représentations qu’ils se faisaient de Dieu (…) ces produits de leur cerveau ont grandi jusqu’à les dominer (…). **Créateurs, ils se sont inclinés devant leurs propres créations.** »
+
+Pour Marx, la vraie liberté ne serait possible que dans une société **sans religion** pour « endormir la conscience ».
+
+## B. Liberté et obligation morale
+
+Pourtant, les obligations morales de la religion ne **contredisent pas** la liberté : elles la **présupposent**. L’homme conscient exerce son **libre-arbitre** — il choisit de croire ou non, de faire le bien ou le mal.
+
+Avec **KANT**, le devoir est un **impératif catégorique** : un commandement qui s’impose **sans condition** (contrairement à l’impératif *hypothétique*, subordonné à un intérêt).
+
+| Impératif | Caractère |
+|---|---|
+| **Catégorique** | s’impose sans condition, par pur devoir |
+| **Hypothétique** | subordonné à un besoin, une utilité, un intérêt |
+
+> **À retenir.** Obéir par **conviction réfléchie** n’est pas s’aliéner. La pratique religieuse ne menace la liberté que lorsqu’elle impose une **obéissance aveugle** ou justifie le **fanatisme** et la violence.`,
         keyPoint: "La pratique religieuse est compatible avec la liberté lorsqu’elle engage la conscience plutôt qu’une obéissance aveugle.",
         example: "Respecter une règle par conviction réfléchie n’a pas le même sens que l’appliquer sous la menace ou contre la dignité d’autrui.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "La religion libère-t-elle ou aliène-t-elle ?",
+          instruction: "Sélectionne une position pour voir son argument et son auteur.",
+          observation: "La foi n’aliène pas quand elle engage une conscience libre ; elle aliène quand elle exige une obéissance aveugle.",
+          rootLabel: "Religion et liberté",
+          rootDetail: "De l’aliénation dénoncée à l’obligation morale librement assumée",
+          nodes: [
+            { id: "marx", group: "La religion aliène", label: "Marx", role: "S’incliner devant sa création", detail: "« Créateurs, ils se sont inclinés devant leurs propres créations » (L’Idéologie allemande). La religion endort la conscience et soustrait l’homme à ses responsabilités." },
+            { id: "libre-arbitre", group: "Liberté et obligation compatibles", label: "Le libre-arbitre", role: "Choisir de croire", detail: "L’homme conscient exerce son libre-arbitre : il choisit de croire ou non, de faire le bien ou le mal. L’obligation morale présuppose donc la liberté." },
+            { id: "kant-imperatif", group: "Liberté et obligation compatibles", label: "Kant : l’impératif catégorique", role: "Un devoir sans condition", detail: "Le devoir moral est un impératif catégorique — un commandement qui s’impose sans condition, non une contrainte subie. Obéir par conviction n’est pas s’aliéner." },
+          ],
+        },
         mapTitle: "De l’obligation à l’aliénation",
         mapInstruction: "Repère le critère qui fait changer la valeur de la pratique.",
         map: [
@@ -1403,6 +1552,11 @@ C’est pourquoi la force de l’État se révèle nécessaire à l’harmonie s
         ],
         observation: "Le problème n’est pas seulement d’obéir, mais de savoir si l’obligation peut être reconnue par une conscience libre.",
         check: q("Quand une pratique religieuse menace-t-elle clairement la liberté ?", "Lorsqu’elle impose une obéissance aveugle et justifie la violence", "Lorsqu’elle invite à réfléchir", "Lorsqu’elle soutient l’entraide", "Lorsqu’elle respecte la dignité"),
+        extraQuestions: [
+          { prompt: "Selon Marx, comment la religion aliène-t-elle l’homme ?", options: ["L’homme s’incline devant ses propres créations (les représentations de Dieu)", "Elle supprime toute société", "Elle prouve l’existence de Dieu", "Elle renforce le libre-arbitre"], correctIndex: 0, explanation: "L’Idéologie allemande décrit ce renversement créateur/création.", sourceLabel: "III-A La religion, source d’aliénation", points: 2 },
+          { prompt: "Qu’est-ce que l’impératif catégorique chez Kant ?", options: ["Un commandement qui s’impose sans condition", "Un conseil facultatif", "Un ordre subordonné à un intérêt", "Une contrainte imposée par la peur"], correctIndex: 0, explanation: "Il s’oppose à l’impératif hypothétique, subordonné à une condition.", sourceLabel: "III-B Liberté et obligation morale", points: 3 },
+          { prompt: "Les obligations morales de la religion et la liberté sont-elles compatibles ?", options: ["Oui : l’obligation morale présuppose le libre-arbitre", "Non : toute obligation est une aliénation", "Non : la foi exclut la réflexion", "Oui, seulement sous la contrainte"], correctIndex: 0, explanation: "Le sujet conscient choisit de se soumettre ou non : la liberté est présupposée.", sourceLabel: "III-B Liberté et obligation morale", points: 2 },
+        ],
         distractors: ["Toute obligation morale est une aliénation.", "La foi exclut nécessairement la réflexion.", "Le fanatisme garantit la liberté de conscience."],
       },
     ],
@@ -1410,17 +1564,50 @@ C’est pourquoi la force de l’État se révèle nécessaire à l’harmonie s
       title: "Sujet BAC : « Doit-on redouter la croyance religieuse ? »",
       scenario: "Traite la situation officielle en confrontant les risques d’aliénation et de fanatisme aux fonctions morales, sociales et existentielles de la religion.",
       problem: "Quel regard faut-il porter sur la foi religieuse et ses effets sur l’homme ?",
+      bodyMarkdown: String.raw`## Le corrigé du sujet
+
+### I. Définition des termes essentiels
+
+| Terme | Définition |
+|---|---|
+| **Doit-on** | faut-il, est-il nécessaire de… |
+| **Redouter** | craindre sérieusement, avoir une grande peur |
+| **La croyance religieuse** | la croyance en la divinité, la foi religieuse |
+
+### II. Problème à analyser
+
+> **Quel regard doit-on porter sur la religion ?**
+
+### III. Axes d’analyse et références
+
+**Axe 1 — Il faut redouter la foi religieuse.**
+
+- Elle est un obstacle à la liberté. *Cf.* **FEUERBACH** : « l’aliénation majeure est l’idée de Dieu dont les règles ont privé l’homme de sa liberté » ; **MARX** : « **la religion est l’opium du peuple** » (Critique de la philosophie du droit de Hegel).
+- Elle entretient le fanatisme et la guerre. *Cf.* **KHOMEINI** : « la religion d’où la guerre est absente est une religion incomplète ».
+
+**Axe 2 — La religion édifie l’homme.**
+
+- Elle répond à l’angoisse existentielle. *Cf.* **BERGSON** : « À l’idée que la mort est inévitable, la religion oppose l’image d’une continuation de la vie après la mort. »
+- Elle rend vertueux et consolide les liens. *Cf.* **PROUDHON** : elle « cimenta les fondements des sociétés ».
+- Elle est inhérente à la nature humaine. *Cf.* **HEGEL** : « L’homme, seul être doué de raison, est aussi le seul animal religieux » ; **PASCAL**, le pari : « si vous gagnez, vous gagnez tout ; si vous perdez, vous ne perdez rien. Gagez donc qu’il est, sans hésiter » ; **Gabriel MARCEL** : « L’humain n’est authentiquement l’humain que là où il est soutenu par l’armature incorruptible du sacré. »
+
+> **Le geste attendu.** Prendre au sérieux les dérives (Axe 1 : aliénation, fanatisme) avant de reconnaître les fonctions morales et existentielles (Axe 2). La réponse nuancée : **redouter les dérives, non condamner toute croyance réfléchie**.`,
       plan: [
-        { label: "Axe 1", detail: "Feuerbach et Marx : la religion peut aliéner la liberté et détourner de l’action." },
-        { label: "Risque", detail: "Une croyance fermée à la critique peut nourrir le fanatisme et la violence." },
-        { label: "Axe 2", detail: "Bergson, Proudhon ou Hegel : elle apaise, moralise et renforce les liens sociaux." },
-        { label: "Réponse", detail: "Il faut redouter ses dérives, non condamner indistinctement toute croyance réfléchie." },
+        { label: "Définir", shortLabel: "Définir", detail: "Redouter : craindre fortement ; la croyance religieuse : la foi en la divinité." },
+        { label: "Axe 1", shortLabel: "Axe 1", detail: "Il faut redouter la foi : l’aliénation (Feuerbach, Marx « l’opium du peuple ») et le fanatisme (Khomeini)." },
+        { label: "Axe 2", shortLabel: "Axe 2", detail: "La religion édifie : réponse à l’angoisse (Bergson), cohésion (Proudhon), nature humaine (Hegel, Pascal, Gabriel Marcel)." },
+        { label: "Réponse", shortLabel: "Réponse", detail: "Redouter les dérives aliénantes et fanatiques, sans condamner indistinctement toute croyance réfléchie." },
       ],
       modelAnswer: "La croyance mérite une vigilance critique lorsqu’elle aliène ou rend violent ; mais vécue dans le respect de la raison et d’autrui, elle peut donner sens, cohésion et exigence morale.",
       questions: [
         q("Quel problème le sujet pose-t-il ?", "La croyance religieuse est-elle nuisible ou peut-elle édifier l’homme ?", "Dieu est-il un objet mathématique ?", "La nation est-elle un rite ?", "La mémoire est-elle sacrée ?"),
         q("Quelle référence soutient la fonction consolatrice ?", "Bergson : la religion oppose à la mort l’image d’une continuation", "Marx : la religion est l’opium du peuple", "Feuerbach : Dieu est une aliénation", "Sartre : l’enfer, c’est les autres"),
         q("Quelle conclusion est la plus équilibrée ?", "Craindre les dérives aliénantes sans nier les fonctions morales et existentielles de la foi", "Condamner toute religion sans distinction", "Accepter toute croyance sans examen", "Éviter toute position argumentée"),
+      ],
+      extraQuestions: [
+        { prompt: "Quelle formule de Marx illustre l’Axe 1 ?", options: ["« La religion est l’opium du peuple »", "« La religion est la vraie libération de l’homme »", "« L’homme est le seul animal religieux »", "« Gagez qu’il est, sans hésiter »"], correctIndex: 0, explanation: "Marx dénonce une religion qui console au lieu de transformer la société.", sourceLabel: "Situation d’évaluation – Axe 1", points: 2 },
+        { prompt: "Que soutient Hegel sur l’homme et la religion (Axe 2) ?", options: ["« L’homme, seul être doué de raison, est aussi le seul animal religieux »", "La religion est l’opium du peuple", "La théologie est une anthropologie", "La religion prive l’homme de liberté"], correctIndex: 0, explanation: "La religion est présentée comme inhérente à la nature humaine.", sourceLabel: "Situation d’évaluation – Axe 2", points: 3 },
+        { prompt: "En quoi consiste le pari de Pascal ?", options: ["Parier que Dieu est : on gagne tout, on ne perd rien", "Prouver mathématiquement Dieu", "Nier l’existence de Dieu", "Réduire la religion à la morale"], correctIndex: 0, explanation: "« Si vous gagnez, vous gagnez tout ; si vous perdez, vous ne perdez rien » (Pensées).", sourceLabel: "Activité d’application 2", points: 2 },
       ],
     },
   },
