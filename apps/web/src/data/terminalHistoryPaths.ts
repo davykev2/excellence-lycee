@@ -580,12 +580,89 @@ La disparition de l’URSS consacre l’avènement d’une **« hyperpuissance �
         timelineTitle: "Les dimensions de l’hyperpuissance",
         timelineInstruction: "Compare trois leviers complémentaires de l’influence américaine.",
         timeline: [
-          { label: "Hard power", detail: "Puissance militaire, réseau mondial de bases, capacité nucléaire et interventions extérieures." },
-          { label: "Puissance économique", shortLabel: "Économie", detail: "Dollar, marchés financiers, firmes multinationales et poids dans les institutions financières." },
-          { label: "Soft power", detail: "Cinéma, musique, universités, innovations, médias et modèles de consommation." },
+          { label: "Le hard power militaire", shortLabel: "Le hard power militaire", detail: "Première puissance nucléaire, armée la mieux équipée, réseau mondial de bases et commandement de l’OTAN." },
+          { label: "La puissance économique et technologique", shortLabel: "L’économie", detail: "Dollar, Wall Street, institutions financières, firmes multinationales et technologies de pointe." },
+          { label: "Le soft power culturel et politique", shortLabel: "le soft power", detail: "Hollywood, american way of life, siège permanent au Conseil de sécurité et suprématie diplomatique." },
         ],
         observation: "Une puissance mondiale combine contrainte, richesse, innovation et capacité d’attraction.",
         check: { prompt: "Quel terme décrit l’influence culturelle et l’attraction d’un pays ?", options: ["Soft power", "Blocus", "Apartheid", "Collectivisation"], correctIndex: 0, explanation: "Le soft power agit par l’attraction culturelle, les valeurs et l’image." },
+        parts: [
+          {
+            bodyMarkdown: String.raw`## Pourquoi parle-t-on d’« hyperpuissance » ?
+
+La disparition de l’URSS en 1991, en tant que **modèle idéologique conquérant**, laisse les États-Unis seule superpuissance sur la scène internationale. Mais ils vont plus loin : ils renforcent ce statut **dans tous les domaines à la fois**, à l’échelle planétaire. D’où le terme d’**hyperpuissance**.
+
+Leur objectif déclaré est de « **façonner et déterminer les structures de la politique économique globale** », donc de « choisir et modeler les structures au sein desquelles les autres pays, leurs institutions politiques, leurs entreprises et leurs professionnels doivent opérer ».
+
+> **Superpuissance ou hyperpuissance ?** Une **superpuissance** domine un ou deux domaines et a un rival — c’était le cas des USA et de l’URSS pendant la guerre froide. Une **hyperpuissance** domine **simultanément** le militaire, l’économique, le technologique, le culturel et le politique, **sans rival**. C’est la nuance que le cours te demande de maîtriser.
+
+## Le hard power militaire
+
+| Domaine | Éléments de puissance |
+|---|---|
+| **Nucléaire** | première puissance nucléaire mondiale |
+| **Équipement** | armée la mieux équipée au monde |
+| **Budget** | Pentagone : **740 milliards de dollars** en 2021 |
+| **Déploiement** | présence militaire, maritime et terrestre mondiale |
+| **Renseignement** | surveillance militaire globale |
+| **Alliances** | **commandement de l’OTAN** |
+| **Interventions** | engagement dans l’essentiel des grands conflits du monde |
+
+Ce réseau de bases réparties sur tous les continents, appuyé par une flotte imposante et une aviation très performante, fait des États-Unis **le seul État capable d’intervenir n’importe où et n’importe quand**.
+
+> **Erreur fréquente.** Le hard power **ne se réduit pas au nombre de soldats** : il combine l’arme nucléaire, la capacité de projection (bases, flotte, aviation) et le commandement d’alliances. C’est cette combinaison qui rend la puissance américaine unique.`,
+            extraQuestions: [
+              { prompt: "Quel était le budget du Pentagone en 2021 ?", options: ["740 milliards de dollars", "74 milliards de dollars", "295 millions de dollars", "23 milliards de dollars"], correctIndex: 0, explanation: "Ce budget, sans équivalent au monde, illustre le hard power américain.", sourceLabel: "Cours I-1, plan militaire", points: 2 },
+              { prompt: "Classe : « Armée la mieux équipée au monde » relève de quelle puissance ?", options: ["Puissance militaire", "Puissance économique", "Puissance politique", "Puissance culturelle"], correctIndex: 0, explanation: "Avec le budget du Pentagone et la présence mondiale, c’est un marqueur militaire.", sourceLabel: "Activité d’application 3", points: 1 },
+              { prompt: "Quelle alliance militaire les États-Unis commandent-ils ?", options: ["L’OTAN", "Le Pacte de Varsovie", "Les BRICS", "L’OCS"], correctIndex: 0, explanation: "Le commandement de l’OTAN prolonge leur influence militaire en Europe.", sourceLabel: "Cours I-1, plan militaire", points: 1 },
+              { prompt: "Les États-Unis sont le seul État au monde capable d’intervenir n’importe où et n’importe quand.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Bases mondiales, flotte imposante et aviation performante rendent cette projection possible.", sourceLabel: "Activité d’application 1 — texte à trous", points: 2 },
+            ],
+          },
+          {
+            bodyMarkdown: String.raw`## La puissance économique
+
+| Domaine | Éléments de puissance |
+|---|---|
+| **Rang** | première puissance économique mondiale |
+| **Mondialisation** | premier pôle des échanges internationaux |
+| **Monnaie** | **suprématie du dollar** |
+| **Finance** | puissance de **Wall Street**, la place boursière de la planète |
+| **Institutions** | siège du **FMI** et de la **Banque mondiale** |
+| **Entreprises** | domination des firmes multinationales du numérique |
+
+Le marché intérieur américain compte environ **295 millions de consommateurs** au pouvoir d’achat élevé, tout en restant largement ouvert sur l’extérieur. Sur les **500 premières multinationales** du monde, **239 sont américaines**.
+
+## La puissance technologique
+
+Première puissance en technologies de pointe — informatique, télécommunications, aérospatiale, biochimie, robotique — les États-Unis pratiquent aussi un **cyberespionnage à l’échelle planétaire** via leurs services de renseignement, dont la **NSA** (National Security Agency).
+
+## Le soft power culturel et politique
+
+Le **soft power** est la capacité d’un pays à obtenir ce qu’il veut par **l’attraction et la séduction**, plutôt que par la contrainte.
+
+- **Culturel** : Hollywood diffuse l’« **american way of life** » par le cinéma, la musique, la télévision, la mode et le fast-food (Coca-Cola, McDonald’s, Pepsi).
+- **Politique** : membre permanent du Conseil de sécurité de l’ONU, suprématie diplomatique, fortes pressions dans les relations internationales, capacité à orienter la politique mondiale selon leurs intérêts.
+
+## Le regard d’un analyste
+
+> « Des décombres de la guerre froide, les États-Unis émergent seuls vainqueurs. Plus rien ne s’oppose à la diffusion universelle du modèle américain, désormais sans rival. **Cette expansion revêt les formes douces de l’hégémonie et non celles brutales de l’expédition. La séduction des esprits remplace efficacement le contrôle des territoires.** […] Nul n’est dupe de cette forme d’**impérialisme doux**, que la présidence de Bill Clinton (1993-2001) […] a incarné avec brio. »
+>
+> — Jean Musitelli, « 1991-2001 : permanences et changements », *Revue internationale et stratégique*, 2001
+
+> **Précision.** La décennie unipolaire 1991-2001 correspond très majoritairement à la présidence de **Bill Clinton (1993-2001)**, comme l’indique ce document. George W. Bush n’entre en fonction qu’en **janvier 2001** : attribuer toute la période à sa présidence est une erreur que l’activité d’application 2 du cours cherche justement à faire repérer.
+
+> **Astuce mémoire de Davy.** Retiens les **cinq plans** de l’hyperpuissance dans l’ordre : **M-É-T-C-P** — Militaire, Économique, Technologique, Culturel, Politique. Et associe à chacun un symbole : le Pentagone, le dollar, la NSA, Hollywood, le Conseil de sécurité.`,
+            extraQuestions: [
+              { prompt: "Sur les 500 premières multinationales du monde, combien sont américaines ?", options: ["239", "27", "500", "115"], correctIndex: 0, explanation: "Près de la moitié : c’est un marqueur fort de la domination économique.", sourceLabel: "Activité d’application 1 — texte à trous", points: 2 },
+              { prompt: "Quelle place boursière domine la finance mondiale ?", options: ["Wall Street", "La City", "La Bourse de Shanghai", "Le Nikkei"], correctIndex: 0, explanation: "Wall Street est présentée par le cours comme « la place boursière de la planète ».", sourceLabel: "Cours I-1, plan économique", points: 1 },
+              { prompt: "Quel service de renseignement américain pratique le cyberespionnage à l’échelle planétaire ?", options: ["La NSA", "Le FMI", "L’OCS", "La CIA uniquement"], correctIndex: 0, explanation: "La National Security Agency est citée par le cours au titre du plan technologique.", sourceLabel: "Cours I-1, plan technologique", points: 1 },
+              { prompt: "Classe : « Suprématie du dollar dans l’économie mondiale » relève de quelle puissance ?", options: ["Puissance économique", "Puissance militaire", "Puissance politique", "Puissance technologique"], correctIndex: 0, explanation: "Avec Wall Street et les multinationales, c’est un marqueur économique.", sourceLabel: "Activité d’application 3", points: 1 },
+              { prompt: "Classe : « Membre permanent du Conseil de sécurité de l’ONU » relève de quelle puissance ?", options: ["Puissance politique", "Puissance économique", "Puissance militaire", "Puissance culturelle"], correctIndex: 0, explanation: "Le siège permanent et le droit de veto sont des leviers politiques.", sourceLabel: "Activité d’application 3", points: 1 },
+              { prompt: "Que désigne l’expression « american way of life » ?", options: ["Le mode de vie américain diffusé par le cinéma, la musique et la consommation", "Une doctrine militaire", "Un accord commercial", "Une alliance politique"], correctIndex: 0, explanation: "C’est le cœur du soft power culturel : Hollywood, la mode, le fast-food.", sourceLabel: "Cours I-1, plan culturel", points: 2 },
+              { prompt: "Selon Jean Musitelli, l’expansion du modèle américain prend surtout la forme :", options: ["D’un « impérialisme doux » fondé sur la séduction des esprits", "D’une conquête militaire des territoires", "D’un repli isolationniste", "D’une alliance avec la Russie"], correctIndex: 0, explanation: "« La séduction des esprits remplace efficacement le contrôle des territoires. »", sourceLabel: "Document 2 — Jean Musitelli", points: 2 },
+            ],
+          },
+        ],
         distractors: ["Après 1991, les États-Unis perdent toute influence mondiale.", "L’hyperpuissance est uniquement une puissance militaire.", "Le dollar n’a aucun rôle international."],
       },
       {
@@ -594,6 +671,29 @@ La disparition de l’URSS consacre l’avènement d’une **« hyperpuissance �
         summary: "Situer les interventions américaines des années 1990 et discuter l’unilatéralisme.",
         conceptTitle: "Intervenir pour façonner l’ordre international",
         explanation: "Dans les années 1990, les États-Unis conduisent ou soutiennent des interventions au Koweït, en Somalie, en Haïti, en Bosnie et au Kosovo. Certaines reçoivent l’appui de l’ONU ou de l’OTAN, d’autres alimentent l’antiaméricanisme.",
+        bodyMarkdown: String.raw`## Le « nation-building »
+
+À partir de **1991**, les États-Unis renforcent leur présence militaire sur le globe. Face à l’instabilité sociopolitique de plusieurs régions, ils s’engagent — sous une couverture présentée comme **humanitaire** — dans des opérations de **nation-building** (construction des nations).
+
+Ils s’érigent ainsi en **gendarme du monde**, avec des interventions tantôt **unilatérales**, tantôt menées avec l’accord de l’**ONU** ou sous la bannière de l’**OTAN**. Les motifs invoqués sont le rétablissement des principes démocratiques bafoués, l’assistance humanitaire ou la stabilité géopolitique régionale.
+
+## Les cinq interventions à connaître
+
+| Année | Opération | Lieu | Objectif affiché |
+|---|---|---|---|
+| **1991** | *Tempête du désert* | **Koweït** occupé par l’Irak | conduite de la guerre du Golfe, à la suite d’une requête du Koweït à l’ONU |
+| **1993-1994** | *Restore Hope* | **Somalie** | soutenir les opérations humanitaires de l’ONU et éliminer le général Mohamed Aïdid |
+| **1994** | *Uphold Democracy* | **Haïti** | installer le président élu Jean-Bertrand Aristide |
+| **1995** | intervention de l’**OTAN** | **Bosnie-Herzégovine** (ex-Yougoslavie) | met fin au conflit par les **accords de Dayton**, le 21 novembre 1995 |
+| **1999** | intervention de l’**OTAN** | **Kosovo**, contre la Serbie | guerre du Kosovo |
+
+## La contrepartie : l’antiaméricanisme
+
+Ces interventions répétées nourrissent un **sentiment d’antiaméricanisme** qui se crée et se renforce à travers le monde, **surtout dans les États arabes du Proche et du Moyen-Orient**. C’est ce ressentiment qui prépare le terrain du chapitre suivant : les attentats du 11 septembre 2001.
+
+> **Erreur fréquente.** Toutes les interventions ne se valent pas juridiquement. Certaines s’appuient sur une **requête et un mandat de l’ONU** (Koweït, Somalie), d’autres passent par l’**OTAN** (Bosnie, Kosovo), d’autres encore seront purement **unilatérales** (Afghanistan 2001, Irak 2003). À l’examen, précise toujours **sous quel mandat** l’intervention a eu lieu : c’est ce qui fonde ou fragilise sa légitimité.
+
+> **Astuce mémoire de Davy.** Retiens les cinq opérations par leur ordre chronologique et leur continent : **Golfe (1991, Asie) → Somalie (1993, Afrique) → Haïti (1994, Amérique) → Bosnie (1995, Europe) → Kosovo (1999, Europe)**. Quatre continents en huit ans : c’est cela, être « gendarme du monde ».`,
         keyPoint: "Le rôle de gendarme du monde repose sur la capacité américaine d’intervenir loin de son territoire et d’orienter le règlement des crises.",
         example: "L’opération Tempête du désert de 1991 libère le Koweït occupé par l’Irak dans le cadre d’une coalition autorisée par l’ONU.",
         timelineTitle: "Les interventions des années 1990",
@@ -605,6 +705,15 @@ La disparition de l’URSS consacre l’avènement d’une **« hyperpuissance �
         ],
         observation: "La légitimité d’une intervention dépend notamment de son mandat, de ses objectifs et de ses conséquences.",
         check: { prompt: "Quelle opération est liée à la guerre du Golfe de 1991 ?", options: ["Tempête du désert", "Restore Hope", "Uphold Democracy", "Perestroïka"], correctIndex: 0, explanation: "Tempête du désert est l’opération militaire menée pour libérer le Koweït." },
+        extraQuestions: [
+          { prompt: "À quelle année correspond l’opération Restore Hope ?", options: ["1993-1994", "1991", "1994", "1999"], correctIndex: 0, explanation: "Intervention en Somalie pour soutenir l’action humanitaire de l’ONU.", sourceLabel: "Activité d’application 1", points: 1 },
+          { prompt: "Quelle opération de 1994 visait à installer le président élu Jean-Bertrand Aristide ?", options: ["Uphold Democracy, en Haïti", "Restore Hope, en Somalie", "Tempête du désert, au Koweït", "L’intervention au Kosovo"], correctIndex: 0, explanation: "Haïti, 1994 : rétablir le président démocratiquement élu.", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "Quels accords mettent fin au conflit de Bosnie-Herzégovine le 21 novembre 1995 ?", options: ["Les accords de Dayton", "Les accords de Genève", "Les accords de Paris", "Les accords de Moscou"], correctIndex: 0, explanation: "Signés aux États-Unis, ils closent l’intervention de l’OTAN en Bosnie.", sourceLabel: "Cours I-2", points: 2 },
+          { prompt: "Contre quel pays l’OTAN intervient-elle en 1999 dans la guerre du Kosovo ?", options: ["La Serbie", "L’Irak", "La Somalie", "La Russie"], correctIndex: 0, explanation: "L’intervention de 1999 vise la Serbie.", sourceLabel: "Activité d’application 1", points: 1 },
+          { prompt: "Que signifie l’expression « nation-building » ?", options: ["Des opérations de construction des nations", "Un accord commercial", "Une doctrine nucléaire", "Une alliance militaire"], correctIndex: 0, explanation: "C’est le cadre présenté comme humanitaire des interventions américaines.", sourceLabel: "Cours I-2", points: 2 },
+          { prompt: "Le rôle de gendarme du monde signifie que les USA ont décidé de régler les problèmes du monde en s’appuyant sur leur hyperpuissance.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "C’est exactement la définition retenue par le cours.", sourceLabel: "Activité d’application 2, affirmation 5", points: 1 },
+          { prompt: "Dans quelle région le sentiment d’antiaméricanisme se renforce-t-il surtout ?", options: ["Les États arabes du Proche et du Moyen-Orient", "L’Amérique du Nord", "L’Europe du Nord", "L’Océanie"], correctIndex: 0, explanation: "Ce ressentiment prépare le contexte des attentats du 11 septembre 2001.", sourceLabel: "Cours I-2", points: 2 },
+        ],
         distractors: ["Les États-Unis n’interviennent jamais hors de leur territoire après 1991.", "Toutes les interventions des années 1990 se déroulent en Amérique du Nord.", "Le rôle de gendarme ne comporte aucune dimension militaire."],
       },
       {
@@ -613,6 +722,65 @@ La disparition de l’URSS consacre l’avènement d’une **« hyperpuissance �
         summary: "Relier le 11 septembre 2001, l’affaiblissement américain et l’affirmation de nouveaux pôles.",
         conceptTitle: "La puissance se redistribue entre plusieurs centres",
         explanation: "Les attentats du 11 septembre et les guerres d’Afghanistan et d’Irak révèlent les limites du leadership américain. L’Union européenne, la Chine, la Russie, l’Inde, le Brésil et des puissances régionales affirment davantage leurs intérêts.",
+        bodyMarkdown: String.raw`## Le 11 septembre 2001
+
+Les attentats sont orchestrés par **Oussama Ben Laden**, dirigeant de l’organisation **Al-Qaïda**. Quatre avions sont détournés peu après leur décollage :
+
+| Cible | Fait |
+|---|---|
+| **World Trade Center** (New York) | deux avions percutent les tours jumelles, qui s’effondrent en quelques heures — **plus de 3 000 morts** |
+| **Pentagone** (Washington) | un avion s’abat sur le siège du ministère de la Défense |
+| **Pennsylvanie** | un quatrième avion s’écrase dans une forêt |
+
+> **Précision.** L’activité d’application 2 du document écrit « le 11 septembre **2011** » : il faut évidemment lire **2001**.
+
+## La riposte américaine
+
+En représailles, les États-Unis redéfinissent leur politique de *nation-building* et s’engagent dans la **guerre contre le terrorisme international** :
+
+- **2001 — Afghanistan** : intervention militaire massive contre le régime des **Talibans**, où serait réfugié le chef d’Al-Qaïda. Elle est déclenchée **sans l’aval de l’ONU**.
+- Ils mènent une « croisade » démocratique contre les « **États voyous** » (*Rogue States*) formant l’« **axe du mal** » : Iran, Irak, Syrie, Corée du Nord.
+- **2003 — Irak** : **guerre préventive** contre le régime de Saddam Hussein, soupçonné de fabriquer des **armes de destruction massive**.
+
+## Pourquoi le leadership s’affaiblit-il ?
+
+Six facteurs convergent :
+
+1. les attentats du 11 septembre eux-mêmes, qui brisent le sentiment d’invulnérabilité ;
+2. le **contrôle des libertés civiles** sous menace terroriste permanente — alors qu’elles fondent la démocratie américaine ;
+3. l’**enlisement** des guerres d’Afghanistan et d’Irak ;
+4. les **mensonges** ayant justifié la guerre d’Irak (les armes de destruction massive n’ont jamais été trouvées) ;
+5. les **crises financières** récurrentes ;
+6. le **refus de l’unilatéralisme** américain par certains alliés.
+
+## Les nouveaux pôles d’influence
+
+### L’Union européenne
+
+Mise en place en **1992 par le traité de Maastricht**, elle compte aujourd’hui **27 États**. Premier espace économique mondial, elle pèse par son *soft power* sur les questions économiques, environnementales, les droits de l’homme et les principes démocratiques.
+
+**Sa limite** : malgré la **PESD** (Politique européenne de sécurité et de défense), sa défense extérieure reste **fortement dépendante de l’OTAN**, largement contrôlée par les États-Unis. Sur le continent africain, les pays de l’UE n’ont pas toujours d’approche commune.
+
+> **Précision.** Le document parle de la « sortie de l’Angleterre en 2020 » : c’est le **Royaume-Uni** dans son ensemble qui a quitté l’UE (*Brexit*), et non la seule Angleterre.
+
+### Les BRICS
+
+| Pays | Atouts principaux |
+|---|---|
+| **Russie** | héritière de l’URSS ; **2ᵉ exportateur mondial d’armement** (23 % du marché) ; **1ᵉʳ exportateur d’énergie** (~30 % des réserves mondiales de gaz) ; priorités : intérêts économiques et maintien des ex-républiques soviétiques dans son orbite (Géorgie 2008, Ukraine 2014) |
+| **Chine** | **2ᵉ puissance économique mondiale** ; puissance par le contrôle stratégique des mers proches et la pénétration de nouveaux marchés, notamment africain (*soft power*) ; à l’origine de l’**ASEAN Plus Trois** en 1997 |
+| **Inde** | taille démographique, dynamisme économique et technologique, investissements militaires et spatiaux croissants |
+| **Brésil** | puissance **diplomatique** plutôt que militaire (voisinage américain) : commandement de la **MINUSTAH** en 2004, prédominance du **MERCOSUR** créé en 1991 |
+
+Russie et Chine coopèrent depuis **2001** au sein de l’**Organisation de coopération de Shanghai (OCS)**, avec le Kazakhstan, le Kirghizistan, le Tadjikistan et l’Ouzbékistan.
+
+### Les puissances émergentes du Moyen-Orient
+
+**Israël, l’Iran, la Turquie et l’Arabie Saoudite** aspirent à un leadership régional. Les oppositions religieuses (judaïsme, islam chiite iranien, islam sunnite saoudien), la montée de l’intégrisme et les enjeux territoriaux, sécuritaires et pétroliers font du Moyen-Orient **la région la plus instable de la planète**.
+
+> **Erreur fréquente.** Multipolaire **ne veut pas dire bipolaire**. Le monde bipolaire (1947-1991) opposait **deux** blocs ; le monde multipolaire compte **plusieurs centres de domination**, aux moyens et à l’influence inégaux. Et attention : un monde multipolaire n’est **pas** un monde équilibré.
+
+> **Astuce mémoire de Davy.** Trois dates structurent toute la leçon : **1991** (fin de l’URSS → monde unipolaire), **2001** (11 septembre → contestation), **depuis 2001** (émergence des pôles → monde multipolaire). Si tu retiens ces trois bornes, tu tiens le plan complet.`,
         keyPoint: "Un monde multipolaire se caractérise par plusieurs pôles capables d’influencer l’économie, la sécurité et les décisions internationales.",
         example: "Les BRICS contestent l’ancien ordre par leur poids démographique, économique, énergétique, technologique ou diplomatique.",
         timelineTitle: "Du choc de 2001 à la multipolarité",
@@ -624,6 +792,20 @@ La disparition de l’URSS consacre l’avènement d’une **« hyperpuissance �
         ],
         observation: "Multipolaire ne signifie pas équilibré : les pôles n’ont ni les mêmes moyens ni la même influence.",
         check: { prompt: "Quel événement fragilise fortement le sentiment d’invulnérabilité américain en 2001 ?", options: ["Les attentats du 11 septembre", "La conférence de Yalta", "La création de l’ONU", "La chute de Rome"], correctIndex: 0, explanation: "Les attentats du 11 septembre 2001 ouvrent une nouvelle phase des relations internationales." },
+        extraQuestions: [
+          { prompt: "Le 11 septembre 2001 marque :", options: ["Les attaques terroristes subies par les États-Unis", "L’intervention américaine en Somalie", "La chute d’Al-Qaïda", "La fin de la guerre froide"], correctIndex: 0, explanation: "Quatre avions détournés frappent le World Trade Center, le Pentagone et s’écrasent en Pennsylvanie.", sourceLabel: "Activité d’application 2", points: 1 },
+          { prompt: "Qui dirige l’organisation Al-Qaïda, commanditaire des attentats ?", options: ["Oussama Ben Laden", "Saddam Hussein", "Mohamed Aïdid", "Jean-Bertrand Aristide"], correctIndex: 0, explanation: "Les États-Unis interviennent en Afghanistan en 2001, où il serait réfugié.", sourceLabel: "Cours II-1", points: 1 },
+          { prompt: "Quels pays forment l’« axe du mal » selon les États-Unis ?", options: ["Iran, Irak, Syrie, Corée du Nord", "Chine, Russie, Inde, Brésil", "France, Allemagne, Italie, Espagne", "Somalie, Haïti, Bosnie, Kosovo"], correctIndex: 0, explanation: "Ces « États voyous » sont soupçonnés de soutenir le terrorisme international.", sourceLabel: "Cours II-1", points: 2 },
+          { prompt: "Quel motif est invoqué pour la guerre préventive contre l’Irak en 2003 ?", options: ["La fabrication supposée d’armes de destruction massive", "L’occupation du Koweït", "Une requête de l’ONU", "Un conflit frontalier avec l’Iran"], correctIndex: 0, explanation: "Ces armes n’ont jamais été trouvées : ces mensonges affaibliront le leadership américain.", sourceLabel: "Cours II-1", points: 2 },
+          { prompt: "L’intervention américaine de 2001 en Afghanistan a-t-elle reçu l’aval de l’ONU ?", options: ["Non, elle est déclenchée sans son aval", "Oui, sur mandat du Conseil de sécurité", "Oui, sous bannière de l’OTAN", "Elle n’a pas eu lieu"], correctIndex: 0, explanation: "Cet unilatéralisme sera contesté par plusieurs alliés des États-Unis.", sourceLabel: "Cours II-1", points: 2 },
+          { prompt: "Quel traité de 1992 met en place l’Union européenne ?", options: ["Le traité de Maastricht", "Le traité de Rome", "Le traité de Washington", "Les accords de Dayton"], correctIndex: 0, explanation: "L’UE compte aujourd’hui 27 États après le Brexit.", sourceLabel: "Cours II-2", points: 1 },
+          { prompt: "Le groupe des BRICS comprend :", options: ["Le Brésil, la Russie, l’Inde, la Chine et l’Afrique du Sud", "La Belgique, la Russie, l’Inde, le Canada et la Suède", "Le Brésil, la Russie, l’Indonésie, le Canada et la Slovénie", "Les États-Unis, la Chine, le Japon et l’UE"], correctIndex: 0, explanation: "L’acronyme reprend les initiales des cinq pays émergents.", sourceLabel: "Activité d’application 2", points: 2 },
+          { prompt: "Dans l’ordre mondial multipolaire, quels sont les deux principaux rivaux des États-Unis ?", options: ["La Chine et la Russie", "L’UE et la Russie", "L’Inde et l’UE", "Le Brésil et l’Inde"], correctIndex: 0, explanation: "Ils coopèrent notamment au sein de l’Organisation de coopération de Shanghai depuis 2001.", sourceLabel: "Activité d’application 2", points: 2 },
+          { prompt: "Le monde multipolaire est dominé par :", options: ["Plusieurs centres de domination, et non plus un seul ou deux", "Les pays de la triade", "Les grandes puissances militaires uniquement", "Un seul pôle hégémonique"], correctIndex: 0, explanation: "C’est la définition même de la multipolarité.", sourceLabel: "Activité d’application 2", points: 2 },
+          { prompt: "Quelle est la principale limite de la puissance européenne ?", options: ["Sa défense extérieure dépend fortement de l’OTAN", "Elle n’a aucun poids économique", "Elle ne compte que 5 États", "Elle refuse tout soft power"], correctIndex: 0, explanation: "Malgré la PESD, les interventions européennes restent dans le sillage américain.", sourceLabel: "Cours II-2, Union européenne", points: 2 },
+          { prompt: "Pourquoi le Brésil exprime-t-il sa puissance surtout par la diplomatie ?", options: ["Son voisinage avec la superpuissance américaine limite ses prétentions", "Il n’a pas d’armée", "Il est membre de l’OTAN", "Il est trop petit"], correctIndex: 0, explanation: "D’où la MINUSTAH en 2004 et sa prédominance dans le MERCOSUR.", sourceLabel: "Cours II-2, Brésil", points: 2 },
+          { prompt: "L’unipolarité du monde de la décennie 1990 est née des décombres de la guerre du Vietnam.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Elle naît des décombres de la **guerre froide**, avec l’effondrement de l’URSS en 1991.", sourceLabel: "Activité d’application 2, affirmation 4", points: 2 },
+        ],
         distractors: ["La multipolarité signifie qu’un seul pays dirige le monde.", "Les BRICS sont une alliance militaire créée en 1949.", "La Chine, l’Inde et le Brésil n’ont aucune influence internationale."],
       },
     ],

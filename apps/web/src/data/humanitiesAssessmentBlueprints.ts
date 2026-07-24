@@ -207,6 +207,59 @@ Puis explique pourquoi l’on parle de « ni paix ni guerre » : l’arme nuclé
       title: "Les États-Unis sont-ils encore l’unique hyperpuissance ?",
       scenario: "Un débat oppose ceux qui considèrent les États-Unis comme l’unique hyperpuissance depuis 1991 et ceux qui estiment que les attentats de 2001 et l’essor de nouveaux pôles ont changé l’ordre mondial.",
       modelAnswer: "Les États-Unis conservent une puissance majeure, mais la Chine, l’Union européenne, la Russie et d’autres acteurs limitent désormais leur capacité à organiser seuls le monde.",
+      bodyMarkdown: String.raw`## La situation d’évaluation
+
+> Tu assistes à un débat télévisé sur RTI 1 portant sur les attentats des tours jumelles du World Trade Center, perpétrés le 11 septembre 2001.
+>
+> L’un des débatteurs affirme : « **De 1991 à 2001, les États-Unis étaient la seule hyperpuissance mondiale. Avec ces attentats, les États-Unis voient leur hégémonie contestée et concurrencée, faisant du monde un monde multipolaire après 2001.** »
+
+## Document 1 — L’hégémonie douce
+
+*Jean Musitelli, « 1991-2001 : permanences et changements »,* Revue internationale et stratégique, *2001 :*
+
+> « En 1991, on savait qui avait perdu la guerre froide, mais on ne savait pas encore qui l’avait gagnée. […] **La fin de la guerre froide n’a pas engendré le nouvel ordre mondial annoncé.** La décennie écoulée a consacré la suprématie d’un modèle unique. Des décombres de la guerre froide, les États-Unis émergent seuls vainqueurs. […] Cette expansion revêt les formes douces de l’hégémonie et non celles brutales de l’expédition. **La séduction des esprits remplace efficacement le contrôle des territoires.** […] Voici donc les États-Unis hissés en une décennie au rang d’**hyperpuissance**. »
+
+## Document 2 — L’évolution des PIB cumulés (en milliards de dollars)
+
+| Année | BRICS | États-Unis | Union européenne |
+|---|---|---|---|
+| 2000 | 2 736 | 10 285 | 9 365 |
+| 2010 | 11 800 | 14 964 | 16 947 |
+| 2017 | 18 640 | 19 360 | 17 110 |
+| Prévision 2020 | **23 600** | 21 850 | 16 950 |
+
+*Source : iveris.eu — « Bras de fer entre la coalition occidentale et les BRICS ».*
+
+> **Ce que montre ce tableau.** En 2000, le PIB cumulé des BRICS ne représentait qu’un **quart** de celui des États-Unis. En 2020, il le **dépasse**. C’est l’argument chiffré le plus fort pour démontrer la multipolarité — pense à le citer.
+
+## Comment construire ta réponse
+
+**Consigne 1 — Identifier le problème.** Une phrase : « Il s’agit de… ». Ici, l’évolution de la place des États-Unis dans les relations internationales depuis 1991.
+
+**Consigne 2 — Expliquer « la seule hyperpuissance mondiale ».** Ne te contente pas d’un domaine : montre que la domination est **simultanée sur cinq plans**.
+
+| Plan | Preuve à citer |
+|---|---|
+| **Militaire** | budget du Pentagone, bases mondiales, commandement de l’OTAN |
+| **Économique** | dollar, Wall Street, FMI et Banque mondiale, 239 des 500 premières multinationales |
+| **Technologique** | technologies de pointe, NSA |
+| **Culturel** | Hollywood, *american way of life* |
+| **Politique** | siège permanent au Conseil de sécurité, suprématie diplomatique |
+
+Ajoute la nuance de Musitelli : cette hégémonie est **douce**, elle repose sur la séduction plus que sur la conquête.
+
+**Consigne 3 — Prendre position sur la multipolarité après 2001.** Annonce ton avis, justifie, nuance :
+
+- *Ce qui appuie le débatteur* : le 11 septembre brise l’invulnérabilité américaine ; l’enlisement en Afghanistan et en Irak et les mensonges sur les armes de destruction massive fragilisent leur crédibilité ; les BRICS dépassent le PIB américain vers 2020 ; l’UE, la Chine, la Russie et les puissances du Moyen-Orient s’affirment.
+- *La nuance indispensable* : **multipolaire ne signifie pas que les États-Unis ont disparu**. Ils restent la première puissance militaire, le dollar domine toujours, et la défense européenne dépend encore de l’OTAN. Les pôles sont **inégaux**.
+
+> **Astuce mémoire de Davy.** La meilleure réponse à la consigne 3 est presque toujours **« oui, mais »** : je partage l’avis, car les faits le montrent ; **cependant**, la puissance américaine est relativisée, pas anéantie. Un avis tranché sans nuance perd des points.`,
+      extraQuestions: [
+        { prompt: "Selon le document de Jean Musitelli, quelle forme prend l’expansion du modèle américain ?", options: ["Les formes douces de l’hégémonie, par la séduction des esprits", "La conquête militaire de territoires", "Un repli isolationniste", "Une alliance avec les BRICS"], correctIndex: 0, explanation: "« La séduction des esprits remplace efficacement le contrôle des territoires. »", sourceLabel: "Document 2 — Jean Musitelli", points: 2 },
+        { prompt: "D’après le tableau des PIB cumulés, que se passe-t-il vers 2020 ?", options: ["Le PIB cumulé des BRICS dépasse celui des États-Unis", "Les États-Unis doublent leur avance", "L’UE devient la première économie mondiale", "Les BRICS s’effondrent"], correctIndex: 0, explanation: "23 600 milliards contre 21 850 : c’est l’argument chiffré de la multipolarité.", sourceLabel: "Document 1 — évolution des PIB", points: 2 },
+        { prompt: "En 2000, le PIB cumulé des BRICS représentait environ quelle part de celui des États-Unis ?", options: ["Un quart", "La moitié", "Le double", "Autant"], correctIndex: 0, explanation: "2 736 milliards contre 10 285 : le rattrapage sera spectaculaire en vingt ans.", sourceLabel: "Document 1 — évolution des PIB", points: 2 },
+        { prompt: "Pour la consigne 3, quelle réponse est la mieux construite ?", options: ["Je partage cet avis car les BRICS et l’UE s’affirment ; cependant les États-Unis restent la première puissance militaire", "Je ne suis pas d’accord, sans donner d’argument", "Les États-Unis ont totalement disparu de la scène mondiale", "La question ne peut pas être tranchée"], correctIndex: 0, explanation: "Position claire, justifiée par le cours, puis nuancée : c’est la méthode attendue.", sourceLabel: "Méthode BAC — consigne 3", points: 2 },
+      ],
       questions: [
         question("Quel problème est posé ?", "Le passage d’un monde dominé par les États-Unis à un ordre plus multipolaire", ["La disparition de toute puissance mondiale", "La création de la CEDEAO", "Le relief ivoirien"], "Le sujet interroge l’évolution du rapport de forces mondial depuis 1991.", 1),
         question("Pourquoi parle-t-on d’hyperpuissance américaine dans les années 1990 ?", "Les États-Unis cumulent des capacités économiques, militaires, politiques et culturelles exceptionnelles", ["Ils sont le seul pays membre de l’ONU", "Ils n’ont aucune présence extérieure", "Ils renoncent à toute technologie"], "L’hyperpuissance désigne la combinaison de plusieurs formes de domination.", 2),
