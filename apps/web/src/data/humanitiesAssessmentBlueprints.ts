@@ -274,6 +274,49 @@ Ajoute la nuance de Musitelli : cette hégémonie est **douce**, elle repose sur
       title: "Pourquoi la colonisation portait-elle les germes de sa destruction ?",
       scenario: "Un auteur affirme que la colonisation a elle-même favorisé les conditions de la décolonisation, tandis que des élèves discutent du rôle des mouvements nationalistes et des facteurs extérieurs.",
       modelAnswer: "Les injustices coloniales éveillent les revendications ; l’école, les élites, les syndicats et partis structurent la lutte, renforcée par les guerres mondiales, l’ONU et l’anticolonialisme.",
+      bodyMarkdown: String.raw`## La situation d’évaluation
+
+> Au cours d’une lecture, tu découvres dans un ouvrage sur la décolonisation le passage suivant :
+>
+> « **La colonisation porte en son sein les germes de sa propre destruction. Au plan interne, les partis de masse ont accéléré la décolonisation de l’Afrique.** »
+
+## Document 1 — Les « hommes nouveaux » révélés par la guerre
+
+*S. Berstein et P. Milza,* Histoire du XXᵉ siècle, *1993 :*
+
+> « Les vicissitudes de la guerre ont fait perdre à l’Europe le **capital de crainte** que sa force avait amassé auprès des peuples coloniaux. […] L’intégration de l’Afrique noire dans l’économie de guerre européenne se solde par d’importantes mutations économiques et sociales. […] Partout des **élites nouvelles** se constituent. […] Aussi la guerre révèle-t-elle des “hommes nouveaux” : **Nkrumah** en Côte-de-l’Or, **Senghor** au Sénégal, **Houphouët-Boigny** en Côte d’Ivoire. »
+
+## Document 2 — La position américaine
+
+*John Foster Dulles, secrétaire d’État américain, Cleveland, 16 novembre 1953 :*
+
+> « Nous n’avons pas oublié que nous fûmes la **première colonie à arracher l’indépendance**. Et nous n’avons donné de chèque en blanc à aucune puissance coloniale. […] La transition normale du statut colonial à l’autonomie doit être menée à une complète réalisation. » *(Il précise toutefois craindre que « le communisme international ne détourne le nationalisme à ses propres fins ».)*
+
+## Comment construire ta réponse
+
+**Consigne 1 — Identifier le problème.** « Il s’agit de… » : les causes et les acteurs de la décolonisation de l’Afrique.
+
+**Consigne 2 — Expliquer « la colonisation porte les germes de sa propre destruction ».** Montre que le système colonial a **lui-même** créé ses fossoyeurs :
+
+| Ce que la colonisation a produit | L’effet retourné contre elle |
+|---|---|
+| des **écoles** et des **élites** instruites | elles réclament liberté et égalité |
+| des **cultures d’exportation** | une bourgeoisie locale, moteur nationaliste |
+| des **injustices** (travail forcé, impôts, discriminations) | l’unité dans la révolte |
+| l’**enrôlement** dans les deux guerres | la démystification de l’homme blanc |
+
+**Consigne 3 — Prendre position sur le rôle des partis de masse.** Annonce ton avis, justifie, nuance :
+
+- *Ce qui appuie l’affirmation* : le PDCI-RDA, le CPP, le FLN mobilisent les foules par meetings, grèves, boycotts et négociations, et arrachent les réformes de 1946, la Loi-Cadre de 1956, puis les indépendances.
+- *La nuance indispensable* : les partis de masse **ne sont pas seuls**. Les facteurs **externes** (affaiblissement de l’Europe, anticolonialisme des deux Grands, ONU, Bandung) et les autres formes de lutte (syndicats, mouvements religieux et culturels) ont aussi joué.
+
+> **Astuce mémoire de Davy.** Pour la consigne 3, le meilleur réflexe est **« oui, mais pas seuls »** : les partis de masse ont bien accéléré la décolonisation, **cependant** ils s’inscrivent dans un faisceau de facteurs internes et externes. Un avis nuancé et documenté rapporte tous les points.`,
+      extraQuestions: [
+        { prompt: "Selon Berstein et Milza, qu’a fait perdre la guerre à l’Europe auprès des peuples coloniaux ?", options: ["Le « capital de crainte » que sa force avait amassé", "Ses colonies d’Asie uniquement", "Son avance technologique définitive", "Sa langue"], correctIndex: 0, explanation: "La démystification de la puissance européenne nourrit le nationalisme.", sourceLabel: "Document 1 — Berstein et Milza", points: 2 },
+        { prompt: "Quels « hommes nouveaux » le document 1 cite-t-il ?", options: ["Nkrumah, Senghor et Houphouët-Boigny", "Truman, Staline et Churchill", "Harris, Kimbangu et Césaire", "Dulles, Clinton et Bush"], correctIndex: 0, explanation: "Trois grandes figures révélées par la période de guerre.", sourceLabel: "Document 1 — Berstein et Milza", points: 2 },
+        { prompt: "Dans le document 2, quel argument Dulles avance-t-il en faveur de la décolonisation ?", options: ["Les États-Unis furent la première colonie à arracher l’indépendance", "L’Europe doit garder ses colonies", "Le communisme doit diriger l’Afrique", "La colonisation doit être éternelle"], correctIndex: 0, explanation: "Il invoque le passé colonial américain, tout en craignant le communisme.", sourceLabel: "Document 2 — John Foster Dulles", points: 2 },
+        { prompt: "Pour la consigne 3, quelle réponse est la mieux construite ?", options: ["Oui, les partis de masse ont accéléré la décolonisation ; cependant les facteurs externes et les autres formes de lutte ont aussi joué", "Non, sans aucun argument", "Les partis n’ont eu aucun rôle", "La question ne peut pas être tranchée"], correctIndex: 0, explanation: "Position claire, justifiée, puis nuancée : c’est la méthode attendue.", sourceLabel: "Méthode BAC — consigne 3", points: 2 },
+      ],
       questions: [
         question("Quel thème historique est abordé ?", "Les causes et les formes de la montée des nationalismes africains", ["La croissance sud-coréenne", "Les accords UE-ACP", "La crise de Cuba"], "La situation cherche à expliquer le réveil nationaliste et la décolonisation.", 1),
         question("Comment la colonisation favorise-t-elle paradoxalement le nationalisme ?", "Les discriminations et l’exploitation suscitent des revendications organisées", ["Elle accorde immédiatement toutes les indépendances", "Elle supprime toute élite instruite", "Elle interdit toute conscience collective"], "Les injustices du système colonial deviennent une cause majeure de contestation.", 2),

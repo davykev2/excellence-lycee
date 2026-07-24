@@ -825,6 +825,37 @@ Russie et Chine coopèrent depuis **2001** au sein de l’**Organisation de coop
         summary: "Distinguer facteurs externes et facteurs internes de l’éveil nationaliste.",
         conceptTitle: "Un contexte international et colonial favorable à l’émancipation",
         explanation: "L’affaiblissement de l’Europe, l’anticolonialisme américain et soviétique, l’ONU et Bandung soutiennent les revendications. À l’intérieur, école, élites, bourgeoisies locales, anciens combattants et contraintes coloniales développent la conscience nationale.",
+        bodyMarkdown: String.raw`## Qu’est-ce qu’un mouvement nationaliste ?
+
+Un **mouvement nationaliste** est la manifestation de la **prise de conscience des peuples colonisés** contre la domination des puissances impérialistes européennes. À la fin de la Seconde Guerre mondiale, ces mouvements naissent et se **radicalisent** progressivement, particulièrement en Afrique.
+
+Leurs facteurs se répartissent en deux familles : **exogènes** (venus de l’extérieur de la colonie) et **endogènes** (nés de sa propre société).
+
+## Les facteurs externes (exogènes)
+
+| Facteur | Explication |
+|---|---|
+| **Anticolonialisme des États-Unis** | anciens colonisés hostiles au colonialisme ; l’impérialisme européen freine leur propre expansion |
+| **Anticolonialisme de l’URSS** | le marxisme prône l’égalité des hommes et refuse l’asservissement d’un peuple par un autre |
+| **Affaiblissement des métropoles** | l’Europe est en ruine après 1945 : les colonisés saisissent l’occasion |
+| **La charte de l’ONU** | son article 1ᵉʳ proclame le droit des peuples à **disposer d’eux-mêmes** — une contradiction flagrante avec la colonisation |
+| **Le mouvement des non-alignés** | depuis la **conférence de Bandung (avril 1955)**, les pays indépendants condamnent la politique coloniale |
+
+## Les facteurs internes (endogènes)
+
+| Facteur | Explication |
+|---|---|
+| **L’école et les élites** | instruites dans l’idéologie occidentale, les nouvelles élites cultivent justice, liberté et égalité, et revendiquent l’autonomie |
+| **Les bourgeoisies locales** | les cultures d’exportation (café, cacao) créent une bourgeoisie agricole ; s’y ajoutent les bourgeoisies administrative et commerciale |
+| **Les bouleversements sociaux** | croissance démographique, exode rural, urbanisation et chômage urbain radicalisent les sentiments |
+| **Les contraintes coloniales** | travaux forcés, corvées, portage, impôts, recrutements militaires, discriminations, expropriations, aliénation culturelle |
+| **L’impact des deux guerres** | les colonies ont fourni troupes et vivres ; les promesses de liberté non tenues, et le retour des anciens combattants, **démystifient l’homme blanc** |
+
+> **La formule à retenir.** « Le système colonial portait en lui-même les germes de sa propre destruction. » En instruisant des élites et en imposant des injustices, la colonisation a **elle-même** créé les conditions de la contestation. C’est le cœur de plusieurs situations d’évaluation du cours.
+
+> **Erreur fréquente.** Ne confonds pas exogène et endogène. L’**anticolonialisme américain**, l’**ONU** et la **Seconde Guerre mondiale** sont **externes** ; les **élites**, la **bourgeoisie agricole** et les **frustrations coloniales** sont **internes**. L’activité d’application 1 du cours porte exactement sur ce tri.
+
+> **Astuce mémoire de Davy.** Pour les facteurs externes, retiens le sigle **A-A-O-B** : **A**mérique et URSS anticolonialistes, **A**ffaiblissement de l’Europe, **O**NU, **B**andung. Tout le reste — école, bourgeoisie, guerres, frustrations — vient de l’intérieur.`,
         keyPoint: "La montée des nationalismes résulte de la rencontre entre un contexte international favorable et des transformations internes aux colonies.",
         example: "Les promesses non tenues après les guerres et les travaux forcés renforcent la radicalisation des anciens combattants et des populations.",
         timelineTitle: "Classer les facteurs",
@@ -836,6 +867,15 @@ Russie et Chine coopèrent depuis **2001** au sein de l’**Organisation de coop
         ],
         observation: "Un facteur exogène vient de l’extérieur de la colonie ; un facteur endogène naît de sa propre société.",
         check: { prompt: "Quel facteur est endogène ?", options: ["L’émergence des élites africaines", "La doctrine Truman", "La création de l’OTAN", "Le plan Marshall"], correctIndex: 0, explanation: "Les élites formées dans les colonies constituent un facteur interne." },
+        extraQuestions: [
+          { prompt: "Classe : « l’anticolonialisme américain » est un facteur…", options: ["Exogène", "Endogène", "Culturel", "Religieux"], correctIndex: 0, explanation: "Il vient de l’extérieur de la colonie : c’est un facteur externe.", sourceLabel: "Activité d’application 1", points: 1 },
+          { prompt: "Classe : « la bourgeoisie agricole africaine » est un facteur…", options: ["Endogène", "Exogène", "International", "Religieux"], correctIndex: 0, explanation: "Née des cultures d’exportation locales, elle est interne à la colonie.", sourceLabel: "Activité d’application 1", points: 1 },
+          { prompt: "Quelle conférence de 1955 marque la solidarité des non-alignés envers les peuples colonisés ?", options: ["La conférence de Bandung", "La conférence de Yalta", "La conférence de Berlin", "La conférence de Brazzaville"], correctIndex: 0, explanation: "Bandung (avril 1955) condamne régulièrement la politique coloniale.", sourceLabel: "Cours I-1-d", points: 2 },
+          { prompt: "Quel article de la charte de l’ONU contredit la colonisation ?", options: ["L’article 1ᵉʳ, sur le droit des peuples à disposer d’eux-mêmes", "L’article 5 sur la défense collective", "L’article sur le droit de veto", "Aucun"], correctIndex: 0, explanation: "L’ONU devient une tribune d’expression de la souveraineté nationale.", sourceLabel: "Cours I-1-c", points: 2 },
+          { prompt: "Pourquoi les anciens combattants radicalisent-ils le nationalisme après 1945 ?", options: ["L’homme blanc est démystifié à leurs yeux et les promesses de liberté ne sont pas tenues", "Ils reçoivent des terres", "Ils obtiennent la nationalité française", "Ils refusent toute contestation"], correctIndex: 0, explanation: "Le mythe de l’invincibilité du Blanc s’effondre.", sourceLabel: "Cours I-2-d", points: 2 },
+          { prompt: "La montée des nationalismes en Afrique désigne la révolte des Africains contre l’occupation étrangère.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "C’est la prise de conscience des peuples colonisés contre la domination impérialiste.", sourceLabel: "Exercice 1, affirmation 1", points: 1 },
+          { prompt: "La Seconde Guerre mondiale est le seul et véritable facteur de l’éveil nationaliste en Afrique.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Elle n’est qu’un facteur parmi d’autres, externes et internes.", sourceLabel: "Exercice 1, affirmation 4", points: 2 },
+        ],
         distractors: ["La Seconde Guerre mondiale renforce définitivement toutes les métropoles.", "L’ONU défend explicitement les travaux forcés.", "Les contraintes coloniales diminuent toujours la contestation."],
       },
       {
@@ -849,12 +889,87 @@ Russie et Chine coopèrent depuis **2001** au sein de l’**Organisation de coop
         timelineTitle: "Les moyens de la mobilisation",
         timelineInstruction: "Parcours les principales formes d’organisation et d’action.",
         timeline: [
-          { label: "Politique et syndical", shortLabel: "Politique", detail: "Partis, syndicats, élections, grèves, marches, boycotts, désobéissance civile et négociations." },
-          { label: "Religieux", detail: "Harrisme et kimbanguisme portent des messages de dignité, délivrance et affirmation noire." },
-          { label: "Culturel", detail: "Négritude, presse africaine et mouvements étudiants valorisent l’histoire, la culture et l’identité." },
+          { label: "Les mouvements politiques et syndicaux", shortLabel: "Les mouvements politiques et syndicaux", detail: "Partis, syndicats, élections, grèves, marches, boycotts, désobéissance civile et négociations." },
+          { label: "Les mouvements religieux", shortLabel: "Les mouvements religieux", detail: "Harrisme et kimbanguisme portent des messages de dignité, délivrance et affirmation noire." },
+          { label: "Les mouvements culturels", shortLabel: "les mouvements culturels", detail: "Négritude, presse africaine et mouvements étudiants valorisent l’histoire, la culture et l’identité." },
         ],
         observation: "La lutte ne se réduit pas à la violence : elle utilise aussi culture, droit, négociation, vote et action collective.",
         check: { prompt: "Quel courant culturel valorise l’identité noire ?", options: ["La Négritude", "Le containment", "Le mercantilisme", "La perestroïka"], correctIndex: 0, explanation: "La Négritude est portée notamment par Césaire, Senghor et Damas." },
+        parts: [
+          {
+            bodyMarkdown: String.raw`## Les mouvements politiques et syndicaux
+
+Les partis et les syndicats sont les organisations **les plus déterminantes** de l’éveil nationaliste.
+
+### Les partis politiques
+
+| Parti | Leader | Territoire |
+|---|---|---|
+| **CPP** (Convention People’s Party) | Kwame Nkrumah | Ghana (Côte-de-l’Or) |
+| **PDCI-RDA** | Félix Houphouët-Boigny | Côte d’Ivoire |
+| **FLN** (Front de libération nationale) | — | Algérie |
+
+Leurs modes d’action : sensibilisation des populations (meetings, marches, **désobéissance civile**), collaboration avec les partis métropolitains (le RDA est apparenté au **PCF**), compétitions électorales et négociations de réformes.
+
+### Les syndicats
+
+| Syndicat | Leader |
+|---|---|
+| **SAA** (Syndicat agricole africain), 1944 | Félix Houphouët-Boigny |
+| **UGTAN** (Union générale des travailleurs d’Afrique noire) | Sékou Touré |
+| **FCA** (Fédération des cheminots africains) | — |
+
+Leurs armes : **grèves, marches, boycotts** et soutiens financiers et politiques aux leaders africains.
+
+> **Erreur fréquente.** Les mouvements nationalistes africains n’utilisent **pas principalement la violence**. Leurs méthodes dominantes sont la sensibilisation, la grève, le boycott, le vote et la négociation. La lutte armée (comme celle du FLN algérien) reste minoritaire à l’échelle du continent.
+
+> **Astuce mémoire de Davy.** Associe chaque leader à son outil : **Houphouët-Boigny** au SAA (syndicat) **et** au PDCI (parti) ; **Nkrumah** au CPP ; **Sékou Touré** à l’UGTAN. Ces noms reviennent dans presque toutes les questions.`,
+            extraQuestions: [
+              { prompt: "Qui dirige le CPP au Ghana ?", options: ["Kwame Nkrumah", "Félix Houphouët-Boigny", "Sékou Touré", "Léopold Sédar Senghor"], correctIndex: 0, explanation: "La Convention People’s Party mène le Ghana vers l’indépendance.", sourceLabel: "Cours II-1", points: 1 },
+              { prompt: "Quel syndicat Félix Houphouët-Boigny fonde-t-il en 1944 ?", options: ["Le Syndicat agricole africain (SAA)", "L’UGTAN", "La FCA", "Le FLN"], correctIndex: 0, explanation: "Le SAA est un instrument majeur de l’éveil nationaliste en Côte d’Ivoire.", sourceLabel: "Cours II-1", points: 2 },
+              { prompt: "Quelles étaient les actions des élites politiques et syndicales ?", options: ["La sensibilisation par meetings, les grèves et les boycotts", "Les déportations de populations", "La recolonisation", "La répression armée des colons"], correctIndex: 0, explanation: "Elles mobilisent par des moyens politiques et syndicaux, non par la violence.", sourceLabel: "Exercice 3, question 4", points: 2 },
+              { prompt: "La plupart des mouvements nationalistes africains utilisaient la violence.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Ils privilégient meetings, grèves, boycotts, élections et négociations.", sourceLabel: "Exercice 1, affirmation 6", points: 1 },
+            ],
+          },
+          {
+            bodyMarkdown: String.raw`## Les mouvements religieux
+
+Les **mouvements messianiques noirs** sont étroitement associés à l’éveil nationaliste. Leurs prophètes annoncent la **fin des aliénations** subies par l’homme noir et sa victoire sur le colonisateur.
+
+| Mouvement | Prophète | Lieu |
+|---|---|---|
+| **Le harrisme** | William Wade Harris | originaire du Libéria |
+| **Le kimbanguisme** | Simon Kimbangu | Congo belge (actuelle RDC) |
+
+## Les mouvements culturels
+
+Ils réhabilitent l’**identité et l’histoire noires**.
+
+- **La Négritude** : portée par **Léon Gontran Damas, Léopold Sédar Senghor et Aimé Césaire**, elle revendique une identité noire assumée et fière.
+- **La presse africaine** : la revue **Présence Africaine** diffuse la pensée anticoloniale.
+- **Les mouvements étudiants** : l’Union des étudiants de l’Afrique de l’Ouest, la **FEANF** (Fédération des étudiants d’Afrique noire francophone) mobilisent par meetings, conférences, expositions et productions littéraires.
+
+## La synthèse à retenir
+
+| Forme de lutte | Acteurs / moyens |
+|---|---|
+| **Politique** | CPP, PDCI-RDA, FLN — meetings, élections, négociations |
+| **Syndicale** | SAA, UGTAN, FCA — grèves, boycotts |
+| **Religieuse** | harrisme, kimbanguisme — messages de délivrance |
+| **Culturelle** | Négritude, Présence Africaine, FEANF — valorisation de l’identité noire |
+
+> **Le point clé.** Ce qui caractérise le nationalisme africain, c’est sa **grande diversité** : quatre registres de lutte se complètent. À l’examen, ne réduis jamais le mouvement à un seul plan — cite au moins deux ou trois formes différentes.
+
+> **Astuce mémoire de Davy.** Retiens les **trois noms de la Négritude** — **Damas, Senghor, Césaire** — et associe-les à la revue **Présence Africaine**. Pour le religieux, deux prophètes suffisent : **Harris** (harrisme) et **Kimbangu** (kimbanguisme).`,
+            extraQuestions: [
+              { prompt: "Qui sont les principaux auteurs de la Négritude ?", options: ["Damas, Senghor et Césaire", "Nkrumah, Sékou Touré et Houphouët-Boigny", "Harris, Kimbangu et Dulles", "Clinton, Bush et Musitelli"], correctIndex: 0, explanation: "Léon Gontran Damas, Léopold Sédar Senghor et Aimé Césaire.", sourceLabel: "Cours II-3", points: 2 },
+              { prompt: "Le kimbanguisme est fondé par quel prophète, et où ?", options: ["Simon Kimbangu, au Congo belge", "William Wade Harris, au Libéria", "Kwame Nkrumah, au Ghana", "Sékou Touré, en Guinée"], correctIndex: 0, explanation: "Le harrisme, lui, est fondé par William Wade Harris.", sourceLabel: "Cours II-2", points: 2 },
+              { prompt: "Quelle revue illustre la naissance d’une presse africaine anticoloniale ?", options: ["Présence Africaine", "Le Monde diplomatique", "Afrique Magazine", "Jeune Afrique"], correctIndex: 0, explanation: "Présence Africaine est un catalyseur culturel de l’éveil nationaliste.", sourceLabel: "Cours II-3", points: 1 },
+              { prompt: "Les mouvements nationalistes africains étaient caractérisés par leur grande diversité.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Politiques, syndicaux, religieux et culturels : quatre registres complémentaires.", sourceLabel: "Exercice 1, affirmation 3", points: 1 },
+              { prompt: "Les actions des mouvements estudiantins ont porté sur :", options: ["La valorisation de la culture et de l’homme noir et la production littéraire", "Le verbiage sans effet", "La recolonisation", "La répression des populations"], correctIndex: 0, explanation: "Meetings, conférences, expositions et productions littéraires.", sourceLabel: "Exercice 3, question 2", points: 2 },
+            ],
+          },
+        ],
         distractors: ["Tous les nationalismes africains utilisent une méthode unique.", "Les syndicats refusent toute forme de grève.", "Les mouvements culturels ne participent pas à la prise de conscience."],
       },
       {
@@ -863,6 +978,36 @@ Russie et Chine coopèrent depuis **2001** au sein de l’**Organisation de coop
         summary: "Relier réformes coloniales, libertés nouvelles, autonomie et indépendances.",
         conceptTitle: "Des réformes qui ouvrent la voie à la souveraineté",
         explanation: "Les mobilisations obtiennent suppression du travail forcé et du code de l’indigénat, libertés d’association et de réunion, représentation politique, suffrage élargi et autonomie. Ces acquis accélèrent finalement l’accession à l’indépendance.",
+        bodyMarkdown: String.raw`## Les acquis sociaux
+
+Les mouvements nationalistes amorcent un processus de décolonisation **irréversible**, en arrachant d’abord des réformes sociales — presque toutes concentrées en **1946** :
+
+| Date | Réforme |
+|---|---|
+| **20 février 1946** | abolition du **code de l’indigénat** |
+| **5 avril 1946** | **loi Houphouët-Boigny** : suppression des **travaux forcés** dans les colonies françaises |
+| **11 avril 1946** | liberté de **réunion** |
+| **16 avril 1946** | liberté d’**association** |
+
+Ces réformes améliorent les conditions de vie, font baisser la mortalité et renforcent l’aspiration à la souveraineté.
+
+## Les acquis politiques
+
+Face à la pression, les métropoles engagent des réformes politiques successives :
+
+| Date | Réforme |
+|---|---|
+| **13 octobre 1946** | nouvelle Constitution française : institue l’**Union française** et supprime l’expression « empire colonial » |
+| **23 juin 1956** | **Loi-Cadre** (Defferre) : suffrage universel généralisé et autonomie financière des colonies |
+| **28 septembre 1958** | **Communauté franco-africaine** adoptée par référendum en AOF et AEF — sauf en **Guinée**, qui vote « non » et accède aussitôt à l’indépendance |
+
+## Le plus grand acquis
+
+Dans leur synergie, tous ces mouvements ont rendu possible l’**accession progressive des colonies à l’indépendance** — certes difficile, mais désormais inéluctable. **1960** sera « l’année de toutes les indépendances » : **dix-sept pays** africains deviennent souverains.
+
+> **Erreur fréquente.** Les mouvements nationalistes **ont bel et bien obtenu** des réformes des pays colonisateurs dès 1946 : dire qu’ils « n’ont rien obtenu » est faux. Et l’indépendance était revendiquée **avant** 1946, contrairement à ce que suggère une affirmation piège du cours.
+
+> **Astuce mémoire de Davy.** Trois dates-clés pour les acquis politiques : **1946** (Union française), **1956** (Loi-Cadre, autonomie), **1958** (Communauté franco-africaine). Et une exception à ne jamais oublier : la **Guinée de Sékou Touré**, seule à dire « non » en 1958.`,
         keyPoint: "Le principal résultat des nationalismes est d’avoir rendu irréversible le processus de décolonisation.",
         example: "La loi Houphouët-Boigny abolit le travail forcé le 5 avril 1946 ; la Loi-Cadre de 1956 élargit le suffrage et l’autonomie.",
         timelineTitle: "Des réformes à l’indépendance",
@@ -874,6 +1019,14 @@ Russie et Chine coopèrent depuis **2001** au sein de l’**Organisation de coop
         ],
         observation: "Les indépendances résultent d’un processus cumulatif de mobilisations et de réformes, pas d’un événement isolé.",
         check: { prompt: "Quelle loi abolit le travail forcé dans les colonies françaises en 1946 ?", options: ["La loi Houphouët-Boigny", "La loi Marshall", "La loi de Yalta", "La loi Jdanov"], correctIndex: 0, explanation: "La loi Houphouët-Boigny du 5 avril 1946 supprime le travail forcé." },
+        extraQuestions: [
+          { prompt: "Quel code, symbole de la discrimination coloniale, est aboli le 20 février 1946 ?", options: ["Le code de l’indigénat", "Le code Napoléon", "Le code du travail", "Le code civil"], correctIndex: 0, explanation: "Son abolition est un acquis social majeur des mouvements nationalistes.", sourceLabel: "Cours III-1", points: 2 },
+          { prompt: "Que met en place la Loi-Cadre du 23 juin 1956 ?", options: ["Le suffrage généralisé et l’autonomie financière des colonies", "L’indépendance immédiate", "La suppression du suffrage", "Le rétablissement du travail forcé"], correctIndex: 0, explanation: "Elle prépare l’autonomie des territoires africains.", sourceLabel: "Cours III-2", points: 2 },
+          { prompt: "Quelle colonie vote « non » au référendum de 1958 et accède aussitôt à l’indépendance ?", options: ["La Guinée", "La Côte d’Ivoire", "Le Sénégal", "Le Ghana"], correctIndex: 0, explanation: "Toutes les autres colonies d’AOF et d’AEF acceptent la Communauté franco-africaine.", sourceLabel: "Cours III-2", points: 2 },
+          { prompt: "Combien de pays africains deviennent souverains en 1960, « année de toutes les indépendances » ?", options: ["Dix-sept", "Cinq", "Trente", "Deux"], correctIndex: 0, explanation: "Chiffre cité par la situation d’apprentissage (Afrique Magazine).", sourceLabel: "Situation d’apprentissage", points: 1 },
+          { prompt: "Les premiers mouvements nationalistes africains n’ont rien obtenu des pays colonisateurs.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Ils obtiennent dès 1946 l’abolition du travail forcé et de nombreuses libertés.", sourceLabel: "Exercice 1, affirmation 7", points: 2 },
+          { prompt: "Les mouvements nationalistes ont permis d’amorcer le processus devant aboutir aux indépendances.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "C’est leur principal résultat : rendre la décolonisation irréversible.", sourceLabel: "Exercice 3, question 1", points: 1 },
+        ],
         distractors: ["Les mouvements nationalistes renforcent durablement le système colonial.", "La Loi-Cadre supprime le suffrage dans les colonies.", "Aucune réforme sociale n’est obtenue avant les indépendances."],
       },
     ],
