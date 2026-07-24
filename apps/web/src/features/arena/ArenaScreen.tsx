@@ -26,6 +26,7 @@ import { formatXp } from "../../data/xpRewards";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
 import { ArenaExercisesPage } from "./ArenaExercisesPage";
 import { MathCodexPage } from "../codex/MathCodexPage";
+import { DuelSetup } from "./DuelSetup";
 
 interface ArenaScreenProps {
   profile: LearnerProfile;
@@ -169,6 +170,7 @@ export function ArenaScreen({
 }: ArenaScreenProps) {
   const [selectedModeId, setSelectedModeId] = useState<ArenaModeId>("exercises");
   const [selectionMessage, setSelectionMessage] = useState<string | null>(null);
+  const [duelSetupOpen, setDuelSetupOpen] = useState(false);
   const selectedMode = useMemo(() => arenaModes.find((mode) => mode.id === selectedModeId) ?? arenaModes[0], [selectedModeId]);
   const SelectedIcon = selectedMode.icon;
 
@@ -195,6 +197,10 @@ export function ArenaScreen({
       onOpenCodex();
       return;
     }
+    if (selectedMode.id === "duel") {
+      setDuelSetupOpen(true);
+      return;
+    }
     setSelectionMessage(`Mode « ${selectedMode.title} » sélectionné pour ${subject.label}. La prochaine étape sera de connecter sa banque d’épreuves.`);
   };
 
@@ -216,6 +222,10 @@ export function ArenaScreen({
   }
 
   if (codexOpen) return <MathCodexPage onBackArena={onBackArena} />;
+
+  if (duelSetupOpen) {
+    return <DuelSetup profile={profile} level={level} subject={subject} onBack={() => setDuelSetupOpen(false)} />;
+  }
 
   return (
     <main className="arena-page">
