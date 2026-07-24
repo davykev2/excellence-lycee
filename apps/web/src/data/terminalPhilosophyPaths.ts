@@ -355,8 +355,68 @@ La conclusion consiste à **répondre de façon claire et précise au problème 
         summary: "Identifier thème, problème, thèse, intention, enjeu et structure logique.",
         conceptTitle: "Présenter précisément le texte",
         explanation: "Le thème indique le domaine du texte, le problème sa question centrale et la thèse la réponse de l’auteur. L’intention précise ce qu’il veut accomplir, l’enjeu ce que la discussion permet de gagner ou de préserver.",
+        bodyMarkdown: String.raw`## Qu’est-ce que commenter un texte ?
+
+Le commentaire de texte philosophique est un exercice écrit qui consiste à **dégager l’intérêt philosophique d’un texte à partir de son étude ordonnée**. Commenter un texte, c’est **d’abord l’expliquer** — mettre en évidence son sens — **et ensuite l’évaluer**.
+
+Comme la dissertation, le devoir comprend **trois parties** : l’introduction, le développement, la conclusion.
+
+| Partie | Rôle |
+|---|---|
+| **Introduction** | présenter le texte par son thème, son problème et sa thèse |
+| **Développement** | l’étude ordonnée (expliquer) puis l’intérêt philosophique (évaluer) |
+| **Conclusion** | prendre position après le bilan du débat |
+
+## La fiche d’identité du texte
+
+L’introduction présente le texte à partir de **trois éléments essentiels** — le thème, le problème et la thèse — auxquels s’ajoutent l’intention, l’enjeu et la structure logique. Chaque élément répond à une question précise :
+
+| Élément | Question à se poser |
+|---|---|
+| **Thème** | De quoi est-il question dans le texte ? |
+| **Problème** | Quelle difficulté l’auteur cherche-t-il à résoudre ? |
+| **Thèse** | Quelle est la position de l’auteur ? |
+| **Intention** | Quel est l’objectif immédiat de l’auteur ? |
+| **Enjeu** | Qu’y a-t-il à gagner dans la résolution du problème ? |
+| **Structure logique** | Quelles sont les étapes, les mouvements de l’argumentation ? |
+| **Démarche argumentative** | De quelle manière le problème est-il traité ? |
+
+> **On peut placer la structure logique** à la fin de l’introduction **ou** au début du développement.
+
+## Exemple entièrement traité — Hountondji
+
+Texte : *Sur « la philosophie africaine »*, où l’auteur refuse de réduire la philosophie à un système.
+
+| Élément | Résultat |
+|---|---|
+| **Thème** | La définition de la philosophie |
+| **Problème** | La philosophie est-elle un système ? |
+| **Thèse** | La philosophie n’est pas un système mais un débat sans cesse rebondissant |
+| **Intention** | Rejeter l’opinion qui fait de la philosophie un savoir achevé |
+| **Enjeu** | La connaissance |
+| **Structure logique** | Deux mouvements (L1–L6 : elle n’est pas un système ; L6–L15 : elle est un débat) |
+
+> **Erreur fréquente.** Confondre le **thème** (le sujet dont on parle) et la **thèse** (ce que l’auteur en dit). Le thème se dit en un mot ; la thèse est une phrase complète qui répond au problème.`,
         keyPoint: "Thème = sujet ; problème = question ; thèse = réponse ; intention = but ; enjeu = intérêt.",
         example: "Dans le texte de Hountondji : thème, définition de la philosophie ; problème, est-elle un système ? ; thèse, elle est un débat toujours ouvert.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "La fiche d’identité du texte",
+          instruction: "Sélectionne un élément pour voir la question qui le révèle et l’exemple de Hountondji.",
+          observation: "Ces éléments ne se confondent pas : chacun répond à une question différente et se rédige autrement.",
+          rootLabel: "Présenter le texte",
+          rootDetail: "Sept repères pour ne rien confondre avant d’expliquer",
+          nodes: [
+            { id: "theme", group: "Ce que dit le texte", label: "Thème", role: "De quoi est-il question ?", detail: "Le domaine, le sujet général du texte, dit en un mot ou une expression. Chez Hountondji : la définition de la philosophie." },
+            { id: "probleme", group: "Ce que dit le texte", label: "Problème", role: "Quelle difficulté résoudre ?", detail: "La question centrale à laquelle le texte répond. Chez Hountondji : la philosophie est-elle un système ?" },
+            { id: "these", group: "Ce que dit le texte", label: "Thèse", role: "Quelle position de l’auteur ?", detail: "La réponse que l’auteur défend, formulée en une phrase complète. Chez Hountondji : la philosophie n’est pas un système mais un débat sans cesse rebondissant." },
+            { id: "intention", group: "Ce que vise l’auteur", label: "Intention", role: "Quel objectif immédiat ?", detail: "Ce que l’auteur cherche à faire en écrivant. Chez Hountondji : rejeter l’opinion qui fait de la philosophie un savoir achevé." },
+            { id: "enjeu", group: "Ce que vise l’auteur", label: "Enjeu", role: "Qu’y a-t-il à gagner ?", detail: "L’intérêt plus large de la discussion, ce qu’elle permet de préserver. Chez Hountondji : la connaissance." },
+            { id: "structure", group: "Comment il argumente", label: "Structure logique", role: "Quels mouvements ?", detail: "Le découpage du texte en parties. Chez Hountondji : deux mouvements — d’abord ce que la philosophie n’est pas, puis ce qu’elle est. Se place en fin d’introduction ou en début de développement." },
+            { id: "demarche", group: "Comment il argumente", label: "Démarche argumentative", role: "De quelle manière ?", detail: "La façon dont l’auteur conduit sa preuve : ici une démarche polémique, qui nie une thèse pour en affirmer une autre." },
+          ],
+        },
         mapTitle: "La fiche d’identité du texte",
         mapInstruction: "Distingue les éléments qui ne doivent pas être confondus.",
         map: [
@@ -367,6 +427,12 @@ La conclusion consiste à **répondre de façon claire et précise au problème 
         ],
         observation: "La thèse doit être formulée comme la réponse exacte de l’auteur au problème.",
         check: q("À quelle question répond la thèse ?", "Quelle réponse l’auteur apporte-t-il au problème ?", "Combien de lignes compte le texte ?", "Qui a imprimé le livre ?", "Quel est le sujet du prochain devoir ?"),
+        extraQuestions: [
+          { prompt: "À quelle question correspond l’« intention » de l’auteur ?", options: ["Quel est l’objectif immédiat de l’auteur ?", "Combien de mouvements compte le texte ?", "Quelle est la date de l’œuvre ?", "Qui est l’éditeur ?"], correctIndex: 0, explanation: "L’intention désigne ce que l’auteur cherche à accomplir.", sourceLabel: "Activité d’application 3", points: 2 },
+          { prompt: "À quelle question correspond l’« enjeu » du texte ?", options: ["Qu’y a-t-il à gagner dans la résolution du problème ?", "De quoi est-il question dans le texte ?", "Quelle est la position de l’auteur ?", "Quelles sont les étapes de l’argumentation ?"], correctIndex: 0, explanation: "L’enjeu, c’est l’intérêt de la discussion — ce qu’elle permet de gagner ou de préserver.", sourceLabel: "Activité d’application 3", points: 2 },
+          { prompt: "Chez Hountondji, quelle est la thèse ?", options: ["La philosophie n’est pas un système mais un débat sans cesse rebondissant", "La philosophie est un ensemble de vérités définitives", "La philosophie est réservée aux savants", "La philosophie n’a pas d’histoire"], correctIndex: 0, explanation: "La thèse répond au problème « la philosophie est-elle un système ? ».", sourceLabel: "Situation d’évaluation 1", points: 2 },
+          { prompt: "Où peut-on placer la structure logique ?", options: ["À la fin de l’introduction ou au début du développement", "Uniquement dans la conclusion", "Nulle part, elle est facultative", "Au milieu de la critique externe"], correctIndex: 0, explanation: "Le document laisse le choix entre ces deux emplacements.", sourceLabel: "I – L’introduction", points: 1 },
+        ],
         distractors: ["Le thème et la thèse désignent la même chose.", "L’enjeu est le nombre de mouvements.", "La problématique consiste à résumer chaque phrase."],
       },
       {
@@ -375,17 +441,61 @@ La conclusion consiste à **répondre de façon claire et précise au problème 
         summary: "Découper les mouvements et expliquer la démarche argumentative sans répéter le texte.",
         conceptTitle: "Suivre le mouvement de la pensée",
         explanation: "L’étude ordonnée explique chaque mouvement du texte, ses idées principales, arguments, concepts et exemples. Elle montre comment l’auteur progresse vers sa thèse et ménage des transitions entre les parties.",
+        bodyMarkdown: String.raw`## Expliquer, ce n’est pas répéter
+
+L’étude ordonnée explique le texte **à partir de sa structure logique**, c’est-à-dire de ses différents **mouvements**. Elle met en évidence :
+
+- la **démarche argumentative** de l’auteur,
+- les **arguments**, les **concepts**, les **allusions**, les **exemples**,
+- les éventuelles **figures de style**.
+
+Entre les mouvements, il faut élaborer des **transitions** qui montrent pourquoi la pensée passe d’une étape à la suivante.
+
+## Les trois pièges à éviter
+
+| Piège | Ce que c’est |
+|---|---|
+| **La paraphrase** | répéter le texte en le reformulant, sans rien expliquer |
+| **Le contre-sens** | attribuer à l’auteur le contraire de ce qu’il dit |
+| **Le non-sens** | prêter au texte une idée absurde ou étrangère |
+
+> **La règle.** La paraphrase **répète** ; l’explication **révèle la fonction logique** des idées — ce que l’auteur affirme, *pourquoi* il l’affirme, et *comment* l’argument conduit à la thèse.
+
+## Exemple entièrement traité — Épictète
+
+Texte : Épictète, *Maximes et Pensées*, sur la tenue du philosophe et de son disciple. Le texte s’articule en **deux mouvements**.
+
+### 1ᵉʳ mouvement (L1 à L7) — « Si un philosophe malpropre… gras et mal peignés. »
+
+**Idée principale :** la nécessité de la décence chez le philosophe et son disciple.
+
+- *Idée secondaire 1* : identifié à un criminel, le philosophe malpropre inspire la répugnance.
+- *Idée secondaire 2* : exhortation à la propreté et à la décence.
+
+### 2ᵉ mouvement (L7 à L12) — « Car par là je juge… n’est que laideur. »
+
+**Idée principale :** la primauté de la beauté intérieure sur la beauté du corps.
+
+- *Idée secondaire 1* : la beauté du corps présuppose la beauté intérieure.
+- *Idée secondaire 2* : la beauté intérieure, qui consiste à faire usage de la raison, surpasse la beauté du corps.
+
+> **Astuce.** Une idée principale par mouvement, deux idées secondaires qui la soutiennent : ce squelette suffit à structurer toute l’étude ordonnée.`,
         keyPoint: "Expliquer, c’est montrer ce que l’auteur affirme, pourquoi il l’affirme et comment l’argument conduit à la thèse.",
-        example: "Hountondji nie d’abord que la philosophie soit un système clos, puis la définit positivement comme débat collectif et responsable.",
-        mapTitle: "Du découpage à l’explication",
-        mapInstruction: "Repère la fonction de chaque mouvement.",
+        example: "Chez Épictète : mouvement 1, la nécessité de la décence ; mouvement 2, la primauté de la beauté intérieure sur celle du corps.",
+        mapTitle: "Les deux mouvements du texte d’Épictète",
+        mapInstruction: "Repère l’idée principale et les idées secondaires de chaque mouvement.",
         map: [
-          { label: "Mouvement 1", detail: "Formuler l’idée principale et expliquer les arguments qui la soutiennent." },
-          { label: "Transition", detail: "Montrer pourquoi la pensée doit passer à une nouvelle étape." },
-          { label: "Mouvement 2", detail: "Expliquer la nouvelle idée et son apport à la thèse générale." },
+          { label: "Mouvement 1 (L1–L7)", shortLabel: "Mvt 1", detail: "Idée principale : la nécessité de la décence. Secondaires : le philosophe malpropre inspire la répugnance ; exhortation à la propreté." },
+          { label: "Transition", shortLabel: "Transition", detail: "Montrer pourquoi l’on passe de l’apparence extérieure à la beauté intérieure." },
+          { label: "Mouvement 2 (L7–L12)", shortLabel: "Mvt 2", detail: "Idée principale : la primauté de la beauté intérieure. Secondaires : le corps présuppose l’âme ; la raison surpasse le corps." },
         ],
         observation: "La paraphrase répète ; l’explication révèle la fonction logique des idées.",
         check: q("Comment éviter la paraphrase ?", "Expliquer la fonction des arguments et leurs liens", "Remplacer chaque mot par un synonyme", "Recopier les phrases les plus longues", "Donner son opinion à chaque ligne"),
+        extraQuestions: [
+          { prompt: "Qu’est-ce qu’un contre-sens ?", options: ["Attribuer à l’auteur le contraire de ce qu’il dit", "Reformuler le texte avec des synonymes", "Citer un autre auteur", "Découper le texte en mouvements"], correctIndex: 0, explanation: "Le contre-sens inverse la pensée de l’auteur ; le non-sens lui prête une idée absurde.", sourceLabel: "II-A L’étude ordonnée", points: 2 },
+          { prompt: "Chez Épictète, quelle est l’idée principale du 1ᵉʳ mouvement ?", options: ["La nécessité de la décence chez le philosophe et son disciple", "La primauté de la beauté intérieure", "L’inutilité de la philosophie", "La supériorité du corps sur l’âme"], correctIndex: 0, explanation: "Le premier mouvement (L1–L7) porte sur la décence.", sourceLabel: "Situation d’évaluation – étude ordonnée", points: 2 },
+          { prompt: "À quoi servent les transitions dans l’étude ordonnée ?", options: ["Montrer pourquoi la pensée passe d’un mouvement au suivant", "Résumer tout le texte", "Introduire la conclusion", "Citer des auteurs"], correctIndex: 0, explanation: "Elles relient les articulations du texte.", sourceLabel: "II-A L’étude ordonnée", points: 1 },
+        ],
         distractors: ["L’étude ordonnée ignore la structure logique.", "Expliquer signifie seulement reformuler.", "Les transitions sont inutiles dans un commentaire."],
       },
       {
@@ -394,8 +504,70 @@ La conclusion consiste à **répondre de façon claire et précise au problème 
         summary: "Évaluer la cohérence du texte puis confronter sa thèse à d’autres positions.",
         conceptTitle: "Critique interne et critique externe",
         explanation: "La critique interne évalue la forme du raisonnement : cohérence, pertinence, forces et limites des arguments. La critique externe discute le fond : elle justifie la thèse par d’autres références puis la dépasse par des positions opposées.",
+        bodyMarkdown: String.raw`## Évaluer le texte : les deux critiques
+
+L’intérêt philosophique consiste à **évaluer le texte dans la forme et dans le fond**. C’est la partie critique du devoir, qui comporte deux aspects.
+
+### A. La critique interne — la forme
+
+Elle évalue le texte **dans la forme**, en montrant :
+
+- la **cohérence** de l’argumentation ;
+- l’**adéquation** (ou l’inadéquation) entre la démarche argumentative et l’intention de l’auteur ;
+- les **forces et les faiblesses** des arguments ;
+- la **pertinence** de la démarche argumentative.
+
+### B. La critique externe — le fond
+
+Elle évalue le texte **dans le fond**, c’est-à-dire qu’elle apprécie la position de l’auteur en deux temps :
+
+1. on **justifie la thèse** en s’appuyant sur d’autres auteurs ;
+2. on la **dépasse** à l’aide d’autres positions.
+
+## Exemple traité — critique interne d’Épictète
+
+> En usant d’expressions excessives — *malpropre, négligé, horrible* —, l’auteur compare le philosophe à un criminel pour mettre en évidence son caractère répugnant… Le **ton ironique** dont use l’auteur est **en conformité avec son intention**, qui est d’amener le philosophe à améliorer son statut social.
+
+On voit ici la critique interne : elle relie un procédé (l’ironie, l’hyperbole) à l’intention, et **juge l’adéquation** de l’un à l’autre.
+
+## Exemple traité — critique externe d’Épictète
+
+**Axe 1 — Le philosophe doit observer la propreté et la décence.**
+
+| Argument | Référence |
+|---|---|
+| Un esprit sain a besoin d’un corps sain. | La maxime « un esprit sain dans un corps sain »¹ |
+| L’aspect extérieur importe pour la crédibilité du philosophe. | **PLATON**, *Le Banquet* : l’amour des beaux corps conduit à la culture des belles âmes. |
+
+**Axe 2 — La beauté corporelle est inessentielle pour le philosophe.**
+
+| Argument | Référence |
+|---|---|
+| L’avilissement du corps conduit à l’élévation de l’esprit. | **DIOGÈNE** le cynique. |
+| L’âme a plus de valeur que le corps. | Les **stoïciens** ; **SAINT AUGUSTIN**, *Confessions*. |
+
+> ¹ **Annotation.** Le document présente cette maxime comme « grecque ». Elle est en réalité **latine** : *mens sana in corpore sano*, tirée des *Satires* du poète **Juvénal**. L’idée est juste, l’origine est à corriger.
+
+> **Garde en tête.** La critique externe **n’attaque pas** : elle soutient d’abord la thèse avec de vraies références, puis lui oppose d’autres positions tout aussi argumentées.`,
         keyPoint: "Interne = valeur du raisonnement ; externe = discussion de la thèse.",
-        example: "On peut soutenir Hountondji avec Jaspers ou Kant, puis lui opposer Hegel pour qui une philosophie doit former un système.",
+        example: "Sur Épictète : Axe 1, la propreté est nécessaire (Platon, Le Banquet) ; Axe 2, elle est inessentielle (Diogène, les stoïciens, saint Augustin).",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "L’intérêt philosophique",
+          instruction: "Sélectionne un critère pour voir ce qu’il évalue, avec l’exemple d’Épictète.",
+          observation: "La critique interne juge la forme ; la critique externe discute le fond en deux temps : justifier puis dépasser.",
+          rootLabel: "Évaluer le texte",
+          rootDetail: "Deux critiques : la forme, puis le fond",
+          nodes: [
+            { id: "coherence", group: "Critique interne (la forme)", label: "Cohérence", role: "L’argumentation se tient-elle ?", detail: "Vérifier que les idées s’enchaînent sans se contredire. Chez Épictète, le passage de l’apparence à la beauté intérieure est cohérent." },
+            { id: "adequation", group: "Critique interne (la forme)", label: "Adéquation", role: "La démarche sert-elle l’intention ?", detail: "Mesurer si la façon d’argumenter réalise le but de l’auteur. Le ton ironique d’Épictète est en adéquation avec son intention d’améliorer le statut du philosophe." },
+            { id: "forces", group: "Critique interne (la forme)", label: "Forces et faiblesses", role: "Les arguments tiennent-ils ?", detail: "Peser ce qui rend les arguments convaincants et ce qui les fragilise." },
+            { id: "pertinence", group: "Critique interne (la forme)", label: "Pertinence", role: "La démarche est-elle bien choisie ?", detail: "Juger si la manière d’argumenter était la mieux adaptée au problème posé." },
+            { id: "justifier", group: "Critique externe (le fond)", label: "Justifier (Axe 1)", role: "Qui soutient la thèse ?", detail: "Appuyer la thèse de l’auteur sur d’autres références. Pour Épictète : Platon (Le Banquet), la maxime d’un esprit sain dans un corps sain." },
+            { id: "depasser", group: "Critique externe (le fond)", label: "Dépasser (Axe 2)", role: "Qui la conteste ?", detail: "Opposer d’autres positions pour nuancer. Pour Épictète : Diogène le cynique, les stoïciens, saint Augustin, pour qui la beauté corporelle est inessentielle." },
+          ],
+        },
         mapTitle: "Évaluer sans juger trop vite",
         mapInstruction: "Passe de la forme du texte au débat sur le fond.",
         map: [
@@ -405,6 +577,11 @@ La conclusion consiste à **répondre de façon claire et précise au problème 
         ],
         observation: "Critiquer ne signifie pas attaquer : il faut apprécier avec des raisons précises.",
         check: q("Que juge principalement la critique interne ?", "La cohérence et la pertinence de l’argumentation", "La vie privée de l’auteur", "La longueur de l’ouvrage", "La popularité de la thèse"),
+        extraQuestions: [
+          { prompt: "Que fait la critique externe dans son premier temps ?", options: ["Elle justifie la thèse en s’appuyant sur d’autres auteurs", "Elle résume le texte", "Elle attaque immédiatement l’auteur", "Elle recopie l’introduction"], correctIndex: 0, explanation: "On soutient d’abord la thèse, puis on la dépasse.", sourceLabel: "II-B La critique externe", points: 2 },
+          { prompt: "Quelle référence soutient l’Axe 1 sur Épictète (la décence est nécessaire) ?", options: ["Platon, Le Banquet : l’amour des beaux corps conduit aux belles âmes", "Diogène le cynique", "Les stoïciens", "Saint Augustin, Confessions"], correctIndex: 0, explanation: "Platon est mobilisé pour justifier la thèse ; les trois autres servent à la dépasser.", sourceLabel: "Activité d’application 2 – critique externe", points: 3 },
+          { prompt: "Sur quel critère porte l’« adéquation » en critique interne ?", options: ["Entre la démarche argumentative et l’intention de l’auteur", "Entre la longueur du texte et sa date", "Entre l’auteur et son éditeur", "Entre le lecteur et le correcteur"], correctIndex: 0, explanation: "La critique interne mesure si la démarche réalise l’intention.", sourceLabel: "II-B 1 La critique interne", points: 2 },
+        ],
         distractors: ["La critique externe résume seulement le texte.", "Toute critique doit rejeter la thèse.", "La critique interne mobilise uniquement des auteurs opposés."],
       },
       {
@@ -413,8 +590,47 @@ La conclusion consiste à **répondre de façon claire et précise au problème 
         summary: "Construire une introduction complète et une conclusion qui prend position après le débat.",
         conceptTitle: "Introduction et conclusion du commentaire",
         explanation: "L’introduction présente la problématique du texte et peut annoncer sa structure logique. La conclusion fait le bilan de la critique externe puis formule une position personnelle justifiée sur l’intérêt du texte.",
+        bodyMarkdown: String.raw`## L’introduction : présenter le texte
+
+L’introduction agence les **trois éléments essentiels** — thème, problème, thèse — et peut annoncer la **structure logique** en fin de paragraphe.
+
+### Modèle rédigé — introduction d’Épictète
+
+> « **Ce texte d’Épictète, extrait de son œuvre *Maximes et Pensées*, parle de la tenue du philosophe et de son disciple.** *(thème)* **À la question : le philosophe et son disciple doivent-ils négliger leur tenue ?** *(problème)* **l’auteur répond que ceux-ci doivent prendre soin de leur corps et de leur âme.** *(thèse)* **Ce texte s’articule autour de deux mouvements : de la L1 à la L7… ; de la L7 à la L12…** *(structure logique)* »
+
+> **Ce qu’il faut observer.** Le problème est posé **comme une vraie question**, et la thèse y **répond directement**. La structure logique vient clore l’introduction.
+
+## La conclusion : prendre position
+
+La conclusion est la dernière partie du devoir. Elle consiste en une **prise de position** par rapport à l’intérêt du texte. Cette prise de position doit être **précédée du bilan** du débat engagé dans la critique externe.
+
+### Modèle rédigé — conclusion d’Épictète
+
+> « **En définitive, si pour Épictète et certains moralistes de l’Antiquité le philosophe et son disciple doivent observer la propreté et la décence en vue d’améliorer leur statut social, pour d’autres penseurs tels que les cyniques, la beauté corporelle est inessentielle pour le philosophe.** *(bilan)* **Au demeurant, à notre sens, la propreté du corps va de pair avec celle de l’esprit.** *(position personnelle)* »
+
+> **Erreur fréquente.** Conclure **avant** d’avoir expliqué puis évalué le texte. On ne prend position qu’**après** l’étude ordonnée et les deux critiques — jamais dès l’introduction.`,
         keyPoint: "L’introduction ouvre le problème ; la conclusion répond après l’explication et la discussion.",
         example: "Conclusion sur Épictète : la décence renforce la crédibilité du philosophe, mais la valeur de sa pensée ne se réduit pas à son apparence.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "L’architecture du commentaire",
+          instruction: "Sélectionne une partie pour découvrir ce qu’elle doit contenir.",
+          observation: "L’introduction présente, le développement explique puis évalue, la conclusion tranche : chaque partie a un rôle unique.",
+          rootLabel: "Le commentaire de texte",
+          rootDetail: "Trois parties, dans un ordre qui ne se bouscule pas",
+          nodes: [
+            { id: "i-theme", group: "Introduction", label: "Thème", role: "Présenter", detail: "Le sujet du texte, dit en une expression. Chez Épictète : la tenue du philosophe et de son disciple." },
+            { id: "i-probleme", group: "Introduction", label: "Problème", role: "Poser la question", detail: "La question centrale du texte : le philosophe et son disciple doivent-ils négliger leur tenue ?" },
+            { id: "i-these", group: "Introduction", label: "Thèse", role: "Donner la réponse de l’auteur", detail: "Ce que soutient l’auteur : ils doivent prendre soin de leur corps et de leur âme." },
+            { id: "i-structure", group: "Introduction", label: "Structure logique", role: "Annoncer les mouvements", detail: "Le découpage du texte, placé en fin d’introduction ou en début de développement : ici deux mouvements." },
+            { id: "d-etude", group: "Développement", label: "Étude ordonnée", role: "Expliquer", detail: "Suivre les mouvements du texte, révéler la démarche argumentative sans paraphraser, ménager des transitions." },
+            { id: "d-interne", group: "Développement", label: "Critique interne", role: "Évaluer la forme", detail: "Juger la cohérence, l’adéquation de la démarche à l’intention, les forces et faiblesses, la pertinence." },
+            { id: "d-externe", group: "Développement", label: "Critique externe", role: "Discuter le fond", detail: "Justifier la thèse avec d’autres auteurs (Axe 1), puis la dépasser par des positions opposées (Axe 2)." },
+            { id: "c-bilan", group: "Conclusion", label: "Bilan", role: "Récapituler le débat", detail: "Résumer l’opposition dégagée dans la critique externe : ce que dit l’auteur, ce que d’autres objectent." },
+            { id: "c-position", group: "Conclusion", label: "Prise de position", role: "Trancher", detail: "Donner un avis personnel justifié sur l’intérêt du texte. Il vient après le bilan, jamais avant l’explication." },
+          ],
+        },
         mapTitle: "Le devoir complet",
         mapInstruction: "Visualise la place de chaque grande partie.",
         map: [
@@ -425,24 +641,80 @@ La conclusion consiste à **répondre de façon claire et précise au problème 
         ],
         observation: "On ne peut conclure sérieusement qu’après avoir expliqué puis évalué le texte.",
         check: q("Que doit contenir la conclusion du commentaire ?", "Le bilan du débat et une position justifiée", "Un nouveau mouvement du texte", "Une simple copie de la thèse", "Une liste de tous les auteurs connus"),
+        extraQuestions: [
+          { prompt: "Quels sont les trois éléments essentiels de l’introduction ?", options: ["Le thème, le problème et la thèse", "L’amorce, l’exemple et la citation", "La critique interne, externe et le bilan", "Le titre, l’auteur et la date"], correctIndex: 0, explanation: "L’introduction du commentaire agence thème, problème et thèse.", sourceLabel: "I – L’introduction", points: 2 },
+          { prompt: "La prise de position en conclusion doit être précédée de…", options: ["du bilan du débat de la critique externe", "d’un nouvel argument", "de la biographie de l’auteur", "d’une seconde étude ordonnée"], correctIndex: 0, explanation: "On récapitule le débat avant de trancher.", sourceLabel: "III – La conclusion", points: 2 },
+          { prompt: "Dans le modèle d’Épictète, quelle est la thèse annoncée en introduction ?", options: ["Le philosophe et son disciple doivent prendre soin de leur corps et de leur âme", "Le philosophe doit rester malpropre", "La philosophie est un système clos", "La beauté du corps n’a aucune importance"], correctIndex: 0, explanation: "La thèse répond à la question posée par le problème.", sourceLabel: "Corrigé – introduction d’Épictète", points: 2 },
+        ],
         distractors: ["L’introduction contient déjà la critique externe.", "La conclusion n’a aucun lien avec l’intérêt du texte.", "Le commentaire se limite à une étude ordonnée."],
       },
     ],
     mission: {
-      title: "Atelier BAC : Hountondji et la philosophie comme débat",
-      scenario: "À partir de la situation officielle, reconstruis la problématique, la structure logique et l’intérêt philosophique d’un texte qui refuse de réduire la philosophie à un système clos.",
-      problem: "La philosophie est-elle un savoir achevé ou un débat sans cesse repris ?",
+      title: "Atelier BAC : Hume et le rôle de la religion",
+      scenario: "Un camarade en difficulté te sollicite. À partir du texte de David Hume (Dialogues sur la religion naturelle), dégage l’intérêt philosophique à partir de son étude ordonnée : problématique, mouvements, critique interne, critique externe et conclusion.",
+      problem: "Quel est le rôle de la religion dans la vie de l’homme ?",
+      bodyMarkdown: String.raw`## Le corrigé complet du texte de Hume
+
+### I. Problématique du texte
+
+| Élément | Résultat |
+|---|---|
+| **Thème** | Le rôle de la religion |
+| **Problème** | Quel est le rôle de la religion dans la vie de l’homme ? |
+| **Thèse** | La religion apaise les souffrances de l’homme et calme ses douleurs terrestres |
+| **Antithèse** | La religion aliène l’homme |
+| **Intention** | Montrer l’importance de la religion dans la société |
+| **Enjeu** | Le bonheur |
+
+**Structure logique — deux mouvements :**
+
+- **1ᵉʳ mouvement (L1–L4)** « Mon opinion… toute la nature. » — Idée principale : *les fondements de la religion*.
+- **2ᵉ mouvement (L4–L12)** « Les plus brillantes scènes… sans cesse ? » — Idée principale : *la fonction psychologique de la religion*.
+
+### II. Intérêt philosophique
+
+**Critique interne.** L’auteur, par une démarche explicative, présente d’abord les fondements de la religion, puis en précise les fonctions, spécifiquement psychologiques. Son intention — montrer l’importance de la religion — est **en parfaite adéquation** avec sa démarche ; l’auteur fait preuve de rigueur.
+
+**Critique externe.**
+
+**Axe 1 — La religion concourt à l’épanouissement de l’homme.**
+
+| Argument | Référence |
+|---|---|
+| Fonction **pédagogique** : elle renseigne sur des phénomènes métaphysiques. | **FREUD**, *L’avenir d’une illusion* : « elle les éclaire sur l’origine et la formation de l’univers… » |
+| Rôle **éthique et moral** : elle règle les opinions antagonistes par ses prescriptions. | **R. GIRARD**, *La violence et le sacré*. |
+| Rôle **social** : elle sème l’amour entre les hommes. | **SAINT AUGUSTIN**, *La Cité de Dieu* : s’aimer, c’est vouloir être heureux, et cette fin, c’est s’attacher à Dieu. |
+
+**Axe 2 — La religion est un fait illusoire et un facteur d’aliénation.**
+
+| Argument | Référence |
+|---|---|
+| Les faits religieux ne sont que de **pures illusions**. | **FREUD**, *L’avenir d’une illusion* : « les doctrines religieuses sont toutes des illusions… » |
+| La religion est source d’**affabulations et d’aberrations**. | **BERGSON**, *Les deux sources de la morale et de la religion* : « Quel tissu d’aberrations ! » |
+| Le **fanatisme** religieux conduit à l’immoralité et aux crimes. | **François JACOB**, *Le jeu des possibles* : « Rien n’est aussi dangereux que la certitude d’avoir raison. » |
+
+> **Le duel des références.** Freud apparaît **dans les deux axes** : d’abord pour décrire ce que la religion prétend apporter, ensuite pour la dénoncer comme illusion. C’est un bon réflexe de commentaire : un même auteur peut servir la thèse *et* son dépassement, selon la citation retenue.
+
+### III. Conclusion
+
+> Même si la religion nous assujettit à des rites rigoureux, il n’y a rien de plus utile à l’humanité que la religion, vu son rôle psychologique. Bien qu’illusoire, la religion est un véritable catalyseur de nos élans, en permettant à l’homme d’espérer et de supporter les vicissitudes de l’existence.`,
       plan: [
-        { label: "Problématique", detail: "Thème : définition de la philosophie ; thèse : elle est un débat ouvert et responsable." },
-        { label: "Mouvement 1", detail: "Rejet de la philosophie comme ensemble de vérités définitives." },
-        { label: "Mouvement 2", detail: "Définition positive comme recherche collective et discussion continue." },
-        { label: "Discussion", detail: "Jaspers et Kant renforcent l’ouverture ; Hegel défend l’exigence d’un système." },
+        { label: "Problématique", shortLabel: "Problématique", detail: "Thème : le rôle de la religion ; thèse : elle apaise les souffrances de l’homme ; antithèse : elle l’aliène ; enjeu : le bonheur." },
+        { label: "Mouvement 1 (L1–L4)", shortLabel: "Mvt 1", detail: "Les fondements de la religion : c’est le sentiment de sa faiblesse, plus qu’un raisonnement, qui conduit l’homme à Dieu." },
+        { label: "Mouvement 2 (L4–L12)", shortLabel: "Mvt 2", detail: "La fonction psychologique de la religion : elle apaise les craintes et les tourments de l’existence." },
+        { label: "Critique interne", shortLabel: "Interne", detail: "Démarche explicative en adéquation avec l’intention ; l’auteur fait preuve de rigueur." },
+        { label: "Critique externe", shortLabel: "Externe", detail: "Axe 1 : la religion épanouit (Freud, Girard, saint Augustin). Axe 2 : elle aliène (Freud, Bergson, François Jacob)." },
       ],
-      modelAnswer: "Le texte progresse par opposition : il ferme d’abord la fausse piste du système achevé, puis montre que philosopher exige discussion, justification et responsabilité.",
+      modelAnswer: "Le texte explique d’abord les fondements de la religion, puis sa fonction psychologique ; la discussion oppose ceux pour qui elle épanouit l’homme à ceux pour qui elle l’aliène, avant de reconnaître son utilité comme soutien de l’espérance.",
       questions: [
-        q("Quelle est la thèse de Hountondji ?", "La philosophie est un débat ouvert plutôt qu’un système clos", "La philosophie possède toutes les vérités définitives", "La philosophie interdit la discussion", "La vérité appartient à un seul penseur"),
-        q("Quel découpage suit le raisonnement ?", "Rejet du système clos puis définition de la philosophie comme débat", "Biographie puis bibliographie", "Science puis religion", "Opinion puis absence de conclusion"),
-        q("Quelle référence permet de nuancer la thèse ?", "Hegel : une philosophie scientifique doit être un système", "Jaspers : philosopher, c’est être en route", "Kant : on apprend à philosopher", "Socrate : reconnaître son ignorance"),
+        q("Quelle est la thèse de Hume dans ce texte ?", "La religion apaise les souffrances de l’homme et calme ses douleurs terrestres", "La religion est inutile à l’homme", "La religion est une science exacte", "La religion interdit tout bonheur"),
+        q("Quel est le découpage du texte ?", "Les fondements de la religion, puis sa fonction psychologique", "Une biographie, puis une bibliographie", "Une définition, puis un poème", "Deux exemples sans idée directrice"),
+        q("Quelle référence permet de dépasser la thèse (Axe 2) ?", "Bergson : « Quel tissu d’aberrations ! »", "Saint Augustin : s’attacher à Dieu rend heureux", "Girard : la religion règle les opinions antagonistes", "Freud : la religion éclaire sur l’origine de l’univers"),
+      ],
+      extraQuestions: [
+        { prompt: "Quel est l’enjeu du texte de Hume ?", options: ["Le bonheur", "La connaissance scientifique", "Le pouvoir politique", "La richesse"], correctIndex: 0, explanation: "L’enjeu, c’est ce qui se joue dans la discussion : ici, le bonheur de l’homme.", sourceLabel: "Corrigé – problématique", points: 2 },
+        { prompt: "En critique interne, comment juge-t-on la démarche de Hume ?", options: ["Explicative et en parfaite adéquation avec son intention", "Incohérente et contradictoire", "Purement poétique et sans argument", "Uniquement polémique"], correctIndex: 0, explanation: "La démarche explicative sert bien l’intention de montrer l’importance de la religion.", sourceLabel: "Corrigé – critique interne", points: 2 },
+        { prompt: "Quel auteur soutient le rôle social de la religion (semer l’amour entre les hommes) ?", options: ["Saint Augustin, La Cité de Dieu", "François Jacob, Le jeu des possibles", "Bergson, Les deux sources", "Karl Jaspers"], correctIndex: 0, explanation: "Saint Augustin fonde l’amour de soi et des autres sur l’attachement à Dieu.", sourceLabel: "Corrigé – critique externe, Axe 1", points: 3 },
       ],
     },
   },
