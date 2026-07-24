@@ -1032,8 +1032,42 @@ Connaître l’homme est une **entreprise difficile** : il est tantôt un être 
         summary: "Comparer la sociabilité naturelle d’Aristote au contrat social de Hobbes, Locke et Rousseau.",
         conceptTitle: "Nature ou convention ?",
         explanation: "Pour Aristote, l’homme est naturellement un animal politique et la cité accomplit sa nature. Pour les théoriciens du contrat, la société organisée résulte plutôt d’un accord destiné à sortir d’une condition initiale dangereuse ou incertaine.",
+        bodyMarkdown: String.raw`## Qu’est-ce que la société ?
+
+> **Définition.** La société est une **communauté d’individus ayant des rapports organisés et des échanges de services** — des rapports durables, le plus souvent établis en institutions et garantis par des sanctions.
+
+Sur son **origine**, deux thèses s’opposent.
+
+## A. La thèse naturaliste — Aristote
+
+La société est un **fait naturel** ; l’homme est un être **naturellement social**.
+
+> **ARISTOTE**, *La Politique* : « À l’évidence la cité fait partie des choses naturelles, et **l’homme est par nature un animal politique**. »
+
+## B. La thèse culturaliste — le contrat social
+
+La société est le **produit d’un contrat**, c’est-à-dire d’un accord passé entre les hommes. C’est la position des **philosophes du contrat** : **Hobbes, Locke, Rousseau**.
+
+> **HOBBES**, *Du citoyen* : « Si l’on considère de plus près les causes pour lesquelles les hommes s’assemblent (…), il apparaîtra bientôt que cela n’arrive que **par accident et non pas par une disposition nécessaire de la nature**. »
+
+> **Le point commun.** Les deux thèses s’opposent sur l’**origine** de la société, jamais sur son **importance** : dans les deux cas, l’individu isolé ne suffit pas à réaliser toutes les possibilités humaines.`,
         keyPoint: "La société peut être pensée comme naturelle ou construite, mais l’existence humaine se développe toujours avec les autres.",
         example: "Même si Hobbes conteste une sociabilité spontanée, son contrat montre pourquoi les individus choisissent une organisation commune.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "L’origine de la société",
+          instruction: "Sélectionne une thèse pour voir sa position et son auteur.",
+          observation: "Deux thèses opposées sur l’origine, mais un même constat : l’homme ne se réalise pas seul.",
+          rootLabel: "D’où vient la société ?",
+          rootDetail: "Une communauté aux rapports organisés — mais naturelle ou construite ?",
+          nodes: [
+            { id: "naturaliste", group: "La société est naturelle", label: "Aristote", role: "La thèse naturaliste", detail: "La cité fait partie des choses naturelles : « L’homme est par nature un animal politique » (La Politique). La société accomplit la nature humaine." },
+            { id: "hobbes", group: "La société est un contrat", label: "Hobbes", role: "La thèse culturaliste", detail: "Les hommes s’assemblent « par accident et non par une disposition nécessaire de la nature » (Du citoyen). La société résulte d’un accord." },
+            { id: "contrat", group: "La société est un contrat", label: "Locke et Rousseau", role: "Les philosophes du contrat", detail: "Comme Hobbes, ils font de la société le produit d’un contrat social : un accord institué entre les hommes pour protéger leurs droits." },
+            { id: "commun", group: "Leur point commun", label: "L’homme ne se réalise pas seul", role: "Ce qui les réunit", detail: "Naturelle ou construite, la vie commune reste indispensable : l’individu isolé ne réalise pas toutes les possibilités humaines." },
+          ],
+        },
         mapTitle: "Deux origines possibles",
         mapInstruction: "Compare les thèses avant de dégager leur point commun.",
         map: [
@@ -1043,6 +1077,11 @@ Connaître l’homme est une **entreprise difficile** : il est tantôt un être 
         ],
         observation: "Le désaccord porte sur l’origine, non sur l’importance concrète de la vie commune.",
         check: q("Quelle thèse Aristote défend-il ?", "L’homme est par nature un animal politique", "La société est toujours un accident", "L’État doit disparaître", "La nation se réduit au territoire"),
+        extraQuestions: [
+          { prompt: "Quelle est la définition exacte de la société ?", options: ["Un ensemble d’individus entre lesquels existent des rapports durables et organisés, établis en institutions et garantis par des sanctions", "L’ensemble des infrastructures économiques d’un État", "L’ensemble des hommes et des animaux d’un État", "Un ensemble structuré de valeurs morales"], correctIndex: 0, explanation: "La société suppose des rapports organisés garantis par des institutions.", sourceLabel: "Activité d’application 3", points: 2 },
+          { prompt: "Complète : « L’homme est par nature un animal … »", options: ["politique", "solitaire", "raisonnable", "économique"], correctIndex: 0, explanation: "C’est la formule d’Aristote dans La Politique.", sourceLabel: "Activité d’application 2", points: 1 },
+          { prompt: "Pour Hobbes, pourquoi les hommes s’assemblent-ils ?", options: ["Par accident, non par une disposition nécessaire de la nature", "Parce que la nature les y pousse spontanément", "Parce qu’un dieu l’ordonne", "Parce qu’ils sont incapables de vivre seuls physiquement"], correctIndex: 0, explanation: "Hobbes est culturaliste : la société vient d’un contrat, non de la nature.", sourceLabel: "I-A L’origine sociale", points: 2 },
+        ],
         distractors: ["Tous les philosophes expliquent la société par un contrat.", "L’homme se réalise entièrement dans l’isolement.", "La sociabilité naturelle et le contrat sont identiques."],
       },
       {
@@ -1051,8 +1090,41 @@ Connaître l’homme est une **entreprise difficile** : il est tantôt un être 
         summary: "Comprendre comment le prochain révèle la conscience de soi et rend possible l’humanisation.",
         conceptTitle: "Se construire par la relation",
         explanation: "Autrui est mon semblable et une autre conscience. Sartre souligne que je passe par l’autre pour obtenir une vérité sur moi ; Malson montre que l’enfant privé du milieu social ne développe pas pleinement son humanité.",
+        bodyMarkdown: String.raw`## La relation nécessaire à autrui
+
+Que la sociabilité soit naturelle ou contractuelle, l’homme vit toujours **avec les autres**. Cette évidence a conduit **HEGEL** et **SARTRE** à rejeter le **solipsisme** — l’idée d’une conscience solitaire — défendu par les essentialistes et rationalistes comme **DESCARTES** ou **LEIBNIZ**.
+
+## Autrui me révèle à moi-même
+
+La connaissance de ma conscience m’est révélée **par autrui**, mon semblable, mon prochain.
+
+> **SARTRE**, *L’existentialisme est un humanisme* : « Pour obtenir une vérité quelconque sur moi, **il faut que je passe par l’autre**. »
+
+La présence d’autrui me constitue chaque fois comme un être nouveau : elle contribue à ma prise de conscience, source de liberté et d’épanouissement.
+
+## Autrui m’humanise
+
+Ma liberté et mon humanisation dépendent essentiellement du **respect** que les autres m’accordent.
+
+> **Lucien MALSON**, *Les enfants sauvages* : « Avant la rencontre d’autrui et du groupe, l’homme n’est rien d’autre que **des virtualités aussi légères qu’une transparente vapeur**. »
+
+> **À retenir.** Autrui n’est ni absolument bienfaisant ni absolument hostile : son regard peut me limiter, mais sans lui je ne me connaîtrais pas et ne deviendrais pas pleinement humain. Cette ambivalence prépare la question de la violence sociale.`,
         keyPoint: "Autrui peut me limiter par son regard, mais il est aussi indispensable à la connaissance de soi et à l’humanisation.",
         example: "Le regard d’un camarade peut me gêner, mais ses remarques me révèlent aussi une facette de moi que je ne percevais pas.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Autrui, mon semblable",
+          instruction: "Sélectionne un aspect pour comprendre ce qu’autrui m’apporte.",
+          observation: "Autrui me révèle à moi-même et m’humanise, avant même de pouvoir entrer en conflit avec moi.",
+          rootLabel: "Autrui, mon prochain",
+          rootDetail: "Une autre conscience, sans laquelle je ne me connaîtrais pas",
+          nodes: [
+            { id: "solipsisme", group: "Le rejet du solipsisme", label: "Contre la conscience solitaire", role: "Hegel et Sartre", detail: "Ils rejettent le solipsisme — l’existence solitaire de la conscience — défendu par Descartes et Leibniz. On ne se pense pas seul, mais parmi les autres." },
+            { id: "revelation", group: "Autrui me révèle à moi-même", label: "Passer par l’autre", role: "Sartre", detail: "« Pour obtenir une vérité quelconque sur moi, il faut que je passe par l’autre » (L’existentialisme est un humanisme). Autrui me constitue comme un être nouveau." },
+            { id: "humanisation", group: "Autrui m’humanise", label: "La transparente vapeur", role: "Malson", detail: "« Avant la rencontre d’autrui et du groupe, l’homme n’est rien d’autre que des virtualités aussi légères qu’une transparente vapeur » (Les enfants sauvages). Coupé du milieu social, l’homme reste un simple animal." },
+          ],
+        },
         mapTitle: "Une relation ambivalente",
         mapInstruction: "Observe les deux effets possibles de la présence d’autrui.",
         map: [
@@ -1062,6 +1134,11 @@ Connaître l’homme est une **entreprise difficile** : il est tantôt un être 
         ],
         observation: "Autrui n’est ni absolument bienfaisant ni absolument hostile.",
         check: q("Pourquoi autrui est-il indispensable selon Malson ?", "Parce que l’humanisation dépend du milieu social", "Parce qu’il supprime toute liberté", "Parce qu’il remplace l’État", "Parce qu’il rend la mémoire inutile"),
+        extraQuestions: [
+          { prompt: "Selon Sartre, comment obtenir une vérité sur soi ?", options: ["En passant par l’autre", "En restant seul avec sa conscience", "En consultant l’État", "En refusant tout regard extérieur"], correctIndex: 0, explanation: "« Pour obtenir une vérité quelconque sur moi, il faut que je passe par l’autre. »", sourceLabel: "I-B La relation à autrui", points: 2 },
+          { prompt: "Complète Malson : « l’homme n’est rien d’autre que … aussi légères qu’une transparente vapeur »", options: ["des virtualités", "des certitudes", "des lois", "des passions"], correctIndex: 0, explanation: "Sans le groupe, l’homme n’est que virtualités, un simple animal.", sourceLabel: "Activité d’application 2", points: 1 },
+          { prompt: "Quel courant Hegel et Sartre rejettent-ils ?", options: ["Le solipsisme, l’existence solitaire de la conscience", "Le contrat social", "La thèse naturaliste", "Le monopole de la violence"], correctIndex: 0, explanation: "Ils refusent l’idée d’une conscience isolée défendue par Descartes et Leibniz.", sourceLabel: "I-B La relation à autrui", points: 2 },
+        ],
         distractors: ["Autrui est toujours mon ennemi.", "La relation sociale empêche toute connaissance de soi.", "L’humanité se développe sans aucun apprentissage social."],
       },
       {
@@ -1070,8 +1147,47 @@ Connaître l’homme est une **entreprise difficile** : il est tantôt un être 
         summary: "Distinguer l’organisation politique de l’unité historique et spirituelle d’un peuple.",
         conceptTitle: "Organiser et unir la société",
         explanation: "L’État exerce une autorité juridique et politique sur un territoire ; par le droit et la justice, il doit protéger sécurité et liberté. La nation repose aussi sur des souvenirs partagés et la volonté actuelle de continuer à vivre ensemble.",
+        bodyMarkdown: String.raw`## A. La nécessité de l’État
+
+> **Définition.** L’État est une **forme d’organisation politico-administrative et juridique** exerçant une autorité sur un territoire défini.
+
+Avec son avènement, les hommes **sortent de l’état de nature** en aliénant une part de leur liberté individuelle pour obtenir l’**assurance de leur droit** et de la **justice**. Par le respect des lois — le droit positif —, l’État garantit la liberté et la sécurité.
+
+> **SPINOZA**, *Traité théologico-politique* : « (…) La fin de l’État n’est pas de faire passer les hommes de la condition d’êtres raisonnables à celle de bêtes brutes (…). **La fin de l’État est donc en réalité la liberté.** »
+
+Le **droit** vise la **justice** — l’équité, l’égalité, « attribuer à chacun ce qui lui revient ». Pour **ROUSSEAU** (*Du Contrat social*), les lois sont l’**émanation de la volonté générale**, édictées par l’ensemble des citoyens.
+
+## B. La nation, garante de l’unité sociale
+
+La **Nation** se distingue de l’État : elle implique une **unité spontanée**, là où l’État relève d’une organisation plus ou moins artificielle. *Une nation peut survivre partagée entre plusieurs États ; un État peut comprendre plusieurs nations.*
+
+Deux conditions la réalisent :
+
+| Conditions | Contenu |
+|---|---|
+| **Objectives** | liens géographiques, ethniques, linguistiques, politiques, religieux |
+| **Subjectives** | la formation d’une **conscience nationale** |
+
+> **Ernest RENAN** (1823–1892), *Qu’est-ce qu’une nation ?* : une nation est « **une âme, un principe spirituel** » — d’un côté « la possession en commun d’un riche legs de souvenirs », de l’autre « **le désir de vivre ensemble**, la volonté de continuer à faire valoir l’héritage qu’on a reçu indivis ».
+
+> **À retenir.** L’État **organise** par les institutions ; la nation **unit** par une histoire, une conscience et un projet communs. Les deux sont étroitement liés.`,
         keyPoint: "L’État organise par les institutions ; la nation unit par une histoire, une conscience et un projet communs.",
         example: "Spinoza fait de la liberté la fin de l’État ; Renan décrit la nation comme un héritage partagé et un consentement présent.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "État et nation",
+          instruction: "Sélectionne un élément pour distinguer l’organisation politique de l’unité d’un peuple.",
+          observation: "Un État peut comprendre plusieurs nations, et une nation peut exister au-delà d’un seul État.",
+          rootLabel: "Organiser et unir la société",
+          rootDetail: "L’État organise par le droit ; la nation unit par une conscience commune",
+          nodes: [
+            { id: "etat", group: "L’État (organiser)", label: "Le rôle de l’État", role: "Garantir la liberté", detail: "Organisation politico-administrative et juridique. Spinoza : « La fin de l’État est donc en réalité la liberté » (Traité théologico-politique). L’État protège par le droit contre les injustices." },
+            { id: "droit", group: "L’État (organiser)", label: "Le droit et la justice", role: "La volonté générale", detail: "Le droit vise la justice — attribuer à chacun son dû. Rousseau : les lois sont l’émanation de la volonté générale, édictées par l’ensemble des citoyens (Du Contrat social)." },
+            { id: "objectives", group: "La Nation (unir)", label: "Les conditions objectives", role: "Les liens concrets", detail: "La nation est une unité organique aux liens multiples : géographiques, ethniques, linguistiques, politiques, religieux." },
+            { id: "subjectives", group: "La Nation (unir)", label: "Les conditions subjectives", role: "La conscience nationale", detail: "Renan : la nation est « une âme, un principe spirituel » — la possession commune de souvenirs et « le désir de vivre ensemble » (Qu’est-ce qu’une nation ?)." },
+          ],
+        },
         mapTitle: "De la règle à l’unité",
         mapInstruction: "Distingue les concepts et leurs fonctions.",
         map: [
@@ -1081,6 +1197,11 @@ Connaître l’homme est une **entreprise difficile** : il est tantôt un être 
         ],
         observation: "Un État peut comprendre plusieurs nations, et une nation peut exister au-delà d’un seul État.",
         check: q("Quelle formule résume la nation selon Renan ?", "Un héritage commun et le désir actuel de vivre ensemble", "Une administration sans mémoire", "Un territoire sans population", "Une autorité sans consentement"),
+        extraQuestions: [
+          { prompt: "Selon Spinoza, quelle est la fin de l’État ?", options: ["La liberté", "La richesse", "La guerre", "L’obéissance aveugle"], correctIndex: 0, explanation: "« La fin de l’État est donc en réalité la liberté » (Traité théologico-politique).", sourceLabel: "Activité d’application 2", points: 2 },
+          { prompt: "Quelle est la bonne définition du droit ?", options: ["L’ensemble des droits et devoirs régissant la vie sociale", "L’ensemble des droits de l’homme uniquement", "Tout ce qui est juste et honnête", "Ce à quoi j’ai droit personnellement"], correctIndex: 0, explanation: "Le droit régit droits et devoirs dans la vie sociale.", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "Pour Rousseau, les lois sont l’émanation de…", options: ["la volonté générale", "la volonté d’un seul homme", "la nature", "la religion"], correctIndex: 0, explanation: "Les lois sont édictées par l’ensemble des citoyens (Du Contrat social).", sourceLabel: "II-A La nécessité de l’État", points: 2 },
+        ],
         distractors: ["État et nation sont toujours exactement identiques.", "Le droit a pour but de supprimer toute liberté.", "La nation dépend seulement de la géographie."],
       },
       {
@@ -1089,8 +1210,47 @@ Connaître l’homme est une **entreprise difficile** : il est tantôt un être 
         summary: "Analyser les conflits avec autrui et la violence légitime ou abusive de l’État.",
         conceptTitle: "Protéger sans opprimer",
         explanation: "Les intérêts, le désir de domination et l’agressivité rendent les relations sociales conflictuelles. L’État utilise une contrainte légale pour protéger les citoyens, mais ce pouvoir peut devenir arbitraire et aliéner ceux qu’il devait servir.",
+        bodyMarkdown: String.raw`## A. Les relations conflictuelles avec autrui
+
+> **Définition.** La violence est l’**usage abusif de la force** : asservir, faire souffrir, aliéner ou anéantir un individu ou un groupe.
+
+Selon **HEGEL** et **SARTRE**, autrui se révèle à moi dans un **conflit originel**.
+
+- Chez **HEGEL**, ce conflit débouche sur la **reconnaissance mutuelle** : c’est la *dialectique du maître et de l’esclave* (*La Phénoménologie de l’esprit*). Chaque conscience y acquiert un statut — dominant ou dominé.
+- Chez **SARTRE**, autrui « est un autre moi, c’est le moi qui n’est pas moi ». Le conflit se vit jusque dans la **honte** : « La honte est toujours honte devant quelqu’un (…). J’ai honte de moi tel que j’apparais à autrui » (*L’être et le néant*). Autrui me **chosifie** et me prive de ma liberté.
+
+C’est pourquoi la force de l’État se révèle nécessaire à l’harmonie sociale.
+
+## B. La violence nécessaire de l’État
+
+**MACHIAVEL** (1469–1527) souligne que, en politique, ce qui compte d’abord, c’est l’**efficacité** : la violence est un moyen de maintenir l’ordre. Elle est un **mal nécessaire**.
+
+> **MACHIAVEL**, *Le Prince* : « Qui veut faire entièrement profession d’homme de bien ne peut éviter sa perte parmi tant d’autres qui ne sont pas bons. »
+
+| Penseur | Ce qu’il apporte |
+|---|---|
+| **Max WEBER** | L’État a le **monopole de la violence légitime**, exercé par trois pouvoirs : **législatif, exécutif, judiciaire**. |
+| **Louis ALTHUSSER** | L’État agit par des **appareils idéologiques** (A.I.E. : médias, école, religion, culture) et des **appareils répressifs** (A.R.E. : police, armée, justice). |
+
+> **À retenir.** La force publique n’est **légitime** que réglée par le droit et orientée vers la liberté et la justice. Une loi n’est pas juste par le seul fait d’exister : elle doit pouvoir être évaluée au regard des droits.`,
         keyPoint: "La force publique n’est légitime que si elle est réglée par le droit et orientée vers la liberté et la justice.",
         example: "Une sanction judiciaire respecte une procédure commune ; une violence arbitraire détourne la puissance de l’État de sa finalité.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "La violence dans l’espace social",
+          instruction: "Sélectionne un élément pour distinguer le conflit privé et la violence de l’État.",
+          observation: "La violence traverse les relations privées ; l’État en revendique le monopole, qui n’est légitime que réglé par le droit.",
+          rootLabel: "La violence sociale",
+          rootDetail: "Du conflit avec autrui au monopole de l’État",
+          nodes: [
+            { id: "hegel", group: "Le conflit avec autrui", label: "Hegel", role: "Maître et esclave", detail: "Autrui se révèle dans un conflit originel qui débouche sur la reconnaissance mutuelle : la dialectique du maître et de l’esclave (La Phénoménologie de l’esprit)." },
+            { id: "sartre-conflit", group: "Le conflit avec autrui", label: "Sartre", role: "La honte et la chosification", detail: "« La honte est toujours honte devant quelqu’un » : sous le regard d’autrui, je deviens un objet. Autrui me chosifie et me prive de ma liberté (L’être et le néant)." },
+            { id: "machiavel", group: "La violence de l’État", label: "Machiavel", role: "Le mal nécessaire", detail: "En politique, l’efficacité prime : la violence maintient l’ordre. « Qui veut faire entièrement profession d’homme de bien ne peut éviter sa perte » (Le Prince)." },
+            { id: "weber", group: "La violence de l’État", label: "Max Weber", role: "Le monopole légitime", detail: "L’État détient le monopole de la violence légitime, exercé par trois pouvoirs : législatif, exécutif et judiciaire." },
+            { id: "althusser", group: "La violence de l’État", label: "Althusser", role: "A.I.E. et A.R.E.", detail: "L’État agit par des appareils idéologiques (médias, école, religion) et des appareils répressifs (police, armée, justice)." },
+          ],
+        },
         mapTitle: "Quand la force devient-elle légitime ?",
         mapInstruction: "Compare conflit privé, contrainte légale et oppression.",
         map: [
@@ -1100,6 +1260,11 @@ Connaître l’homme est une **entreprise difficile** : il est tantôt un être 
         ],
         observation: "Une loi n’est pas juste par le seul fait qu’elle existe ; elle doit pouvoir être évaluée au regard des droits.",
         check: q("À quelle condition la contrainte de l’État peut-elle être légitime ?", "Lorsqu’elle est réglée par le droit et protège les libertés", "Lorsqu’elle sert les intérêts d’un seul groupe", "Lorsqu’elle échappe à toute règle", "Lorsqu’elle interdit toute critique"),
+        extraQuestions: [
+          { prompt: "Selon Max Weber, que détient l’État ?", options: ["Le monopole de la violence légitime", "Le monopole du commerce", "Le refus de toute contrainte", "La suppression des lois"], correctIndex: 0, explanation: "Ce monopole s’exerce par les pouvoirs législatif, exécutif et judiciaire.", sourceLabel: "III-B La violence nécessaire de l’État", points: 2 },
+          { prompt: "Chez Sartre, que fait le regard d’autrui ?", options: ["Il me chosifie et me fait honte devant quelqu’un", "Il me rend invisible", "Il supprime la société", "Il garantit ma richesse"], correctIndex: 0, explanation: "« J’ai honte de moi tel que j’apparais à autrui » (L’être et le néant).", sourceLabel: "III-A Les relations conflictuelles", points: 2 },
+          { prompt: "Que distingue Althusser dans les moyens de l’État ?", options: ["Les appareils idéologiques (école, médias) et répressifs (police, armée)", "Le pouvoir spirituel et le pouvoir divin", "La nation et le territoire", "Le droit naturel et le droit positif"], correctIndex: 0, explanation: "Par les A.I.E. l’État impose sa doctrine, par les A.R.E. il exerce la coercition.", sourceLabel: "III-B La violence nécessaire de l’État", points: 3 },
+        ],
         distractors: ["Toute violence de l’État est automatiquement juste.", "Les relations sociales sont toujours pacifiques.", "La justice consiste à obéir à la force la plus grande."],
       },
     ],
@@ -1107,17 +1272,50 @@ Connaître l’homme est une **entreprise difficile** : il est tantôt un être 
       title: "Sujet BAC : « Autrui est-il absolument mon ennemi ? »",
       scenario: "Traite la situation officielle en examinant le conflit possible avec autrui puis son rôle indispensable dans la construction de soi.",
       problem: "Mon semblable est-il nécessairement nuisible ?",
+      bodyMarkdown: String.raw`## Le corrigé du sujet
+
+### I. Définition des termes essentiels
+
+| Terme | Définition |
+|---|---|
+| **Autrui** | mon semblable, mon prochain |
+| **Absolument** | forcément, toujours |
+| **Ennemi** | celui qui cherche à me nuire, à me détruire |
+
+### II. Problème à analyser
+
+> **Autrui est-il nécessairement nuisible ?**
+
+### III. Axes d’analyse et références
+
+**Axe 1 — Autrui se présente comme mon ennemi.**
+
+- Autrui est source de gêne et d’angoisse : son regard, ses actes me dépouillent de mes possibilités. *Cf.* **SARTRE**, *L’être et le néant* : « Je saisis le regard de l’autre (…) comme solidification et aliénation de mes propres possibilités » ; *Huis clos* : « **L’enfer, c’est les autres.** »
+- Autrui est un être égoïste qui vise à m’instrumentaliser. *Cf.* **NIETZSCHE**, *Par-delà le bien et le mal* : « Vivre, c’est essentiellement dépouiller, blesser, violenter le faible » ; **FREUD**, *Malaise dans la civilisation* : l’homme « est tenté de satisfaire son besoin d’agression aux dépens de son prochain ».
+
+**Axe 2 — Autrui est indispensable.**
+
+- L’homme est naturellement porté à vivre en société. *Cf.* **ARISTOTE**, *La Politique* : « L’homme est par nature un animal politique. »
+- Le prochain est indispensable à mon humanisation : coupé du milieu social, je reste un simple animal. *Cf.* **Seydou BADIAN**, *Sous l’orage* : « L’homme n’est rien sans les autres. »
+- Autrui est une source d’enrichissement. *Cf.* **SAINT-EXUPÉRY**, *Terre des hommes* : « Si tu diffères de moi, mon frère, loin de me léser, **tu m’enrichis**. »
+
+> **Le geste attendu.** Défendre sérieusement le conflit (Axe 1) avant de montrer qu’autrui **conditionne mon humanité** (Axe 2). La réponse nuancée : autrui peut être un rival, mais non un ennemi *absolu*, puisque sans lui je ne deviendrais pas moi-même.`,
       plan: [
-        { label: "Axe 1", detail: "Le regard, l’égoïsme et l’agressivité d’autrui peuvent aliéner ou menacer." },
-        { label: "Références", detail: "Sartre, Nietzsche et Freud éclairent le conflit et la violence." },
-        { label: "Axe 2", detail: "Aristote, Malson et Saint-Exupéry montrent la sociabilité et l’enrichissement mutuel." },
-        { label: "Réponse", detail: "Autrui peut être rival, mais il n’est pas absolument ennemi puisqu’il conditionne mon humanité." },
+        { label: "Définir", shortLabel: "Définir", detail: "Autrui : mon prochain ; absolument : toujours ; ennemi : celui qui cherche à me nuire." },
+        { label: "Axe 1", shortLabel: "Axe 1", detail: "Autrui comme ennemi : le regard aliénant (Sartre, « l’enfer c’est les autres »), l’égoïsme (Nietzsche) et l’agressivité (Freud)." },
+        { label: "Axe 2", shortLabel: "Axe 2", detail: "Autrui indispensable : la sociabilité (Aristote), l’humanisation (Seydou Badian) et l’enrichissement (Saint-Exupéry)." },
+        { label: "Réponse", shortLabel: "Réponse", detail: "Autrui peut être rival, mais non ennemi absolu : il conditionne ma conscience de soi et mon humanité." },
       ],
       modelAnswer: "Autrui devient parfois un adversaire par le conflit des intérêts, mais sa présence est indispensable à la conscience de soi, à l’éducation et à la coopération.",
       questions: [
         q("Que signifie « absolument » dans le sujet ?", "Nécessairement et dans tous les cas", "Parfois seulement", "Juridiquement", "Naturellement heureux"),
         q("Quelle référence défend le rôle positif d’autrui ?", "Malson : l’homme ne devient humain que dans le milieu social", "Sartre : l’enfer, c’est les autres", "Freud : l’agressivité appartient à l’homme", "Nietzsche : vivre implique de violenter"),
         q("Quelle réponse évite le faux choix ?", "Autrui peut être conflictuel tout en restant indispensable à mon humanisation", "Autrui est toujours ennemi", "Autrui est toujours bienveillant", "La relation à autrui ne concerne pas la liberté"),
+      ],
+      extraQuestions: [
+        { prompt: "Quelle citation de Sartre illustre le conflit avec autrui ?", options: ["« L’enfer, c’est les autres » (Huis clos)", "« L’homme est par nature un animal politique »", "« Si tu diffères de moi, tu m’enrichis »", "« L’homme n’est rien sans les autres »"], correctIndex: 0, explanation: "C’est la formule de Huis clos, mobilisée à l’Axe 1.", sourceLabel: "Situation d’évaluation – Axe 1", points: 2 },
+        { prompt: "Quel auteur ivoirien illustre l’humanisation par autrui ?", options: ["Seydou Badian : « L’homme n’est rien sans les autres » (Sous l’orage)", "Nietzsche : « Vivre, c’est violenter »", "Freud : « une bonne somme d’agressivité »", "Machiavel : le mal nécessaire"], correctIndex: 0, explanation: "Seydou Badian soutient l’Axe 2 : autrui est indispensable.", sourceLabel: "Situation d’évaluation – Axe 2", points: 3 },
+        { prompt: "Que soutient Saint-Exupéry sur la différence d’autrui ?", options: ["« Si tu diffères de moi, loin de me léser, tu m’enrichis »", "La différence est une menace mortelle", "Autrui doit être supprimé", "La solitude vaut mieux que la société"], correctIndex: 0, explanation: "La différence enrichit : autrui n’est pas un ennemi absolu (Terre des hommes).", sourceLabel: "Situation d’évaluation – Axe 2", points: 2 },
       ],
     },
   },
