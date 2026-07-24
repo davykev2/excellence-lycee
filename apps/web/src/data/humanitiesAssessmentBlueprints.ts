@@ -331,6 +331,44 @@ Ajoute la nuance de Musitelli : cette hégémonie est **douce**, elle repose sur
       title: "Une indépendance obtenue sans résistance ?",
       scenario: "Deux personnes discutent de l’accession de la Côte d’Ivoire à l’indépendance : l’une évoque la résistance, l’autre affirme que le transfert du pouvoir s’est fait sans lutte grâce à l’action de l’élite nationale.",
       modelAnswer: "L’indépendance finale est négociée, mais elle est précédée de mobilisations, de répression et de luttes politiques. L’action du PDCI-RDA et d’Houphouët-Boigny est donc essentielle dans plusieurs phases.",
+      bodyMarkdown: String.raw`## La situation d’évaluation
+
+> Lors de la retransmission des festivités de l’indépendance à la télévision, tu entends un **journaliste** dire : « l’accession à l’indépendance de la Côte d’Ivoire a certes connu des résistances, mais elle a été le **point de départ de plusieurs réformes** ».
+>
+> Ton **ami** n’est pas d’accord : « notre pays s’est libéré du joug colonial à la suite d’une **lutte farouche de l’élite nationale** ».
+
+## Document 1 — L’esprit de Brazzaville
+
+*J. Ki-Zerbo,* Histoire de l’Afrique Noire d’hier à demain, *Hatier, 1978 :*
+
+> « La conférence recommande une large représentation des indigènes […], la suppression du travail forcé, le développement de l’instruction […]. Certes la préscience des lendemains ne va pas jusqu’à envisager […] la constitution de **self-government**. La notion d’**Empire reste préférée**… Dès son retour à Abidjan, le gouverneur **Latrille** va s’attacher honnêtement à travailler dans l’esprit de Brazzaville. Les résistances […] lui vaudront d’être considéré par les colons comme l’**ennemi n°1**. »
+
+## Document 2 — Houphouët et la « balkanisation »
+
+*H. Deschamps,* Histoire de l’Afrique Noire, *PUF, 1975 :*
+
+> « En janvier 1950, en basse Côte d’Ivoire, des troubles se déclenchèrent, qui furent **réprimés dans le sang**. […] Houphouët sentit que l’alliance communiste lui faisait perdre […] ses moyens d’action. […] Houphouët avait abandonné les communistes et fait alliance avec […] **Mitterrand** […]. Son influence sur la “loi-cadre” fut sans doute déterminante dans le sens de la “**balkanisation**”. »
+
+## Comment construire ta réponse
+
+**Consigne 1 — Le problème.** Il s’agit des **formes de lutte** et des **étapes** de l’accession de la Côte d’Ivoire à l’indépendance (1944-1960).
+
+**Consigne 2 — Expliquer le journaliste.** Il a raison : l’indépendance fut le **point de départ de réformes** — Brazzaville (1944), suppression du travail forcé (1946), Loi-Cadre (1956), Communauté (1958) — mais elle « connut des résistances » (répression de 1949-1950, 52 morts).
+
+**Consigne 3 — Partages-tu l’avis de l’ami ?** Réponse **nuancée** :
+
+| Ce que l’ami a raison de dire | Ce qu’il oublie |
+|---|---|
+| L’élite (FHB, PDCI-RDA) a bien mené une lutte réelle | La lutte ne fut pas seulement « farouche » : elle fut **surtout politique et négociée** |
+| Il y eut des morts et de la répression | L’indépendance vint aussi de **réformes** et d’un **contexte international** favorable |
+
+> **Astuce mémoire de Davy.** Face à l’ami, le bon réflexe est **« oui, mais »** : oui, l’élite nationale a lutté ; **mais** l’indépendance ivoirienne fut globalement **pacifique et négociée** (désapparentement, Loi-Cadre, référendum de 1958), pas seulement une lutte armée. Ni tout-négociation, ni tout-résistance : les deux.`,
+      extraQuestions: [
+        { prompt: "Selon Ki-Zerbo (doc. 1), la Conférence de Brazzaville envisageait-elle le self-government ?", options: ["Non : « la notion d’Empire reste préférée »", "Oui, dès 1944", "Oui, mais seulement pour la Côte d’Ivoire", "Le texte ne le dit pas"], correctIndex: 0, explanation: "Brazzaville réforme sans envisager l’indépendance.", sourceLabel: "Document 1 — Ki-Zerbo", points: 2 },
+        { prompt: "Comment les colons considèrent-ils le gouverneur Latrille (doc. 1) ?", options: ["Comme leur « ennemi n°1 »", "Comme un allié fidèle", "Comme un gouverneur absent", "Comme un communiste inoffensif"], correctIndex: 0, explanation: "Il applique honnêtement l’esprit de Brazzaville, au grand dam des colons.", sourceLabel: "Document 1 — Ki-Zerbo", points: 1 },
+        { prompt: "Que désigne la « balkanisation » évoquée par Deschamps (doc. 2) ?", options: ["Le morcellement de l’Afrique en États séparés plutôt qu’en fédérations", "L’union de toutes les colonies en un seul État", "La guerre dans les Balkans", "Le retour au travail forcé"], correctIndex: 0, explanation: "Houphouët, territorialiste, refusait le leadership de Dakar.", sourceLabel: "Document 2 — Deschamps", points: 2 },
+        { prompt: "Pour la consigne 3, quelle position est la mieux argumentée ?", options: ["Oui en partie : l’élite a lutté, mais l’indépendance fut surtout politique et négociée", "Non, l’élite n’a joué aucun rôle", "Oui, ce fut uniquement une lutte armée", "La question ne peut être tranchée"], correctIndex: 0, explanation: "Un avis nuancé, appuyé sur les deux documents, est attendu.", sourceLabel: "Méthode BAC — consigne 3", points: 2 },
+      ],
       questions: [
         question("Quel problème est posé ?", "Les formes de lutte et les étapes de l’accession de la Côte d’Ivoire à l’indépendance", ["Le bilan de l’Union africaine", "L’économie de la Corée du Sud", "La formation de l’OTAN"], "La discussion oppose une lecture uniquement pacifique à une histoire faite de plusieurs phases.", 1),
         question("Pourquoi peut-on parler d’une lutte avant la collaboration ?", "Le mouvement nationaliste connaît mobilisations, répression et rupture avec l’administration coloniale", ["L’indépendance est offerte dès 1944", "Aucun parti politique n’existe", "La population reste totalement absente"], "La phase de lutte de 1947 à 1950 précède le rapprochement politique.", 2),

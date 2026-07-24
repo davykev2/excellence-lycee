@@ -1046,6 +1046,35 @@ Dans leur synergie, tous ces mouvements ont rendu possible l’**accession progr
         summary: "Relier Brazzaville, SAA, PDCI-RDA et premières réformes politiques.",
         conceptTitle: "Les réformes ouvrent un espace politique africain",
         explanation: "La Conférence de Brazzaville recommande d’assouplir l’administration coloniale. En Côte d’Ivoire, le SAA puis le PDCI structurent les revendications, tandis que Félix Houphouët-Boigny entre dans la représentation politique française.",
+        bodyMarkdown: String.raw`## Le cadre général
+
+Après la Seconde Guerre mondiale (1939-1945), la décolonisation devient en Afrique un phénomène **irréversible**. L’émancipation de la Côte d’Ivoire s’inscrit dans celle de l’**Afrique noire française**, mais elle est marquée sur le plan interne par la personnalité de **Félix Houphouët-Boigny (FHB)**. Le processus se déroule en **trois phases** : l’espoir (1944-1947), la lutte (1947-1950), la collaboration (1950-1960).
+
+## La Conférence de Brazzaville (30 janvier – 8 février 1944)
+
+**Le contexte.** La France est affaiblie ; les nationalismes montent en Afrique du Nord. Pour renforcer le Comité français de libération nationale (CFLN) et **préserver les colonies**, le général **de Gaulle** convoque la conférence. Elle réunit surtout des hauts fonctionnaires — **21 gouverneurs, 9 députés, 6 observateurs** — mais **aucune élite africaine n’y est invitée**.
+
+**Les recommandations** visent à assouplir l’administration directe :
+
+- suppression **progressive** du travail forcé et du code de l’indigénat ;
+- possibilité pour les indigènes de créer des assemblées élues (associations, syndicats, partis) ;
+- plus large représentation dans les assemblées françaises ;
+- accès des indigènes à tous les emplois.
+
+> **Correction importante.** Brazzaville **n’envisage pas** l’indépendance. Le document de Ki-Zerbo le dit clairement : « la constitution de self-government » n’est pas envisagée et « la notion d’Empire reste préférée ». Ne jamais écrire que Brazzaville promet l’indépendance.
+
+## L’application en Côte d’Ivoire
+
+Le gouverneur **André Latrille** (en poste depuis le 26 août 1943) applique honnêtement l’esprit de Brazzaville, ce qui lui vaudra d’être traité de « communiste » par l’administration. Il facilite :
+
+| Date | Fait |
+|---|---|
+| **8 août 1944** | création du **Syndicat agricole africain (SAA)**, présidé par Houphouët-Boigny |
+| **21 octobre 1945** | FHB élu **député** à l’Assemblée constituante française |
+| **9 avril 1946** | création du **PDCI** |
+| 1946 | amélioration des prix agricoles, suppression des intermédiaires |
+
+> **Astuce mémoire de Davy.** Trois sigles à ne jamais confondre : **SAA** (syndicat, 1944), **PDCI** (parti ivoirien, 9 avril 1946), **RDA** (rassemblement panafricain, 18 octobre 1946 à Bamako). Le PDCI **s’affilie** au RDA — il n’est pas le RDA.`,
         keyPoint: "Entre 1944 et 1947, réformes et organisations africaines font naître l’espoir d’une émancipation progressive.",
         example: "Le SAA est créé le 8 août 1944 ; le PDCI en avril 1946 et le RDA en octobre 1946.",
         timelineTitle: "Les débuts de l’organisation politique",
@@ -1057,6 +1086,13 @@ Dans leur synergie, tous ces mouvements ont rendu possible l’**accession progr
         ],
         observation: "Les réformes coloniales restent limitées, mais elles donnent aux organisations africaines de nouveaux moyens d’action.",
         check: { prompt: "Quelle organisation est créée le 8 août 1944 ?", options: ["Le Syndicat agricole africain", "L’ONU", "La CEDEAO", "Le FLN"], correctIndex: 0, explanation: "Le SAA défend notamment les planteurs africains." },
+        extraQuestions: [
+          { prompt: "Qui convoque la Conférence de Brazzaville et dans quel but ?", options: ["Le général de Gaulle, pour préserver les colonies françaises", "Sékou Touré, pour proclamer l’indépendance", "Houphouët-Boigny, pour créer le RDA", "L’ONU, pour décoloniser l’Afrique"], correctIndex: 0, explanation: "Il s’agit de renforcer le CFLN et de moderniser l’administration coloniale.", sourceLabel: "Cours I-1", points: 2 },
+          { prompt: "Quelle élite africaine participe à la Conférence de Brazzaville ?", options: ["Aucune : seuls des fonctionnaires coloniaux y siègent", "Houphouët-Boigny et Senghor", "Tous les députés africains", "Les syndicats agricoles"], correctIndex: 0, explanation: "21 gouverneurs, 9 députés, 6 observateurs — mais aucune élite africaine.", sourceLabel: "Cours I-1", points: 2 },
+          { prompt: "Relie : la création du PDCI a lieu le…", options: ["9 avril 1946", "8 août 1944", "18 octobre 1946", "11 avril 1946"], correctIndex: 0, explanation: "Le SAA date du 8 août 1944, le RDA du 18 octobre 1946.", sourceLabel: "Activité d’application 1", points: 1 },
+          { prompt: "Quel gouverneur applique l’esprit de Brazzaville en Côte d’Ivoire ?", options: ["André Latrille", "Laurent Péchoux", "Pierre Pélieu", "René Pleven"], correctIndex: 0, explanation: "Jugé trop favorable aux Noirs, il sera plus tard remplacé par Péchoux.", sourceLabel: "Cours I-1", points: 1 },
+          { prompt: "La Conférence de Brazzaville envisageait dès 1944 l’indépendance des colonies.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Elle refuse le self-government : « la notion d’Empire reste préférée » (Ki-Zerbo).", sourceLabel: "Document — Ki-Zerbo", points: 2 },
+        ],
         distractors: ["La phase de l’espoir commence après 1960.", "Brazzaville proclame immédiatement l’indépendance de toutes les colonies.", "Le PDCI est créé avant le SAA."],
       },
       {
@@ -1065,6 +1101,29 @@ Dans leur synergie, tous ces mouvements ont rendu possible l’**accession progr
         summary: "Expliquer apparentement communiste, répression coloniale et changement de stratégie du PDCI.",
         conceptTitle: "La confrontation entre le PDCI-RDA et l’administration",
         explanation: "L’apparentement du RDA au Parti communiste français inquiète les autorités. Meetings, boycotts et marches sont réprimés sous Laurent Péchoux ; arrestations, incidents et morts poussent le PDCI dans la clandestinité puis vers une nouvelle stratégie.",
+        bodyMarkdown: String.raw`## L’apparentement au PCF
+
+La Constitution de 1946, jugée trop **assimilationniste**, déçoit les attentes d’indépendance. Les leaders africains engagent alors la lutte. À l’Assemblée, Houphouët-Boigny fait créer le **Rassemblement démocratique africain (RDA)** au congrès de **Bamako, le 18 octobre 1946** ; il en devient le premier président, le siège est fixé à Abidjan, et le PDCI s’y affilie.
+
+Pour renforcer son action, le RDA **s’apparente au Parti communiste français (PCF)**, qui lui apporte financement, formation et soutien au vote des lois. Mais en pleine **Guerre froide**, cet apparentement fait apparaître le RDA comme un **danger** aux yeux de la France : les députés du **MRP** et de la **SFIO** se déchaînent contre le PDCI.
+
+## La répression de Laurent Péchoux
+
+La résistance du PDCI prend des formes **pacifiques** : journaux, meetings, marches, et surtout **boycotts** (du travail chez les colons, de leurs magasins, de leurs réunions).
+
+Comme les colons perdent leurs privilèges, l’administration passe à l’offensive. Profitant des incidents d’**Abengourou**, elle remplace Latrille par **Laurent Péchoux**, chargé de réprimer le PDCI-RDA « communiste ». Le pouvoir suscite des partis rivaux, tel le **BDE** d’Étienne Djaument (30 décembre 1948).
+
+| Date | Événement |
+|---|---|
+| **6 février 1949** | incidents de **Treichville** : 30 arrestations dont 8 du comité directeur (Ekra, Mockey, Dadié…) |
+| — | **marche des femmes** sur la prison de **Grand-Bassam** |
+| **Janvier 1950** | affrontements de **Bouaflé, Séguéla, Dimbokro** |
+
+**Bilan de 1950 : 52 morts et environ 3 000 blessés.** Le PDCI, interdit de réunion et poussé à la **clandestinité**, va changer de stratégie et passer à la collaboration.
+
+> **Le point clé.** L’apparentement au PCF a d’abord donné des moyens au RDA, puis est devenu un **handicap** : après le départ des communistes du gouvernement français (1947), il expose le parti à la répression. C’est ce qui explique le futur désapparentement de 1950.
+
+> **Astuce mémoire de Davy.** Oppose les **deux gouverneurs** : **Latrille** (favorable aux Africains, « l’ennemi n°1 » des colons) et **Péchoux** (le répresseur). Si une question parle de répression, la réponse est Péchoux.`,
         keyPoint: "La répression de 1947-1950 transforme la lutte et conduit le PDCI à abandonner l’apparentement communiste.",
         example: "Après les arrestations de février 1949, les femmes marchent sur la prison de Grand-Bassam pour réclamer la libération des militants.",
         timelineTitle: "L’escalade de la confrontation",
@@ -1076,6 +1135,13 @@ Dans leur synergie, tous ces mouvements ont rendu possible l’**accession progr
         ],
         observation: "La répression peut radicaliser un mouvement, mais elle peut aussi provoquer un changement tactique.",
         check: { prompt: "Quel gouverneur est associé à la forte répression du PDCI-RDA ?", options: ["Laurent Péchoux", "André Latrille", "Pierre Mendès France", "Dag Hammarskjöld"], correctIndex: 0, explanation: "Laurent Péchoux remplace André Latrille et réprime le militantisme du PDCI-RDA." },
+        extraQuestions: [
+          { prompt: "À quel parti français le RDA s’apparente-t-il, et pourquoi cela devient-il un problème ?", options: ["Au PCF ; en pleine Guerre froide, il est vu comme un danger pour la France", "À la SFIO ; elle refuse toute réforme", "Au MRP ; il est trop conservateur", "À l’UDSR ; elle est communiste"], correctIndex: 0, explanation: "Le communisme est combattu en Europe occidentale : l’apparentement inquiète.", sourceLabel: "Cours II-1", points: 2 },
+          { prompt: "Quelles formes prend la résistance du PDCI ?", options: ["Journaux, meetings, marches et boycotts", "Uniquement la lutte armée", "La recolonisation", "Aucune action"], correctIndex: 0, explanation: "Une résistance essentiellement pacifique et organisée.", sourceLabel: "Cours II-2", points: 1 },
+          { prompt: "Quel est le lourd bilan humain de la répression de janvier 1950 ?", options: ["52 morts et environ 3 000 blessés", "5 morts", "Aucune victime", "300 morts"], correctIndex: 0, explanation: "Le PDCI est ensuite interdit de réunion et poussé à la clandestinité.", sourceLabel: "Cours II-2", points: 2 },
+          { prompt: "Complète (activité 2) : « L’exclusion des … du gouvernement français laissa les mains libres pour réprimer les mouvements. »", options: ["communistes", "gaullistes", "socialistes", "planteurs"], correctIndex: 0, explanation: "Le départ des communistes de 1947 fragilise le RDA apparenté.", sourceLabel: "Activité d’application 2", points: 2 },
+          { prompt: "La marche des femmes de 1949 se dirige vers la prison de…", options: ["Grand-Bassam", "Treichville", "Bouaflé", "Dimbokro"], correctIndex: 0, explanation: "Elle réclame la libération des militants arrêtés.", sourceLabel: "Cours II-2", points: 1 },
+        ],
         distractors: ["Le PDCI cesse toute activité politique dès 1944.", "L’apparentement unit le RDA au parti gaulliste.", "La phase de lutte ne connaît aucune arrestation."],
       },
       {
@@ -1089,12 +1155,75 @@ Dans leur synergie, tous ces mouvements ont rendu possible l’**accession progr
         timelineTitle: "La marche vers l’indépendance",
         timelineInstruction: "Parcours les trois repères qui conduisent de la collaboration à la souveraineté.",
         timeline: [
-          { label: "7 octobre 1950", shortLabel: "Désapparentement", detail: "Houphouët-Boigny rompt avec le PCF et engage le PDCI dans une stratégie de collaboration." },
-          { label: "23 juin 1956", shortLabel: "Loi-Cadre", detail: "Autonomie politique et administrative accrue, suffrage universel et collège unique." },
-          { label: "7 août 1960", shortLabel: "Indépendance", detail: "La Côte d’Ivoire devient un État souverain." },
+          { label: "Le désapparentement et la stratégie parlementaire (1950-1956)", shortLabel: "Le désapparentement et la stratégie parlementaire", detail: "Houphouët-Boigny rompt avec le PCF, s’allie à l’UDSR de Mitterrand et fait de la lutte une action parlementaire jusqu’à la Loi-Cadre de 1956." },
+          { label: "La Communauté franco-africaine (1958)", shortLabel: "La Communauté franco-africaine", detail: "De Gaulle met en place une Communauté de républiques autonomes ; toutes les colonies l’acceptent par référendum, sauf la Guinée." },
+          { label: "L’indépendance du 7 août 1960", shortLabel: "l’indépendance du 7 août 1960", detail: "Après la désagrégation de la Communauté, la Côte d’Ivoire devient souveraine, avec Houphouët-Boigny pour premier président." },
         ],
         observation: "L’indépendance ivoirienne résulte d’une succession de rapports de force, de réformes et de négociations.",
         check: { prompt: "Quelle réforme de 1956 accroît l’autonomie des colonies ?", options: ["La Loi-Cadre", "Le plan Marshall", "Le Pacte de Varsovie", "La Charte de l’Atlantique"], correctIndex: 0, explanation: "La Loi-Cadre Defferre constitue une étape majeure vers l’autonomie." },
+        parts: [
+          {
+            bodyMarkdown: String.raw`## Le désapparentement (7 octobre 1950)
+
+Le **12 juin 1950**, René **Pleven** arrive au pouvoir en France et nomme François **Mitterrand** ministre de la France d’Outre-Mer. Ce dernier convainc Houphouët-Boigny de **rompre avec le PCF** pour rejoindre l’**UDSR** (Union démocratique et socialiste de la Résistance). La rupture est officialisée dans le **discours du 7 octobre 1950 au stade Géo André** : c’est le **désapparentement**, qui ouvre l’**ère de la collaboration**.
+
+FHB lance alors un appel à l’union des forces politiques dans un parti unique pour bâtir la Côte d’Ivoire.
+
+## La lutte devient parlementaire
+
+Laurent Péchoux est remplacé par **Pierre Pélieu en 1952** : la lutte devient surtout **parlementaire**. Aux **élections législatives de 1956**, le PDCI (Côte d’Ivoire) et le RDA (Afrique) obtiennent la majorité des sièges africains. FHB devient **ministre d’État** dans le gouvernement de **Guy Mollet**.
+
+## La Loi-Cadre (23 juin 1956)
+
+Rédigée par **Gaston Defferre**, elle associe davantage les Africains à la gestion de leurs affaires :
+
+- **suffrage universel** et **collège unique** dans les colonies ;
+- pouvoir élargi des **assemblées territoriales** (justice, finances) ;
+- création d’un **Conseil de gouvernement** (présidé par le gouverneur, vice-présidé par le chef du parti majoritaire).
+
+La Loi-Cadre dote ainsi les colonies d’une réelle **autonomie politique et administrative** : un pas décisif vers l’émancipation.
+
+> **Astuce mémoire de Davy.** Le désapparentement, c’est un triangle d’hommes : **Pleven** (chef du gouvernement) → **Mitterrand** (le ministre qui négocie) → **Houphouët-Boigny** (qui quitte le PCF pour l’UDSR). Date-repère unique : **7 octobre 1950, stade Géo André**.`,
+            extraQuestions: [
+              { prompt: "Qui convainc Houphouët-Boigny de rompre avec le PCF ?", options: ["François Mitterrand, ministre de la France d’Outre-Mer", "Charles de Gaulle", "Guy Mollet", "Gaston Defferre"], correctIndex: 0, explanation: "Nommé par Pleven, Mitterrand négocie le ralliement à l’UDSR.", sourceLabel: "Cours III-1", points: 2 },
+              { prompt: "Où et quand le désapparentement est-il officialisé ?", options: ["Au stade Géo André, le 7 octobre 1950", "À Bamako, le 18 octobre 1946", "À Brazzaville, en février 1944", "À Abidjan, en 1960"], correctIndex: 0, explanation: "Ce discours ouvre l’ère de la collaboration.", sourceLabel: "Cours III-1", points: 2 },
+              { prompt: "Qui rédige la Loi-Cadre de 1956 ?", options: ["Gaston Defferre", "François Mitterrand", "René Pleven", "André Latrille"], correctIndex: 0, explanation: "La Loi-Cadre Defferre du 23 juin 1956.", sourceLabel: "Cours III-2", points: 1 },
+              { prompt: "Que met en place la Loi-Cadre de 1956 ?", options: ["Suffrage universel, collège unique et Conseil de gouvernement", "L’indépendance immédiate", "Le rétablissement du travail forcé", "La suppression des assemblées"], correctIndex: 0, explanation: "Elle donne aux colonies une autonomie politique et administrative.", sourceLabel: "Cours III-2", points: 2 },
+              { prompt: "Range (activité 3) : « Houphouët-Boigny se rallie à l’UDSR de Mitterrand » appartient à…", options: ["Le désapparentement", "La Loi-Cadre de 1956", "La Communauté franco-africaine", "L’indépendance"], correctIndex: 0, explanation: "C’est l’acte fondateur de la phase de collaboration.", sourceLabel: "Activité d’application 3", points: 1 },
+            ],
+          },
+          {
+            bodyMarkdown: String.raw`## La Communauté franco-africaine (1958)
+
+Revenu au pouvoir à la suite de la **guerre d’Algérie**, **de Gaulle** élabore une nouvelle constitution qui met en place, en **1958**, la **Communauté franco-africaine** : la France et ses anciennes colonies, devenues des **républiques autonomes**.
+
+Ces États gèrent leurs propres affaires, **sauf** les **domaines stratégiques** réservés à la métropole :
+
+> justice, défense, **monnaie**, politique extérieure, communication, enseignement supérieur.
+
+Présentée par **référendum en septembre 1958**, la Communauté est **acceptée par toutes les colonies sauf la Guinée** de **Sékou Touré**, qui vote « non » et obtient aussitôt l’indépendance (**28 septembre 1958**), au prix d’une rupture de toute aide française.
+
+## De la désagrégation à l’indépendance (1960)
+
+La Communauté divise les leaders en deux camps :
+
+| Camp | Chef de file | Idée |
+|---|---|---|
+| **Fédéralistes** | Léopold Sédar **Senghor** | regrouper les États en grands ensembles |
+| **Territorialistes** | **Houphouët-Boigny** | indépendance territoire par territoire |
+
+En **janvier 1959**, le Soudan français et le Sénégal créent la **Fédération du Mali** : la Communauté se désagrège. Entre janvier et août 1960, c’est la **vague des indépendances**. La **Côte d’Ivoire devient indépendante le 7 août 1960**, avec pour premier président **Félix Houphouët-Boigny**, rentré au pays en 1959 comme Premier ministre. Après l’indépendance, le pays maintient des relations d’amitié et de coopération avec la France.
+
+> **Astuce mémoire de Davy.** Deux visions à opposer : **Senghor le fédéraliste** (« restons unis ») contre **Houphouët le territorialiste** (« chacun son État »). C’est la victoire des territorialistes qui explique la « balkanisation » évoquée par Deschamps et les 17 indépendances de 1960.`,
+            extraQuestions: [
+              { prompt: "Quels domaines la métropole conserve-t-elle dans la Communauté franco-africaine ?", options: ["Justice, défense, monnaie, politique extérieure, communication, enseignement supérieur", "Uniquement l’agriculture", "Aucun domaine", "La santé et le sport"], correctIndex: 0, explanation: "Les États gèrent le reste ; ces domaines restent des compétences communes.", sourceLabel: "Cours III-3", points: 2 },
+              { prompt: "Quelle colonie refuse la Communauté en 1958 ?", options: ["La Guinée de Sékou Touré", "Le Sénégal de Senghor", "La Côte d’Ivoire d’Houphouët-Boigny", "Le Soudan français"], correctIndex: 0, explanation: "Elle accède aussitôt à l’indépendance, avec rupture de l’aide française.", sourceLabel: "Cours III-3", points: 2 },
+              { prompt: "Qui dirige le camp des « fédéralistes » face aux « territorialistes » d’Houphouët-Boigny ?", options: ["Léopold Sédar Senghor", "Sékou Touré", "Gaston Defferre", "René Pleven"], correctIndex: 0, explanation: "L’opposition fédéralistes / territorialistes désagrège la Communauté.", sourceLabel: "Cours III-3", points: 2 },
+              { prompt: "Quand la Côte d’Ivoire devient-elle indépendante, et avec quel premier président ?", options: ["Le 7 août 1960, avec Houphouët-Boigny", "Le 28 septembre 1958, avec Sékou Touré", "Le 27 octobre 1946, avec Latrille", "En 1959, avec Senghor"], correctIndex: 0, explanation: "FHB, rentré en 1959 comme Premier ministre, devient le premier président.", sourceLabel: "Cours III-3", points: 1 },
+              { prompt: "La création de la Fédération du Mali (janvier 1959) réunit :", options: ["Le Soudan français et le Sénégal", "La Côte d’Ivoire et la Guinée", "Le Togo et le Cameroun", "L’Algérie et la Tunisie"], correctIndex: 0, explanation: "Cet événement précipite la désagrégation de la Communauté.", sourceLabel: "Cours III-3", points: 1 },
+            ],
+          },
+        ],
         distractors: ["La Côte d’Ivoire devient indépendante en 1944.", "Le désapparentement renforce l’alliance avec le PCF.", "La Communauté franco-africaine précède la Conférence de Brazzaville."],
       },
     ],
