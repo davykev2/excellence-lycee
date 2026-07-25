@@ -25,8 +25,52 @@ const courses: PhilosophyCourseSeed[] = [
         summary: "Définir les productions par lesquelles l’être humain transforme la nature et se transforme lui-même.",
         conceptTitle: "Ce qui distingue l’humanité",
         explanation: "L’humanité désigne tous les hommes mais aussi l’ordre moral qui les unit. La culture rassemble les transformations et connaissances acquises ; la civilisation met ces valeurs et techniques en action dans une société.",
+        bodyMarkdown: String.raw`## Qu’est-ce que l’humanité ?
+
+Au sens propre, l’**humanité** désigne la **totalité des hommes** ; de manière spécifique, elle est un **ordre éthique et moral** qui réunit les hommes et les distingue des animaux.
+
+> **SOPHOCLE**, *Antigone* : « Il est bien des merveilles en ce monde, il n’en est pas de plus grand que l’homme. »
+
+> **PASCAL**, *Traité du vide* : « L’humanité désigne toute la suite des hommes à travers les générations pour apparaître comme **un même individu qui apprend continuellement et se transforme sans cesse**. »
+
+## Culture, civilisation, existence
+
+| Notion | Sens |
+|---|---|
+| **Histoire** | l’ensemble des faits du passé humain **et** leur étude |
+| **Culture** | les modifications que l’homme imprime à la nature et à lui-même ; les connaissances acquises |
+| **Civilisation** | la culture **en action** |
+| **Existence** | le fait d’exister, d’être présent au monde et d’en prendre conscience |
+
+> **SENGHOR**, *Liberté* : la civilisation est « l’ensemble des **valeurs morales et techniques** et la manière de s’en servir ».
+
+L’existence s’oppose à l’**essence** (ce qu’est une chose indépendamment du fait qu’elle existe). D’où deux doctrines : l’**existentialisme** et l’**essentialisme**.
+
+> **SARTRE**, *L’existentialisme est un humanisme* : « **L’existence précède l’essence.** »
+
+## Ce qui éloigne l’homme de l’animalité
+
+> **ROUSSEAU**, *Discours sur l’inégalité* : « Cette différence de l’homme et de l’animal réside dans une qualité très spécifique, c’est **la faculté de se perfectionner** » — la **perfectibilité**.
+
+> **KANT**, *Anthropologie du point de vue pragmatique* : « **L’homme ne peut devenir homme que par l’éducation.** » L’éducation (discipline + instruction) fait faire à la nature « un pas vers la perfection ».`,
         keyPoint: "Culture et civilisation expriment la perfectibilité humaine et distinguent l’existence historique de la simple vie biologique.",
         example: "Rousseau nomme perfectibilité la capacité humaine à se transformer ; Kant ajoute que l’éducation permet à l’homme de devenir humain.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Ce qui distingue l’humanité",
+          instruction: "Sélectionne une notion pour voir sa définition et l’auteur qui l’éclaire.",
+          observation: "L’humanité n’est pas seulement donnée à la naissance : elle s’acquiert et se transmet par la culture et l’éducation.",
+          rootLabel: "L’humanité",
+          rootDetail: "Une totalité des hommes, mais aussi un ordre moral qui se construit",
+          nodes: [
+            { id: "pascal", group: "Définir l’humanité", label: "Pascal", role: "Un individu qui se transforme", detail: "« L’humanité désigne toute la suite des hommes (…) comme un même individu qui apprend continuellement et se transforme sans cesse » (Traité du vide)." },
+            { id: "culture", group: "Culture et civilisation", label: "La culture", role: "Transformer la nature et soi", detail: "L’ensemble des modifications que l’homme imprime à la nature qui l’entoure et à sa propre personne, ainsi que les connaissances acquises par l’éducation." },
+            { id: "senghor", group: "Culture et civilisation", label: "Senghor", role: "La culture en action", detail: "La civilisation est « l’ensemble des valeurs morales et techniques et la manière de s’en servir » (Liberté)." },
+            { id: "rousseau", group: "Ce qui éloigne de l’animalité", label: "Rousseau", role: "La perfectibilité", detail: "« Cette différence de l’homme et de l’animal réside dans une qualité très spécifique, c’est la faculté de se perfectionner » (Discours sur l’inégalité)." },
+            { id: "kant-educ", group: "Ce qui éloigne de l’animalité", label: "Kant", role: "L’éducation", detail: "« L’homme ne peut devenir homme que par l’éducation. » Discipline et instruction humanisent l’être humain (Anthropologie du point de vue pragmatique)." },
+          ],
+        },
         mapTitle: "De la vie à l’humanité",
         mapInstruction: "Observe la fonction de chaque notion.",
         map: [
@@ -36,6 +80,12 @@ const courses: PhilosophyCourseSeed[] = [
         ],
         observation: "L’humanité n’est pas seulement donnée à la naissance : elle s’acquiert et se transmet.",
         check: q("Quelle notion exprime la capacité humaine à se transformer ?", "La perfectibilité", "Le fatalisme", "Le solipsisme", "Le scepticisme"),
+        extraQuestions: [
+          { prompt: "Relie : « L’humanité désigne toute la suite des hommes (…) qui apprend continuellement et se transforme sans cesse. »", options: ["Pascal", "Rousseau", "Senghor", "Kant"], correctIndex: 0, explanation: "Formule de Pascal (Traité du vide).", sourceLabel: "Activité d’application 3", points: 2 },
+          { prompt: "Relie : « L’homme ne peut devenir homme que par l’éducation. »", options: ["Kant", "Sartre", "Senghor", "Sophocle"], correctIndex: 0, explanation: "Formule de Kant (Anthropologie du point de vue pragmatique).", sourceLabel: "Activité d’application 3", points: 2 },
+          { prompt: "Comment Senghor définit-il la civilisation ?", options: ["La culture en action : l’ensemble des valeurs morales et techniques", "Une simple accumulation d’objets", "L’opposé de la culture", "Un fait purement biologique"], correctIndex: 0, explanation: "La civilisation est la culture mise en œuvre (Liberté).", sourceLabel: "I-A Humanité, culture, civilisation", points: 2 },
+          { prompt: "Que signifie « l’existence précède l’essence » chez Sartre ?", options: ["L’homme existe d’abord, puis se définit par ses actes", "L’homme est défini avant de naître", "L’essence rend l’existence inutile", "L’homme ne peut pas se transformer"], correctIndex: 0, explanation: "C’est le principe de l’existentialisme, opposé à l’essentialisme.", sourceLabel: "I-A L’existence et l’essence", points: 2 },
+        ],
         distractors: ["La culture est uniquement biologique.", "La civilisation n’a aucun lien avec les valeurs.", "L’éducation empêche l’humanisation."],
       },
       {
@@ -44,6 +94,19 @@ const courses: PhilosophyCourseSeed[] = [
         summary: "Comprendre le lien entre mémoire du passé, action présente et construction de l’avenir.",
         conceptTitle: "Exister dans le temps",
         explanation: "L’historicité signifie que l’homme se comprend à partir d’un passé transmis, agit dans le présent et ouvre un avenir. L’histoire désigne à la fois les événements humains et la connaissance raisonnée de ces événements.",
+        bodyMarkdown: String.raw`## L’historicité, propre de l’humanité
+
+Le passé des hommes n’est **pas en rupture** avec le présent, et le présent trace les sillons de l’avenir. C’est le sens de l’**historicité** : le récit des actions et événements dignes de mémoire.
+
+La **mémoire individuelle et collective** restitue le passé, qui sert de **repère** et justifie la dimension **dynamique** du parcours de l’humanité.
+
+> **Raymond ARON**, *Les Dimensions de la conscience historique* : il souligne la **nécessité de connaître le passé**, de ne point le négliger, afin de rendre la marche de l’humanité performante.
+
+## L’homme, seul être historique
+
+L’homme demeure le **seul être historique**. C’est pourquoi l’histoire acquiert la dimension d’un **devenir** : elle intègre le **passé**, le **présent** et l’**avenir**.
+
+> **À retenir.** L’histoire n’est ni une simple collection de dates, ni un destin mécanique : la mémoire du passé **éclaire le présent** sans le condamner à le répéter, et ouvre un avenir à construire.`,
         keyPoint: "La mémoire historique éclaire le présent sans le condamner à répéter le passé.",
         example: "Connaître une domination passée peut aider une société à reconnaître ses mécanismes et à empêcher leur retour.",
         mapTitle: "Le devenir historique",
@@ -55,6 +118,10 @@ const courses: PhilosophyCourseSeed[] = [
         ],
         observation: "L’histoire n’est ni une collection de dates ni un destin mécanique : elle donne des repères pour agir.",
         check: q("Que désigne l’historicité ?", "L’inscription de l’existence humaine dans un passé, un présent et un avenir liés", "L’oubli complet du passé", "La répétition exacte de tous les événements", "Une loi mathématique éternelle"),
+        extraQuestions: [
+          { prompt: "Selon Raymond Aron, pourquoi connaître le passé ?", options: ["Pour rendre la marche et l’évolution de l’humanité performantes", "Pour l’oublier définitivement", "Pour répéter exactement les événements", "Parce que le passé n’a aucun lien avec le présent"], correctIndex: 0, explanation: "Aron insiste sur la nécessité de ne pas négliger le passé (Les Dimensions de la conscience historique).", sourceLabel: "II-A L’historicité", points: 2 },
+          { prompt: "Pourquoi l’histoire est-elle un « devenir » ?", options: ["Parce qu’elle intègre le passé, le présent et l’avenir", "Parce qu’elle se répète à l’identique", "Parce qu’elle ignore le présent", "Parce qu’elle est un simple destin"], correctIndex: 0, explanation: "L’homme, seul être historique, inscrit son existence dans les trois dimensions du temps.", sourceLabel: "II-A L’historicité", points: 2 },
+        ],
         distractors: ["La mémoire historique interdit toute nouveauté.", "Le passé est sans lien avec le présent.", "L’histoire ne concerne que les individus isolés."],
       },
       {
@@ -63,8 +130,47 @@ const courses: PhilosophyCourseSeed[] = [
         summary: "Confronter Providence et déterminisme à la liberté et à l’action humaines.",
         conceptTitle: "Qui conduit le devenir ?",
         explanation: "Le fatalisme et Hegel voient dans l’histoire une nécessité qui dépasse les individus. Marx et Sartre soulignent au contraire que les hommes font l’histoire, même s’ils agissent dans des conditions héritées qu’ils n’ont pas choisies.",
+        bodyMarkdown: String.raw`## 1. L’homme, objet de l’histoire
+
+Les **religions révélées** enseignent que l’histoire est assujettie à la **Providence**. Le **fatalisme stoïcien** va dans le même sens.
+
+> **MARC-AURÈLE**, *Pensées pour moi-même* : « Tout ce qui arrive est nécessaire et utile au monde universel dont tu fais partie. »
+
+> **HEGEL**, *La Raison dans l’histoire* : « (…) c’est l’Esprit, sa volonté raisonnable et nécessaire, qui a guidé et qui continue de guider les événements du monde. »
+
+L’**essentialisme** réduit alors l’histoire au **destin**, faisant de l’homme un **pantin**.
+
+## 2. L’homme, sujet de l’histoire
+
+Contre cette vision, **MARX** et **ENGELS** défendent le **matérialisme historique**.
+
+> **MARX**, *Le 18 Brumaire de Louis Bonaparte* : « **Les hommes font leur propre histoire, dans des conditions directement héritées du passé.** »
+
+> **SARTRE**, *Critique de la Raison dialectique* : « Ainsi **l’homme fait l’histoire**. » (Principe existentialiste : « l’existence précède l’essence ».)
+
+## 3. L’homme, à la fois produit et agent
+
+> **MACHIAVEL** (*Le Prince* ; *Discours sur la première décade de Tite-Live*) : l’histoire **n’est pas totalement prédéterminée** ; elle laisse une place à l’engagement et à l’action des hommes.
+
+> **La position nuancée.** Si l’homme est **objet** de l’histoire, il en est aussi le **sujet** : il agit réellement, mais toujours au sein de circonstances héritées. Esclavage, racisme, apartheid, colonisation ont marqué ce devenir — et appellent une réponse.`,
         keyPoint: "L’homme est à la fois produit de conditions historiques et agent capable de les transformer.",
         example: "Une génération hérite d’institutions et d’inégalités, mais ses luttes et décisions peuvent modifier cet héritage.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Qui conduit l’histoire ?",
+          instruction: "Sélectionne une position pour voir son argument et son auteur.",
+          observation: "Ni pantin du destin, ni maître absolu : l’homme est à la fois produit et agent de l’histoire.",
+          rootLabel: "L’homme et le devenir historique",
+          rootDetail: "Trois réponses : objet, sujet, ou les deux à la fois",
+          nodes: [
+            { id: "marc-aurele", group: "L’homme, objet de l’histoire", label: "Marc-Aurèle", role: "Le fatalisme stoïcien", detail: "« Tout ce qui arrive est nécessaire et utile au monde universel dont tu fais partie » (Pensées pour moi-même). L’histoire échappe à la volonté de l’homme." },
+            { id: "hegel-hist", group: "L’homme, objet de l’histoire", label: "Hegel", role: "La ruse de l’Esprit", detail: "« C’est l’Esprit (…) qui a guidé et continue de guider les événements du monde » (La Raison dans l’histoire). L’essentialisme réduit l’homme à un pantin du destin." },
+            { id: "marx-hist", group: "L’homme, sujet de l’histoire", label: "Marx", role: "Les hommes font leur histoire", detail: "« Les hommes font leur propre histoire, dans des conditions directement héritées du passé » (Le 18 Brumaire). C’est le matérialisme historique." },
+            { id: "sartre-hist", group: "L’homme, sujet de l’histoire", label: "Sartre", role: "L’homme fait l’histoire", detail: "« Ainsi l’homme fait l’histoire » (Critique de la Raison dialectique). L’existentialisme cloue au pilori le déterminisme : l’existence précède l’essence." },
+            { id: "machiavel-hist", group: "Produit et agent", label: "Machiavel", role: "Ni tout à fait déterminé", detail: "L’histoire n’est pas totalement prédéterminée : elle laisse une place à l’engagement et à l’action des hommes (Le Prince ; Discours sur la première décade de Tite-Live)." },
+          ],
+        },
         mapTitle: "Trois positions",
         mapInstruction: "Compare déterminisme, liberté absolue et synthèse.",
         map: [
@@ -74,6 +180,11 @@ const courses: PhilosophyCourseSeed[] = [
         ],
         observation: "La position nuancée reconnaît les contraintes sans transformer l’homme en simple jouet de l’histoire.",
         check: q("Quelle thèse Marx défend-il ?", "Les hommes font leur histoire dans des conditions héritées", "L’histoire exclut toute action humaine", "La Providence décide de chaque acte", "Le passé ne produit aucune contrainte"),
+        extraQuestions: [
+          { prompt: "Quelle assertion soutient que l’homme est agent de l’histoire ?", options: ["« L’histoire n’est rien d’autre que l’œuvre de l’homme »", "« Les créatures de Dieu ne peuvent s’affranchir du plan préétabli »", "« L’Idée est ce qui mène les peuples et le monde »", "« Tout ce qui arrive est nécessaire »"], correctIndex: 0, explanation: "Les autres formules relèvent du fatalisme ou de l’essentialisme.", sourceLabel: "Activité d’application 2", points: 3 },
+          { prompt: "Que soutient le fatalisme stoïcien de Marc-Aurèle ?", options: ["Tout ce qui arrive est nécessaire et utile au monde", "L’homme est le seul maître de l’histoire", "L’histoire n’a aucun sens", "Le passé ne compte pas"], correctIndex: 0, explanation: "L’homme y est objet, non sujet, de l’histoire.", sourceLabel: "II-B-1 L’homme, objet de l’histoire", points: 2 },
+          { prompt: "Quelle est la position la plus nuancée sur le rôle de l’homme ?", options: ["Il est à la fois produit et agent de l’histoire", "Il n’est qu’un pantin du destin", "Il est le maître absolu et sans conditions", "Il n’a aucune influence"], correctIndex: 0, explanation: "Machiavel : l’histoire laisse une place à l’action, sans être totalement libre.", sourceLabel: "II-B-3 Produit et agent", points: 2 },
+        ],
         distractors: ["Être agent signifie ne subir aucune condition.", "Hegel fait de chaque individu le seul maître de l’histoire.", "Le fatalisme valorise l’engagement humain."],
       },
       {
@@ -82,8 +193,47 @@ const courses: PhilosophyCourseSeed[] = [
         summary: "Refuser l’ethnocentrisme et faire de la diversité culturelle un enrichissement de l’humanité.",
         conceptTitle: "Reconquérir dignité et autonomie",
         explanation: "La colonisation combine domination politique, économique et culturelle. Décoloniser met fin à la domination institutionnelle ; désaliéner libère les représentations et rétablit l’égale dignité des peuples et de leurs cultures.",
+        bodyMarkdown: String.raw`## 1. Le refus de la domination
+
+Le fait colonial a produit une **domination politique et économique** et une **aliénation intellectuelle et culturelle**. Or l’humanité repose sur la **dignité humaine** et la **diversité culturelle** : elle est **incompatible** avec la domination.
+
+L’**ethnocentrisme** — privilégier sa propre culture — est illégitime et dangereux : il conduit au racisme, à l’exclusion, à l’esclavage, à la domination coloniale.
+
+> **MONTESQUIEU**, *De l’Esprit des lois* : il « justifie » ironiquement l’esclavage des Noirs au motif qu’ils « n’appartiendraient pas à l’humanité » — une position que le texte dénonce.
+
+Contre cette position, **SENGHOR, CÉSAIRE, DAMAS, Frantz FANON** revendiquent l’**égalité des peuples** à travers la **négritude**.
+
+> **Claude LÉVI-STRAUSS**, *Tristes Tropiques* : « Aucune société n’est foncièrement bonne ; mais **aucune n’est absolument mauvaise**. »
+
+## 2. La diversité, facteur d’enrichissement
+
+L’humanité est une **totalité qui se construit dans la diversité** des peuples et des cultures.
+
+> **SAINT-EXUPÉRY**, *Terre des hommes* : « Si tu diffères de moi mon frère, **loin de me léser, tu m’enrichis**. »
+
+> **Auguste COMTE**, *Catéchisme positiviste* : « Tout en nous appartient à l’humanité. Et notre harmonie morale repose exclusivement sur **l’altruisme**. »
+
+**SENGHOR** prône la **civilisation de l’universel** ; **Nelson MANDELA** consacre sa vie à l’unité des hommes et au rejet de toute domination.
+
+> **À retenir.** Refuser l’ethnocentrisme ne rend pas toute pratique intouchable : la **dignité humaine** reste le critère commun, au nom de la raison comme faculté universelle.`,
         keyPoint: "L’unité du genre humain n’exige pas l’uniformité : la diversité culturelle l’enrichit lorsqu’elle respecte la dignité commune.",
         example: "Césaire, Senghor, Damas et Fanon combattent les hiérarchies coloniales ; Saint-Exupéry résume l’enrichissement par la différence.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Décoloniser et désaliéner",
+          instruction: "Sélectionne un élément pour comprendre le refus de la domination et l’éloge de la diversité.",
+          observation: "L’unité du genre humain n’exige pas l’uniformité : la diversité enrichit lorsqu’elle respecte la dignité commune.",
+          rootLabel: "Deux exigences de l’humanité",
+          rootDetail: "Refuser la domination, faire de la diversité une richesse",
+          nodes: [
+            { id: "montesquieu", group: "Refuser la domination", label: "Montesquieu", role: "L’ethnocentrisme dénoncé", detail: "De l’Esprit des lois « justifie » ironiquement l’esclavage : cette position ethnocentrique, qui exclut certains peuples de l’humanité, est illégitime et dangereuse." },
+            { id: "negritude", group: "Refuser la domination", label: "La négritude", role: "Senghor, Césaire, Damas, Fanon", detail: "Ils revendiquent l’égalité des peuples et des cultures et combattent les hiérarchies coloniales." },
+            { id: "levi-strauss", group: "Refuser la domination", label: "Lévi-Strauss", role: "Aucune société absolument mauvaise", detail: "« Aucune société n’est foncièrement bonne ; mais aucune n’est absolument mauvaise » (Tristes Tropiques). Aucun peuple ne peut se prétendre supérieur." },
+            { id: "saint-exupery", group: "La diversité enrichit", label: "Saint-Exupéry", role: "La différence enrichit", detail: "« Si tu diffères de moi mon frère, loin de me léser, tu m’enrichis » (Terre des hommes)." },
+            { id: "comte-mandela", group: "La diversité enrichit", label: "Comte et Mandela", role: "L’altruisme et l’universel", detail: "Comte : « notre harmonie morale repose exclusivement sur l’altruisme » (Catéchisme positiviste). Senghor prône la civilisation de l’universel ; Mandela lutte pour l’unité des hommes." },
+          ],
+        },
         mapTitle: "De la domination à l’universel",
         mapInstruction: "Suis les étapes de l’émancipation.",
         map: [
@@ -93,6 +243,11 @@ const courses: PhilosophyCourseSeed[] = [
         ],
         observation: "Refuser l’ethnocentrisme ne signifie pas rendre toute pratique intouchable : la dignité humaine reste le critère commun.",
         check: q("Pourquoi la diversité culturelle enrichit-elle l’humanité ?", "Parce que des expériences différentes contribuent à un monde commun", "Parce qu’une culture doit dominer toutes les autres", "Parce qu’elle supprime toute valeur universelle", "Parce qu’elle empêche le dialogue"),
+        extraQuestions: [
+          { prompt: "Quelle assertion illustre « Si tu diffères de moi, tu m’enrichis » ?", options: ["L’humanité est une totalité qui se construit dans la diversité des peuples et des cultures", "La culture est un facteur de division entre les peuples", "Une seule culture doit s’imposer à toutes", "La diversité appauvrit l’humanité"], correctIndex: 0, explanation: "La différence est présentée comme un enrichissement mutuel.", sourceLabel: "Activité d’application 1", points: 3 },
+          { prompt: "Quel courant Senghor, Césaire, Damas et Fanon incarnent-ils ?", options: ["La négritude", "L’ethnocentrisme", "Le fatalisme", "L’essentialisme"], correctIndex: 0, explanation: "La négritude revendique l’égalité des peuples et des cultures.", sourceLabel: "III-1 Refus de la domination", points: 2 },
+          { prompt: "Que dit Lévi-Strauss des sociétés humaines ?", options: ["Aucune n’est foncièrement bonne, mais aucune n’est absolument mauvaise", "Une seule est parfaite", "Toutes doivent se ressembler", "Certaines n’appartiennent pas à l’humanité"], correctIndex: 0, explanation: "Tristes Tropiques refuse toute hiérarchie absolue entre cultures.", sourceLabel: "III-1 Refus de la domination", points: 2 },
+        ],
         distractors: ["Décoloniser suffit toujours à supprimer toute aliénation.", "L’unité humaine impose une culture unique.", "L’ethnocentrisme valorise également tous les peuples."],
       },
     ],
@@ -100,17 +255,56 @@ const courses: PhilosophyCourseSeed[] = [
       title: "Commentaire BAC : Sartre, l’homme et son devenir",
       scenario: "La situation officielle propose un texte où Sartre affirme que l’homme n’est rien d’autre que son projet et l’ensemble de ses actes. Reconstruis puis discute ce raisonnement.",
       problem: "L’homme est-il entièrement responsable de ce qu’il devient ?",
+      bodyMarkdown: String.raw`## Le corrigé du commentaire
+
+### I. Problématique du texte
+
+| Élément | Résultat |
+|---|---|
+| **Thème** | L’homme et son devenir |
+| **Problème** | L’homme a-t-il une emprise sur son devenir ? |
+| **Thèse** | L’homme est entièrement responsable de son devenir |
+| **Antithèse** | L’homme est soumis au déterminisme |
+| **Intention** | Montrer que l’homme est le sujet de son devenir |
+| **Enjeu** | La liberté |
+
+### II. Structure logique (deux mouvements)
+
+- **1ᵉʳ mouvement (L1–L11)** « L’homme n’est rien (…) ma vie » — *Idée principale :* l’homme est fondamentalement libre et responsable de son devenir.
+- **2ᵉ mouvement (L11–L18)** « Or en réalité (…) il n’y a rien » — *Idée principale :* l’existentialisme comme expression de l’engagement de l’homme.
+
+### III. Intérêt philosophique
+
+**Critique interne.** Le texte est **polémique**, son raisonnement **antithétique**. La démarche est en adéquation avec l’intention (montrer que l’homme est sujet de son devenir).
+
+**Critique externe.**
+
+**Axe 1 — L’homme est entièrement responsable de son devenir.**
+
+- Il existe d’abord et se réalise ensuite. *Cf.* **SARTRE** : « L’existence précède l’essence ».
+- Il trace son chemin à travers les contradictions sociales. *Cf.* **MARX et ENGELS**, *Le Manifeste du parti communiste* : « L’histoire de toutes les sociétés jusqu’à nos jours n’a été que l’histoire de la lutte des classes ».
+
+**Axe 2 — L’homme est aussi le produit de son devenir.**
+
+- Il peut être un objet au service de l’histoire ou de la Raison absolue, qui le dépasse (Hegel, le fatalisme).
+
+> **Le geste attendu.** Reconstruire d’abord la thèse forte de Sartre (Axe 1), puis la nuancer (Axe 2) : l’homme fait son histoire, **mais dans des conditions héritées** qu’il n’a pas choisies.`,
       plan: [
-        { label: "Thèse", detail: "L’homme se réalise dans ses actes et ne peut invoquer de possibilités jamais accomplies." },
-        { label: "Mouvement 1", detail: "Rejet des excuses qui attribuent l’échec uniquement aux circonstances." },
-        { label: "Mouvement 2", detail: "L’existence et l’engagement effectifs définissent la personne." },
-        { label: "Discussion", detail: "La liberté agit dans des conditions historiques qui peuvent limiter les possibilités." },
+        { label: "Problématique", shortLabel: "Problématique", detail: "Thème : l’homme et son devenir ; thèse : il en est entièrement responsable ; enjeu : la liberté." },
+        { label: "Mouvement 1", shortLabel: "Mvt 1", detail: "L’homme est libre et responsable : il n’est rien d’autre que l’ensemble de ses actes." },
+        { label: "Mouvement 2", shortLabel: "Mvt 2", detail: "L’existentialisme comme engagement : il n’y a de génie que dans les œuvres réalisées." },
+        { label: "Discussion", shortLabel: "Discussion", detail: "Axe 1 : responsable (Sartre, Marx) ; Axe 2 : aussi produit de conditions héritées (Hegel)." },
       ],
       modelAnswer: "Sartre rappelle avec force la responsabilité, mais Marx permet de nuancer : les hommes agissent eux-mêmes, dans des conditions héritées qui ne dépendent pas entièrement d’eux.",
       questions: [
         q("Quelle est la thèse du texte de Sartre ?", "L’homme se définit par son projet et ses actes", "L’homme est entièrement produit par le destin", "Le génie existe sans aucune œuvre", "Les circonstances annulent toujours la liberté"),
         q("Quel est l’enjeu principal du texte ?", "La liberté et la responsabilité", "La preuve de Dieu", "La cohérence mathématique", "La communication animale"),
         q("Quelle nuance respecte le cours ?", "L’homme agit sur son devenir à partir de conditions déjà héritées", "L’homme ne possède aucune action", "L’histoire dépend d’un seul individu", "Le passé interdit tout changement"),
+      ],
+      extraQuestions: [
+        { prompt: "Quelle est l’antithèse dégagée par le corrigé ?", options: ["L’homme est soumis au déterminisme", "L’homme est un pur esprit", "L’homme n’existe pas", "L’homme est immortel"], correctIndex: 0, explanation: "Face à la thèse de la responsabilité, l’antithèse est le déterminisme.", sourceLabel: "Corrigé – problématique", points: 2 },
+        { prompt: "Quelle citation de Marx et Engels soutient l’Axe 1 ?", options: ["« L’histoire de toutes les sociétés (…) n’a été que l’histoire de la lutte des classes »", "« Les hommes ne font pas leur histoire »", "« L’Idée mène le monde »", "« Tout ce qui arrive est nécessaire »"], correctIndex: 0, explanation: "Le Manifeste du parti communiste : l’homme trace son devenir dans les contradictions sociales.", sourceLabel: "Corrigé – critique externe, Axe 1", points: 3 },
+        { prompt: "Quelle est la nature du texte selon la critique interne ?", options: ["Polémique, au raisonnement antithétique", "Descriptif et neutre", "Purement narratif", "Mathématique"], correctIndex: 0, explanation: "Le corrigé qualifie le texte de polémique et antithétique.", sourceLabel: "Corrigé – critique interne", points: 2 },
       ],
     },
   },
