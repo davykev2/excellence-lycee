@@ -944,8 +944,45 @@ Il faut aussi **mettre fin aux projets futiles** qui menacent la planète (essai
         summary: "Distinguer signaux, langage humain, langue et parole.",
         conceptTitle: "Un système de signes conventionnels",
         explanation: "Communiquer consiste à transmettre une information. Le langage humain utilise des signes organisés ; la langue est le code partagé par une communauté et la parole son usage singulier par un sujet.",
+        bodyMarkdown: String.raw`## Le langage et la communication
+
+Le **langage** est un système de signes qui permet d’exprimer et de communiquer sa pensée. Selon **John SEARLE** (*Les Actes de langage*) : « La **communication** est la fonction essentielle du langage. »
+
+## 1. La communication animale
+
+Les animaux communiquent par des **codes de signaux** : les abeilles, étudiées par **Karl von FRISCH**, exécutent une **danse en forme de 8** pour indiquer un butin. Mais est-ce vraiment un langage ?
+
+## 2. La spécificité du langage humain
+
+> **Ferdinand de SAUSSURE**, *Cours de linguistique générale* : « Le lien unissant le **signifiant** au **signifié** (…) est **arbitraire**. »
+
+Le signe linguistique unit un **signifiant** (l’aspect matériel : son, graphie) et un **signifié** (le concept). Selon **BENVENISTE**, entre communication animale et humaine « les différences sont considérables ».
+
+| Communication animale | Langage humain |
+|---|---|
+| fixe, invariable | évolutif, variable |
+| indécomposable | articulé, créatif |
+| transmission unilatérale | dialogue (émetteur ↔ récepteur) |
+| instinctive, naturelle | culturel, polysémique |
+
+> **À retenir.** La communication animale est un simple **code de signaux** ; le langage humain **appelle une réponse**, non une conduite. Il a de multiples fonctions (Mounin), au-delà de la seule information.`,
         keyPoint: "Le langage humain est articulé, conventionnel et créatif : avec un nombre limité de signes, il produit une infinité de messages.",
         example: "Deux locuteurs partagent le français comme langue, mais chacun choisit ses mots, son ton et son style dans la parole.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Communication animale et langage humain",
+          instruction: "Sélectionne un élément pour comprendre ce qui distingue le langage humain.",
+          observation: "La communication animale est un code fixe ; le langage humain est arbitraire, articulé et créatif.",
+          rootLabel: "Communiquer",
+          rootDetail: "Du code de signaux au signe linguistique",
+          nodes: [
+            { id: "searle", group: "La communication", label: "Searle", role: "La fonction du langage", detail: "« La communication est la fonction essentielle du langage » (Les Actes de langage) : le langage sert d’abord à transmettre un message." },
+            { id: "frisch", group: "La communication animale", label: "Karl von Frisch", role: "La danse des abeilles", detail: "Les abeilles indiquent un butin par une danse en forme de 8. La communication animale existe, mais reste un simple code de signaux : fixe, invariable, unilatéral." },
+            { id: "saussure", group: "Le langage humain", label: "Saussure", role: "Le signe arbitraire", detail: "« Le lien unissant le signifiant au signifié est arbitraire » (Cours de linguistique générale). Le signe unit un signifiant (le son, la graphie) et un signifié (le concept)." },
+            { id: "benveniste", group: "Le langage humain", label: "Benveniste", role: "La spécificité humaine", detail: "« Les différences sont considérables » : le langage humain est évolutif, créatif, polysémique, fait de dialogue — il appelle une réponse, non une conduite instinctive." },
+          ],
+        },
         mapTitle: "Du code au message",
         mapInstruction: "Distingue les niveaux de la communication.",
         map: [
@@ -955,6 +992,11 @@ Il faut aussi **mettre fin aux projets futiles** qui menacent la planète (essai
         ],
         observation: "La convention ne rend pas les mots arbitraires dans l’usage : leur sens dépend de règles communes.",
         check: q("Qu’est-ce que la parole ?", "L’usage individuel d’une langue dans une situation", "La capacité biologique de tout vivant", "Le dictionnaire entier", "Un signal sans règle"),
+        extraQuestions: [
+          { prompt: "« La capacité linguistique n’appartient en propre qu’à l’homme » : vrai ou faux ?", options: ["Vrai : elle le distingue de tous les autres vivants", "Faux : les animaux ont le même langage", "Faux : le langage n’existe pas", "Vrai, mais seulement à l’écrit"], correctIndex: 0, explanation: "Le langage articulé et créatif est propre à l’homme.", sourceLabel: "Activité d’application", points: 2 },
+          { prompt: "« La communication animale est un code de signaux identique au langage humain » : vrai ou faux ?", options: ["Faux : elle est fixe et unilatérale, sans la créativité du langage humain", "Vrai", "Vrai selon Saussure", "Vrai selon Benveniste"], correctIndex: 0, explanation: "La communication animale reste un simple code de signaux.", sourceLabel: "Activité d’application", points: 2 },
+          { prompt: "Selon Saussure, quel est le rapport entre signifiant et signifié ?", options: ["Il est arbitraire (conventionnel)", "Il est naturel et nécessaire", "Il est identique chez l’animal", "Il n’existe pas"], correctIndex: 0, explanation: "« Le lien unissant le signifiant au signifié est arbitraire » (Cours de linguistique générale).", sourceLabel: "I-A La spécificité du langage humain", points: 2 },
+        ],
         distractors: ["Langue et parole sont strictement identiques.", "Le langage humain ne produit que des messages déjà mémorisés.", "Les signes n’ont besoin d’aucune convention."],
       },
       {
@@ -963,8 +1005,44 @@ Il faut aussi **mettre fin aux projets futiles** qui menacent la planète (essai
         summary: "Étudier comment le langage exprime, organise et rend partageable la pensée.",
         conceptTitle: "Pensons-nous dans les mots ?",
         explanation: "Le langage ne sert pas seulement à communiquer une pensée déjà formée : il permet aussi de distinguer, fixer et organiser les idées. Hegel affirme que le mot donne à la pensée son existence la plus haute.",
+        bodyMarkdown: String.raw`## 1. Le fondement culturel du langage
+
+Le langage **s’acquiert** : hors du cadre socio-culturel, il n’y a pas de langage (les **enfants sauvages** de Malson). Contre **Lucrèce** et **ROUSSEAU** (le langage serait naturel), les linguistes montrent qu’il est un **fait culturel**.
+
+> **Henry DUMÉRY**, *La philosophie du langage* : « Tout le passé culturel est inhérent à l’**acquis linguistique** d’un peuple. »
+
+Apprendre à parler, c’est apprendre à **percevoir et penser le monde** d’une certaine manière : « on pense comme on parle ».
+
+## 2. Langage et pensée sont intimement liés
+
+> **DESCARTES** : « C’est parce qu’ils n’ont pas la pensée que les animaux ne parlent pas. »
+
+> **HEGEL**, *Phénoménologie de l’esprit* : « **C’est dans les mots que nous pensons** (…). Ainsi le mot donne à la pensée son existence la plus haute et la plus vraie. »
+
+> **PLATON**, *Le Cratyle* : « Qui connaît les mots, connaît les choses. » — **MERLEAU-PONTY** : « Il n’y a pas de pensée extérieure au langage (…) notre pensée trame dans le langage. »
+
+## La pensée sans les mots est floue
+
+> **DELACROIX** : « La pensée sans le langage n’est qu’une **nébuleuse**. » — **BOILEAU**, *Art poétique* : « Ce que l’on conçoit bien s’énonce clairement, et les mots pour le dire arrivent aisément. »
+
+> **HOBBES**, *Léviathan* : « Grâce aux dénominations correctes, le langage permet à l’homme d’élaborer une **science de la nature et de lui-même**. »`,
         keyPoint: "Les mots rendent la pensée plus précise et communicable, mais peuvent aussi imposer des catégories trop générales.",
         example: "Nommer précisément une émotion aide à la comprendre, même si aucun mot ne restitue parfaitement toute la sensation vécue.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Le langage et la pensée",
+          instruction: "Sélectionne un élément pour comprendre le lien entre les mots et la pensée.",
+          observation: "Le langage s’acquiert dans une culture, et sans lui la pensée reste une nébuleuse.",
+          rootLabel: "Penser avec les mots",
+          rootDetail: "Un fait culturel intimement lié à la pensée",
+          nodes: [
+            { id: "culturel", group: "Un fait culturel", label: "Malson et Duméry", role: "Le langage s’acquiert", detail: "Hors du cadre social, pas de langage (les enfants sauvages de Malson). Duméry : « Tout le passé culturel est inhérent à l’acquis linguistique d’un peuple ». Contre Lucrèce et Rousseau (langage naturel)." },
+            { id: "hegel-mot", group: "Langage et pensée liés", label: "Hegel", role: "Penser dans les mots", detail: "« C’est dans les mots que nous pensons (…). Ainsi le mot donne à la pensée son existence la plus haute et la plus vraie » (Phénoménologie de l’esprit)." },
+            { id: "platon-cratyle", group: "Langage et pensée liés", label: "Platon et Merleau-Ponty", role: "Connaître les mots, les choses", detail: "Platon : « Qui connaît les mots, connaît les choses » (Le Cratyle). Merleau-Ponty : « Il n’y a pas de pensée extérieure au langage »." },
+            { id: "delacroix", group: "Sans mots, la pensée est floue", label: "Delacroix et Boileau", role: "La nébuleuse", detail: "Delacroix : « La pensée sans le langage n’est qu’une nébuleuse ». Boileau : « Ce que l’on conçoit bien s’énonce clairement, et les mots pour le dire arrivent aisément »." },
+          ],
+        },
         mapTitle: "Le travail des mots",
         mapInstruction: "Observe les gains et la limite.",
         map: [
@@ -975,6 +1053,11 @@ Il faut aussi **mettre fin aux projets futiles** qui menacent la planète (essai
         ],
         observation: "Le langage rend la pensée possible et publique sans en épuiser toute la richesse vécue.",
         check: q("Quel rôle Hegel attribue-t-il au mot ?", "Il donne à la pensée une existence plus haute et partageable", "Il détruit toute pensée", "Il remplace l’expérience scientifique", "Il rend le mensonge impossible"),
+        extraQuestions: [
+          { prompt: "Relie : « Qui connaît les mots, connaît les choses. »", options: ["Platon", "Hobbes", "Boileau", "Hegel"], correctIndex: 0, explanation: "Formule de Platon (Le Cratyle).", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "Relie : « C’est dans les mots que nous pensons (…) le mot donne à la pensée son existence la plus haute et la plus vraie. »", options: ["Hegel", "Platon", "Hobbes", "Boileau"], correctIndex: 0, explanation: "Formule de Hegel (Phénoménologie de l’esprit).", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "Le langage est-il naturel ou culturel ?", options: ["Culturel : il s’acquiert et s’apprend en société", "Purement naturel, comme chez Lucrèce", "Ni l’un ni l’autre", "Uniquement biologique"], correctIndex: 0, explanation: "Duméry : « Tout le passé culturel est inhérent à l’acquis linguistique d’un peuple ».", sourceLabel: "I-B Le fondement culturel", points: 2 },
+        ],
         distractors: ["La pensée est toujours totalement indépendante des signes.", "Un mot exprime parfaitement chaque sensation.", "Le langage ne sert qu’à transmettre des ordres."],
       },
       {
@@ -983,8 +1066,46 @@ Il faut aussi **mettre fin aux projets futiles** qui menacent la planète (essai
         summary: "Comparer évidence, cohérence logique, correspondance au réel et vérification.",
         conceptTitle: "Comment reconnaître le vrai ?",
         explanation: "Une proposition peut sembler évidente, être cohérente avec un système ou correspondre à des faits vérifiables. Dans les sciences formelles, la cohérence domine ; dans les sciences expérimentales, l’épreuve du réel est indispensable.",
+        bodyMarkdown: String.raw`## Quatre critères de la vérité
+
+| Critère | Idée | Auteur |
+|---|---|---|
+| **La réalité** | est vrai ce qui correspond au réel | Bossuet : « Le vrai est ce qui est ; le faux ce qui n’est point » |
+| **L’unanimité** | est vrai ce qui est admis par tous | Lalande : « on appelle vérité ce qu’on a cru vrai à une certaine époque » |
+| **L’évidence** | est vrai ce qui s’impose clairement | Descartes : « clairement et distinctement » |
+| **Le pragmatisme** | est vrai ce qui réussit | William James : « le vrai (…) est ce qui est avantageux pour notre pensée » |
+
+**KANT** rappelle : la vérité est « l’**accord de la connaissance avec l’objet** ». Et **SPINOZA** : « Qui a une idée vraie sait en même temps qu’il a une idée vraie. »
+
+> **Attention.** La vérité **n’est pas la réalité** : un faux billet est bien réel, mais faux dans son usage. La vérité est la **conformité** de ce qu’on dit avec le réel.
+
+## La relativité de la vérité
+
+Le scepticisme nie toute vérité absolue.
+
+> **PROTAGORAS** : « L’**homme est la mesure de toute chose**. » — **PYRRHON** pratique l’**épochè** (suspension du jugement).
+
+> **LALANDE** : « **Chaque siècle a ses vérités.** » — **PASCAL** : « Vérité au deçà des Pyrénées, erreur au-delà. »
+
+Ainsi, pour **BACHELARD**, « il n’y a pas de vérités premières : il n’y a que des **erreurs premières** ». La vérité scientifique d’aujourd’hui peut être l’erreur de demain : elle est **évolutive**.`,
         keyPoint: "La cohérence est nécessaire à un raisonnement, mais elle ne garantit pas toujours que son contenu corresponde au réel.",
         example: "Un syllogisme peut être logiquement valide à partir de prémisses fausses ; sa forme est correcte, mais sa conclusion ne décrit pas nécessairement la réalité.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Comment reconnaître le vrai ?",
+          instruction: "Sélectionne un critère pour comprendre ce qu’il mesure et sa limite.",
+          observation: "Chaque critère éclaire un aspect du vrai ; mais aucune vérité n’est absolue : elle reste évolutive.",
+          rootLabel: "Les critères de la vérité",
+          rootDetail: "Quatre tests du vrai, et la relativité de la vérité",
+          nodes: [
+            { id: "realite", group: "Les critères", label: "La réalité", role: "L’accord au réel", detail: "Est vrai ce qui correspond au réel. Bossuet : « Le vrai est ce qui est ; le faux ce qui n’est point ». Kant : la vérité est « l’accord de la connaissance avec l’objet »." },
+            { id: "unanimite", group: "Les critères", label: "L’unanimité", role: "L’accord de tous", detail: "Est vrai ce qui est admis par tous. Lalande : « on appelle vérité ce qu’on a cru vrai à une certaine époque ». Risque : conformisme et suivisme." },
+            { id: "evidence", group: "Les critères", label: "L’évidence", role: "Ce qui s’impose", detail: "Descartes : l’idée vraie se présente « clairement et distinctement ». Spinoza : « Qui a une idée vraie sait qu’il a une idée vraie »." },
+            { id: "pragmatisme", group: "Les critères", label: "Le pragmatisme", role: "Ce qui réussit", detail: "William James : « le vrai (…) est ce qui est avantageux pour notre pensée » (Le pragmatisme). Les idées vraies sont celles « qui paient »." },
+            { id: "relativite", group: "La relativité", label: "Scepticisme et évolution", role: "Chaque siècle a ses vérités", detail: "Protagoras : « L’homme est la mesure de toute chose » ; Pyrrhon suspend son jugement. Lalande : « Chaque siècle a ses vérités ». La vérité est évolutive (Bachelard)." },
+          ],
+        },
         mapTitle: "Plusieurs tests du vrai",
         mapInstruction: "Compare leurs domaines et leurs limites.",
         map: [
@@ -995,6 +1116,11 @@ Il faut aussi **mettre fin aux projets futiles** qui menacent la planète (essai
         ],
         observation: "Le critère pertinent dépend du type de connaissance, mais aucun discours incohérent ne peut être tenu pour rationnellement vrai.",
         check: q("Pourquoi une pensée cohérente peut-elle être fausse ?", "Parce que des prémisses fausses peuvent produire un raisonnement formellement valide", "Parce que toute logique est inutile", "Parce que le réel est toujours contradictoire", "Parce que la vérité exclut toute règle"),
+        extraQuestions: [
+          { prompt: "« Pour le scepticisme, il n’existe pas de vérités objectives » : vrai ou faux ?", options: ["Vrai", "Faux : le scepticisme prouve toute vérité", "Faux : c’est le pragmatisme", "Faux : c’est l’évidence"], correctIndex: 0, explanation: "Le scepticisme nie la possibilité d’une vérité absolue (Protagoras, Pyrrhon).", sourceLabel: "Activité d’application 2", points: 2 },
+          { prompt: "Comment Bossuet définit-il le vrai ?", options: ["« Le vrai est ce qui est ; le faux ce qui n’est point »", "Ce qui est utile", "Ce qui plaît à tous", "Ce qui est ancien"], correctIndex: 0, explanation: "Le critère de la réalité : la vérité est conformité au réel.", sourceLabel: "II-A La réalité comme critère", points: 2 },
+          { prompt: "Selon William James, qu’est-ce qui est vrai ?", options: ["Ce qui est avantageux pour notre pensée", "Ce qui est éternel", "Ce que dit l’autorité", "Ce qui est invisible"], correctIndex: 0, explanation: "C’est le critère pragmatique (Le pragmatisme).", sourceLabel: "II-A Le pragmatisme", points: 2 },
+        ],
         distractors: ["La cohérence prouve toujours la correspondance aux faits.", "La vérification ne concerne aucune science.", "Une proposition contradictoire est nécessairement vraie."],
       },
       {
@@ -1003,8 +1129,46 @@ Il faut aussi **mettre fin aux projets futiles** qui menacent la planète (essai
         summary: "Comprendre l’expression du vrai, mais aussi l’ambiguïté, le mensonge et l’ineffable.",
         conceptTitle: "Dire, agir, tromper — et parfois échouer à dire",
         explanation: "Le langage transmet le savoir, organise la société et permet d’agir sur autrui. Mais les mots sont ambigus, peuvent servir au mensonge et traduisent imparfaitement les sensations singulières ; Bergson souligne cet écart entre expérience et expression.",
+        bodyMarkdown: String.raw`## A. Les pouvoirs du langage
+
+Le langage est le **canal privilégié** de la vérité.
+
+> **HOBBES**, *Léviathan* : « Là où il n’y a pas de langage, il n’y a **ni vérité ni fausseté**. » — **MERLEAU-PONTY** : « Notre pensée traîne dans le langage, et **toute vérité est par le langage**. »
+
+> **Louis LAVELLE** : « Le langage n’est pas (…) le simple vêtement de la pensée, il en est le **corps véritable**. »
+
+Le langage est aussi **facteur de cohésion sociale**.
+
+> **NIETZSCHE**, *Le Gai savoir* : « Les hommes ont besoin (…) de certitudes (…), parce que les certitudes partagées maintiennent un accord entre les hommes. »
+
+## B. Les limites du langage
+
+Mais tout ce que nous pensons ne peut pas toujours être dit.
+
+> **DIDEROT** : « Nous avons plus d’idées que de mots ; combien de choses senties et qui ne sont pas nommées. » — **BERGSON**, *Essai sur les données immédiates de la conscience* : « Nous échouons à traduire entièrement ce que notre âme ressent : la pensée demeure **incommensurable** avec le langage. »
+
+La pensée est **personnelle et continue**, le langage **impersonnel et discontinu**.
+
+> **John LOCKE** : « Le langage nous **trompera parfois**. » La parole peut servir l’abus et la tromperie — la **rhétorique** des Sophistes, le **lapsus**.
+
+> **WITTGENSTEIN**, *Tractatus* : « **Ce dont on ne peut parler, il faut le taire.** »`,
         keyPoint: "Parler rend la vérité partageable, mais ne garantit ni la sincérité du locuteur ni l’exactitude de l’expression.",
         example: "Une formule persuasive peut être grammaticalement parfaite tout en dissimulant les faits ; une émotion sincère peut au contraire rester difficile à nommer.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Pouvoirs et limites du langage",
+          instruction: "Sélectionne un élément pour comprendre ce que le langage permet et ce qui lui échappe.",
+          observation: "Le langage rend la vérité partageable, mais il ne dit pas toujours tout, et peut tromper.",
+          rootLabel: "Le langage face à la vérité",
+          rootDetail: "Un pouvoir d’expression, mais des limites réelles",
+          nodes: [
+            { id: "hobbes-verite", group: "Les pouvoirs", label: "Hobbes et Merleau-Ponty", role: "Le canal de la vérité", detail: "Hobbes : « Là où il n’y a pas de langage, il n’y a ni vérité ni fausseté ». Merleau-Ponty : « toute vérité est par le langage ». Lavelle : le langage est « le corps véritable » de la pensée." },
+            { id: "nietzsche-cohesion", group: "Les pouvoirs", label: "Nietzsche", role: "La cohésion sociale", detail: "« Les certitudes partagées maintiennent un accord entre les hommes » (Le Gai savoir). Le langage unit et consolide les communautés." },
+            { id: "bergson-limite", group: "Les limites", label: "Diderot et Bergson", role: "L’incommensurable", detail: "Diderot : « Nous avons plus d’idées que de mots ». Bergson : « la pensée demeure incommensurable avec le langage ». Le vécu personnel dépasse les mots impersonnels." },
+            { id: "locke-tromperie", group: "Les limites", label: "Locke et Wittgenstein", role: "L’abus et l’indicible", detail: "Locke : « Le langage nous trompera parfois » (rhétorique des Sophistes, lapsus). Wittgenstein : « Ce dont on ne peut parler, il faut le taire » (Tractatus)." },
+          ],
+        },
         mapTitle: "Trois usages de la parole",
         mapInstruction: "Compare le même pouvoir linguistique selon son orientation.",
         map: [
@@ -1015,6 +1179,11 @@ Il faut aussi **mettre fin aux projets futiles** qui menacent la planète (essai
         ],
         observation: "La vérité dépend d’un usage responsable du langage et de critères qui dépassent la seule éloquence.",
         check: q("Pourquoi parler ne signifie-t-il pas toujours dire vrai ?", "Parce que les mots peuvent être ambigus, mensongers ou inadéquats à l’expérience", "Parce que le langage empêche toute pensée", "Parce que toute parole est scientifique", "Parce que la vérité est uniquement grammaticale"),
+        extraQuestions: [
+          { prompt: "Complète Bergson : « Le … nous trompera parfois sur le caractère de la sensation éprouvée. »", options: ["langage", "sentiment", "silence", "réel"], correctIndex: 0, explanation: "Le langage peut mal traduire la sensation.", sourceLabel: "Activité d’application 3", points: 1 },
+          { prompt: "Complète Bergson : « La pensée demeure … avec le langage. »", options: ["incommensurable", "identique", "confondue", "compatible"], correctIndex: 0, explanation: "Pensée et langage n’ont pas les mêmes dimensions.", sourceLabel: "Activité d’application 3", points: 2 },
+          { prompt: "Quel conseil Wittgenstein donne-t-il face aux limites du langage ?", options: ["« Ce dont on ne peut parler, il faut le taire »", "Il faut tout dire, même le faux", "Le langage doit être supprimé", "Seule la rhétorique compte"], correctIndex: 0, explanation: "Fin du Tractatus logico-philosophicus.", sourceLabel: "III-B Les limites du langage", points: 2 },
+        ],
         distractors: ["L’éloquence garantit la vérité.", "Le langage exprime parfaitement toute sensation.", "Un mensonge ne peut pas être cohérent."],
       },
     ],
@@ -1022,17 +1191,50 @@ Il faut aussi **mettre fin aux projets futiles** qui menacent la planète (essai
       title: "Sujet BAC : « Une pensée cohérente est-elle nécessairement vraie ? »",
       scenario: "Traite la situation officielle en distinguant la validité logique d’un raisonnement et la vérité de son contenu.",
       problem: "Un raisonnement sans contradiction correspond-il forcément au réel ?",
+      bodyMarkdown: String.raw`## Le corrigé du sujet
+
+### I. Définition des termes essentiels
+
+| Terme | Définition |
+|---|---|
+| **Pensée cohérente** | raisonnement logique, argumentation rigoureuse sans contradiction |
+| **Nécessairement** | absolument, forcément, inévitablement |
+| **Vraie** | conforme à la vérité, qui correspond à un fait |
+
+### II. Problème à analyser
+
+> **Un raisonnement logique est-il absolument conforme à la vérité ?**
+
+### III. Axes d’analyse et références
+
+**Axe 1 — La cohérence de la pensée est un critère de vérité.**
+
+- Dans les **sciences formelles**, la vérité va de pair avec la forme du discours : elle dépend de la **cohérence logique**, non de la matérialité. *Cf.* **ARISTOTE** (*L’Organon*), **DESCARTES** ; **ARNAULD et NICOLE** : « la logique est l’art de bien conduire sa raison » (Logique de Port-Royal).
+- En **mathématiques**, l’axiomatique est une construction totalement formalisée. *Cf.* **Bourbaki** ; **Robert BLANCHÉ**, *L’axiomatique*.
+
+**Axe 2 — La cohérence ne suffit pas à établir la vérité.**
+
+- Une pensée peut être vraie **dans la forme** mais fausse **dans le contenu** (un **syllogisme** valide à partir de prémisses fausses). *Cf.* **ARISTOTE**.
+- Dans les **sciences expérimentales**, la vérité exige la **vérification** des hypothèses. *Cf.* **Claude BERNARD**, **BACHELARD**.
+- Le fondement du vrai peut passer par le **cœur**. *Cf.* **PASCAL** : « Le cœur a ses raisons que la raison ne connaît point. »
+
+> **Le geste attendu.** Reconnaître la valeur de la cohérence (Axe 1) avant de montrer qu’elle ne garantit pas le **rapport au réel** (Axe 2). La cohérence est **nécessaire mais non suffisante**.`,
       plan: [
-        { label: "Axe 1", detail: "Dans les sciences formelles, la vérité dépend de la cohérence des déductions avec les axiomes." },
-        { label: "Exemple", detail: "La logique garantit que la conclusion suit correctement des prémisses." },
-        { label: "Axe 2", detail: "Des prémisses fausses peuvent rester cohérentes ; les sciences expérimentales exigent vérification." },
-        { label: "Réponse", detail: "La cohérence est nécessaire mais ne suffit pas toujours : il faut aussi interroger le rapport au réel." },
+        { label: "Définir", shortLabel: "Définir", detail: "Pensée cohérente : raisonnement sans contradiction ; vraie : conforme au réel." },
+        { label: "Axe 1", shortLabel: "Axe 1", detail: "La cohérence, critère du vrai dans les sciences formelles : Aristote, Descartes, Arnauld et Nicole, l’axiomatique (Bourbaki)." },
+        { label: "Axe 2", shortLabel: "Axe 2", detail: "La cohérence ne suffit pas : le syllogisme aux prémisses fausses, la vérification expérimentale (Claude Bernard, Bachelard), le cœur (Pascal)." },
+        { label: "Réponse", shortLabel: "Réponse", detail: "La cohérence est nécessaire à la validité, mais la vérité du contenu exige le rapport au réel." },
       ],
       modelAnswer: "La cohérence rend une pensée valide dans sa forme ; sa vérité matérielle exige encore que les prémisses ou les résultats correspondent à l’objet étudié.",
       questions: [
         q("Que signifie une pensée cohérente ?", "Un raisonnement logique sans contradiction", "Une phrase populaire", "Une émotion intense", "Une opinion majoritaire"),
         q("Dans quel domaine la cohérence formelle est-elle centrale ?", "Les mathématiques et la logique", "La simple rumeur", "Le goût personnel", "La publicité"),
         q("Quelle réponse résout le problème ?", "La cohérence est nécessaire à la validité, mais la vérité du contenu peut exiger une vérification", "Toute pensée cohérente décrit le réel", "La logique empêche toute vérité", "La vérité ne possède aucun critère"),
+      ],
+      extraQuestions: [
+        { prompt: "Quel exemple montre qu’une pensée cohérente peut être fausse ?", options: ["Un syllogisme valide à partir de prémisses fausses", "Une phrase mal orthographiée", "Une opinion partagée par tous", "Une émotion sincère"], correctIndex: 0, explanation: "La forme peut être valide et le contenu faux (Aristote).", sourceLabel: "Situation d’évaluation – Axe 2", points: 3 },
+        { prompt: "Dans les sciences expérimentales, qu’exige la vérité, au-delà de la cohérence ?", options: ["La vérification des hypothèses", "L’unanimité des savants", "Une belle formulation", "L’ancienneté de la théorie"], correctIndex: 0, explanation: "Claude Bernard et Bachelard : l’épreuve du réel est indispensable.", sourceLabel: "Situation d’évaluation – Axe 2", points: 2 },
+        { prompt: "Que soutient Pascal sur le fondement du vrai ?", options: ["« Le cœur a ses raisons que la raison ne connaît point »", "La cohérence suffit toujours", "La vérité est impossible", "Seule la logique compte"], correctIndex: 0, explanation: "Pascal ajoute l’intuition du cœur à la raison (Pensées).", sourceLabel: "Situation d’évaluation – Axe 2", points: 2 },
       ],
     },
   },
