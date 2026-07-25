@@ -1450,6 +1450,36 @@ Signés le **18 mars 1962**, les **accords d’Évian** prévoient que la France
         summary: "Expliquer le remplacement de l’OUA et les ambitions d’intégration de l’UA.",
         conceptTitle: "Une organisation rénovée pour une Afrique plus intégrée",
         explanation: "Créée en 1963, l’OUA ne parvient pas à résoudre plusieurs crises ni la marginalisation du continent. Les États la remplacent par l’UA, officiellement créée en 2002, avec des objectifs plus larges de paix, démocratie, développement et intégration.",
+        bodyMarkdown: String.raw`## De l’OUA à l’UA
+
+Au lendemain des indépendances, une Afrique **morcelée, fragile et pauvre** cherche à s’unir. L’**OUA** (Organisation de l’unité africaine) naît le **25 mai 1963 à Addis-Abeba** (Éthiopie). Mais elle échoue à remplir ses missions, pour trois raisons :
+
+- l’**inadaptation de ses structures** ;
+- la **marginalisation économique et politique** de l’Afrique à l’ère de la mondialisation ;
+- l’**insécurité et l’instabilité** du continent.
+
+Pour y remédier, les chefs d’État décident de la remplacer par l’**Union africaine (UA)**.
+
+## Quatre sommets fondateurs
+
+| Date | Sommet | Décision |
+|---|---|---|
+| **Septembre 1999** | **Syrte** (Libye) | **décide** la création de l’UA |
+| **Juillet 2000** | **Lomé** (Togo) | adopte l’**acte constitutif** (charte) |
+| **Juillet 2001** | **Lusaka** (Zambie) | établit le programme de mise en place |
+| **9 juillet 2002** | **Durban** (Afrique du Sud) | signe la charte : l’UA est **officiellement créée** |
+
+L’UA compte **55 pays membres** (tous les pays d’Afrique) et conserve le **siège d’Addis-Abeba**.
+
+> **Correction.** Ne confonds pas **Syrte 1999** (qui *décide*) et **Durban 2002** (qui *crée officiellement*). Et l’UA remplace l’OUA pour cause d’**inefficacité**, non à cause de « rivalités entre chefs d’État ».
+
+## Objectifs et principes
+
+**Objectifs** : réaliser l’**unité** africaine, défendre la **souveraineté** des États, promouvoir la **paix et la sécurité**, la **démocratie** et les **droits de l’homme**, le **développement durable** et la recherche. L’ambition centrale est d’**accélérer l’intégration** économique et politique du continent.
+
+**Principes** : règlement pacifique des conflits, égalité et souveraineté des États, **non-ingérence**, rejet des **changements anticonstitutionnels**, respect des **frontières héritées de la colonisation** — mais aussi un **droit d’intervention** en cas de **génocide, de crise grave ou de guerre**.
+
+> **Astuce mémoire de Davy.** Retiens le grand renversement : l’OUA sacralisait la **non-ingérence** ; l’UA garde ce principe **mais** s’autorise à **intervenir** en cas de génocide ou de guerre. C’est la principale nouveauté de 2002.`,
         keyPoint: "L’UA remplace l’OUA pour disposer d’institutions et de moyens mieux adaptés aux défis contemporains de l’Afrique.",
         example: "Contrairement au principe strict de non-ingérence, l’UA reconnaît un droit d’intervention en cas de génocide, de guerre ou de crise grave.",
         timelineTitle: "Les sommets fondateurs de l’UA",
@@ -1461,6 +1491,15 @@ Signés le **18 mars 1962**, les **accords d’Évian** prévoient que la France
         ],
         observation: "Le passage de l’OUA à l’UA marque une volonté de dépasser la seule défense de la souveraineté pour agir davantage sur les crises.",
         check: { prompt: "En quelle année l’Union africaine est-elle officiellement créée ?", options: ["2002", "1963", "1975", "1945"], correctIndex: 0, explanation: "Le sommet de Durban officialise l’UA le 9 juillet 2002." },
+        extraQuestions: [
+          { prompt: "Où et quand l’OUA a-t-elle été créée ?", options: ["Le 25 mai 1963 à Addis-Abeba", "En 2002 à Durban", "En 1999 à Syrte", "En 1975 à Lomé"], correctIndex: 0, explanation: "L’UA conserve d’ailleurs ce siège d’Addis-Abeba.", sourceLabel: "Cours — Introduction", points: 1 },
+          { prompt: "Quel sommet crée officiellement l’Union africaine ?", options: ["Le sommet de Durban (9 juillet 2002)", "Le sommet de Syrte (1999)", "Le sommet de Lomé (2000)", "Le sommet de Lusaka (2001)"], correctIndex: 0, explanation: "Syrte décide la création ; Durban la rend officielle.", sourceLabel: "Cours I-1-b", points: 2 },
+          { prompt: "Le sommet de Syrte, en Libye, crée officiellement l’UA.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Syrte (1999) décide seulement la création ; c’est Durban (2002) qui la crée.", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "Combien de pays membres compte l’UA ?", options: ["55, soit tous les pays d’Afrique", "27", "15", "8"], correctIndex: 0, explanation: "L’Union rassemble l’ensemble du continent.", sourceLabel: "Cours I-1-b", points: 1 },
+          { prompt: "Quelle nouveauté distingue l’UA de l’OUA en matière d’ingérence ?", options: ["Un droit d’intervention en cas de génocide, de crise grave ou de guerre", "L’interdiction absolue de toute intervention", "La suppression des frontières", "L’adhésion à l’OTAN"], correctIndex: 0, explanation: "L’OUA sacralisait la non-ingérence ; l’UA l’assouplit.", sourceLabel: "Cours I-2-b", points: 2 },
+          { prompt: "L’UA remplace l’OUA à cause des rivalités politiques entre chefs d’État.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "C’est l’inefficacité de l’OUA (structures, marginalisation, insécurité) qui motive le changement.", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "L’UA veille au respect des droits de l’homme en Afrique.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "C’est l’un de ses objectifs affichés.", sourceLabel: "Activité d’application 1", points: 1 },
+        ],
         distractors: ["L’UA remplace l’ONU.", "L’UA rejette tout objectif de développement.", "L’OUA est créée après l’UA."],
       },
       {
@@ -1469,6 +1508,34 @@ Signés le **18 mars 1962**, les **accords d’Évian** prévoient que la France
         summary: "Distinguer organes de direction, de paix, de représentation, de justice et de financement.",
         conceptTitle: "Une architecture institutionnelle diversifiée",
         explanation: "La Conférence de l’Union est l’organe suprême. Le Conseil exécutif, la Commission, le Comité des représentants permanents et le Parlement panafricain assurent direction et administration. Le CPS, les juridictions et les institutions financières complètent l’ensemble.",
+        bodyMarkdown: String.raw`## Les organes de direction
+
+| Organe | Rôle |
+|---|---|
+| **La Conférence de l’Union** | organe **suprême** : chefs d’État et de gouvernement, réunion ≥ 1 fois/an, définit les politiques communes, adopte le budget. Présidence tournante d’**un an** |
+| **Le Conseil exécutif** | ministres (ou délégués) des États : contrôle la **mise en œuvre** des politiques |
+| **La Commission** | le **secrétariat général** : administration quotidienne. Président : **Moussa Faki Mahamat** (Tchad) |
+| **Le Comité des représentants permanents** | ambassadeurs résidant à Addis-Abeba : prépare les travaux du Conseil exécutif |
+| **Le Parlement panafricain (PAP)** | représentants des parlements nationaux (5 par pays), siège en **Afrique du Sud** |
+
+## Les autres organes
+
+- **Conseil de paix et de sécurité (CPS)** : **15 membres** (et un comité des sages de 9) — l’organe **décisionnel permanent** pour prévenir, gérer et régler les conflits.
+- **Comités techniques spécialisés** : préparent projets et programmes (rôle de conseil-appui).
+- **Institutions financières (3)** : la **Banque centrale africaine (BCA)**, le **Fonds monétaire africain (FMA)**, la **Banque africaine d’investissement (BAI)**.
+- **Organe judiciaire** : la **CADHP** (Commission des droits de l’homme et des peuples), la **CAfDHP** (Cour africaine), la **CUADI** (droit international).
+
+## Trois familles d’organes
+
+| Nature | Exemples |
+|---|---|
+| **Politiques** | Conférence de l’Union, Commission, Comité des représentants permanents |
+| **Économiques** | BCA, FMA, BAI |
+| **Judiciaires** | CADHP, CAfDHP, CUADI |
+
+> **Le point clé.** L’organe **suprême**, c’est la **Conférence** (les chefs d’État) ; l’organe **de la paix**, c’est le **CPS** ; le **bras administratif**, c’est la **Commission** (Moussa Faki). Ces trois-là reviennent tout le temps.
+
+> **Astuce mémoire de Davy.** Pour classer un organe (activité 2), pose-toi une question : décide-t-il de la **politique** (Conférence, Commission), gère-t-il l’**argent** (BCA, FMA, BAI) ou dit-il le **droit** (CADHP, CAfDHP, CUADI) ?`,
         keyPoint: "L’UA répartit ses fonctions entre décision politique, administration, représentation, sécurité, justice et financement.",
         example: "Le Conseil de paix et de sécurité, composé de quinze membres, est l’organe permanent de prévention et de gestion des conflits.",
         timelineTitle: "Du sommet à l’action spécialisée",
@@ -1480,6 +1547,14 @@ Signés le **18 mars 1962**, les **accords d’Évian** prévoient que la France
         ],
         observation: "La présence d’un organe ne garantit pas son efficacité : il faut aussi des ressources, une autorité et l’application des décisions.",
         check: { prompt: "Quel organe de l’UA est chargé de la prévention et du règlement des conflits ?", options: ["Le Conseil de paix et de sécurité", "Le STABEX", "La Cour de La Haye", "Le CAEM"], correctIndex: 0, explanation: "Le CPS est l’organe décisionnel permanent pour la paix et la sécurité." },
+        extraQuestions: [
+          { prompt: "Quel est l’organe suprême de l’Union africaine ?", options: ["La Conférence de l’Union", "La Commission", "Le Parlement panafricain", "Le CPS"], correctIndex: 0, explanation: "Elle réunit les chefs d’État et de gouvernement au moins une fois par an.", sourceLabel: "Cours II-1", points: 2 },
+          { prompt: "Qui préside la Commission de l’UA (secrétariat général) ?", options: ["Moussa Faki Mahamat", "Paul Kagame", "Cyril Ramaphosa", "Idriss Déby Itno"], correctIndex: 0, explanation: "La Commission assure l’administration quotidienne de l’organisation.", sourceLabel: "Cours II-1", points: 2 },
+          { prompt: "Combien de membres compte le Conseil de paix et de sécurité (CPS) ?", options: ["15 membres", "5 membres", "27 membres", "55 membres"], correctIndex: 0, explanation: "Il s’appuie aussi sur un comité des sages de 9 membres.", sourceLabel: "Cours II-2", points: 1 },
+          { prompt: "Où siège le Parlement panafricain ?", options: ["En Afrique du Sud", "À Addis-Abeba", "À Lomé", "En Libye"], correctIndex: 0, explanation: "Il réunit cinq représentants par parlement national.", sourceLabel: "Cours II-1", points: 1 },
+          { prompt: "Classe (activité 2) : la Banque africaine d’investissement (BAI) est un organe…", options: ["Économique", "Politique", "Judiciaire", "Militaire"], correctIndex: 0, explanation: "Avec la BCA et le FMA, elle relève des institutions financières.", sourceLabel: "Activité d’application 2", points: 1 },
+          { prompt: "Classe (activité 2) : la Cour africaine des droits de l’homme et des peuples (CAfDHP) est un organe…", options: ["Judiciaire", "Politique", "Économique", "Consultatif"], correctIndex: 0, explanation: "Elle relève de l’organe judiciaire, avec la CADHP et la CUADI.", sourceLabel: "Activité d’application 2", points: 2 },
+        ],
         distractors: ["L’UA ne possède aucun parlement.", "La Commission est une alliance militaire.", "Les institutions financières dirigent seules la Conférence de l’Union."],
       },
       {
@@ -1489,16 +1564,76 @@ Signés le **18 mars 1962**, les **accords d’Évian** prévoient que la France
         conceptTitle: "Des succès, mais une dépendance persistante",
         explanation: "L’UA intervient dans des crises, condamne les changements anticonstitutionnels, déploie des missions et soutient des projets. Elle reste limitée par instabilité, terrorisme, faiblesse démocratique, manque de moyens autonomes, retards de cotisation et dépendance financière extérieure.",
         keyPoint: "Le bilan de l’UA est mitigé : son champ d’action s’élargit, mais ses moyens et l’engagement des États restent insuffisants.",
-        example: "Des missions sont déployées au Darfour et en Somalie, mais une grande part du financement de l’organisation provient de partenaires extérieurs.",
+        example: "L’UA intervient dans la crise ivoirienne, déploie des forces au Darfour et en Somalie, et rétablit la légalité constitutionnelle aux Comores en 2008.",
         timelineTitle: "Mettre en balance résultats et limites",
         timelineInstruction: "Compare les actions de paix, les projets de développement et les obstacles.",
         timeline: [
-          { label: "Paix et démocratie", detail: "Médiations, missions, condamnation des coups d’État et soutien au retour à l’ordre constitutionnel." },
-          { label: "Développement", detail: "NEPAD, aide humanitaire, projets d’infrastructures et coordination continentale." },
-          { label: "Limites", detail: "Conflits persistants, terrorisme, cotisations impayées, dépendance extérieure et décisions peu appliquées." },
+          { label: "Les succès de l’UA", shortLabel: "Les succès de l’UA", detail: "Médiations et missions de paix (Darfour, Somalie, Comores), condamnation des coups d’État et hausse du budget." },
+          { label: "Les limites de l’UA", shortLabel: "Les limites de l’UA", detail: "Instabilité, terrorisme, dépendance financière (95 % de l’extérieur) et faible intégration économique." },
+          { label: "Les défis à relever", shortLabel: "les défis à relever", detail: "Autonomie financière (réforme Kagame), passer des réunions à l’action, libre circulation et solidarité." },
         ],
         observation: "Pour juger l’UA, il faut comparer l’ambition continentale aux ressources réellement disponibles.",
         check: { prompt: "Quelle faiblesse réduit l’autonomie de l’UA ?", options: ["Sa forte dépendance aux financements extérieurs", "L’absence totale d’États membres", "L’interdiction de toute réunion", "La disparition de tous les conflits africains"], correctIndex: 0, explanation: "Le financement extérieur important limite l’autonomie de l’organisation." },
+        parts: [
+          {
+            bodyMarkdown: String.raw`## Les succès politiques et militaires
+
+Grâce au **Conseil de paix et de sécurité (CPS)**, l’UA prévient et règle des crises :
+
+- **intervention** dans la crise politico-militaire **ivoirienne** ;
+- déploiement de forces au **Darfour** et en **Somalie** ;
+- **désarmement** des ex-Interahamwe au Congo ;
+- intervention aux **Comores (mars 2008)** : rétablissement de la **légalité constitutionnelle** ;
+- **condamnation** des coups d’État (capitaine **Sanogo** au Mali en 2012, général **Diendéré** au Burkina en 2015) et des crimes de guerre (Darfour).
+
+## Les succès économiques et sociaux
+
+- **Budget en forte hausse** : de **150 millions $ (2011)** à **1,2 milliard $ (2017)** — signe d’un rôle grandissant.
+- **Aide humanitaire** aux pays en guerre ou frappés par des catastrophes (Darfour, Éthiopie, Mozambique).
+- **Appropriation du NEPAD** (Nouveau partenariat pour le développement).
+- Projets d’**infrastructures** (écoles, routes) via la **BAD**.
+
+> **Le point clé.** Les succès de l’UA sont **réels mais surtout dans la médiation et la paix** (CPS). Sur le terrain économique, ce sont plutôt des **amorces** (budget, NEPAD, infrastructures) que des résultats massifs.
+
+> **Astuce mémoire de Davy.** Pour les succès politiques, retiens le trio **Comores 2008 – Darfour/Somalie – condamnation des coups d’État**. Et une image forte : le budget qui passe de **150 millions à 1,2 milliard** de dollars.`,
+            extraQuestions: [
+              { prompt: "Quel organe permet à l’UA d’intervenir dans les crises ?", options: ["Le Conseil de paix et de sécurité (CPS)", "Le Fonds monétaire africain", "Le Parlement panafricain", "La CADHP"], correctIndex: 0, explanation: "Le CPS prévient, gère et règle les conflits.", sourceLabel: "Cours III-1", points: 1 },
+              { prompt: "Où l’UA rétablit-elle la légalité constitutionnelle en mars 2008 ?", options: ["Aux Comores", "Au Mali", "En Somalie", "Au Burkina Faso"], correctIndex: 0, explanation: "Une intervention souvent citée comme un succès de l’UA.", sourceLabel: "Cours III-1", points: 2 },
+              { prompt: "Comment évolue le budget de l’UA entre 2011 et 2017 ?", options: ["De 150 millions à 1,2 milliard de dollars", "Il reste stable", "Il diminue de moitié", "Il devient nul"], correctIndex: 0, explanation: "Une hausse qui traduit un rôle grandissant.", sourceLabel: "Cours III-1", points: 2 },
+              { prompt: "L’UA a déployé des soldats au Darfour.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Avec la Somalie, c’est l’un de ses grands déploiements.", sourceLabel: "Exercice — Activité 3", points: 1 },
+              { prompt: "L’UA est intervenue dans le règlement du conflit post-électoral de la Côte d’Ivoire.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "C’est cité parmi ses succès politico-militaires.", sourceLabel: "Exercice — Activité 3", points: 1 },
+            ],
+          },
+          {
+            bodyMarkdown: String.raw`## Les limites politiques et militaires
+
+- **Instabilité** et faiblesse démocratique : coups d’État (Égypte, Soudan, Zimbabwe, Libye), **crises post-électorales** (Côte d’Ivoire, Burundi, Gabon…), et **souveraineté** brandie contre les recommandations de l’UA.
+- **Insécurité** : guerres civiles (Sierra Leone, RCA, Somalie) et **terrorisme** (Mali, Burkina, Niger, Nigéria, Tchad, Cameroun).
+- **Impuissance** à prévenir les conflits, à maintenir la paix et à **financer** seule ses missions ; **manque d’autorité** du président de la Commission ; **influences extérieures** (blocs francophone, anglophone, arabophone).
+
+## Les limites économiques et sociales
+
+- **95 % du budget de fonctionnement** vient de l’**extérieur** (le siège lui-même a été construit par la **Chine**).
+- **Retards de cotisation** : en 2012, seulement **17 pays** à jour.
+- **Faiblesse des échanges** intra-africains (**12 %**), surendettement, **multiplicité des monnaies**, retard de la **monnaie unique**.
+- Persistance de la **pauvreté, de la corruption et de la mauvaise gouvernance**.
+
+## Les défis à relever
+
+L’enjeu est l’**autonomie financière** (réforme de **Paul Kagame** : taxe sur les importations pour financer l’UA) et le passage **des réunions à l’action** — comme l’exhorte le président tchadien **Idriss Déby Itno** : libre circulation des biens et des personnes, passeport commun, solidarité face au terrorisme, « prendre son destin en main ».
+
+> **Correction.** L’UA **n’est pas** systématiquement opposée à *tous* les coups d’État avec la même fermeté, et le NEPAD **n’est pas encore** pleinement une réalité : reste prudent sur ces affirmations (exercice « vrai/faux »).
+
+> **Astuce mémoire de Davy.** Deux chiffres résument la fragilité : **95 %** du budget vient de l’extérieur, et seulement **12 %** d’échanges entre pays africains. Le grand défi tient en une phrase de Kagame : « on ne peut pas financer des idées africaines avec un fonds qui ne vient pas d’Afrique ».`,
+            extraQuestions: [
+              { prompt: "Quelle part du budget de fonctionnement de l’UA provient de l’extérieur ?", options: ["Environ 95 %", "Environ 10 %", "0 %", "50 %"], correctIndex: 0, explanation: "Une dépendance qui limite fortement l’autonomie de l’UA.", sourceLabel: "Cours III-2", points: 2 },
+              { prompt: "Quel pays a financé la construction du siège de l’UA ?", options: ["La Chine", "La France", "Les États-Unis", "Le Royaume-Uni"], correctIndex: 0, explanation: "Un symbole de la dépendance extérieure de l’organisation.", sourceLabel: "Exercice — Activité 3", points: 2 },
+              { prompt: "Quelle est la part des échanges commerciaux entre les États de l’Union ?", options: ["Environ 12 %", "Environ 60 %", "Environ 90 %", "0 %"], correctIndex: 0, explanation: "La faiblesse des échanges intra-africains freine l’intégration.", sourceLabel: "Cours III-2", points: 1 },
+              { prompt: "Quelle réforme Paul Kagame propose-t-il pour l’autonomie financière de l’UA ?", options: ["Une taxe sur les importations de chaque pays", "La suppression du budget", "La vente du siège", "L’adhésion à l’Union européenne"], correctIndex: 0, explanation: "« On ne peut pas financer des idées africaines avec un fonds venu d’ailleurs. »", sourceLabel: "Document 1 — RFI", points: 2 },
+              { prompt: "Qu’exhorte le président Idriss Déby Itno à faire ?", options: ["Passer des réunions interminables à l’action et prendre son destin en main", "Multiplier les réunions", "Dépendre davantage de l’extérieur", "Dissoudre l’UA"], correctIndex: 0, explanation: "Libre circulation, passeport commun, solidarité contre le terrorisme.", sourceLabel: "Document 3 — Fraternité Matin", points: 1 },
+            ],
+          },
+        ],
         distractors: ["L’UA dispose de moyens illimités.", "Elle ne condamne jamais les changements anticonstitutionnels.", "Son bilan ne comporte aucune réalisation."],
       },
     ],

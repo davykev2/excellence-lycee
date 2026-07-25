@@ -434,6 +434,46 @@ Ajoute la nuance de Musitelli : cette hégémonie est **douce**, elle repose sur
       title: "L’Union africaine face à ses défis",
       scenario: "Des élèves discutent des crises africaines : certains jugent l’Union africaine inefficace, d’autres rappellent qu’elle est jeune et doit encore relever de nombreux défis.",
       modelAnswer: "L’UA obtient des résultats en médiation, observation électorale et coopération, mais manque parfois de moyens, d’autonomie financière et d’unité politique.",
+      bodyMarkdown: String.raw`## La situation d’évaluation
+
+> Après la mort du président tchadien **Idriss Déby Itno**, un débat télévisé porte sur le bilan de l’UA. Un invité affirme : « **Les difficultés de l’UA sont d’origines endogènes et exogènes.** » Les autres en conviennent, mais **imputent la plus grande responsabilité aux dirigeants africains.**
+
+## Document 1 — L’enjeu de l’autonomie financière
+
+*RFI, 2018 — la réforme de Paul Kagame, président en exercice de l’UA :*
+
+> « Parmi les propositions, le prélèvement d’une **taxe sur les importations** de chaque pays, afin de financer le budget de l’organisation. […] “On ne peut pas vouloir **financer des idées africaines avec un fonds qui ne vient pas de l’Afrique**”. »
+
+## Document 2 — « Nous n’agissons pas assez »
+
+*Étienne Aboua,* Fraternité Matin, *1ᵉʳ février 2016 (propos rapportés d’Idriss Déby) :*
+
+> « Notre organisation fonctionne toujours comme il y a 20 ou 30 ans. Nous nous réunissons souvent. Nous parlons toujours trop. […] Mais **nous n’agissons pas assez**. Nous **attendons tout de l’extérieur**. Cela doit impérativement changer si nous voulons faire changer le cours de l’histoire de l’Afrique. »
+
+## Comment construire ta réponse
+
+**Consigne 1 — Le problème.** Il s’agit d’**apprécier les difficultés de l’UA** et la **responsabilité** respective des dirigeants africains et des facteurs extérieurs.
+
+**Consigne 2 — Expliquer « difficultés endogènes et exogènes ».**
+
+| Endogènes (internes) | Exogènes (externes) |
+|---|---|
+| instabilité politique, coups d’État, crises post-électorales | **dépendance financière** (95 % du budget vient de l’extérieur) |
+| **souveraineté** brandie contre les décisions de l’UA | influences des blocs (francophone, anglophone, arabophone) |
+| retards de cotisation, corruption, mauvaise gouvernance | siège et projets financés par des partenaires (Chine) |
+
+**Consigne 3 — La responsabilité incombe-t-elle surtout aux dirigeants ?** Réponse **nuancée** :
+
+- *Ce qui appuie l’affirmation* : les blocages majeurs (instabilité, non-respect des décisions, cotisations impayées, réunions sans actes) viennent bien des **dirigeants**.
+- *La nuance* : la **dépendance financière** et les influences extérieures **contraignent** aussi l’UA — d’où l’enjeu de l’autonomie proposé par Kagame.
+
+> **Astuce mémoire de Davy.** Le bon réflexe : **« oui, surtout — mais pas seulement »**. Oui, la responsabilité première revient aux dirigeants africains (endogène) ; **mais** la dépendance envers l’extérieur (exogène) pèse aussi. Cite les **deux chiffres-chocs** : **95 %** du budget venu de l’extérieur, **12 %** d’échanges intra-africains.`,
+      extraQuestions: [
+        { prompt: "Que signifie « les difficultés de l’UA sont d’origines endogènes et exogènes » ?", options: ["Elles viennent à la fois des États africains (internes) et de contraintes extérieures", "Elles sont uniquement climatiques", "Elles ont toutes disparu", "Elles ne concernent que la langue"], correctIndex: 0, explanation: "Endogène = interne ; exogène = externe.", sourceLabel: "Situation d’évaluation 2, consigne 2", points: 2 },
+        { prompt: "Selon Kagame (doc. 1), comment financer le budget de l’UA de façon autonome ?", options: ["Par une taxe sur les importations de chaque pays", "En vendant le siège", "En supprimant les cotisations", "En empruntant à la Chine"], correctIndex: 0, explanation: "« On ne peut pas financer des idées africaines avec un fonds qui ne vient pas d’Afrique. »", sourceLabel: "Document 1 — RFI", points: 2 },
+        { prompt: "Que reproche Idriss Déby à l’UA (doc. 2) ?", options: ["De trop se réunir et de ne pas assez agir, en attendant tout de l’extérieur", "D’agir trop vite", "De refuser toute réunion", "D’être trop indépendante"], correctIndex: 0, explanation: "Il appelle à passer des paroles aux actes.", sourceLabel: "Document 2 — Fraternité Matin", points: 2 },
+        { prompt: "Pour la consigne 3, quelle position est la mieux argumentée ?", options: ["La responsabilité première est aux dirigeants, mais la dépendance extérieure pèse aussi", "Les dirigeants n’ont aucune responsabilité", "Tout est la faute de l’extérieur uniquement", "L’UA n’a aucune difficulté"], correctIndex: 0, explanation: "Un avis nuancé qui reconnaît les acquis et propose des améliorations.", sourceLabel: "Méthode BAC — consigne 3", points: 2 },
+      ],
       questions: [
         question("Quel est le problème central ?", "L’efficacité, les difficultés et l’avenir de l’Union africaine", ["La disparition du panafricanisme", "La croissance démographique coréenne", "Le commerce UE-ACP uniquement"], "La situation invite à évaluer l’organisation et non à la déclarer simplement utile ou inutile.", 1),
         question("Que signifie l’expression « difficultés endogènes et exogènes » ?", "Elles viennent à la fois des États africains et de contraintes ou influences extérieures", ["Elles sont uniquement climatiques", "Elles concernent seulement la langue", "Elles ont toutes disparu"], "Endogène signifie interne ; exogène signifie externe.", 2),
