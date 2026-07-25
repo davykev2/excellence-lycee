@@ -632,8 +632,54 @@ Depuis l’Antiquité grecque, la philosophie est un **effort pour penser par so
         summary: "Distinguer le manque conscient du besoin et comprendre la démesure passionnelle.",
         conceptTitle: "Ce qui met l’homme en mouvement",
         explanation: "Le désir vise ce qui manque et peut se multiplier sans fin ; la passion est un attachement excessif qui domine les autres sentiments. Épicure propose de privilégier les désirs naturels et nécessaires, tandis que Hegel reconnaît une énergie créatrice aux passions.",
+        bodyMarkdown: String.raw`## Le désir, expression du manque
+
+**Désirer, c’est aspirer à posséder ce qui nous manque.** Lié à la conscience, le désir est **propre à l’homme** et le distingue de l’animal, qui n’a que des **besoins**.
+
+> **PLATON**, *Le Phédon* : « Le désirable par excellence est **le Bien**. »
+
+## La passion, un amour démesuré
+
+La passion est le **développement monstrueux d’un sentiment** au détriment des autres — un amour exagéré, qu’on subit et dont on souffre.
+
+## Faut-il condamner tout désir ?
+
+Pour **PLATON** et **ÉPICURE**, les **désirs naturels et nécessaires** suffisent au bonheur.
+
+> **PLATON**, *Le Phédon* : « Ni trop, ni trop peu. La vertu réside dans le **juste milieu**. »
+
+**ÉPICURE** (*Lettre à Ménécée*) classe les désirs en trois catégories :
+
+| Type de désir | Exemple | Le sage… |
+|---|---|---|
+| **Naturels et nécessaires** | manger, boire, s’abriter | les satisfait |
+| **Naturels et non nécessaires** | mets raffinés | s’en méfie |
+| **Non naturels et non nécessaires** | gloire, richesse | les écarte |
+
+## Les bonnes passions
+
+Les moralistes condamnent les passions, mais certaines déclenchent une **énergie au service de l’action**.
+
+> **ROUSSEAU**, *La Nouvelle Héloïse* : « Il n’y a que des **âmes de feu** qui sachent combattre et vaincre. » — **HEGEL**, *La Raison dans l’Histoire* : « **Rien de grand ne s’est accompli dans le monde sans passion.** »
+
+> **À retenir.** L’homme va toujours au-delà du nécessaire : son désir, qui ne cesse de croître, en fait un **éternel insatisfait**.`,
         keyPoint: "Le désir stimule l’action, mais sa démesure entretient l’insatisfaction ; le bonheur exige de hiérarchiser les désirs.",
         example: "Vouloir se nourrir répond à un besoin naturel ; rechercher sans limite des signes de prestige peut entretenir un manque permanent.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Le désir et les passions",
+          instruction: "Sélectionne un élément pour comprendre le manque, la démesure et l’énergie créatrice.",
+          observation: "Le désir met l’homme en mouvement ; bien réglé, il conduit au bonheur ; démesuré, il devient passion.",
+          rootLabel: "Ce qui met l’homme en mouvement",
+          rootDetail: "Le désir, la passion, et la sagesse d’Épicure",
+          nodes: [
+            { id: "desir", group: "Le désir", label: "L’expression du manque", role: "Platon", detail: "Désirer, c’est aspirer à ce qui manque. Propre à l’homme (l’animal n’a que des besoins). « Le désirable par excellence est le Bien » (Le Phédon)." },
+            { id: "epicure", group: "La sagesse du sage", label: "Épicure", role: "Classer les désirs", detail: "Trois types de désirs : naturels et nécessaires, naturels et non nécessaires, non naturels et non nécessaires. Le sage se contente des naturels et nécessaires (Lettre à Ménécée)." },
+            { id: "passion", group: "La passion", label: "L’amour démesuré", role: "Un déséquilibre", detail: "Développement monstrueux d’un sentiment au détriment des autres. On la subit, on en souffre : elle déséquilibre l’âme." },
+            { id: "bonnes-passions", group: "Les bonnes passions", label: "L’énergie créatrice", role: "Rousseau et Hegel", detail: "Certaines passions servent l’action. Rousseau : « les âmes de feu » ; Hegel : « rien de grand ne s’est accompli dans le monde sans passion »." },
+          ],
+        },
         mapTitle: "Du manque à la maîtrise",
         mapInstruction: "Compare les devenirs possibles du désir.",
         map: [
@@ -643,6 +689,11 @@ Depuis l’Antiquité grecque, la philosophie est un **effort pour penser par so
         ],
         observation: "Supprimer tout désir supprimerait aussi l’élan d’agir ; il s’agit surtout d’en régler la mesure.",
         check: q("Quel conseil Épicure donne-t-il pour le bonheur ?", "Privilégier les désirs naturels et nécessaires", "Multiplier tous les désirs", "Condamner chaque plaisir", "Transformer chaque désir en passion"),
+        extraQuestions: [
+          { prompt: "Quelles définitions s’appliquent au désir ?", options: ["Une aspiration profonde à posséder ce qui nous manque", "Un excès d’émotion qui détourne de la raison", "Une simple volonté indifférente", "Un besoin purement biologique"], correctIndex: 0, explanation: "Le désir est la conscience d’un manque orientée vers un objet jugé bon.", sourceLabel: "Activité d’application", points: 2 },
+          { prompt: "Que dit Hegel des passions ?", options: ["« Rien de grand ne s’est accompli dans le monde sans passion »", "Toute passion doit être supprimée", "La passion est un simple besoin", "La passion n’a aucun effet"], correctIndex: 0, explanation: "Hegel reconnaît l’énergie créatrice de la passion (La Raison dans l’Histoire).", sourceLabel: "I-A Le désir et les passions", points: 2 },
+          { prompt: "Selon Épicure, qui est le sage ?", options: ["Celui qui se contente des désirs naturels et nécessaires", "Celui qui satisfait tous ses désirs", "Celui qui refuse tout plaisir", "Celui qui recherche la gloire"], correctIndex: 0, explanation: "Le bonheur vient de la maîtrise des désirs (Lettre à Ménécée).", sourceLabel: "I-A Le désir et les passions", points: 2 },
+        ],
         distractors: ["Le désir et le besoin sont toujours identiques.", "Toute passion est dépourvue d’énergie créatrice.", "Le bonheur exige une accumulation sans limite."],
       },
       {
@@ -651,8 +702,44 @@ Depuis l’Antiquité grecque, la philosophie est un **effort pour penser par so
         summary: "Relier transformation utile, savoir-faire, art et imagination.",
         conceptTitle: "Transformer le monde et inventer",
         explanation: "Le travail transforme la nature et l’homme pour produire l’utile ; la technique rassemble les procédés efficaces. L’art vise une création esthétique et l’imagination forme des images nouvelles qui ouvrent l’invention.",
+        bodyMarkdown: String.raw`## Le travail
+
+Le travail est une **activité consciente de transformation de la nature et de l’homme**, pour produire l’utile. Son étymologie est rude : le latin **tripalium**, un instrument de torture. Dans les religions monothéistes, il est une **sanction** après la faute d’Adam et Ève (*Genèse*, ch. 3).
+
+> **VOLTAIRE**, *Candide* : « Le travail éloigne de nous trois grands maux : **l’ennui, le vice et le besoin**. »
+
+## La technique
+
+La technique est un **ensemble de procédés**, le **savoir-faire** de l’homme. Aujourd’hui, elle désigne surtout la **science appliquée** — d’où la **technoscience**.
+
+## L’art
+
+L’art est la **production du beau**. Platon le condamne comme une « pâle copie » du réel, mais Kant et Hegel y voient une **création**.
+
+> **KANT**, *Critique de la faculté de juger* : « L’art est la **belle représentation d’une chose**, et non la représentation d’une belle chose. » — **HEGEL**, *Esthétique* : l’imitation « ne peut produire que des chefs-d’œuvre de la technique, jamais des œuvres d’art ».
+
+## L’imagination
+
+> **KANT**, *Critique de la raison pure* : l’imagination est « le pouvoir de se représenter par intuition **un objet, même en son absence** ». — **BACHELARD**, *L’air et le songe* : elle est « l’**expérience même de l’ouverture, de la nouveauté** ».
+
+> **À retenir.** Travail et technique produisent l’**utile** ; art et imagination créent du **nouveau**. Mais cette satisfaction reste **matérielle** : la machine peut aussi aliéner l’homme (Marx, *Manuscrits de 1844*).`,
         keyPoint: "Travail et technique produisent l’utile ; art et imagination créent du sens et du nouveau — tous contribuent à l’accomplissement humain.",
         example: "Une machine améliore une production ; une œuvre transforme une expérience en forme sensible qui dépasse la simple imitation.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Quatre puissances humaines",
+          instruction: "Sélectionne une notion pour voir sa définition et l’auteur qui l’éclaire.",
+          observation: "Travail et technique produisent l’utile ; art et imagination créent le nouveau. Ensemble, ils rendent le progrès possible.",
+          rootLabel: "Transformer et créer",
+          rootDetail: "Le travail, la technique, l’art, l’imagination",
+          nodes: [
+            { id: "travail", group: "Produire l’utile", label: "Le travail", role: "Transformer la nature", detail: "Activité consciente de transformation, pour produire l’utile. Étymologie : tripalium (torture) ; sanction dans la Genèse. Mais Voltaire : « le travail éloigne l’ennui, le vice et le besoin » (Candide)." },
+            { id: "technique", group: "Produire l’utile", label: "La technique", role: "Le savoir-faire", detail: "Ensemble de procédés pour fabriquer et inventer. Aujourd’hui, science appliquée : la technoscience." },
+            { id: "art", group: "Créer le nouveau", label: "L’art", role: "La production du beau", detail: "Kant : « l’art est la belle représentation d’une chose », non l’imitation. Hegel : l’imitation ne produit jamais d’œuvres d’art." },
+            { id: "imagination", group: "Créer le nouveau", label: "L’imagination", role: "Représenter l’absent", detail: "Kant : « le pouvoir de se représenter par intuition un objet, même en son absence ». Bachelard : « l’expérience même de l’ouverture, de la nouveauté »." },
+          ],
+        },
         mapTitle: "Quatre puissances humaines",
         mapInstruction: "Distingue leurs finalités tout en voyant leurs liens.",
         map: [
@@ -663,6 +750,12 @@ Depuis l’Antiquité grecque, la philosophie est un **effort pour penser par so
         ],
         observation: "Réduire l’art à l’imitation ou le travail à la peine fait oublier leur pouvoir de création et d’humanisation.",
         check: q("Comment Kant caractérise-t-il l’art ?", "Comme une belle représentation, pas seulement la copie d’une belle chose", "Comme une technique sans imagination", "Comme toute production utile", "Comme une imitation forcément fausse"),
+        extraQuestions: [
+          { prompt: "Relie : « Création du beau. »", options: ["L’art", "Le travail", "La technique", "L’imagination"], correctIndex: 0, explanation: "L’art est la production du beau.", sourceLabel: "Activité d’application 2", points: 2 },
+          { prompt: "Relie : « Capacité à créer des images et à les combiner de manière originale. »", options: ["L’imagination", "L’art", "Le travail", "La technique"], correctIndex: 0, explanation: "L’imagination forme des images nouvelles qui dépassent la réalité.", sourceLabel: "Activité d’application 2", points: 2 },
+          { prompt: "« Dans les religions monothéistes, le travail est une sanction suite à la faute d’Adam et Ève » : vrai ou faux ?", options: ["Vrai", "Faux : le travail y est une récompense", "Faux : le travail n’y figure pas", "Vrai, mais seulement dans l’islam"], correctIndex: 0, explanation: "Le travail comme malédiction figure dans la Genèse, ch. 3.", sourceLabel: "Activité d’application 3", points: 1 },
+          { prompt: "Que présente Bachelard, contre l’idée de l’imagination comme copie ?", options: ["« L’expérience même de l’ouverture, de la nouveauté »", "Une simple mémoire des faits", "Une pâle copie du réel", "Une torture de l’esprit"], correctIndex: 0, explanation: "Bachelard fait de l’imagination une invention (L’air et le songe).", sourceLabel: "Activité d’application 3", points: 2 },
+        ],
         distractors: ["La technique et le travail n’ont aucun lien.", "L’imagination se réduit toujours à la mémoire.", "L’art ne produit jamais de nouveauté."],
       },
       {
@@ -671,8 +764,44 @@ Depuis l’Antiquité grecque, la philosophie est un **effort pour penser par so
         summary: "Comprendre comment science, technique et travail augmentent la maîtrise de la nature et le niveau de vie.",
         conceptTitle: "Du bien vers le mieux",
         explanation: "Le progrès matériel améliore les moyens d’action, la production, les soins et le confort. Descartes espère que la science et la technique rendront l’homme comme maître et possesseur de la nature.",
+        bodyMarkdown: String.raw`## Qu’est-ce que le progrès ?
+
+Le progrès est une **marche en avant**, un passage graduel « du bien au mieux ». Deux définitions s’opposent :
+
+> **HEGEL**, *La Raison dans l’Histoire* : le progrès est une **nécessité historique**, un déterminisme conduit par l’Esprit. — **MARX**, *La Sainte Famille* : le progrès est l’**œuvre de l’homme lui-même**, par son travail.
+
+## Deux formes de progrès
+
+| Forme | Fondement | Auteur |
+|---|---|---|
+| **Matériel** | la rationalité technoscientifique | Descartes : l’homme « comme **maître et possesseur de la nature** » |
+| **Spirituel et moral** | l’élévation de la pensée et de la conduite | Kant : « le *Je pense* doit pouvoir accompagner toutes nos représentations » |
+
+## Les limites du progrès matériel
+
+Le progrès matériel a montré ses failles : il s’est parfois **mué en régression** — atrocités de masse, barbarie d’une civilisation industrielle.
+
+> **ADORNO et HORKHEIMER** (École de Francfort), *La Dialectique de la raison* : « la raison est devenue une **finalité sans fin**, qui peut s’attacher à toutes les fins ».
+
+> **À retenir.** Le progrès **mesure une amélioration des moyens** ; le bonheur, lui, **juge la qualité globale de l’existence**. Une puissance accrue ne garantit pas un usage juste.`,
         keyPoint: "Le progrès technique réduit certaines contraintes et misères, mais une puissance accrue ne garantit pas l’usage juste de cette puissance.",
         example: "Une innovation médicale peut augmenter l’espérance de vie ; son accès inégal rappelle que l’invention seule ne réalise pas la justice.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Les types de progrès et leurs limites",
+          instruction: "Sélectionne un élément pour distinguer les progrès et comprendre leurs limites.",
+          observation: "Le progrès matériel augmente la puissance, mais peut se muer en régression sans progrès moral.",
+          rootLabel: "Du bien vers le mieux",
+          rootDetail: "Deux définitions, deux formes, et des limites",
+          nodes: [
+            { id: "hegel-progres", group: "Deux définitions", label: "Hegel", role: "Une nécessité historique", detail: "Le progrès est un déterminisme inscrit dans l’évolution des peuples, conduit par l’Esprit (La Raison dans l’Histoire)." },
+            { id: "marx-progres", group: "Deux définitions", label: "Marx", role: "L’œuvre de l’homme", detail: "Le progrès est réalisé par l’action et le travail de l’homme lui-même (La Sainte Famille)." },
+            { id: "materiel", group: "Deux formes", label: "Le progrès matériel", role: "Descartes", detail: "Fondé sur la technoscience : l’homme devient « comme maître et possesseur de la nature » (Discours de la méthode). Mais il réduit l’homme à la matérialité." },
+            { id: "spirituel", group: "Deux formes", label: "Le progrès spirituel", role: "Kant", detail: "Un changement qualitatif dans la pensée et la conduite : élévation morale et intellectuelle. Le « Je pense » doit accompagner toutes nos représentations." },
+            { id: "adorno", group: "Les limites", label: "Adorno et Horkheimer", role: "La raison dévoyée", detail: "Le progrès s’est mué en régression : « la raison est devenue une finalité sans fin, qui peut s’attacher à toutes les fins » (La Dialectique de la raison)." },
+          ],
+        },
         mapTitle: "De l’invention au bien-être",
         mapInstruction: "Suis les effets possibles du progrès matériel.",
         map: [
@@ -682,6 +811,11 @@ Depuis l’Antiquité grecque, la philosophie est un **effort pour penser par so
         ],
         observation: "Le progrès mesure une amélioration des moyens ; le bonheur juge la qualité globale de l’existence.",
         check: q("Pourquoi progrès et bonheur ne sont-ils pas synonymes ?", "Parce que l’amélioration des moyens ne garantit ni leur juste usage ni une satisfaction durable", "Parce que toute technique détruit l’homme", "Parce que le bonheur est un objet matériel", "Parce que la science interdit le confort"),
+        extraQuestions: [
+          { prompt: "Quelle prophétie de Descartes le progrès matériel accomplit-il ?", options: ["L’homme « comme maître et possesseur de la nature »", "L’homme esclave de la nature", "La fin de toute science", "Le retour à l’état de nature"], correctIndex: 0, explanation: "Descartes, Discours de la méthode.", sourceLabel: "I-C Les types de progrès", points: 2 },
+          { prompt: "« D’après Hegel, le progrès est l’œuvre de l’homme lui-même » : vrai ou faux ?", options: ["Faux : c’est la thèse de Marx ; pour Hegel, c’est une nécessité historique", "Vrai", "Vrai selon La Sainte Famille", "Faux : Hegel nie le progrès"], correctIndex: 0, explanation: "Hegel voit un déterminisme de l’Esprit ; Marx en fait l’œuvre de l’homme.", sourceLabel: "Activité d’application 1", points: 3 },
+          { prompt: "« Le progrès matériel apporte exclusivement le bonheur à l’homme » : vrai ou faux ?", options: ["Faux : il est limité et doit s’accompagner du progrès moral", "Vrai", "Vrai selon Adorno", "Vrai selon Descartes"], correctIndex: 0, explanation: "Le progrès matériel seul réduit l’homme à la matérialité.", sourceLabel: "Activité d’application 1", points: 2 },
+        ],
         distractors: ["Toute innovation rend automatiquement chacun heureux.", "Le progrès n’améliore jamais la santé.", "La maîtrise technique suffit à créer la justice."],
       },
       {
@@ -690,8 +824,42 @@ Depuis l’Antiquité grecque, la philosophie est un **effort pour penser par so
         summary: "Analyser les limites écologiques, morales et sociales du progrès matériel et la nécessité d’un progrès spirituel.",
         conceptTitle: "Puissance matérielle et sagesse",
         explanation: "Le progrès peut produire pollution, armes, domination et nouveaux besoins. Rousseau critique la corruption morale accompagnant les sciences et les arts ; une société heureuse doit donc unir avancées matérielles, justice et élévation morale.",
+        bodyMarkdown: String.raw`## Unir le matériel et le spirituel
+
+Le bonheur — que **KANT** appelle « la **satisfaction de toutes nos inclinations** » — suppose que le progrès matériel **s’accompagne du progrès spirituel et moral**. Car l’homme a une **triple dimension : corps, âme, esprit**.
+
+> **RABELAIS**, *Pantagruel* : « **Science sans conscience n’est que ruine de l’âme.** »
+
+> **BERGSON**, *Les deux sources de la morale et de la religion* : « À une culture technologique extrêmement poussée, il faut un **supplément d’âme**. »
+
+## Le vrai développement
+
+Le véritable progrès a pour objectif la **promotion de la personne humaine** et son épanouissement total :
+
+- le travail pour tous, un logement décent ;
+- se nourrir en quantité et en qualité ;
+- l’éducation et la santé pour tous.
+
+Il faut aussi **mettre fin aux projets futiles** qui menacent la planète (essais nucléaires, course aux armements).
+
+> **À retenir.** Il ne s’agit pas de **refuser la technique**, mais de **soumettre son usage à une réflexion sur les fins** : justice, responsabilité, respect du vivant.`,
         keyPoint: "Le progrès contribue au bonheur seulement s’il est orienté par la conscience, la justice et le respect du vivant.",
         example: "Une technologie très efficace peut améliorer la vie ou détruire un écosystème selon les choix politiques et moraux qui guident son usage.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Les conditions du bonheur",
+          instruction: "Sélectionne un élément pour comprendre pourquoi le progrès matériel ne suffit pas.",
+          observation: "Le progrès contribue au bonheur seulement s’il est orienté par la conscience, la justice et le respect du vivant.",
+          rootLabel: "Puissance matérielle et sagesse",
+          rootDetail: "Unir corps, âme et esprit pour un progrès véritable",
+          nodes: [
+            { id: "kant-bonheur", group: "Le bonheur", label: "Kant", role: "La satisfaction des inclinations", detail: "Le bonheur est « la satisfaction de toutes nos inclinations ». Il suppose la triple dimension de l’homme : corps, âme, esprit." },
+            { id: "rabelais", group: "La complémentarité", label: "Rabelais", role: "Science et conscience", detail: "« Science sans conscience n’est que ruine de l’âme » (Pantagruel) : le savoir sans morale détruit l’homme." },
+            { id: "bergson-ame", group: "La complémentarité", label: "Bergson", role: "Le supplément d’âme", detail: "« À une culture technologique extrêmement poussée, il faut un supplément d’âme » (Les deux sources de la morale et de la religion)." },
+            { id: "developpement", group: "Le vrai développement", label: "Promouvoir la personne", role: "Un progrès humain", detail: "Travail, logement, nourriture, éducation et santé pour tous ; en finir avec les projets futiles qui menacent la planète. Le développement authentique vise l’épanouissement total de la personne." },
+          ],
+        },
         mapTitle: "Le progrès sous condition",
         mapInstruction: "Compare puissance, risques et orientation morale.",
         map: [
@@ -701,6 +869,11 @@ Depuis l’Antiquité grecque, la philosophie est un **effort pour penser par so
         ],
         observation: "Il ne s’agit pas de refuser la technique, mais de soumettre son usage à une réflexion sur les fins.",
         check: q("Quelle condition relie réellement progrès et bonheur ?", "Une orientation morale, juste et respectueuse du vivant", "La puissance technique seule", "La multiplication illimitée des besoins", "L’absence de toute règle"),
+        extraQuestions: [
+          { prompt: "Que signifie « Science sans conscience n’est que ruine de l’âme » (Rabelais) ?", options: ["Le savoir sans morale détruit l’homme", "La science est inutile", "La conscience empêche le progrès", "La science remplace la morale"], correctIndex: 0, explanation: "Le progrès matériel doit s’accompagner du progrès moral.", sourceLabel: "III-B La complémentarité", points: 2 },
+          { prompt: "Que réclame Bergson face à la culture technologique ?", options: ["Un supplément d’âme", "Encore plus de machines", "La fin de toute morale", "Le retour à la nature sauvage"], correctIndex: 0, explanation: "« Il faut un supplément d’âme » (Les deux sources de la morale et de la religion).", sourceLabel: "III-B La complémentarité", points: 2 },
+          { prompt: "« L’humanité ne peut prétendre au bonheur qu’en réalisant les deux types de progrès » : vrai ou faux ?", options: ["Vrai : le matériel et le spirituel doivent aller de pair", "Faux : le matériel suffit", "Faux : seul le spirituel compte", "Faux : le bonheur est impossible"], correctIndex: 0, explanation: "L’homme a une triple dimension : corps, âme, esprit.", sourceLabel: "Activité d’application 1", points: 2 },
+        ],
         distractors: ["Le progrès matériel contient automatiquement le progrès moral.", "Tout risque impose d’abandonner la science.", "Le bonheur se réduit à la consommation."],
       },
     ],
@@ -708,17 +881,50 @@ Depuis l’Antiquité grecque, la philosophie est un **effort pour penser par so
       title: "Sujet BAC : « Le progrès technique éradique-t-il la misère de l’homme ? »",
       scenario: "Traite la situation officielle en évaluant les améliorations concrètes du niveau de vie puis les souffrances qui persistent ou naissent des usages de la technique.",
       problem: "La puissance technique suffit-elle à réaliser le bonheur de l’humanité ?",
+      bodyMarkdown: String.raw`## Le corrigé du sujet
+
+### I. Définition des termes essentiels
+
+| Terme | Définition |
+|---|---|
+| **Le progrès technique** | l’amélioration des moyens d’action, des savoir-faire de l’homme |
+| **Éradiquer** | éliminer, mettre fin à, supprimer |
+| **La misère** | la souffrance, le malheur, l’ensemble des maux vécus par les hommes |
+
+### II. Problème à analyser
+
+> **La technique réalise-t-elle le bonheur de l’humanité ?**
+
+### III. Axes d’analyse et références
+
+**Axe 1 — Le progrès technique contribue au bonheur.**
+
+- Il confère à l’homme un **pouvoir sur la nature**. *Cf.* **DESCARTES** : nous rendre « comme maîtres et possesseurs de la nature » (Discours de la méthode).
+- Il **améliore les conditions de vie** (biens, croissance, espérance de vie). *Cf.* **MARCUSE**, *L’homme unidimensionnel* : la technologie assure « une amélioration croissante du standard de vie ».
+
+**Axe 2 — La misère persiste malgré le progrès technique.**
+
+- Il porte atteinte à l’**intégrité morale**. *Cf.* **ROUSSEAU** : « nos âmes se sont corrompues à mesure que nos sciences et nos arts se sont avancés » ; **EINSTEIN** : « toute la technique (…) est comme une hache entre les mains d’un criminel ».
+- Il **détruit l’écosystème**. *Cf.* **Michel HENRY**, *La Barbarie* : la technique est « la nouvelle barbarie de notre temps ».
+- Il crée un **déséquilibre** matériel/spirituel. *Cf.* **BERGSON** : il faut « un supplément d’âme ».
+
+> **Le geste attendu.** Reconnaître les gains matériels (Axe 1) avant de montrer les souffrances qui persistent ou naissent (Axe 2). La réponse : la technique réduit des misères **si un progrès moral et politique en gouverne l’usage**.`,
       plan: [
-        { label: "Axe 1", detail: "Descartes et Marcuse : maîtrise de la nature, production, santé et amélioration du niveau de vie." },
-        { label: "Transition", detail: "Ces gains matériels éliminent-ils corruption morale, inégalités et destructions ?" },
-        { label: "Axe 2", detail: "Rousseau et Einstein : la puissance peut dégrader l’homme ou devenir dangereuse." },
-        { label: "Réponse", detail: "La technique réduit certaines misères si un progrès moral et politique en gouverne l’usage." },
+        { label: "Définir", shortLabel: "Définir", detail: "Progrès technique : amélioration des moyens d’action ; éradiquer : supprimer ; misère : l’ensemble des maux de l’homme." },
+        { label: "Axe 1", shortLabel: "Axe 1", detail: "La technique contribue au bonheur : pouvoir sur la nature (Descartes) et meilleur niveau de vie (Marcuse)." },
+        { label: "Axe 2", shortLabel: "Axe 2", detail: "La misère persiste : corruption morale (Rousseau, Einstein), destruction de l’écosystème (Michel Henry), déséquilibre (Bergson)." },
+        { label: "Réponse", shortLabel: "Réponse", detail: "La technique réduit des misères si un progrès moral et politique en gouverne l’usage." },
       ],
       modelAnswer: "Le progrès technique soulage de nombreuses contraintes, mais il n’éradique pas à lui seul la misère : sans justice et responsabilité, il peut créer de nouvelles souffrances.",
       questions: [
         q("Quel est le problème central du sujet ?", "La technique suffit-elle à réaliser le bonheur humain ?", "Le désir est-il une mémoire ?", "La science est-elle un mythe ?", "L’État est-il naturel ?"),
         q("Quelle référence soutient le pouvoir technique ?", "Descartes : devenir comme maîtres et possesseurs de la nature", "Rousseau : les âmes se corrompent avec les progrès", "Einstein : la technique peut devenir une hache", "Freud : les progrès n’ont pas rendu heureux"),
         q("Quelle conclusion est la plus solide ?", "La technique réduit des misères mais exige justice et progrès moral pour servir le bonheur", "Toute technique doit être condamnée", "Le confort suffit au bonheur", "La misère a déjà totalement disparu"),
+      ],
+      extraQuestions: [
+        { prompt: "Quelle citation d’Einstein illustre l’Axe 2 ?", options: ["« Toute la technique (…) est comme une hache entre les mains d’un criminel »", "« Maîtres et possesseurs de la nature »", "« Rien de grand sans passion »", "« Le travail éloigne trois grands maux »"], correctIndex: 0, explanation: "Einstein alerte sur le danger d’un mauvais usage de la technique.", sourceLabel: "Situation d’évaluation – Axe 2", points: 3 },
+        { prompt: "Comment Marcuse décrit-il la société technicienne (Axe 1) ?", options: ["Elle assure « une amélioration croissante du standard de vie »", "Elle supprime tout confort", "Elle rejette la technologie", "Elle interdit le progrès"], correctIndex: 0, explanation: "L’homme unidimensionnel : la technologie améliore le niveau de vie.", sourceLabel: "Situation d’évaluation – Axe 1", points: 2 },
+        { prompt: "Selon Rousseau, quel est l’effet du progrès des sciences et des arts ?", options: ["Nos âmes se sont corrompues à mesure qu’ils se sont perfectionnés", "L’homme est devenu parfaitement heureux", "La morale a progressé au même rythme", "La technique a disparu"], correctIndex: 0, explanation: "Discours sur les sciences et les arts : le progrès matériel n’élève pas la morale.", sourceLabel: "Situation d’évaluation – Axe 2", points: 2 },
       ],
     },
   },
