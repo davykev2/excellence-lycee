@@ -11,6 +11,7 @@ export type NavigationId =
   | "home"
   | "paths"
   | "arena"
+  | "store"
   | "ranking"
   | "messages"
   | "profile"
@@ -20,12 +21,14 @@ export type IconName =
   | "home"
   | "paths"
   | "arena"
+  | "store"
   | "ranking"
   | "messages"
   | "profile"
   | "admin"
   | "target"
-  | "calendar";
+  | "calendar"
+  | "coin";
 
 export interface NavigationItem {
   id: NavigationId;

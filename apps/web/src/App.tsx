@@ -23,6 +23,8 @@ import type { AuthUser } from "./domain/auth";
 import { CompanionGuide } from "./features/companion/CompanionGuide";
 import { FirstVisitTour } from "./features/companion/FirstVisitTour";
 import { ArenaScreen } from "./features/arena/ArenaScreen";
+import { StoreScreen } from "./features/store/StoreScreen";
+import { useStoreWallet } from "./features/store/useStoreWallet";
 import { usePublishedLessonContents } from "./features/content/usePublishedLessonContents";
 import { useUnreadMessages } from "./features/community/useUnreadMessages";
 import {
@@ -43,6 +45,7 @@ const previewParams = new URLSearchParams(window.location.search);
 const isPathPreview = import.meta.env.DEV && previewParams.has("__paths-preview");
 const isAdminContentPreview = import.meta.env.DEV && previewParams.has("__admin-content-preview");
 const isArenaExerciseEditorPreview = import.meta.env.DEV && previewParams.has("__arena-exercise-editor-preview");
+const isDuelPreview = import.meta.env.DEV && previewParams.has("__duel-preview");
 const forceDavyTourPreview = import.meta.env.DEV && previewParams.has("__davy-tour-preview");
 const requestedPreviewLevel = previewParams.get("__level-preview");
 const previewLevelId = schoolLevels.some((level) => level.id === requestedPreviewLevel) ? requestedPreviewLevel! : "seconde-c";
@@ -83,6 +86,8 @@ const arenaEditorPreviewUser: AuthUser = {
 
 const routeFallback: AppRoute = isArenaExerciseEditorPreview
   ? { navigation: "arena", subjectId: "mathematics", arenaMode: "exercises", arenaEditor: true }
+  : isDuelPreview
+  ? { navigation: "arena", subjectId: "mathematics", arenaMode: "duel" }
   : isAdminContentPreview
   ? { navigation: "admin", subjectId: "mathematics", adminSection: "content", adminStudio: true }
   : isPathPreview
@@ -107,6 +112,7 @@ function routeAllowedForUser(route: AppRoute, user: AuthUser): AppRoute {
 export function App() {
   const { user, loading } = useAuth();
   if (isArenaExerciseEditorPreview) return <LearningApp user={arenaEditorPreviewUser} />;
+  if (isDuelPreview) return <LearningApp user={previewUser} />;
   if (isAdminContentPreview) return <LearningApp user={adminPreviewUser} />;
   if (isPathPreview) return <LearningApp user={previewUser} />;
   if (loading) return <main className="session-loading" role="status"><span className="session-loading-mark" />Préparation de ton espace…</main>;
@@ -120,8 +126,9 @@ function LearningApp({ user }: { user: AuthUser }) {
   const [notice, setNotice] = useState<string | null>(null);
   const [tourReplayKey, setTourReplayKey] = useState(0);
   const { logout, updateUser } = useAuth();
-  const localPreview = isPathPreview || isAdminContentPreview || isArenaExerciseEditorPreview;
+  const localPreview = isPathPreview || isAdminContentPreview || isArenaExerciseEditorPreview || isDuelPreview;
   const { progressByPath, completedLessonsByPath, submitAttempt, totalXp, loading: progressLoading } = useLearningProgress({ localOnly: localPreview });
+  const store = useStoreWallet({ localOnly: localPreview, localTotalXp: totalXp });
   const availablePaths = usePublishedLessonContents(learningPaths, localPreview);
   const platformStats = usePlatformStats(availablePaths, localPreview);
   const unreadMessages = useUnreadMessages(localPreview);
@@ -291,8 +298,8 @@ function LearningApp({ user }: { user: AuthUser }) {
 
   return (
     <div className="app-shell" style={{ "--subject-accent": subject.theme.accent, "--subject-accent-soft": subject.theme.accentSoft } as React.CSSProperties}>
-      <Sidebar activeItem={activeNavigation} onNavigate={handleNavigate} canAccessAdmin={user.role === "admin"} unreadMessages={unreadMessages} />
-      <MobileHeader />
+      <Sidebar activeItem={activeNavigation} onNavigate={handleNavigate} canAccessAdmin={user.role === "admin"} unreadMessages={unreadMessages} goldBalance={store.loading ? null : store.wallet.goldBalance} />
+      <MobileHeader goldBalance={store.loading ? null : store.wallet.goldBalance} onOpenStore={() => handleNavigate("store")} />
 
       {activeNavigation === "admin" ? (
         <Suspense fallback={<main className="admin-loading" role="status">Chargement du centre d’administration…</main>}>
@@ -331,16 +338,20 @@ function LearningApp({ user }: { user: AuthUser }) {
           role={user.role}
           exercisesOpen={route.arenaMode === "exercises"}
           codexOpen={route.arenaMode === "codex"}
+          duelOpen={route.arenaMode === "duel"}
           exerciseEditorOpen={Boolean(route.arenaEditor)}
           localOnly={localPreview}
           onSubjectChange={handleSubjectChange}
           onBackHome={() => handleNavigate("home")}
           onOpenExercises={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "exercises" })}
           onOpenCodex={() => navigate({ navigation: "arena", subjectId: "mathematics", arenaMode: "codex" })}
+          onOpenDuel={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "duel" })}
           onBackArena={() => navigate({ navigation: "arena", subjectId: subject.id })}
           onOpenExerciseEditor={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "exercises", arenaEditor: true })}
           onCloseExerciseEditor={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "exercises" })}
         />
+      ) : activeNavigation === "store" ? (
+        <StoreScreen profile={profile} level={level} store={store} />
       ) : activeNavigation === "messages" ? (
         <MessagesScreen key={level.id} profile={profile} level={level} />
       ) : activeNavigation === "paths" && selectedPath ? (

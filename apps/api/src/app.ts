@@ -15,6 +15,7 @@ import { messageRoutes } from "./routes/messages.js";
 import { statsRoutes } from "./routes/stats.js";
 import { arenaExerciseRoutes } from "./routes/arenaExercises.js";
 import { lessonFeedbackRoutes } from "./routes/lessonFeedback.js";
+import { storeRoutes } from "./routes/store.js";
 import { authenticateWithSupabase, supabaseConfigured } from "./supabase.js";
 
 export async function buildApp() {
@@ -71,6 +72,7 @@ export async function buildApp() {
   await app.register(statsRoutes, { prefix: "/stats" });
   await app.register(arenaExerciseRoutes, { prefix: "/arena-exercises" });
   await app.register(lessonFeedbackRoutes, { prefix: "/lesson-feedback" });
+  await app.register(storeRoutes, { prefix: "/store" });
 
   app.setErrorHandler((error, _request, reply) => {
     app.log.error(error);

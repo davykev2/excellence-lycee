@@ -6,7 +6,7 @@ export interface AppRoute {
   subjectId?: SubjectId;
   pathId?: string;
   lessonId?: string;
-  arenaMode?: "exercises" | "codex";
+  arenaMode?: "exercises" | "codex" | "duel";
   arenaEditor?: boolean;
   adminSection?: AdminSection;
   adminStudio?: boolean;
@@ -45,6 +45,7 @@ const preservedPreviewParams = [
   "__lesson-preview",
   "__davy-tour-preview",
   "__arena-exercise-editor-preview",
+  "__duel-preview",
 ] as const;
 
 function decodeSegment(value: string | undefined) {
@@ -75,10 +76,17 @@ export function readAppRoute(location: Pick<Location, "pathname" | "search">, fa
   }
 
   if (section === "arene") {
-    const arenaMode = second === "exercices" ? "exercises" as const : second === "codex" ? "codex" as const : undefined;
+    const arenaMode = second === "exercices"
+      ? "exercises" as const
+      : second === "codex"
+        ? "codex" as const
+        : second === "duel"
+          ? "duel" as const
+          : undefined;
     const arenaEditor = arenaMode === "exercises" && third === "editeur";
     return { navigation: "arena", subjectId, arenaMode, arenaEditor };
   }
+  if (section === "boutique") return { navigation: "store", subjectId };
   if (section === "classement") return { navigation: "ranking", subjectId };
   if (section === "messages") return { navigation: "messages", subjectId };
   if (section === "profil") return { navigation: "profile", subjectId };
@@ -102,8 +110,10 @@ function pathnameFor(route: AppRoute) {
   if (route.navigation === "arena") {
     if (route.arenaMode === "exercises") return route.arenaEditor ? "/arene/exercices/editeur" : "/arene/exercices";
     if (route.arenaMode === "codex") return "/arene/codex";
+    if (route.arenaMode === "duel") return "/arene/duel";
     return "/arene";
   }
+  if (route.navigation === "store") return "/boutique";
   if (route.navigation === "ranking") return "/classement";
   if (route.navigation === "messages") return "/messages";
   if (route.navigation === "profile") return "/profil";

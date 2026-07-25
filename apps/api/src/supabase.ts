@@ -845,6 +845,36 @@ export async function submitSupabaseLevelAttempt(accessToken: string, pathId: st
   };
 }
 
+export async function getSupabaseStoreWallet(accessToken: string) {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("get_store_wallet");
+  if (error) throw new SupabaseOperationError(error.message, error.code === "42501" ? 401 : 500, error.code);
+  const row = (data as Array<{
+    gold_balance: number;
+    gold_spent: number;
+    total_xp: number;
+    owned_item_ids: string[] | null;
+  }> | null)?.[0];
+  return {
+    goldBalance: Number(row?.gold_balance ?? 0),
+    goldSpent: Number(row?.gold_spent ?? 0),
+    totalXp: Number(row?.total_xp ?? 0),
+    ownedItemIds: row?.owned_item_ids ?? [],
+  };
+}
+
+export async function purchaseSupabaseStoreItem(accessToken: string, itemId: string) {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("purchase_store_item", { p_item_id: itemId });
+  if (error) {
+    const status = error.code === "P0002" ? 404 : error.code === "42501" ? 401 : 400;
+    throw new SupabaseOperationError(error.message, status, error.code);
+  }
+  const row = (data as Array<{ gold_balance: number; item_id: string }> | null)?.[0];
+  if (!row) throw new SupabaseOperationError("L’achat n’a pas pu être enregistré.", 500);
+  return { goldBalance: Number(row.gold_balance), itemId: row.item_id };
+}
+
 export async function writeSupabaseAudit(
   accessToken: string,
   actorUserId: string,

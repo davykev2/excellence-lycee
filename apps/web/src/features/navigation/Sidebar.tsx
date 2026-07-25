@@ -1,3 +1,4 @@
+import { Coins } from "@phosphor-icons/react";
 import type { NavigationId } from "../../domain/learning";
 import { navigationItems } from "../../config/navigation";
 import { AppIcon } from "../../ui/AppIcon";
@@ -9,9 +10,10 @@ interface SidebarProps {
   onNavigate: (id: NavigationId) => void;
   canAccessAdmin?: boolean;
   unreadMessages?: number;
+  goldBalance?: number | null;
 }
 
-export function Sidebar({ activeItem, onNavigate, canAccessAdmin = false, unreadMessages = 0 }: SidebarProps) {
+export function Sidebar({ activeItem, onNavigate, canAccessAdmin = false, unreadMessages = 0, goldBalance = null }: SidebarProps) {
   return (
     <aside className="sidebar" aria-label="Navigation principale">
       <div className="brand-lockup">
@@ -20,6 +22,17 @@ export function Sidebar({ activeItem, onNavigate, canAccessAdmin = false, unread
         </span>
         <span className="brand-name">Excellence<br />Lycée</span>
       </div>
+
+      <button
+        className={`sidebar-wallet${activeItem === "store" ? " is-active" : ""}`}
+        type="button"
+        aria-label={`Solde : ${goldBalance ?? 0} or. Ouvrir la boutique.`}
+        onClick={() => onNavigate("store")}
+      >
+        <Coins size={22} weight="fill" />
+        <strong>{goldBalance === null ? "…" : goldBalance.toLocaleString("fr-FR")}</strong>
+        <span>or</span>
+      </button>
 
       <nav className="sidebar-nav">
         {navigationItems.filter((item) => item.id !== "admin" || canAccessAdmin).map((item) => (

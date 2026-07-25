@@ -6,6 +6,8 @@ import {
   Trophy,
   Sword,
   ShieldCheck,
+  Storefront,
+  Coins,
   Target,
   UserCircle,
   type IconProps,
@@ -16,12 +18,14 @@ const icons = {
   home: House,
   paths: BookOpenText,
   arena: Sword,
+  store: Storefront,
   ranking: Trophy,
   messages: ChatCircleDots,
   profile: UserCircle,
   admin: ShieldCheck,
   target: Target,
   calendar: CalendarCheck,
+  coin: Coins,
 };
 
 interface AppIconProps extends IconProps {

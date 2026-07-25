@@ -1,3 +1,4 @@
+import { Coins } from "@phosphor-icons/react";
 import type { NavigationId } from "../../domain/learning";
 import { navigationItems } from "../../config/navigation";
 import { AppIcon } from "../../ui/AppIcon";
@@ -10,13 +11,17 @@ interface MobileNavigationProps {
   unreadMessages?: number;
 }
 
-export function MobileHeader() {
+export function MobileHeader({ goldBalance = null, onOpenStore }: { goldBalance?: number | null; onOpenStore?: () => void }) {
   return (
     <header className="mobile-header">
       <span className="mobile-logo-crop">
         <img src={officialLogo} alt="Logo officiel Excellence" />
       </span>
       <span>Excellence Lycée</span>
+      <button className="mobile-wallet" type="button" aria-label={`Solde : ${goldBalance ?? 0} or. Ouvrir la boutique.`} onClick={onOpenStore}>
+        <Coins size={18} weight="fill" />
+        <strong>{goldBalance === null ? "…" : goldBalance.toLocaleString("fr-FR")}</strong>
+      </button>
     </header>
   );
 }

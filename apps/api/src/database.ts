@@ -2,6 +2,7 @@ import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 import Database from "better-sqlite3";
 import { config } from "./config.js";
+import { storeItems } from "./storeCatalog.js";
 
 mkdirSync(dirname(config.databasePath), { recursive: true });
 
@@ -212,7 +213,44 @@ database.exec(`
 
   CREATE INDEX IF NOT EXISTS lesson_comments_target_idx
     ON lesson_comments(path_id, lesson_id, created_at DESC);
+
+  CREATE TABLE IF NOT EXISTS store_items (
+    id TEXT PRIMARY KEY,
+    category TEXT NOT NULL CHECK (category IN ('frame', 'theme', 'badge', 'title')),
+    title TEXT NOT NULL,
+    price INTEGER NOT NULL CHECK (price >= 0),
+    active INTEGER NOT NULL DEFAULT 1 CHECK (active IN (0, 1)),
+    sort_order INTEGER NOT NULL DEFAULT 0
+  );
+
+  CREATE TABLE IF NOT EXISTS store_purchases (
+    id TEXT PRIMARY KEY,
+    user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    item_id TEXT NOT NULL REFERENCES store_items(id) ON DELETE CASCADE,
+    price_paid INTEGER NOT NULL CHECK (price_paid >= 0),
+    created_at TEXT NOT NULL,
+    UNIQUE(user_id, item_id)
+  );
+
+  CREATE INDEX IF NOT EXISTS store_purchases_user_idx ON store_purchases(user_id);
 `);
+
+// Aligne la table catalogue SQLite sur la source de vérité JS (apps/api/src/storeCatalog.ts).
+const upsertStoreItem = database.prepare(`
+  INSERT INTO store_items (id, category, title, price, active, sort_order)
+  VALUES (@id, @category, @title, @price, 1, @sort_order)
+  ON CONFLICT(id) DO UPDATE SET
+    category = excluded.category,
+    title = excluded.title,
+    price = excluded.price,
+    active = excluded.active,
+    sort_order = excluded.sort_order
+`);
+database.transaction(() => {
+  storeItems.forEach((item, index) => {
+    upsertStoreItem.run({ ...item, sort_order: index });
+  });
+})();
 
 const userColumns = database.prepare("PRAGMA table_info(users)").all() as Array<{ name: string }>;
 if (!userColumns.some((column) => column.name === "audience")) {
