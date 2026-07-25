@@ -1653,6 +1653,27 @@ L’enjeu est l’**autonomie financière** (réforme de **Paul Kagame** : taxe 
         summary: "Relier héritages grec, romain, judéo-chrétien et révolutions modernes.",
         conceptTitle: "Une civilisation faite d’héritages successifs",
         explanation: "La démocratie grecque, le droit romain, le christianisme et les langues gréco-latines structurent un héritage ancien. Les révolutions anglaise, américaine et française renforcent ensuite parlementarisme, souveraineté populaire, libertés et droits humains.",
+        bodyMarkdown: String.raw`## Qu’est-ce que le « monde occidental » ?
+
+Le monde occidental se caractérise par un **haut niveau de vie**, un fort développement **industriel** et un système **capitaliste** (longtemps opposé au monde socialiste), organisé autour d’**institutions démocratiques**. Géographiquement, il regroupe l’**Amérique du Nord**, l’**Europe de l’Ouest**, le **Japon** et l’**Australie** — un espace pénétré d’**idées libérales**.
+
+> **Correction.** Le monde occidental **ne se limite pas** à l’Europe de l’Ouest, et il **inclut le Japon**. En revanche, le **Brésil** n’en fait pas partie (piège de l’activité 1).
+
+## Un héritage lointain
+
+| Source | Apport majeur |
+|---|---|
+| **Grèce antique** (Athènes) | la **démocratie** — instaurée par **Clisthène** à la fin du VIᵉ s. av. J.-C. : égalité devant la loi et libertés |
+| **Rome antique** | le **droit civil**, base du droit européen, et l’idée d’**État souverain** |
+| **Influence judéo-chrétienne** | le **monothéisme** hébraïque puis le **christianisme**, greffé sur le tronc gréco-latin |
+| **Apports gréco-latins** | les **langues** (français, italien, espagnol…) et la pensée politique de **Platon** et **Aristote** |
+
+## L’héritage moderne et contemporain
+
+- **Régimes parlementaires** : au XVIIᵉ siècle, les **révolutions anglaises** limitent le pouvoir royal ; **John Locke** (*Traité du gouvernement civil*) place la souveraineté dans le **peuple**, non dans le monarque.
+- **Régimes démocratiques et droits de l’homme** : la **révolution américaine de 1776** (liberté, droit des peuples) et la **Révolution française de 1789** (**Déclaration des droits de l’homme et du citoyen**). À la fin du XIXᵉ siècle se réalise la **synthèse du libéralisme et de la démocratie**.
+
+> **Astuce mémoire de Davy.** Retiens les **quatre couches** de l’héritage : **Grèce** (démocratie) + **Rome** (droit) + **judéo-christianisme** (religion) + **révolutions** (1776, 1789 → droits de l’homme). Les mots mêmes — *démocratie, monarchie, aristocratie* — sont grecs.`,
         keyPoint: "Les valeurs occidentales contemporaines résultent d’un long héritage antique, religieux et révolutionnaire.",
         example: "La Déclaration des droits de l’homme et du citoyen de 1789 diffuse des principes de liberté et d’égalité politique.",
         timelineTitle: "Les couches de l’héritage occidental",
@@ -1664,6 +1685,15 @@ L’enjeu est l’**autonomie financière** (réforme de **Paul Kagame** : taxe 
         ],
         observation: "Une valeur actuelle peut avoir plusieurs sources historiques qui se sont combinées au fil du temps.",
         check: { prompt: "Quel héritage antique est associé à Athènes ?", options: ["La démocratie", "Le STABEX", "Le communisme soviétique", "La CEDEAO"], correctIndex: 0, explanation: "Athènes est présentée comme un foyer majeur de la démocratie antique." },
+        extraQuestions: [
+          { prompt: "Le monde occidental désigne seulement l’ensemble des pays de l’Europe de l’Ouest.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Il inclut aussi l’Amérique du Nord, le Japon et l’Australie.", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "L’Australie et le Brésil sont comptés parmi les pays du monde occidental.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "L’Australie oui, mais pas le Brésil.", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "Qui instaure la démocratie à Athènes en remplaçant la tyrannie ?", options: ["Clisthène", "Platon", "John Locke", "Aristote"], correctIndex: 0, explanation: "À la fin du VIᵉ siècle av. J.-C., après l’époque des tyrans.", sourceLabel: "Cours I-1-a", points: 2 },
+          { prompt: "Quel héritage antique est à la base du droit européen ?", options: ["Le droit civil romain", "Le droit coutumier japonais", "La common law américaine", "Le droit canonique seul"], correctIndex: 0, explanation: "Rome lègue le droit et l’idée d’État souverain.", sourceLabel: "Cours I-1-b", points: 1 },
+          { prompt: "Quelle révolution proclame la Déclaration des droits de l’homme et du citoyen ?", options: ["La Révolution française de 1789", "La révolution américaine de 1776", "Les révolutions anglaises du XVIIᵉ siècle", "La révolution russe de 1917"], correctIndex: 0, explanation: "1789 est un laboratoire du libéralisme et de la démocratie.", sourceLabel: "Cours I-2-b", points: 2 },
+          { prompt: "Selon John Locke, où réside la souveraineté ?", options: ["Dans le peuple", "Dans le monarque", "Dans l’Église", "Dans l’armée"], correctIndex: 0, explanation: "Le parlement devient le centre de la décision politique.", sourceLabel: "Cours I-2-a", points: 1 },
+          { prompt: "Le mot « démocratie » désigne le pouvoir du peuple.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Comme monarchie ou aristocratie, le terme est d’origine grecque.", sourceLabel: "Activité d’application 1", points: 1 },
+        ],
         distractors: ["Le droit européen ne doit rien à Rome.", "Le christianisme apparaît au XXe siècle.", "Les révolutions américaine et française rejettent toute idée de liberté."],
       },
       {
@@ -1673,16 +1703,83 @@ L’enjeu est l’**autonomie financière** (réforme de **Paul Kagame** : taxe 
         conceptTitle: "Libertés politiques et capitalisme libéral",
         explanation: "Le modèle politique valorise libertés individuelles, élections, pluralisme, séparation des pouvoirs et État de droit. Le modèle économique repose sur propriété privée, initiative individuelle, concurrence, profit et loi de l’offre et de la demande.",
         keyPoint: "Le monde occidental associe généralement démocratie libérale et économie capitaliste, malgré des limites et des inégalités.",
-        example: "Les régimes peuvent être présidentiels, parlementaires ou des monarchies parlementaires tout en partageant des principes démocratiques.",
+        example: "Les régimes peuvent être présidentiels (États-Unis), parlementaires ou des monarchies parlementaires (Royaume-Uni, Japon), tout en partageant des principes démocratiques.",
         timelineTitle: "Les piliers du modèle libéral",
         timelineInstruction: "Explore les institutions politiques, les règles économiques et leurs limites.",
         timeline: [
-          { label: "Démocratie", detail: "Élections, pluralisme des partis, libertés publiques, Constitution et séparation des pouvoirs." },
-          { label: "Capitalisme", detail: "Propriété privée, libre entreprise, concurrence, profit et marché." },
-          { label: "Limites", detail: "Inégalités, exclusions, lobbying, dérives de certaines libertés et montée d’idéologies extrémistes." },
+          { label: "Le domaine politique", shortLabel: "Le domaine politique", detail: "Liberté, suffrage universel, pluralisme des partis, assemblées parlementaires et séparation des pouvoirs." },
+          { label: "Le domaine économique", shortLabel: "Le domaine économique", detail: "Libéralisme : propriété privée, libre concurrence, recherche du profit et loi de l’offre et de la demande." },
+          { label: "Les limites du modèle", shortLabel: "les limites du modèle", detail: "Inégalités et exclusions, lobbying, dérives de certaines libertés et montée d’idéologies extrémistes." },
         ],
         observation: "Présenter un modèle ne signifie pas ignorer l’écart entre ses principes et son fonctionnement réel.",
         check: { prompt: "Quel principe caractérise l’économie capitaliste libérale ?", options: ["La propriété privée des moyens de production", "La suppression de toute monnaie", "L’interdiction de la concurrence", "La collectivisation obligatoire"], correctIndex: 0, explanation: "Propriété privée et libre entreprise sont des principes centraux du capitalisme libéral." },
+        parts: [
+          {
+            bodyMarkdown: String.raw`## Le modèle politique occidental
+
+Il repose sur cinq grands principes :
+
+| Principe | Contenu |
+|---|---|
+| **La liberté** | primauté de l’individu et **droits naturels** (pensée, opinion, presse, association, réunion). Le pouvoir tire sa légitimité du **contrat social** (**Rousseau**) |
+| **Le suffrage universel** | participation au pouvoir par le vote : **direct** en France, **indirect** aux États-Unis, à **scrutin secret** |
+| **Les partis politiques** | le **pluralisme** naît de la liberté de pensée ; les partis portent des **clivages idéologiques** |
+| **Les assemblées parlementaires** | elles votent le **budget** et les **lois**, et **contrôlent l’exécutif** (responsable devant le parlement) |
+| **La séparation des pouvoirs** | **exécutif, législatif et judiciaire** confiés à des personnes différentes, garantie par la **Constitution** |
+
+La **presse** y joue le rôle de **quatrième pouvoir**.
+
+## Trois grands types de régimes
+
+| Régime | Exemples |
+|---|---|
+| **Présidentiel** | États-Unis |
+| **Parlementaire** | Italie, Portugal, France, Allemagne, Israël, Turquie |
+| **Monarchie parlementaire** | Royaume-Uni, Japon, Espagne |
+
+> **Astuce mémoire de Davy.** Ne confonds pas **régime présidentiel** (le président élu gouverne, ex. USA) et **monarchie parlementaire** (un roi qui règne mais ne gouverne pas, ex. Royaume-Uni, Japon, Espagne). Et une définition à connaître : la **Constitution** = la **loi fondamentale** qui fixe l’organisation de l’État.`,
+            extraQuestions: [
+              { prompt: "Sur quel penseur repose l’idée que le pouvoir naît d’un « contrat social » ?", options: ["Jean-Jacques Rousseau", "Karl Marx", "Adam Smith", "Platon"], correctIndex: 0, explanation: "La légitimité du pouvoir vient du consentement des individus.", sourceLabel: "Cours II-1", points: 2 },
+              { prompt: "Quelle forme de suffrage universel est utilisée aux États-Unis ?", options: ["Le suffrage universel indirect", "Le suffrage universel direct", "Le tirage au sort", "Aucune élection"], correctIndex: 0, explanation: "En France, il est direct ; aux États-Unis, indirect.", sourceLabel: "Cours II-1", points: 2 },
+              { prompt: "Que garantit le principe de séparation des pouvoirs ?", options: ["Que l’exécutif, le législatif et le judiciaire sont confiés à des personnes différentes", "Que le président détient tous les pouvoirs", "Qu’il n’existe qu’un seul parti", "Que la presse est interdite"], correctIndex: 0, explanation: "Il évite l’abus de pouvoir ; la presse est le « quatrième pouvoir ».", sourceLabel: "Cours II-1", points: 2 },
+              { prompt: "Classe : les États-Unis relèvent d’un régime…", options: ["Présidentiel", "Parlementaire", "Monarchie parlementaire", "Théocratique"], correctIndex: 0, explanation: "Leur Constitution institue un régime présidentiel.", sourceLabel: "Exercice — Activité 1", points: 1 },
+              { prompt: "Classe : le Japon relève d’…", options: ["Une monarchie parlementaire", "Un régime présidentiel", "Une république socialiste", "Une dictature militaire"], correctIndex: 0, explanation: "Comme le Royaume-Uni et l’Espagne.", sourceLabel: "Exercice — Activité 1", points: 1 },
+            ],
+          },
+          {
+            bodyMarkdown: String.raw`## Le modèle économique : le capitalisme libéral
+
+Le système repose sur le **libéralisme économique** : la **liberté** laissée aux producteurs et aux consommateurs d’agir selon leurs intérêts.
+
+Ses principes :
+
+- la **libre concurrence** ;
+- la **recherche du profit maximum** ;
+- la **loi de l’offre et de la demande** (loi du marché).
+
+Le **capitaliste** est **propriétaire des moyens de production** ; il verse à l’ouvrier un **salaire** fixé par le marché. Ce capitalisme est très efficace pour la **production de masse** et a **enrichi** les pays occidentaux.
+
+## Les limites du modèle
+
+La démocratie libérale n’est pas parfaite :
+
+- **exclusion** de catégories raciales ou sociales (pauvres, immigrés laissés pour compte) ;
+- **dérives** de certaines libertés (grèves excessives, **liberté du port d’arme** aux États-Unis) ;
+- **alternance** parfois factice, le pouvoir étant capté par des **lobbies** (groupes de pression) ;
+- persistance de **partis d’extrême droite** et d’**idéologies racistes**.
+
+> **Le point clé.** Économie = **capitalisme libéral** (concurrence, profit, marché). Mais garde en tête la nuance : ce modèle **enrichit** ET **exclut** ; la liberté qu’il célèbre connaît aussi des **dérives**.
+
+> **Astuce mémoire de Davy.** Trois mots pour l’économie : **concurrence**, **profit**, **marché** (offre/demande). Trois mots pour les limites : **inégalités**, **lobbying**, **extrémismes**.`,
+            extraQuestions: [
+              { prompt: "Sur quoi repose le système économique du monde occidental ?", options: ["Le libéralisme économique (capitalisme)", "Le communisme", "L’économie planifiée", "L’autarcie"], correctIndex: 0, explanation: "Concurrence, profit et loi du marché en sont les principes.", sourceLabel: "Cours II-2", points: 1 },
+              { prompt: "Qui est propriétaire des moyens de production dans le capitalisme libéral ?", options: ["Le capitaliste (l’entrepreneur)", "L’État seul", "Les ouvriers collectivement", "Personne"], correctIndex: 0, explanation: "Il verse à l’ouvrier un salaire fixé par le marché.", sourceLabel: "Cours II-2", points: 2 },
+              { prompt: "Le communisme est une politique du monde occidental.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Le monde occidental est capitaliste, longtemps opposé au monde socialiste.", sourceLabel: "Activité d’application 1", points: 2 },
+              { prompt: "Quelle est une limite de la démocratie libérale citée dans le cours ?", options: ["Le pouvoir capté par des lobbies et l’exclusion des plus pauvres", "L’absence totale de partis", "L’interdiction du profit", "La disparition de la presse"], correctIndex: 0, explanation: "S’y ajoutent les dérives des libertés et les extrémismes.", sourceLabel: "Cours I-2-b", points: 2 },
+              { prompt: "La loi de l’offre et de la demande est aussi appelée…", options: ["La loi du marché", "La loi de Locke", "La loi salique", "La loi martiale"], correctIndex: 0, explanation: "Elle fixe notamment le niveau des salaires.", sourceLabel: "Cours II-2", points: 1 },
+            ],
+          },
+        ],
         distractors: ["La démocratie libérale concentre tous les pouvoirs sans contrôle.", "Le pluralisme interdit plusieurs partis politiques.", "L’économie de marché ignore l’offre et la demande."],
       },
       {
@@ -1691,6 +1788,25 @@ L’enjeu est l’**autonomie financière** (réforme de **Paul Kagame** : taxe 
         summary: "Analyser urbanisation, consommation, loisirs, arts, christianisme et diffusion médiatique.",
         conceptTitle: "Une société urbaine, mobile et médiatisée",
         explanation: "La croissance d’après-guerre accentue urbanisation, consommation de masse, éducation, loisirs et sport. Arts, musique et cinéma occupent une place majeure ; le christianisme reste influent, tandis que médias et internet diffusent les modes de vie occidentaux.",
+        bodyMarkdown: String.raw`## Une vie sociale en mutation
+
+La **croissance économique d’après-guerre** a transformé les sociétés occidentales :
+
+- forte **urbanisation** et **consommation de masse** ;
+- l’**éducation**, les **loisirs** et le **sport** deviennent des besoins prioritaires ;
+- mais aussi une modification des rapports entre générations et une **montée de la délinquance et de la violence**.
+
+## Un art en renouveau
+
+Les **lettres**, la **création artistique** et la **musique** connaissent un renouveau ; la **chanson** et surtout le **cinéma** deviennent un refuge pour une société en crise. Les nouvelles générations prônent la **paix, la fraternité** et le **refus du racisme**.
+
+## Une société chrétienne et médiatisée
+
+Le **christianisme** reste la religion majoritaire ; les Églises tentent de s’adapter. Ces croyances et valeurs se diffusent mondialement par les **multimédias** (internet, autoroutes de l’information) et les **médias classiques** (radio, télévision, cinéma, publicité), au point de tendre vers l’**universel**.
+
+> **Nuance de conclusion.** Le monde occidental reste dominé par les valeurs de **liberté** et de **démocratie**. **Toutefois**, avec l’**émergence d’autres sociétés**, la civilisation occidentale influence **de moins en moins** le reste du monde — un point essentiel pour la mission finale.
+
+> **Astuce mémoire de Davy.** Pour classer un trait (activité 2) : est-il **économique** (libre-échange, loi du marché, concurrence) ou **socioculturel** (individualisme, société de consommation, pluralité de la presse, émancipation de la femme, De Vinci et Picasso) ?`,
         keyPoint: "Les valeurs occidentales se diffusent mondialement par la puissance économique, culturelle, éducative et médiatique.",
         example: "Cinéma, publicité, télévision et internet font circuler vêtements, loisirs, pratiques de consommation et conceptions de la liberté.",
         timelineTitle: "Les vecteurs de diffusion",
@@ -1702,6 +1818,14 @@ L’enjeu est l’**autonomie financière** (réforme de **Paul Kagame** : taxe 
         ],
         observation: "La diffusion culturelle produit des emprunts, mais aussi des résistances, adaptations et métissages.",
         check: { prompt: "Quel ensemble diffuse fortement les modes de vie occidentaux ?", options: ["Les médias et les réseaux numériques", "Uniquement les frontières fermées", "La disparition de l’éducation", "L’interdiction du cinéma"], correctIndex: 0, explanation: "Médias classiques et numériques diffusent largement croyances, valeurs et pratiques." },
+        extraQuestions: [
+          { prompt: "Qu’est-ce qui explique les mutations sociales de l’Occident d’après-guerre ?", options: ["La croissance économique (urbanisation, consommation de masse)", "Un retour à la ruralité", "La fin de l’éducation", "L’interdiction des loisirs"], correctIndex: 0, explanation: "Éducation, loisirs et sport deviennent prioritaires.", sourceLabel: "Cours III-3-a", points: 1 },
+          { prompt: "Quelle religion est majoritaire dans les sociétés occidentales ?", options: ["Le christianisme", "L’islam", "Le bouddhisme", "L’hindouisme"], correctIndex: 0, explanation: "Les Églises chrétiennes tentent de s’adapter aux mutations de la société.", sourceLabel: "Cours III-3-c", points: 1 },
+          { prompt: "Classe (activité 2) : la « société de consommation » est une caractéristique…", options: ["Socioculturelle", "Économique", "Militaire", "Religieuse"], correctIndex: 0, explanation: "Avec l’individualisme, la presse plurielle ou l’émancipation de la femme.", sourceLabel: "Activité d’application 2", points: 2 },
+          { prompt: "Classe (activité 2) : la « loi du marché » est une caractéristique…", options: ["Économique", "Socioculturelle", "Politique", "Religieuse"], correctIndex: 0, explanation: "Comme la libre concurrence et le libre-échange.", sourceLabel: "Activité d’application 2", points: 2 },
+          { prompt: "Comment les valeurs occidentales se diffusent-elles dans le monde ?", options: ["Par les multimédias et les médias classiques (internet, TV, cinéma, publicité)", "Par la fermeture des frontières", "Uniquement par l’armée", "Elles ne se diffusent pas"], correctIndex: 0, explanation: "Elles tendent ainsi à devenir universelles.", sourceLabel: "Cours III-3-c", points: 1 },
+          { prompt: "Aujourd’hui, la civilisation occidentale influence le reste du monde…", options: ["De moins en moins, avec l’émergence d’autres sociétés", "De plus en plus, sans concurrence", "Plus du tout", "Uniquement en Afrique"], correctIndex: 0, explanation: "C’est la nuance de la conclusion du cours.", sourceLabel: "Cours — Conclusion", points: 2 },
+        ],
         distractors: ["Les sociétés occidentales restent entièrement rurales.", "Le christianisme n’a aucune influence historique en Occident.", "La diffusion culturelle entraîne partout une copie identique sans adaptation."],
       },
     ],

@@ -488,6 +488,43 @@ Ajoute la nuance de Musitelli : cette hégémonie est **douce**, elle repose sur
       title: "La démocratie libérale est-elle un modèle parfait ?",
       scenario: "Deux élèves débattent : l’un présente la démocratie libérale occidentale comme un modèle de perfection ; l’autre insiste sur ses limites et ses contradictions.",
       modelAnswer: "La démocratie libérale protège des libertés, la représentation et la séparation des pouvoirs. Elle reste imparfaite face aux inégalités, aux crises de représentation et aux tensions sociales.",
+      bodyMarkdown: String.raw`## La situation d’évaluation
+
+> Après le cours, un reportage sur la civilisation occidentale déclenche un débat. **William Koffi** estime que « **la démocratie libérale est un modèle de perfection** ». **Christelle Aké** réplique : « **la démocratie libérale a des limites** ».
+
+## Document 1 — Les principes de la démocratie libérale
+
+*G. Bourel,* Histoire Terminales, *Belin, 1998 :*
+
+> « Les démocraties libérales […] reposent sur un principe de **représentation** : le pouvoir législatif […] est détenu par un **parlement**, souvent bicaméral. […] La démocratie libérale repose sur les principes de la représentation […] et celui de la **liberté**, garantie par la **séparation des pouvoirs** […]. Le parlement a pour principale fonction le **vote des lois** […] et surtout le **budget de l’État**. […] Pour assurer un minimum de stabilité, le régime libéral peut **limiter** les prérogatives du parlement (dissolution, vote bloqué, décrets-lois). »
+
+## Document 2 — Une manifestation dans « un vieux pays occidental »
+
+*Rappel de la situation « Gilets jaunes » (France, 2019) :*
+
+> Des amis, affligés par les violences entre manifestants et forces de l’ordre, réagissent : « Des violences effroyables ! Dans un vieux pays occidental ! » — « les pratiques liées à la **liberté d’expression** sont devenues insoutenables dans le cœur même du monde occidental. »
+
+## Comment construire ta réponse
+
+**Consigne 1 — Le problème.** Il s’agit d’apprécier les **qualités et les limites** de la démocratie libérale : est-elle un modèle **parfait** ?
+
+**Consigne 2 — Expliquer « un modèle de perfection ».** Montre pourquoi elle peut servir de modèle : elle garantit les **libertés** (pensée, presse, réunion), le **pluralisme** des partis, la **représentation** (suffrage universel, parlement), la **séparation des pouvoirs** et l’**État de droit** — autant de garde-fous contre l’arbitraire.
+
+**Consigne 3 — Partages-tu l’avis de Christelle (« elle a des limites ») ?** Réponse **nuancée** :
+
+| Ses acquis réels | Ses limites |
+|---|---|
+| libertés, représentation, séparation des pouvoirs | **exclusion** des pauvres et des immigrés |
+| alternance et contrôle de l’exécutif | **lobbying**, alternance parfois factice |
+| État de droit garanti par la Constitution | **dérives** des libertés, violences (Gilets jaunes), montée des **extrémismes** |
+
+> **Astuce mémoire de Davy.** Le bon réflexe : **« oui, mais »**. Oui, la démocratie libérale a de **vrais acquis** (elle n’est pas un modèle *de perfection* pour rien) ; **mais** non, elle n’est pas **parfaite** — Christelle a raison. Un modèle **précieux et perfectible**, pas un modèle idéal.`,
+      extraQuestions: [
+        { prompt: "Selon le document 1, sur quels principes repose la démocratie libérale ?", options: ["La représentation et la liberté garantie par la séparation des pouvoirs", "La concentration de tous les pouvoirs", "Le parti unique", "L’absence de parlement"], correctIndex: 0, explanation: "Le parlement, cœur du régime, vote les lois et le budget.", sourceLabel: "Document 1 — Bourel", points: 2 },
+        { prompt: "D’après le document 1, comment le régime libéral assure-t-il sa stabilité ?", options: ["En pouvant limiter le parlement (dissolution, vote bloqué, décrets-lois)", "En supprimant les élections", "En interdisant les partis", "En abolissant la Constitution"], correctIndex: 0, explanation: "Ces outils montrent que le modèle n’est pas sans tensions internes.", sourceLabel: "Document 1 — Bourel", points: 2 },
+        { prompt: "Que révèle l’épisode des « Gilets jaunes » (doc. 2) sur la démocratie libérale ?", options: ["Qu’elle connaît aussi des tensions et des dérives, même dans un vieux pays occidental", "Qu’elle est parfaite", "Qu’elle a disparu", "Qu’elle interdit toute manifestation"], correctIndex: 0, explanation: "Un exemple des limites du modèle dans son propre « cœur ».", sourceLabel: "Document 2 — Gilets jaunes", points: 2 },
+        { prompt: "Pour la consigne 3, quelle position est la mieux argumentée ?", options: ["La démocratie libérale a de vrais acquis, mais elle n’est pas parfaite : Christelle a raison", "Elle est un modèle de perfection sans défaut", "Elle n’a aucun acquis", "La question ne peut être tranchée"], correctIndex: 0, explanation: "Un avis nuancé : un modèle précieux mais perfectible.", sourceLabel: "Méthode BAC — consigne 3", points: 2 },
+      ],
       questions: [
         question("Quel problème est posé ?", "Les principes, les qualités et les limites de la démocratie libérale", ["La fin de la guerre froide", "Le développement agricole ivoirien", "La création de l’Union africaine"], "Le débat oppose idéal démocratique et fonctionnement réel.", 1),
         question("Pourquoi la démocratie libérale peut-elle servir de modèle ?", "Elle garantit pluralisme, libertés, représentation et séparation des pouvoirs", ["Elle interdit toute opposition", "Elle concentre tous les pouvoirs", "Elle supprime les élections"], "Ces principes limitent l’arbitraire et organisent la souveraineté populaire.", 2),
