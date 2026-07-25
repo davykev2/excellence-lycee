@@ -320,12 +320,47 @@ L’humanité est une **totalité qui se construit dans la diversité** des peup
     sections: [
       {
         id: "philosophy-reason",
-        title: "Philosophie et raison",
-        summary: "Définir la philosophie comme quête rationnelle de vérité, de sagesse et de vertu.",
-        conceptTitle: "Questionner et juger par soi-même",
+        title: "Philosophie, raison et mythe",
+        summary: "Définir la philosophie comme quête rationnelle, la raison comme faculté de juger, le mythe comme récit imaginaire.",
+        conceptTitle: "Trois notions à distinguer",
         explanation: "La philosophie est amour de la sagesse et recherche critique de la vérité. Elle utilise la raison, faculté de connaître, de juger et de justifier, plutôt que l’autorité ou l’opinion immédiate.",
-        keyPoint: "Philosopher consiste moins à posséder le savoir qu’à examiner les raisons de ce que l’on affirme.",
-        example: "Le questionnement socratique fait reconnaître les contradictions d’une opinion afin d’ouvrir une recherche plus exigeante.",
+        bodyMarkdown: String.raw`## A. La philosophie, quête de savoir rationnel et de vertu
+
+La philosophie est un **savoir rationnel** apparu vers le **VIᵉ siècle avant J.-C.** Étymologiquement, elle signifie « **amour de la sagesse** » (Pythagore).
+
+> **PLATON**, *Gorgias* : elle « sert à l’instruction ». — **DESCARTES**, *Principes de la philosophie* : elle permet de « **régler nos mœurs** ». — **HEIDEGGER**, *Qu’est-ce que la philosophie ?* : « La philosophie est **œuvre de la raison**. »
+
+## B. La raison, faculté de connaissance et de jugement
+
+La raison permet de **connaître, juger et agir selon des principes**. Elle vient de deux mots : le grec **logos** (le discours cohérent) et le latin **ratio** (le calcul).
+
+> **DESCARTES**, *Discours de la méthode* : « La raison est la **puissance de bien juger et de distinguer le vrai d’avec le faux**. »
+
+Elle sert de **matrice à la science et à la philosophie**, toutes deux en quête de vérité.
+
+## C. Le mythe, récit imaginaire et fabuleux
+
+Du grec **muthos** (récit, parole par images). Le mythe est une production de l’**imagination** : un récit **symbolique** des origines du monde et de l’humanité, inhérent à la culture et aux croyances des peuples.
+
+> **Edith HAMILTON**, *La Mythologie* : « Le mythe est la **science des premiers âges**. »
+
+> **Astuce mémoire.** Trois facultés, trois productions : la **raison** (juger le vrai) → la science et la philosophie ; l’**imagination** (inventer des images) → le mythe.`,
+        keyPoint: "Philosopher, c’est chercher la vérité par la raison ; le mythe, lui, explique le monde par l’imagination.",
+        example: "Descartes définit la raison comme la puissance de bien juger ; Edith Hamilton voit dans le mythe la science des premiers âges.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Philosophie, raison et mythe",
+          instruction: "Sélectionne une notion pour voir sa définition et l’auteur qui l’éclaire.",
+          observation: "Philosophie et science naissent de la raison ; le mythe naît de l’imagination — d’où leur apparente opposition.",
+          rootLabel: "Comprendre le monde",
+          rootDetail: "Deux voies : la raison et l’imagination",
+          nodes: [
+            { id: "philosophie", group: "La philosophie", label: "L’amour de la sagesse", role: "Un savoir rationnel", detail: "Née au VIᵉ siècle av. J.-C., « amour de la sagesse » (Pythagore). Elle sert à l’instruction (Platon) et à régler nos mœurs (Descartes) ; elle est « œuvre de la raison » (Heidegger)." },
+            { id: "raison", group: "La raison", label: "Bien juger le vrai", role: "Logos et ratio", detail: "Faculté de connaître, juger et agir selon des principes : « la puissance de bien juger et de distinguer le vrai d’avec le faux » (Descartes). Matrice de la science et de la philosophie." },
+            { id: "mythe", group: "Le mythe", label: "Un récit imaginaire", role: "Muthos, l’image", detail: "Production de l’imagination : récit symbolique des origines, inhérent à la culture. « Le mythe est la science des premiers âges » (Edith Hamilton)." },
+          ],
+        },
         mapTitle: "Le geste philosophique",
         mapInstruction: "Observe comment une opinion devient réflexion.",
         map: [
@@ -335,6 +370,11 @@ L’humanité est une **totalité qui se construit dans la diversité** des peup
         ],
         observation: "La raison philosophique n’est pas une récitation de doctrines, mais un exercice personnel de jugement.",
         check: q("Qu’est-ce qui caractérise d’abord la philosophie ?", "La recherche critique et rationnelle de la vérité et de la sagesse", "L’acceptation de toute opinion", "La mémorisation sans examen", "Le refus de toute question"),
+        extraQuestions: [
+          { prompt: "De qui est cette pensée : « La raison est la puissance de bien juger et de distinguer le vrai d’avec le faux » ?", options: ["Descartes", "Platon", "Pythagore", "Heidegger"], correctIndex: 0, explanation: "Formule de Descartes (Discours de la méthode).", sourceLabel: "Activité d’application 3", points: 2 },
+          { prompt: "Quelle est la bonne définition du mythe ?", options: ["Le mythe est inhérent à la culture et aux croyances des peuples", "Le mythe est une affaire d’indigènes sauvages", "Le mythe est une histoire racontée aux enfants pour les divertir", "Le mythe est une démonstration scientifique"], correctIndex: 0, explanation: "Le mythe porte les traditions et croyances des peuples.", sourceLabel: "Activité d’application 2", points: 2 },
+          { prompt: "Que signifie étymologiquement « philosophie » ?", options: ["L’amour de la sagesse", "La science du calcul", "Le récit des origines", "Le refus de la raison"], correctIndex: 0, explanation: "De philo (amour) et sophia (sagesse), selon Pythagore.", sourceLabel: "I-A La philosophie", points: 1 },
+        ],
         distractors: ["La philosophie prétend posséder toutes les réponses définitives.", "La raison consiste à croire sans preuve.", "La sagesse exclut l’examen critique."],
       },
       {
@@ -343,8 +383,43 @@ L’humanité est une **totalité qui se construit dans la diversité** des peup
         summary: "Distinguer l’explication argumentée du récit imaginaire et symbolique.",
         conceptTitle: "Du récit traditionnel à la justification",
         explanation: "Le mythe est un récit fabuleux qui donne sens aux origines, aux valeurs ou au destin d’un peuple. La raison exige des concepts, des arguments discutables et une cohérence que l’autorité de la tradition ne suffit pas à fournir.",
-        keyPoint: "Le mythe donne à voir par des images ; la raison cherche à démontrer et à justifier.",
-        example: "L’allégorie de la caverne raconte une libération imagée, tandis que l’analyse philosophique explique le passage de l’opinion à la connaissance.",
+        bodyMarkdown: String.raw`## Pourquoi raison et mythe semblent s’opposer
+
+La raison se rapporte au **réel** pour fonder la connaissance ; le mythe se fonde sur l’**imagination**, qui « contredit ou transcende le réel ». Trois arguments nourrissent cette opposition.
+
+## 1. L’imagination, « ennemie de la raison »
+
+Pour les **rationalistes**, l’imagination témoigne de notre servitude aux sens trompeurs.
+
+> **PASCAL**, *Pensées* : l’imagination est « **maîtresse d’erreur et de fausseté** », elle est « ennemie de la raison ».
+
+## 2. Le mythe, « l’enfance de l’esprit »
+
+La démarche rationnelle abandonne le théologique et le métaphysique pour une approche **objective et scientifique**.
+
+> **Auguste COMTE**, *Cours de philosophie positive* : la **loi des trois états** (théologique → métaphysique → positif). Le mythe est « l’**enfance de l’esprit** » (Discours sur l’esprit positif) — une connaissance dépassée, prélogique.
+
+## 3. La preuve contre la croyance
+
+Enfin, la raison **exige des preuves**, des vérifications par la démonstration, tandis que le mythe repose sur la **croyance**, sur la **foi**. On ne critique pas le mythe : on y croit.
+
+> **La question qui reste.** Cette opposition est-elle définitive ? Le mythe ne peut-il pas être un **auxiliaire** de la raison ? C’est l’objet du niveau suivant.`,
+        keyPoint: "Le mythe donne à voir par des images et repose sur la croyance ; la raison cherche à démontrer et à prouver.",
+        example: "Pascal juge l’imagination « maîtresse d’erreur » ; Comte range le mythe parmi les connaissances dépassées, « l’enfance de l’esprit ».",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "L’opposition entre la raison et le mythe",
+          instruction: "Sélectionne un argument pour comprendre ce qui sépare les deux.",
+          observation: "La raison prouve et vérifie ; le mythe imagine et fait croire — trois arguments creusent cet écart.",
+          rootLabel: "Raison contre mythe",
+          rootDetail: "Trois arguments de l’opposition",
+          nodes: [
+            { id: "pascal", group: "L’imagination trompeuse", label: "Pascal", role: "« Ennemie de la raison »", detail: "Pour les rationalistes, l’imagination témoigne de notre servitude aux sens. « L’imagination est maîtresse d’erreur et de fausseté » (Pensées)." },
+            { id: "comte", group: "Une connaissance dépassée", label: "Auguste Comte", role: "La loi des trois états", detail: "La démarche rationnelle l’emporte sur la mythique. Le mythe est « l’enfance de l’esprit » : une connaissance prélogique, dépassée par l’ère positive (Cours de philosophie positive)." },
+            { id: "preuve", group: "La preuve contre la croyance", label: "Prouver ou croire", role: "Le critère décisif", detail: "La raison exige des preuves et des vérifications ; le mythe repose sur la croyance et la foi. On ne critique pas le mythe, on y croit." },
+          ],
+        },
         mapTitle: "Deux façons de donner du sens",
         mapInstruction: "Compare leurs moyens et leurs critères.",
         map: [
@@ -354,6 +429,11 @@ L’humanité est une **totalité qui se construit dans la diversité** des peup
         ],
         observation: "Opposer les formes de discours ne signifie pas que le mythe soit dépourvu de toute signification.",
         check: q("Quelle différence essentielle sépare raison et mythe ?", "La raison justifie par des arguments, le mythe exprime par un récit symbolique", "Le mythe est toujours scientifique", "La raison refuse les concepts", "Les deux sont strictement identiques"),
+        extraQuestions: [
+          { prompt: "Comment Pascal qualifie-t-il l’imagination ?", options: ["« Maîtresse d’erreur et de fausseté », ennemie de la raison", "La plus haute faculté humaine", "Une preuve scientifique", "Le fondement de la vérité"], correctIndex: 0, explanation: "Pascal se méfie de l’imagination (Pensées).", sourceLabel: "II-A L’opposition raison/mythe", points: 2 },
+          { prompt: "Que désigne la « loi des trois états » de Comte ?", options: ["Le passage du théologique au métaphysique puis au positif", "Les trois preuves de Dieu", "Les trois âges du mythe", "Les trois vertus philosophiques"], correctIndex: 0, explanation: "L’esprit progresse jusqu’à l’ère positive ou scientifique.", sourceLabel: "II-A L’opposition raison/mythe", points: 3 },
+          { prompt: "Sur quoi repose le mythe, contrairement à la raison ?", options: ["Sur la croyance et la foi, sans preuve", "Sur des démonstrations logiques", "Sur des expériences vérifiables", "Sur le calcul mathématique"], correctIndex: 0, explanation: "On croit au mythe ; on prouve en raison.", sourceLabel: "II-A L’opposition raison/mythe", points: 2 },
+        ],
         distractors: ["Tout récit symbolique est dépourvu de sens.", "La raison s’impose seulement par la tradition.", "Un argument philosophique n’a pas besoin de justification."],
       },
       {
@@ -362,8 +442,46 @@ L’humanité est une **totalité qui se construit dans la diversité** des peup
         summary: "Comprendre comment un récit peut soutenir une intuition philosophique sans remplacer l’argumentation.",
         conceptTitle: "Penser aussi par les symboles",
         explanation: "Les philosophes utilisent parfois le mythe pour rendre sensible une idée difficile, explorer l’origine ou orienter l’action. Le récit ouvre l’imagination ; l’analyse rationnelle en précise ensuite le sens et les limites.",
+        bodyMarkdown: String.raw`## Raison et mythe sont complémentaires
+
+Raison et mythe procèdent différemment, mais **ne s’opposent pas radicalement** : ils s’inscrivent dans un mouvement **dialectique**. Dans la culture grecque, les savoirs se transmettaient d’abord **sous forme de mythe** — donc le mythe est aussi un effort pour comprendre le monde, un **fruit de la raison**.
+
+> **Jean-Pierre VERNANT**, *Mythe et société* : le mythe est « comme une **ébauche de discours rationnel** : à travers ses fables, on percevait le premier balbutiement du **logos** ».
+
+Quand la raison confesse son impuissance, elle **produit le mythe** ; le mythe éclaire ce que la raison laisse d’obscur, et la raison donne au mythe cohérence et logique.
+
+> **François JACOB**, *Le jeu des possibles* : « mythe et science remplissent une **même fonction** : ils fournissent tous deux, à l’esprit humain, une certaine représentation du monde ».
+
+## Le mythe au service de la philosophie
+
+> **Georges GUSDORF** : « La philosophie **naît par épuration du mythe**. »
+
+**PLATON** utilise le mythe dans ses dialogues — valeur cognitive, didactique, **pédagogique** :
+
+| Mythe | Ce qu’il explique | Œuvre |
+|---|---|---|
+| **L’allégorie de la caverne** | la théorie de la connaissance | *La République*, VII |
+| **Le mythe d’Er le Pamphylien** | la transmigration des âmes | *La République*, X |
+| **Le mythe de l’androgyne** | l’origine des désirs de l’homme | *Le Banquet* |
+
+Ainsi, en tant que production humaine, la philosophie repose **à la fois sur la raison et sur le mythe**.`,
         keyPoint: "Le mythe devient philosophiquement fécond lorsqu’il est interprété et mis au service d’un problème rationnel.",
         example: "Chez Platon, le mythe de l’androgyne illustre le désir humain, et l’allégorie de la caverne éclaire la théorie de la connaissance.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Quand le mythe sert la raison",
+          instruction: "Sélectionne un élément pour voir la complémentarité et les mythes de Platon.",
+          observation: "Le récit ouvre l’imagination ; l’analyse rationnelle en précise le sens. La philosophie naît par épuration du mythe.",
+          rootLabel: "La féconde complémentarité",
+          rootDetail: "Le mythe, première forme de la raison, et outil du philosophe",
+          nodes: [
+            { id: "vernant", group: "Le mythe, ébauche de raison", label: "Vernant", role: "Le balbutiement du logos", detail: "Le mythe est « comme une ébauche de discours rationnel : à travers ses fables, on percevait le premier balbutiement du logos » (Mythe et société)." },
+            { id: "jacob", group: "Le mythe, ébauche de raison", label: "François Jacob", role: "Une même fonction", detail: "« Mythe et science remplissent une même fonction : ils fournissent tous deux, à l’esprit humain, une certaine représentation du monde » (Le jeu des possibles)." },
+            { id: "gusdorf", group: "La philosophie épure le mythe", label: "Gusdorf", role: "Naître par épuration", detail: "« La philosophie naît par épuration du mythe » : le discours philosophique émerge en raffinant le récit mythique." },
+            { id: "platon-mythes", group: "Platon et ses mythes", label: "Les mythes de Platon", role: "La caverne, Er, l’androgyne", detail: "La caverne (théorie de la connaissance, République VII), Er le Pamphylien (transmigration des âmes, République X), l’androgyne (origine des désirs, Le Banquet)." },
+          ],
+        },
         mapTitle: "Du symbole au concept",
         mapInstruction: "Suis le travail d’interprétation.",
         map: [
@@ -373,6 +491,12 @@ L’humanité est une **totalité qui se construit dans la diversité** des peup
         ],
         observation: "Un mythe n’est pas une preuve ; il peut cependant faire comprendre une question que le concept approfondira.",
         check: q("À quelle condition le mythe peut-il aider la philosophie ?", "Lorsqu’il est interprété et relié à un problème rationnel", "Lorsqu’il interdit toute discussion", "Lorsqu’il remplace définitivement les arguments", "Lorsqu’il est pris comme un fait vérifié"),
+        extraQuestions: [
+          { prompt: "Que dit Vernant du mythe ?", options: ["Il est « comme une ébauche de discours rationnel », le premier balbutiement du logos", "Il est une pure superstition sans valeur", "Il s’oppose totalement à la raison", "Il n’a aucun rapport avec le langage"], correctIndex: 0, explanation: "Le mythe est la première forme d’expression de la raison (Mythe et société).", sourceLabel: "II-B La complémentarité", points: 3 },
+          { prompt: "Relie : l’allégorie de la caverne explique…", options: ["la théorie de la connaissance", "l’origine des désirs de l’homme", "la transmigration des âmes", "la naissance des dieux"], correctIndex: 0, explanation: "La caverne illustre le passage de l’opinion à la connaissance (République VII).", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "Relie : le mythe de l’androgyne explique…", options: ["l’origine des désirs de l’homme", "la théorie de la connaissance", "la transmigration des âmes", "la loi des trois états"], correctIndex: 0, explanation: "L’androgyne éclaire le désir humain (Le Banquet).", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "Selon Gusdorf, comment naît la philosophie ?", options: ["Par épuration du mythe", "Par rejet total de la raison", "Par la seule expérience scientifique", "En dehors de toute culture"], correctIndex: 0, explanation: "« La philosophie naît par épuration du mythe. »", sourceLabel: "III-A Raison et mythe, fondements", points: 2 },
+        ],
         distractors: ["La philosophie doit toujours éliminer toute image.", "Le symbole démontre automatiquement une thèse.", "Interpréter signifie croire littéralement le récit."],
       },
       {
@@ -381,8 +505,49 @@ L’humanité est une **totalité qui se construit dans la diversité** des peup
         summary: "Confronter les critiques de l’abstraction philosophique à ses rôles intellectuel, politique et pratique.",
         conceptTitle: "Interpréter, orienter et transformer",
         explanation: "La philosophie paraît inutile lorsqu’elle reste abstraite ou sans résultats définitifs. Pourtant elle combat l’ignorance, exerce l’esprit critique, interroge les fins de la technique, éclaire la justice et cherche un art de vivre.",
+        bodyMarkdown: String.raw`## Le rôle de la philosophie dans l’histoire de l’humanité
+
+Depuis l’Antiquité grecque, la philosophie est un **effort pour penser par soi-même**. Sa valeur s’observe sur cinq plans.
+
+## Sur le plan intellectuel — délivrer de l’ignorance
+
+> **ARISTOTE**, *Métaphysique* : « Ce fut bien pour **échapper à l’ignorance** que les premiers philosophes se livrèrent à la philosophie. »
+
+> **Bertrand RUSSELL**, *Problèmes de philosophie* : « Celui qui n’a aucune teinture de philosophie traverse l’existence, **emprisonné dans les préjugés** qui lui viennent du sens commun. »
+
+## Sur le plan moral — rendre vertueux
+
+> **ÉPICURE**, *Lettre à Ménécée* : la réflexion conduit à une vie heureuse, conforme à la satisfaction des « seuls désirs naturels et nécessaires ».
+
+## Sur le plan politique — éclairer la cité
+
+> **PLATON**, *La République* : « Tant que les **philosophes ne seront pas rois** dans les cités (…), il n’y aura de cesse aux maux des cités ni à ceux du genre humain. »
+
+## Sur le plan existentiel — répondre : « Qu’est-ce que l’homme ? »
+
+> **KANT**, *Logique* : la philosophie a pour finalité de répondre à la question « **Qu’est-ce que l’homme ?** ».
+
+## Source de progrès
+
+> **HEGEL** : sans l’esprit philosophique, « il ne peut y avoir (…) ni vie, ni esprit, ni vérité ». Et **Claude BERNARD** : la philosophie « entretient la **soif de la connaissance de l’inconnu** et le feu sacré de la recherche ».`,
         keyPoint: "La philosophie n’est pas utile comme un outil technique : elle l’est parce qu’elle examine les buts, les valeurs et le sens de nos actions.",
         example: "La technique explique comment produire davantage ; la philosophie demande si cette production rend la société plus juste et les hommes plus heureux.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "À quoi sert la philosophie ?",
+          instruction: "Sélectionne un plan pour voir la valeur de la philosophie et l’auteur qui l’éclaire.",
+          observation: "Sa valeur n’est pas matérielle : elle examine les buts, les valeurs et le sens de nos actions.",
+          rootLabel: "La valeur de la philosophie",
+          rootDetail: "Cinq plans où elle se révèle indispensable",
+          nodes: [
+            { id: "intellectuel", group: "Plan intellectuel", label: "Délivrer de l’ignorance", role: "Aristote et Russell", detail: "« Ce fut pour échapper à l’ignorance que les premiers philosophes se livrèrent à la philosophie » (Aristote). Russell : sans philosophie, on reste « emprisonné dans les préjugés »." },
+            { id: "moral", group: "Plan moral", label: "Rendre vertueux", role: "Épicure", detail: "La réflexion conduit à une vie heureuse, conforme à la satisfaction des seuls désirs naturels et nécessaires (Lettre à Ménécée). Elle prémunit contre les vices." },
+            { id: "politique", group: "Plan politique", label: "Éclairer la cité", role: "Platon", detail: "« Tant que les philosophes ne seront pas rois dans les cités (…), il n’y aura de cesse aux maux des cités » (La République)." },
+            { id: "existentiel", group: "Plan existentiel", label: "Qu’est-ce que l’homme ?", role: "Kant", detail: "La philosophie est une anthropologie : sa finalité est de répondre à la question « Qu’est-ce que l’homme ? » (Logique)." },
+            { id: "progres", group: "Source de progrès", label: "Le feu de la recherche", role: "Hegel et Claude Bernard", detail: "Sans esprit philosophique, « ni vie, ni esprit, ni vérité » (Hegel). Elle « entretient la soif de la connaissance de l’inconnu » (Claude Bernard)." },
+          ],
+        },
         mapTitle: "Les objections et les réponses",
         mapInstruction: "Compare les deux évaluations de la philosophie.",
         map: [
@@ -392,6 +557,11 @@ L’humanité est une **totalité qui se construit dans la diversité** des peup
         ],
         observation: "Demander l’utilité de la philosophie oblige à distinguer efficacité matérielle et valeur humaine.",
         check: q("Pourquoi la philosophie reste-t-elle utile face à la technique ?", "Parce qu’elle interroge les fins et les valeurs de l’action", "Parce qu’elle fabrique toutes les machines", "Parce qu’elle interdit le progrès", "Parce qu’elle fournit des réponses incontestables"),
+        extraQuestions: [
+          { prompt: "Selon Aristote, pourquoi les premiers philosophes ont-ils philosophé ?", options: ["Pour échapper à l’ignorance", "Pour gagner de l’argent", "Pour fabriquer des outils", "Pour dominer la cité"], correctIndex: 0, explanation: "La philosophie naît du désir de savoir (Métaphysique).", sourceLabel: "III-B Le rôle de la philosophie", points: 2 },
+          { prompt: "Que répond Platon aux maux de la cité ?", options: ["Que les philosophes soient rois ou les rois philosophes", "Qu’il faut supprimer les lois", "Que la technique gouverne", "Qu’il faut abolir la cité"], correctIndex: 0, explanation: "Le roi-philosophe met fin aux maux des cités (La République).", sourceLabel: "III-B Le rôle de la philosophie", points: 2 },
+          { prompt: "À quelle question fondamentale la philosophie répond-elle, selon Kant ?", options: ["« Qu’est-ce que l’homme ? »", "« Combien coûte la sagesse ? »", "« Qui a créé le monde ? »", "« Quand finira l’histoire ? »"], correctIndex: 0, explanation: "La philosophie est une anthropologie (Logique).", sourceLabel: "III-B Plan existentiel", points: 2 },
+        ],
         distractors: ["L’absence de produit matériel rend toute activité inutile.", "La technoscience répond seule à toutes les questions morales.", "L’esprit critique empêche l’action."],
       },
     ],
@@ -399,17 +569,50 @@ L’humanité est une **totalité qui se construit dans la diversité** des peup
       title: "Sujet BAC : « La philosophie est-elle un luxe ? »",
       scenario: "Traite la situation officielle en définissant le luxe comme ce dont on peut se passer, puis confronte l’apparente inutilité de la philosophie à sa valeur humaine.",
       problem: "La philosophie est-elle une activité superflue ?",
+      bodyMarkdown: String.raw`## Le corrigé du sujet
+
+### I. Définition des termes essentiels
+
+| Terme | Définition |
+|---|---|
+| **La philosophie** | l’amour de la sagesse, la quête perpétuelle de vérité, la pensée rationnelle et éthique |
+| **Un luxe** | ce qui est superflu, non nécessaire, ce dont on peut se passer |
+
+### II. Problème à analyser
+
+> **La philosophie est-elle inutile ?**
+
+### III. Axes d’analyse et références
+
+**Axe 1 — La philosophie, une activité superflue.**
+
+- Elle est une quête **désintéressée**, sans fin utilitaire. *Cf.* **ARISTOTE** : les premiers philosophes cherchaient « en vue de connaître et non pour une fin utilitaire » (Métaphysique).
+- Elle est **inachevée**. *Cf.* **ROUSSEAU** : « Tous les philosophes sont des charlatans » (Discours sur les sciences et les arts).
+- Elle est **abstraite**, contrairement à la technoscience. *Cf.* **MARX** : « Les philosophes n’ont fait qu’**interpréter** le monde (…) ; ce qui importe, c’est de le **transformer** » (Thèses sur Feuerbach).
+
+**Axe 2 — La philosophie, une activité nécessaire.**
+
+- Elle aide à **connaître** et à progresser vers la vérité. *Cf.* **DESCARTES** : « C’est proprement avoir les yeux fermés (…) que de vivre sans philosopher » ; **PIAGET** : elle est « une prise de position raisonnée par rapport à la totalité du réel ».
+- Au plan **politique**, elle installe l’ordre et l’équité. *Cf.* **PLATON** : le roi-philosophe.
+- En tant qu’**art de vivre**, elle conduit au bonheur. *Cf.* **André COMTE-SPONVILLE** : « Le but de la philosophie est la sagesse en toute chose, donc le bonheur » (Le bonheur, désespérément).
+
+> **Le geste attendu.** Prendre au sérieux l’apparente inutilité (Axe 1) avant de montrer que la philosophie **oriente l’usage même des outils** et la recherche du bonheur (Axe 2).`,
       plan: [
-        { label: "Axe 1", detail: "Aristote, Rousseau ou Marx permettent de montrer son abstraction, son inachèvement ou son impuissance pratique." },
-        { label: "Transition", detail: "L’efficacité matérielle suffit-elle pourtant à guider les finalités humaines ?" },
-        { label: "Axe 2", detail: "Descartes, Platon et Comte-Sponville éclairent connaissance, justice et sagesse." },
-        { label: "Réponse", detail: "Elle n’est pas un outil matériel, mais demeure nécessaire pour juger l’usage des outils et orienter la vie." },
+        { label: "Définir", shortLabel: "Définir", detail: "La philosophie : l’amour de la sagesse ; un luxe : ce qui est superflu, dont on peut se passer." },
+        { label: "Axe 1", shortLabel: "Axe 1", detail: "Une activité superflue : désintéressée (Aristote), inachevée (Rousseau), abstraite (Marx : interpréter au lieu de transformer)." },
+        { label: "Axe 2", shortLabel: "Axe 2", detail: "Une activité nécessaire : connaître (Descartes, Piaget), l’ordre politique (Platon), le bonheur (Comte-Sponville)." },
+        { label: "Réponse", shortLabel: "Réponse", detail: "Non un outil matériel, mais l’indispensable pour juger l’usage des outils et orienter la vie." },
       ],
       modelAnswer: "La philosophie paraît luxueuse si l’utilité se réduit à la production immédiate ; elle devient indispensable dès qu’il faut examiner la vérité, la justice, les fins de la technique et le bonheur.",
       questions: [
         q("Que signifie « un luxe » dans le sujet ?", "Ce qui est superflu et non indispensable", "Ce qui est nécessaire à toute survie", "Une méthode expérimentale", "Un récit mythique"),
         q("Quelle référence soutient la critique pratique ?", "Marx : il faut transformer le monde et pas seulement l’interpréter", "Descartes : vivre sans philosopher, c’est avoir les yeux fermés", "Platon : les philosophes devraient gouverner", "Comte-Sponville : la philosophie vise la sagesse"),
         q("Quelle conclusion répond au problème ?", "La philosophie n’est pas matériellement productive, mais elle est nécessaire pour orienter savoir et action", "La philosophie doit disparaître", "La technique garantit seule la justice", "Toute question reste sans réponse possible"),
+      ],
+      extraQuestions: [
+        { prompt: "Quelle citation de Descartes soutient l’Axe 2 (la philosophie est nécessaire) ?", options: ["« C’est proprement avoir les yeux fermés (…) que de vivre sans philosopher »", "« Les philosophes sont des charlatans »", "« Il faut transformer le monde »", "« La philosophie est un luxe »"], correctIndex: 0, explanation: "Descartes fait de la philosophie une exigence de lucidité (Principes de la philosophie).", sourceLabel: "Situation d’évaluation – Axe 2", points: 3 },
+        { prompt: "Selon André Comte-Sponville, quel est le but de la philosophie ?", options: ["La sagesse en toute chose, donc le bonheur", "La richesse matérielle", "Le pouvoir politique absolu", "L’accumulation de citations"], correctIndex: 0, explanation: "La philosophie comme art de vivre conduit au bonheur (Le bonheur, désespérément).", sourceLabel: "Situation d’évaluation – Axe 2", points: 2 },
+        { prompt: "Comment Marx critique-t-il la philosophie (Axe 1) ?", options: ["Les philosophes n’ont fait qu’interpréter le monde ; il faut le transformer", "La philosophie est trop utile", "La philosophie prouve tout", "La philosophie ignore la sagesse"], correctIndex: 0, explanation: "La 11ᵉ thèse sur Feuerbach oppose interprétation et transformation.", sourceLabel: "Situation d’évaluation – Axe 1", points: 2 },
       ],
     },
   },
