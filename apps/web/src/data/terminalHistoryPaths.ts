@@ -1243,6 +1243,40 @@ En **janvier 1959**, le Soudan français et le Sénégal créent la **Fédérati
         summary: "Relier colonie de peuplement, inégalités et affirmation des nationalismes algériens.",
         conceptTitle: "Une colonie de peuplement profondément inégalitaire",
         explanation: "Conquise en 1830 et divisée en départements, l’Algérie est considérée comme partie intégrante de la France. La minorité européenne domine administration, villes et meilleures terres, tandis que la majorité musulmane subit précarité et faibles droits politiques.",
+        bodyMarkdown: String.raw`## Un statut à part : l’Algérie « française »
+
+L’occupation française commence en **1830**. Jusqu’au **9 décembre 1848**, l’Algérie est une **colonie de peuplement** ; à cette date, elle devient une **partie intégrante de la France** (application des lois françaises). Elle est découpée en **trois départements — Alger, Oran, Constantine —** placés sous un gouverneur général relevant du **ministère de l’Intérieur**.
+
+> **Correction importante.** L’Algérie n’est **pas** une colonie d’exploitation : c’est une **colonie de peuplement**. C’est le piège n°1 de l’activité d’application du cours.
+
+## Une société à deux vitesses
+
+| | Européens d’Algérie | Musulmans autochtones |
+|---|---|---|
+| **Nombre** | ~ **1 000 000** (80 % nés en Algérie) | ~ **8 000 000** |
+| **Statut** | citoyens, privilèges, pouvoir | sous tutelle, sans partage réel de l’autorité |
+| **Économie** | fonctions administratives, industrie, **meilleures terres** | agriculture traditionnelle, sous-emploi, misère |
+
+Malgré leur participation à l’**effort de guerre de 1914-1918**, aucune amélioration n’est accordée aux musulmans, et la minorité française **refuse toute réforme** qui donnerait l’égalité.
+
+## Trois tendances nationalistes
+
+| Tendance | Leader | Organisation | Revendication |
+|---|---|---|---|
+| **Traditionnelle** | Abdelhamid **Ben Badis** | Association des Ouléma (1931) | rejet de l’assimilation, restauration de l’**Islam** |
+| **Révolutionnaire / populiste** | **Messali Hadj** | Étoile nord-africaine (1927) → **PPA** (1939) | **indépendance** de l’Algérie |
+| **Modérée / réformiste** | **Ferhat Abbas** | Fédération des élus indigènes (1927) | d’abord **assimilation** et égalité |
+
+> Devise des Ouléma de Ben Badis : « L’Islam est ma religion, l’Arabe est ma langue et l’Algérie est ma patrie. »
+
+## La radicalisation (1945-1954)
+
+- **8 mai 1945 — massacres de Sétif** : émeutes puis répression très violente (~100 Français tués ; **8 000 Algériens** selon l’administration, **15 000** selon les nationalistes).
+- **1946** : Ferhat Abbas fonde l’**UDMA** (république algérienne autonome associée à la France) ; Messali Hadj crée le **MTLD** (indépendance d’une Algérie musulmane et arabe).
+- **20 septembre 1947** : statut érigeant l’Algérie en département d’outre-mer (assemblée de 120 députés, deux collèges) — **jamais appliqué**, rejeté par les deux camps.
+- **Mars 1954** : naissance du **CRUA** (Belkacem Krim, Ben Boulaïd, Larbi Ben M’Hidi), décidé à la **lutte armée**.
+
+> **Astuce mémoire de Davy.** Trois leaders, trois lignes : **Ben Badis** = religion (Ouléma), **Messali Hadj** = indépendance (PPA/MTLD), **Ferhat Abbas** = réforme puis autonomie (UDMA). Sétif 1945, c’est l’étincelle ; le CRUA de 1954, c’est le détonateur.`,
         keyPoint: "Les inégalités politiques, économiques et sociales alimentent la formation puis la radicalisation du nationalisme algérien.",
         example: "Ben Badis porte une tendance traditionnelle, Messali Hadj une tendance révolutionnaire et Ferhat Abbas une tendance d’abord réformiste.",
         timelineTitle: "De la conquête à la radicalisation",
@@ -1254,6 +1288,15 @@ En **janvier 1959**, le Soudan français et le Sénégal créent la **Fédérati
         ],
         observation: "La colonie de peuplement se distingue par l’installation durable d’une forte population européenne privilégiée.",
         check: { prompt: "Pourquoi l’Algérie est-elle qualifiée de colonie de peuplement ?", options: ["Une importante population européenne s’y installe durablement", "Elle n’est jamais occupée", "Elle ne possède aucune administration française", "Tous ses habitants ont immédiatement les mêmes droits"], correctIndex: 0, explanation: "Environ un million d’Européens y vivent et disposent de nombreux privilèges." },
+        extraQuestions: [
+          { prompt: "L’Algérie est une colonie d’exploitation.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "C’est une colonie de peuplement, intégrée à la France en 1848.", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "Les Français d’Algérie bénéficiaient de privilèges.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Un million d’Européens dominent l’administration, les villes et les meilleures terres.", sourceLabel: "Activité d’application 1", points: 1 },
+          { prompt: "Les autochtones musulmans cultivaient les terres pauvres.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Ils pratiquent une agriculture traditionnelle ; les meilleures terres reviennent aux colons.", sourceLabel: "Activité d’application 1", points: 1 },
+          { prompt: "Quel leader fonde l’Association des Ouléma en 1931 ?", options: ["Abdelhamid Ben Badis", "Messali Hadj", "Ferhat Abbas", "Ahmed Ben Bella"], correctIndex: 0, explanation: "La tendance traditionnelle rejette l’assimilation et prône la restauration de l’Islam.", sourceLabel: "Cours I-3", points: 2 },
+          { prompt: "Que réclame Messali Hadj à travers l’Étoile nord-africaine puis le PPA ?", options: ["L’indépendance de l’Algérie", "L’assimilation complète", "Le maintien de la colonisation", "Une monarchie"], correctIndex: 0, explanation: "C’est la tendance révolutionnaire et populiste.", sourceLabel: "Cours I-3", points: 2 },
+          { prompt: "En 1946, l’UDMA de Ferhat Abbas préconise…", options: ["Une République algérienne autonome associée à la France", "L’indépendance immédiate et armée", "Le rattachement à l’Espagne", "La fin de tout parti"], correctIndex: 0, explanation: "Ferhat Abbas évolue vers l’autonomie associée, quand le MTLD vise l’indépendance.", sourceLabel: "Cours I-3-b", points: 2 },
+          { prompt: "Quelle date correspond aux émeutes de Sétif ?", options: ["8 mai 1945", "20 septembre 1947", "1er novembre 1954", "18 mars 1962"], correctIndex: 0, explanation: "La répression de Sétif accélère la radicalisation nationaliste.", sourceLabel: "Activité d’application 2", points: 1 },
+        ],
         distractors: ["La société coloniale algérienne garantit une égalité complète entre Européens et musulmans.", "Le nationalisme algérien ne comporte qu’une seule tendance.", "L’Algérie cesse d’être française en 1848."],
       },
       {
@@ -1262,6 +1305,28 @@ En **janvier 1959**, le Soudan français et le Sénégal créent la **Fédérati
         summary: "Caractériser le FLN, la Toussaint rouge, la répression et l’internationalisation du conflit.",
         conceptTitle: "Une guerre de libération armée",
         explanation: "Le CRUA devient le FLN et crée l’ALN. Dans la nuit du 31 octobre au 1er novembre 1954, une série d’attentats déclenche l’insurrection. La France répond par un engagement militaire massif, tandis que le conflit s’étend et se durcit.",
+        bodyMarkdown: String.raw`## Le FLN déclenche l’insurrection
+
+Le **CRUA** devient le **FLN** (Front de libération nationale), doté d’une branche militaire, l’**ALN** (Armée de libération nationale). Ses objectifs :
+
+- **restaurer un État algérien souverain** fondé sur des principes islamiques ;
+- déclencher une **insurrection armée** le 1ᵉʳ novembre 1954.
+
+Dans la nuit du **31 octobre au 1ᵉʳ novembre 1954**, une série d’attentats vise installations militaires, communications et bâtiments publics : c’est la **Toussaint rouge** (« complot de la Toussaint »), avec au moins 10 morts côté français. La métropole, qui vient de perdre l’**Indochine**, réagit violemment et qualifie l’insurrection de « sédition ».
+
+## L’escalade (1956-1958)
+
+- **1956** : le FLN intensifie le **terrorisme urbain** ; les maquisards sont ravitaillés depuis le **Maroc, la Tunisie et l’Égypte**.
+- **Riposte française** : **quadrillage** des quartiers, **regroupement** des populations et **torture**.
+- Paris **refuse d’internationaliser** le conflit (« l’Algérie, c’est la France »), mais l’**ONU** et les **non-alignés** réclament la décolonisation.
+
+## La crise de mai 1958
+
+Le **13 mai 1958**, des émeutes éclatent à Alger. L’armée, favorable à l’Algérie française, installe un **Comité de salut public**. À Paris, les crises ministérielles s’enchaînent. Le général **Salan** fait appel à **De Gaulle** pour former un gouvernement capable de résoudre la crise : c’est la fin de la IVᵉ République.
+
+> **Le point clé.** L’Algérie est une **guerre**, pas une simple négociation. Deux camps s’affrontent — **FLN-ALN** contre l’armée française — et la violence (attentats, torture, regroupements) est au cœur du processus.
+
+> **Astuce mémoire de Davy.** Une seule date à ne jamais rater : **1ᵉʳ novembre 1954, la Toussaint rouge** = le début de la guerre d’Algérie. Et retiens l’enchaînement : **Sétif (1945) → CRUA (1954) → FLN/ALN → Toussaint rouge → crise de 1958 → De Gaulle**.`,
         keyPoint: "La guerre d’Algérie oppose le FLN-ALN à la puissance coloniale française et internationalise progressivement la question algérienne.",
         example: "Le FLN organise maquis et actions urbaines ; la France emploie quadrillage, regroupements de population et torture.",
         timelineTitle: "L’escalade de la guerre",
@@ -1273,6 +1338,14 @@ En **janvier 1959**, le Soudan français et le Sénégal créent la **Fédérati
         ],
         observation: "La violence, l’impasse politique et la pression internationale rendent progressivement le maintien de l’Algérie française impossible.",
         check: { prompt: "Quel mouvement dirige principalement la lutte armée pour l’indépendance ?", options: ["Le FLN", "La CEDEAO", "L’OTAN", "Le PDCI"], correctIndex: 0, explanation: "Le Front de libération nationale organise la lutte avec sa branche militaire, l’ALN." },
+        extraQuestions: [
+          { prompt: "Comment appelle-t-on le déclenchement de l’insurrection dans la nuit du 31 octobre au 1er novembre 1954 ?", options: ["La Toussaint rouge", "La semaine des barricades", "La nuit de cristal", "La marche verte"], correctIndex: 0, explanation: "Une série d’attentats coordonnés du FLN, aussi appelée « complot de la Toussaint ».", sourceLabel: "Cours II-1", points: 2 },
+          { prompt: "Quelle est la branche militaire du FLN ?", options: ["L’ALN (Armée de libération nationale)", "L’OAS", "Le CRUA", "Le GPRA"], correctIndex: 0, explanation: "Le FLN mène le combat politique, l’ALN le combat armé.", sourceLabel: "Cours II-1", points: 1 },
+          { prompt: "Quelles méthodes la France emploie-t-elle en riposte au FLN ?", options: ["Quadrillage, regroupement des populations et torture", "Le désarmement volontaire", "L’octroi immédiat de l’indépendance", "Le retrait total de l’armée"], correctIndex: 0, explanation: "Une répression dure qui alimente la condamnation internationale.", sourceLabel: "Cours II-1", points: 2 },
+          { prompt: "Depuis quels pays les maquisards du FLN sont-ils ravitaillés en armes ?", options: ["Le Maroc, la Tunisie et l’Égypte", "La France et l’Espagne", "Les États-Unis et l’URSS", "Aucun pays voisin"], correctIndex: 0, explanation: "Les frontières voisines servent de bases arrière au FLN.", sourceLabel: "Cours II-1", points: 1 },
+          { prompt: "Que provoque la crise du 13 mai 1958 ?", options: ["Le retour de De Gaulle au pouvoir", "L’indépendance immédiate", "La victoire de l’OAS", "La fin du FLN"], correctIndex: 0, explanation: "L’armée met en place un Comité de salut public et le général Salan appelle De Gaulle.", sourceLabel: "Cours II-1", points: 2 },
+          { prompt: "Quelle date marque le début de la guerre d’Algérie ?", options: ["1er novembre 1954", "8 mai 1945", "4 juin 1958", "3 juillet 1962"], correctIndex: 0, explanation: "La Toussaint rouge ouvre huit années de guerre.", sourceLabel: "Activité d’application 2", points: 1 },
+        ],
         distractors: ["La Toussaint rouge a lieu en 1945.", "La France ne déploie aucun renfort en Algérie.", "Le conflit reste totalement ignoré par l’ONU et les non-alignés."],
       },
       {
@@ -1282,16 +1355,82 @@ En **janvier 1959**, le Soudan français et le Sénégal créent la **Fédérati
         conceptTitle: "La négociation met fin à la guerre",
         explanation: "De Gaulle comprend progressivement que l’indépendance est inéluctable. Malgré l’opposition de l’OAS, les négociations avec le FLN aboutissent aux accords d’Évian, au cessez-le-feu et au référendum d’autodétermination.",
         keyPoint: "Les accords d’Évian et le référendum de 1962 consacrent l’indépendance de l’Algérie après près de huit années de guerre.",
-        example: "Le référendum du 1er juillet 1962 donne une très large majorité au oui à l’indépendance.",
+        example: "« Je vous ai compris ! » : le 4 juin 1958 à Alger, De Gaulle reste volontairement ambigu sur le statut de l’Algérie.",
         timelineTitle: "Vers la souveraineté algérienne",
         timelineInstruction: "Suis les étapes politiques qui mettent fin au conflit.",
         timeline: [
-          { label: "1958-1961", detail: "De Gaulle propose autodétermination et solutions politiques tandis que FLN et OAS poursuivent la confrontation." },
-          { label: "18 mars 1962", shortLabel: "Évian", detail: "Signature des accords d’Évian entre la France et les représentants algériens." },
-          { label: "1er-5 juillet 1962", shortLabel: "Indépendance", detail: "Référendum d’autodétermination puis proclamation de l’indépendance algérienne." },
+          { label: "La politique algérienne de De Gaulle (1958-1961)", shortLabel: "La politique algérienne de De Gaulle", detail: "De Gaulle renonce à l’Algérie française, propose l’autodétermination et affronte l’OAS jusqu’au putsch d’avril 1961." },
+          { label: "Les accords d’Évian (18 mars 1962)", shortLabel: "Les accords d’Évian", detail: "Négociés à partir de juillet 1961, ils reconnaissent l’indépendance et l’intégrité du territoire algérien." },
+          { label: "L’indépendance du 3 juillet 1962", shortLabel: "l’indépendance du 3 juillet 1962", detail: "Après les référendums, l’indépendance est proclamée avec Ahmed Ben Bella pour premier président." },
         ],
         observation: "La négociation n’efface pas les violences, mais elle crée le cadre juridique de la fin de la guerre.",
         check: { prompt: "Quels accords ouvrent directement la voie à l’indépendance algérienne ?", options: ["Les accords d’Évian", "Les accords de Yalta", "Les conventions de Lomé", "Les accords de Dayton"], correctIndex: 0, explanation: "Les accords d’Évian de mars 1962 organisent cessez-le-feu et autodétermination." },
+        parts: [
+          {
+            bodyMarkdown: String.raw`## De Gaulle change de cap
+
+Le **1ᵉʳ juin 1958**, De Gaulle accède au pouvoir. Le **4 juin 1958**, à Alger, il prononce un discours volontairement ambigu resté célèbre : **« Algériens, je vous ai compris ! »**. Réaliste, il renonce en fait à l’Algérie française : faute de pouvoir donner l’**égalité**, il faudra donner la **liberté**. Il propose **trois solutions** :
+
+| Solution | Contenu |
+|---|---|
+| **Indépendance totale** | une Algérie souveraine |
+| **Assimilation** | une Algérie pleinement française |
+| **Autonomie / association** | une Algérie associée à la France |
+
+## Le blocage entre deux extrêmes
+
+- Le **FLN**, qui a formé en **octobre 1958** un gouvernement provisoire (**GPRA**), exige la **seule indépendance** et rejette tout compromis fédéral.
+- La **minorité française d’Algérie** refuse toute indépendance : c’est le dilemme de **« la valise ou le cercueil »** (partir ou mourir).
+
+Persuadant l’opinion que l’indépendance est **inéluctable**, De Gaulle provoque la colère des partisans de l’Algérie française : **semaine des barricades** (24-31 janvier 1960), puis création de l’**OAS** (Organisation de l’armée secrète), qui multiplie les attentats et va jusqu’à un **putsch avorté** en avril 1961.
+
+> **Précision.** Le putsch des généraux d’avril 1961 éclate à **Alger** (et non à Paris comme l’indique parfois le support) : c’est une tentative de l’armée d’Algérie contre la politique de De Gaulle.
+
+> **Astuce mémoire de Davy.** Retiens la phrase-piège **« Je vous ai compris »** (4 juin 1958) et les **trois solutions** de De Gaulle. Face à lui, deux refus symétriques : le **FLN** veut tout (l’indépendance), l’**OAS** ne veut rien lâcher (l’Algérie française).`,
+            extraQuestions: [
+              { prompt: "Quelle phrase célèbre De Gaulle prononce-t-il à Alger le 4 juin 1958 ?", options: ["« Algériens, je vous ai compris ! »", "« L’Algérie, c’est la France »", "« Partir ou mourir »", "« Vive le Québec libre »"], correctIndex: 0, explanation: "Un discours volontairement ambigu sur le statut de l’Algérie.", sourceLabel: "Cours II-2", points: 2 },
+              { prompt: "Quelles trois solutions De Gaulle propose-t-il pour l’Algérie ?", options: ["Indépendance totale, assimilation, autonomie associée", "Guerre, paix, neutralité", "Monarchie, république, empire", "Aucune : il refuse tout changement"], correctIndex: 0, explanation: "Le FLN choisit la première ; la minorité française les rejette toutes.", sourceLabel: "Cours II-2", points: 2 },
+              { prompt: "Que désigne le dilemme de « la valise ou le cercueil » ?", options: ["Le choix des Français d’Algérie : partir ou mourir", "Une tactique du FLN", "Un accord commercial", "Le nom d’un référendum"], correctIndex: 0, explanation: "La minorité européenne redoute un État dirigé par le FLN.", sourceLabel: "Cours II-2", points: 2 },
+              { prompt: "Quelle organisation les partisans de l’Algérie française créent-ils pour combattre le FLN par des attentats ?", options: ["L’OAS (Organisation de l’armée secrète)", "Le GPRA", "L’ALN", "L’UDMA"], correctIndex: 0, explanation: "L’OAS va jusqu’au putsch avorté d’avril 1961.", sourceLabel: "Cours II-2", points: 1 },
+              { prompt: "À quelle date De Gaulle prononce-t-il son discours d’Alger ?", options: ["4 juin 1958", "13 mai 1958", "18 mars 1962", "1er novembre 1954"], correctIndex: 0, explanation: "Il accède au pouvoir le 1er juin 1958 et parle à Alger le 4 juin.", sourceLabel: "Activité d’application 2", points: 1 },
+            ],
+          },
+          {
+            bodyMarkdown: String.raw`## Les accords d’Évian (18 mars 1962)
+
+À partir de **juillet 1961**, des pourparlers s’ouvrent entre la France et le FLN :
+
+| Côté français | Côté algérien (FLN) |
+|---|---|
+| Louis **Joxe**, R. Buron, J. de Broglie | Belkacem **Krim**, Ben Tobbal, Dahleb, Yazid |
+
+Signés le **18 mars 1962**, les **accords d’Évian** prévoient que la France :
+
+- **reconnaît l’indépendance** de l’Algérie ;
+- reconnaît l’**intégrité de son territoire** (Sahara compris) et de son peuple ;
+- évacue progressivement ses troupes et maintient trois ans son aide de 1961 ;
+- obtient des assurances sur la **coopération** (notamment le **pétrole**).
+
+## Les référendums et l’indépendance
+
+- **8 avril 1962** : un référendum en France **approuve** les accords d’Évian.
+- **1ᵉʳ juillet 1962** : le **référendum d’autodétermination** en Algérie donne **90 % de « oui »**.
+- **3 juillet 1962** : l’**indépendance** de l’Algérie est proclamée, avec **Ahmed Ben Bella** pour premier président.
+
+**Bilan.** Après **huit années** de guerre, l’Algérie accède à la souveraineté au prix d’environ **un million de morts** de tous bords.
+
+> **Correction.** Le premier président algérien est **Ahmed** Ben Bella (le support écrit parfois « Hamed »).
+
+> **Astuce mémoire de Davy.** Trois dates de la fin : **18 mars 1962** (Évian, signature) → **1ᵉʳ juillet 1962** (référendum, 90 % oui) → **3 juillet 1962** (indépendance, Ben Bella). Ne confonds pas Évian (les accords) et le 3 juillet (la proclamation).`,
+            extraQuestions: [
+              { prompt: "Quand les accords d’Évian sont-ils signés ?", options: ["18 mars 1962", "8 mai 1945", "4 juin 1958", "3 juillet 1962"], correctIndex: 0, explanation: "Ils reconnaissent l’indépendance et l’intégrité du territoire algérien.", sourceLabel: "Activité d’application 2", points: 2 },
+              { prompt: "Que reconnaît la France dans les accords d’Évian ?", options: ["L’indépendance de l’Algérie et l’intégrité de son territoire (Sahara compris)", "Le maintien de l’Algérie française", "L’annexion du Sahara par la France", "La partition de l’Algérie"], correctIndex: 0, explanation: "La France obtient en échange des assurances sur la coopération et le pétrole.", sourceLabel: "Cours II-2", points: 2 },
+              { prompt: "Quel résultat donne le référendum d’autodétermination du 1er juillet 1962 ?", options: ["Environ 90 % de « oui » à l’indépendance", "Un rejet de l’indépendance", "Une égalité parfaite", "Le maintien du statut colonial"], correctIndex: 0, explanation: "Un plébiscite en faveur de la souveraineté.", sourceLabel: "Cours II-2", points: 1 },
+              { prompt: "Qui devient le premier président de l’Algérie indépendante ?", options: ["Ahmed Ben Bella", "Ferhat Abbas", "Messali Hadj", "Belkacem Krim"], correctIndex: 0, explanation: "L’indépendance est proclamée le 3 juillet 1962.", sourceLabel: "Cours II-2", points: 2 },
+              { prompt: "Relie : la proclamation de l’indépendance de l’Algérie a lieu le…", options: ["3 juillet 1962", "18 mars 1962", "20 septembre 1947", "8 mai 1945"], correctIndex: 0, explanation: "Après près de huit années de guerre et environ un million de morts.", sourceLabel: "Activité d’application 2", points: 1 },
+            ],
+          },
+        ],
         distractors: ["L’OAS soutient l’indépendance négociée par le FLN.", "Le référendum d’autodétermination rejette massivement l’indépendance.", "La guerre se termine sans aucune négociation."],
       },
     ],

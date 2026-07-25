@@ -383,6 +383,43 @@ Ajoute la nuance de Musitelli : cette hégémonie est **douce**, elle repose sur
       title: "Le rôle de De Gaulle dans l’indépendance algérienne",
       scenario: "Une élève affirme que l’action du général de Gaulle a été déterminante dans l’accession de l’Algérie à l’indépendance, après plusieurs années de guerre.",
       modelAnswer: "De Gaulle ne déclenche pas la lutte, menée par le FLN, mais il fait évoluer la position française vers l’autodétermination et les négociations qui aboutissent aux accords d’Évian.",
+      bodyMarkdown: String.raw`## La situation d’évaluation
+
+> Une élève révise la leçon sur l’Algérie. Son grand-frère, étudiant en histoire, lui dit : « Cette leçon est l’exemple type de la véritable accession à l’indépendance : des mouvements nationalistes courageux ont **arraché** l’indépendance de leur pays. » L’élève réplique : « Bien vrai, mais les Algériens ont eu **besoin de l’aide du général de Gaulle** pour y parvenir. » Le grand-frère conclut : « **En réalité, le général de Gaulle a été contraint par la détermination du peuple algérien.** »
+
+## Document 1 — Le Manifeste du peuple algérien (1943)
+
+*Ferhat Abbas, extrait du* Manifeste du peuple algérien, *10 février 1943 :*
+
+> « Il suffit d’examiner le processus de la colonisation en Algérie pour se rendre compte comment la politique d’“**assimilation**”, appliquée automatiquement aux uns et refusée aux autres, a réduit la société musulmane à la **servitude la plus complète** […]. Le peuple algérien demande […] la condamnation de la colonisation, le **droit des peuples à disposer d’eux-mêmes**, une constitution garantissant l’**égalité absolue** de tous ses habitants, la reconnaissance de la **langue arabe**, la liberté de la presse et l’instruction pour tous. »
+
+## Document 2 — De Gaulle et l’issue de la guerre
+
+*Rappel du cours :*
+
+> Revenu au pouvoir le 1ᵉʳ juin 1958, De Gaulle renonce à l’Algérie française (« Je vous ai compris », 4 juin 1958), propose l’**autodétermination**, affronte l’**OAS**, puis négocie avec le FLN les **accords d’Évian** (18 mars 1962). L’indépendance est proclamée le **3 juillet 1962**.
+
+## Comment construire ta réponse
+
+**Consigne 1 — Le problème.** Il s’agit du **rôle respectif** de la lutte nationaliste algérienne (FLN) et de l’action du **général de Gaulle** dans l’accession de l’Algérie à l’indépendance.
+
+**Consigne 2 — Expliquer « De Gaulle a été contraint par la détermination du peuple algérien ».** Montre que l’initiative vient des **Algériens** : le FLN déclenche et mène la guerre (Toussaint rouge, maquis, GPRA), rend l’Algérie française **ingouvernable** et **intenable** internationalement. De Gaulle **subit** ce rapport de force : c’est parce que la lutte est victorieuse qu’il évolue vers l’indépendance.
+
+**Consigne 3 — Apprécier le rôle de De Gaulle.** Réponse **nuancée** :
+
+| Ce que De Gaulle a fait | Ce qui le relativise |
+|---|---|
+| Il fait **basculer** la position française vers l’autodétermination | Il **ne déclenche pas** la lutte : c’est le FLN |
+| Il **négocie et signe** les accords d’Évian | Il agit **sous la contrainte** de huit ans de guerre |
+| Il affronte l’OAS et impose l’indépendance à l’opinion | L’indépendance était déjà **inéluctable** |
+
+> **Astuce mémoire de Davy.** Le bon réflexe pour la consigne 3, c’est **« oui, mais » (dans ce sens précis)** : oui, De Gaulle a joué un rôle **décisif dans le dénouement** (Évian) ; **mais** ce sont bien les nationalistes algériens qui ont **arraché** l’indépendance — De Gaulle a accompagné l’inévitable, il ne l’a pas offert.`,
+      extraQuestions: [
+        { prompt: "Selon Ferhat Abbas (doc. 1), qu’a produit la politique d’« assimilation » appliquée aux uns et refusée aux autres ?", options: ["Elle a réduit la société musulmane à la servitude la plus complète", "Elle a donné l’égalité à tous", "Elle a supprimé la colonisation", "Elle a enrichi les musulmans"], correctIndex: 0, explanation: "Le Manifeste dénonce une assimilation à sens unique.", sourceLabel: "Document 1 — Ferhat Abbas", points: 2 },
+        { prompt: "Quel principe international le Manifeste de 1943 invoque-t-il ?", options: ["Le droit des peuples à disposer d’eux-mêmes", "Le libre-échange", "La doctrine Monroe", "L’équilibre européen"], correctIndex: 0, explanation: "Il s’appuie notamment sur la déclaration de Roosevelt.", sourceLabel: "Document 1 — Ferhat Abbas", points: 1 },
+        { prompt: "Pour la consigne 2, quelle explication est la plus juste ?", options: ["De Gaulle subit le rapport de force créé par la lutte du FLN, qui rend l’Algérie française intenable", "De Gaulle agit librement, sans aucune pression", "Les Algériens n’ont joué aucun rôle", "L’ONU impose seule l’indépendance"], correctIndex: 0, explanation: "La détermination du peuple algérien contraint la France à négocier.", sourceLabel: "Méthode BAC — consigne 2", points: 2 },
+        { prompt: "Pour la consigne 3, quelle appréciation est la mieux équilibrée ?", options: ["De Gaulle a un rôle décisif dans le dénouement (Évian), mais l’indépendance a été arrachée par les nationalistes", "De Gaulle est l’unique auteur de l’indépendance", "De Gaulle n’a joué strictement aucun rôle", "De Gaulle a proclamé l’indépendance avant la guerre"], correctIndex: 0, explanation: "Un avis nuancé, appuyé sur la lutte algérienne et l’action française.", sourceLabel: "Méthode BAC — consigne 3", points: 2 },
+      ],
       questions: [
         question("Quel problème historique est posé ?", "Le processus et les acteurs de l’indépendance algérienne", ["La création de l’ONU", "Le secteur tertiaire ivoirien", "Les valeurs occidentales"], "La situation interroge la place respective de la lutte nationaliste et de la décision politique française.", 1),
         question("Pourquoi le système colonial nourrit-il la révolte ?", "Les inégalités politiques, économiques et sociales marginalisent la majorité musulmane", ["Il garantit une égalité complète dès 1830", "Il donne immédiatement l’autodétermination", "Il supprime toute présence européenne"], "Les discriminations et l’échec des réformes alimentent le nationalisme algérien.", 2),
