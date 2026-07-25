@@ -1254,8 +1254,43 @@ La pensée est **personnelle et continue**, le langage **impersonnel et disconti
         summary: "Distinguer connaissance vulgaire, philosophique, religieuse et scientifique.",
         conceptTitle: "Plusieurs voies vers le savoir",
         explanation: "Le sens commun naît de l’habitude et de l’expérience quotidienne ; la philosophie interroge rationnellement les fondements ; la foi se rapporte à la révélation ; la science construit des objets, méthodes et preuves contrôlables.",
+        bodyMarkdown: String.raw`## Trois formes essentielles de connaissance
+
+Le savoir humain est **multiforme**. On distingue trois formes essentielles.
+
+## 1. La connaissance vulgaire (la doxa)
+
+Un ensemble d’**opinions** et de croyances reçues de l’expérience quotidienne. Non organisée, elle s’arrête à l’**apparence** et généralise sans preuve. Platon l’appelle la **doxa**.
+
+> **BACHELARD**, *La Formation de l’esprit scientifique* : « L’opinion **pense mal** ; elle ne pense pas. »
+
+## 2. La connaissance philosophique
+
+Un **savoir critique** : une interrogation perpétuelle sur l’homme et le monde, axée sur les normes (le bien, le juste, le beau, le vrai). Elle vise à réduire l’ignorance de façon **désintéressée**.
+
+## 3. La connaissance scientifique
+
+> **André LALANDE** : « La science est un ensemble de connaissances (…) susceptibles d’amener les hommes (…) à des **conclusions concordantes**, qui (…) résultent de relations objectives qu’on découvre graduellement, et que l’on confirme par des **méthodes de vérification** définies. »
+
+Elle est **objective, universelle**, et opère une **rupture** avec les préjugés (coutume, tradition, esprit théologique). Selon **COMTE**, elle n’est pas naturelle à l’homme : elle représente la **maturité de l’esprit humain**.
+
+> **À retenir.** Ce qui distingue la science : la **méthode**, l’**objectivité**, la **preuve** et la possibilité d’un **contrôle collectif** qui crée l’unanimité des esprits.`,
         keyPoint: "La connaissance scientifique se distingue par la méthode, l’objectivité recherchée, la preuve et la possibilité d’un contrôle collectif.",
         example: "Prévoir la pluie par habitude n’équivaut pas à expliquer un phénomène météorologique par des mesures et un modèle vérifiable.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Les formes de connaissance",
+          instruction: "Sélectionne une forme pour comprendre sa source et son mode de validation.",
+          observation: "La connaissance scientifique se distingue par la méthode, la preuve et le contrôle collectif.",
+          rootLabel: "Le savoir humain",
+          rootDetail: "Multiforme : de l’opinion à la science",
+          nodes: [
+            { id: "vulgaire", group: "La connaissance vulgaire", label: "La doxa", role: "Le sens commun", detail: "Opinions et croyances reçues de l’expérience quotidienne, non organisées, arrêtées à l’apparence. Platon l’appelle la doxa. Bachelard : « L’opinion pense mal ; elle ne pense pas »." },
+            { id: "philosophique", group: "La connaissance philosophique", label: "Le savoir critique", role: "Interroger les normes", detail: "Une interrogation perpétuelle sur l’homme et le monde, axée sur le bien, le juste, le beau, le vrai. Elle réduit l’ignorance de façon désintéressée." },
+            { id: "scientifique", group: "La connaissance scientifique", label: "Objective et vérifiée", role: "Lalande et Comte", detail: "Des « conclusions concordantes » confirmées par des « méthodes de vérification définies » (Lalande). Objective, universelle, en rupture avec les préjugés. Elle est la maturité de l’esprit (Comte)." },
+          ],
+        },
         mapTitle: "Quatre régimes de connaissance",
         mapInstruction: "Compare leur source et leur mode de validation.",
         map: [
@@ -1266,6 +1301,11 @@ La pensée est **personnelle et continue**, le langage **impersonnel et disconti
         ],
         observation: "Distinguer les formes de connaissance évite d’exiger d’une méthode ce qu’elle ne prétend pas fournir.",
         check: q("Quel trait caractérise particulièrement la science ?", "Des énoncés soumis à une méthode et à un contrôle collectif", "Une vérité fondée sur l’habitude seule", "Une adhésion impossible à discuter", "Une opinion privée sans preuve"),
+        extraQuestions: [
+          { prompt: "Relie : « La connaissance résultant du sens commun. »", options: ["La connaissance générale", "La connaissance philosophique", "La connaissance scientifique", "La foi"], correctIndex: 0, explanation: "La connaissance vulgaire relève du sens commun (la doxa).", sourceLabel: "Activité d’application", points: 2 },
+          { prompt: "« La connaissance scientifique est vulgaire » : vrai ou faux ?", options: ["Faux : elle rompt avec le sens commun et les préjugés", "Vrai", "Vrai selon Platon", "Vrai selon Lalande"], correctIndex: 0, explanation: "La science opère une rupture avec la doxa.", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "« La connaissance scientifique est basée sur la vérification expérimentale ou la démarche hypothético-déductive » : vrai ou faux ?", options: ["Vrai", "Faux : elle repose sur l’opinion", "Faux : elle est subjective", "Faux : elle refuse la preuve"], correctIndex: 0, explanation: "C’est ce qui fonde son objectivité (Lalande).", sourceLabel: "Activité d’application 1", points: 1 },
+        ],
         distractors: ["Toute expérience quotidienne est déjà une science.", "La science ne possède aucune méthode propre.", "La foi et l’expérimentation valident de la même manière."],
       },
       {
@@ -1274,8 +1314,37 @@ La pensée est **personnelle et continue**, le langage **impersonnel et disconti
         summary: "Distinguer sciences formelles, expérimentales et humaines selon leurs objets et méthodes.",
         conceptTitle: "Des objets différents, des démarches adaptées",
         explanation: "Les sciences formelles démontrent à partir d’axiomes ; les sciences expérimentales observent et testent les phénomènes naturels ; les sciences humaines étudient des sujets historiques, sociaux et libres, plus difficiles à isoler.",
+        bodyMarkdown: String.raw`## Trois familles de sciences
+
+| Type | Objet | Démarche | Exemples |
+|---|---|---|---|
+| **Formelles** | des êtres abstraits (nombres, figures) | **axiomatico-déductive** : seule compte la forme | logique, mathématiques |
+| **Expérimentales** | les phénomènes de la nature | **hypothético-déductive** : hypothèse puis vérification | physique, chimie |
+| **Humaines** | l’homme, ses conduites, son histoire | **inductive** : observation et interprétation | histoire, sociologie, psychologie |
+
+## Ce que chaque famille recherche
+
+- Les **sciences formelles** produisent des vérités par la seule **cohérence** du raisonnement — elles n’ont pas besoin que leurs objets soient réels.
+- Les **sciences expérimentales** permettent d’**agir** sur les choses et de **prévoir** le cours des événements.
+- Les **sciences humaines** ont choisi d’être des sciences, avec, selon **PIAGET**, « une sorte de brevet d’exactitude ». Ce ne sont pas des sciences exactes, mais des sciences **inductives**.
+
+> **À retenir.** Il n’existe pas **une** méthode unique : la rigueur consiste à **adapter la démarche à l’objet** étudié.`,
         keyPoint: "Il n’existe pas une méthode unique : la rigueur consiste à adapter la démarche à l’objet étudié.",
         example: "La logique vérifie une déduction, la biologie expérimente sur le vivant et la sociologie combine observations, statistiques et interprétations.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Trois familles scientifiques",
+          instruction: "Sélectionne une famille pour associer objet, démarche et exemples.",
+          observation: "Chaque famille adapte sa démarche à son objet : il n’y a pas une méthode unique.",
+          rootLabel: "Les types de sciences",
+          rootDetail: "Formelles, expérimentales, humaines",
+          nodes: [
+            { id: "formelles", group: "Sciences formelles", label: "Logique et mathématiques", role: "Axiomatico-déductives", detail: "Des sciences du raisonnement : elles tirent des conclusions à partir d’axiomes et de définitions. Seule compte la forme, la validité du raisonnement." },
+            { id: "experimentales", group: "Sciences expérimentales", label: "Physique et chimie", role: "Hypothético-déductives", detail: "Elles produisent des connaissances permettant d’agir sur les choses et de prévoir les événements, par hypothèse puis vérification." },
+            { id: "humaines", group: "Sciences humaines", label: "Histoire, sociologie, psychologie", role: "Inductives", detail: "Elles étudient l’homme, ses comportements, son histoire. Selon Piaget, elles se sont dissociées de la philosophie pour devenir des sciences inductives." },
+          ],
+        },
         mapTitle: "Trois familles scientifiques",
         mapInstruction: "Associe objet, exemple et démarche.",
         map: [
@@ -1285,6 +1354,11 @@ La pensée est **personnelle et continue**, le langage **impersonnel et disconti
         ],
         observation: "L’impossibilité de répéter exactement un événement humain ne retire pas toute rigueur aux sciences humaines.",
         check: q("À quelle famille appartient la sociologie ?", "Aux sciences humaines", "Aux sciences formelles", "Aux sciences expérimentales de la matière", "À la simple opinion"),
+        extraQuestions: [
+          { prompt: "Range : la biologie est une science…", options: ["expérimentale", "formelle", "humaine", "vulgaire"], correctIndex: 0, explanation: "Elle observe et expérimente sur le vivant.", sourceLabel: "Activité d’application 2", points: 2 },
+          { prompt: "Range : les mathématiques sont une science…", options: ["formelle", "expérimentale", "humaine", "religieuse"], correctIndex: 0, explanation: "Elles procèdent par axiomes et démonstration.", sourceLabel: "Activité d’application 2", points: 2 },
+          { prompt: "Range : l’histoire est une science…", options: ["humaine", "formelle", "expérimentale", "exacte"], correctIndex: 0, explanation: "Elle étudie l’homme et son passé (science inductive).", sourceLabel: "Activité d’application 2", points: 1 },
+        ],
         distractors: ["Toutes les sciences démontrent comme les mathématiques.", "La biologie est une science formelle.", "Les sciences humaines n’utilisent aucune méthode."],
       },
       {
@@ -1293,8 +1367,49 @@ La pensée est **personnelle et continue**, le langage **impersonnel et disconti
         summary: "Ordonner observation, problème, hypothèse, expérimentation et formulation d’une loi révisable.",
         conceptTitle: "Construire et mettre à l’épreuve",
         explanation: "Le fait scientifique n’est pas seulement reçu : un problème guide l’observation, une hypothèse propose une explication et l’expérimentation en tire des conséquences vérifiables. Claude Bernard associe ainsi idée et expérience.",
+        bodyMarkdown: String.raw`## La démarche des sciences formelles
+
+La logique (née avec **ARISTOTE**) est la science du raisonnement — le **syllogisme** : *tous les hommes sont mortels ; or Socrate est un homme ; donc Socrate est mortel*. Les mathématiques utilisent l’**axiomatique**. Un discours y est vrai s’il est **cohérent**, sans que ses objets soient réels.
+
+> **GALILÉE** : « Le livre de la nature est écrit dans le langage **mathématique**. » — **POINCARÉ** : les maths fournissent au physicien « la seule langue qu’il puisse parler ».
+
+## Théorie et expérience dans les sciences expérimentales
+
+Un ancien conflit opposait deux doctrines :
+
+| Doctrine | Thèse | Auteur |
+|---|---|---|
+| **Empirisme** | la connaissance vient des **sens** | Locke : « l’esprit est une **table rase** » |
+| **Rationalisme** | la connaissance vient de la **raison** | Descartes : le morceau de cire, la raison juge |
+
+**KANT** dépasse le conflit par le **criticisme** :
+
+> **KANT**, *Critique de la raison pure* : « La connaissance suppose deux éléments : le **concept** par lequel l’objet est pensé et l’**intuition sensible** par laquelle il est donné. »
+
+> **Claude BERNARD** : « Le savant complet est celui qui embrasse à la fois la **théorie et l’expérience**. »
+
+## Les trois étapes de la démarche expérimentale
+
+1. **L’observation** du fait (et le *fait-question* qui contredit les explications anciennes) ;
+2. **L’hypothèse** — « l’idée scientifique préconçue ou anticipée » (Claude Bernard) ;
+3. **La vérification** : « ou bien l’hypothèse sera infirmée, ou bien elle sera confirmée ». Confirmée, elle devient une **loi**.`,
         keyPoint: "Observer → formuler un problème → proposer une hypothèse → tester → interpréter et réviser.",
         example: "Une observation inattendue conduit le chercheur à imaginer une cause, puis à construire un dispositif capable de confirmer ou de réfuter cette hypothèse.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Comment la science élabore le vrai",
+          instruction: "Sélectionne un élément pour comprendre la démarche formelle et expérimentale.",
+          observation: "Le vrai formel repose sur la cohérence ; le vrai expérimental naît du dialogue entre théorie et expérience.",
+          rootLabel: "Élaborer la vérité scientifique",
+          rootDetail: "De la cohérence formelle à la vérification expérimentale",
+          nodes: [
+            { id: "formel", group: "Les sciences formelles", label: "L’axiomatique", role: "La cohérence", detail: "Logique et mathématiques : un discours est vrai s’il est cohérent. Galilée : « Le livre de la nature est écrit dans le langage mathématique »." },
+            { id: "empirisme", group: "Théorie et expérience", label: "Empirisme et rationalisme", role: "Un ancien conflit", detail: "Empirisme (Locke, « l’esprit est une table rase ») contre rationalisme (Descartes, la raison juge le morceau de cire)." },
+            { id: "kant-criticisme", group: "Théorie et expérience", label: "Kant", role: "Le criticisme", detail: "« La connaissance suppose (…) le concept (…) et l’intuition sensible ». Claude Bernard : « le savant complet embrasse théorie et expérience »." },
+            { id: "etapes", group: "La démarche expérimentale", label: "Les trois étapes", role: "Observer, supposer, vérifier", detail: "Observation du fait-question → hypothèse (« l’idée préconçue », Claude Bernard) → vérification : confirmée, l’hypothèse devient une loi ; infirmée, elle est rejetée." },
+          ],
+        },
         mapTitle: "Le cycle expérimental",
         mapInstruction: "Parcours les étapes dans leur ordre logique.",
         map: [
@@ -1307,6 +1422,11 @@ La pensée est **personnelle et continue**, le langage **impersonnel et disconti
         methodTitle: "Analyser une expérience",
         methodSteps: ["Identifie le fait observé et le problème posé.", "Formule clairement l’hypothèse testée.", "Repère la conséquence attendue et le protocole de contrôle.", "Compare le résultat puis indique si l’hypothèse est conservée, corrigée ou rejetée."],
         check: q("Quelle étape vient après la formulation de l’hypothèse ?", "La mise à l’épreuve par une expérimentation ou un test", "L’acceptation définitive", "L’abandon de toute observation", "La publication sans résultat"),
+        extraQuestions: [
+          { prompt: "Ordonne les étapes de la démarche expérimentale.", options: ["Observation → hypothèse → vérification", "Vérification → observation → hypothèse", "Hypothèse → observation → vérification", "Vérification → hypothèse → observation"], correctIndex: 0, explanation: "On observe, on suppose, puis on vérifie (Claude Bernard).", sourceLabel: "Activité d’application 3", points: 3 },
+          { prompt: "Comment Claude Bernard définit-il l’hypothèse ?", options: ["« L’idée scientifique préconçue ou anticipée »", "Une preuve définitive", "Un simple hasard", "Une opinion du sens commun"], correctIndex: 0, explanation: "L’hypothèse relève de l’imagination rationnelle.", sourceLabel: "II-B La démarche expérimentale", points: 2 },
+          { prompt: "Comment Kant dépasse-t-il le conflit empirisme/rationalisme ?", options: ["La connaissance unit le concept et l’intuition sensible", "Seuls les sens comptent", "Seule la raison compte", "La connaissance est impossible"], correctIndex: 0, explanation: "C’est le criticisme (Critique de la raison pure).", sourceLabel: "II-B Théorie et expérience", points: 2 },
+        ],
         distractors: ["Une hypothèse scientifique ne doit jamais pouvoir être réfutée.", "L’observation suffit sans problème ni interprétation.", "Une théorie confirmée devient éternellement vraie."],
       },
       {
@@ -1315,8 +1435,49 @@ La pensée est **personnelle et continue**, le langage **impersonnel et disconti
         summary: "Comprendre la révisabilité des théories, les difficultés propres au vivant et l’exigence morale des pratiques scientifiques.",
         conceptTitle: "Savoir davantage, répondre de son pouvoir",
         explanation: "Les théories sont partielles et provisoires : Popper exige qu’elles puissent être réfutées. L’étude du vivant et les biotechnologies soulèvent en outre des questions de dignité, de consentement et de limites que la bioéthique doit examiner.",
+        bodyMarkdown: String.raw`## Les limites des démarches
+
+- **Sciences formelles :** elles ne servent la connaissance qu’**indirectement**. Aristote appelait sa logique *organon* (outil) ; Bacon : « les mathématiques (…) ne doivent être que les **servantes** de la physique ». Russell : « les mathématiques (…), on ne sait jamais de quoi l’on parle, ni si ce que l’on dit est vrai ».
+- **Sciences expérimentales :** l’observation est imparfaite (la lumière, d’abord corpusculaire, puis ondulatoire) ; l’hypothèse porte la **subjectivité** du savant.
+- **Sciences humaines :** l’événement est **irréversible**, et le chercheur peut se projeter dans son objet.
+
+## Connaître le vivant : quatre théories
+
+| Théorie | Idée | Auteur |
+|---|---|---|
+| **Finalisme** | la nature obéit à un but | Aristote : « la finalité règne dans les œuvres de la nature » |
+| **Mécanisme** | le vivant est une machine | Descartes : « le corps n’est autre chose qu’une machine » |
+| **Vitalisme** | une « force vitale » anime les corps | Aristote |
+| **Organicisme** | l’organisme n’est pas une simple machine | Kant ; Canguilhem : « autoconstitution, autorégulation, autoréparation » |
+
+## La bioéthique
+
+Les biotechnologies (procréatique, génétique, euthanasie…) posent des **problèmes de dignité**. La **bioéthique** définit les normes qui doivent guider les pratiques sur le vivant.
+
+> **RABELAIS** : « **Science sans conscience n’est que ruine de l’âme.** »
+
+## La relativité de la vérité scientifique
+
+> **Karl POPPER** : « un système faisant partie de la science empirique doit pouvoir être **réfuté** par l’expérience » — c’est la **falsifiabilité**. — **Claude BERNARD** : les lois « ne sont que des vérités **partielles et provisoires** ». — **BACHELARD** : une science qui se croit absolue devient un « **obstacle épistémologique** ».
+
+> **La conclusion.** La science n’a **pas le monopole** de la vérité : la vérité du cœur, de la foi, de la philosophie et de l’art la complètent.`,
         keyPoint: "La science explique ce qui est possible ; la bioéthique demande aussi ce qui est légitime et respectueux de la dignité.",
         example: "Une technique génétique peut être réalisable sans que toutes ses applications soient moralement acceptables pour l’être humain ou l’écosystème.",
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Explorer",
+          title: "Limites, vivant et bioéthique",
+          instruction: "Sélectionne un élément pour comprendre les limites de la science et ses responsabilités.",
+          observation: "Reconnaître les limites ne détruit pas la science : cela rend sa pratique plus lucide et responsable.",
+          rootLabel: "Les limites de la vérité scientifique",
+          rootDetail: "Des théories révisables, un vivant complexe, une exigence morale",
+          nodes: [
+            { id: "russell-limite", group: "Les limites des démarches", label: "Russell et Bacon", role: "Des outils, non des fins", detail: "Les sciences formelles ne servent la connaissance qu’indirectement. Bacon : « les mathématiques, servantes de la physique ». Russell : « on ne sait jamais de quoi l’on parle, ni si ce que l’on dit est vrai »." },
+            { id: "vivant", group: "Connaître le vivant", label: "Quatre théories", role: "Finalisme, mécanisme, vitalisme, organicisme", detail: "Finalisme (Aristote, la nature a un but), mécanisme (Descartes, le corps-machine), vitalisme (une force vitale), organicisme (Kant : « un être organisé n’est pas une simple machine » ; Canguilhem)." },
+            { id: "bioethique", group: "La bioéthique", label: "La dignité du vivant", role: "Rabelais", detail: "Les biotechnologies (procréatique, génétique, euthanasie) posent des problèmes de dignité. La bioéthique fixe les normes. « Science sans conscience n’est que ruine de l’âme » (Rabelais)." },
+            { id: "popper", group: "La relativité", label: "Popper et Bachelard", role: "La falsifiabilité", detail: "Popper : une théorie scientifique doit pouvoir être réfutée. Claude Bernard : les lois sont « partielles et provisoires ». Bachelard : une science absolue devient un « obstacle épistémologique »." },
+          ],
+        },
         mapTitle: "Trois limites à reconnaître",
         mapInstruction: "Distingue révision théorique, complexité de l’objet et responsabilité pratique.",
         map: [
@@ -1327,6 +1488,11 @@ La pensée est **personnelle et continue**, le langage **impersonnel et disconti
         ],
         observation: "Reconnaître les limites ne détruit pas la science ; cela rend sa pratique plus lucide et responsable.",
         check: q("Quel est le rôle de la bioéthique ?", "Définir des normes pour guider les pratiques sur le vivant et protéger la dignité", "Empêcher toute recherche scientifique", "Remplacer toutes les expériences par des opinions", "Prouver que toute technique est bonne"),
+        extraQuestions: [
+          { prompt: "Qu’est-ce que la falsifiabilité selon Popper ?", options: ["Une théorie scientifique doit pouvoir être réfutée par l’expérience", "Une théorie doit être définitivement vraie", "Une théorie ne doit jamais changer", "Une théorie doit plaire à tous"], correctIndex: 0, explanation: "C’est le critère de scientificité (La logique de la découverte scientifique).", sourceLabel: "III-B La relativité des théories", points: 3 },
+          { prompt: "Selon l’organicisme (Kant), le vivant est-il une machine ?", options: ["Non : « un être organisé n’est pas une simple machine »", "Oui, exactement comme une horloge", "Oui, selon Descartes", "La question n’a pas de sens"], correctIndex: 0, explanation: "L’organisme se caractérise par l’autoconstitution et l’autoréparation (Canguilhem).", sourceLabel: "III-A Les théories du vivant", points: 2 },
+          { prompt: "Que rappelle Rabelais sur les pratiques scientifiques ?", options: ["« Science sans conscience n’est que ruine de l’âme »", "La science suffit à tout", "La morale gêne la science", "Le vivant est un simple objet"], correctIndex: 0, explanation: "La science doit être moralisée : c’est le sens de la bioéthique.", sourceLabel: "III-A La bioéthique", points: 2 },
+        ],
         distractors: ["Une théorie scientifique confirmée est absolue.", "La possibilité technique suffit à établir la légitimité morale.", "Le vivant se réduit toujours à une machine simple."],
       },
     ],
@@ -1334,17 +1500,51 @@ La pensée est **personnelle et continue**, le langage **impersonnel et disconti
       title: "Sujet BAC : « Nos connaissances résultent-elles de l’expérience ? »",
       scenario: "Traite la situation officielle en confrontant empirisme, rationalisme et coopération entre sens et raison.",
       problem: "Quelle est la source de nos connaissances ?",
+      bodyMarkdown: String.raw`## Le corrigé du sujet
+
+### I. Définition des termes essentiels
+
+| Terme | Définition |
+|---|---|
+| **Nos connaissances** | l’ensemble de ce que l’on a appris, les savoirs, la certitude |
+| **Résultent de** | viennent de, découlent de, ont pour source |
+| **L’expérience** | les connaissances acquises par les sens, le vécu, l’habitude |
+
+### II. Problème à analyser
+
+> **Quelle est la source de nos connaissances ?**
+
+### III. Axes d’analyse et références
+
+**Axe 1 — Nos connaissances viennent de nos sens.**
+
+- L’**empirisme** : les sens sont l’unique source du savoir. *Cf.* **HUME** : « D’où viennent nos connaissances ? Je réponds en un mot : **de l’expérience** ». Le sens commun aussi (le ciel sombre annonce la pluie).
+
+**Axe 2 — Nos connaissances viennent de la raison seule.**
+
+- Nos sens ne sont pas fiables. *Cf.* **DESCARTES** : « Nos sens nous trompent quelquefois » (Méditations). — **HEGEL** : « Tout ce qui est réel est rationnel, et tout ce qui est rationnel est réel ».
+
+**Axe 3 — La connaissance naît de la collaboration des sens et de la raison.**
+
+- *Cf.* **KANT** : « Sans la sensibilité nul objet ne serait donné, et sans entendement nul objet ne serait pensé. **Des pensées sans contenu sont vides, des intuitions sans concepts sont aveugles** » (Critique de la raison pure). — **Claude BERNARD** : « Le savant complet embrasse à la fois la théorie et l’expérience. »
+
+> **Le geste attendu.** Opposer l’empirisme (Axe 1) et le rationalisme (Axe 2) avant de les **dépasser** par le criticisme kantien (Axe 3) : la connaissance **commence** avec l’expérience sans en **dériver entièrement**.`,
       plan: [
-        { label: "Axe 1", detail: "Hume et l’empirisme : les sens et l’expérience fournissent la matière de la connaissance." },
-        { label: "Axe 2", detail: "Descartes et le rationalisme : les sens trompent parfois et la raison apporte principes et nécessité." },
-        { label: "Synthèse", detail: "Kant et Claude Bernard : expérience et activité rationnelle collaborent." },
-        { label: "Réponse", detail: "La connaissance commence avec l’expérience sans dériver entièrement d’elle." },
+        { label: "Définir", shortLabel: "Définir", detail: "Nos connaissances : nos savoirs ; l’expérience : le vécu, les sens." },
+        { label: "Axe 1", shortLabel: "Axe 1", detail: "L’empirisme : la connaissance vient des sens (Hume, « de l’expérience »)." },
+        { label: "Axe 2", shortLabel: "Axe 2", detail: "Le rationalisme : les sens trompent, la raison prime (Descartes, Hegel)." },
+        { label: "Axe 3", shortLabel: "Axe 3", detail: "Le criticisme : sens et raison collaborent (Kant, Claude Bernard)." },
       ],
       modelAnswer: "Les sens donnent un contenu à connaître, mais l’esprit compare, organise et construit ce contenu ; la science progresse donc par le dialogue de la théorie et de l’expérience.",
       questions: [
         q("Quelle réponse Hume donne-t-il sur l’origine des connaissances ?", "Elles viennent de l’expérience", "Elles viennent seulement de la foi", "Elles sont toutes innées", "Elles viennent du langage seul"),
         q("Pourquoi le rationalisme critique-t-il les sens ?", "Parce qu’ils peuvent tromper et ne donnent pas seuls la nécessité", "Parce qu’ils démontrent tous les théorèmes", "Parce qu’ils sont toujours inutiles", "Parce qu’ils remplacent les concepts"),
         q("Quelle synthèse Kant permet-il ?", "La connaissance débute avec l’expérience mais mobilise aussi les formes de l’esprit", "Toute connaissance dérive uniquement des sens", "Toute connaissance existe avant toute expérience", "La raison et l’expérience s’excluent"),
+      ],
+      extraQuestions: [
+        { prompt: "Quelle formule de Kant résume la collaboration des sens et de la raison ?", options: ["« Des intuitions sans concepts sont aveugles » (et des pensées sans contenu sont vides)", "« Les sens nous trompent toujours »", "« Tout vient de l’expérience »", "« La raison seule suffit »"], correctIndex: 0, explanation: "La connaissance unit intuition sensible et concept (Critique de la raison pure).", sourceLabel: "Situation d’évaluation – Axe 3", points: 3 },
+        { prompt: "Quel auteur défend l’empirisme dans ce corrigé ?", options: ["Hume : « nos connaissances viennent de l’expérience »", "Descartes", "Hegel", "Kant"], correctIndex: 0, explanation: "Hume incarne l’empirisme (Axe 1).", sourceLabel: "Situation d’évaluation – Axe 1", points: 2 },
+        { prompt: "Que soutient Claude Bernard sur le savant complet ?", options: ["Il embrasse à la fois la théorie et l’expérience", "Il ne se fie qu’aux sens", "Il ignore l’expérience", "Il rejette toute théorie"], correctIndex: 0, explanation: "La connaissance naît du dialogue théorie/expérience.", sourceLabel: "Situation d’évaluation – Axe 3", points: 2 },
       ],
     },
   },
