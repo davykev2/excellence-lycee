@@ -2,6 +2,7 @@ import type { LearningPath } from "../domain/paths";
 import { chemistryPaths } from "./chemistryPaths";
 import { mathematicsPaths } from "./mathPaths";
 import { physicsPaths } from "./physicsPaths";
+import { inertiaMotionPaths } from "./terminalCDInertiaMotionPath";
 import { terminalGeographyPaths } from "./terminalGeographyPaths";
 import { terminalHistoryPaths } from "./terminalHistoryPaths";
 import { terminalMathematicsPaths } from "./terminalMathPaths";
@@ -15,6 +16,7 @@ const baseLearningPaths: LearningPath[] = [
   ...mathematicsPaths,
   ...terminalMathematicsPaths,
   ...physicsPaths,
+  ...inertiaMotionPaths,
   ...chemistryPaths,
   ...terminalGeographyPaths,
   ...terminalHistoryPaths,

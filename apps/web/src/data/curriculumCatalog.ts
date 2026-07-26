@@ -552,8 +552,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
     ],
     "physics-chemistry": [
       { title: "Cinématique du point", strand: "Physique", pathId: "seconde-c-kinematics" },
+      { title: "Mouvement du centre d’inertie d’un solide", strand: "Physique", pathId: "terminale-cd-inertia-motion" },
       ...withStrand("Physique", [
-        "Mouvement du centre d’inertie d’un solide",
         "Interaction gravitationnelle",
         "Mouvements dans les champs uniformes",
         "Oscillations mécaniques libres",
@@ -644,8 +644,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
     ],
     "physics-chemistry": [
       { title: "Cinématique du point", strand: "Physique", pathId: "seconde-c-kinematics" },
+      { title: "Mouvement du centre d’inertie d’un solide", strand: "Physique", pathId: "terminale-cd-inertia-motion" },
       ...withStrand("Physique", [
-        "Mouvement du centre d’inertie d’un solide",
         "Mouvements dans les champs uniformes",
         "Oscillations mécaniques libres",
         "Champ magnétique",
