@@ -44,12 +44,20 @@ http://localhost:<port>/?__paths-preview&__path-preview=<pathId>&__level-preview
 
 ## 3. Déploiement
 
-**Automatique.** Le dépôt GitHub `davykev2/excellence-lycee` est connecté au projet Vercel `excellence-lycee`, dont le **Root Directory est `apps/web`**. Tout push sur `main` déclenche un déploiement de production.
+**Automatique pour le FRONTEND seulement.** Le dépôt GitHub `davykev2/excellence-lycee` est connecté au projet Vercel `excellence-lycee` (Root Directory `apps/web`). Tout push sur `main` redéploie **le frontend**.
 
 - Production web : https://excellence-lycee.vercel.app
-- Production API : https://excellence-lycee-api.vercel.app (projet Vercel séparé, `excellence-lycee-api`)
+- Production API : projet Vercel **séparé** `excellence-lycee-api`, aliasé sur https://excellence-lycee-api.vercel.app. Le frontend l'appelle via une réécriture `/api/*` (le point d'entrée serverless est `apps/api/api/index.ts`, qui charge tout `buildApp()`).
 
-Déploiement manuel de secours — **depuis la racine du dépôt**, jamais depuis `apps/web` (le Root Directory est déjà réglé côté Vercel) :
+> ⚠️ **PIÈGE : un push ne redéploie PAS l'API.** Le projet `excellence-lycee-api` ne se redéploie pas automatiquement sur push. Dès qu'on **modifie du code sous `apps/api/` (nouvelle route, logique serveur…), il faut le déployer à la main**, sinon le frontend appelle une API à l'ancien code (symptôme typique : `Route GET:/… not found` renvoyé par Fastify, alors que `/api/health` répond). Le projet est déjà lié (`apps/api/.vercel/`), donc :
+>
+> ```bash
+> cd apps/api && npx vercel deploy --prod --yes
+> ```
+>
+> (Vérifier ensuite : `curl https://excellence-lycee.vercel.app/api/<route>` doit renvoyer 401 et non 404.)
+
+Déploiement manuel de secours du **frontend** — **depuis la racine du dépôt**, jamais depuis `apps/web` (le Root Directory est déjà réglé côté Vercel) :
 
 ```bash
 npx vercel --prod
