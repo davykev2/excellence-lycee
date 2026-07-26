@@ -1845,6 +1845,31 @@ Le **christianisme** reste la religion majoritaire ; les Églises tentent de s�
         summary: "Comparer sociétés étatiques, chefferies et économie de subsistance.",
         conceptTitle: "Des organisations politiques et économiques variées",
         explanation: "Royaumes et empires possèdent un pouvoir centralisé, tandis que des sociétés sans État s’organisent autour de chefferies, conseils de notables, lignages et classes d’âge. L’économie vise surtout la subsistance par agriculture, élevage, artisanat et commerce.",
+        bodyMarkdown: String.raw`## Qu’est-ce que la civilisation négro-africaine ?
+
+C’est l’ensemble des **caractères propres aux peuples d’Afrique noire** (institutions politiques, techniques, économie, croyances). De la préhistoire au Moyen Âge, l’Afrique a produit de **brillantes civilisations**. Les contacts avec le reste du monde (surtout aux XVIIIᵉ-XIXᵉ siècles) en transforment ensuite les structures.
+
+> **Correction.** La civilisation **négro-africaine** ne concerne pas *toute* l’Afrique, mais l’**Afrique noire (subsaharienne)**.
+
+## Des structures politiques variées
+
+| Type | Organisation | Exemples |
+|---|---|---|
+| **Sociétés étatiques** (royaumes, empires) | pouvoir **centralisé** et **sacré** du roi ou de l’empereur (aristocratie héréditaire) | Mossi, Ashanti, Dahomey, empires du **Mali** et du **Ghana**, émirat de Kano |
+| **Sociétés sans État** (chefferies) | un **chef** assisté d’un **conseil des notables**, sur la base des lignages, clans et villages | peuples **Krou**, Akan lagunaires (Ébrié, Attié, Adjoukrou) |
+
+Le pouvoir « absolu » du roi est en réalité **tempéré** par l’**arbre à palabres**, les **griots**, les **chefs de terre** et, chez les Akan, la **Reine-Mère**.
+
+## Une économie de subsistance
+
+L’économie vise d’abord à **nourrir la communauté** :
+
+- **agriculture** (céréales, tubercules ; terre **collective** ; culture sur brûlis ; houe et machette ; faibles rendements) ;
+- **élevage** (savanes et steppes : Peuls, Masaï), **cueillette, pêche, chasse** (dozos) ;
+- **artisanat** (poteries, sculptures, bijoux) ;
+- **commerce** peu développé : **troc**, monnaies anciennes (**cauris**, poudre d’or), grandes cités sahéliennes (**Tombouctou, Gao, Djenné**).
+
+> **Astuce mémoire de Davy.** Deux familles politiques : **avec État** (royaumes/empires, pouvoir centralisé) et **sans État** (chefferies, conseil des notables). Et un mot pour l’économie : **subsistance** (pas de marché, mais du troc).`,
         keyPoint: "L’Afrique précoloniale connaît des formes politiques diverses et une économie principalement communautaire et de subsistance.",
         example: "Les empires du Mali et du Ghana illustrent les sociétés étatiques ; les peuples krou illustrent des chefferies et sociétés sans État centralisé.",
         timelineTitle: "Comparer les formes d’organisation",
@@ -1856,6 +1881,14 @@ Le **christianisme** reste la religion majoritaire ; les Églises tentent de s�
         ],
         observation: "L’absence d’État centralisé ne signifie pas l’absence d’organisation ou de règles politiques.",
         check: { prompt: "Quelle caractéristique domine l’économie précoloniale décrite dans le cours ?", options: ["La subsistance", "L’industrie automobile", "La finance numérique", "La production aéronautique"], correctIndex: 0, explanation: "La production vise d’abord à satisfaire les besoins de la communauté." },
+        extraQuestions: [
+          { prompt: "La civilisation négro-africaine concerne les peuples de l’ensemble de l’Afrique.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Elle concerne l’Afrique noire (subsaharienne).", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "Comment nomme-t-on les sociétés précoloniales dotées d’un pouvoir centralisé (roi ou empereur) ?", options: ["Les sociétés étatiques (royaumes et empires)", "Les chefferies", "Les républiques", "Les cités-États grecques"], correctIndex: 0, explanation: "Le souverain, personnage sacré, y détient des pouvoirs politiques, militaires et religieux.", sourceLabel: "Cours I-1-a", points: 2 },
+          { prompt: "Quel dispositif tempère le pouvoir « absolu » du roi ?", options: ["L’arbre à palabres, les griots et les chefs de terre", "Un parlement bicaméral", "Une cour constitutionnelle", "Un référendum annuel"], correctIndex: 0, explanation: "Chez les Akan s’y ajoute la Reine-Mère.", sourceLabel: "Cours I-1", points: 2 },
+          { prompt: "L’économie des sociétés négro-africaines précoloniales est une économie de marché.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "C’est une économie de subsistance, fondée sur le troc.", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "Quelle forme d’échange est la plus courante dans le commerce précolonial ?", options: ["Le troc", "La carte bancaire", "Le crédit international", "La Bourse"], correctIndex: 0, explanation: "On utilise aussi des monnaies anciennes comme les cauris.", sourceLabel: "Cours I-2-d", points: 1 },
+          { prompt: "Quelles grandes cités sahéliennes servaient de lieux d’échange entre Afrique noire et Afrique blanche ?", options: ["Tombouctou, Gao et Djenné", "Le Caire, Alger et Tunis", "Lagos, Accra et Dakar", "Kano, Sokoto et Zaria"], correctIndex: 0, explanation: "Elles concentraient les grandes transactions transsahariennes.", sourceLabel: "Cours I-2-d", points: 1 },
+        ],
         distractors: ["Toutes les sociétés africaines précoloniales possèdent un empire centralisé.", "L’artisanat est absent des économies précoloniales.", "Le commerce utilise uniquement des billets modernes."],
       },
       {
@@ -1864,6 +1897,28 @@ Le **christianisme** reste la religion majoritaire ; les Églises tentent de s�
         summary: "Comprendre solidarité communautaire, hiérarchies, oralité, arts et croyances.",
         conceptTitle: "Une vie communautaire fortement structurée",
         explanation: "La famille élargie et la communauté organisent éducation, mariage et solidarité. La société est hiérarchisée selon âge, sexe, statut ou métier. Oralité, musique, danse et arts transmettent les valeurs, tandis qu’un Dieu suprême, les ancêtres et les génies structurent les croyances.",
+        bodyMarkdown: String.raw`## Une société communautaire
+
+En Afrique noire, **l’individu n’est jamais isolé** : l’éducation des enfants est l’affaire de **toute la communauté**. Le **mariage** a un caractère **collectif** (il unit deux familles ou clans) et se scelle par la **dot**.
+
+## Une société hiérarchisée
+
+| Critère | Hiérarchie |
+|---|---|
+| **Statut** | nobles (rois, notables) → hommes libres (paysans, artisans) → esclaves (captifs de guerre) |
+| **Âge et sexe** | l’aîné avant le cadet, l’homme avant la femme ; les **initiés** (adultes) dominent — c’est la **gérontocratie** |
+| **Métier** | des **castes** héréditaires (forgerons, cordonniers, griots) |
+
+L’**initiation** fait passer les jeunes au monde adulte (le **Poro** chez les Sénoufo). Des règles structurent la vie : **solidarité**, **polygamie**, modes d’**héritage**.
+
+## Culture et croyances
+
+- **Productions culturelles** : la **littérature orale** (contes, légendes, proverbes), la **musique** et la **danse** (tam-tam, balafon, flûte), un **art sacré** (masques et statues représentant des divinités).
+- **Croyances** : les Africains reconnaissent un **Dieu suprême** (Gnamien en baoulé, Lagô en bété, Kolotchôlô en sénoufo) ; les **ancêtres** et les **génies** servent d’**intermédiaires**. L’**animisme** est la religion par excellence, fondée sur l’idée d’une **force vitale**.
+
+> **Correction.** Ne confonds pas **Dieu** (l’être suprême unique) et les **divinités** (génies de la nature : génie de l’eau, de la montagne…). Et la littérature africaine **existe bel et bien** — orale, mais riche.
+
+> **Astuce mémoire de Davy.** Trois mots-clés pour cette société : **communautaire** (l’individu dans le groupe), **hiérarchisée** (âge, statut, castes, gérontocratie) et **animiste** (Dieu suprême + ancêtres + génies).`,
         keyPoint: "La civilisation négro-africaine précoloniale associe solidarité communautaire, hiérarchies sociales, traditions orales et croyances ancestrales.",
         example: "Le Poro chez les Sénoufo forme les jeunes à l’entrée dans le monde adulte ; griots, contes et proverbes transmettent l’histoire et les normes.",
         timelineTitle: "Les dimensions de la vie communautaire",
@@ -1875,6 +1930,14 @@ Le **christianisme** reste la religion majoritaire ; les Églises tentent de s�
         ],
         observation: "Les arts et croyances ont des fonctions sociales, éducatives et religieuses, pas seulement esthétiques.",
         check: { prompt: "Qui transmet traditionnellement récits et mémoire dans plusieurs sociétés ouest-africaines ?", options: ["Les griots", "Les chaebols", "Les Casques bleus", "Les commissaires européens"], correctIndex: 0, explanation: "Les griots ou traditionnalistes jouent un rôle majeur de transmission orale." },
+        extraQuestions: [
+          { prompt: "L’éducation des enfants concerne toute la communauté dans la société négro-africaine précoloniale.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "L’individu n’y est jamais isolé.", sourceLabel: "Activité d’application 1", points: 1 },
+          { prompt: "Comment appelle-t-on le pouvoir détenu par les anciens (les initiés adultes) ?", options: ["La gérontocratie", "La démocratie", "La ploutocratie", "La théocratie"], correctIndex: 0, explanation: "Les vieux détiennent la connaissance et le pouvoir.", sourceLabel: "Cours I-3-b", points: 2 },
+          { prompt: "Quel rite fait passer les jeunes Sénoufo au monde adulte ?", options: ["Le Poro", "Le harrisme", "Le kimbanguisme", "Le baptême civil"], correctIndex: 0, explanation: "Une initiation par des épreuves physiques et mystiques.", sourceLabel: "Cours I-3-b", points: 2 },
+          { prompt: "La production littéraire est inexistante dans l’Afrique noire précoloniale.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Il existe une riche littérature orale : contes, légendes, proverbes.", sourceLabel: "Activité d’application 1", points: 2 },
+          { prompt: "Quelle est la religion « par excellence » de l’Afrique noire traditionnelle ?", options: ["L’animisme", "Le catholicisme", "Le protestantisme", "Le bouddhisme"], correctIndex: 0, explanation: "Elle repose sur la notion de force vitale et le culte des ancêtres.", sourceLabel: "Cours I-3-d", points: 1 },
+          { prompt: "Les croyances négro-africaines reposent notamment sur l’existence d’un Dieu suprême.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Ancêtres et génies servent d’intermédiaires vers ce Dieu unique.", sourceLabel: "Activité d’application 1", points: 1 },
+        ],
         distractors: ["L’éducation des enfants est uniquement individuelle.", "Les sociétés précoloniales ne produisent aucune littérature.", "Les croyances excluent toujours l’idée d’un Dieu suprême."],
       },
       {
@@ -1884,16 +1947,73 @@ Le **christianisme** reste la religion majoritaire ; les Églises tentent de s�
         conceptTitle: "Des sociétés transformées par les contacts et la modernité",
         explanation: "École occidentale, économie monétaire, villes, christianisme, islam et colonisation modifient l’autorité des anciens, le travail, les frontières et les institutions. Apparaissent États modernes, salariat, propriété privée, nouvelles classes sociales et formes familiales renouvelées.",
         keyPoint: "La société négro-africaine contemporaine combine transformations extérieures, innovations modernes et permanences culturelles.",
-        example: "La monétarisation et les cultures d’exportation intègrent l’Afrique à une économie de marché, tandis que les États adoptent des institutions inspirées des anciennes métropoles.",
+        example: "L’école occidentale valorise le savoir des jeunes et ébranle la sacralisation du savoir des anciens.",
         timelineTitle: "Des facteurs aux transformations",
-        timelineInstruction: "Explore les facteurs de mutation, puis leurs effets politiques, économiques et sociaux.",
+        timelineInstruction: "Explore les facteurs de mutation, puis la nouvelle société et ce qui résiste.",
         timeline: [
-          { label: "Facteurs", detail: "Colonisation, école, économie monétaire, urbanisation, communications, christianisme et islam." },
-          { label: "Mutations politiques", shortLabel: "Politique", detail: "États et frontières modernes, administrations, élections et recul relatif des autorités traditionnelles." },
-          { label: "Mutations économiques et sociales", shortLabel: "Société", detail: "Salariat, marché, cultures commerciales, classes professionnelles, mariage civil et mobilité sociale." },
+          { label: "Les facteurs des mutations", shortLabel: "Les facteurs des mutations", detail: "École occidentale, économie monétaire, urbanisation, christianisme et islam, sous l’effet de la colonisation." },
+          { label: "La nouvelle société africaine", shortLabel: "La nouvelle société africaine", detail: "États modernes, salariat et marché, classes socio-professionnelles, mariage civil et nouveaux modes culturels." },
+          { label: "Les permanences culturelles", shortLabel: "les permanences", detail: "Chefferies, animisme, solidarité (funérailles, mariages), polygamie et modes de succession résistent." },
         ],
         observation: "Mutation ne signifie pas disparition totale : les sociétés sélectionnent, adaptent et recomposent les apports extérieurs.",
         check: { prompt: "Quel facteur favorise directement la monétarisation de l’économie africaine ?", options: ["Les cultures d’exportation et le paiement des impôts", "La disparition de tous les échanges", "L’interdiction du travail salarié", "Le retour exclusif au troc"], correctIndex: 0, explanation: "Cultures commerciales et fiscalité coloniale diffusent l’usage de la monnaie." },
+        parts: [
+          {
+            bodyMarkdown: String.raw`## La colonisation, cause principale
+
+La **colonisation** est le moteur des mutations, à travers quatre grands facteurs.
+
+## L’école
+
+Autrefois, le savoir était l’**apanage des vieux**. L’**école occidentale** valorise le savoir des **jeunes** et impose la **prééminence du savoir occidental** : la sacralisation du savoir des anciens (désormais vus comme « ignorants ») est **ébranlée**. Mais l’école n’a **pas promu** les sources culturelles traditionnelles.
+
+## L’économie monétaire
+
+Elle naît avec les **cultures d’exportation**, nécessaires au **paiement de l’impôt**. L’argent **déstabilise la hiérarchie** et fait naître des **classes sociales** (riches / pauvres). La monnaie ouvre l’Afrique sur une **économie extravertie**.
+
+## L’urbanisation et les nouvelles religions
+
+Les populations, jadis isolées, deviennent **mobiles** ; la **ville** devient le symbole de l’**émancipation**, de la **détribalisation** et du **métissage**. Le **christianisme** apporte des valeurs nouvelles (**monogamie**, œuvres sanitaires) ; l’**islam**, par sa morale accommodante (polygamie, respect de l’aîné, solidarité), gagne de nombreux adeptes.
+
+> **Astuce mémoire de Davy.** Quatre facteurs à retenir, tous liés à la **colonisation** : **l’école**, **la monnaie**, **la ville**, **les religions** (christianisme et islam). C’est le sigle É-M-V-R.`,
+            extraQuestions: [
+              { prompt: "Quelle est la cause principale des mutations de la société négro-africaine ?", options: ["La colonisation", "La sécheresse", "L’animisme", "Le troc"], correctIndex: 0, explanation: "Elle agit par l’école, la monnaie, la ville et les religions.", sourceLabel: "Cours II-1", points: 1 },
+              { prompt: "Comment l’école occidentale bouleverse-t-elle la transmission du savoir ?", options: ["Elle valorise le savoir des jeunes et ébranle celui des anciens", "Elle renforce l’autorité des vieux", "Elle supprime toute connaissance", "Elle n’a aucun effet"], correctIndex: 0, explanation: "Le savoir occidental prend le pas sur le savoir traditionnel.", sourceLabel: "Cours II-1-a", points: 2 },
+              { prompt: "Comment débute l’introduction de l’économie monétaire ?", options: ["Avec les cultures d’exportation, nécessaires au paiement de l’impôt", "Avec le retour au troc", "Avec l’interdiction de la monnaie", "Avec la fin du commerce"], correctIndex: 0, explanation: "L’argent fait naître des classes sociales et une économie extravertie.", sourceLabel: "Cours II-1-b", points: 2 },
+              { prompt: "Que symbolise la ville dans la nouvelle société africaine ?", options: ["L’émancipation individuelle, la détribalisation et le métissage", "Le retour aux traditions", "La fin des échanges", "L’isolement des populations"], correctIndex: 0, explanation: "Le brassage ethnique, linguistique et culturel s’y développe.", sourceLabel: "Cours II-1-c", points: 2 },
+            ],
+          },
+          {
+            bodyMarkdown: String.raw`## La nouvelle société africaine
+
+| Domaine | Mutations |
+|---|---|
+| **Politique** | **États modernes** aux **frontières artificielles** (source de conflits), institutions calquées sur la métropole, **multipartisme**, **affaiblissement des chefs traditionnels** |
+| **Économique** | **monétarisation** (FCFA, naira), **industrie** au détriment de l’artisanat, cultures commerciales, **propriété privée** des terres, **salariat**, **économie de marché** |
+| **Social** | disparition des **castes** au profit de **classes socio-professionnelles**, **mariage civil**, **émancipation de la femme**, interdiction de la **polygamie** et de l’**excision**, **famille nucléaire** |
+| **Culturel** | habillement occidental, nouveaux médias, expansion du **christianisme**, **syncrétisme** (kimbanguisme, harrisme), nouvelle **langue** (celle du colonisateur) |
+
+## Ce qui résiste : les permanences
+
+Malgré tout, des **valeurs traditionnelles résistent** :
+
+- l’existence des **chefferies** ;
+- la pratique de l’**animisme** ;
+- la **solidarité africaine** (funérailles, mariages, baptêmes) ;
+- la **polygamie** et certains **modes de succession**.
+
+> **Le point clé.** La civilisation négro-africaine actuelle n’est **ni une copie de l’Occident, ni figée** : c’est une **recomposition** — elle adopte, adapte et conserve. Ce « ni-ni » est la clé de la mission finale.
+
+> **Astuce mémoire de Davy.** Quatre domaines de mutation (**PESC** : Politique, Économique, Social, Culturel) — mais garde en tête les **permanences** : chefferies, animisme, solidarité, polygamie. Mutation **n’est pas** disparition.`,
+            extraQuestions: [
+              { prompt: "Classe (activité 2) : l’« Assemblée nationale » est une mutation…", options: ["Politique", "Économique", "Sociale", "Culturelle"], correctIndex: 0, explanation: "Comme l’influence de la démocratie libérale.", sourceLabel: "Activité d’application 2", points: 1 },
+              { prompt: "Classe (activité 2) : la « propriété privée » et l’« économie de marché » sont des mutations…", options: ["Économiques", "Politiques", "Sociales", "Culturelles"], correctIndex: 0, explanation: "Avec la production industrielle et la disparition du troc.", sourceLabel: "Activité d’application 2", points: 2 },
+              { prompt: "Classe (activité 2) : le « syncrétisme religieux » (kimbanguisme, harrisme) est une mutation…", options: ["Culturelle", "Politique", "Économique", "Sociale"], correctIndex: 0, explanation: "Il mêle christianisme et croyances africaines.", sourceLabel: "Activité d’application 2", points: 2 },
+              { prompt: "Quelle valeur traditionnelle résiste encore aux mutations ?", options: ["La solidarité africaine (funérailles, mariages, baptêmes)", "Le troc généralisé", "L’absence totale de villes", "La disparition des chefferies"], correctIndex: 0, explanation: "Chefferies, animisme et polygamie résistent aussi.", sourceLabel: "Cours II-2", points: 2 },
+              { prompt: "La société négro-africaine a toujours été moderne, à l’image de l’Occident.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Elle avait ses propres structures ; la modernité vient des contacts et de la colonisation.", sourceLabel: "Exercice — Activité 2", points: 1 },
+            ],
+          },
+        ],
         distractors: ["Les mutations contemporaines effacent toute permanence culturelle.", "L’urbanisation réduit toujours les brassages de population.", "Les États modernes renforcent partout sans changement l’autorité traditionnelle."],
       },
     ],

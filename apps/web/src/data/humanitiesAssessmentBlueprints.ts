@@ -539,6 +539,43 @@ Ajoute la nuance de Musitelli : cette hégémonie est **douce**, elle repose sur
       title: "Modernité occidentale ou permanence africaine ?",
       scenario: "Des élèves opposent les apports occidentaux, jugés favorables à la modernisation, au maintien des valeurs ancestrales nécessaire à un développement culturel endogène.",
       modelAnswer: "École, techniques, institutions et économie moderne transforment les sociétés africaines, mais les solidarités, croyances, arts et traditions sont souvent adaptés plutôt que totalement abandonnés.",
+      bodyMarkdown: String.raw`## La situation d’évaluation
+
+> Pendant la récréation, des amis débattent des mutations de la civilisation négro-africaine. Pour les uns, « la **civilisation occidentale a des apports qui enrichissent** les sociétés négro-africaines en vue de leur **insertion dans le monde moderne** ». Pour les autres, « les sociétés négro-africaines **maintiennent beaucoup de valeurs ancestrales** afin d’accéder à un **développement socioculturel endogène** ».
+
+## Document 1 — Une démocratie réelle malgré l’absolutisme
+
+*J. Ki-Zerbo,* Histoire de l’Afrique d’hier à demain, *Hatier, 1972 :*
+
+> « La société africaine d’hier était une société **solidaire** […] qui avait atteint un certain **humanisme** […]. Bien sûr, tout n’était pas rose […] : il y a eu des cas de **tyrannies** […]. La division des tâches et la collégialité assuraient une **démocratie réelle**. Il peut paraître paradoxal de parler de démocratie dans l’Afrique d’hier où l’absolutisme semble avoir régné. Mais le mot et la réalité de la démocratie ne sont pas toujours logés à la même enseigne. »
+
+## Document 2 — Des civilisations « harmonieuses et bien formées »
+
+*Frobenius,* Histoire de la civilisation africaine, *Gallimard, 1936 :*
+
+> « Lorsqu’ils arrivèrent dans la baie de Guinée […], les capitaines furent fort étonnés de trouver des **rues bien aménagées** […]. Plus au sud, dans le royaume du Congo, une foule habillée de soie et de velours, de **grands États bien ordonnés** […]. L’Afrique nègre […] était encore en plein épanouissement […]. Cette floraison, les conquistadors européens l’**anéantissaient** à mesure qu’ils progressaient. »
+
+## Comment construire ta réponse
+
+**Consigne 1 — Le problème.** Il s’agit du débat entre les **apports de la modernité occidentale** et le **maintien des valeurs ancestrales** africaines.
+
+**Consigne 2 — Expliquer « la civilisation occidentale enrichit et éclaire ».** Montre les **apports** : l’**école** et un nouveau savoir, les **techniques** modernes, les **institutions** (État, élections), l’**économie de marché** et la **santé** — autant d’outils d’**insertion dans le monde moderne**.
+
+**Consigne 3 — Les sociétés maintiennent-elles leurs valeurs ancestrales ? (Y es-tu favorable ?)** Réponse **nuancée** :
+
+| Ce qui plaide pour les permanences | Les mutations réelles |
+|---|---|
+| chefferies, animisme, **solidarité** (funérailles, mariages) | États modernes, salariat, mariage civil |
+| polygamie, modes de succession | émancipation de la femme, famille nucléaire |
+| une identité et une **démocratie réelle** anciennes (Ki-Zerbo) | affaiblissement des solidarités |
+
+> **Astuce mémoire de Davy.** Le bon réflexe, c’est le **« ni-ni »** : la civilisation négro-africaine actuelle n’est **ni une copie totale de l’Occident**, **ni figée** dans le passé. Elle **recompose** — elle garde des valeurs ancestrales (une force pour un développement **endogène**) tout en adoptant des apports modernes. Réfute donc l’idée qu’elle serait « devenue totalement la même que l’Occident ».`,
+      extraQuestions: [
+        { prompt: "Selon Ki-Zerbo (doc. 1), que peut-on dire de l’Afrique d’hier malgré l’apparent absolutisme ?", options: ["Elle connaissait une solidarité et une « démocratie réelle »", "Elle n’avait aucune organisation", "Elle était identique à l’Europe", "Elle ignorait toute hiérarchie"], correctIndex: 0, explanation: "Division des tâches et collégialité assuraient une démocratie réelle.", sourceLabel: "Document 1 — Ki-Zerbo", points: 2 },
+        { prompt: "Que révèle le document 2 de Frobenius sur l’Afrique avant la colonisation ?", options: ["Des villes bien aménagées et de grands États ordonnés, ensuite anéantis", "Un continent vide et sans civilisation", "Une copie de l’Europe", "L’absence de tout État"], correctIndex: 0, explanation: "Il réfute l’image d’une Afrique « désolée » et « primitive ».", sourceLabel: "Document 2 — Frobenius", points: 2 },
+        { prompt: "Pour la consigne 2, quel est un apport occidental qui « enrichit » les sociétés africaines ?", options: ["L’école, les techniques, les institutions et l’économie moderne", "Le retour au troc", "La suppression de l’école", "L’isolement du continent"], correctIndex: 0, explanation: "Des outils d’insertion dans le monde moderne.", sourceLabel: "Méthode BAC — consigne 2", points: 2 },
+        { prompt: "Pour la consigne 3, quelle position est la plus juste ?", options: ["La civilisation africaine n’est ni une copie de l’Occident ni figée : elle recompose et garde des valeurs propres", "Elle est devenue totalement identique à l’Occident", "Elle n’a connu aucune mutation", "Toute tradition empêche le développement"], correctIndex: 0, explanation: "Un avis nuancé : mutations réelles mais permanences vivaces.", sourceLabel: "Méthode BAC — consigne 3", points: 2 },
+      ],
       questions: [
         question("Quel est le thème du débat ?", "Les mutations et les permanences de la civilisation négro-africaine", ["La création des blocs militaires", "Le déficit halieutique ivoirien", "Les accords de Cotonou uniquement"], "La situation confronte changement culturel et maintien de l’identité.", 1),
         question("Comment le contact occidental transforme-t-il les sociétés africaines ?", "Il diffuse école, monnaie, urbanisation, religions et institutions nouvelles", ["Il empêche tout changement social", "Il restaure partout les mêmes royaumes", "Il supprime toute économie de marché"], "Les transformations touchent les domaines politique, économique, social et culturel.", 2),
