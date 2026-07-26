@@ -3,7 +3,7 @@ import { BookOpenText, CheckCircle, Circle, MagnifyingGlass, Sparkle, Warning } 
 import type { LearningPath } from "../../domain/paths";
 import type { SubjectId } from "../../domain/learning";
 import { learningPaths } from "../../data/learningPaths";
-import { subjects, schoolLevels } from "../../data/programme";
+import { subjects, schoolLevels, isSubjectAvailableForLevel } from "../../data/programme";
 
 // Interactions considérées comme « riches » (au-delà de la frise/numérique de base).
 const richInteractionKinds = new Set(["diagram", "curve", "orbit", "schema"]);
@@ -86,12 +86,6 @@ export function EditorialOverview() {
 
   const audits = useMemo(() => learningPaths.map(auditPath), []);
 
-  // Niveaux/séries réellement présents dans le catalogue, dans l'ordre du programme.
-  const availableLevels = useMemo(() => {
-    const present = new Set(audits.flatMap((a) => a.levelIds));
-    return schoolLevels.filter((level) => present.has(level.id));
-  }, [audits]);
-
   // Tout est cadré par le niveau choisi (KPI, couverture par matière et tableau).
   const scopedAudits = useMemo(
     () => (levelFilter === "all" ? audits : audits.filter((a) => a.levelIds.includes(levelFilter))),
@@ -108,6 +102,7 @@ export function EditorialOverview() {
 
   const perSubject = useMemo(() => {
     return Object.values(subjects).map((subject) => {
+      const available = levelFilter === "all" || isSubjectAvailableForLevel(subject, levelFilter);
       const rows = scopedAudits.filter((a) => a.subjectId === subject.id);
       const levels = rows.reduce((sum, a) => sum + a.levels, 0);
       const enriched = rows.reduce((sum, a) => sum + a.enrichedLevels, 0);
@@ -115,14 +110,19 @@ export function EditorialOverview() {
         id: subject.id,
         label: subject.label,
         accent: subject.theme.accent,
+        available,
         paths: rows.length,
         levels,
         enriched,
         coverage: levels === 0 ? 0 : Math.round((enriched / levels) * 100),
       };
-    }).filter((row) => row.paths > 0)
-      .sort((a, b) => a.coverage - b.coverage);
-  }, [scopedAudits]);
+    })
+      // Vue globale : tout ce qui a du contenu. Vue par niveau : uniquement les
+      // matières réellement enseignées à ce niveau (ex. la Seconde ne fait pas de philo),
+      // y compris celles encore vides pour révéler les manques.
+      .filter((row) => (levelFilter === "all" ? row.paths > 0 : row.available))
+      .sort((a, b) => a.coverage - b.coverage || b.paths - a.paths);
+  }, [scopedAudits, levelFilter]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -182,13 +182,13 @@ export function EditorialOverview() {
         <h3>Par matière</h3>
         <div className="editorial-subject-grid">
           {perSubject.map((row) => (
-            <article key={row.id} style={{ "--subj-accent": row.accent } as React.CSSProperties}>
+            <article className={row.paths === 0 ? "is-empty" : ""} key={row.id} style={{ "--subj-accent": row.accent } as React.CSSProperties}>
               <div className="editorial-subject-head">
                 <strong>{row.label}</strong>
-                <b>{row.coverage}%</b>
+                <b>{row.paths === 0 ? "—" : `${row.coverage}%`}</b>
               </div>
               <div className="editorial-bar"><i style={{ width: `${row.coverage}%` }} /></div>
-              <small>{row.paths} parcours • {row.enriched}/{row.levels} niveaux enrichis</small>
+              <small>{row.paths === 0 ? "Aucun contenu à ce niveau" : `${row.paths} parcours • ${row.enriched}/${row.levels} niveaux enrichis`}</small>
             </article>
           ))}
         </div>
@@ -199,7 +199,7 @@ export function EditorialOverview() {
         <label className="admin-filter"><span>Niveau et série</span>
           <select value={levelFilter} onChange={(event) => setLevelFilter(event.target.value)}>
             <option value="all">Tous les niveaux</option>
-            {availableLevels.map((level) => <option key={level.id} value={level.id}>{level.label}</option>)}
+            {schoolLevels.map((level) => <option key={level.id} value={level.id}>{level.label}</option>)}
           </select>
         </label>
         <label className="admin-filter"><span>Matière</span>

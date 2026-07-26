@@ -9988,6 +9988,9 @@ textarea:focus-visible {
 .editorial-subject-head strong { font-size: 14px; font-weight: 900; color: var(--navy-800); }
 .editorial-subject-head b { font-size: 16px; font-weight: 900; color: var(--subj-accent, var(--navy-800)); }
 .editorial-subject-grid small { font-size: 12px; color: var(--ink-muted); }
+.editorial-subject-grid article.is-empty { border-left-color: var(--line); background: var(--ivory-100); opacity: 0.72; }
+.editorial-subject-grid article.is-empty .editorial-subject-head strong { color: var(--ink-muted); }
+.editorial-subject-grid article.is-empty .editorial-subject-head b { color: var(--ink-muted); }
 
 .editorial-bar, .editorial-mini-bar { display: block; height: 8px; margin: 8px 0; border-radius: 999px; background: var(--ivory-200); overflow: hidden; }
 .editorial-bar i, .editorial-mini-bar i { display: block; height: 100%; border-radius: 999px; background: var(--subj-accent, var(--navy-800)); }
