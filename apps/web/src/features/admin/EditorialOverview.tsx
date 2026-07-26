@@ -16,6 +16,7 @@ interface PathAudit {
   title: string;
   chapterNumber: number;
   themeTitle: string;
+  levelIds: string[];
   series: string[];
   levels: number;
   enrichedLevels: number;
@@ -48,6 +49,7 @@ function auditPath(path: LearningPath): PathAudit {
     title: path.title,
     chapterNumber: path.chapterNumber,
     themeTitle: path.theme.title,
+    levelIds: path.levelIds,
     series,
     levels: lessons.length,
     enrichedLevels,
@@ -74,22 +76,35 @@ const statusMeta: Record<Exclude<StatusFilter, "all">, { label: string; classNam
 
 export function EditorialOverview() {
   const [query, setQuery] = useState("");
+  const [levelFilter, setLevelFilter] = useState<string | "all">("all");
   const [subjectFilter, setSubjectFilter] = useState<SubjectId | "all">("all");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
 
   const audits = useMemo(() => learningPaths.map(auditPath), []);
 
-  const totals = useMemo(() => {
-    const levels = audits.reduce((sum, a) => sum + a.levels, 0);
-    const enriched = audits.reduce((sum, a) => sum + a.enrichedLevels, 0);
-    const questions = audits.reduce((sum, a) => sum + a.questions, 0);
-    const subjectsCovered = new Set(audits.map((a) => a.subjectId)).size;
-    return { paths: audits.length, levels, enriched, questions, subjectsCovered };
+  // Niveaux/séries réellement présents dans le catalogue, dans l'ordre du programme.
+  const availableLevels = useMemo(() => {
+    const present = new Set(audits.flatMap((a) => a.levelIds));
+    return schoolLevels.filter((level) => present.has(level.id));
   }, [audits]);
+
+  // Tout est cadré par le niveau choisi (KPI, couverture par matière et tableau).
+  const scopedAudits = useMemo(
+    () => (levelFilter === "all" ? audits : audits.filter((a) => a.levelIds.includes(levelFilter))),
+    [audits, levelFilter],
+  );
+
+  const totals = useMemo(() => {
+    const levels = scopedAudits.reduce((sum, a) => sum + a.levels, 0);
+    const enriched = scopedAudits.reduce((sum, a) => sum + a.enrichedLevels, 0);
+    const questions = scopedAudits.reduce((sum, a) => sum + a.questions, 0);
+    const subjectsCovered = new Set(scopedAudits.map((a) => a.subjectId)).size;
+    return { paths: scopedAudits.length, levels, enriched, questions, subjectsCovered };
+  }, [scopedAudits]);
 
   const perSubject = useMemo(() => {
     return Object.values(subjects).map((subject) => {
-      const rows = audits.filter((a) => a.subjectId === subject.id);
+      const rows = scopedAudits.filter((a) => a.subjectId === subject.id);
       const levels = rows.reduce((sum, a) => sum + a.levels, 0);
       const enriched = rows.reduce((sum, a) => sum + a.enrichedLevels, 0);
       return {
@@ -103,11 +118,11 @@ export function EditorialOverview() {
       };
     }).filter((row) => row.paths > 0)
       .sort((a, b) => a.coverage - b.coverage);
-  }, [audits]);
+  }, [scopedAudits]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return audits
+    return scopedAudits
       .filter((a) => subjectFilter === "all" || a.subjectId === subjectFilter)
       .filter((a) => statusFilter === "all" || statusOf(a) === statusFilter)
       .filter((a) => !q || a.title.toLowerCase().includes(q) || a.themeTitle.toLowerCase().includes(q) || subjects[a.subjectId].label.toLowerCase().includes(q))
@@ -117,7 +132,7 @@ export function EditorialOverview() {
         if (ra !== rb) return ra - rb; // les moins enrichis d'abord
         return subjects[a.subjectId].label.localeCompare(subjects[b.subjectId].label, "fr");
       });
-  }, [audits, query, subjectFilter, statusFilter]);
+  }, [scopedAudits, query, subjectFilter, statusFilter]);
 
   const coveragePct = totals.levels === 0 ? 0 : Math.round((totals.enriched / totals.levels) * 100);
 
@@ -177,6 +192,12 @@ export function EditorialOverview() {
 
       <div className="admin-toolbar">
         <label className="admin-search"><MagnifyingGlass size={20} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Rechercher un parcours, un thème, une matière…" /></label>
+        <label className="admin-filter"><span>Niveau et série</span>
+          <select value={levelFilter} onChange={(event) => setLevelFilter(event.target.value)}>
+            <option value="all">Tous les niveaux</option>
+            {availableLevels.map((level) => <option key={level.id} value={level.id}>{level.label}</option>)}
+          </select>
+        </label>
         <label className="admin-filter"><span>Matière</span>
           <select value={subjectFilter} onChange={(event) => setSubjectFilter(event.target.value as SubjectId | "all")}>
             <option value="all">Toutes</option>
