@@ -23,6 +23,7 @@ const subjectIds = new Set<SubjectId>([
 ]);
 
 const adminSectionBySegment: Record<string, AdminSection> = {
+  editorial: "editorial",
   contenus: "content",
   utilisateurs: "users",
   operations: "operations",
@@ -31,6 +32,7 @@ const adminSectionBySegment: Record<string, AdminSection> = {
 
 const adminSegmentBySection: Record<AdminSection, string> = {
   overview: "",
+  editorial: "editorial",
   content: "contenus",
   users: "utilisateurs",
   operations: "operations",

@@ -1,6 +1,6 @@
 import type { SubjectId } from "./learning";
 
-export type AdminSection = "overview" | "content" | "users" | "operations" | "settings";
+export type AdminSection = "overview" | "editorial" | "content" | "users" | "operations" | "settings";
 export type PublicationStatus = "published" | "review" | "draft";
 export type UserStatus = "active" | "suspended";
 export type UserRole = "student" | "teacher" | "content_editor" | "admin";

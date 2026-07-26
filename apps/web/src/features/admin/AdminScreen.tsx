@@ -37,9 +37,11 @@ import { useAdminUsers } from "./useAdminUsers";
 import { useAdminWorkspace } from "./useAdminWorkspace";
 import { useAdminLessonContents } from "./useAdminLessonContents";
 import { LessonContentStudio } from "./LessonContentStudio";
+import { EditorialOverview } from "./EditorialOverview";
 
 const sections: Array<{ id: AdminSection; label: string }> = [
   { id: "overview", label: "Pilotage" },
+  { id: "editorial", label: "Éditorial" },
   { id: "content", label: "Contenus" },
   { id: "users", label: "Utilisateurs" },
   { id: "operations", label: "Opérations" },
@@ -450,7 +452,7 @@ export function AdminScreen({
           </section>
 
           <section className="admin-panel admin-subject-panel">
-            <header className="admin-panel-header"><div><p className="admin-eyebrow">Couverture du programme</p><h2>Déploiement par matière</h2></div><button type="button" onClick={() => selectSection("content")}>Gérer les contenus</button></header>
+            <header className="admin-panel-header"><div><p className="admin-eyebrow">Couverture du programme</p><h2>Déploiement par matière</h2></div><button type="button" onClick={() => selectSection("editorial")}><ChartBar size={18} weight="bold" /> Vue d’ensemble éditoriale</button></header>
             <div className="admin-subject-grid">
               {Object.values(subjects).map((subject) => {
                 const subjectContents = workspace.contents.filter((item) => item.subjectId === subject.id);
@@ -469,6 +471,8 @@ export function AdminScreen({
           </section>
         </div>
       )}
+
+      {activeSection === "editorial" && <EditorialOverview />}
 
       {activeSection === "content" && (
         <section className="admin-section" data-testid="admin-content">
