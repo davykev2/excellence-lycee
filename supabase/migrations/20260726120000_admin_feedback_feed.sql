@@ -15,7 +15,9 @@ set search_path = ''
 as $$
 declare
   current_user_id uuid := auth.uid();
-  current_role text;
+  -- NE PAS renommer en `current_role` : c'est un mot-clé réservé de PostgreSQL
+  -- (rôle de session, ex. « authenticated ») qui casserait le test de rôle ci-dessous.
+  v_role text;
   v_limit integer := least(100, greatest(1, coalesce(p_limit, 40)));
   feed jsonb;
 begin
@@ -24,11 +26,11 @@ begin
   end if;
 
   select coalesce(profile.role, 'student')
-  into current_role
+  into v_role
   from public.profiles profile
   where profile.id = current_user_id;
 
-  if current_role not in ('admin', 'content_editor') then
+  if v_role not in ('admin', 'content_editor') then
     raise exception 'Accès réservé à l''administration.' using errcode = '42501';
   end if;
 
