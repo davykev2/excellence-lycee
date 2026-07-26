@@ -15,7 +15,7 @@ import type {
   PublishedArenaExerciseLevel,
 } from "./arenaExercises.js";
 import type { GlobalMessageSummary, MessageRecipientSummary, MessageThreadSummary, ThreadMessageSummary } from "./messaging.js";
-import type { LessonFeedbackSummary, LessonReaction } from "./lessonFeedback.js";
+import type { AdminFeedbackItem, LessonFeedbackSummary, LessonReaction } from "./lessonFeedback.js";
 
 export interface PublicAuthUser {
   id: string;
@@ -1208,4 +1208,14 @@ export async function deleteSupabaseLessonComment(accessToken: string, commentId
   });
   if (error) throw new SupabaseOperationError(error.message, 400, error.code);
   return Boolean(data);
+}
+
+export async function getSupabaseAdminFeedbackFeed(accessToken: string, limit = 40): Promise<AdminFeedbackItem[]> {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("get_admin_mastery_feedback_feed", { p_limit: limit });
+  if (error) {
+    const status = error.code === "42501" ? 403 : error.code === "PGRST202" ? 503 : 500;
+    throw new SupabaseOperationError(error.message, status, error.code);
+  }
+  return (data ?? []) as unknown as AdminFeedbackItem[];
 }

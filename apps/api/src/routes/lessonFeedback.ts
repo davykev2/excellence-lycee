@@ -7,6 +7,7 @@ import {
   createSupabaseLessonComment,
   deleteSupabaseLessonComment,
   editSupabaseLessonComment,
+  getSupabaseAdminFeedbackFeed,
   getSupabaseLessonFeedback,
   setSupabaseLessonReaction,
   supabaseConfigured,
@@ -14,6 +15,7 @@ import {
 } from "../supabase.js";
 import {
   lessonReactionValues,
+  type AdminFeedbackItem,
   type LessonFeedbackComment,
   type LessonFeedbackSummary,
   type LessonReaction,
@@ -26,6 +28,21 @@ const targetSchema = z.object({
 const commentIdSchema = z.object({ commentId: z.string().uuid() });
 const reactionSchema = z.object({ reaction: z.enum(lessonReactionValues).nullable() });
 const commentSchema = z.object({ body: z.string().trim().min(1).max(1000) });
+const feedQuerySchema = z.object({ limit: z.coerce.number().int().min(1).max(100).optional() });
+
+interface SqliteFeedRow {
+  kind: "comment" | "reaction";
+  id: string;
+  pathId: string;
+  lessonId: string;
+  authorId: string | null;
+  authorName: string;
+  authorPhotoUrl: string | null;
+  authorRole: UserRole;
+  body: string | null;
+  reaction: LessonReaction | null;
+  createdAt: string;
+}
 
 interface SqliteCommentRow {
   id: string;
@@ -101,7 +118,57 @@ function sqliteFeedback(userId: string, role: UserRole, pathId: string, lessonId
   };
 }
 
+function sqliteAdminFeed(limit: number): AdminFeedbackItem[] {
+  const rows = database.prepare(`
+    SELECT * FROM (
+      SELECT 'comment' AS kind, c.id AS id, c.path_id AS pathId, c.lesson_id AS lessonId,
+        c.author_user_id AS authorId, COALESCE(u.name, 'Utilisateur supprimé') AS authorName,
+        u.photo_url AS authorPhotoUrl, COALESCE(u.role, 'student') AS authorRole,
+        c.body AS body, NULL AS reaction, c.created_at AS createdAt
+      FROM lesson_comments c
+      LEFT JOIN users u ON u.id = c.author_user_id
+      UNION ALL
+      SELECT 'reaction' AS kind, r.user_id || ':' || r.path_id || ':' || r.lesson_id AS id,
+        r.path_id AS pathId, r.lesson_id AS lessonId, r.user_id AS authorId,
+        COALESCE(u.name, 'Utilisateur supprimé') AS authorName, u.photo_url AS authorPhotoUrl,
+        COALESCE(u.role, 'student') AS authorRole, NULL AS body, r.reaction AS reaction, r.created_at AS createdAt
+      FROM lesson_reactions r
+      LEFT JOIN users u ON u.id = r.user_id
+    )
+    ORDER BY createdAt DESC
+    LIMIT ?
+  `).all(limit) as SqliteFeedRow[];
+  return rows.map((row) => ({
+    kind: row.kind,
+    id: row.id,
+    pathId: row.pathId,
+    lessonId: row.lessonId,
+    authorId: row.authorId ?? undefined,
+    authorName: row.authorName,
+    authorPhotoUrl: row.authorPhotoUrl ?? undefined,
+    authorRole: row.authorRole,
+    body: row.body ?? undefined,
+    reaction: row.reaction ?? undefined,
+    createdAt: row.createdAt,
+  }));
+}
+
 export async function lessonFeedbackRoutes(app: FastifyInstance) {
+  // Flux de notifications pour l'administration : réactions et commentaires récents,
+  // tous niveaux confondus. Route statique enregistrée avant les routes paramétriques.
+  app.get("/admin/feed", { preHandler: app.authenticate }, async (request, reply) => {
+    if (request.authContext.role !== "admin" && request.authContext.role !== "content_editor") {
+      return reply.code(403).send({ error: "FORBIDDEN", message: "Accès réservé à l’administration." });
+    }
+    const parsed = feedQuerySchema.safeParse(request.query);
+    if (!parsed.success) return reply.code(400).send({ error: "VALIDATION_ERROR", message: "Paramètre invalide." });
+    const limit = parsed.data.limit ?? 40;
+    const items = supabaseConfigured
+      ? await getSupabaseAdminFeedbackFeed(request.authContext.accessToken!, limit)
+      : sqliteAdminFeed(limit);
+    return { items };
+  });
+
   app.get("/:pathId/:lessonId", { preHandler: app.authenticate }, async (request, reply) => {
     const parsed = targetSchema.safeParse(request.params);
     if (!parsed.success) return reply.code(400).send({ error: "VALIDATION_ERROR", message: "Niveau invalide." });

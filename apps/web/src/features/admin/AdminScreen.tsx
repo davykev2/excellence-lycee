@@ -1,18 +1,24 @@
 import { useMemo, useState, type CSSProperties, type FormEvent } from "react";
 import {
+  ArrowRight,
   Bell,
   BookOpenText,
   ChartBar,
+  ChatCircleText,
   Check,
   CheckCircle,
   Cloud,
   Database,
   Gear,
   GraduationCap,
+  Heart,
+  Lightbulb,
   MagnifyingGlass,
   Plus,
+  Question,
   ShieldCheck,
   Student,
+  ThumbsUp,
   UserCircle,
   Users,
   WarningCircle,
@@ -29,15 +35,54 @@ import type {
   UserStatus,
 } from "../../domain/admin";
 import type { SubjectId } from "../../domain/learning";
+import type { LessonReaction } from "../../domain/lessonFeedback";
 import { schoolLevels, subjects } from "../../data/programme";
+import { learningPaths } from "../../data/learningPaths";
 import { adminActivity } from "../../data/admin";
 import { formatXp } from "../../data/xpRewards";
 import { useAuth } from "../auth/AuthProvider";
 import { useAdminUsers } from "./useAdminUsers";
 import { useAdminWorkspace } from "./useAdminWorkspace";
 import { useAdminLessonContents } from "./useAdminLessonContents";
+import { useAdminFeedback } from "./useAdminFeedback";
 import { LessonContentStudio } from "./LessonContentStudio";
 import { EditorialOverview } from "./EditorialOverview";
+
+const reactionMeta: Record<LessonReaction, { label: string; Icon: typeof Heart }> = {
+  useful: { label: "a trouvé utile", Icon: ThumbsUp },
+  love: { label: "a adoré", Icon: Heart },
+  clear: { label: "a trouvé clair", Icon: Lightbulb },
+  confusing: { label: "a trouvé confus", Icon: Question },
+};
+
+// Résout un couple (parcours, niveau) vers des libellés lisibles, calculé une fois.
+const feedbackTargetLabels = (() => {
+  const map = new Map<string, { pathTitle: string; lessonTitle: string; subjectLabel: string }>();
+  for (const path of learningPaths) {
+    path.modules.flatMap((module) => module.lessons).forEach((lesson, index) => {
+      map.set(`${path.id}:${lesson.id}`, {
+        pathTitle: path.title,
+        lessonTitle: `Niveau ${index + 1} · ${lesson.title}`,
+        subjectLabel: subjects[path.subjectId]?.label ?? path.subjectId,
+      });
+    });
+  }
+  return map;
+})();
+
+function relativeTime(iso: string): string {
+  const then = Date.parse(iso);
+  if (Number.isNaN(then)) return "";
+  const seconds = Math.max(0, Math.round((Date.now() - then) / 1000));
+  if (seconds < 60) return "à l’instant";
+  const minutes = Math.round(seconds / 60);
+  if (minutes < 60) return `il y a ${minutes} min`;
+  const hours = Math.round(minutes / 60);
+  if (hours < 24) return `il y a ${hours} h`;
+  const days = Math.round(hours / 24);
+  if (days < 7) return `il y a ${days} j`;
+  return new Date(then).toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+}
 
 const sections: Array<{ id: AdminSection; label: string }> = [
   { id: "overview", label: "Pilotage" },
@@ -243,6 +288,7 @@ interface AdminScreenProps {
   activeSection?: AdminSection;
   contentStudioOpen?: boolean;
   onNavigate?: (section: AdminSection, studioOpen?: boolean) => void;
+  onOpenLesson?: (pathId: string, lessonId: string) => void;
 }
 
 export function AdminScreen({
@@ -250,8 +296,12 @@ export function AdminScreen({
   activeSection: controlledActiveSection,
   contentStudioOpen: controlledContentStudioOpen,
   onNavigate,
+  onOpenLesson,
 }: AdminScreenProps) {
   const { user: currentAdmin } = useAuth();
+  const canModerate = currentAdmin?.role === "admin" || currentAdmin?.role === "content_editor";
+  const feedback = useAdminFeedback({ userId: currentAdmin?.id ?? "", enabled: Boolean(canModerate) && !preview });
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
   const {
     workspace,
     resolveTask,
@@ -295,6 +345,19 @@ export function AdminScreen({
       setInternalActiveSection("content");
       setInternalContentStudioOpen(open);
     }
+  };
+
+  const toggleNotifications = () => {
+    setNotificationsOpen((open) => {
+      const next = !open;
+      if (next) feedback.markAllSeen();
+      return next;
+    });
+  };
+
+  const openLessonFromFeed = (pathId: string, lessonId: string) => {
+    setNotificationsOpen(false);
+    onOpenLesson?.(pathId, lessonId);
   };
 
   const currentAdminName = currentAdmin?.name ?? "Administrateur";
@@ -366,10 +429,69 @@ export function AdminScreen({
           <p>Pilote les contenus, les utilisateurs et les opérations d’Excellence Lycée.</p>
         </div>
         <div className="admin-header-actions">
-          <button className="admin-notification-button" type="button" onClick={() => selectSection("operations")} aria-label={`${openTasks.length} actions à traiter`}>
-            <Bell size={23} weight="duotone" />
-            {openTasks.length > 0 && <span>{openTasks.length}</span>}
-          </button>
+          <div className="admin-notification-wrap">
+            <button
+              className={`admin-notification-button ${notificationsOpen ? "is-open" : ""}`}
+              type="button"
+              onClick={toggleNotifications}
+              aria-haspopup="dialog"
+              aria-expanded={notificationsOpen}
+              aria-label={`${feedback.unreadCount} nouvelle(s) réaction(s) ou commentaire(s)`}
+            >
+              <Bell size={23} weight="duotone" />
+              {feedback.unreadCount > 0 && <span>{feedback.unreadCount > 99 ? "99+" : feedback.unreadCount}</span>}
+            </button>
+            {notificationsOpen && (
+              <>
+                <button className="admin-notification-scrim" type="button" aria-label="Fermer" onClick={() => setNotificationsOpen(false)} />
+                <section className="admin-notification-panel" role="dialog" aria-label="Réactions et commentaires des élèves">
+                  <header>
+                    <div>
+                      <strong>Courrier des élèves</strong>
+                      <small>Réactions et commentaires sur les niveaux</small>
+                    </div>
+                    <button className="icon-button" type="button" onClick={() => setNotificationsOpen(false)} aria-label="Fermer">
+                      <X size={18} weight="bold" />
+                    </button>
+                  </header>
+                  <div className="admin-notification-list">
+                    {feedback.loading && feedback.items.length === 0 && <p className="admin-notification-empty">Chargement…</p>}
+                    {feedback.error && feedback.items.length === 0 && <p className="admin-notification-empty">{feedback.error}</p>}
+                    {!feedback.loading && !feedback.error && feedback.items.length === 0 && (
+                      <p className="admin-notification-empty">Aucune réaction ni commentaire pour le moment.</p>
+                    )}
+                    {feedback.items.map((item) => {
+                      const target = feedbackTargetLabels.get(`${item.pathId}:${item.lessonId}`);
+                      const isNew = feedback.lastSeenAt ? Date.parse(item.createdAt) > Date.parse(feedback.lastSeenAt) : true;
+                      const Icon = item.kind === "comment" ? ChatCircleText : (reactionMeta[item.reaction ?? "useful"]?.Icon ?? ThumbsUp);
+                      const action = item.kind === "comment" ? "a commenté" : (reactionMeta[item.reaction ?? "useful"]?.label ?? "a réagi");
+                      return (
+                        <button
+                          key={`${item.kind}:${item.id}`}
+                          type="button"
+                          className={`admin-notification-item ${item.kind === "comment" ? "is-comment" : "is-reaction"} ${isNew ? "is-new" : ""}`}
+                          onClick={() => openLessonFromFeed(item.pathId, item.lessonId)}
+                        >
+                          <span className="admin-notification-icon" aria-hidden="true"><Icon size={18} weight="fill" /></span>
+                          <span className="admin-notification-body">
+                            <span className="admin-notification-line">
+                              <strong>{item.authorName}</strong> {action}
+                              <em className="admin-notification-time">{relativeTime(item.createdAt)}</em>
+                            </span>
+                            {item.kind === "comment" && item.body && <span className="admin-notification-excerpt">« {item.body} »</span>}
+                            <span className="admin-notification-target">
+                              {target ? `${target.subjectLabel} · ${target.pathTitle} — ${target.lessonTitle}` : `${item.pathId} · ${item.lessonId}`}
+                              <ArrowRight size={13} weight="bold" />
+                            </span>
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </section>
+              </>
+            )}
+          </div>
           <div className="admin-account">
             <span>{currentAdminInitials}</span>
             <div><strong>{currentAdminName}</strong><small>Administrateur</small></div>

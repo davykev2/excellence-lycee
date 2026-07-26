@@ -313,6 +313,16 @@ function LearningApp({ user }: { user: AuthUser }) {
               adminSection,
               adminStudio,
             })}
+            onOpenLesson={(pathId, lessonId) => {
+              const targetPath = availablePaths.find((path) => path.id === pathId)
+                ?? learningPaths.find((path) => path.id === pathId);
+              navigate({
+                navigation: "paths",
+                subjectId: targetPath?.subjectId ?? subject.id,
+                pathId,
+                lessonId,
+              });
+            }}
           />
         </Suspense>
       ) : activeNavigation === "profile" ? (
