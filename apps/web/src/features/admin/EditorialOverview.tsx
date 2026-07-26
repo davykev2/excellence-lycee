@@ -36,9 +36,13 @@ function auditPath(path: LearningPath): PathAudit {
   for (const lesson of lessons) {
     const hasBody = Boolean(lesson.concept.bodyMarkdown);
     const hasRich = richInteractionKinds.has(lesson.interaction.kind ?? "");
+    // La carte de synthèse « Les repères essentiels » des leçons Humanités est
+    // produite par la fabrique : elle est déjà rédigée et n'attend aucun cours
+    // supplémentaire, on la considère donc comme enrichie.
+    const isSynthesis = lesson.id.endsWith("-overview");
     if (hasBody) bodyLevels += 1;
     if (hasRich) richLevels += 1;
-    if (hasBody || hasRich) enrichedLevels += 1;
+    if (hasBody || hasRich || isSynthesis) enrichedLevels += 1;
     questions += lesson.questions?.length ?? 1;
     xp += lesson.xp;
   }

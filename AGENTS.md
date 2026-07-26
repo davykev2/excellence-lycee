@@ -110,9 +110,25 @@ Dernier travail livré et déployé en production :
 
 > **Modèle à suivre pour les prochaines leçons.** Le générateur `buildOfficialMathPath` **ignore** le paramètre `weight` passé dans chaque `officialMathTopic` : il applique `50 + Math.min(index, 7) * 5`, exactement la même formule que `terminalCMathRewardWeight` côté API. Toute réécriture d'une leçon générée doit donc reproduire cette formule et conserver l'ordre des identifiants pour ne rien casser.
 
+### Histoire — série complète (26/07/2026)
+
+> ✅ **Les huit leçons d'Histoire du thème 2 et 3 (H2 à H9) sont désormais toutes enrichies et en ligne** : bipolarisation, monde multipolaire, montée des nationalismes, indépendance de la Côte d'Ivoire, indépendance de l'Algérie, Union africaine, valeurs du monde occidental, mutations de la civilisation négro-africaine.
+
+**Patron différent des maths — la fabrique Humanités.** Les leçons d'Histoire, de Géographie et de Philosophie ne sont **pas** des `officialLevel` : elles sont produites par `createHumanitiesPath()` (`apps/web/src/data/humanitiesPathFactory.ts`) à partir d'un `HumanitiesCourseSeed`. Points clés :
+
+- Un seed a **exactement 3 sections** ; la fabrique génère **6 niveaux** (1 aperçu « Les repères essentiels » + 4 niveaux de contenu + 1 mission finale). Une section est scindée en 2 niveaux via `blueprint.splitSectionIndex` (dans `humanitiesAssessmentBlueprints.ts`).
+- **Titres des niveaux scindés** : ils sont dérivés des `shortLabel` du `timeline` de la section (premier item → niveau A ; items suivants joints par « et » → niveau B). Pour piloter proprement les titres, on réécrit le `timeline` de la section scindée.
+- **Enrichir** = ajouter aux sections un `bodyMarkdown` (cours rédigé en markdown : titres, tableaux, encadrés) et des `extraQuestions` ; pour la section scindée, un `parts: [Partial, Partial]` avec un `bodyMarkdown`/`extraQuestions` dédié par moitié ; pour la mission, `mission.bodyMarkdown` (situation d'évaluation + documents) et `mission.extraQuestions` dans `humanitiesAssessmentBlueprints.ts`.
+- **Aucune migration Supabase** : la fabrique **fige les identifiants et les XP** (les 6 poids sont dans `humanitiesMasteryRewards`, déjà au registre API). Enrichir ne touche donc que deux fichiers de données web : `terminalHistoryPaths.ts` et `humanitiesAssessmentBlueprints.ts`.
+- **Leçon partagée** : `levelIds: ["terminale-a", "terminale-c", "terminale-d"]` — une seule leçon d'Histoire sert les trois séries de Terminale.
+- Les coquilles factuelles du PDF source sont corrigées et annotées dans des encadrés « Correction »/« Précision » (ex. Syrte *décide*/Durban *crée* l'UA ; putsch d'avril 1961 à Alger ; Ahmed Ben Bella ; colonie de peuplement).
+
+**Page éditoriale de l'admin (`EditorialOverview.tsx`).** La couverture est calculée **en direct** depuis le contenu réel (`bodyMarkdown` ou interaction riche). La carte de synthèse auto-générée des leçons Humanités (id en `-overview`) est désormais **comptée comme enrichie** : sans cela, une leçon d'Histoire terminée plafonnait à 5/6 « Partiel ». Rien d'autre n'est à mettre à jour à la main : ajouter du `bodyMarkdown` fait automatiquement passer la leçon à « Complet ».
+
 ### Suites naturelles
 
-1. Appliquer le même traitement d'enrichissement aux leçons restantes des autres séries. **La Terminale A est terminée : ses 8 leçons sont toutes enrichies.** En Terminale C, les leçons 01 à 03 sont désormais enrichies ; les leçons 04 à 19 et les 12 leçons de Terminale D utilisent encore le générateur compact.
+1. Appliquer le même traitement d'enrichissement aux leçons restantes des autres séries. **La Terminale A (maths) est terminée : ses 8 leçons sont toutes enrichies. La série Histoire (H2 à H9) est terminée** (partagée A/C/D via la fabrique Humanités). En Terminale C, les leçons de maths 01 à 03 sont enrichies ; les leçons 04 à 19 et les 12 leçons de Terminale D utilisent encore le générateur compact.
+1c. **Poursuivre les Humanités restantes** avec la fabrique : les leçons de **Géographie** et les leçons de **Philosophie** encore générées sans `bodyMarkdown` (seule la leçon 01 de Philosophie est enrichie à ce jour).
 1b. **Appliquer à la base de production Supabase les trois migrations en attente** : `20260723180000_terminal_a_statistics_mission.sql`, `20260723200000_terminal_a_linear_systems_missions.sql` et `20260723220000_terminal_a_primitives_mission.sql` (le déploiement Vercel ne les exécute pas). La migration `20260723160000` des Suites a, elle, été appliquée et vérifiée le 23/07/2026.
 2. Créer le lot d'exercices guidés **`tle-a-maths`** manquant dans `content_pipeline/batches/` (les autres séries et matières en ont un).
 3. Trancher la question des deux frontends (`apps/web` vs `frontend/`).
