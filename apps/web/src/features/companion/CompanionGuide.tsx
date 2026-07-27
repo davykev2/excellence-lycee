@@ -200,7 +200,10 @@ export function CompanionGuide({
   };
 
   return (
-    <aside className={`companion-shell ${open ? "is-open" : ""}`} aria-label="Davy, guide virtuel Excellence">
+    <aside
+      className={`companion-shell companion-shell--${activeNavigation} ${open ? "is-open" : ""}`}
+      aria-label="Davy, guide virtuel Excellence"
+    >
       {showIntro && !open && !activeLessonTitle && activeNavigation !== "paths" && (
         <div className="companion-intro" role="status">
           <button type="button" aria-label="Masquer la présentation de Davy" onClick={rememberIntro}><X size={15} weight="bold" /></button>

@@ -8024,6 +8024,10 @@ textarea:focus-visible {
     bottom: calc(78px + env(safe-area-inset-bottom));
   }
 
+  .companion-shell--messages {
+    bottom: calc(178px + env(safe-area-inset-bottom));
+  }
+
   .companion-trigger {
     width: 66px;
     height: 66px;
