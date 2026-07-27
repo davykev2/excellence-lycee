@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
   Backspace,
   BellRinging,
+  BookOpenText,
   CheckCircle,
   ChatCircleDots,
   Clock,
@@ -24,7 +25,8 @@ import {
   UsersThree,
   XCircle,
 } from "@phosphor-icons/react";
-import type { LearnerProfile, SchoolLevel, SubjectDefinition } from "../../domain/learning";
+import { getCurriculumLessonTitles, type CurriculumLessonTitle } from "../../data/curriculumCatalog";
+import type { LearnerProfile, SchoolLevel, SubjectDefinition, SubjectId } from "../../domain/learning";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
 import "./DuelPreviewPage.css";
 
@@ -39,6 +41,7 @@ interface DuelPreviewPageProps {
   profile: LearnerProfile;
   level: SchoolLevel;
   subject: SubjectDefinition;
+  subjects: SubjectDefinition[];
   onBackArena: () => void;
 }
 
@@ -214,6 +217,17 @@ function duelQuestionUnit(formatId: DuelFormatId, questionCount: number) {
   return `${questionCount} questions`;
 }
 
+function duelLessonSummary(lessonTitles: string[]) {
+  if (lessonTitles.length === 0) return "Aucune leçon sélectionnée";
+  if (lessonTitles.length === 1) return lessonTitles[0];
+  if (lessonTitles.length === 2) return lessonTitles.join(" + ");
+  return `${lessonTitles[0]} + ${lessonTitles.length - 1} autres leçons`;
+}
+
+function getDuelLessons(levelId: string, subjectId: SubjectId) {
+  return getCurriculumLessonTitles(levelId, subjectId).filter((lesson) => Boolean(lesson.pathId));
+}
+
 function MiniAvatar({ name, tone = "navy" }: { name: string; tone?: "navy" | "orange" }) {
   return <span className={`duel-mini-avatar is-${tone}`}>{initials(name)}</span>;
 }
@@ -255,27 +269,41 @@ function DuelLobbyMockup({
 function DuelSetupMockup({
   level,
   subject,
+  subjectOptions,
+  lessonOptions,
+  selectedLessonIds,
   format,
   difficulty,
   questionCount,
+  onSubjectChange,
+  onLessonToggle,
+  onSelectAllLessons,
   onFormatChange,
   onDifficultyChange,
   onQuestionCountChange,
   onBack,
   onSelect,
 }: Pick<DuelPreviewPageProps, "level" | "subject"> & {
+  subjectOptions: SubjectDefinition[];
+  lessonOptions: CurriculumLessonTitle[];
+  selectedLessonIds: string[];
   format: DuelFormat;
   difficulty: DuelDifficulty;
   questionCount: number;
+  onSubjectChange: (subjectId: SubjectId) => void;
+  onLessonToggle: (lessonId: string) => void;
+  onSelectAllLessons: () => void;
   onFormatChange: (format: DuelFormatId) => void;
   onDifficultyChange: (difficulty: DuelDifficultyId) => void;
   onQuestionCountChange: (count: number) => void;
   onBack: () => void;
   onSelect: () => void;
 }) {
-  const preview = getDuelSubjectPreview(subject);
   const duration = duelDuration(questionCount, format.id);
   const questionCounts = format.id === "compound" ? compoundQuestionCounts : qcmQuestionCounts;
+  const selectedLessons = lessonOptions.filter((lesson) => selectedLessonIds.includes(lesson.id));
+  const lessonTitles = selectedLessons.map((lesson) => lesson.title);
+  const allLessonsSelected = lessonOptions.length > 0 && selectedLessons.length === lessonOptions.length;
 
   return (
     <section className="duel-ui-frame duel-setup-mockup" aria-label="Maquette de la préparation d’un duel">
@@ -289,9 +317,42 @@ function DuelSetupMockup({
           <h2>Choisis les règles du match.</h2>
           <div className="duel-choice-grid">
             <div className="duel-choice-field"><span>NIVEAU ET SÉRIE</span><strong>{level.label}</strong></div>
-            <div className="duel-choice-field"><span>MATIÈRE</span><strong>{subject.label}</strong></div>
-            <div className="duel-choice-field is-wide"><span>LEÇON</span><strong>{preview.topic}</strong></div>
+            <label className="duel-choice-field is-select">
+              <span>MATIÈRE DU DUEL</span>
+              <select value={subject.id} onChange={(event) => onSubjectChange(event.target.value as SubjectId)}>
+                {subjectOptions.map((option) => <option key={option.id} value={option.id}>{option.label}</option>)}
+              </select>
+            </label>
           </div>
+
+          <fieldset className="duel-option-group duel-lesson-choice">
+            <legend>LEÇON OU LEÇONS DU DUEL</legend>
+            <div className="duel-lesson-choice-heading">
+              <span>{selectedLessons.length} sélectionnée{selectedLessons.length > 1 ? "s" : ""}</span>
+              <button type="button" onClick={onSelectAllLessons}>
+                {allLessonsSelected ? "Garder la première" : "Tout sélectionner"}
+              </button>
+            </div>
+            <div className="duel-lesson-options">
+              {lessonOptions.map((lesson) => {
+                const isSelected = selectedLessonIds.includes(lesson.id);
+                return (
+                  <button
+                    key={lesson.id}
+                    type="button"
+                    className={isSelected ? "is-active" : ""}
+                    onClick={() => onLessonToggle(lesson.id)}
+                    aria-pressed={isSelected}
+                  >
+                    <span>{isSelected ? <CheckCircle size={18} weight="fill" /> : <BookOpenText size={18} weight="duotone" />}</span>
+                    <strong>{String(lesson.sequence).padStart(2, "0")} — {lesson.title}</strong>
+                    {lesson.strand ? <small>{lesson.strand}</small> : null}
+                  </button>
+                );
+              })}
+            </div>
+            <small>Choisis au moins une leçon. Les questions seront mélangées lorsque plusieurs leçons sont sélectionnées.</small>
+          </fieldset>
 
           <fieldset className="duel-option-group duel-format-choice">
             <legend>FORMAT DU DUEL</legend>
@@ -354,6 +415,7 @@ function DuelSetupMockup({
           <span className="duel-match-ring"><Sword size={29} weight="fill" /></span>
           <p>TON MATCH</p>
           <strong>{format.label} · {difficulty.label}</strong>
+          <div><BookOpenText size={17} weight="duotone" /> {duelLessonSummary(lessonTitles)}</div>
           <div><Target size={17} weight="duotone" /> {duelQuestionUnit(format.id, questionCount)}</div>
           <div><Clock size={17} weight="duotone" /> Environ {duration} minutes</div>
           <div><ShieldCheck size={17} weight="duotone" /> Même niveau et même temps</div>
@@ -369,6 +431,7 @@ function DuelSetupMockup({
 function DuelInboxMockup({
   profile,
   subject,
+  lessonTitles,
   format,
   difficulty,
   questionCount,
@@ -377,6 +440,7 @@ function DuelInboxMockup({
   onDecline,
   onShowLive,
 }: Pick<DuelPreviewPageProps, "profile" | "subject"> & {
+  lessonTitles: string[];
   format: DuelFormat;
   difficulty: DuelDifficulty;
   questionCount: number;
@@ -385,7 +449,6 @@ function DuelInboxMockup({
   onDecline: () => void;
   onShowLive: () => void;
 }) {
-  const preview = getDuelSubjectPreview(subject);
   const isPending = decision === "pending";
 
   return (
@@ -429,7 +492,7 @@ function DuelInboxMockup({
               </div>
               <p>Un duel de {subject.label.toLowerCase()} t’attend. L’invitation restera ici jusqu’à son expiration.</p>
               <div className="duel-invite-config">
-                <span><small>LEÇON</small><strong>{preview.topic}</strong></span>
+                <span><small>LEÇON{lessonTitles.length > 1 ? "S" : ""}</small><strong>{duelLessonSummary(lessonTitles)}</strong></span>
                 <span><small>DIFFICULTÉ</small><strong>{difficulty.label}</strong></span>
                 <span><small>FORMAT</small><strong>{format.label}</strong></span>
                 <span><small>CONTENU</small><strong>{duelQuestionUnit(format.id, questionCount)} · {duelDuration(questionCount, format.id)} min</strong></span>
@@ -460,6 +523,7 @@ function DuelInboxMockup({
 function DuelLiveInviteMockup({
   profile,
   subject,
+  lessonTitles,
   format,
   difficulty,
   questionCount,
@@ -468,6 +532,7 @@ function DuelLiveInviteMockup({
   onDecline,
   onReset,
 }: Pick<DuelPreviewPageProps, "profile" | "subject"> & {
+  lessonTitles: string[];
   format: DuelFormat;
   difficulty: DuelDifficulty;
   questionCount: number;
@@ -476,8 +541,6 @@ function DuelLiveInviteMockup({
   onDecline: () => void;
   onReset: () => void;
 }) {
-  const preview = getDuelSubjectPreview(subject);
-
   return (
     <section className="duel-ui-frame duel-live-invite-mockup" aria-label="Maquette de l’alerte de duel en direct">
       <div className="duel-live-underlay" aria-hidden="true">
@@ -507,7 +570,7 @@ function DuelLiveInviteMockup({
         <div className="duel-live-copy">
           <small>DÉFI EN DIRECT · EXPIRE DANS 01:48</small>
           <strong>{profile.name.split(" ")[0]} te défie en {subject.label}</strong>
-          <p>{preview.topic} · {format.label} · {difficulty.label} · {duelQuestionUnit(format.id, questionCount)} · {duelDuration(questionCount, format.id)} min</p>
+          <p>{duelLessonSummary(lessonTitles)} · {format.label} · {difficulty.label} · {duelQuestionUnit(format.id, questionCount)} · {duelDuration(questionCount, format.id)} min</p>
           <span><EnvelopeSimple size={13} weight="fill" /> Le défi reste disponible dans Messages.</span>
         </div>
         {decision === "pending" ? (
@@ -531,17 +594,20 @@ function DuelLiveInviteMockup({
 function DuelBattleMockup({
   profile,
   subject,
+  lessonTitles,
   format,
   difficulty,
   questionCount,
   onRematch,
 }: Pick<DuelPreviewPageProps, "profile" | "subject"> & {
+  lessonTitles: string[];
   format: DuelFormat;
   difficulty: DuelDifficulty;
   questionCount: number;
   onRematch: () => void;
 }) {
   const preview = getDuelSubjectPreview(subject);
+  const lessonLabel = duelLessonSummary(lessonTitles);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [writtenAnswer, setWrittenAnswer] = useState("");
   const [formulaKeyboardOpen, setFormulaKeyboardOpen] = useState(false);
@@ -664,7 +730,7 @@ function DuelBattleMockup({
       <div className="duel-referee"><CompanionAvatar motion="blink" decorative /><span>{isCompound ? "Dernière partie de l’exercice" : "Dernière question"} · Le bilan restera masqué tant qu’Aïcha joue encore.</span></div>
       {isCompound ? (
         <article className="duel-question-card duel-compound-card">
-          <span>EXERCICE COMPOSÉ · {preview.topic.toUpperCase()}</span>
+          <span>EXERCICE COMPOSÉ · {lessonLabel.toUpperCase()}</span>
           <h2>Un seul énoncé, plusieurs étapes de raisonnement.</h2>
           <div className="duel-compound-statement">
             <strong>Énoncé commun</strong>
@@ -711,7 +777,7 @@ function DuelBattleMockup({
         </article>
       ) : (
         <article className="duel-question-card">
-          <span>QCM · {preview.topic.toUpperCase()}</span>
+          <span>QCM · {lessonLabel.toUpperCase()}</span>
           <h2>{preview.question}</h2>
           <div className="duel-answer-grid">
             {preview.answers.map((answer, index) => {
@@ -739,17 +805,51 @@ function DuelBattleMockup({
   );
 }
 
-export function DuelPreviewPage({ profile, level, subject, onBackArena }: DuelPreviewPageProps) {
+export function DuelPreviewPage({ profile, level, subject: initialSubject, subjects, onBackArena }: DuelPreviewPageProps) {
+  const availableDuelSubjects = useMemo(() => {
+    const withPublishedLessons = subjects.filter((option) => getDuelLessons(level.id, option.id).length > 0);
+    return withPublishedLessons.length > 0 ? withPublishedLessons : [initialSubject];
+  }, [initialSubject, level.id, subjects]);
+  const initialDuelSubject = availableDuelSubjects.find((option) => option.id === initialSubject.id) ?? availableDuelSubjects[0];
   const [activeScreen, setActiveScreen] = useState<DuelScreenId>("lobby");
   const [device, setDevice] = useState<PreviewDevice>("desktop");
+  const [duelSubjectId, setDuelSubjectId] = useState<SubjectId>(initialDuelSubject.id);
+  const [selectedLessonIds, setSelectedLessonIds] = useState<string[]>(() => {
+    const firstLesson = getDuelLessons(level.id, initialDuelSubject.id)[0];
+    return firstLesson ? [firstLesson.id] : [];
+  });
   const [formatId, setFormatId] = useState<DuelFormatId>("qcm");
   const [difficultyId, setDifficultyId] = useState<DuelDifficultyId>("medium");
   const [questionCount, setQuestionCount] = useState<number>(10);
   const [invitationDecision, setInvitationDecision] = useState<InvitationDecision>("pending");
+  const subject = availableDuelSubjects.find((option) => option.id === duelSubjectId) ?? initialDuelSubject;
+  const lessonOptions = useMemo(() => getDuelLessons(level.id, subject.id), [level.id, subject.id]);
+  const selectedLessons = useMemo(
+    () => lessonOptions.filter((lesson) => selectedLessonIds.includes(lesson.id)),
+    [lessonOptions, selectedLessonIds],
+  );
+  const lessonTitles = selectedLessons.map((lesson) => lesson.title);
   const format = duelFormats.find((option) => option.id === formatId) ?? duelFormats[0];
   const difficulty = difficulties.find((option) => option.id === difficultyId) ?? difficulties[1];
 
   const goTo = (id: DuelScreenId) => setActiveScreen(id);
+  const changeDuelSubject = (nextSubjectId: SubjectId) => {
+    const nextLessons = getDuelLessons(level.id, nextSubjectId);
+    setDuelSubjectId(nextSubjectId);
+    setSelectedLessonIds(nextLessons[0] ? [nextLessons[0].id] : []);
+  };
+  const toggleDuelLesson = (lessonId: string) => {
+    setSelectedLessonIds((current) => {
+      if (!current.includes(lessonId)) return [...current, lessonId];
+      return current.length > 1 ? current.filter((id) => id !== lessonId) : current;
+    });
+  };
+  const toggleAllDuelLessons = () => {
+    setSelectedLessonIds((current) => {
+      if (lessonOptions.length === 0) return [];
+      return current.length === lessonOptions.length ? [lessonOptions[0].id] : lessonOptions.map((lesson) => lesson.id);
+    });
+  };
   const changeFormat = (nextFormatId: DuelFormatId) => {
     setFormatId(nextFormatId);
     setQuestionCount(nextFormatId === "compound" ? 4 : 10);
@@ -767,9 +867,15 @@ export function DuelPreviewPage({ profile, level, subject, onBackArena }: DuelPr
         <DuelSetupMockup
           level={level}
           subject={subject}
+          subjectOptions={availableDuelSubjects}
+          lessonOptions={lessonOptions}
+          selectedLessonIds={selectedLessonIds}
           format={format}
           difficulty={difficulty}
           questionCount={questionCount}
+          onSubjectChange={changeDuelSubject}
+          onLessonToggle={toggleDuelLesson}
+          onSelectAllLessons={toggleAllDuelLessons}
           onFormatChange={changeFormat}
           onDifficultyChange={setDifficultyId}
           onQuestionCountChange={setQuestionCount}
@@ -786,6 +892,7 @@ export function DuelPreviewPage({ profile, level, subject, onBackArena }: DuelPr
         <DuelInboxMockup
           profile={profile}
           subject={subject}
+          lessonTitles={lessonTitles}
           format={format}
           difficulty={difficulty}
           questionCount={questionCount}
@@ -804,6 +911,7 @@ export function DuelPreviewPage({ profile, level, subject, onBackArena }: DuelPr
         <DuelLiveInviteMockup
           profile={profile}
           subject={subject}
+          lessonTitles={lessonTitles}
           format={format}
           difficulty={difficulty}
           questionCount={questionCount}
@@ -819,6 +927,7 @@ export function DuelPreviewPage({ profile, level, subject, onBackArena }: DuelPr
         <DuelBattleMockup
           profile={profile}
           subject={subject}
+          lessonTitles={lessonTitles}
           format={format}
           difficulty={difficulty}
           questionCount={questionCount}

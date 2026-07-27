@@ -227,7 +227,7 @@ export function ArenaScreen({
   if (codexOpen) return <MathCodexPage onBackArena={onBackArena} />;
 
   if (duelOpen) {
-    return <DuelPreviewPage profile={profile} level={level} subject={subject} onBackArena={onBackArena} />;
+    return <DuelPreviewPage profile={profile} level={level} subject={subject} subjects={subjects} onBackArena={onBackArena} />;
   }
 
   return (
