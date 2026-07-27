@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -31,7 +31,6 @@ import { CompanionAvatar } from "../companion/CompanionAvatar";
 import "./DuelPreviewPage.css";
 
 type DuelScreenId = "lobby" | "setup" | "inbox" | "liveInvite" | "battle";
-type PreviewDevice = "desktop" | "mobile";
 type DuelDifficultyId = "easy" | "medium" | "hard" | "very-hard" | "ultra";
 type DuelFormatId = "qcm" | "compound";
 type InvitationDecision = "pending" | "accepted" | "declined";
@@ -812,7 +811,9 @@ export function DuelPreviewPage({ profile, level, subject: initialSubject, subje
   }, [initialSubject, level.id, subjects]);
   const initialDuelSubject = availableDuelSubjects.find((option) => option.id === initialSubject.id) ?? availableDuelSubjects[0];
   const [activeScreen, setActiveScreen] = useState<DuelScreenId>("lobby");
-  const [device, setDevice] = useState<PreviewDevice>("desktop");
+  const [isMobileLayout, setIsMobileLayout] = useState(() => (
+    typeof window !== "undefined" && window.matchMedia("(max-width: 760px)").matches
+  ));
   const [duelSubjectId, setDuelSubjectId] = useState<SubjectId>(initialDuelSubject.id);
   const [selectedLessonIds, setSelectedLessonIds] = useState<string[]>(() => {
     const firstLesson = getDuelLessons(level.id, initialDuelSubject.id)[0];
@@ -831,6 +832,14 @@ export function DuelPreviewPage({ profile, level, subject: initialSubject, subje
   const lessonTitles = selectedLessons.map((lesson) => lesson.title);
   const format = duelFormats.find((option) => option.id === formatId) ?? duelFormats[0];
   const difficulty = difficulties.find((option) => option.id === difficultyId) ?? difficulties[1];
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 760px)");
+    const updateLayout = () => setIsMobileLayout(mediaQuery.matches);
+    updateLayout();
+    mediaQuery.addEventListener("change", updateLayout);
+    return () => mediaQuery.removeEventListener("change", updateLayout);
+  }, []);
 
   const goTo = (id: DuelScreenId) => setActiveScreen(id);
   const changeDuelSubject = (nextSubjectId: SubjectId) => {
@@ -946,10 +955,6 @@ export function DuelPreviewPage({ profile, level, subject: initialSubject, subje
       <header className="duel-preview-header">
         <button className="path-back-button" type="button" onClick={onBackArena}><ArrowLeft size={20} weight="bold" />Arène</button>
         <div><p>PROTOTYPE VISUEL · AUCUN DUEL RÉEL N’EST LANCÉ</p><h1>Les Duels de Davy</h1></div>
-        <div className="duel-preview-device-toggle" role="tablist" aria-label="Format de la maquette">
-          <button type="button" role="tab" className={device === "desktop" ? "is-active" : ""} onClick={() => setDevice("desktop")} aria-selected={device === "desktop"}>Ordinateur</button>
-          <button type="button" role="tab" className={device === "mobile" ? "is-active" : ""} onClick={() => setDevice("mobile")} aria-selected={device === "mobile"}>Mobile</button>
-        </div>
       </header>
 
       <section className="duel-preview-intro">
@@ -958,9 +963,8 @@ export function DuelPreviewPage({ profile, level, subject: initialSubject, subje
       </section>
 
       <section className="duel-preview-stage" aria-live="polite">
-        <div className={`duel-preview-browser is-${device}`}>
-          <div className="duel-preview-browser-bar"><i /><i /><i /><span>excellence-lycee.app/arene/duel</span></div>
-          <div className="duel-preview-canvas">{renderScreen()}</div>
+        <div className={`duel-preview-browser${isMobileLayout ? " is-mobile" : ""}`}>
+          {renderScreen()}
         </div>
       </section>
 
