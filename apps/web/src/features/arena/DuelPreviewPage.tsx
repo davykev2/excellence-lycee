@@ -238,7 +238,7 @@ function DuelLobbyMockup({
   onSelect,
 }: Pick<DuelPreviewPageProps, "profile" | "level" | "subject"> & { onSelect: () => void }) {
   return (
-    <section className="duel-ui-frame duel-lobby-mockup" aria-label="Maquette du hall des duels">
+    <section className="duel-ui-frame duel-lobby-mockup" aria-label="Hall des duels">
       <header className="duel-ui-topbar">
         <span className="duel-ui-brand"><Sword size={18} weight="fill" /> Les Duels de Davy</span>
         <span className="duel-ui-pill"><Fire size={14} weight="fill" /> 3 victoires</span>
@@ -305,7 +305,7 @@ function DuelSetupMockup({
   const allLessonsSelected = lessonOptions.length > 0 && selectedLessons.length === lessonOptions.length;
 
   return (
-    <section className="duel-ui-frame duel-setup-mockup" aria-label="Maquette de la préparation d’un duel">
+    <section className="duel-ui-frame duel-setup-mockup" aria-label="Préparation d’un duel">
       <header className="duel-ui-topbar">
         <button type="button" aria-label="Retour au hall" onClick={onBack}><ArrowLeft size={18} weight="bold" /></button>
         <span className="duel-ui-brand"><Target size={18} weight="fill" /> Préparer mon duel</span>
@@ -420,7 +420,7 @@ function DuelSetupMockup({
           <div><ShieldCheck size={17} weight="duotone" /> Même niveau et même temps</div>
           <div><EnvelopeSimple size={17} weight="duotone" /> Invitation privée, valable 15 min</div>
           <button type="button" onClick={onSelect}>Envoyer l’invitation <PaperPlaneTilt size={17} weight="fill" /></button>
-          <small>Aucun vrai message ne part dans cette maquette.</small>
+          <small>Ton adversaire retrouvera cette invitation dans Messages.</small>
         </aside>
       </div>
     </section>
@@ -451,7 +451,7 @@ function DuelInboxMockup({
   const isPending = decision === "pending";
 
   return (
-    <section className="duel-ui-frame duel-inbox-mockup" aria-label="Maquette de l’invitation reçue dans Messages">
+    <section className="duel-ui-frame duel-inbox-mockup" aria-label="Invitation reçue dans Messages">
       <header className="duel-ui-topbar">
         <span className="duel-ui-brand"><ChatCircleDots size={18} weight="fill" /> Messages</span>
         <span className="duel-ui-pill is-message"><EnvelopeSimple size={14} weight="fill" /> 1 nouveau défi</span>
@@ -541,7 +541,7 @@ function DuelLiveInviteMockup({
   onReset: () => void;
 }) {
   return (
-    <section className="duel-ui-frame duel-live-invite-mockup" aria-label="Maquette de l’alerte de duel en direct">
+    <section className="duel-ui-frame duel-live-invite-mockup" aria-label="Alerte de duel en direct">
       <div className="duel-live-underlay" aria-hidden="true">
         <header>
           <strong>Excellence Lycée</strong>
@@ -581,11 +581,11 @@ function DuelLiveInviteMockup({
           <div className="duel-live-feedback" role="status">
             {decision === "accepted" ? <CheckCircle size={24} weight="fill" /> : <XCircle size={24} weight="fill" />}
             <strong>{decision === "accepted" ? "Défi accepté" : "Défi refusé"}</strong>
-            <button type="button" onClick={onReset}>Rejouer la démo</button>
+            <button type="button" onClick={onReset}>Revenir à l’invitation</button>
           </div>
         )}
       </div>
-      <div className="duel-live-davy"><CompanionAvatar motion="blink" decorative /><span>Davy ne coupe jamais ton activité : l’alerte reste claire et rapide.</span></div>
+      <div className="duel-live-davy"><CompanionAvatar motion="blink" decorative /><span>Tu peux accepter ou refuser ce duel maintenant.</span></div>
     </section>
   );
 }
@@ -615,6 +615,12 @@ function DuelBattleMockup({
   const learnerScore = Math.max(3, Math.round(questionCount * 0.6));
   const rivalScore = Math.max(2, learnerScore - 1);
   const isCompound = format.id === "compound";
+
+  useEffect(() => {
+    if (phase !== "waiting") return undefined;
+    const resultTimer = window.setTimeout(() => setPhase("review"), 3200);
+    return () => window.clearTimeout(resultTimer);
+  }, [phase]);
 
   const replayCurrentDuel = () => {
     setSelectedAnswer(null);
@@ -653,14 +659,14 @@ function DuelBattleMockup({
 
   if (phase === "review") {
     return (
-      <section className="duel-ui-frame duel-review-mockup" aria-label="Maquette du duel terminé et de sa correction">
+      <section className="duel-ui-frame duel-review-mockup" aria-label="Duel terminé et correction">
         <header className="duel-ui-topbar">
           <span className="duel-ui-brand"><Trophy size={18} weight="fill" /> Duel terminé</span>
           <span className="duel-ui-pill is-gold"><Medal size={14} weight="fill" /> Correction débloquée</span>
         </header>
         <div className="duel-review-ready">
           <CheckCircle size={19} weight="fill" />
-          <span><strong>Les deux joueurs ont terminé.</strong> Le bilan remplace automatiquement le questionnaire sur cette même page.</span>
+          <span><strong>Les deux joueurs ont terminé.</strong> Ton résultat et la correction sont disponibles.</span>
         </div>
         <div className="duel-review-layout">
           <aside className="duel-result-summary">
@@ -693,7 +699,7 @@ function DuelBattleMockup({
 
   if (phase === "waiting") {
     return (
-      <section className="duel-ui-frame duel-battle-mockup duel-waiting-mockup" aria-label="Maquette d’un duel en attente de l’adversaire">
+      <section className="duel-ui-frame duel-battle-mockup duel-waiting-mockup" aria-label="Duel en attente de l’adversaire">
         <header className="duel-battle-header">
           <div className="duel-player is-you"><MiniAvatar name={profile.name} /><div><small>TOI</small><strong>{profile.name.split(" ")[0]}</strong></div><b><CheckCircle size={14} weight="fill" /></b></div>
           <div className="duel-battle-round"><span>{format.label.toUpperCase()} · {difficulty.label.toUpperCase()}</span><strong>00:42</strong><i><em className="is-waiting" /></i></div>
@@ -709,18 +715,14 @@ function DuelBattleMockup({
             <article><MiniAvatar name={profile.name} /><div><small>{profile.name.split(" ")[0]}</small><strong>Terminé · {duelQuestionUnit(format.id, questionCount)}</strong></div><CheckCircle size={20} weight="fill" /></article>
             <article><MiniAvatar name="Aïcha Koné" tone="orange" /><div><small>Aïcha Koné</small><strong>{format.id === "compound" ? "Encore 1 partie" : "Encore 2 questions"}</strong></div><HourglassHigh size={20} weight="fill" /></article>
           </div>
-          <div className="duel-waiting-demo-actions">
-            <span>DÉMO DU PASSAGE AUTOMATIQUE</span>
-            <button type="button" onClick={() => setPhase("review")}><CheckCircle size={16} weight="fill" /> Aïcha a terminé</button>
-            <button type="button" className="is-secondary" onClick={() => setPhase("review")}><Clock size={16} weight="fill" /> Temps écoulé</button>
-          </div>
+          <span className="duel-waiting-auto-status"><Clock size={16} weight="fill" /> Mise à jour automatique du résultat…</span>
         </div>
       </section>
     );
   }
 
   return (
-    <section className="duel-ui-frame duel-battle-mockup" aria-label="Maquette d’un duel en cours">
+    <section className="duel-ui-frame duel-battle-mockup" aria-label="Duel en cours">
       <header className="duel-battle-header">
         <div className="duel-player is-you"><MiniAvatar name={profile.name} /><div><small>TOI</small><strong>{profile.name.split(" ")[0]}</strong></div><b>2</b></div>
         <div className="duel-battle-round"><span>{isCompound ? `PARTIE ${questionCount} / ${questionCount}` : `QUESTION ${questionCount} / ${questionCount}`} · {difficulty.label.toUpperCase()}</span><strong>{isCompound ? "01:24" : "00:18"}</strong><i><em /></i></div>
@@ -952,27 +954,16 @@ export function DuelPreviewPage({ profile, level, subject: initialSubject, subje
 
   return (
     <main className="duel-preview-page">
-      <header className="duel-preview-header">
+      <header className="duel-page-toolbar">
         <button className="path-back-button" type="button" onClick={onBackArena}><ArrowLeft size={20} weight="bold" />Arène</button>
-        <div><p>PROTOTYPE VISUEL · AUCUN DUEL RÉEL N’EST LANCÉ</p><h1>Les Duels de Davy</h1></div>
+        <span><UsersThree size={18} weight="duotone" /> Duel multijoueur</span>
       </header>
-
-      <section className="duel-preview-intro">
-        <div><span><Sword size={25} weight="duotone" /></span><p>UNE EXPÉRIENCE À VALIDER</p><h2>Du défi à la correction, sans changer de page.</h2><p>Teste les réglages, l’invitation, l’attente de l’adversaire et le bilan intégré avant que nous connections les vrais joueurs.</p></div>
-        <CompanionAvatar motion="celebrate" className="duel-preview-davy" decorative />
-      </section>
 
       <section className="duel-preview-stage" aria-live="polite">
         <div className={`duel-preview-browser${isMobileLayout ? " is-mobile" : ""}`}>
           {renderScreen()}
         </div>
       </section>
-
-      <footer className="duel-preview-feedback">
-        <span><Sparkle size={23} weight="duotone" /></span>
-        <div><strong>Une seule page pour jouer, patienter et comprendre.</strong><p>La maquette conserve les invitations fictives : aucun vrai duel n’est envoyé tant que ce parcours n’est pas validé.</p></div>
-        <button type="button" onClick={() => goTo("lobby")}>Revoir depuis le début</button>
-      </footer>
     </main>
   );
 }

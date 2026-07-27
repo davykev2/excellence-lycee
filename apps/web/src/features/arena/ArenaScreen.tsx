@@ -186,6 +186,10 @@ export function ArenaScreen({
       onOpenCodex();
       return;
     }
+    if (modeId === "duel") {
+      onOpenDuel();
+      return;
+    }
     setSelectedModeId(modeId);
     setSelectionMessage(null);
     window.setTimeout(() => document.getElementById("arena-selected-mode")?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 0);
