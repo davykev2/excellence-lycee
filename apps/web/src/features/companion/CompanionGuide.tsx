@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import { ArrowRight, BookOpenText, Lightbulb, SpeakerHigh, SpeakerSlash, Sparkle, Stop, X } from "@phosphor-icons/react";
 import type { NavigationId, SchoolLevel } from "../../domain/learning";
 import { CompanionAvatar, type CompanionMotion } from "./CompanionAvatar";
@@ -28,6 +29,24 @@ interface CompanionContext {
 }
 
 const introStorageKey = "excellence-davy-intro-seen-v1";
+const positionStorageKey = "excellence-davy-position-v1";
+
+interface CompanionOffset {
+  x: number;
+  y: number;
+}
+
+function readStoredOffset(): CompanionOffset {
+  try {
+    const stored = JSON.parse(window.localStorage.getItem(positionStorageKey) ?? "");
+    if (typeof stored?.x === "number" && typeof stored?.y === "number") {
+      return { x: stored.x, y: stored.y };
+    }
+  } catch {
+    // Une ancienne valeur illisible ne doit jamais empêcher Davy de s'afficher.
+  }
+  return { x: 0, y: 0 };
+}
 
 export function CompanionGuide({
   learnerName,
@@ -45,9 +64,50 @@ export function CompanionGuide({
   const [showIntro, setShowIntro] = useState(() => window.localStorage.getItem(introStorageKey) !== "yes");
   const [motion, setMotion] = useState<CompanionMotion>("idle");
   const [reduceMotion, setReduceMotion] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const [offset, setOffset] = useState<CompanionOffset>(readStoredOffset);
   const previousCelebrationKey = useRef(celebrationKey);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const offsetRef = useRef(offset);
+  const dragRef = useRef<{
+    pointerId: number;
+    startX: number;
+    startY: number;
+    startOffset: CompanionOffset;
+    originLeft: number;
+    originTop: number;
+    width: number;
+    height: number;
+  } | null>(null);
+  const movedDuringDragRef = useRef(false);
   const firstName = learnerName.trim().split(/\s+/)[0] || "toi";
   const voice = useDavyVoice();
+
+  useEffect(() => {
+    offsetRef.current = offset;
+  }, [offset]);
+
+  useEffect(() => {
+    const keepDavyOnScreen = () => {
+      const trigger = triggerRef.current;
+      if (!trigger) return;
+      const rect = trigger.getBoundingClientRect();
+      const originLeft = rect.left - offsetRef.current.x;
+      const originTop = rect.top - offsetRef.current.y;
+      const margin = 8;
+      const next = {
+        x: Math.min(window.innerWidth - margin - rect.width - originLeft, Math.max(margin - originLeft, offsetRef.current.x)),
+        y: Math.min(window.innerHeight - margin - rect.height - originTop, Math.max(margin - originTop, offsetRef.current.y)),
+      };
+      if (next.x === offsetRef.current.x && next.y === offsetRef.current.y) return;
+      offsetRef.current = next;
+      setOffset(next);
+      window.localStorage.setItem(positionStorageKey, JSON.stringify(next));
+    };
+
+    keepDavyOnScreen();
+    window.addEventListener("resize", keepDavyOnScreen);
+    return () => window.removeEventListener("resize", keepDavyOnScreen);
+  }, [activeNavigation]);
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -190,6 +250,60 @@ export function CompanionGuide({
     setOpen(true);
   };
 
+  const startDragging = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    dragRef.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      startOffset: offsetRef.current,
+      originLeft: rect.left - offsetRef.current.x,
+      originTop: rect.top - offsetRef.current.y,
+      width: rect.width,
+      height: rect.height,
+    };
+    movedDuringDragRef.current = false;
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const moveDavy = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    const drag = dragRef.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    const deltaX = event.clientX - drag.startX;
+    const deltaY = event.clientY - drag.startY;
+    if (!movedDuringDragRef.current && Math.hypot(deltaX, deltaY) < 6) return;
+
+    movedDuringDragRef.current = true;
+    const margin = 8;
+    const next = {
+      x: Math.min(
+        window.innerWidth - margin - drag.width - drag.originLeft,
+        Math.max(margin - drag.originLeft, drag.startOffset.x + deltaX),
+      ),
+      y: Math.min(
+        window.innerHeight - margin - drag.height - drag.originTop,
+        Math.max(margin - drag.originTop, drag.startOffset.y + deltaY),
+      ),
+    };
+    offsetRef.current = next;
+    setOffset(next);
+  };
+
+  const stopDragging = (event: ReactPointerEvent<HTMLButtonElement>) => {
+    if (dragRef.current?.pointerId !== event.pointerId) return;
+    dragRef.current = null;
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    if (!movedDuringDragRef.current) return;
+    rememberIntro();
+    window.localStorage.setItem(positionStorageKey, JSON.stringify(offsetRef.current));
+    window.setTimeout(() => {
+      movedDuringDragRef.current = false;
+    }, 0);
+  };
+
   const runAction = () => {
     voice.stop();
     setOpen(false);
@@ -250,7 +364,35 @@ export function CompanionGuide({
         </section>
       )}
 
-      <button className="companion-trigger" type="button" data-tour-id="davy" aria-label={open ? "Fermer Davy" : "Ouvrir Davy, mon guide"} aria-expanded={open} onClick={() => { if (open) { voice.stop(); setOpen(false); } else openGuide(); }}>
+      <button
+        ref={triggerRef}
+        className={`companion-trigger ${dragRef.current ? "is-dragging" : ""}`}
+        type="button"
+        data-tour-id="davy"
+        aria-label={open ? "Fermer Davy" : "Ouvrir Davy, mon guide. Maintenir et faire glisser pour le déplacer."}
+        aria-expanded={open}
+        title="Maintiens et fais glisser pour déplacer Davy"
+        style={{
+          "--davy-drag-x": `${offset.x}px`,
+          "--davy-drag-y": `${offset.y}px`,
+        } as CSSProperties}
+        onPointerDown={startDragging}
+        onPointerMove={moveDavy}
+        onPointerUp={stopDragging}
+        onPointerCancel={stopDragging}
+        onClick={(event) => {
+          if (movedDuringDragRef.current) {
+            event.preventDefault();
+            return;
+          }
+          if (open) {
+            voice.stop();
+            setOpen(false);
+          } else {
+            openGuide();
+          }
+        }}
+      >
         <span className="companion-trigger-glow" />
         <CompanionAvatar motion={motion} decorative />
         <span className="companion-online-dot" />

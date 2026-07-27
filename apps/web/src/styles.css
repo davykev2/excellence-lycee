@@ -7689,12 +7689,19 @@ textarea:focus-visible {
   box-shadow: 0 15px 34px rgba(4, 29, 65, 0.3), 0 0 0 3px rgba(211, 160, 40, 0.2);
   cursor: pointer;
   pointer-events: auto;
-  transition: transform 180ms ease, box-shadow 180ms ease;
+  touch-action: none;
+  transform: translate3d(var(--davy-drag-x, 0px), var(--davy-drag-y, 0px), 0);
+  transition: box-shadow 180ms ease;
+  user-select: none;
 }
 
 .companion-trigger:hover {
-  transform: translateY(-4px);
+  transform: translate3d(var(--davy-drag-x, 0px), calc(var(--davy-drag-y, 0px) - 4px), 0);
   box-shadow: 0 19px 38px rgba(4, 29, 65, 0.34), 0 0 0 4px rgba(211, 160, 40, 0.25);
+}
+
+.companion-trigger:active {
+  cursor: grabbing;
 }
 
 .companion-trigger:focus-visible {
