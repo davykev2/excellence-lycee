@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
 import {
   Archive,
+  ArrowLeft,
   ArrowCounterClockwise,
   ArrowRight,
   BellSimple,
@@ -71,6 +72,7 @@ export function MessagesScreen({ profile, level }: MessagesScreenProps) {
   const [replyTo, setReplyTo] = useState<ChatMessage | null>(null);
   const [editing, setEditing] = useState<ChatMessage | null>(null);
   const [composeOpen, setComposeOpen] = useState(false);
+  const [mobileConversationOpen, setMobileConversationOpen] = useState(false);
   const [recipientSearch, setRecipientSearch] = useState("");
   const [newRecipientId, setNewRecipientId] = useState("");
   const [newSubject, setNewSubject] = useState("");
@@ -107,6 +109,10 @@ export function MessagesScreen({ profile, level }: MessagesScreenProps) {
     setReplyTo(null);
     setEditing(null);
   }, [messaging.activeId]);
+
+  useEffect(() => {
+    if (channel === "global") setMobileConversationOpen(false);
+  }, [channel]);
 
   const openCompose = () => {
     setFormError(null);
@@ -199,7 +205,7 @@ export function MessagesScreen({ profile, level }: MessagesScreenProps) {
 
       <MessageChannelSwitch channel={channel} onChange={setChannel} />
 
-      <section className="messages-shell" aria-busy={messaging.loadingThreads}>
+      <section className={`messages-shell${mobileConversationOpen && activeThread ? " is-conversation-open" : ""}`} aria-busy={messaging.loadingThreads}>
         <aside className="thread-sidebar">
           <div className="thread-sidebar-heading">
             <div><span>{showArchived ? "Conversations archivées" : "Boîte de réception"}</span><strong>{unreadTotal} non lu{unreadTotal > 1 ? "s" : ""}</strong></div>
@@ -211,7 +217,7 @@ export function MessagesScreen({ profile, level }: MessagesScreenProps) {
           <div className="thread-list">
             {messaging.loadingThreads && <div className="message-loading" role="status"><span />Chargement des conversations…</div>}
             {!messaging.loadingThreads && visibleThreads.map((thread) => (
-              <button className={activeThread?.id === thread.id ? "is-active" : ""} key={thread.id} type="button" onClick={() => messaging.setActiveId(thread.id)}>
+              <button className={activeThread?.id === thread.id ? "is-active" : ""} key={thread.id} type="button" onClick={() => { messaging.setActiveId(thread.id); setMobileConversationOpen(true); }}>
                 <span className="thread-avatar" style={{ background: avatarTone(thread.participant.id) }}>{thread.participant.photoUrl ? <img src={thread.participant.photoUrl} alt="" /> : thread.participant.name.slice(0, 1).toLocaleUpperCase("fr")}</span>
                 <span className="thread-preview"><strong>{thread.participant.name}</strong><span>{thread.subject}</span><small>{thread.lastMessage.body}</small></span>
                 <span className="thread-meta"><time>{formatDate(thread.lastMessage.createdAt)}</time>{thread.muted && <BellSimpleSlash size={13} />}{thread.unreadCount > 0 && <b>{thread.unreadCount}</b>}</span>
@@ -224,6 +230,9 @@ export function MessagesScreen({ profile, level }: MessagesScreenProps) {
         {activeThread ? (
           <article className="conversation-panel">
             <header className="conversation-header">
+              <button className="conversation-mobile-back" type="button" onClick={() => setMobileConversationOpen(false)} aria-label="Retour aux conversations">
+                <ArrowLeft size={20} weight="bold" />
+              </button>
               <span className="thread-avatar is-large" style={{ background: avatarTone(activeThread.participant.id) }}>{activeThread.participant.photoUrl ? <img src={activeThread.participant.photoUrl} alt="" /> : activeThread.participant.name.slice(0, 1).toLocaleUpperCase("fr")}</span>
               <div><strong>{activeThread.participant.name}</strong><span>{roleLabel(activeThread.participant)}</span></div>
               <div className="conversation-header-tools">
