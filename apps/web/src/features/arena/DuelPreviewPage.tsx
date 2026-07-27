@@ -409,6 +409,9 @@ function DuelSetupMockup({
               ))}
             </div>
           </fieldset>
+          <button className="duel-mobile-next" type="button" onClick={onSelect}>
+            Continuer vers l’invitation <ArrowRight size={18} weight="bold" />
+          </button>
         </div>
         <aside className="duel-match-card">
           <span className="duel-match-ring"><Sword size={29} weight="fill" /></span>
@@ -825,6 +828,7 @@ export function DuelPreviewPage({ profile, level, subject: initialSubject, subje
   const [difficultyId, setDifficultyId] = useState<DuelDifficultyId>("medium");
   const [questionCount, setQuestionCount] = useState<number>(10);
   const [invitationDecision, setInvitationDecision] = useState<InvitationDecision>("pending");
+  const duelPageRef = useRef<HTMLElement | null>(null);
   const subject = availableDuelSubjects.find((option) => option.id === duelSubjectId) ?? initialDuelSubject;
   const lessonOptions = useMemo(() => getDuelLessons(level.id, subject.id), [level.id, subject.id]);
   const selectedLessons = useMemo(
@@ -842,6 +846,12 @@ export function DuelPreviewPage({ profile, level, subject: initialSubject, subje
     mediaQuery.addEventListener("change", updateLayout);
     return () => mediaQuery.removeEventListener("change", updateLayout);
   }, []);
+
+  useEffect(() => {
+    window.requestAnimationFrame(() => {
+      duelPageRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, [activeScreen]);
 
   const goTo = (id: DuelScreenId) => setActiveScreen(id);
   const changeDuelSubject = (nextSubjectId: SubjectId) => {
@@ -953,7 +963,7 @@ export function DuelPreviewPage({ profile, level, subject: initialSubject, subje
   };
 
   return (
-    <main className="duel-preview-page">
+    <main ref={duelPageRef} className="duel-preview-page">
       <header className="duel-page-toolbar">
         <button className="path-back-button" type="button" onClick={onBackArena}><ArrowLeft size={20} weight="bold" />Arène</button>
         <span><UsersThree size={18} weight="duotone" /> Duel multijoueur</span>
