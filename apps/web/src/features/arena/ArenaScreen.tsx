@@ -26,6 +26,7 @@ import { formatXp } from "../../data/xpRewards";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
 import { ArenaExercisesPage } from "./ArenaExercisesPage";
 import { MathCodexPage } from "../codex/MathCodexPage";
+import { DuelPreviewPage } from "./DuelPreviewPage";
 
 interface ArenaScreenProps {
   profile: LearnerProfile;
@@ -36,12 +37,14 @@ interface ArenaScreenProps {
   role: UserRole;
   exercisesOpen: boolean;
   codexOpen: boolean;
+  duelOpen: boolean;
   exerciseEditorOpen: boolean;
   localOnly?: boolean;
   onSubjectChange: (subjectId: SubjectId) => void;
   onBackHome: () => void;
   onOpenExercises: () => void;
   onOpenCodex: () => void;
+  onOpenDuel: () => void;
   onBackArena: () => void;
   onOpenExerciseEditor: () => void;
   onCloseExerciseEditor: () => void;
@@ -97,7 +100,7 @@ const arenaModes = [
     metric: "1 contre 1",
     action: "Préparer un duel",
     featured: "Duel éclair",
-    featuredDescription: "5 questions • 90 secondes • Adversaire de Seconde C.",
+    featuredDescription: "5 questions • 3 minutes • Adversaire de niveau similaire.",
     highlights: ["Adversaire équitable", "Questions synchronisées", "Bonus de victoire"],
   },
   {
@@ -157,12 +160,14 @@ export function ArenaScreen({
   role,
   exercisesOpen,
   codexOpen,
+  duelOpen,
   exerciseEditorOpen,
   localOnly = false,
   onSubjectChange,
   onBackHome,
   onOpenExercises,
   onOpenCodex,
+  onOpenDuel,
   onBackArena,
   onOpenExerciseEditor,
   onCloseExerciseEditor,
@@ -195,6 +200,10 @@ export function ArenaScreen({
       onOpenCodex();
       return;
     }
+    if (selectedMode.id === "duel") {
+      onOpenDuel();
+      return;
+    }
     setSelectionMessage(`Mode « ${selectedMode.title} » sélectionné pour ${subject.label}. La prochaine étape sera de connecter sa banque d’épreuves.`);
   };
 
@@ -216,6 +225,10 @@ export function ArenaScreen({
   }
 
   if (codexOpen) return <MathCodexPage onBackArena={onBackArena} />;
+
+  if (duelOpen) {
+    return <DuelPreviewPage profile={profile} level={level} subject={subject} onBackArena={onBackArena} />;
+  }
 
   return (
     <main className="arena-page">
