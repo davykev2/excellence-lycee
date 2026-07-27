@@ -25,6 +25,8 @@ export function useMessaging(includeArchived: boolean) {
   const [mutating, setMutating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const activeIdRef = useRef(activeId);
+  const lastMessageIdByThreadRef = useRef(new Map<string, string | undefined>());
+  const refreshInFlightRef = useRef(false);
   activeIdRef.current = activeId;
 
   const loadThreads = useCallback(async (silent = false) => {
@@ -57,11 +59,27 @@ export function useMessaging(includeArchived: boolean) {
     try {
       const response = await apiRequest<MessagesResponse>(`/messages/threads/${threadId}/messages`);
       if (activeIdRef.current !== threadId) return;
-      setMessages(response.messages.map(({ createdAt, ...message }) => ({ ...message, sentAt: createdAt })));
+      const nextMessages = response.messages.map(({ createdAt, ...message }) => ({ ...message, sentAt: createdAt }));
+      const lastMessageId = nextMessages.at(-1)?.id;
+      const hasNewMessage = lastMessageIdByThreadRef.current.get(threadId) !== lastMessageId;
+      lastMessageIdByThreadRef.current.set(threadId, lastMessageId);
+      setMessages((current) => {
+        const unchanged = current.length === nextMessages.length && current.every((message, index) => {
+          const next = nextMessages[index];
+          return message.id === next.id
+            && message.body === next.body
+            && message.editedAt === next.editedAt
+            && message.deletedAt === next.deletedAt
+            && message.readByRecipient === next.readByRecipient;
+        });
+        return unchanged ? current : nextMessages;
+      });
       setError(null);
-      await apiRequest<void>(`/messages/threads/${threadId}/read`, { method: "POST" });
-      setThreads((current) => current.map((thread) => thread.id === threadId ? { ...thread, unreadCount: 0 } : thread));
-      window.dispatchEvent(new Event("excellence:messages-updated"));
+      if (!silent || (hasNewMessage && document.visibilityState === "visible")) {
+        await apiRequest<void>(`/messages/threads/${threadId}/read`, { method: "POST" });
+        setThreads((current) => current.map((thread) => thread.id === threadId ? { ...thread, unreadCount: 0 } : thread));
+        window.dispatchEvent(new Event("excellence:messages-updated"));
+      }
     } catch (reason) {
       if (!silent) setError(reason instanceof Error ? reason.message : "Les messages sont indisponibles.");
     } finally {
@@ -79,11 +97,34 @@ export function useMessaging(includeArchived: boolean) {
   }, [activeId, loadMessages]);
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
-      void loadThreads(true);
-      if (activeIdRef.current) void loadMessages(activeIdRef.current, true);
-    }, 15_000);
-    return () => window.clearInterval(timer);
+    const refreshWhenVisible = async () => {
+      if (document.visibilityState !== "visible" || refreshInFlightRef.current) return;
+      refreshInFlightRef.current = true;
+      try {
+        await Promise.all([
+          loadThreads(true),
+          activeIdRef.current ? loadMessages(activeIdRef.current, true) : Promise.resolve(),
+        ]);
+      } finally {
+        refreshInFlightRef.current = false;
+      }
+    };
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") void refreshWhenVisible();
+    };
+    const requestRefresh = () => void refreshWhenVisible();
+    const timer = window.setInterval(requestRefresh, 2_500);
+    window.addEventListener("focus", requestRefresh);
+    window.addEventListener("online", requestRefresh);
+    window.addEventListener("excellence:messages-updated", requestRefresh);
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => {
+      window.clearInterval(timer);
+      window.removeEventListener("focus", requestRefresh);
+      window.removeEventListener("online", requestRefresh);
+      window.removeEventListener("excellence:messages-updated", requestRefresh);
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
   }, [loadMessages, loadThreads]);
 
   const runMutation = useCallback(async (operation: () => Promise<void>) => {

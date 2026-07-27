@@ -2,7 +2,6 @@ import { useEffect, useMemo, useRef, useState, type FormEvent, type KeyboardEven
 import {
   Archive,
   ArrowLeft,
-  ArrowCounterClockwise,
   ArrowRight,
   BellSimple,
   BellSimpleSlash,
@@ -79,6 +78,8 @@ export function MessagesScreen({ profile, level }: MessagesScreenProps) {
   const [newBody, setNewBody] = useState("");
   const [formError, setFormError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
+  const messagesScrollRef = useRef<HTMLDivElement | null>(null);
+  const stickToBottomRef = useRef(true);
 
   const visibleThreads = useMemo(() => {
     const query = search.trim().toLocaleLowerCase("fr");
@@ -101,10 +102,13 @@ export function MessagesScreen({ profile, level }: MessagesScreenProps) {
   }, [showArchived, visibleThreads]);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: messaging.loadingMessages ? "auto" : "smooth", block: "end" });
+    if (stickToBottomRef.current) {
+      messagesEndRef.current?.scrollIntoView({ behavior: messaging.loadingMessages ? "auto" : "smooth", block: "end" });
+    }
   }, [messaging.messages, messaging.loadingMessages]);
 
   useEffect(() => {
+    stickToBottomRef.current = true;
     setReply("");
     setReplyTo(null);
     setEditing(null);
@@ -134,6 +138,7 @@ export function MessagesScreen({ profile, level }: MessagesScreenProps) {
     event?.preventDefault();
     const body = reply.trim();
     if (!body || !activeThread || messaging.mutating) return;
+    stickToBottomRef.current = true;
     try {
       if (editing) await messaging.editMessage(activeThread.id, editing.id, body);
       else await messaging.sendMessage(activeThread.id, body, replyTo?.id);
@@ -182,28 +187,22 @@ export function MessagesScreen({ profile, level }: MessagesScreenProps) {
   if (channel === "global") {
     return (
       <main className="community-page messages-page">
-        <header className="community-header">
-          <div><p className="header-kicker">La communauté Excellence en direct</p><h1>Messages</h1><p>Échange avec les élèves, enseignants et membres de l’équipe dans un espace commun.</p></div>
-        </header>
-        <MessageChannelSwitch channel={channel} onChange={setChannel} />
-        <GlobalChatPanel profile={profile} level={level} />
+        <div className="messages-page-toolbar">
+          <MessageChannelSwitch channel={channel} onChange={setChannel} />
+        </div>
+        <GlobalChatPanel profile={profile} />
       </main>
     );
   }
 
   return (
     <main className="community-page messages-page">
-      <header className="community-header">
-        <div><p className="header-kicker">Échanges privés et accompagnement</p><h1>Messages</h1><p>Discute avec les personnes autorisées de ta classe et l’équipe Excellence.</p></div>
-        <div className="message-header-actions">
-          <button className="secondary-action is-compact" type="button" onClick={() => void messaging.reload()} disabled={messaging.loadingThreads} aria-label="Actualiser les messages"><ArrowCounterClockwise size={19} weight="bold" /> Actualiser</button>
-          <button className="primary-action is-compact" type="button" onClick={openCompose}><Plus size={20} weight="bold" /> Nouveau message</button>
-        </div>
-      </header>
-
       {messaging.error && <div className="message-error" role="alert"><span>{messaging.error}</span><button type="button" onClick={() => void messaging.reload()}>Réessayer</button></div>}
 
-      <MessageChannelSwitch channel={channel} onChange={setChannel} />
+      <div className="messages-page-toolbar">
+        <MessageChannelSwitch channel={channel} onChange={setChannel} />
+        <button className="primary-action is-compact" type="button" onClick={openCompose}><Plus size={20} weight="bold" /> Nouveau message</button>
+      </div>
 
       <section className={`messages-shell${mobileConversationOpen && activeThread ? " is-conversation-open" : ""}`} aria-busy={messaging.loadingThreads}>
         <aside className="thread-sidebar">
@@ -244,7 +243,16 @@ export function MessagesScreen({ profile, level }: MessagesScreenProps) {
               </div>
             </header>
             <div className="conversation-subject"><span>Objet</span><strong>{activeThread.subject}</strong></div>
-            <div className="conversation-messages" aria-live="polite">
+            <div
+              ref={messagesScrollRef}
+              className="conversation-messages"
+              aria-live="polite"
+              onScroll={() => {
+                const container = messagesScrollRef.current;
+                if (!container) return;
+                stickToBottomRef.current = container.scrollHeight - container.scrollTop - container.clientHeight < 96;
+              }}
+            >
               {messaging.loadingMessages && <div className="message-loading is-conversation" role="status"><span />Synchronisation des messages…</div>}
               {!messaging.loadingMessages && messaging.messages.map((message) => (
                 <div className={`message-bubble-row ${message.isMine ? "is-learner" : ""} ${message.deletedAt ? "is-deleted" : ""}`} key={message.id}>

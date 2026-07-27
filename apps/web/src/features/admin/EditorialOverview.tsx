@@ -34,16 +34,27 @@ function auditPath(path: LearningPath): PathAudit {
   let questions = 0;
   let xp = 0;
   for (const lesson of lessons) {
-    const hasBody = Boolean(lesson.concept.bodyMarkdown);
+    const bodyLength = lesson.concept.bodyMarkdown?.trim().length ?? 0;
+    const hasBody = bodyLength > 0;
     const hasRich = richInteractionKinds.has(lesson.interaction.kind ?? "");
+    const questionCount = lesson.questions?.length ?? 1;
     // La carte de synthèse « Les repères essentiels » des leçons Humanités est
     // produite par la fabrique : elle est déjà rédigée et n'attend aucun cours
     // supplémentaire, on la considère donc comme enrichie.
     const isSynthesis = lesson.id.endsWith("-overview");
+    // Les anciens parcours de maths compacts possèdent eux aussi un petit bloc
+    // bodyMarkdown généré automatiquement et une seule question. Cela ne suffit
+    // pas à les déclarer « enrichis ». Un niveau de maths doit avoir un vrai
+    // développement, plusieurs exercices, ou une interaction riche accompagnée
+    // d'une pratique minimale.
+    const isSubstantiveMathLevel = bodyLength >= 600 || questionCount >= 3 || (hasRich && questionCount >= 2);
+    const isEnriched = path.subjectId === "mathematics"
+      ? isSubstantiveMathLevel
+      : hasBody || hasRich || isSynthesis;
     if (hasBody) bodyLevels += 1;
     if (hasRich) richLevels += 1;
-    if (hasBody || hasRich || isSynthesis) enrichedLevels += 1;
-    questions += lesson.questions?.length ?? 1;
+    if (isEnriched) enrichedLevels += 1;
+    questions += questionCount;
     xp += lesson.xp;
   }
   const series = [...new Set(path.levelIds.map((id) => seriesByLevelId.get(id) ?? id))];
@@ -175,7 +186,7 @@ export function EditorialOverview() {
 
       <div className="editorial-legend">
         <Sparkle size={16} weight="fill" />
-        <span>Un niveau est <strong>enrichi</strong> s’il possède un cours rédigé (bodyMarkdown) <em>ou</em> une interaction riche (organigramme, courbe, orbite, schéma).</span>
+        <span>Un niveau est <strong>enrichi</strong> s’il possède un cours substantiel, plusieurs exercices ou une interaction riche réellement exploitable. Les petits résumés automatiques ne sont plus comptés comme des cours complets.</span>
       </div>
 
       <section className="editorial-subject-panel">

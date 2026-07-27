@@ -1490,9 +1490,27 @@ textarea:focus-visible {
 .sidebar-nav {
   position: relative;
   z-index: 2;
+  min-height: 0;
   display: grid;
+  align-content: start;
+  flex: 1 1 auto;
   gap: 12px;
   margin-top: 16px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar-admin-nav {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .nav-item {
@@ -1534,7 +1552,7 @@ textarea:focus-visible {
 }
 
 .nav-item.is-admin-item {
-  margin-top: 18px;
+  margin-top: 0;
   border-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -5913,12 +5931,12 @@ textarea:focus-visible {
   min-height: 0;
   display: flex;
   flex-direction: column;
+  padding: 22px clamp(24px, 3vw, 48px) 28px;
   overflow: hidden;
 }
 
-.messages-page > .community-header,
 .messages-page > .message-error,
-.messages-page > .message-channel-switch {
+.messages-page > .messages-page-toolbar {
   flex: 0 0 auto;
 }
 
@@ -6120,11 +6138,27 @@ textarea:focus-visible {
 .message-channel-switch small { font-size: 9px; }
 .message-channel-switch button.is-active { background: #fff; color: var(--green-700); box-shadow: 0 5px 16px rgba(13,37,74,.08); }
 
+.messages-page-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.messages-page-toolbar .message-channel-switch {
+  margin: 0;
+}
+
+.messages-page-toolbar .primary-action {
+  flex: 0 0 auto;
+}
+
 .global-chat-shell {
-  height: calc(100dvh - 232px);
-  min-height: 620px;
+  height: auto;
+  min-height: 0;
   display: grid;
-  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+  grid-template-rows: auto minmax(0, 1fr) auto;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 26px;
@@ -6144,8 +6178,8 @@ textarea:focus-visible {
 .global-chat-guidelines { grid-row: 2; display: flex; align-items: center; gap: 10px; margin: 13px 18px 0; padding: 10px 13px; border: 1px solid #dce9d9; border-radius: 13px; background: #f4faf2; color: #426147; }
 .global-chat-guidelines svg { flex: 0 0 auto; color: var(--green-600); }
 .global-chat-guidelines p { margin: 0; font-size: 10px; line-height: 1.45; }
-.message-error.is-global { grid-row: 3; width: auto; max-width: none; margin: 12px 18px 0; }
-.global-chat-messages { grid-row: 4; padding-inline: clamp(18px, 6vw, 88px); }
+.message-error.is-global { grid-row: 1; width: auto; max-width: none; margin: 12px 18px 0; }
+.global-chat-messages { grid-row: 2; padding-inline: clamp(18px, 6vw, 88px); }
 .global-message-author { display: flex; align-items: baseline; gap: 7px; margin-bottom: 5px; }
 .global-message-author strong { font-size: 10px; }
 .global-message-author span { color: var(--ink-muted); font-size: 8px; font-weight: 750; text-transform: capitalize; }
@@ -6153,7 +6187,7 @@ textarea:focus-visible {
 .global-chat-empty svg { color: var(--green-600); }
 .global-chat-empty strong { color: var(--navy-800); font-size: 18px; }
 .global-chat-empty span { font-size: 11px; }
-.global-chat-composer { grid-row: 5; padding-inline: clamp(18px, 6vw, 88px); }
+.global-chat-composer { grid-row: 3; padding-inline: clamp(18px, 6vw, 88px); }
 
 .messages-shell {
   height: calc(100dvh - 166px);
@@ -6731,13 +6765,9 @@ textarea:focus-visible {
   .leaderboard-score { font-size: 11px; }
   .leaderboard-name small { font-size: 9px; }
 
-  .messages-page .community-header { align-items: center; flex-direction: row; gap: 10px; margin-bottom: 10px; }
-  .messages-page .community-header .header-kicker,
-  .messages-page .community-header > div > p:last-child,
-  .messages-page .message-header-actions .secondary-action { display: none; }
-  .messages-page .community-header h1 { font-size: 31px; }
-  .messages-page .message-header-actions { flex-wrap: nowrap; }
-  .messages-page .community-header .primary-action { width: auto; min-height: 40px; padding: 0 13px; }
+  .messages-page-toolbar { gap: 8px; margin-bottom: 9px; }
+  .messages-page-toolbar .primary-action { min-height: 43px; padding-inline: 12px; font-size: 0; }
+  .messages-page-toolbar .primary-action svg { margin: 0; }
   .message-channel-switch { width: 100%; grid-template-columns: 1fr 1fr; margin-top: 0; }
   .message-channel-switch button { justify-content: center; padding-inline: 9px; }
   .message-channel-switch small { display: none; }

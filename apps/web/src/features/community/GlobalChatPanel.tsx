@@ -1,25 +1,21 @@
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from "react";
 import {
-  ArrowCounterClockwise,
   Check,
   GlobeHemisphereWest,
   NotePencil,
   PaperPlaneTilt,
   PencilSimple,
-  ShieldCheck,
   Trash,
-  UsersThree,
   X,
 } from "@phosphor-icons/react";
 import type { GlobalChatMessage } from "../../domain/community";
-import type { LearnerProfile, SchoolLevel } from "../../domain/learning";
+import type { LearnerProfile } from "../../domain/learning";
 import { ProfileAvatar } from "../../ui/ProfileAvatar";
 import { useAuth } from "../auth/AuthProvider";
 import { useGlobalChat } from "./useGlobalChat";
 
 interface GlobalChatPanelProps {
   profile: LearnerProfile;
-  level: SchoolLevel;
 }
 
 function formatDate(value: string) {
@@ -40,22 +36,27 @@ function senderStatus(message: GlobalChatMessage) {
   return message.senderLevelId ? message.senderLevelId.replaceAll("-", " ") : "Élève";
 }
 
-export function GlobalChatPanel({ profile, level }: GlobalChatPanelProps) {
+export function GlobalChatPanel({ profile }: GlobalChatPanelProps) {
   const { user } = useAuth();
   const chat = useGlobalChat();
   const [body, setBody] = useState("");
   const [replyTo, setReplyTo] = useState<GlobalChatMessage | null>(null);
   const [editing, setEditing] = useState<GlobalChatMessage | null>(null);
   const endRef = useRef<HTMLDivElement | null>(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const stickToBottomRef = useRef(true);
 
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: chat.loading ? "auto" : "smooth", block: "end" });
+    if (stickToBottomRef.current) {
+      endRef.current?.scrollIntoView({ behavior: chat.loading ? "auto" : "smooth", block: "end" });
+    }
   }, [chat.loading, chat.messages.length]);
 
   const submit = async (event?: FormEvent) => {
     event?.preventDefault();
     const cleanBody = body.trim();
     if (!cleanBody || chat.mutating) return;
+    stickToBottomRef.current = true;
     try {
       if (editing) await chat.editMessage(editing.id, cleanBody);
       else await chat.sendMessage(cleanBody, replyTo?.id);
@@ -92,20 +93,18 @@ export function GlobalChatPanel({ profile, level }: GlobalChatPanelProps) {
 
   return (
     <section className="global-chat-shell" aria-busy={chat.loading}>
-      <header className="global-chat-header">
-        <div className="global-chat-symbol"><GlobeHemisphereWest size={28} weight="duotone" /></div>
-        <div><strong>Communauté Excellence</strong><span><i /> Salon ouvert à tous les membres connectés</span></div>
-        <div className="global-chat-header-actions">
-          <span><UsersThree size={18} weight="duotone" /> {level.label}</span>
-          <button type="button" onClick={() => void chat.reload()} disabled={chat.loading} aria-label="Actualiser le salon"><ArrowCounterClockwise size={19} weight="bold" /></button>
-        </div>
-      </header>
-
-      <div className="global-chat-guidelines"><ShieldCheck size={20} weight="duotone" /><p><strong>Un espace d’entraide.</strong> Pose tes questions, partage une méthode et reste respectueux. Les administrateurs peuvent modérer les échanges.</p></div>
-
       {chat.error && <div className="message-error is-global" role="alert"><span>{chat.error}</span><button type="button" onClick={() => void chat.reload()}>Réessayer</button></div>}
 
-      <div className="conversation-messages global-chat-messages" aria-live="polite">
+      <div
+        ref={scrollRef}
+        className="conversation-messages global-chat-messages"
+        aria-live="polite"
+        onScroll={() => {
+          const container = scrollRef.current;
+          if (!container) return;
+          stickToBottomRef.current = container.scrollHeight - container.scrollTop - container.clientHeight < 96;
+        }}
+      >
         {chat.loading && <div className="message-loading is-conversation" role="status"><span />Connexion à la communauté…</div>}
         {!chat.loading && chat.messages.map((message) => (
           <div className={`message-bubble-row ${message.isMine ? "is-learner" : ""} ${message.deletedAt ? "is-deleted" : ""}`} key={message.id}>

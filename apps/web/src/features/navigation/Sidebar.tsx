@@ -14,6 +14,22 @@ interface SidebarProps {
 }
 
 export function Sidebar({ activeItem, onNavigate, canAccessAdmin = false, unreadMessages = 0, goldBalance = null }: SidebarProps) {
+  const renderNavigationItem = (item: (typeof navigationItems)[number]) => (
+    <button
+      className={`nav-item ${item.id === "admin" ? "is-admin-item" : ""} ${activeItem === item.id ? "is-active" : ""}`}
+      key={item.id}
+      type="button"
+      data-tour-id={`nav-${item.id}`}
+      aria-current={activeItem === item.id ? "page" : undefined}
+      onClick={() => onNavigate(item.id)}
+    >
+      <AppIcon name={item.icon} size={28} weight={activeItem === item.id ? "duotone" : "regular"} />
+      <span>{item.label}</span>
+      {item.id === "messages" && unreadMessages > 0 && <b className="navigation-unread" aria-label={`${unreadMessages} message${unreadMessages > 1 ? "s" : ""} non lu${unreadMessages > 1 ? "s" : ""}`}>{Math.min(unreadMessages, 99)}</b>}
+    </button>
+  );
+  const adminItem = navigationItems.find((item) => item.id === "admin");
+
   return (
     <aside className="sidebar" aria-label="Navigation principale">
       <div className="brand-lockup">
@@ -34,22 +50,15 @@ export function Sidebar({ activeItem, onNavigate, canAccessAdmin = false, unread
         <span>or</span>
       </button>
 
-      <nav className="sidebar-nav">
-        {navigationItems.filter((item) => item.id !== "admin" || canAccessAdmin).map((item) => (
-          <button
-            className={`nav-item ${item.id === "admin" ? "is-admin-item" : ""} ${activeItem === item.id ? "is-active" : ""}`}
-            key={item.id}
-            type="button"
-            data-tour-id={`nav-${item.id}`}
-            aria-current={activeItem === item.id ? "page" : undefined}
-            onClick={() => onNavigate(item.id)}
-          >
-            <AppIcon name={item.icon} size={28} weight={activeItem === item.id ? "duotone" : "regular"} />
-            <span>{item.label}</span>
-            {item.id === "messages" && unreadMessages > 0 && <b className="navigation-unread" aria-label={`${unreadMessages} message${unreadMessages > 1 ? "s" : ""} non lu${unreadMessages > 1 ? "s" : ""}`}>{Math.min(unreadMessages, 99)}</b>}
-          </button>
-        ))}
+      <nav className="sidebar-nav" aria-label="Sections principales">
+        {navigationItems.filter((item) => item.id !== "admin").map(renderNavigationItem)}
       </nav>
+
+      {canAccessAdmin && adminItem && (
+        <nav className="sidebar-admin-nav" aria-label="Administration">
+          {renderNavigationItem(adminItem)}
+        </nav>
+      )}
 
       <img className="sidebar-decoration" src={sidebarDecoration} alt="" aria-hidden="true" />
     </aside>

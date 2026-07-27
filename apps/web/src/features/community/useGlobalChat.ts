@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { GlobalChatMessage } from "../../domain/community";
 import { apiRequest } from "../../lib/api";
 
@@ -12,8 +12,11 @@ export function useGlobalChat() {
   const [loading, setLoading] = useState(true);
   const [mutating, setMutating] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const requestInFlightRef = useRef(false);
 
   const loadMessages = useCallback(async (silent = false) => {
+    if (requestInFlightRef.current) return;
+    requestInFlightRef.current = true;
     if (!silent) setLoading(true);
     try {
       const response = await apiRequest<GlobalMessagesResponse>("/messages/global?limit=200");
@@ -23,13 +26,28 @@ export function useGlobalChat() {
       if (!silent) setError(reason instanceof Error ? reason.message : "Le salon global est momentanément indisponible.");
     } finally {
       if (!silent) setLoading(false);
+      requestInFlightRef.current = false;
     }
   }, []);
 
   useEffect(() => {
     void loadMessages();
-    const timer = window.setInterval(() => void loadMessages(true), 10_000);
-    return () => window.clearInterval(timer);
+    const refreshWhenVisible = () => {
+      if (document.visibilityState === "visible") void loadMessages(true);
+    };
+    const handleVisibility = () => {
+      if (document.visibilityState === "visible") void loadMessages(true);
+    };
+    const timer = window.setInterval(refreshWhenVisible, 2_500);
+    window.addEventListener("focus", refreshWhenVisible);
+    window.addEventListener("online", refreshWhenVisible);
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => {
+      window.clearInterval(timer);
+      window.removeEventListener("focus", refreshWhenVisible);
+      window.removeEventListener("online", refreshWhenVisible);
+      document.removeEventListener("visibilitychange", handleVisibility);
+    };
   }, [loadMessages]);
 
   const runMutation = useCallback(async (operation: () => Promise<void>) => {
