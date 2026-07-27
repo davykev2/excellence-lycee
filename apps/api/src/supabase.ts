@@ -894,6 +894,8 @@ export async function writeSupabaseAudit(
 
 export async function listSupabaseMessageRecipients(accessToken: string, search = ""): Promise<MessageRecipientSummary[]> {
   const client = userDataClient(accessToken);
+  const { error: presenceError } = await client.rpc("touch_user_presence");
+  if (presenceError) throw new SupabaseOperationError(presenceError.message, 500, presenceError.code);
   const { data, error } = await client.rpc("list_message_recipients", { p_search: search });
   if (error) throw new SupabaseOperationError(error.message, 500, error.code);
   return ((data ?? []) as Array<{
@@ -903,6 +905,8 @@ export async function listSupabaseMessageRecipients(accessToken: string, search 
     user_account_type: AccountAudience;
     user_level_id: string;
     user_photo_url: string | null;
+    user_online: boolean;
+    user_last_seen_at: string | null;
   }>).map((row) => ({
     id: row.user_id,
     name: row.user_name,
@@ -910,6 +914,8 @@ export async function listSupabaseMessageRecipients(accessToken: string, search 
     accountType: row.user_account_type,
     levelId: row.user_level_id,
     photoUrl: row.user_photo_url ?? undefined,
+    online: row.user_online,
+    lastSeenAt: row.user_last_seen_at ?? undefined,
   }));
 }
 

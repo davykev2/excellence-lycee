@@ -44,6 +44,8 @@ export interface MessageRecipient {
   accountType: "student" | "parent" | "teacher";
   levelId: string;
   photoUrl?: string;
+  online?: boolean;
+  lastSeenAt?: string;
 }
 
 export interface MessageThread {

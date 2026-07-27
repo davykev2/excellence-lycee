@@ -42,7 +42,10 @@ const editMessageSchema = z.object({ body: z.string().trim().min(1).max(2000) })
 const preferencesSchema = z.object({ muted: z.boolean().optional(), archived: z.boolean().optional() })
   .refine((value) => value.muted !== undefined || value.archived !== undefined, "Aucune préférence à modifier.");
 
-function asRecipient(user: UserRow): MessageRecipientSummary {
+const ONLINE_WINDOW_MS = 2 * 60 * 1000;
+
+function asRecipient(user: UserRow, lastSeenAt?: string | null): MessageRecipientSummary {
+  const lastSeenTime = lastSeenAt ? Date.parse(lastSeenAt) : Number.NaN;
   return {
     id: user.id,
     name: user.name,
@@ -50,6 +53,8 @@ function asRecipient(user: UserRow): MessageRecipientSummary {
     accountType: user.audience,
     levelId: user.level_id,
     photoUrl: user.photo_url ?? undefined,
+    online: Number.isFinite(lastSeenTime) && Date.now() - lastSeenTime <= ONLINE_WINDOW_MS,
+    lastSeenAt: lastSeenAt ?? undefined,
   };
 }
 
@@ -71,10 +76,27 @@ function listSqliteRecipients(userId: string, search: string) {
   const actor = sqliteUser(userId);
   if (!actor) return [];
   const normalized = search.toLocaleLowerCase("fr");
-  return (database.prepare("SELECT * FROM users ORDER BY name COLLATE NOCASE ASC").all() as UserRow[])
+  const rows = database.prepare(`
+    SELECT users.*, user_presence.last_seen_at
+    FROM users
+    LEFT JOIN user_presence ON user_presence.user_id = users.id
+    ORDER BY
+      CASE WHEN user_presence.last_seen_at >= ? THEN 0 ELSE 1 END,
+      user_presence.last_seen_at DESC,
+      users.name COLLATE NOCASE ASC
+  `).all(new Date(Date.now() - ONLINE_WINDOW_MS).toISOString()) as Array<UserRow & { last_seen_at: string | null }>;
+  return rows
     .filter((recipient) => canMessage(actor, recipient))
-    .map(asRecipient)
+    .map((recipient) => asRecipient(recipient, recipient.last_seen_at))
     .filter((recipient) => !normalized || `${recipient.name} ${recipient.role} ${recipient.levelId}`.toLocaleLowerCase("fr").includes(normalized));
+}
+
+function touchSqlitePresence(userId: string) {
+  database.prepare(`
+    INSERT INTO user_presence (user_id, last_seen_at)
+    VALUES (?, ?)
+    ON CONFLICT(user_id) DO UPDATE SET last_seen_at = excluded.last_seen_at
+  `).run(userId, new Date().toISOString());
 }
 
 interface SqliteThreadRow {
@@ -380,6 +402,7 @@ export async function messageRoutes(app: FastifyInstance) {
   app.get("/recipients", { preHandler: app.authenticate }, async (request, reply) => {
     const parsed = recipientsQuerySchema.safeParse(request.query);
     if (!parsed.success) return reply.code(400).send({ error: "VALIDATION_ERROR", message: "Recherche invalide." });
+    if (!supabaseConfigured) touchSqlitePresence(request.authContext.id);
     const recipients = supabaseConfigured
       ? await listSupabaseMessageRecipients(request.authContext.accessToken!, parsed.data.search)
       : listSqliteRecipients(request.authContext.id, parsed.data.search);

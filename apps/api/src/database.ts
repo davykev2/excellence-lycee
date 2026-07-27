@@ -157,6 +157,14 @@ database.exec(`
   CREATE INDEX IF NOT EXISTS message_thread_members_user_idx
     ON message_thread_members(user_id, archived, thread_id);
 
+  CREATE TABLE IF NOT EXISTS user_presence (
+    user_id TEXT PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+    last_seen_at TEXT NOT NULL
+  );
+
+  CREATE INDEX IF NOT EXISTS user_presence_last_seen_idx
+    ON user_presence(last_seen_at DESC);
+
   CREATE TABLE IF NOT EXISTS messages (
     id TEXT PRIMARY KEY,
     thread_id TEXT NOT NULL REFERENCES message_threads(id) ON DELETE CASCADE,

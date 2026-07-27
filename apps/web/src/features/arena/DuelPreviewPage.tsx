@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowLeft,
+  ArrowClockwise,
   ArrowRight,
   Backspace,
   BellRinging,
   BookOpenText,
   CheckCircle,
   ChatCircleDots,
+  CircleNotch,
   Clock,
   Crown,
   EnvelopeSimple,
@@ -14,6 +16,7 @@ import {
   HourglassHigh,
   Keyboard,
   Lightning,
+  MagnifyingGlass,
   Medal,
   PaperPlaneTilt,
   Play,
@@ -22,15 +25,19 @@ import {
   Sword,
   Target,
   Trophy,
+  UserPlus,
   UsersThree,
   XCircle,
 } from "@phosphor-icons/react";
 import { getCurriculumLessonTitles, type CurriculumLessonTitle } from "../../data/curriculumCatalog";
+import type { MessageRecipient } from "../../domain/community";
 import type { LearnerProfile, SchoolLevel, SubjectDefinition, SubjectId } from "../../domain/learning";
+import { ProfileAvatar } from "../../ui/ProfileAvatar";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
 import "./DuelPreviewPage.css";
+import { useDuelOpponents } from "./useDuelOpponents";
 
-type DuelScreenId = "lobby" | "setup" | "inbox" | "liveInvite" | "battle";
+type DuelScreenId = "lobby" | "setup" | "opponents" | "sent" | "battle";
 type DuelDifficultyId = "easy" | "medium" | "hard" | "very-hard" | "ultra";
 type DuelFormatId = "qcm" | "compound";
 type InvitationDecision = "pending" | "accepted" | "declined";
@@ -430,93 +437,246 @@ function DuelSetupMockup({
   );
 }
 
-function DuelInboxMockup({
-  profile,
+function formatOpponentPresence(opponent: MessageRecipient) {
+  if (opponent.online) return "En ligne maintenant";
+  if (!opponent.lastSeenAt) return "Hors ligne";
+
+  const elapsedMinutes = Math.max(1, Math.round((Date.now() - Date.parse(opponent.lastSeenAt)) / 60_000));
+  if (!Number.isFinite(elapsedMinutes)) return "Hors ligne";
+  if (elapsedMinutes < 60) return `Vu il y a ${elapsedMinutes} min`;
+  if (elapsedMinutes < 24 * 60) return `Vu il y a ${Math.round(elapsedMinutes / 60)} h`;
+  return "Hors ligne";
+}
+
+function DuelOpponentPicker({
+  level,
   subject,
   lessonTitles,
   format,
   difficulty,
   questionCount,
-  decision,
-  onAccept,
-  onDecline,
-  onShowLive,
-}: Pick<DuelPreviewPageProps, "profile" | "subject"> & {
+  opponents,
+  selectedOpponentId,
+  loading,
+  inviting,
+  error,
+  onBack,
+  onReload,
+  onSelectOpponent,
+  onInvite,
+}: Pick<DuelPreviewPageProps, "level" | "subject"> & {
   lessonTitles: string[];
   format: DuelFormat;
   difficulty: DuelDifficulty;
   questionCount: number;
-  decision: InvitationDecision;
-  onAccept: () => void;
-  onDecline: () => void;
-  onShowLive: () => void;
+  opponents: MessageRecipient[];
+  selectedOpponentId: string;
+  loading: boolean;
+  inviting: boolean;
+  error: string | null;
+  onBack: () => void;
+  onReload: () => void;
+  onSelectOpponent: (opponentId: string) => void;
+  onInvite: (opponent: MessageRecipient) => void;
 }) {
-  const isPending = decision === "pending";
+  const [search, setSearch] = useState("");
+  const eligibleOpponents = useMemo(() => opponents
+    .filter((opponent) => (
+      opponent.role === "student"
+      && opponent.accountType === "student"
+      && opponent.levelId === level.id
+    ))
+    .sort((left, right) => {
+      if (Boolean(left.online) !== Boolean(right.online)) return left.online ? -1 : 1;
+      const leftSeen = left.lastSeenAt ? Date.parse(left.lastSeenAt) : 0;
+      const rightSeen = right.lastSeenAt ? Date.parse(right.lastSeenAt) : 0;
+      if (leftSeen !== rightSeen) return rightSeen - leftSeen;
+      return left.name.localeCompare(right.name, "fr");
+    }), [level.id, opponents]);
+  const normalizedSearch = search.trim().toLocaleLowerCase("fr");
+  const visibleOpponents = eligibleOpponents.filter((opponent) => (
+    !normalizedSearch
+    || `${opponent.name} ${opponent.levelId}`.toLocaleLowerCase("fr").includes(normalizedSearch)
+  ));
+  const onlineOpponents = visibleOpponents.filter((opponent) => opponent.online);
+  const offlineOpponents = visibleOpponents.filter((opponent) => !opponent.online);
+  const selectedOpponent = eligibleOpponents.find((opponent) => opponent.id === selectedOpponentId);
+
+  const renderOpponent = (opponent: MessageRecipient) => (
+    <button
+      className={`duel-opponent-card${selectedOpponentId === opponent.id ? " is-selected" : ""}`}
+      key={opponent.id}
+      type="button"
+      onClick={() => onSelectOpponent(opponent.id)}
+      aria-pressed={selectedOpponentId === opponent.id}
+    >
+      <span className={`duel-opponent-avatar${opponent.online ? " is-online" : ""}`}>
+        <ProfileAvatar name={opponent.name} photoUrl={opponent.photoUrl} />
+        <i aria-hidden="true" />
+      </span>
+      <span className="duel-opponent-identity">
+        <strong>{opponent.name}</strong>
+        <small>{level.label} · Élève</small>
+      </span>
+      <span className={`duel-opponent-presence${opponent.online ? " is-online" : ""}`}>
+        <i aria-hidden="true" />
+        {formatOpponentPresence(opponent)}
+      </span>
+      <span className="duel-opponent-select">
+        {selectedOpponentId === opponent.id ? <CheckCircle size={20} weight="fill" /> : <UserPlus size={19} weight="duotone" />}
+      </span>
+    </button>
+  );
 
   return (
-    <section className="duel-ui-frame duel-inbox-mockup" aria-label="Invitation reçue dans Messages">
+    <section className="duel-ui-frame duel-opponents-screen" aria-label="Choisir un adversaire">
       <header className="duel-ui-topbar">
-        <span className="duel-ui-brand"><ChatCircleDots size={18} weight="fill" /> Messages</span>
-        <span className="duel-ui-pill is-message"><EnvelopeSimple size={14} weight="fill" /> 1 nouveau défi</span>
+        <button type="button" aria-label="Retour aux réglages" onClick={onBack}><ArrowLeft size={18} weight="bold" /></button>
+        <span className="duel-ui-brand"><UsersThree size={18} weight="fill" /> Choisir mon adversaire</span>
+        <span className="duel-ui-pill is-message"><span className="duel-live-dot" /> {onlineOpponents.length} en ligne</span>
       </header>
-      <div className="duel-inbox-layout">
-        <aside className="duel-inbox-list" aria-label="Conversations">
-          <div className="duel-inbox-list-heading"><strong>Boîte de réception</strong><span>3</span></div>
-          <button className="is-active" type="button">
-            <MiniAvatar name={profile.name} />
-            <span><strong>{profile.name.split(" ")[0]}</strong><small>t’a envoyé un duel</small></span>
-            <em>maintenant</em>
-          </button>
-          <button type="button">
-            <MiniAvatar name="Groupe Terminale" tone="orange" />
-            <span><strong>Ma classe</strong><small>Nouvelle annonce</small></span>
-            <em>12 min</em>
-          </button>
-          <button type="button">
-            <MiniAvatar name="Davy" />
-            <span><strong>Davy</strong><small>Continue comme ça !</small></span>
-            <em>hier</em>
-          </button>
-        </aside>
-        <div className="duel-inbox-thread">
-          <header>
-            <MiniAvatar name={profile.name} />
-            <div><strong>{profile.name}</strong><small>En ligne · invitation privée</small></div>
-            <span><ShieldCheck size={15} weight="fill" /> Lien sécurisé</span>
-          </header>
-          <div className="duel-thread-content">
-            <div className="duel-message-note"><span>Aujourd’hui</span></div>
-            <article className={`duel-invitation-card is-${decision}`}>
-              <div className="duel-invitation-card-heading">
-                <span><Sword size={24} weight="fill" /></span>
-                <div><small>DÉFI DE {profile.name.split(" ")[0].toUpperCase()}</small><strong>Prête à défendre tes acquis ?</strong></div>
-                <em><HourglassHigh size={14} weight="fill" /> 14:52</em>
-              </div>
-              <p>Un duel de {subject.label.toLowerCase()} t’attend. L’invitation restera ici jusqu’à son expiration.</p>
-              <div className="duel-invite-config">
-                <span><small>LEÇON{lessonTitles.length > 1 ? "S" : ""}</small><strong>{duelLessonSummary(lessonTitles)}</strong></span>
-                <span><small>DIFFICULTÉ</small><strong>{difficulty.label}</strong></span>
-                <span><small>FORMAT</small><strong>{format.label}</strong></span>
-                <span><small>CONTENU</small><strong>{duelQuestionUnit(format.id, questionCount)} · {duelDuration(questionCount, format.id)} min</strong></span>
-              </div>
-              {isPending ? (
-                <div className="duel-invite-actions">
-                  <button type="button" onClick={onAccept}><CheckCircle size={17} weight="fill" /> Accepter</button>
-                  <button type="button" className="is-secondary" onClick={onDecline}><XCircle size={17} weight="bold" /> Refuser</button>
-                </div>
-              ) : (
-                <div className={`duel-invite-decision is-${decision}`} role="status">
-                  {decision === "accepted" ? <CheckCircle size={18} weight="fill" /> : <XCircle size={18} weight="fill" />}
-                  <span>{decision === "accepted" ? "Défi accepté. Le duel peut commencer." : "Défi refusé sans pénalité. L’expéditeur sera informé."}</span>
-                </div>
-              )}
-            </article>
+      <div className="duel-opponents-layout">
+        <div className="duel-opponents-directory">
+          <div className="duel-opponents-heading">
+            <div>
+              <p>ÉLÈVES DE {level.label.toUpperCase()}</p>
+              <h2>Qui veux-tu défier ?</h2>
+              <span>Les élèves connectés apparaissent toujours en premier.</span>
+            </div>
+            <button type="button" onClick={onReload} disabled={loading} aria-label="Actualiser les élèves">
+              <ArrowClockwise size={18} weight="bold" />
+              Actualiser
+            </button>
           </div>
-          <footer>
-            <span><BellRinging size={16} weight="duotone" /> Si Aïcha est en ligne, elle voit aussi une alerte en haut de l’écran.</span>
-            <button type="button" onClick={onShowLive}>Voir l’alerte en direct <ArrowRight size={15} weight="bold" /></button>
-          </footer>
+          <label className="duel-opponent-search">
+            <MagnifyingGlass size={19} />
+            <input
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              placeholder="Rechercher un élève…"
+              aria-label="Rechercher un adversaire"
+            />
+          </label>
+
+          {error ? (
+            <div className="duel-opponents-error" role="alert">
+              <span>{error}</span>
+              <button type="button" onClick={onReload}>Réessayer</button>
+            </div>
+          ) : null}
+
+          {loading ? (
+            <div className="duel-opponents-loading" role="status">
+              <CircleNotch size={25} />
+              Recherche des adversaires disponibles…
+            </div>
+          ) : (
+            <div className="duel-opponents-list">
+              {onlineOpponents.length > 0 ? (
+                <section aria-labelledby="duel-online-heading">
+                  <h3 id="duel-online-heading"><span className="duel-live-dot" /> En ligne maintenant <b>{onlineOpponents.length}</b></h3>
+                  <div>{onlineOpponents.map(renderOpponent)}</div>
+                </section>
+              ) : null}
+              {offlineOpponents.length > 0 ? (
+                <section aria-labelledby="duel-offline-heading">
+                  <h3 id="duel-offline-heading">Autres élèves de ta classe <b>{offlineOpponents.length}</b></h3>
+                  <div>{offlineOpponents.map(renderOpponent)}</div>
+                </section>
+              ) : null}
+              {visibleOpponents.length === 0 ? (
+                <div className="duel-opponents-empty">
+                  <UsersThree size={35} weight="duotone" />
+                  <strong>{normalizedSearch ? "Aucun élève ne correspond à ta recherche." : "Aucun adversaire n’est disponible pour le moment."}</strong>
+                  <span>Seuls les élèves inscrits dans ta classe et ta série peuvent être défiés.</span>
+                </div>
+              ) : null}
+            </div>
+          )}
         </div>
+
+        <aside className="duel-opponent-summary">
+          <span className="duel-match-ring"><Sword size={29} weight="fill" /></span>
+          <p>INVITATION PRIVÉE</p>
+          <h2>{selectedOpponent ? selectedOpponent.name : "Choisis un élève"}</h2>
+          {selectedOpponent ? (
+            <span className={`duel-selected-presence${selectedOpponent.online ? " is-online" : ""}`}>
+              <i aria-hidden="true" />
+              {formatOpponentPresence(selectedOpponent)}
+            </span>
+          ) : (
+            <span>Sélectionne une personne dans la liste.</span>
+          )}
+          <div className="duel-opponent-match-details">
+            <span><BookOpenText size={17} weight="duotone" /><strong>{subject.label}</strong><small>{duelLessonSummary(lessonTitles)}</small></span>
+            <span><Target size={17} weight="duotone" /><strong>{format.label} · {difficulty.label}</strong><small>{duelQuestionUnit(format.id, questionCount)}</small></span>
+            <span><Clock size={17} weight="duotone" /><strong>{duelDuration(questionCount, format.id)} minutes</strong><small>Même temps pour les deux joueurs</small></span>
+          </div>
+          <button
+            type="button"
+            disabled={!selectedOpponent || inviting}
+            onClick={() => selectedOpponent && onInvite(selectedOpponent)}
+          >
+            {inviting ? <><CircleNotch className="duel-spin" size={18} /> Envoi…</> : <><PaperPlaneTilt size={18} weight="fill" /> Envoyer l’invitation</>}
+          </button>
+          <small>
+            {selectedOpponent?.online
+              ? "Il recevra aussi une alerte en haut de son écran."
+              : "L’invitation restera disponible dans sa boîte de réception."}
+          </small>
+        </aside>
+      </div>
+    </section>
+  );
+}
+
+function DuelInvitationSent({
+  opponent,
+  subject,
+  lessonTitles,
+  format,
+  difficulty,
+  questionCount,
+  onChooseAnother,
+  onEditRules,
+}: Pick<DuelPreviewPageProps, "subject"> & {
+  opponent: MessageRecipient;
+  lessonTitles: string[];
+  format: DuelFormat;
+  difficulty: DuelDifficulty;
+  questionCount: number;
+  onChooseAnother: () => void;
+  onEditRules: () => void;
+}) {
+  return (
+    <section className="duel-ui-frame duel-invitation-sent" aria-label="Invitation envoyée">
+      <header className="duel-ui-topbar">
+        <span className="duel-ui-brand"><EnvelopeSimple size={18} weight="fill" /> Invitation envoyée</span>
+        <span className="duel-ui-pill is-message"><CheckCircle size={14} weight="fill" /> Dans Messages</span>
+      </header>
+      <div className="duel-sent-stage">
+        <div className={`duel-sent-avatar${opponent.online ? " is-online" : ""}`}>
+          <ProfileAvatar name={opponent.name} photoUrl={opponent.photoUrl} />
+          <span><CheckCircle size={20} weight="fill" /></span>
+        </div>
+        <p>DÉFI ENVOYÉ</p>
+        <h2>En attente de {opponent.name}…</h2>
+        <span>
+          {opponent.online
+            ? `${opponent.name.split(" ")[0]} est en ligne : l’alerte du duel vient aussi de s’afficher en haut de son écran.`
+            : `${opponent.name.split(" ")[0]} retrouvera le défi dans sa boîte de réception lors de sa prochaine connexion.`}
+        </span>
+        <div className="duel-sent-config">
+          <span><small>MATIÈRE</small><strong>{subject.label}</strong></span>
+          <span><small>LEÇON{lessonTitles.length > 1 ? "S" : ""}</small><strong>{duelLessonSummary(lessonTitles)}</strong></span>
+          <span><small>FORMAT</small><strong>{format.label} · {difficulty.label}</strong></span>
+          <span><small>DURÉE</small><strong>{duelQuestionUnit(format.id, questionCount)} · {duelDuration(questionCount, format.id)} min</strong></span>
+        </div>
+        <div className="duel-sent-actions">
+          <button type="button" onClick={onChooseAnother}><UsersThree size={18} weight="duotone" /> Choisir une autre personne</button>
+          <button className="is-secondary" type="button" onClick={onEditRules}><Target size={18} weight="duotone" /> Modifier les règles</button>
+        </div>
+        <small><BellRinging size={15} weight="duotone" /> Le duel commencera seulement après acceptation de l’adversaire.</small>
       </div>
     </section>
   );
@@ -810,6 +970,7 @@ function DuelBattleMockup({
 }
 
 export function DuelPreviewPage({ profile, level, subject: initialSubject, subjects, onBackArena }: DuelPreviewPageProps) {
+  const duelOpponents = useDuelOpponents();
   const availableDuelSubjects = useMemo(() => {
     const withPublishedLessons = subjects.filter((option) => getDuelLessons(level.id, option.id).length > 0);
     return withPublishedLessons.length > 0 ? withPublishedLessons : [initialSubject];
@@ -827,7 +988,8 @@ export function DuelPreviewPage({ profile, level, subject: initialSubject, subje
   const [formatId, setFormatId] = useState<DuelFormatId>("qcm");
   const [difficultyId, setDifficultyId] = useState<DuelDifficultyId>("medium");
   const [questionCount, setQuestionCount] = useState<number>(10);
-  const [invitationDecision, setInvitationDecision] = useState<InvitationDecision>("pending");
+  const [selectedOpponentId, setSelectedOpponentId] = useState("");
+  const [invitedOpponent, setInvitedOpponent] = useState<MessageRecipient | null>(null);
   const duelPageRef = useRef<HTMLElement | null>(null);
   const subject = availableDuelSubjects.find((option) => option.id === duelSubjectId) ?? initialDuelSubject;
   const lessonOptions = useMemo(() => getDuelLessons(level.id, subject.id), [level.id, subject.id]);
@@ -838,6 +1000,16 @@ export function DuelPreviewPage({ profile, level, subject: initialSubject, subje
   const lessonTitles = selectedLessons.map((lesson) => lesson.title);
   const format = duelFormats.find((option) => option.id === formatId) ?? duelFormats[0];
   const difficulty = difficulties.find((option) => option.id === difficultyId) ?? difficulties[1];
+  const eligibleOpponents = useMemo(() => duelOpponents.opponents
+    .filter((opponent) => (
+      opponent.role === "student"
+      && opponent.accountType === "student"
+      && opponent.levelId === level.id
+    ))
+    .sort((left, right) => {
+      if (Boolean(left.online) !== Boolean(right.online)) return left.online ? -1 : 1;
+      return left.name.localeCompare(right.name, "fr");
+    }), [duelOpponents.opponents, level.id]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 760px)");
@@ -852,6 +1024,11 @@ export function DuelPreviewPage({ profile, level, subject: initialSubject, subje
       duelPageRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }, [activeScreen]);
+
+  useEffect(() => {
+    if (eligibleOpponents.some((opponent) => opponent.id === selectedOpponentId)) return;
+    setSelectedOpponentId(eligibleOpponents[0]?.id ?? "");
+  }, [eligibleOpponents, selectedOpponentId]);
 
   const goTo = (id: DuelScreenId) => setActiveScreen(id);
   const changeDuelSubject = (nextSubjectId: SubjectId) => {
@@ -875,12 +1052,26 @@ export function DuelPreviewPage({ profile, level, subject: initialSubject, subje
     setFormatId(nextFormatId);
     setQuestionCount(nextFormatId === "compound" ? 4 : 10);
   };
-  const acceptInvitation = () => {
-    setInvitationDecision("accepted");
-    goTo("battle");
+  const sendDuelInvitation = async (opponent: MessageRecipient) => {
+    const subjectLine = `Duel · ${subject.label} · ${difficulty.label}`;
+    const duelLink = `${window.location.origin}/arene/duel?matiere=${subject.id}`;
+    const body = [
+      `⚔️ ${profile.name} te défie dans un duel Excellence !`,
+      `Matière : ${subject.label}`,
+      `Leçon${lessonTitles.length > 1 ? "s" : ""} : ${duelLessonSummary(lessonTitles)}`,
+      `Format : ${format.label} · ${difficulty.label}`,
+      `Contenu : ${duelQuestionUnit(format.id, questionCount)} · environ ${duelDuration(questionCount, format.id)} min`,
+      `Ouvre le duel : ${duelLink}`,
+    ].join("\n");
+
+    try {
+      await duelOpponents.invite(opponent.id, subjectLine, body);
+      setInvitedOpponent(opponent);
+      goTo("sent");
+    } catch {
+      // L'erreur détaillée est affichée dans la sélection des adversaires.
+    }
   };
-  const declineInvitation = () => setInvitationDecision("declined");
-  const resetInvitation = () => setInvitationDecision("pending");
 
   const renderScreen = () => {
     if (activeScreen === "setup") {
@@ -902,44 +1093,44 @@ export function DuelPreviewPage({ profile, level, subject: initialSubject, subje
           onQuestionCountChange={setQuestionCount}
           onBack={() => goTo("lobby")}
           onSelect={() => {
-            resetInvitation();
-            goTo("inbox");
+            setInvitedOpponent(null);
+            goTo("opponents");
           }}
         />
       );
     }
-    if (activeScreen === "inbox") {
+    if (activeScreen === "opponents") {
       return (
-        <DuelInboxMockup
-          profile={profile}
+        <DuelOpponentPicker
+          level={level}
           subject={subject}
           lessonTitles={lessonTitles}
           format={format}
           difficulty={difficulty}
           questionCount={questionCount}
-          decision={invitationDecision}
-          onAccept={acceptInvitation}
-          onDecline={declineInvitation}
-          onShowLive={() => {
-            resetInvitation();
-            goTo("liveInvite");
-          }}
+          opponents={duelOpponents.opponents}
+          selectedOpponentId={selectedOpponentId}
+          loading={duelOpponents.loading}
+          inviting={duelOpponents.inviting}
+          error={duelOpponents.error}
+          onBack={() => goTo("setup")}
+          onReload={() => void duelOpponents.reload()}
+          onSelectOpponent={setSelectedOpponentId}
+          onInvite={(opponent) => void sendDuelInvitation(opponent)}
         />
       );
     }
-    if (activeScreen === "liveInvite") {
+    if (activeScreen === "sent" && invitedOpponent) {
       return (
-        <DuelLiveInviteMockup
-          profile={profile}
+        <DuelInvitationSent
+          opponent={invitedOpponent}
           subject={subject}
           lessonTitles={lessonTitles}
           format={format}
           difficulty={difficulty}
           questionCount={questionCount}
-          decision={invitationDecision}
-          onAccept={acceptInvitation}
-          onDecline={declineInvitation}
-          onReset={resetInvitation}
+          onChooseAnother={() => goTo("opponents")}
+          onEditRules={() => goTo("setup")}
         />
       );
     }
@@ -953,7 +1144,6 @@ export function DuelPreviewPage({ profile, level, subject: initialSubject, subje
           difficulty={difficulty}
           questionCount={questionCount}
           onRematch={() => {
-            resetInvitation();
             goTo("setup");
           }}
         />

@@ -7,6 +7,8 @@ export interface MessageRecipientSummary {
   accountType: AccountAudience;
   levelId: string;
   photoUrl?: string;
+  online?: boolean;
+  lastSeenAt?: string;
 }
 
 export interface MessageThreadSummary {
