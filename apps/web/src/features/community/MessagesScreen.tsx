@@ -165,7 +165,7 @@ export function MessagesScreen({ profile, level }: MessagesScreenProps) {
   };
 
   const removeMessage = async (message: ChatMessage) => {
-    if (!activeThread || !window.confirm("Supprimer ce message ? Il restera indiqué comme supprimé dans la conversation.")) return;
+    if (!activeThread || !window.confirm("Supprimer définitivement ce message ? Il disparaîtra de la conversation sans laisser de trace.")) return;
     try {
       await messaging.deleteMessage(activeThread.id, message.id);
     } catch {

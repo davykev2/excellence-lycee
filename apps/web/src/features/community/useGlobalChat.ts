@@ -64,8 +64,9 @@ export function useGlobalChat() {
   const deleteMessage = useCallback(async (messageId: string) => {
     await runMutation(async () => {
       await apiRequest<void>(`/messages/global/${messageId}`, { method: "DELETE" });
+      await loadMessages(true);
     });
-  }, [runMutation]);
+  }, [loadMessages, runMutation]);
 
   return {
     messages,
