@@ -429,8 +429,8 @@ function DuelSetupMockup({
           <div><Clock size={17} weight="duotone" /> Environ {duration} minutes</div>
           <div><ShieldCheck size={17} weight="duotone" /> Même niveau et même temps</div>
           <div><EnvelopeSimple size={17} weight="duotone" /> Invitation privée, valable 15 min</div>
-          <button type="button" onClick={onSelect}>Envoyer l’invitation <PaperPlaneTilt size={17} weight="fill" /></button>
-          <small>Ton adversaire retrouvera cette invitation dans Messages.</small>
+          <button type="button" onClick={onSelect}>Choisir un adversaire <ArrowRight size={17} weight="bold" /></button>
+          <small>À l’étape suivante, choisis l’élève à qui envoyer l’invitation.</small>
         </aside>
       </div>
     </section>
