@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -107,50 +107,6 @@ const formulaKeyboardKeys = [
   "(",
   ")",
 ] as const;
-
-const screens: Array<{
-  id: DuelScreenId;
-  step: string;
-  title: string;
-  description: string;
-  icon: typeof Sword;
-}> = [
-  {
-    id: "lobby",
-    step: "01",
-    title: "Le hall des duels",
-    description: "Choisir son type de défi et trouver une partie équitable.",
-    icon: Sword,
-  },
-  {
-    id: "setup",
-    step: "02",
-    title: "Les réglages",
-    description: "Choisir le format, la difficulté et le nombre de questions.",
-    icon: Target,
-  },
-  {
-    id: "inbox",
-    step: "03",
-    title: "L’invitation",
-    description: "Retrouver le défi dans Messages, même après une déconnexion.",
-    icon: EnvelopeSimple,
-  },
-  {
-    id: "liveInvite",
-    step: "04",
-    title: "L’alerte en direct",
-    description: "Accepter ou refuser immédiatement si l’élève est connecté.",
-    icon: BellRinging,
-  },
-  {
-    id: "battle",
-    step: "05",
-    title: "Duel, attente et bilan",
-    description: "Jouer, attendre l’adversaire puis découvrir la correction au même endroit.",
-    icon: Lightning,
-  },
-];
 
 type DuelSubjectPreview = {
   topic: string;
@@ -326,9 +282,7 @@ function DuelSetupMockup({
       <header className="duel-ui-topbar">
         <button type="button" aria-label="Retour au hall" onClick={onBack}><ArrowLeft size={18} weight="bold" /></button>
         <span className="duel-ui-brand"><Target size={18} weight="fill" /> Préparer mon duel</span>
-        <span className="duel-ui-step">ÉTAPE 2 / 5</span>
       </header>
-      <div className="duel-setup-progress" aria-hidden="true"><i /><i className="is-active" /><i /><i /><i /></div>
       <div className="duel-setup-layout">
         <div className="duel-setup-form">
           <p>UN DÉFI À TA MESURE</p>
@@ -792,7 +746,6 @@ export function DuelPreviewPage({ profile, level, subject, onBackArena }: DuelPr
   const [difficultyId, setDifficultyId] = useState<DuelDifficultyId>("medium");
   const [questionCount, setQuestionCount] = useState<number>(10);
   const [invitationDecision, setInvitationDecision] = useState<InvitationDecision>("pending");
-  const active = useMemo(() => screens.find((screen) => screen.id === activeScreen) ?? screens[0], [activeScreen]);
   const format = duelFormats.find((option) => option.id === formatId) ?? duelFormats[0];
   const difficulty = difficulties.find((option) => option.id === difficultyId) ?? difficulties[1];
 
@@ -895,25 +848,7 @@ export function DuelPreviewPage({ profile, level, subject, onBackArena }: DuelPr
         <CompanionAvatar motion="celebrate" className="duel-preview-davy" decorative />
       </section>
 
-      <section className="duel-preview-steps" aria-label="Étapes du futur duel">
-        {screens.map((screen) => {
-          const Icon = screen.icon;
-          const isActive = screen.id === activeScreen;
-          return (
-            <button key={screen.id} className={isActive ? "is-active" : ""} type="button" onClick={() => goTo(screen.id)} aria-pressed={isActive}>
-              <span><Icon size={23} weight={isActive ? "fill" : "duotone"} /></span>
-              <div><small>ÉTAPE {screen.step}</small><strong>{screen.title}</strong><p>{screen.description}</p></div>
-              <ArrowRight size={18} weight="bold" />
-            </button>
-          );
-        })}
-      </section>
-
       <section className="duel-preview-stage" aria-live="polite">
-        <div className="duel-preview-stage-heading">
-          <div><p>MAQUETTE {active.step} · {device === "desktop" ? "VERSION ORDINATEUR" : "VERSION MOBILE"}</p><h2>{active.title}</h2></div>
-          <span><Sparkle size={18} weight="fill" /> Les principaux boutons fonctionnent dans la maquette</span>
-        </div>
         <div className={`duel-preview-browser is-${device}`}>
           <div className="duel-preview-browser-bar"><i /><i /><i /><span>excellence-lycee.app/arene/duel</span></div>
           <div className="duel-preview-canvas">{renderScreen()}</div>
