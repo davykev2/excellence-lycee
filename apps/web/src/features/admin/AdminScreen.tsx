@@ -48,6 +48,7 @@ import { useAdminFeedback } from "./useAdminFeedback";
 import { LessonContentStudio } from "./LessonContentStudio";
 import { EditorialOverview } from "./EditorialOverview";
 import { BacExamPublicationControl } from "./BacExamPublicationControl";
+import { BacExamParticipantResults } from "./BacExamParticipantResults";
 
 const reactionMeta: Record<LessonReaction, { label: string; Icon: typeof Heart }> = {
   useful: { label: "a trouvé utile", Icon: ThumbsUp },
@@ -673,6 +674,7 @@ export function AdminScreen({
         <section className="admin-section" data-testid="admin-operations">
           <div className="admin-section-heading"><div><p className="admin-eyebrow">Supervision</p><h2>Opérations et qualité</h2><p>Traite les validations, signalements et contrôles indispensables.</p></div><span className="admin-live-pill"><i /> Surveillance active</span></div>
           <BacExamPublicationControl preview={preview} />
+          <BacExamParticipantResults preview={preview} />
           <div className="admin-operations-grid">
             <article className="admin-panel admin-task-board">
               <header className="admin-panel-header"><div><p className="admin-eyebrow">File de travail</p><h2>{openTasks.length} actions ouvertes</h2></div></header>

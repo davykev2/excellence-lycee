@@ -16,6 +16,18 @@ export interface BacExamAppreciation {
   message: string;
 }
 
+export interface BacExamParticipantResult {
+  userId: string;
+  name: string;
+  email: string;
+  levelId: string;
+  photoUrl?: string;
+  submittedAt: string;
+  correctAnswers: number;
+  scoreMax: number;
+  appreciation: BacExamAppreciation;
+}
+
 export interface BacExamState {
   examId: string;
   title: string;

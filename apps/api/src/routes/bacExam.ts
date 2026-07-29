@@ -7,11 +7,13 @@ import {
   type BacExamAnswers,
   type BacExamChoice,
   type BacExamCorrectionEntry,
+  type BacExamParticipantResult,
   type BacExamState,
 } from "../bacExam.js";
 import { database, writeAuditLog } from "../database.js";
 import {
   getSupabaseBacExamState,
+  listSupabaseBacExamParticipantResults,
   setSupabaseBacExamResultsPublished,
   setSupabaseBacExamSubjectPublished,
   submitSupabaseBacExam,
@@ -43,6 +45,14 @@ interface LocalExamSettingsRow {
 interface LocalExamSubmissionRow {
   answers_json: string;
   submitted_at: string;
+}
+
+interface LocalExamParticipantRow extends LocalExamSubmissionRow {
+  user_id: string;
+  name: string;
+  email: string;
+  level_id: string;
+  photo_url: string | null;
 }
 
 function questionKey(index: number) {
@@ -138,6 +148,60 @@ function localExamState(userId: string, isAdmin: boolean): BacExamState {
   return state;
 }
 
+function localExamParticipantResults(examId: string): BacExamParticipantResult[] {
+  const settings = database.prepare(`
+    SELECT question_count, answer_key_json
+    FROM bac_exam_settings
+    WHERE exam_id = ?
+  `).get(examId) as Pick<LocalExamSettingsRow, "question_count" | "answer_key_json"> | undefined;
+  if (!settings) throw Object.assign(new Error("Épreuve introuvable."), { statusCode: 404 });
+
+  const answerKey = JSON.parse(settings.answer_key_json) as Record<string, BacExamChoice>;
+  if (!isCompleteAnswerSet(answerKey, settings.question_count)) {
+    throw Object.assign(
+      new Error("La clé de réponses complète doit être chargée avant de calculer les notes."),
+      { statusCode: 409 },
+    );
+  }
+
+  const rows = database.prepare(`
+    SELECT
+      submission.user_id,
+      profile.name,
+      profile.email,
+      profile.level_id,
+      profile.photo_url,
+      submission.answers_json,
+      submission.submitted_at
+    FROM bac_exam_submissions AS submission
+    INNER JOIN users AS profile ON profile.id = submission.user_id
+    WHERE submission.exam_id = ?
+  `).all(examId) as LocalExamParticipantRow[];
+
+  return rows
+    .map((row) => {
+      const answers = JSON.parse(row.answers_json) as BacExamAnswers;
+      const correctAnswers = Object.entries(answerKey)
+        .reduce((total, [key, answer]) => total + (answers[key] === answer ? 1 : 0), 0);
+      return {
+        userId: row.user_id,
+        name: row.name,
+        email: row.email,
+        levelId: row.level_id,
+        photoUrl: row.photo_url ?? undefined,
+        submittedAt: row.submitted_at,
+        correctAnswers,
+        scoreMax: settings.question_count,
+        appreciation: getBacExamAppreciation(correctAnswers, settings.question_count),
+      };
+    })
+    .sort((left, right) => (
+      right.correctAnswers - left.correctAnswers
+      || left.name.localeCompare(right.name, "fr", { sensitivity: "base" })
+      || left.userId.localeCompare(right.userId)
+    ));
+}
+
 function submitLocalExam(userId: string, answers: BacExamAnswers) {
   const settings = database.prepare(`
     SELECT question_count, subject_published FROM bac_exam_settings WHERE exam_id = ?
@@ -210,6 +274,17 @@ export async function bacExamRoutes(app: FastifyInstance) {
       ? await getSupabaseBacExamState(request.authContext.accessToken!, parsed.data.examId)
       : localExamState(request.authContext.id, request.authContext.role === "admin");
     return state;
+  });
+
+  app.get("/:examId/participant-results", { preHandler: app.authenticate }, async (request, reply) => {
+    reply.header("Cache-Control", "private, no-store");
+    if (!requireAdmin(request, reply)) return;
+    const parsed = paramsSchema.safeParse(request.params);
+    if (!parsed.success) return reply.code(404).send({ error: "EXAM_NOT_FOUND", message: "Épreuve introuvable." });
+    const items = supabaseConfigured
+      ? await listSupabaseBacExamParticipantResults(request.authContext.accessToken!, parsed.data.examId)
+      : localExamParticipantResults(parsed.data.examId);
+    return { items, total: items.length };
   });
 
   app.post("/:examId/submissions", {

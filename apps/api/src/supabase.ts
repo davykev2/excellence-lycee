@@ -16,7 +16,12 @@ import type {
 } from "./arenaExercises.js";
 import type { GlobalMessageSummary, MessageRecipientSummary, MessageThreadSummary, ThreadMessageSummary } from "./messaging.js";
 import type { AdminFeedbackItem, LessonFeedbackSummary, LessonReaction } from "./lessonFeedback.js";
-import type { BacExamAnswers, BacExamState } from "./bacExam.js";
+import {
+  getBacExamAppreciation,
+  type BacExamAnswers,
+  type BacExamParticipantResult,
+  type BacExamState,
+} from "./bacExam.js";
 
 export interface PublicAuthUser {
   id: string;
@@ -1272,6 +1277,47 @@ export async function submitSupabaseBacExam(accessToken: string, examId: string,
     throw new SupabaseOperationError("La copie n’a pas pu être enregistrée.", 500, "BAC_EXAM_SUBMISSION_MISSING");
   }
   return data;
+}
+
+export async function listSupabaseBacExamParticipantResults(
+  accessToken: string,
+  examId: string,
+): Promise<BacExamParticipantResult[]> {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("get_bac_exam_participant_results", {
+    p_exam_id: examId,
+  });
+  if (error) {
+    const status = error.code === "42501" ? 403
+      : error.code === "P0002" ? 404
+        : error.code === "55000" ? 409
+          : error.code === "PGRST202" ? 503
+            : 500;
+    throw new SupabaseOperationError(error.message, status, error.code);
+  }
+
+  const rows = (data ?? []) as unknown as Array<{
+    user_id: string;
+    student_name: string;
+    student_email: string;
+    level_id: string;
+    photo_url: string | null;
+    submitted_at: string;
+    correct_answers: number;
+    score_max: number;
+  }>;
+
+  return rows.map((row) => ({
+    userId: row.user_id,
+    name: row.student_name,
+    email: row.student_email,
+    levelId: row.level_id,
+    photoUrl: row.photo_url ?? undefined,
+    submittedAt: row.submitted_at,
+    correctAnswers: row.correct_answers,
+    scoreMax: row.score_max,
+    appreciation: getBacExamAppreciation(row.correct_answers, row.score_max),
+  }));
 }
 
 export async function setSupabaseBacExamResultsPublished(
