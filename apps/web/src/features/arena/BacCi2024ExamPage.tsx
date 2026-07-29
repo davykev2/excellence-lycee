@@ -13,6 +13,7 @@ import {
   WarningCircle,
 } from "@phosphor-icons/react";
 import { MathText } from "../../components/MathText";
+import { MarkdownContent } from "../../components/MarkdownContent";
 import {
   bacCi2024Exam,
   bacCi2024Questions,
@@ -22,6 +23,7 @@ import {
   type BacExamQuestion,
 } from "../../data/bacCi2024Exam";
 import type { LearnerProfile } from "../../domain/learning";
+import type { BacExamCorrectionEntry } from "../../domain/bacExam";
 import { useAuth } from "../auth/AuthProvider";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
 import { useBacExam } from "./useBacExam";
@@ -84,7 +86,7 @@ function QuestionCard({
   question: BacExamQuestion;
   answer?: BacExamChoiceId;
   readOnly: boolean;
-  correction?: { answer: BacExamChoiceId; explanation?: string };
+  correction?: BacExamCorrectionEntry;
   onAnswer: (answer: BacExamChoiceId) => void;
 }) {
   return (
@@ -125,10 +127,25 @@ function QuestionCard({
       {correction && (
         <div className="bac-exam-correction">
           <SealCheck size={22} weight="duotone" />
-          <p>
+          <div>
             <strong>Bonne réponse : {correction.answer}</strong>
-            <span>{correction.explanation || "La correction détaillée sera complétée par l’équipe pédagogique."}</span>
-          </p>
+            <MarkdownContent
+              markdown={correction.explanation || "La correction détaillée sera complétée par l’équipe pédagogique."}
+              preserveLineBreaks
+            />
+            {correction.warning && (
+              <p className="bac-exam-correction-warning">
+                <WarningCircle size={18} weight="fill" />
+                <span>{correction.warning}</span>
+              </p>
+            )}
+            {correction.sourceUrl && (
+              <a href={correction.sourceUrl} target="_blank" rel="noreferrer">
+                {correction.sourceLabel || "Consulter la source de vérification"}
+                <ArrowRight size={15} weight="bold" />
+              </a>
+            )}
+          </div>
         </div>
       )}
     </fieldset>
@@ -205,6 +222,25 @@ export function BacCi2024ExamPage({
     );
   }
 
+  if (state?.subjectPublished === false && !state.canManageSubject && !submitted) {
+    return (
+      <main className="bac-exam-page">
+        <button className="path-back-button" type="button" onClick={onBackArena}>
+          <ArrowLeft size={20} weight="bold" />Retour à l’Arène
+        </button>
+        <section className="bac-result-lock">
+          <CompanionAvatar motion="idle" className="bac-result-davy" decorative />
+          <span className="bac-result-lock-icon"><LockKey size={27} weight="duotone" /></span>
+          <h1>Le sujet est actuellement fermé</h1>
+          <p>Davy te préviendra dès que l’administrateur ouvrira cette épreuve aux candidats.</p>
+          <button className="secondary-action" type="button" onClick={() => void exam.reload()}>
+            Vérifier maintenant
+          </button>
+        </section>
+      </main>
+    );
+  }
+
   if (resultsOpen) {
     const corrections = state?.result?.corrections ?? {};
     return (
@@ -236,13 +272,17 @@ export function BacCi2024ExamPage({
               <div>
                 <p className="path-kicker">Résultat officiel</p>
                 <h1>{profile.name}, voici ta note</h1>
-                <p>Chaque réponse est reprise ci-dessous avec la bonne proposition.</p>
+                <p>Chaque bonne réponse vaut un point. Consulte ensuite le corrigé détaillé question par question.</p>
               </div>
               <div className="bac-result-score">
                 <Medal size={31} weight="duotone" />
-                <strong>{state.result.scoreOutOf20.toLocaleString("fr-FR")}</strong>
-                <span>/20</span>
-                <small>{state.result.correctAnswers} bonnes réponses sur 69</small>
+                <strong>{state.result.correctAnswers}</strong>
+                <span>/{state.result.scoreMax}</span>
+                <small>1 point par bonne réponse</small>
+                <div className="bac-result-appreciation">
+                  <strong>{state.result.appreciation.label}</strong>
+                  <p>{state.result.appreciation.message}</p>
+                </div>
               </div>
             </section>
             <div className="bac-exam-paper is-correction">

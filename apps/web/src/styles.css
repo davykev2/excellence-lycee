@@ -10644,16 +10644,70 @@ textarea:focus-visible {
   background: #edf7e9;
 }
 
-.bac-exam-correction p {
+.bac-exam-correction > div {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
+  min-width: 0;
   margin: 0;
 }
 
-.bac-exam-correction span {
+.bac-exam-correction .lesson-rich-content {
   color: #58725f;
   font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.bac-exam-correction .lesson-rich-content > * {
+  margin: 0;
+}
+
+.bac-exam-correction .lesson-rich-content > * + * {
+  margin-top: 7px;
+}
+
+.bac-exam-correction .lesson-rich-content ul,
+.bac-exam-correction .lesson-rich-content ol {
+  padding-left: 20px;
+}
+
+.bac-exam-correction .math-text {
+  color: #58725f;
+}
+
+.bac-exam-correction-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 4px 0 0;
+  padding: 10px 11px;
+  border-radius: 10px;
+  color: #9a5a0b;
+  background: #fff5d8;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.bac-exam-correction-warning svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
+.bac-exam-correction a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: max-content;
+  max-width: 100%;
+  margin-top: 2px;
+  color: #0b5fc1;
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.bac-exam-correction a:hover {
+  text-decoration: underline;
 }
 
 .bac-exam-submit-panel {
@@ -10987,7 +11041,7 @@ textarea:focus-visible {
   color: #ffd74a;
 }
 
-.bac-result-score strong {
+.bac-result-score > strong {
   justify-self: end;
   font-size: 3rem;
   line-height: 1;
@@ -11004,6 +11058,26 @@ textarea:focus-visible {
   color: #dce7f5;
 }
 
+.bac-result-appreciation {
+  grid-column: 1 / -1;
+  margin-top: 14px;
+  padding-top: 13px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.bac-result-appreciation strong {
+  display: block;
+  color: #ffd74a;
+  font-size: 1.05rem;
+}
+
+.bac-result-appreciation p {
+  margin: 4px 0 0;
+  color: #f1f6fd;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
 .admin-bac-publication {
   margin-bottom: 22px;
   padding: 24px;
@@ -11017,6 +11091,13 @@ textarea:focus-visible {
   border-radius: 999px;
   font-size: 0.76rem;
   font-weight: 900;
+}
+
+.admin-bac-statuses {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
 }
 
 .admin-bac-status.is-locked {
@@ -11103,11 +11184,18 @@ textarea:focus-visible {
   margin-top: 18px;
 }
 
-.admin-bac-actions a {
+.admin-bac-actions a,
+.admin-bac-actions .secondary-action {
   display: inline-flex;
   align-items: center;
   gap: 7px;
   text-decoration: none;
+}
+
+.admin-bac-actions .secondary-action.is-danger {
+  color: #b74018;
+  border-color: #efc0b0;
+  background: #fff7f3;
 }
 
 .admin-bac-notice {

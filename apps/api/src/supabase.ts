@@ -1229,15 +1229,31 @@ export async function getSupabaseAdminFeedbackFeed(accessToken: string, limit = 
 
 export async function getSupabaseBacExamState(accessToken: string, examId: string): Promise<BacExamState> {
   const client = userDataClient(accessToken);
-  const { data, error } = await client.rpc("get_bac_exam_state", { p_exam_id: examId });
+  const [
+    { data, error },
+    { data: availability, error: availabilityError },
+  ] = await Promise.all([
+    client.rpc("get_bac_exam_state", { p_exam_id: examId }),
+    client.rpc("get_bac_exam_availability", { p_exam_id: examId }),
+  ]);
   if (error) {
     const status = error.code === "P0002" ? 404 : error.code === "42501" ? 401 : error.code === "PGRST202" ? 503 : 500;
     throw new SupabaseOperationError(error.message, status, error.code);
   }
+  if (availabilityError) {
+    const status = availabilityError.code === "P0002" ? 404
+      : availabilityError.code === "42501" ? 401
+        : availabilityError.code === "PGRST202" ? 503
+          : 500;
+    throw new SupabaseOperationError(availabilityError.message, status, availabilityError.code);
+  }
   if (!data || typeof data !== "object") {
     throw new SupabaseOperationError("L’état de l’épreuve est indisponible.", 500, "BAC_EXAM_STATE_MISSING");
   }
-  return data as unknown as BacExamState;
+  if (!availability || typeof availability !== "object") {
+    throw new SupabaseOperationError("La disponibilité de l’épreuve est indisponible.", 500, "BAC_EXAM_AVAILABILITY_MISSING");
+  }
+  return { ...data, ...availability } as unknown as BacExamState;
 }
 
 export async function submitSupabaseBacExam(accessToken: string, examId: string, answers: BacExamAnswers) {
@@ -1247,7 +1263,9 @@ export async function submitSupabaseBacExam(accessToken: string, examId: string,
     p_answers: answers,
   });
   if (error) {
-    const status = error.code === "P0002" ? 404 : error.code === "23505" || error.code === "P0001" ? 409 : 400;
+    const status = error.code === "P0002" ? 404
+      : error.code === "23505" || error.code === "P0001" || error.code === "55000" ? 409
+        : 400;
     throw new SupabaseOperationError(error.message, status, error.code);
   }
   if (typeof data !== "string") {
@@ -1268,6 +1286,23 @@ export async function setSupabaseBacExamResultsPublished(
   });
   if (error) {
     const status = error.code === "42501" ? 403 : error.code === "P0002" ? 404 : error.code === "55000" ? 409 : 400;
+    throw new SupabaseOperationError(error.message, status, error.code);
+  }
+  return Boolean(data);
+}
+
+export async function setSupabaseBacExamSubjectPublished(
+  accessToken: string,
+  examId: string,
+  published: boolean,
+) {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("set_bac_exam_subject_published", {
+    p_exam_id: examId,
+    p_published: published,
+  });
+  if (error) {
+    const status = error.code === "42501" ? 403 : error.code === "P0002" ? 404 : 400;
     throw new SupabaseOperationError(error.message, status, error.code);
   }
   return Boolean(data);

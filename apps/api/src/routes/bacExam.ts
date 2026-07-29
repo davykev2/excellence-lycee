@@ -3,6 +3,7 @@ import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 import {
   BAC_CI_2024_EXAM_ID,
+  getBacExamAppreciation,
   type BacExamAnswers,
   type BacExamChoice,
   type BacExamCorrectionEntry,
@@ -12,6 +13,7 @@ import { database, writeAuditLog } from "../database.js";
 import {
   getSupabaseBacExamState,
   setSupabaseBacExamResultsPublished,
+  setSupabaseBacExamSubjectPublished,
   submitSupabaseBacExam,
   supabaseConfigured,
   writeSupabaseAudit,
@@ -32,6 +34,7 @@ interface LocalExamSettingsRow {
   title: string;
   duration_minutes: number;
   question_count: number;
+  subject_published: number;
   results_published: number;
   answer_key_json: string;
   corrections_json: string;
@@ -53,9 +56,21 @@ function isCompleteAnswerSet(answers: Record<string, unknown>, questionCount: nu
       .every((key) => ["A", "B", "C", "D"].includes(String(answers[key])));
 }
 
+function isCompleteCorrectionSet(corrections: Record<string, unknown>, questionCount: number) {
+  const keys = Object.keys(corrections);
+  return keys.length === questionCount
+    && Array.from({ length: questionCount }, (_, index) => questionKey(index + 1))
+      .every((key) => {
+        const entry = corrections[key];
+        if (!entry || typeof entry !== "object" || Array.isArray(entry)) return false;
+        return typeof (entry as { explanation?: unknown }).explanation === "string"
+          && (entry as { explanation: string }).explanation.trim().length > 0;
+      });
+}
+
 function requireAdmin(request: FastifyRequest, reply: FastifyReply) {
   if (request.authContext.role !== "admin") {
-    reply.code(403).send({ error: "FORBIDDEN", message: "Seul un administrateur peut publier les résultats." });
+    reply.code(403).send({ error: "FORBIDDEN", message: "Seul un administrateur peut gérer cette épreuve." });
     return false;
   }
   return true;
@@ -63,7 +78,7 @@ function requireAdmin(request: FastifyRequest, reply: FastifyReply) {
 
 function localExamState(userId: string, isAdmin: boolean): BacExamState {
   const settings = database.prepare(`
-    SELECT exam_id, title, duration_minutes, question_count, results_published,
+    SELECT exam_id, title, duration_minutes, question_count, subject_published, results_published,
       answer_key_json, corrections_json
     FROM bac_exam_settings
     WHERE exam_id = ?
@@ -76,17 +91,21 @@ function localExamState(userId: string, isAdmin: boolean): BacExamState {
     WHERE exam_id = ? AND user_id = ?
   `).get(BAC_CI_2024_EXAM_ID, userId) as LocalExamSubmissionRow | undefined;
   const answerKey = JSON.parse(settings.answer_key_json) as Record<string, BacExamChoice>;
-  const corrections = JSON.parse(settings.corrections_json) as Record<string, BacExamCorrectionEntry>;
+  const corrections = JSON.parse(settings.corrections_json) as Record<string, Partial<BacExamCorrectionEntry>>;
   const answerKeyReady = isCompleteAnswerSet(answerKey, settings.question_count);
+  const correctionReady = answerKeyReady && isCompleteCorrectionSet(corrections, settings.question_count);
   const published = settings.results_published === 1;
   const state: BacExamState = {
     examId: settings.exam_id,
     title: settings.title,
     durationMinutes: settings.duration_minutes,
     questionCount: settings.question_count,
+    subjectPublished: settings.subject_published === 1,
     resultsPublished: published,
     answerKeyReady,
-    canPublishResults: isAdmin && answerKeyReady,
+    correctionReady,
+    canPublishResults: isAdmin && correctionReady,
+    canManageSubject: isAdmin,
     submittedAt: submission?.submitted_at,
     submittedAnswers: submission ? JSON.parse(submission.answers_json) as BacExamAnswers : undefined,
   };
@@ -98,7 +117,7 @@ function localExamState(userId: string, isAdmin: boolean): BacExamState {
     state.totalSubmissions = count.total;
   }
 
-  if (published && answerKeyReady && submission) {
+  if (published && correctionReady && submission) {
     const answers = JSON.parse(submission.answers_json) as BacExamAnswers;
     const correctAnswers = Object.entries(answerKey)
       .reduce((total, [key, answer]) => total + (answers[key] === answer ? 1 : 0), 0);
@@ -110,7 +129,9 @@ function localExamState(userId: string, isAdmin: boolean): BacExamState {
     );
     state.result = {
       correctAnswers,
+      scoreMax: settings.question_count,
       scoreOutOf20: Math.round((correctAnswers * 2_000) / settings.question_count) / 100,
+      appreciation: getBacExamAppreciation(correctAnswers, settings.question_count),
       corrections: resultCorrections,
     };
   }
@@ -119,9 +140,12 @@ function localExamState(userId: string, isAdmin: boolean): BacExamState {
 
 function submitLocalExam(userId: string, answers: BacExamAnswers) {
   const settings = database.prepare(`
-    SELECT question_count FROM bac_exam_settings WHERE exam_id = ?
-  `).get(BAC_CI_2024_EXAM_ID) as { question_count: number } | undefined;
+    SELECT question_count, subject_published FROM bac_exam_settings WHERE exam_id = ?
+  `).get(BAC_CI_2024_EXAM_ID) as { question_count: number; subject_published: number } | undefined;
   if (!settings) throw Object.assign(new Error("Épreuve introuvable."), { statusCode: 404 });
+  if (settings.subject_published !== 1) {
+    throw Object.assign(new Error("Ce sujet est actuellement fermé par l’administrateur."), { statusCode: 409 });
+  }
   if (!isCompleteAnswerSet(answers, settings.question_count)) {
     throw Object.assign(new Error("Réponds aux 69 questions avant de valider ta copie."), { statusCode: 400 });
   }
@@ -140,11 +164,21 @@ function submitLocalExam(userId: string, answers: BacExamAnswers) {
 
 function setLocalResultsPublished(actorId: string, published: boolean) {
   const settings = database.prepare(`
-    SELECT question_count, answer_key_json FROM bac_exam_settings WHERE exam_id = ?
-  `).get(BAC_CI_2024_EXAM_ID) as { question_count: number; answer_key_json: string } | undefined;
+    SELECT question_count, answer_key_json, corrections_json
+    FROM bac_exam_settings
+    WHERE exam_id = ?
+  `).get(BAC_CI_2024_EXAM_ID) as {
+    question_count: number;
+    answer_key_json: string;
+    corrections_json: string;
+  } | undefined;
   if (!settings) throw Object.assign(new Error("Épreuve introuvable."), { statusCode: 404 });
   const answerKey = JSON.parse(settings.answer_key_json) as Record<string, unknown>;
-  if (published && !isCompleteAnswerSet(answerKey, settings.question_count)) {
+  const corrections = JSON.parse(settings.corrections_json) as Record<string, unknown>;
+  if (published && (
+    !isCompleteAnswerSet(answerKey, settings.question_count)
+    || !isCompleteCorrectionSet(corrections, settings.question_count)
+  )) {
     throw Object.assign(new Error("La correction complète doit être chargée avant la publication."), { statusCode: 409 });
   }
   database.prepare(`
@@ -155,8 +189,21 @@ function setLocalResultsPublished(actorId: string, published: boolean) {
   writeAuditLog(actorId, published ? "bac_exam.results.publish" : "bac_exam.results.hide", BAC_CI_2024_EXAM_ID);
 }
 
+function setLocalSubjectPublished(actorId: string, published: boolean) {
+  const result = database.prepare(`
+    UPDATE bac_exam_settings
+    SET subject_published = ?, updated_by = ?, updated_at = ?
+    WHERE exam_id = ?
+  `).run(published ? 1 : 0, actorId, new Date().toISOString(), BAC_CI_2024_EXAM_ID);
+  if (result.changes === 0) {
+    throw Object.assign(new Error("Épreuve introuvable."), { statusCode: 404 });
+  }
+  writeAuditLog(actorId, published ? "bac_exam.subject.publish" : "bac_exam.subject.hide", BAC_CI_2024_EXAM_ID);
+}
+
 export async function bacExamRoutes(app: FastifyInstance) {
   app.get("/:examId", { preHandler: app.authenticate }, async (request, reply) => {
+    reply.header("Cache-Control", "private, no-store");
     const parsed = paramsSchema.safeParse(request.params);
     if (!parsed.success) return reply.code(404).send({ error: "EXAM_NOT_FOUND", message: "Épreuve introuvable." });
     const state = supabaseConfigured
@@ -169,6 +216,7 @@ export async function bacExamRoutes(app: FastifyInstance) {
     preHandler: app.authenticate,
     config: { rateLimit: { max: 5, timeWindow: "1 hour" } },
   }, async (request, reply) => {
+    reply.header("Cache-Control", "private, no-store");
     const params = paramsSchema.safeParse(request.params);
     const body = submitSchema.safeParse(request.body);
     if (!params.success) return reply.code(404).send({ error: "EXAM_NOT_FOUND", message: "Épreuve introuvable." });
@@ -189,6 +237,7 @@ export async function bacExamRoutes(app: FastifyInstance) {
   });
 
   app.patch("/:examId/results-publication", { preHandler: app.authenticate }, async (request, reply) => {
+    reply.header("Cache-Control", "private, no-store");
     if (!requireAdmin(request, reply)) return;
     const params = paramsSchema.safeParse(request.params);
     const body = publicationSchema.safeParse(request.body);
@@ -204,6 +253,27 @@ export async function bacExamRoutes(app: FastifyInstance) {
       ).catch((error) => request.log.warn(error, "Supabase audit log failed"));
     } else {
       setLocalResultsPublished(request.authContext.id, body.data.published);
+    }
+    return getSupabaseOrLocalState(request);
+  });
+
+  app.patch("/:examId/subject-publication", { preHandler: app.authenticate }, async (request, reply) => {
+    reply.header("Cache-Control", "private, no-store");
+    if (!requireAdmin(request, reply)) return;
+    const params = paramsSchema.safeParse(request.params);
+    const body = publicationSchema.safeParse(request.body);
+    if (!params.success) return reply.code(404).send({ error: "EXAM_NOT_FOUND", message: "Épreuve introuvable." });
+    if (!body.success) return reply.code(400).send({ error: "VALIDATION_ERROR", message: "État du sujet invalide." });
+    if (supabaseConfigured) {
+      await setSupabaseBacExamSubjectPublished(request.authContext.accessToken!, params.data.examId, body.data.published);
+      await writeSupabaseAudit(
+        request.authContext.accessToken!,
+        request.authContext.id,
+        body.data.published ? "bac_exam.subject.publish" : "bac_exam.subject.hide",
+        params.data.examId,
+      ).catch((error) => request.log.warn(error, "Supabase audit log failed"));
+    } else {
+      setLocalSubjectPublished(request.authContext.id, body.data.published);
     }
     return getSupabaseOrLocalState(request);
   });

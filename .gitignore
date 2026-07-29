@@ -27,6 +27,7 @@ apps/api/data/*.db-*
 
 # Sources volumineuses ou sous copyright
 content_sources/
+output/pdf/corrige-detaille-concours-bac-ci-2024-augmente.pdf
 
 # Fichiers temporaires et caches d’outils
 .agents/

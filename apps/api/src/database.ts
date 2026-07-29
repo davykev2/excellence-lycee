@@ -247,6 +247,7 @@ database.exec(`
     title TEXT NOT NULL,
     duration_minutes INTEGER NOT NULL CHECK (duration_minutes > 0),
     question_count INTEGER NOT NULL CHECK (question_count > 0),
+    subject_published INTEGER NOT NULL DEFAULT 0 CHECK (subject_published IN (0, 1)),
     results_published INTEGER NOT NULL DEFAULT 0 CHECK (results_published IN (0, 1)),
     answer_key_json TEXT NOT NULL DEFAULT '{}',
     corrections_json TEXT NOT NULL DEFAULT '{}',
@@ -267,11 +268,16 @@ database.exec(`
     ON bac_exam_submissions(user_id, submitted_at DESC);
 `);
 
+const bacExamSettingsColumns = database.prepare("PRAGMA table_info(bac_exam_settings)").all() as Array<{ name: string }>;
+if (!bacExamSettingsColumns.some((column) => column.name === "subject_published")) {
+  database.exec("ALTER TABLE bac_exam_settings ADD COLUMN subject_published INTEGER NOT NULL DEFAULT 0 CHECK (subject_published IN (0, 1))");
+}
+
 database.prepare(`
   INSERT INTO bac_exam_settings (
-    exam_id, title, duration_minutes, question_count, results_published,
+    exam_id, title, duration_minutes, question_count, subject_published, results_published,
     answer_key_json, corrections_json, updated_at
-  ) VALUES (?, ?, ?, ?, 0, '{}', '{}', ?)
+  ) VALUES (?, ?, ?, ?, 0, 0, '{}', '{}', ?)
   ON CONFLICT(exam_id) DO UPDATE SET
     title = excluded.title,
     duration_minutes = excluded.duration_minutes,

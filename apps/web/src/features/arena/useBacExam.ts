@@ -8,9 +8,12 @@ const previewState: BacExamState = {
   title: "Concours BAC & BT 2024 — Test de niveau",
   durationMinutes: 180,
   questionCount: 69,
+  subjectPublished: false,
   resultsPublished: false,
   answerKeyReady: false,
+  correctionReady: false,
   canPublishResults: false,
+  canManageSubject: true,
   totalSubmissions: 0,
 };
 
@@ -90,5 +93,36 @@ export function useBacExam({ preview = false }: { preview?: boolean } = {}) {
     }
   }, [preview]);
 
-  return { state, loading, error, submitting, reload, submit, setResultsPublished };
+  const setSubjectPublished = useCallback(async (published: boolean) => {
+    if (preview) {
+      setState((current) => ({ ...(current ?? previewState), subjectPublished: published }));
+      return;
+    }
+    setSubmitting(true);
+    setError(null);
+    try {
+      const next = await apiRequest<BacExamState>(
+        `/bac-exams/${BAC_CI_2024_EXAM_ID}/subject-publication`,
+        { method: "PATCH", body: JSON.stringify({ published }) },
+      );
+      setState(next);
+    } catch (publicationError) {
+      const message = publicationError instanceof Error ? publicationError.message : "L’accès au sujet n’a pas pu être modifié.";
+      setError(message);
+      throw publicationError;
+    } finally {
+      setSubmitting(false);
+    }
+  }, [preview]);
+
+  return {
+    state,
+    loading,
+    error,
+    submitting,
+    reload,
+    submit,
+    setResultsPublished,
+    setSubjectPublished,
+  };
 }
