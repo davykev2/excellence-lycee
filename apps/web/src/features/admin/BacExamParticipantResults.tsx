@@ -3,6 +3,7 @@ import {
   ArrowClockwise,
   CalendarBlank,
   ChartBar,
+  FilePdf,
   LockKey,
   MagnifyingGlass,
   Medal,
@@ -51,6 +52,8 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
   const [query, setQuery] = useState("");
   const [levelId, setLevelId] = useState("all");
   const [sort, setSort] = useState<ParticipantSort>("score");
+  const [exportingPdf, setExportingPdf] = useState(false);
+  const [exportError, setExportError] = useState<string | null>(null);
 
   const availableLevels = useMemo(() => (
     [...new Set(participants.items.map((participant) => participant.levelId).filter(Boolean))]
@@ -85,6 +88,19 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
     ? Math.round(participants.items.reduce((sum, item) => sum + item.correctAnswers, 0) / participants.items.length * 10) / 10
     : 0;
   const bestScore = participants.items.reduce((best, item) => Math.max(best, item.correctAnswers), 0);
+
+  const downloadRankingPdf = async () => {
+    setExportingPdf(true);
+    setExportError(null);
+    try {
+      const { exportBacExamResultsPdf } = await import("./exportBacExamResultsPdf");
+      exportBacExamResultsPdf(participants.items, levelLabel);
+    } catch {
+      setExportError("Le PDF n’a pas pu être généré. Réessaie dans quelques instants.");
+    } finally {
+      setExportingPdf(false);
+    }
+  };
 
   return (
     <article className="admin-panel admin-bac-participants">
@@ -151,7 +167,18 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
           <ArrowClockwise size={18} weight="bold" />
           {participants.loading ? "Actualisation…" : "Actualiser"}
         </button>
+        <button
+          className="primary-action is-compact admin-bac-pdf"
+          type="button"
+          disabled={participants.loading || participants.items.length === 0 || exportingPdf}
+          onClick={() => void downloadRankingPdf()}
+        >
+          <FilePdf size={19} weight="duotone" />
+          {exportingPdf ? "Création du PDF…" : "Télécharger le classement PDF"}
+        </button>
       </div>
+
+      {exportError && <p className="admin-bac-export-error" role="alert">{exportError}</p>}
 
       {participants.loading && participants.items.length === 0 && (
         <div className="admin-bac-participants-feedback" role="status">
@@ -198,7 +225,10 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
               <span role="columnheader">Élève</span>
               <span role="columnheader">Classe</span>
               <span role="columnheader">Copie déposée</span>
-              <span role="columnheader">Note</span>
+              <span role="columnheader">Anglais</span>
+              <span role="columnheader">Culture G.</span>
+              <span role="columnheader">Culture S.</span>
+              <span role="columnheader">Total</span>
               <span role="columnheader">Appréciation</span>
             </div>
             {filteredItems.map((participant, index) => (
@@ -214,6 +244,18 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
                 <span className="admin-bac-date" role="cell">
                   <CalendarBlank size={17} weight="duotone" />
                   {formatSubmissionDate(participant.submittedAt)}
+                </span>
+                <span className="admin-bac-section-score" role="cell">
+                  <strong>{participant.sectionScores.english.correctAnswers}</strong>
+                  <em>/{participant.sectionScores.english.scoreMax}</em>
+                </span>
+                <span className="admin-bac-section-score" role="cell">
+                  <strong>{participant.sectionScores.generalKnowledge.correctAnswers}</strong>
+                  <em>/{participant.sectionScores.generalKnowledge.scoreMax}</em>
+                </span>
+                <span className="admin-bac-section-score" role="cell">
+                  <strong>{participant.sectionScores.scientificKnowledge.correctAnswers}</strong>
+                  <em>/{participant.sectionScores.scientificKnowledge.scoreMax}</em>
                 </span>
                 <span className="admin-bac-score" role="cell">
                   {sort === "score" && <small>#{index + 1}</small>}
@@ -246,6 +288,20 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
                 <div className="admin-bac-result-card-meta">
                   <span>{levelLabel(participant.levelId)}</span>
                   <span><CalendarBlank size={16} weight="duotone" />{formatSubmissionDate(participant.submittedAt)}</span>
+                </div>
+                <div className="admin-bac-card-section-scores" aria-label="Notes par matière">
+                  <span>
+                    <small>Anglais</small>
+                    <strong>{participant.sectionScores.english.correctAnswers}/{participant.sectionScores.english.scoreMax}</strong>
+                  </span>
+                  <span>
+                    <small>Culture générale</small>
+                    <strong>{participant.sectionScores.generalKnowledge.correctAnswers}/{participant.sectionScores.generalKnowledge.scoreMax}</strong>
+                  </span>
+                  <span>
+                    <small>Culture scientifique</small>
+                    <strong>{participant.sectionScores.scientificKnowledge.correctAnswers}/{participant.sectionScores.scientificKnowledge.scoreMax}</strong>
+                  </span>
                 </div>
                 <footer>
                   <span className={`admin-bac-appreciation ${appreciationTone(participant.appreciation.label)}`}>

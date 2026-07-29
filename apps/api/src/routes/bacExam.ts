@@ -4,6 +4,7 @@ import { z } from "zod";
 import {
   BAC_CI_2024_EXAM_ID,
   getBacExamAppreciation,
+  getBacExamSectionScores,
   type BacExamAnswers,
   type BacExamChoice,
   type BacExamCorrectionEntry,
@@ -141,6 +142,7 @@ function localExamState(userId: string, isAdmin: boolean): BacExamState {
       correctAnswers,
       scoreMax: settings.question_count,
       scoreOutOf20: Math.round((correctAnswers * 2_000) / settings.question_count) / 100,
+      sectionScores: getBacExamSectionScores(answers, answerKey),
       appreciation: getBacExamAppreciation(correctAnswers, settings.question_count),
       corrections: resultCorrections,
     };
@@ -192,6 +194,7 @@ function localExamParticipantResults(examId: string): BacExamParticipantResult[]
         submittedAt: row.submitted_at,
         correctAnswers,
         scoreMax: settings.question_count,
+        sectionScores: getBacExamSectionScores(answers, answerKey),
         appreciation: getBacExamAppreciation(correctAnswers, settings.question_count),
       };
     })

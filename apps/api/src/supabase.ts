@@ -1305,6 +1305,12 @@ export async function listSupabaseBacExamParticipantResults(
     submitted_at: string;
     correct_answers: number;
     score_max: number;
+    english_correct: number;
+    english_max: number;
+    general_knowledge_correct: number;
+    general_knowledge_max: number;
+    scientific_knowledge_correct: number;
+    scientific_knowledge_max: number;
   }>;
 
   return rows.map((row) => ({
@@ -1316,6 +1322,20 @@ export async function listSupabaseBacExamParticipantResults(
     submittedAt: row.submitted_at,
     correctAnswers: row.correct_answers,
     scoreMax: row.score_max,
+    sectionScores: {
+      english: {
+        correctAnswers: row.english_correct,
+        scoreMax: row.english_max,
+      },
+      generalKnowledge: {
+        correctAnswers: row.general_knowledge_correct,
+        scoreMax: row.general_knowledge_max,
+      },
+      scientificKnowledge: {
+        correctAnswers: row.scientific_knowledge_correct,
+        scoreMax: row.scientific_knowledge_max,
+      },
+    },
     appreciation: getBacExamAppreciation(row.correct_answers, row.score_max),
   }));
 }

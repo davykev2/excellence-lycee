@@ -285,6 +285,30 @@ export function BacCi2024ExamPage({
                 </div>
               </div>
             </section>
+            <section className="bac-result-section-scores" aria-labelledby="bac-section-scores-title">
+              <header>
+                <p className="path-kicker">Détail par matière</p>
+                <h2 id="bac-section-scores-title">Tes trois sous-notes</h2>
+                <p>Le total des trois matières correspond exactement à ta note globale sur 69.</p>
+              </header>
+              <div>
+                <article>
+                  <span>Anglais</span>
+                  <p><strong>{state.result.sectionScores.english.correctAnswers}</strong><em>/{state.result.sectionScores.english.scoreMax}</em></p>
+                  <small>Questions 1 à 20</small>
+                </article>
+                <article>
+                  <span>Culture générale</span>
+                  <p><strong>{state.result.sectionScores.generalKnowledge.correctAnswers}</strong><em>/{state.result.sectionScores.generalKnowledge.scoreMax}</em></p>
+                  <small>Questions 21 à 40 et 61 à 65</small>
+                </article>
+                <article>
+                  <span>Culture scientifique</span>
+                  <p><strong>{state.result.sectionScores.scientificKnowledge.correctAnswers}</strong><em>/{state.result.sectionScores.scientificKnowledge.scoreMax}</em></p>
+                  <small>Questions 41 à 60 et 66 à 69</small>
+                </article>
+              </div>
+            </section>
             <div className="bac-exam-paper is-correction">
               {bacCi2024Exam.sections.map((section) => (
                 <section className="bac-exam-section" key={section.id}>

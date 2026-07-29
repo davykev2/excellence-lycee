@@ -16,6 +16,17 @@ export interface BacExamAppreciation {
   message: string;
 }
 
+export interface BacExamSectionScore {
+  correctAnswers: number;
+  scoreMax: number;
+}
+
+export interface BacExamSectionScores {
+  english: BacExamSectionScore;
+  generalKnowledge: BacExamSectionScore;
+  scientificKnowledge: BacExamSectionScore;
+}
+
 export interface BacExamParticipantResult {
   userId: string;
   name: string;
@@ -25,6 +36,7 @@ export interface BacExamParticipantResult {
   submittedAt: string;
   correctAnswers: number;
   scoreMax: number;
+  sectionScores: BacExamSectionScores;
   appreciation: BacExamAppreciation;
 }
 
@@ -46,8 +58,50 @@ export interface BacExamState {
     correctAnswers: number;
     scoreMax: number;
     scoreOutOf20?: number;
+    sectionScores: BacExamSectionScores;
     appreciation: BacExamAppreciation;
     corrections: Record<string, BacExamCorrectionEntry>;
+  };
+}
+
+const bacExamSectionQuestionNumbers = {
+  english: Array.from({ length: 20 }, (_, index) => index + 1),
+  generalKnowledge: [
+    ...Array.from({ length: 20 }, (_, index) => index + 21),
+    ...Array.from({ length: 5 }, (_, index) => index + 61),
+  ],
+  scientificKnowledge: [
+    ...Array.from({ length: 20 }, (_, index) => index + 41),
+    ...Array.from({ length: 4 }, (_, index) => index + 66),
+  ],
+} as const;
+
+function bacExamQuestionKey(questionNumber: number) {
+  return `q${String(questionNumber).padStart(2, "0")}`;
+}
+
+function scoreBacExamSection(
+  answers: BacExamAnswers,
+  answerKey: Record<string, BacExamChoice>,
+  questionNumbers: readonly number[],
+): BacExamSectionScore {
+  return {
+    correctAnswers: questionNumbers.reduce((total, questionNumber) => {
+      const key = bacExamQuestionKey(questionNumber);
+      return total + (answers[key] === answerKey[key] ? 1 : 0);
+    }, 0),
+    scoreMax: questionNumbers.length,
+  };
+}
+
+export function getBacExamSectionScores(
+  answers: BacExamAnswers,
+  answerKey: Record<string, BacExamChoice>,
+): BacExamSectionScores {
+  return {
+    english: scoreBacExamSection(answers, answerKey, bacExamSectionQuestionNumbers.english),
+    generalKnowledge: scoreBacExamSection(answers, answerKey, bacExamSectionQuestionNumbers.generalKnowledge),
+    scientificKnowledge: scoreBacExamSection(answers, answerKey, bacExamSectionQuestionNumbers.scientificKnowledge),
   };
 }
 

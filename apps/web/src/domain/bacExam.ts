@@ -13,6 +13,17 @@ export interface BacExamAppreciation {
   message: string;
 }
 
+export interface BacExamSectionScore {
+  correctAnswers: number;
+  scoreMax: number;
+}
+
+export interface BacExamSectionScores {
+  english: BacExamSectionScore;
+  generalKnowledge: BacExamSectionScore;
+  scientificKnowledge: BacExamSectionScore;
+}
+
 export interface BacExamParticipantResult {
   userId: string;
   name: string;
@@ -22,6 +33,7 @@ export interface BacExamParticipantResult {
   submittedAt: string;
   correctAnswers: number;
   scoreMax: number;
+  sectionScores: BacExamSectionScores;
   appreciation: BacExamAppreciation;
 }
 
@@ -43,6 +55,7 @@ export interface BacExamState {
     correctAnswers: number;
     scoreMax: number;
     scoreOutOf20?: number;
+    sectionScores: BacExamSectionScores;
     appreciation: BacExamAppreciation;
     corrections: Record<string, BacExamCorrectionEntry>;
   };
