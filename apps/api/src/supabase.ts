@@ -16,6 +16,7 @@ import type {
 } from "./arenaExercises.js";
 import type { GlobalMessageSummary, MessageRecipientSummary, MessageThreadSummary, ThreadMessageSummary } from "./messaging.js";
 import type { AdminFeedbackItem, LessonFeedbackSummary, LessonReaction } from "./lessonFeedback.js";
+import type { BacExamAnswers, BacExamState } from "./bacExam.js";
 
 export interface PublicAuthUser {
   id: string;
@@ -1224,4 +1225,50 @@ export async function getSupabaseAdminFeedbackFeed(accessToken: string, limit = 
     throw new SupabaseOperationError(error.message, status, error.code);
   }
   return (data ?? []) as unknown as AdminFeedbackItem[];
+}
+
+export async function getSupabaseBacExamState(accessToken: string, examId: string): Promise<BacExamState> {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("get_bac_exam_state", { p_exam_id: examId });
+  if (error) {
+    const status = error.code === "P0002" ? 404 : error.code === "42501" ? 401 : error.code === "PGRST202" ? 503 : 500;
+    throw new SupabaseOperationError(error.message, status, error.code);
+  }
+  if (!data || typeof data !== "object") {
+    throw new SupabaseOperationError("L’état de l’épreuve est indisponible.", 500, "BAC_EXAM_STATE_MISSING");
+  }
+  return data as unknown as BacExamState;
+}
+
+export async function submitSupabaseBacExam(accessToken: string, examId: string, answers: BacExamAnswers) {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("submit_bac_exam", {
+    p_exam_id: examId,
+    p_answers: answers,
+  });
+  if (error) {
+    const status = error.code === "P0002" ? 404 : error.code === "23505" || error.code === "P0001" ? 409 : 400;
+    throw new SupabaseOperationError(error.message, status, error.code);
+  }
+  if (typeof data !== "string") {
+    throw new SupabaseOperationError("La copie n’a pas pu être enregistrée.", 500, "BAC_EXAM_SUBMISSION_MISSING");
+  }
+  return data;
+}
+
+export async function setSupabaseBacExamResultsPublished(
+  accessToken: string,
+  examId: string,
+  published: boolean,
+) {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("set_bac_exam_results_published", {
+    p_exam_id: examId,
+    p_published: published,
+  });
+  if (error) {
+    const status = error.code === "42501" ? 403 : error.code === "P0002" ? 404 : error.code === "55000" ? 409 : 400;
+    throw new SupabaseOperationError(error.message, status, error.code);
+  }
+  return Boolean(data);
 }

@@ -6,8 +6,9 @@ export interface AppRoute {
   subjectId?: SubjectId;
   pathId?: string;
   lessonId?: string;
-  arenaMode?: "exercises" | "codex" | "duel";
+  arenaMode?: "exercises" | "codex" | "duel" | "bac-2024";
   arenaEditor?: boolean;
+  bacResults?: boolean;
   adminSection?: AdminSection;
   adminStudio?: boolean;
 }
@@ -48,6 +49,7 @@ const preservedPreviewParams = [
   "__davy-tour-preview",
   "__arena-exercise-editor-preview",
   "__duel-preview",
+  "__bac-exam-preview",
 ] as const;
 
 function decodeSegment(value: string | undefined) {
@@ -84,9 +86,12 @@ export function readAppRoute(location: Pick<Location, "pathname" | "search">, fa
         ? "codex" as const
         : second === "duel"
           ? "duel" as const
+          : second === "concours-bac-ci-2024"
+            ? "bac-2024" as const
           : undefined;
     const arenaEditor = arenaMode === "exercises" && third === "editeur";
-    return { navigation: "arena", subjectId, arenaMode, arenaEditor };
+    const bacResults = arenaMode === "bac-2024" && third === "resultats";
+    return { navigation: "arena", subjectId, arenaMode, arenaEditor, bacResults };
   }
   if (section === "boutique") return { navigation: "store", subjectId };
   if (section === "classement") return { navigation: "ranking", subjectId };
@@ -113,6 +118,9 @@ function pathnameFor(route: AppRoute) {
     if (route.arenaMode === "exercises") return route.arenaEditor ? "/arene/exercices/editeur" : "/arene/exercices";
     if (route.arenaMode === "codex") return "/arene/codex";
     if (route.arenaMode === "duel") return "/arene/duel";
+    if (route.arenaMode === "bac-2024") {
+      return route.bacResults ? "/arene/concours-bac-ci-2024/resultats" : "/arene/concours-bac-ci-2024";
+    }
     return "/arene";
   }
   if (route.navigation === "store") return "/boutique";

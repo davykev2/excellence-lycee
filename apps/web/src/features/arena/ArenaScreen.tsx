@@ -27,6 +27,7 @@ import { CompanionAvatar } from "../companion/CompanionAvatar";
 import { ArenaExercisesPage } from "./ArenaExercisesPage";
 import { MathCodexPage } from "../codex/MathCodexPage";
 import { DuelPreviewPage } from "./DuelPreviewPage";
+import { BacCi2024ExamPage } from "./BacCi2024ExamPage";
 
 interface ArenaScreenProps {
   profile: LearnerProfile;
@@ -38,6 +39,8 @@ interface ArenaScreenProps {
   exercisesOpen: boolean;
   codexOpen: boolean;
   duelOpen: boolean;
+  bacExamOpen: boolean;
+  bacResultsOpen: boolean;
   exerciseEditorOpen: boolean;
   localOnly?: boolean;
   onSubjectChange: (subjectId: SubjectId) => void;
@@ -45,6 +48,9 @@ interface ArenaScreenProps {
   onOpenExercises: () => void;
   onOpenCodex: () => void;
   onOpenDuel: () => void;
+  onOpenBacExam: () => void;
+  onOpenBacResults: () => void;
+  onBackBacExam: () => void;
   onBackArena: () => void;
   onOpenExerciseEditor: () => void;
   onCloseExerciseEditor: () => void;
@@ -161,6 +167,8 @@ export function ArenaScreen({
   exercisesOpen,
   codexOpen,
   duelOpen,
+  bacExamOpen,
+  bacResultsOpen,
   exerciseEditorOpen,
   localOnly = false,
   onSubjectChange,
@@ -168,6 +176,9 @@ export function ArenaScreen({
   onOpenExercises,
   onOpenCodex,
   onOpenDuel,
+  onOpenBacExam,
+  onOpenBacResults,
+  onBackBacExam,
   onBackArena,
   onOpenExerciseEditor,
   onCloseExerciseEditor,
@@ -190,6 +201,10 @@ export function ArenaScreen({
       onOpenDuel();
       return;
     }
+    if (modeId === "bac") {
+      onOpenBacExam();
+      return;
+    }
     setSelectedModeId(modeId);
     setSelectionMessage(null);
     window.setTimeout(() => document.getElementById("arena-selected-mode")?.scrollIntoView({ behavior: "smooth", block: "nearest" }), 0);
@@ -206,6 +221,10 @@ export function ArenaScreen({
     }
     if (selectedMode.id === "duel") {
       onOpenDuel();
+      return;
+    }
+    if (selectedMode.id === "bac") {
+      onOpenBacExam();
       return;
     }
     setSelectionMessage(`Mode « ${selectedMode.title} » sélectionné pour ${subject.label}. La prochaine étape sera de connecter sa banque d’épreuves.`);
@@ -232,6 +251,19 @@ export function ArenaScreen({
 
   if (duelOpen) {
     return <DuelPreviewPage profile={profile} level={level} subject={subject} subjects={subjects} onBackArena={onBackArena} />;
+  }
+
+  if (bacExamOpen) {
+    return (
+      <BacCi2024ExamPage
+        profile={profile}
+        resultsOpen={bacResultsOpen}
+        localOnly={localOnly}
+        onBackArena={onBackArena}
+        onOpenResults={onOpenBacResults}
+        onBackExam={onBackBacExam}
+      />
+    );
   }
 
   return (
