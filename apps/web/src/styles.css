@@ -11775,21 +11775,39 @@ textarea:focus-visible {
   }
 
   .admin-bac-results-cards > article {
+    min-width: 0;
     padding: 15px;
     border: 1px solid #dfe5e0;
     border-radius: 16px;
     background: #fff;
+    overflow: hidden;
   }
 
   .admin-bac-results-cards header {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content;
     align-items: center;
-    justify-content: space-between;
     gap: 12px;
+    min-width: 0;
   }
 
   .admin-bac-results-cards .admin-bac-student {
+    flex: 1 1 0;
     min-width: 0;
+    overflow: hidden;
+  }
+
+  .admin-bac-results-cards .admin-bac-student p {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .admin-bac-results-cards .admin-bac-score {
+    flex: 0 0 auto;
+    justify-self: end;
+    padding: 7px 9px;
+    border-radius: 11px;
+    background: #f5f8fb;
   }
 
   .admin-bac-result-card-meta {
@@ -11826,21 +11844,109 @@ textarea:focus-visible {
 }
 
 @media (max-width: 480px) {
+  .admin-bac-participants {
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .admin-bac-participants > .admin-panel-header {
+    flex-direction: column;
+    padding: 16px 6px 12px;
+  }
+
+  .admin-bac-private-pill {
+    max-width: 100%;
+    font-size: 0.66rem;
+  }
+
+  .admin-bac-participant-stats {
+    gap: 8px;
+  }
+
+  .admin-bac-participant-stats > div {
+    padding: 12px;
+  }
+
   .admin-bac-participant-toolbar {
     grid-template-columns: 1fr;
+    gap: 8px;
   }
 
   .admin-bac-participant-search {
     grid-column: auto;
   }
 
-  .admin-bac-results-cards header,
-  .admin-bac-results-cards footer {
+  .admin-bac-results-cards {
+    gap: 10px;
+  }
+
+  .admin-bac-results-cards > article {
+    padding: 12px;
+  }
+
+  .admin-bac-results-cards header {
     align-items: flex-start;
+    gap: 8px;
+  }
+
+  .admin-bac-results-cards .admin-bac-student {
+    gap: 9px;
+  }
+
+  .admin-bac-results-cards .admin-bac-student > img,
+  .admin-bac-results-cards .admin-bac-student > span {
+    width: 38px;
+    height: 38px;
+  }
+
+  .admin-bac-results-cards .admin-bac-student strong {
+    font-size: 0.8rem;
+  }
+
+  .admin-bac-results-cards .admin-bac-student small {
+    font-size: 0.64rem;
+  }
+
+  .admin-bac-results-cards .admin-bac-score {
+    padding: 7px 8px;
+  }
+
+  .admin-bac-results-cards .admin-bac-score > small {
+    margin-right: 4px;
+    font-size: 0.58rem;
+  }
+
+  .admin-bac-results-cards .admin-bac-score > strong {
+    font-size: 1.22rem;
+  }
+
+  .admin-bac-results-cards .admin-bac-score > em {
+    font-size: 0.69rem;
+  }
+
+  .admin-bac-result-card-meta {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 7px 10px;
+    font-size: 0.67rem;
+  }
+
+  .admin-bac-result-card-meta > span {
+    min-width: 0;
+  }
+
+  .admin-bac-result-card-meta > span:last-child {
+    white-space: normal;
   }
 
   .admin-bac-results-cards footer {
+    align-items: flex-start;
     flex-direction: column;
+    gap: 7px;
+  }
+
+  .admin-bac-results-cards footer p {
+    overflow-wrap: anywhere;
   }
 
   .bac-exam-topbar > span:last-child {
