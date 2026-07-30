@@ -1,4 +1,4 @@
-import { ArrowRight, CaretDown, Lightbulb, Student } from "@phosphor-icons/react";
+import { ArrowRight, CaretDown, Hammer, Lightbulb, Student } from "@phosphor-icons/react";
 import type { DashboardContent, SchoolLevel, SubjectDefinition, SubjectId } from "../../domain/learning";
 import { AppIcon } from "../../ui/AppIcon";
 import { ProfileAvatar } from "../../ui/ProfileAvatar";
@@ -72,6 +72,25 @@ export function Dashboard({
           </label>
         </div>
       </header>
+
+      <section
+        className="dashboard-construction-notice"
+        role="status"
+        aria-label="Information sur la version de l’application"
+      >
+        <span className="dashboard-construction-icon" aria-hidden="true">
+          <Hammer size={24} weight="duotone" />
+        </span>
+        <div>
+          <p>Version en construction</p>
+          <h2>Excellence Lycée continue de grandir.</h2>
+          <span>
+            Certaines leçons et fonctionnalités sont encore en cours d’ajout ou d’amélioration.
+            Tu peux déjà utiliser les espaces disponibles et nous partager tes retours.
+          </span>
+        </div>
+        <strong>Bêta</strong>
+      </section>
 
       <PlatformStats stats={stats} />
 

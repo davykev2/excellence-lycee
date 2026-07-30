@@ -1604,6 +1604,72 @@ textarea:focus-visible {
   line-height: 1;
 }
 
+.dashboard-construction-notice {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 15px 18px;
+  border: 1px solid #efd8aa;
+  border-radius: 20px;
+  color: var(--navy-800);
+  background:
+    radial-gradient(circle at 96% 0%, rgba(255, 255, 255, 0.76), transparent 32%),
+    linear-gradient(135deg, #fff5df 0%, #f9fbf2 100%);
+  box-shadow: 0 12px 28px rgba(99, 72, 20, 0.07);
+}
+
+.dashboard-construction-icon {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  color: var(--orange-600);
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(125, 80, 13, 0.1);
+}
+
+.dashboard-construction-notice > div {
+  min-width: 0;
+}
+
+.dashboard-construction-notice p {
+  margin: 0 0 2px;
+  color: var(--orange-600);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.dashboard-construction-notice h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 850;
+  letter-spacing: -0.015em;
+}
+
+.dashboard-construction-notice > div > span {
+  display: block;
+  margin-top: 3px;
+  color: var(--ink-muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.dashboard-construction-notice > strong {
+  padding: 7px 10px;
+  border-radius: 999px;
+  color: #8a5d07;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .platform-stats {
   display: grid;
   grid-template-columns: minmax(250px, 1fr) repeat(2, minmax(190px, auto));
@@ -7172,6 +7238,31 @@ textarea:focus-visible {
 
   .dashboard-header h1 {
     font-size: 36px;
+  }
+
+  .dashboard-construction-notice {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .dashboard-construction-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .dashboard-construction-notice h2 {
+    font-size: 15px;
+  }
+
+  .dashboard-construction-notice > div > span {
+    font-size: 12px;
+  }
+
+  .dashboard-construction-notice > strong {
+    grid-column: 2;
+    width: max-content;
   }
 
   .platform-stats {
