@@ -14,6 +14,7 @@ import {
   Heart,
   Lightbulb,
   MagnifyingGlass,
+  PaperPlaneTilt,
   Plus,
   Question,
   ShieldCheck,
@@ -35,11 +36,12 @@ import type {
   UserStatus,
 } from "../../domain/admin";
 import type { SubjectId } from "../../domain/learning";
-import type { LessonReaction } from "../../domain/lessonFeedback";
+import type { AdminFeedbackItem, CommentReaction, LessonReaction } from "../../domain/lessonFeedback";
 import { schoolLevels, subjects } from "../../data/programme";
 import { learningPaths } from "../../data/learningPaths";
 import { adminActivity } from "../../data/admin";
 import { formatXp } from "../../data/xpRewards";
+import { apiRequest } from "../../lib/api";
 import { useAuth } from "../auth/AuthProvider";
 import { useAdminUsers } from "./useAdminUsers";
 import { useAdminWorkspace } from "./useAdminWorkspace";
@@ -55,6 +57,12 @@ const reactionMeta: Record<LessonReaction, { label: string; Icon: typeof Heart }
   love: { label: "a adoré", Icon: Heart },
   clear: { label: "a trouvé clair", Icon: Lightbulb },
   confusing: { label: "a trouvé confus", Icon: Question },
+};
+
+const commentReactionMeta: Record<CommentReaction, { label: string; action: string; Icon: typeof Heart }> = {
+  like: { label: "J’aime", action: "a aimé un commentaire", Icon: ThumbsUp },
+  love: { label: "J’adore", action: "a adoré un commentaire", Icon: Heart },
+  helpful: { label: "Utile", action: "a trouvé un commentaire utile", Icon: Lightbulb },
 };
 
 // Résout un couple (parcours, niveau) vers des libellés lisibles, calculé une fois.
@@ -304,6 +312,11 @@ export function AdminScreen({
   const canModerate = currentAdmin?.role === "admin" || currentAdmin?.role === "content_editor";
   const feedback = useAdminFeedback({ userId: currentAdmin?.id ?? "", enabled: Boolean(canModerate) && !preview });
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [replyingToFeedbackId, setReplyingToFeedbackId] = useState<string | null>(null);
+  const [feedbackReplyDraft, setFeedbackReplyDraft] = useState("");
+  const [sendingFeedbackReplyId, setSendingFeedbackReplyId] = useState<string | null>(null);
+  const [feedbackReplyError, setFeedbackReplyError] = useState<string | null>(null);
+  const [repliedFeedbackIds, setRepliedFeedbackIds] = useState<Set<string>>(() => new Set());
   const {
     workspace,
     resolveTask,
@@ -393,6 +406,55 @@ export function AdminScreen({
     window.setTimeout(() => setNotice(null), 2300);
   };
 
+  const sendFeedbackReply = async (
+    event: FormEvent<HTMLFormElement>,
+    item: AdminFeedbackItem,
+    target?: { pathTitle: string; lessonTitle: string; subjectLabel: string },
+  ) => {
+    event.preventDefault();
+    const body = feedbackReplyDraft.trim();
+    const feedbackId = `${item.kind}:${item.id}`;
+    if (!body || !item.authorId || currentAdmin?.role !== "admin") return;
+    setSendingFeedbackReplyId(feedbackId);
+    setFeedbackReplyError(null);
+    try {
+      const context = item.kind === "comment_reaction"
+        ? `Ta réaction concernait le commentaire de ${item.commentAuthorName ?? "un membre"} : « ${item.commentBody ?? ""} »`
+        : item.kind === "comment"
+          ? `Ton commentaire était : « ${item.body ?? ""} »`
+          : "Tu avais laissé une réaction sur ce niveau.";
+      const location = target
+        ? `${target.subjectLabel} · ${target.pathTitle} — ${target.lessonTitle}`
+        : `${item.pathId} · ${item.lessonId}`;
+      await apiRequest<{ threadId: string }>("/messages/threads", {
+        method: "POST",
+        body: JSON.stringify({
+          recipientId: item.authorId,
+          subject: `Retour de l’administration — ${target?.lessonTitle ?? "ton avis"}`.slice(0, 120),
+          body: [
+            `Bonjour ${item.authorName.split(/\s+/)[0] || item.authorName},`,
+            "",
+            body,
+            "",
+            `${context}`,
+            `Niveau concerné : ${location}`,
+            "",
+            `— ${currentAdminName}, administration Excellence Lycée`,
+          ].join("\n").slice(0, 2000),
+        }),
+      });
+      window.dispatchEvent(new Event("excellence:messages-updated"));
+      setRepliedFeedbackIds((current) => new Set(current).add(feedbackId));
+      setReplyingToFeedbackId(null);
+      setFeedbackReplyDraft("");
+      notify(`Retour envoyé à ${item.authorName} dans Messages.`);
+    } catch (reason) {
+      setFeedbackReplyError(reason instanceof Error ? reason.message : "Le retour n’a pas pu être envoyé.");
+    } finally {
+      setSendingFeedbackReplyId(null);
+    }
+  };
+
   const changeContentStatus = (contentId: string, status: PublicationStatus) => {
     updateContentStatus(contentId, status);
     notify(status === "published" ? "Contenu publié." : status === "review" ? "Contenu envoyé en validation." : "Contenu replacé en brouillon.");
@@ -465,28 +527,97 @@ export function AdminScreen({
                     {feedback.items.map((item) => {
                       const target = feedbackTargetLabels.get(`${item.pathId}:${item.lessonId}`);
                       const isNew = feedback.lastSeenAt ? Date.parse(item.createdAt) > Date.parse(feedback.lastSeenAt) : true;
-                      const Icon = item.kind === "comment" ? ChatCircleText : (reactionMeta[item.reaction ?? "useful"]?.Icon ?? ThumbsUp);
-                      const action = item.kind === "comment" ? "a commenté" : (reactionMeta[item.reaction ?? "useful"]?.label ?? "a réagi");
+                      const feedbackId = `${item.kind}:${item.id}`;
+                      const lessonReaction = item.kind === "reaction" ? item.reaction as LessonReaction | undefined : undefined;
+                      const commentReaction = item.kind === "comment_reaction" ? item.reaction as CommentReaction | undefined : undefined;
+                      const Icon = item.kind === "comment"
+                        ? ChatCircleText
+                        : item.kind === "comment_reaction"
+                          ? (commentReactionMeta[commentReaction ?? "like"]?.Icon ?? ThumbsUp)
+                          : (reactionMeta[lessonReaction ?? "useful"]?.Icon ?? ThumbsUp);
+                      const action = item.kind === "comment"
+                        ? "a commenté"
+                        : item.kind === "comment_reaction"
+                          ? (commentReactionMeta[commentReaction ?? "like"]?.action ?? "a réagi à un commentaire")
+                          : (reactionMeta[lessonReaction ?? "useful"]?.label ?? "a réagi");
+                      const replying = replyingToFeedbackId === feedbackId;
+                      const replied = repliedFeedbackIds.has(feedbackId);
                       return (
-                        <button
+                        <article
                           key={`${item.kind}:${item.id}`}
-                          type="button"
-                          className={`admin-notification-item ${item.kind === "comment" ? "is-comment" : "is-reaction"} ${isNew ? "is-new" : ""}`}
-                          onClick={() => openLessonFromFeed(item.pathId, item.lessonId)}
+                          className={`admin-notification-item is-${item.kind.replace("_", "-")} ${isNew ? "is-new" : ""}`}
                         >
-                          <span className="admin-notification-icon" aria-hidden="true"><Icon size={18} weight="fill" /></span>
-                          <span className="admin-notification-body">
-                            <span className="admin-notification-line">
-                              <strong>{item.authorName}</strong> {action}
-                              <em className="admin-notification-time">{relativeTime(item.createdAt)}</em>
+                          <button
+                            className="admin-notification-main"
+                            type="button"
+                            onClick={() => openLessonFromFeed(item.pathId, item.lessonId)}
+                          >
+                            <span className="admin-notification-icon" aria-hidden="true"><Icon size={18} weight="fill" /></span>
+                            <span className="admin-notification-body">
+                              <span className="admin-notification-line">
+                                <strong>{item.authorName}</strong> {action}
+                                <em className="admin-notification-time">{relativeTime(item.createdAt)}</em>
+                              </span>
+                              {item.kind === "comment" && item.body && (
+                                <span className="admin-notification-excerpt">« {item.body} »</span>
+                              )}
+                              {item.kind === "comment_reaction" && item.commentBody && (
+                                <span className="admin-notification-excerpt">
+                                  Sur le commentaire de {item.commentAuthorName ?? "un membre"} : « {item.commentBody} »
+                                </span>
+                              )}
+                              <span className="admin-notification-target">
+                                {target ? `${target.subjectLabel} · ${target.pathTitle} — ${target.lessonTitle}` : `${item.pathId} · ${item.lessonId}`}
+                                <ArrowRight size={13} weight="bold" />
+                              </span>
                             </span>
-                            {item.kind === "comment" && item.body && <span className="admin-notification-excerpt">« {item.body} »</span>}
-                            <span className="admin-notification-target">
-                              {target ? `${target.subjectLabel} · ${target.pathTitle} — ${target.lessonTitle}` : `${item.pathId} · ${item.lessonId}`}
-                              <ArrowRight size={13} weight="bold" />
-                            </span>
-                          </span>
-                        </button>
+                          </button>
+                          {currentAdmin?.role === "admin" && item.authorId && (
+                            <div className="admin-notification-actions">
+                              {replied ? (
+                                <span><Check size={14} weight="bold" /> Retour envoyé dans Messages</span>
+                              ) : (
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setReplyingToFeedbackId(replying ? null : feedbackId);
+                                    setFeedbackReplyDraft("");
+                                    setFeedbackReplyError(null);
+                                  }}
+                                >
+                                  <ChatCircleText size={15} weight="duotone" />
+                                  {replying ? "Fermer la réponse" : "Envoyer un retour"}
+                                </button>
+                              )}
+                            </div>
+                          )}
+                          {replying && (
+                            <form
+                              className="admin-notification-reply"
+                              onSubmit={(event) => void sendFeedbackReply(event, item, target)}
+                            >
+                              <label>
+                                <span>Réponse privée à {item.authorName}</span>
+                                <textarea
+                                  autoFocus
+                                  rows={3}
+                                  maxLength={1500}
+                                  value={feedbackReplyDraft}
+                                  placeholder="Écris ton retour. L’élève le recevra dans Messages…"
+                                  onChange={(event) => setFeedbackReplyDraft(event.target.value)}
+                                />
+                              </label>
+                              {feedbackReplyError && <p role="alert">{feedbackReplyError}</p>}
+                              <button
+                                type="submit"
+                                disabled={!feedbackReplyDraft.trim() || sendingFeedbackReplyId === feedbackId}
+                              >
+                                <PaperPlaneTilt size={15} weight="bold" />
+                                {sendingFeedbackReplyId === feedbackId ? "Envoi…" : "Envoyer dans Messages"}
+                              </button>
+                            </form>
+                          )}
+                        </article>
                       );
                     })}
                   </div>

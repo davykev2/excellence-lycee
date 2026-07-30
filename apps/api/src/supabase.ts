@@ -15,7 +15,12 @@ import type {
   PublishedArenaExerciseLevel,
 } from "./arenaExercises.js";
 import type { GlobalMessageSummary, MessageRecipientSummary, MessageThreadSummary, ThreadMessageSummary } from "./messaging.js";
-import type { AdminFeedbackItem, LessonFeedbackSummary, LessonReaction } from "./lessonFeedback.js";
+import type {
+  AdminFeedbackItem,
+  CommentReaction,
+  LessonFeedbackSummary,
+  LessonReaction,
+} from "./lessonFeedback.js";
 import {
   getBacExamAppreciation,
   type BacExamAnswers,
@@ -1220,6 +1225,20 @@ export async function deleteSupabaseLessonComment(accessToken: string, commentId
   });
   if (error) throw new SupabaseOperationError(error.message, 400, error.code);
   return Boolean(data);
+}
+
+export async function setSupabaseLessonCommentReaction(
+  accessToken: string,
+  commentId: string,
+  reaction: CommentReaction | null,
+): Promise<LessonFeedbackSummary> {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("set_mastery_lesson_comment_reaction", {
+    p_comment_id: commentId,
+    p_reaction: reaction,
+  });
+  if (error) throw new SupabaseOperationError(error.message, 400, error.code);
+  return data as unknown as LessonFeedbackSummary;
 }
 
 export async function getSupabaseAdminFeedbackFeed(accessToken: string, limit = 40): Promise<AdminFeedbackItem[]> {

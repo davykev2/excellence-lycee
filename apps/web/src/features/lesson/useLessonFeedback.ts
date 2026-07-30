@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import type { AuthUser } from "../../domain/auth";
 import type {
+  CommentReaction,
+  CommentReactionSummary,
   LessonFeedbackComment,
   LessonFeedbackSummary,
   LessonReaction,
@@ -25,6 +27,24 @@ function emptyFeedback(): LessonFeedbackSummary {
   };
 }
 
+function emptyCommentReactions(): CommentReactionSummary {
+  return {
+    counts: { like: 0, love: 0, helpful: 0 },
+    adminCounts: { like: 0, love: 0, helpful: 0 },
+    total: 0,
+  };
+}
+
+function normalizeFeedback(feedback: LessonFeedbackSummary): LessonFeedbackSummary {
+  return {
+    ...feedback,
+    comments: feedback.comments.map((comment) => ({
+      ...comment,
+      reactions: comment.reactions ?? emptyCommentReactions(),
+    })),
+  };
+}
+
 function errorMessage(reason: unknown) {
   if (reason instanceof ApiError) return reason.message;
   if (reason instanceof TypeError) {
@@ -41,7 +61,7 @@ function readPreview(pathId: string, lessonId: string) {
   try {
     const raw = window.localStorage.getItem(previewKey(pathId, lessonId));
     if (!raw) return emptyFeedback();
-    return JSON.parse(raw) as LessonFeedbackSummary;
+    return normalizeFeedback(JSON.parse(raw) as LessonFeedbackSummary);
   } catch {
     return emptyFeedback();
   }
@@ -70,7 +90,7 @@ export function useLessonFeedback({
       const next = localOnly
         ? readPreview(pathId, lessonId)
         : await apiRequest<LessonFeedbackSummary>(`/lesson-feedback/${pathId}/${lessonId}`);
-      setFeedback(next);
+      setFeedback(normalizeFeedback(next));
     } catch (reason) {
       setError(errorMessage(reason));
     } finally {
@@ -107,7 +127,7 @@ export function useLessonFeedback({
           `/lesson-feedback/${pathId}/${lessonId}/reaction`,
           { method: "PUT", body: JSON.stringify({ reaction }) },
         );
-        setFeedback(next);
+        setFeedback(normalizeFeedback(next));
       }
     } catch (reason) {
       setError(errorMessage(reason));
@@ -133,6 +153,7 @@ export function useLessonFeedback({
           isMine: true,
           canEdit: true,
           canDelete: true,
+          reactions: emptyCommentReactions(),
         };
         setFeedback((current) => writePreview(pathId, lessonId, {
           ...current,
@@ -144,7 +165,7 @@ export function useLessonFeedback({
           `/lesson-feedback/${pathId}/${lessonId}/comments`,
           { method: "POST", body: JSON.stringify({ body }) },
         );
-        setFeedback(next);
+        setFeedback(normalizeFeedback(next));
       }
       return true;
     } catch (reason) {
@@ -206,6 +227,54 @@ export function useLessonFeedback({
     }
   }, [lessonId, localOnly, pathId]);
 
+  const reactToComment = useCallback(async (commentId: string, reaction: CommentReaction) => {
+    setPendingAction(`comment:reaction:${commentId}`);
+    setError(null);
+    try {
+      if (localOnly) {
+        setFeedback((current) => writePreview(pathId, lessonId, {
+          ...current,
+          comments: current.comments.map((comment) => {
+            if (comment.id !== commentId) return comment;
+            const previous = comment.reactions.myReaction;
+            const nextReaction = previous === reaction ? undefined : reaction;
+            const counts = { ...comment.reactions.counts };
+            const adminCounts = { ...comment.reactions.adminCounts };
+            if (previous) {
+              counts[previous] = Math.max(0, counts[previous] - 1);
+              if (currentUser.role === "admin") {
+                adminCounts[previous] = Math.max(0, adminCounts[previous] - 1);
+              }
+            }
+            if (nextReaction) {
+              counts[nextReaction] += 1;
+              if (currentUser.role === "admin") adminCounts[nextReaction] += 1;
+            }
+            return {
+              ...comment,
+              reactions: {
+                counts,
+                adminCounts,
+                total: Object.values(counts).reduce((sum, count) => sum + count, 0),
+                myReaction: nextReaction,
+              },
+            };
+          }),
+        }));
+      } else {
+        const next = await apiRequest<LessonFeedbackSummary>(
+          `/lesson-feedback/comments/${commentId}/reaction`,
+          { method: "PUT", body: JSON.stringify({ reaction }) },
+        );
+        setFeedback(normalizeFeedback(next));
+      }
+    } catch (reason) {
+      setError(errorMessage(reason));
+    } finally {
+      setPendingAction(null);
+    }
+  }, [currentUser.role, lessonId, localOnly, pathId]);
+
   return {
     feedback,
     loading,
@@ -213,6 +282,7 @@ export function useLessonFeedback({
     error,
     reload: load,
     react,
+    reactToComment,
     addComment,
     editComment,
     deleteComment,

@@ -1138,6 +1138,85 @@
 .lesson-comment-content time { color: #8994a0; font-size: 9px; white-space: nowrap; }
 .lesson-comment-content > p { margin: 8px 0 0; color: #425778; font-size: 13px; line-height: 1.58; white-space: pre-wrap; overflow-wrap: anywhere; }
 
+.lesson-comment-reactions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.lesson-comment-reactions button {
+  min-height: 29px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 9px;
+  border: 1px solid #dde4e8;
+  border-radius: 999px;
+  background: #f8fafb;
+  color: #607086;
+  cursor: pointer;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 850;
+  transition: border-color .16s ease, background .16s ease, color .16s ease, transform .16s ease;
+}
+
+.lesson-comment-reactions button:hover {
+  border-color: color-mix(in srgb, var(--subject-accent) 48%, #dde4e8);
+  color: var(--subject-accent);
+  transform: translateY(-1px);
+}
+
+.lesson-comment-reactions button.is-selected {
+  border-color: color-mix(in srgb, var(--subject-accent) 54%, transparent);
+  background: var(--subject-accent-soft);
+  color: var(--subject-accent);
+}
+
+.lesson-comment-reactions button:disabled { cursor: wait; opacity: .65; transform: none; }
+.lesson-comment-reactions button strong { font-size: 9px; font-weight: 950; }
+
+.lesson-comment-admin-reactions {
+  width: fit-content;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+  padding: 6px 8px;
+  border: 1px solid #ead18b;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #fff9e8, #f4f8ff);
+  color: var(--navy-900);
+}
+
+.lesson-comment-admin-reactions > span,
+.lesson-comment-admin-reactions > strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.lesson-comment-admin-reactions > span {
+  color: #9b6d00;
+  font-size: 9px;
+  font-weight: 950;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+
+.lesson-comment-admin-reactions > strong {
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: #092c69;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 850;
+}
+
 .lesson-comment-actions {
   display: flex;
   align-items: center;
@@ -10249,19 +10328,36 @@ textarea:focus-visible {
 .admin-notification-empty { padding: 28px 16px; text-align: center; color: var(--ink-muted); font-size: 13px; font-weight: 600; }
 
 .admin-notification-item {
-  display: flex; gap: 11px; align-items: flex-start; text-align: left;
-  padding: 11px 12px; border: 0; border-radius: 14px; background: transparent; cursor: pointer;
-  font-family: inherit; width: 100%; transition: background 0.15s;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  background: transparent;
+  transition: border-color 0.15s, background 0.15s;
 }
-.admin-notification-item:hover { background: var(--ivory-100); }
+.admin-notification-item:hover { border-color: var(--line); background: var(--ivory-100); }
 .admin-notification-item.is-new { background: rgba(251, 107, 22, 0.06); }
 .admin-notification-item.is-new:hover { background: rgba(251, 107, 22, 0.10); }
+.admin-notification-main {
+  width: 100%;
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  padding: 11px 12px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+}
 .admin-notification-icon {
   width: 34px; height: 34px; flex: none; border-radius: 10px; display: grid; place-items: center;
   background: var(--ivory-200); color: var(--ink-muted);
 }
 .admin-notification-item.is-comment .admin-notification-icon { background: rgba(251, 107, 22, 0.14); color: var(--orange-600); }
 .admin-notification-item.is-reaction .admin-notification-icon { background: var(--green-100); color: var(--green-600); }
+.admin-notification-item.is-comment-reaction .admin-notification-icon { background: #fff0c7; color: #a56d00; }
 .admin-notification-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
 .admin-notification-line { font-size: 13px; color: var(--navy-900); font-weight: 600; line-height: 1.35; }
 .admin-notification-line strong { font-weight: 800; }
@@ -10274,8 +10370,83 @@ textarea:focus-visible {
   display: inline-flex; align-items: center; gap: 5px; margin-top: 1px;
   font-size: 11.5px; font-weight: 800; color: var(--orange-600);
 }
+.admin-notification-actions {
+  display: flex;
+  align-items: center;
+  min-height: 28px;
+  margin: -3px 12px 9px 57px;
+}
+.admin-notification-actions button,
+.admin-notification-actions span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font: inherit;
+  font-size: 10.5px;
+  font-weight: 850;
+}
+.admin-notification-actions button {
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: var(--navy-700);
+  cursor: pointer;
+}
+.admin-notification-actions button:hover { color: var(--orange-600); }
+.admin-notification-actions span { color: var(--green-700); }
+.admin-notification-reply {
+  display: grid;
+  gap: 8px;
+  margin: 0 10px 10px 56px;
+  padding: 10px;
+  border: 1px solid #d9e2e8;
+  border-radius: 12px;
+  background: #ffffff;
+}
+.admin-notification-reply label { display: grid; gap: 6px; }
+.admin-notification-reply label > span {
+  color: var(--navy-900);
+  font-size: 10.5px;
+  font-weight: 850;
+}
+.admin-notification-reply textarea {
+  width: 100%;
+  min-height: 74px;
+  resize: vertical;
+  padding: 9px 10px;
+  border: 1px solid #d9e2e8;
+  border-radius: 9px;
+  background: #fbfcfd;
+  color: var(--navy-950);
+  font: inherit;
+  font-size: 12px;
+  line-height: 1.45;
+  outline: 0;
+}
+.admin-notification-reply textarea:focus {
+  border-color: var(--orange-500);
+  box-shadow: 0 0 0 3px rgba(251, 107, 22, .1);
+}
+.admin-notification-reply > p { margin: 0; color: #b64b2b; font-size: 10px; font-weight: 750; }
+.admin-notification-reply > button {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--orange-600);
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 10.5px;
+  font-weight: 900;
+}
+.admin-notification-reply > button:disabled { cursor: not-allowed; opacity: .55; }
 @media (max-width: 560px) {
   .admin-notification-panel { position: fixed; top: auto; bottom: 12px; left: 16px; right: 16px; width: auto; max-height: 70vh; }
+  .admin-notification-reply { margin-left: 10px; }
 }
 /* Concours BAC & BT 2024 — sujet complet et publication différée. */
 .bac-exam-page {

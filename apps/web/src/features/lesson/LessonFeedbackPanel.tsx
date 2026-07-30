@@ -6,12 +6,14 @@ import {
   Lightbulb,
   PaperPlaneTilt,
   PencilSimple,
+  ShieldCheck,
   Smiley,
+  ThumbsUp,
   Trash,
   WarningDiamond,
 } from "@phosphor-icons/react";
 import type { AuthUser, UserRole } from "../../domain/auth";
-import type { LessonReaction } from "../../domain/lessonFeedback";
+import type { CommentReaction, LessonReaction } from "../../domain/lessonFeedback";
 import { ProfileAvatar } from "../../ui/ProfileAvatar";
 import { useLessonFeedback } from "./useLessonFeedback";
 
@@ -33,6 +35,16 @@ const reactions: Array<{
   { id: "love", label: "J’adore", hint: "J’aime cette leçon", icon: Heart },
   { id: "clear", label: "Très clair", hint: "J’ai bien compris", icon: Lightbulb },
   { id: "confusing", label: "À améliorer", hint: "Une partie reste difficile", icon: WarningDiamond },
+];
+
+const commentReactions: Array<{
+  id: CommentReaction;
+  label: string;
+  icon: typeof Smiley;
+}> = [
+  { id: "like", label: "J’aime", icon: ThumbsUp },
+  { id: "love", label: "J’adore", icon: Heart },
+  { id: "helpful", label: "Utile", icon: Lightbulb },
 ];
 
 const roleLabels: Record<UserRole, string> = {
@@ -65,6 +77,7 @@ export function LessonFeedbackPanel({
     error,
     reload,
     react,
+    reactToComment,
     addComment,
     editComment,
     deleteComment,
@@ -223,7 +236,53 @@ export function LessonFeedbackPanel({
                           </div>
                         </div>
                       ) : (
-                        <p>{comment.body}</p>
+                        <>
+                          <p>{comment.body}</p>
+                          <div className="lesson-comment-reactions" aria-label={`Réagir au commentaire de ${comment.authorName}`}>
+                            {commentReactions.map((reaction) => {
+                              const Icon = reaction.icon;
+                              const selected = comment.reactions.myReaction === reaction.id;
+                              return (
+                                <button
+                                  type="button"
+                                  className={selected ? "is-selected" : ""}
+                                  aria-pressed={selected}
+                                  aria-label={`${reaction.label} — ${comment.reactions.counts[reaction.id]} réaction(s)`}
+                                  title={reaction.label}
+                                  disabled={pendingAction === `comment:reaction:${comment.id}`}
+                                  onClick={() => void reactToComment(comment.id, reaction.id)}
+                                  key={reaction.id}
+                                >
+                                  <Icon size={15} weight={selected ? "fill" : "duotone"} />
+                                  <span>{reaction.label}</span>
+                                  {comment.reactions.counts[reaction.id] > 0 && (
+                                    <strong>{comment.reactions.counts[reaction.id]}</strong>
+                                  )}
+                                </button>
+                              );
+                            })}
+                          </div>
+                          {Object.values(comment.reactions.adminCounts).some((count) => count > 0) && (
+                            <div className="lesson-comment-admin-reactions">
+                              <span>
+                                <ShieldCheck size={15} weight="fill" />
+                                Administration
+                              </span>
+                              {commentReactions.map((reaction) => {
+                                const count = comment.reactions.adminCounts[reaction.id];
+                                if (count === 0) return null;
+                                const Icon = reaction.icon;
+                                return (
+                                  <strong key={reaction.id} title={`${reaction.label} par l’administration`}>
+                                    <Icon size={14} weight="fill" />
+                                    {reaction.label}
+                                    {count > 1 ? ` · ${count}` : ""}
+                                  </strong>
+                                );
+                              })}
+                            </div>
+                          )}
+                        </>
                       )}
 
                       {!editing && (comment.canEdit || comment.canDelete) && (

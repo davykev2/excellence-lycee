@@ -222,6 +222,18 @@ database.exec(`
   CREATE INDEX IF NOT EXISTS lesson_comments_target_idx
     ON lesson_comments(path_id, lesson_id, created_at DESC);
 
+  CREATE TABLE IF NOT EXISTS lesson_comment_reactions (
+    comment_id TEXT NOT NULL REFERENCES lesson_comments(id) ON DELETE CASCADE,
+    user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    reaction TEXT NOT NULL CHECK (reaction IN ('like', 'love', 'helpful')),
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL,
+    PRIMARY KEY (comment_id, user_id)
+  );
+
+  CREATE INDEX IF NOT EXISTS lesson_comment_reactions_comment_idx
+    ON lesson_comment_reactions(comment_id, updated_at DESC);
+
   CREATE TABLE IF NOT EXISTS store_items (
     id TEXT PRIMARY KEY,
     category TEXT NOT NULL CHECK (category IN ('frame', 'theme', 'badge', 'title')),

@@ -9,13 +9,17 @@ import {
   editSupabaseLessonComment,
   getSupabaseAdminFeedbackFeed,
   getSupabaseLessonFeedback,
+  setSupabaseLessonCommentReaction,
   setSupabaseLessonReaction,
   supabaseConfigured,
   writeSupabaseAudit,
 } from "../supabase.js";
 import {
+  commentReactionValues,
   lessonReactionValues,
   type AdminFeedbackItem,
+  type CommentReaction,
+  type CommentReactionSummary,
   type LessonFeedbackComment,
   type LessonFeedbackSummary,
   type LessonReaction,
@@ -27,11 +31,12 @@ const targetSchema = z.object({
 });
 const commentIdSchema = z.object({ commentId: z.string().uuid() });
 const reactionSchema = z.object({ reaction: z.enum(lessonReactionValues).nullable() });
+const commentReactionSchema = z.object({ reaction: z.enum(commentReactionValues).nullable() });
 const commentSchema = z.object({ body: z.string().trim().min(1).max(1000) });
 const feedQuerySchema = z.object({ limit: z.coerce.number().int().min(1).max(100).optional() });
 
 interface SqliteFeedRow {
-  kind: "comment" | "reaction";
+  kind: "comment" | "reaction" | "comment_reaction";
   id: string;
   pathId: string;
   lessonId: string;
@@ -40,7 +45,10 @@ interface SqliteFeedRow {
   authorPhotoUrl: string | null;
   authorRole: UserRole;
   body: string | null;
-  reaction: LessonReaction | null;
+  reaction: LessonReaction | CommentReaction | null;
+  commentId: string | null;
+  commentBody: string | null;
+  commentAuthorName: string | null;
   createdAt: string;
 }
 
@@ -53,6 +61,21 @@ interface SqliteCommentRow {
   body: string;
   createdAt: string;
   updatedAt: string;
+}
+
+interface SqliteCommentReactionRow {
+  commentId: string;
+  reaction: CommentReaction;
+  count: number;
+  adminCount: number;
+}
+
+function emptyCommentReactions(): CommentReactionSummary {
+  return {
+    counts: { like: 0, love: 0, helpful: 0 },
+    adminCounts: { like: 0, love: 0, helpful: 0 },
+    total: 0,
+  };
 }
 
 function ensurePublishedLevel(pathId: string, lessonId: string, reply: FastifyReply) {
@@ -91,6 +114,35 @@ function sqliteFeedback(userId: string, role: UserRole, pathId: string, lessonId
     ORDER BY c.created_at DESC
     LIMIT 50
   `).all(pathId, lessonId) as SqliteCommentRow[];
+  const commentReactionRows = database.prepare(`
+    SELECT reaction.comment_id AS commentId, reaction.reaction,
+      COUNT(*) AS count,
+      SUM(CASE WHEN profile.role = 'admin' THEN 1 ELSE 0 END) AS adminCount
+    FROM lesson_comment_reactions reaction
+    JOIN lesson_comments comment ON comment.id = reaction.comment_id
+    LEFT JOIN users profile ON profile.id = reaction.user_id
+    WHERE comment.path_id = ? AND comment.lesson_id = ?
+    GROUP BY reaction.comment_id, reaction.reaction
+  `).all(pathId, lessonId) as SqliteCommentReactionRow[];
+  const ownCommentReactionRows = database.prepare(`
+    SELECT reaction.comment_id AS commentId, reaction.reaction
+    FROM lesson_comment_reactions reaction
+    JOIN lesson_comments comment ON comment.id = reaction.comment_id
+    WHERE reaction.user_id = ? AND comment.path_id = ? AND comment.lesson_id = ?
+  `).all(userId, pathId, lessonId) as Array<{ commentId: string; reaction: CommentReaction }>;
+  const commentReactions = new Map<string, CommentReactionSummary>();
+  commentReactionRows.forEach((row) => {
+    const summary = commentReactions.get(row.commentId) ?? emptyCommentReactions();
+    summary.counts[row.reaction] = Number(row.count);
+    summary.adminCounts[row.reaction] = Number(row.adminCount);
+    summary.total += Number(row.count);
+    commentReactions.set(row.commentId, summary);
+  });
+  ownCommentReactionRows.forEach((row) => {
+    const summary = commentReactions.get(row.commentId) ?? emptyCommentReactions();
+    summary.myReaction = row.reaction;
+    commentReactions.set(row.commentId, summary);
+  });
   const comments: LessonFeedbackComment[] = rows.map((row) => {
     const isMine = row.authorId === userId;
     return {
@@ -105,6 +157,7 @@ function sqliteFeedback(userId: string, role: UserRole, pathId: string, lessonId
       isMine,
       canEdit: isMine,
       canDelete: isMine || role === "admin",
+      reactions: commentReactions.get(row.id) ?? emptyCommentReactions(),
     };
   });
   return {
@@ -124,16 +177,33 @@ function sqliteAdminFeed(limit: number): AdminFeedbackItem[] {
       SELECT 'comment' AS kind, c.id AS id, c.path_id AS pathId, c.lesson_id AS lessonId,
         c.author_user_id AS authorId, COALESCE(u.name, 'Utilisateur supprimé') AS authorName,
         u.photo_url AS authorPhotoUrl, COALESCE(u.role, 'student') AS authorRole,
-        c.body AS body, NULL AS reaction, c.created_at AS createdAt
+        c.body AS body, NULL AS reaction, NULL AS commentId, NULL AS commentBody,
+        NULL AS commentAuthorName, c.created_at AS createdAt
       FROM lesson_comments c
       LEFT JOIN users u ON u.id = c.author_user_id
+      WHERE COALESCE(u.role, 'student') NOT IN ('admin', 'content_editor')
       UNION ALL
       SELECT 'reaction' AS kind, r.user_id || ':' || r.path_id || ':' || r.lesson_id AS id,
         r.path_id AS pathId, r.lesson_id AS lessonId, r.user_id AS authorId,
         COALESCE(u.name, 'Utilisateur supprimé') AS authorName, u.photo_url AS authorPhotoUrl,
-        COALESCE(u.role, 'student') AS authorRole, NULL AS body, r.reaction AS reaction, r.created_at AS createdAt
+        COALESCE(u.role, 'student') AS authorRole, NULL AS body, r.reaction AS reaction,
+        NULL AS commentId, NULL AS commentBody, NULL AS commentAuthorName, r.updated_at AS createdAt
       FROM lesson_reactions r
       LEFT JOIN users u ON u.id = r.user_id
+      WHERE COALESCE(u.role, 'student') NOT IN ('admin', 'content_editor')
+      UNION ALL
+      SELECT 'comment_reaction' AS kind, r.user_id || ':' || r.comment_id AS id,
+        c.path_id AS pathId, c.lesson_id AS lessonId, r.user_id AS authorId,
+        COALESCE(u.name, 'Utilisateur supprimé') AS authorName, u.photo_url AS authorPhotoUrl,
+        COALESCE(u.role, 'student') AS authorRole, NULL AS body, r.reaction AS reaction,
+        r.comment_id AS commentId, c.body AS commentBody,
+        COALESCE(comment_author.name, 'Utilisateur supprimé') AS commentAuthorName,
+        r.updated_at AS createdAt
+      FROM lesson_comment_reactions r
+      JOIN lesson_comments c ON c.id = r.comment_id
+      LEFT JOIN users u ON u.id = r.user_id
+      LEFT JOIN users comment_author ON comment_author.id = c.author_user_id
+      WHERE COALESCE(u.role, 'student') NOT IN ('admin', 'content_editor')
     )
     ORDER BY createdAt DESC
     LIMIT ?
@@ -149,6 +219,9 @@ function sqliteAdminFeed(limit: number): AdminFeedbackItem[] {
     authorRole: row.authorRole,
     body: row.body ?? undefined,
     reaction: row.reaction ?? undefined,
+    commentId: row.commentId ?? undefined,
+    commentBody: row.commentBody ?? undefined,
+    commentAuthorName: row.commentAuthorName ?? undefined,
     createdAt: row.createdAt,
   }));
 }
@@ -216,6 +289,64 @@ export async function lessonFeedbackRoutes(app: FastifyInstance) {
     }
     writeAuditLog(request.authContext.id, "lesson.reaction", lessonId, { pathId, reaction: body.data.reaction });
     return sqliteFeedback(request.authContext.id, request.authContext.role, pathId, lessonId);
+  });
+
+  app.put("/comments/:commentId/reaction", {
+    preHandler: app.authenticate,
+    config: { rateLimit: { max: 60, timeWindow: "1 minute" } },
+  }, async (request, reply) => {
+    const params = commentIdSchema.safeParse(request.params);
+    const body = commentReactionSchema.safeParse(request.body);
+    if (!params.success || !body.success) {
+      return reply.code(400).send({ error: "VALIDATION_ERROR", message: "Réaction au commentaire invalide." });
+    }
+    const { commentId } = params.data;
+    if (supabaseConfigured) {
+      const result = await setSupabaseLessonCommentReaction(
+        request.authContext.accessToken!,
+        commentId,
+        body.data.reaction,
+      );
+      await writeSupabaseAudit(
+        request.authContext.accessToken!,
+        request.authContext.id,
+        "lesson.comment.reaction",
+        commentId,
+        { reaction: body.data.reaction },
+      ).catch((error) => request.log.warn(error, "Supabase comment reaction audit failed"));
+      return result;
+    }
+    const comment = database.prepare(`
+      SELECT path_id AS pathId, lesson_id AS lessonId
+      FROM lesson_comments
+      WHERE id = ?
+    `).get(commentId) as { pathId: string; lessonId: string } | undefined;
+    if (!comment) {
+      return reply.code(404).send({ error: "COMMENT_NOT_FOUND", message: "Commentaire introuvable." });
+    }
+    if (!ensurePublishedLevel(comment.pathId, comment.lessonId, reply)) return;
+    const current = database.prepare(`
+      SELECT reaction FROM lesson_comment_reactions
+      WHERE comment_id = ? AND user_id = ?
+    `).get(commentId, request.authContext.id) as { reaction: CommentReaction } | undefined;
+    if (body.data.reaction === null || body.data.reaction === current?.reaction) {
+      database.prepare("DELETE FROM lesson_comment_reactions WHERE comment_id = ? AND user_id = ?")
+        .run(commentId, request.authContext.id);
+    } else {
+      const now = new Date().toISOString();
+      database.prepare(`
+        INSERT INTO lesson_comment_reactions (comment_id, user_id, reaction, created_at, updated_at)
+        VALUES (?, ?, ?, ?, ?)
+        ON CONFLICT(comment_id, user_id)
+        DO UPDATE SET reaction = excluded.reaction, updated_at = excluded.updated_at
+      `).run(commentId, request.authContext.id, body.data.reaction, now, now);
+    }
+    writeAuditLog(request.authContext.id, "lesson.comment.reaction", commentId, {
+      reaction: body.data.reaction,
+      pathId: comment.pathId,
+      lessonId: comment.lessonId,
+    });
+    return sqliteFeedback(request.authContext.id, request.authContext.role, comment.pathId, comment.lessonId);
   });
 
   app.post("/:pathId/:lessonId/comments", {
