@@ -1,10 +1,104 @@
 export const BAC_CI_2024_EXAM_ID = "bac-ci-2024-level-test";
+export const BAC_CI_2017_EXAM_ID = "bac-ci-2017-archive";
+export const BAC_CI_2018_EXAM_ID = "bac-ci-2018-archive";
+export const BAC_CI_2019_EXAM_ID = "bac-ci-2019-archive";
+export const BAC_CI_2020_EXAM_ID = "bac-ci-2020-archive";
 
-export type BacExamChoice = "A" | "B" | "C" | "D";
+export type BacExamChoice = "A" | "B" | "C" | "D" | "E";
 export type BacExamAnswers = Record<string, BacExamChoice>;
 export type BacExamZone = "cocody" | "bingerville" | "yopougon" | "online";
 
 export const BAC_EXAM_ZONES: readonly BacExamZone[] = ["cocody", "bingerville", "yopougon", "online"];
+
+export const BAC_EXAM_IDS = [
+  BAC_CI_2017_EXAM_ID,
+  BAC_CI_2018_EXAM_ID,
+  BAC_CI_2019_EXAM_ID,
+  BAC_CI_2020_EXAM_ID,
+  BAC_CI_2024_EXAM_ID,
+] as const;
+
+export type BacExamId = typeof BAC_EXAM_IDS[number];
+
+export interface BacExamConfiguration {
+  id: BacExamId;
+  title: string;
+  durationMinutes: number;
+  questionCount: number;
+  allowedChoices: readonly BacExamChoice[];
+  sectionQuestionNumbers: {
+    english: readonly number[];
+    generalKnowledge: readonly number[];
+    scientificKnowledge: readonly number[];
+  };
+}
+
+const standardSixtyQuestionSections = {
+  english: Array.from({ length: 20 }, (_, index) => index + 1),
+  generalKnowledge: Array.from({ length: 20 }, (_, index) => index + 21),
+  scientificKnowledge: Array.from({ length: 20 }, (_, index) => index + 41),
+};
+
+export const BAC_EXAM_CONFIGURATIONS: readonly BacExamConfiguration[] = [
+  {
+    id: BAC_CI_2017_EXAM_ID,
+    title: "Sujet type BAC — Session 2017",
+    durationMinutes: 180,
+    questionCount: 74,
+    allowedChoices: ["A", "B", "C", "D"],
+    sectionQuestionNumbers: {
+      english: Array.from({ length: 29 }, (_, index) => index + 1),
+      generalKnowledge: Array.from({ length: 22 }, (_, index) => index + 30),
+      scientificKnowledge: Array.from({ length: 23 }, (_, index) => index + 52),
+    },
+  },
+  {
+    id: BAC_CI_2018_EXAM_ID,
+    title: "Sujet type BAC — Session 2018",
+    durationMinutes: 180,
+    questionCount: 60,
+    allowedChoices: ["A", "B", "C", "D", "E"],
+    sectionQuestionNumbers: standardSixtyQuestionSections,
+  },
+  {
+    id: BAC_CI_2019_EXAM_ID,
+    title: "Sujet type BAC — Session 2019",
+    durationMinutes: 180,
+    questionCount: 60,
+    allowedChoices: ["A", "B", "C", "D", "E"],
+    sectionQuestionNumbers: standardSixtyQuestionSections,
+  },
+  {
+    id: BAC_CI_2020_EXAM_ID,
+    title: "Sujet type BAC — Session 2020",
+    durationMinutes: 180,
+    questionCount: 60,
+    allowedChoices: ["A", "B", "C", "D"],
+    sectionQuestionNumbers: standardSixtyQuestionSections,
+  },
+  {
+    id: BAC_CI_2024_EXAM_ID,
+    title: "Concours BAC & BT 2024 — Test de niveau",
+    durationMinutes: 180,
+    questionCount: 69,
+    allowedChoices: ["A", "B", "C", "D"],
+    sectionQuestionNumbers: {
+      english: Array.from({ length: 20 }, (_, index) => index + 1),
+      generalKnowledge: [
+        ...Array.from({ length: 20 }, (_, index) => index + 21),
+        ...Array.from({ length: 5 }, (_, index) => index + 61),
+      ],
+      scientificKnowledge: [
+        ...Array.from({ length: 20 }, (_, index) => index + 41),
+        ...Array.from({ length: 4 }, (_, index) => index + 66),
+      ],
+    },
+  },
+] as const;
+
+export function getBacExamConfiguration(examId: string) {
+  return BAC_EXAM_CONFIGURATIONS.find((configuration) => configuration.id === examId);
+}
 
 export interface BacExamCorrectionEntry {
   answer: BacExamChoice;
@@ -69,18 +163,6 @@ export interface BacExamState {
   };
 }
 
-const bacExamSectionQuestionNumbers = {
-  english: Array.from({ length: 20 }, (_, index) => index + 1),
-  generalKnowledge: [
-    ...Array.from({ length: 20 }, (_, index) => index + 21),
-    ...Array.from({ length: 5 }, (_, index) => index + 61),
-  ],
-  scientificKnowledge: [
-    ...Array.from({ length: 20 }, (_, index) => index + 41),
-    ...Array.from({ length: 4 }, (_, index) => index + 66),
-  ],
-} as const;
-
 function bacExamQuestionKey(questionNumber: number) {
   return `q${String(questionNumber).padStart(2, "0")}`;
 }
@@ -102,11 +184,14 @@ function scoreBacExamSection(
 export function getBacExamSectionScores(
   answers: BacExamAnswers,
   answerKey: Record<string, BacExamChoice>,
+  examId = BAC_CI_2024_EXAM_ID,
 ): BacExamSectionScores {
+  const questionNumbers = getBacExamConfiguration(examId)?.sectionQuestionNumbers
+    ?? getBacExamConfiguration(BAC_CI_2024_EXAM_ID)!.sectionQuestionNumbers;
   return {
-    english: scoreBacExamSection(answers, answerKey, bacExamSectionQuestionNumbers.english),
-    generalKnowledge: scoreBacExamSection(answers, answerKey, bacExamSectionQuestionNumbers.generalKnowledge),
-    scientificKnowledge: scoreBacExamSection(answers, answerKey, bacExamSectionQuestionNumbers.scientificKnowledge),
+    english: scoreBacExamSection(answers, answerKey, questionNumbers.english),
+    generalKnowledge: scoreBacExamSection(answers, answerKey, questionNumbers.generalKnowledge),
+    scientificKnowledge: scoreBacExamSection(answers, answerKey, questionNumbers.scientificKnowledge),
   };
 }
 

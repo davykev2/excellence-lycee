@@ -1,23 +1,31 @@
 import { useCallback, useEffect, useState } from "react";
 import { BAC_CI_2024_EXAM_ID, type BacExamAnswers } from "../../data/bacCi2024Exam";
+import { bacExamById } from "../../data/bacExamCatalog";
 import type { BacExamState, BacExamZone } from "../../domain/bacExam";
 import { apiRequest } from "../../lib/api";
 
-const previewState: BacExamState = {
-  examId: BAC_CI_2024_EXAM_ID,
-  title: "Concours BAC & BT 2024 — Test de niveau",
-  durationMinutes: 180,
-  questionCount: 69,
-  subjectPublished: false,
-  resultsPublished: false,
-  answerKeyReady: false,
-  correctionReady: false,
-  canPublishResults: false,
-  canManageSubject: true,
-  totalSubmissions: 0,
-};
+function previewStateFor(examId: string): BacExamState {
+  const definition = bacExamById.get(examId);
+  return {
+    examId,
+    title: definition?.title ?? "Sujet type BAC",
+    durationMinutes: definition?.durationMinutes ?? 180,
+    questionCount: definition?.questionCount ?? 60,
+    subjectPublished: false,
+    resultsPublished: false,
+    answerKeyReady: false,
+    correctionReady: false,
+    canPublishResults: false,
+    canManageSubject: true,
+    totalSubmissions: 0,
+  };
+}
 
-export function useBacExam({ preview = false }: { preview?: boolean } = {}) {
+export function useBacExam({
+  preview = false,
+  examId = BAC_CI_2024_EXAM_ID,
+}: { preview?: boolean; examId?: string } = {}) {
+  const previewState = previewStateFor(examId);
   const [state, setState] = useState<BacExamState | null>(preview ? previewState : null);
   const [loading, setLoading] = useState(!preview);
   const [error, setError] = useState<string | null>(null);
@@ -32,7 +40,7 @@ export function useBacExam({ preview = false }: { preview?: boolean } = {}) {
     setLoading(true);
     setError(null);
     try {
-      const next = await apiRequest<BacExamState>(`/bac-exams/${BAC_CI_2024_EXAM_ID}`);
+      const next = await apiRequest<BacExamState>(`/bac-exams/${examId}`);
       setState(next);
       return next;
     } catch (loadError) {
@@ -41,7 +49,7 @@ export function useBacExam({ preview = false }: { preview?: boolean } = {}) {
     } finally {
       setLoading(false);
     }
-  }, [preview]);
+  }, [examId, preview]);
 
   useEffect(() => {
     void reload();
@@ -62,7 +70,7 @@ export function useBacExam({ preview = false }: { preview?: boolean } = {}) {
     setError(null);
     try {
       const response = await apiRequest<{ submittedAt: string }>(
-        `/bac-exams/${BAC_CI_2024_EXAM_ID}/submissions`,
+        `/bac-exams/${examId}/submissions`,
         { method: "POST", body: JSON.stringify({ answers, candidateZone }) },
       );
       await reload();
@@ -74,7 +82,7 @@ export function useBacExam({ preview = false }: { preview?: boolean } = {}) {
     } finally {
       setSubmitting(false);
     }
-  }, [preview, reload]);
+  }, [examId, preview, reload]);
 
   const setResultsPublished = useCallback(async (published: boolean) => {
     if (preview) {
@@ -85,7 +93,7 @@ export function useBacExam({ preview = false }: { preview?: boolean } = {}) {
     setError(null);
     try {
       const next = await apiRequest<BacExamState>(
-        `/bac-exams/${BAC_CI_2024_EXAM_ID}/results-publication`,
+        `/bac-exams/${examId}/results-publication`,
         { method: "PATCH", body: JSON.stringify({ published }) },
       );
       setState(next);
@@ -96,7 +104,7 @@ export function useBacExam({ preview = false }: { preview?: boolean } = {}) {
     } finally {
       setSubmitting(false);
     }
-  }, [preview]);
+  }, [examId, preview]);
 
   const setSubjectPublished = useCallback(async (published: boolean) => {
     if (preview) {
@@ -107,7 +115,7 @@ export function useBacExam({ preview = false }: { preview?: boolean } = {}) {
     setError(null);
     try {
       const next = await apiRequest<BacExamState>(
-        `/bac-exams/${BAC_CI_2024_EXAM_ID}/subject-publication`,
+        `/bac-exams/${examId}/subject-publication`,
         { method: "PATCH", body: JSON.stringify({ published }) },
       );
       setState(next);
@@ -118,7 +126,7 @@ export function useBacExam({ preview = false }: { preview?: boolean } = {}) {
     } finally {
       setSubmitting(false);
     }
-  }, [preview]);
+  }, [examId, preview]);
 
   return {
     state,

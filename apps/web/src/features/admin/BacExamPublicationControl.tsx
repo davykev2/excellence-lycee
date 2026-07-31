@@ -9,10 +9,11 @@ import {
   Student,
   WarningCircle,
 } from "@phosphor-icons/react";
+import { bacExamCatalog, type BacExamCatalogEntry } from "../../data/bacExamCatalog";
 import { useBacExam } from "../arena/useBacExam";
 
-export function BacExamPublicationControl({ preview = false }: { preview?: boolean }) {
-  const exam = useBacExam({ preview });
+function BacExamPublicationCard({ definition, preview }: { definition: BacExamCatalogEntry; preview: boolean }) {
+  const exam = useBacExam({ preview, examId: definition.id });
   const [notice, setNotice] = useState<string | null>(null);
   const state = exam.state;
 
@@ -44,8 +45,8 @@ export function BacExamPublicationControl({ preview = false }: { preview?: boole
     <article className="admin-panel admin-bac-publication">
       <header className="admin-panel-header">
         <div>
-          <p className="admin-eyebrow">Épreuve nationale</p>
-          <h2>Concours BAC & BT 2024</h2>
+          <p className="admin-eyebrow">Épreuve nationale · {definition.year}</p>
+          <h2>{definition.title}</h2>
         </div>
         <div className="admin-bac-statuses">
           <span className={`admin-bac-status ${state?.subjectPublished ? "is-published" : "is-locked"}`}>
@@ -64,23 +65,23 @@ export function BacExamPublicationControl({ preview = false }: { preview?: boole
       ) : (
         <>
           <div className="admin-bac-metrics">
-            <div><FileText size={24} weight="duotone" /><span><strong>69</strong><small>questions dans le sujet</small></span></div>
+            <div><FileText size={24} weight="duotone" /><span><strong>{definition.questionCount}</strong><small>questions dans le sujet</small></span></div>
             <div><Student size={24} weight="duotone" /><span><strong>{state?.totalSubmissions ?? 0}</strong><small>copies reçues</small></span></div>
             <div className={state?.correctionReady ? "is-ready" : "is-waiting"}>
               {state?.correctionReady ? <CheckCircle size={24} weight="fill" /> : <WarningCircle size={24} weight="duotone" />}
-              <span><strong>{state?.correctionReady ? "Prête" : "En attente"}</strong><small>69 réponses expliquées</small></span>
+              <span><strong>{state?.correctionReady ? "Prête" : "En attente"}</strong><small>{definition.questionCount} réponses expliquées</small></span>
             </div>
           </div>
 
           {!state?.correctionReady && (
             <div className="admin-bac-warning">
               <WarningCircle size={23} weight="duotone" />
-              <p><strong>Activation sécurisée.</strong><span>Le bouton sera disponible dès que la correction des 69 questions aura été chargée.</span></p>
+              <p><strong>Correction séparée.</strong><span>Tu peux ouvrir le sujet maintenant. Les résultats resteront masqués jusqu’au chargement des {definition.questionCount} réponses expliquées.</span></p>
             </div>
           )}
 
           <div className="admin-bac-actions">
-            <a className="secondary-action" href="/arene/concours-bac-ci-2024">
+            <a className="secondary-action" href={`/arene/exos-types-bac/${definition.slug}`}>
               Prévisualiser le sujet <ArrowSquareOut size={18} weight="bold" />
             </a>
             <button
@@ -116,5 +117,22 @@ export function BacExamPublicationControl({ preview = false }: { preview?: boole
         </>
       )}
     </article>
+  );
+}
+
+export function BacExamPublicationControl({ preview = false }: { preview?: boolean }) {
+  return (
+    <section className="admin-bac-publication-list" aria-labelledby="admin-bac-publication-title">
+      <header>
+        <div><p className="admin-eyebrow">Exos type BAC</p><h2 id="admin-bac-publication-title">Ouverture des sujets</h2></div>
+        <span>{bacExamCatalog.length} sessions indépendantes</span>
+      </header>
+      <p>Ouvre ou ferme chaque année séparément. Un sujet fermé reste visible dans la bibliothèque avec un cadenas.</p>
+      <div>
+        {bacExamCatalog.map((definition) => (
+          <BacExamPublicationCard key={definition.id} definition={definition} preview={preview} />
+        ))}
+      </div>
+    </section>
   );
 }

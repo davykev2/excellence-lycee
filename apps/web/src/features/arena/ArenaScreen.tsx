@@ -23,11 +23,14 @@ import {
 import type { LearnerProfile, SchoolLevel, SubjectDefinition, SubjectId } from "../../domain/learning";
 import type { UserRole } from "../../domain/auth";
 import { formatXp } from "../../data/xpRewards";
+import { getBacExamBySlug, type BacExamSlug } from "../../data/bacExamCatalog";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
 import { ArenaExercisesPage } from "./ArenaExercisesPage";
 import { MathCodexPage } from "../codex/MathCodexPage";
 import { DuelPreviewPage } from "./DuelPreviewPage";
 import { BacCi2024ExamPage } from "./BacCi2024ExamPage";
+import { BacExamLibraryPage } from "./BacExamLibraryPage";
+import { BacArchiveExamPage } from "./BacArchiveExamPage";
 
 interface ArenaScreenProps {
   profile: LearnerProfile;
@@ -40,6 +43,7 @@ interface ArenaScreenProps {
   codexOpen: boolean;
   duelOpen: boolean;
   bacExamOpen: boolean;
+  bacExamSlug?: string;
   bacResultsOpen: boolean;
   exerciseEditorOpen: boolean;
   localOnly?: boolean;
@@ -49,6 +53,7 @@ interface ArenaScreenProps {
   onOpenCodex: () => void;
   onOpenDuel: () => void;
   onOpenBacExam: () => void;
+  onSelectBacExam: (slug: BacExamSlug) => void;
   onOpenBacResults: () => void;
   onBackBacExam: () => void;
   onBackArena: () => void;
@@ -168,6 +173,7 @@ export function ArenaScreen({
   codexOpen,
   duelOpen,
   bacExamOpen,
+  bacExamSlug,
   bacResultsOpen,
   exerciseEditorOpen,
   localOnly = false,
@@ -177,6 +183,7 @@ export function ArenaScreen({
   onOpenCodex,
   onOpenDuel,
   onOpenBacExam,
+  onSelectBacExam,
   onOpenBacResults,
   onBackBacExam,
   onBackArena,
@@ -254,12 +261,31 @@ export function ArenaScreen({
   }
 
   if (bacExamOpen) {
+    const selectedBacExam = getBacExamBySlug(bacExamSlug);
+    if (!selectedBacExam) {
+      return (
+        <BacExamLibraryPage
+          preview={localOnly}
+          onBackArena={onBackArena}
+          onOpenExam={onSelectBacExam}
+        />
+      );
+    }
+    if (selectedBacExam.format === "facsimile") {
+      return (
+        <BacArchiveExamPage
+          exam={selectedBacExam}
+          preview={localOnly}
+          onBackLibrary={onOpenBacExam}
+        />
+      );
+    }
     return (
       <BacCi2024ExamPage
         profile={profile}
         resultsOpen={bacResultsOpen}
         localOnly={localOnly}
-        onBackArena={onBackArena}
+        onBackArena={onOpenBacExam}
         onOpenResults={onOpenBacResults}
         onBackExam={onBackBacExam}
       />

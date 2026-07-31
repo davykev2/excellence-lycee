@@ -6,7 +6,8 @@ export interface AppRoute {
   subjectId?: SubjectId;
   pathId?: string;
   lessonId?: string;
-  arenaMode?: "exercises" | "codex" | "duel" | "bac-2024";
+  arenaMode?: "exercises" | "codex" | "duel" | "bac";
+  bacExamSlug?: string;
   arenaEditor?: boolean;
   bacResults?: boolean;
   adminSection?: AdminSection;
@@ -86,12 +87,16 @@ export function readAppRoute(location: Pick<Location, "pathname" | "search">, fa
         ? "codex" as const
         : second === "duel"
           ? "duel" as const
-          : second === "concours-bac-ci-2024"
-            ? "bac-2024" as const
+          : second === "exos-types-bac" || second === "concours-bac-ci-2024"
+            ? "bac" as const
           : undefined;
     const arenaEditor = arenaMode === "exercises" && third === "editeur";
-    const bacResults = arenaMode === "bac-2024" && third === "resultats";
-    return { navigation: "arena", subjectId, arenaMode, arenaEditor, bacResults };
+    const legacyBacRoute = second === "concours-bac-ci-2024";
+    const bacExamSlug = arenaMode === "bac"
+      ? legacyBacRoute ? "2024" : decodeSegment(third)
+      : undefined;
+    const bacResults = arenaMode === "bac" && (legacyBacRoute ? third === "resultats" : fourth === "resultats");
+    return { navigation: "arena", subjectId, arenaMode, arenaEditor, bacExamSlug, bacResults };
   }
   if (section === "boutique") return { navigation: "store", subjectId };
   if (section === "classement") return { navigation: "ranking", subjectId };
@@ -118,8 +123,10 @@ function pathnameFor(route: AppRoute) {
     if (route.arenaMode === "exercises") return route.arenaEditor ? "/arene/exercices/editeur" : "/arene/exercices";
     if (route.arenaMode === "codex") return "/arene/codex";
     if (route.arenaMode === "duel") return "/arene/duel";
-    if (route.arenaMode === "bac-2024") {
-      return route.bacResults ? "/arene/concours-bac-ci-2024/resultats" : "/arene/concours-bac-ci-2024";
+    if (route.arenaMode === "bac") {
+      if (!route.bacExamSlug) return "/arene/exos-types-bac";
+      const base = `/arene/exos-types-bac/${encodeURIComponent(route.bacExamSlug)}`;
+      return route.bacResults ? `${base}/resultats` : base;
     }
     return "/arene";
   }

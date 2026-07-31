@@ -1,6 +1,6 @@
 export const BAC_CI_2024_EXAM_ID = "bac-ci-2024-level-test";
 
-export type BacExamChoiceId = "A" | "B" | "C" | "D";
+export type BacExamChoiceId = "A" | "B" | "C" | "D" | "E";
 export type BacExamAnswers = Record<string, BacExamChoiceId>;
 
 export interface BacExamQuestion {

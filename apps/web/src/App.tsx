@@ -20,6 +20,7 @@ import { AuthScreen } from "./features/auth/AuthScreen";
 import { useAuth } from "./features/auth/AuthProvider";
 import { useLearningProgress } from "./features/progress/useLearningProgress";
 import type { AuthUser } from "./domain/auth";
+import type { BacExamSlug } from "./data/bacExamCatalog";
 import { CompanionGuide } from "./features/companion/CompanionGuide";
 import { FirstVisitTour } from "./features/companion/FirstVisitTour";
 import { ArenaScreen } from "./features/arena/ArenaScreen";
@@ -88,7 +89,7 @@ const arenaEditorPreviewUser: AuthUser = {
 const routeFallback: AppRoute = isArenaExerciseEditorPreview
   ? { navigation: "arena", subjectId: "mathematics", arenaMode: "exercises", arenaEditor: true }
   : isBacExamPreview
-  ? { navigation: "arena", subjectId: "mathematics", arenaMode: "bac-2024" }
+  ? { navigation: "arena", subjectId: "mathematics", arenaMode: "bac", bacExamSlug: "2024" }
   : isDuelPreview
   ? { navigation: "arena", subjectId: "mathematics", arenaMode: "duel" }
   : isAdminContentPreview
@@ -353,7 +354,8 @@ function LearningApp({ user }: { user: AuthUser }) {
           exercisesOpen={route.arenaMode === "exercises"}
           codexOpen={route.arenaMode === "codex"}
           duelOpen={route.arenaMode === "duel"}
-          bacExamOpen={route.arenaMode === "bac-2024"}
+          bacExamOpen={route.arenaMode === "bac"}
+          bacExamSlug={route.bacExamSlug}
           bacResultsOpen={Boolean(route.bacResults)}
           exerciseEditorOpen={Boolean(route.arenaEditor)}
           localOnly={localPreview}
@@ -362,9 +364,10 @@ function LearningApp({ user }: { user: AuthUser }) {
           onOpenExercises={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "exercises" })}
           onOpenCodex={() => navigate({ navigation: "arena", subjectId: "mathematics", arenaMode: "codex" })}
           onOpenDuel={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "duel" })}
-          onOpenBacExam={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "bac-2024" })}
-          onOpenBacResults={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "bac-2024", bacResults: true })}
-          onBackBacExam={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "bac-2024" })}
+          onOpenBacExam={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "bac" })}
+          onSelectBacExam={(slug: BacExamSlug) => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "bac", bacExamSlug: slug })}
+          onOpenBacResults={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "bac", bacExamSlug: route.bacExamSlug ?? "2024", bacResults: true })}
+          onBackBacExam={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "bac", bacExamSlug: route.bacExamSlug ?? "2024" })}
           onBackArena={() => navigate({ navigation: "arena", subjectId: subject.id })}
           onOpenExerciseEditor={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "exercises", arenaEditor: true })}
           onCloseExerciseEditor={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "exercises" })}

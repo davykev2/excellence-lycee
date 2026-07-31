@@ -1,6 +1,7 @@
 import { mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 import Database from "better-sqlite3";
+import { BAC_EXAM_CONFIGURATIONS } from "./bacExam.js";
 import { config } from "./config.js";
 import { storeItems } from "./storeCatalog.js";
 
@@ -291,7 +292,7 @@ if (!bacExamSubmissionColumns.some((column) => column.name === "candidate_zone")
   database.exec("ALTER TABLE bac_exam_submissions ADD COLUMN candidate_zone TEXT CHECK (candidate_zone IN ('cocody', 'bingerville', 'yopougon', 'online'))");
 }
 
-database.prepare(`
+const upsertBacExamSettings = database.prepare(`
   INSERT INTO bac_exam_settings (
     exam_id, title, duration_minutes, question_count, subject_published, results_published,
     answer_key_json, corrections_json, updated_at
@@ -300,13 +301,13 @@ database.prepare(`
     title = excluded.title,
     duration_minutes = excluded.duration_minutes,
     question_count = excluded.question_count
-`).run(
-  "bac-ci-2024-level-test",
-  "Concours BAC & BT 2024 — Test de niveau",
-  180,
-  69,
-  new Date().toISOString(),
-);
+`);
+database.transaction(() => {
+  const updatedAt = new Date().toISOString();
+  BAC_EXAM_CONFIGURATIONS.forEach((exam) => {
+    upsertBacExamSettings.run(exam.id, exam.title, exam.durationMinutes, exam.questionCount, updatedAt);
+  });
+})();
 
 // Aligne la table catalogue SQLite sur la source de vérité JS (apps/api/src/storeCatalog.ts).
 const upsertStoreItem = database.prepare(`
