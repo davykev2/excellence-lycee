@@ -10513,6 +10513,133 @@ textarea:focus-visible {
   font-variant-numeric: tabular-nums;
 }
 
+.bac-exam-zone-picker {
+  width: min(1050px, 100%);
+  margin: 0 auto 18px;
+  padding: 22px;
+  border: 1px solid #dce5dc;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 18px 45px rgba(8, 38, 90, 0.07);
+}
+
+.bac-exam-zone-picker.is-required {
+  border-color: #e7bd75;
+  box-shadow: 0 18px 45px rgba(169, 112, 12, 0.1);
+}
+
+.bac-exam-zone-picker > header {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.bac-exam-zone-picker > header > span {
+  display: grid;
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  color: #23813a;
+  background: #eaf6e7;
+  place-items: center;
+}
+
+.bac-exam-zone-picker > header > div {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.bac-exam-zone-picker h2,
+.bac-exam-zone-picker p {
+  margin: 0;
+}
+
+.bac-exam-zone-picker h2 {
+  color: #08265a;
+  font-size: 1.25rem;
+}
+
+.bac-exam-zone-picker > header > div > p:last-child {
+  margin-top: 4px;
+  color: #65768d;
+  font-size: 0.84rem;
+}
+
+.bac-exam-zone-picker > header > strong {
+  padding: 8px 11px;
+  border-radius: 999px;
+  color: #267d35;
+  background: #eaf6e7;
+  font-size: 0.76rem;
+  white-space: nowrap;
+}
+
+.bac-exam-zone-options {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.bac-exam-zone-options button {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 3px 9px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #dce3e6;
+  border-radius: 15px;
+  color: #5f7188;
+  background: #fafbf9;
+  text-align: left;
+  cursor: pointer;
+}
+
+.bac-exam-zone-options button:hover:not(:disabled),
+.bac-exam-zone-options button.is-selected {
+  border-color: #4dad43;
+  background: #f0f8ed;
+  box-shadow: 0 0 0 3px rgba(77, 173, 67, 0.1);
+}
+
+.bac-exam-zone-options button:disabled {
+  cursor: default;
+}
+
+.bac-exam-zone-options button > span {
+  grid-row: 1 / span 2;
+  color: #3fa63e;
+}
+
+.bac-exam-zone-options strong {
+  overflow: hidden;
+  color: #0c346d;
+  font-size: 0.88rem;
+  text-overflow: ellipsis;
+}
+
+.bac-exam-zone-options small {
+  color: #7b899a;
+  font-size: 0.69rem;
+  line-height: 1.35;
+}
+
+.bac-exam-zone-required,
+.bac-exam-zone-legacy {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 12px !important;
+  color: #a2610b;
+  font-size: 0.77rem;
+  font-weight: 850;
+}
+
+.bac-exam-zone-legacy {
+  color: #6d7d91;
+}
+
 .bac-exam-paper {
   width: min(1050px, 100%);
   margin: 0 auto;
@@ -11001,6 +11128,32 @@ textarea:focus-visible {
   gap: 3px;
 }
 
+.bac-exam-submit-summary small,
+.bac-result-zone,
+.bac-submission-banner > div > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bac-exam-submit-summary small {
+  margin-top: 4px;
+  color: #2d7e3a;
+  font-size: 0.73rem;
+  font-weight: 850;
+}
+
+.bac-result-zone {
+  width: max-content;
+  margin-top: 10px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  color: #237c36;
+  background: #eaf6e7;
+  font-size: 0.77rem;
+  font-weight: 900;
+}
+
 .bac-exam-submit-summary strong,
 .bac-exam-submit-panel > div > strong {
   color: #08265a;
@@ -11154,6 +11307,15 @@ textarea:focus-visible {
   justify-content: center;
   gap: 10px;
   margin-top: 24px;
+}
+
+.bac-exam-confirm-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #237c36 !important;
+  font-weight: 800;
 }
 
 .bac-exam-loading,
@@ -11649,9 +11811,56 @@ textarea:focus-visible {
   white-space: nowrap;
 }
 
+.admin-bac-zone-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 10px;
+}
+
+.admin-bac-zone-stats button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid #dfe6e0;
+  border-radius: 13px;
+  color: #338342;
+  background: #f8fbf7;
+  text-align: left;
+  cursor: pointer;
+}
+
+.admin-bac-zone-stats button:hover,
+.admin-bac-zone-stats button.is-active {
+  border-color: #4dad43;
+  background: #edf7e9;
+  box-shadow: 0 0 0 3px rgba(77, 173, 67, 0.09);
+}
+
+.admin-bac-zone-stats button > span {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.admin-bac-zone-stats strong {
+  color: #08265a;
+  font-size: 0.92rem;
+}
+
+.admin-bac-zone-stats small {
+  overflow: hidden;
+  color: #718198;
+  font-size: 0.69rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .admin-bac-participant-toolbar {
   display: grid;
-  grid-template-columns: minmax(220px, 1fr) minmax(145px, auto) minmax(155px, auto) auto auto;
+  grid-template-columns: minmax(200px, 1fr) minmax(135px, auto) minmax(145px, auto) minmax(145px, auto) auto auto;
   gap: 10px;
   margin-top: 18px;
 }
@@ -11808,6 +12017,7 @@ textarea:focus-visible {
   grid-template-columns:
     minmax(190px, 1.35fr)
     minmax(92px, 0.58fr)
+    minmax(118px, 0.72fr)
     minmax(132px, 0.8fr)
     63px
     72px
@@ -11816,7 +12026,7 @@ textarea:focus-visible {
     minmax(155px, 1fr);
   align-items: center;
   gap: 14px;
-  min-width: 1030px;
+  min-width: 1160px;
 }
 
 .admin-bac-results-head {
@@ -11841,6 +12051,20 @@ textarea:focus-visible {
 
 .admin-bac-results-row:hover {
   background: #fbfdf9;
+}
+
+.admin-bac-zone {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  color: #287d39;
+  font-size: 0.74rem;
+  font-weight: 850;
+}
+
+.admin-bac-zone.is-unknown {
+  color: #8490a0;
 }
 
 .admin-bac-student {
@@ -12046,6 +12270,24 @@ textarea:focus-visible {
     margin: 18px;
   }
 
+  .bac-exam-zone-picker {
+    padding: 17px;
+    border-radius: 18px;
+  }
+
+  .bac-exam-zone-picker > header {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .bac-exam-zone-picker > header > strong {
+    margin-left: 59px;
+  }
+
+  .bac-exam-zone-options {
+    grid-template-columns: 1fr 1fr;
+  }
+
   .bac-exam-section {
     padding: 10px 18px 34px;
   }
@@ -12164,6 +12406,10 @@ textarea:focus-visible {
 
   .admin-bac-participant-stats {
     grid-template-columns: 1fr;
+  }
+
+  .admin-bac-zone-stats {
+    grid-template-columns: 1fr 1fr;
   }
 
   .admin-bac-participant-toolbar {
@@ -12295,6 +12541,19 @@ textarea:focus-visible {
 }
 
 @media (max-width: 480px) {
+  .bac-exam-zone-picker > header > span {
+    width: 40px;
+    height: 40px;
+  }
+
+  .bac-exam-zone-picker > header > strong {
+    margin-left: 0;
+  }
+
+  .bac-exam-zone-options {
+    grid-template-columns: 1fr;
+  }
+
   .admin-bac-participants {
     padding: 12px;
     border-radius: 18px;
@@ -12312,6 +12571,10 @@ textarea:focus-visible {
 
   .admin-bac-participant-stats {
     gap: 8px;
+  }
+
+  .admin-bac-zone-stats {
+    gap: 7px;
   }
 
   .admin-bac-participant-stats > div {

@@ -272,6 +272,7 @@ database.exec(`
     exam_id TEXT NOT NULL REFERENCES bac_exam_settings(exam_id) ON DELETE CASCADE,
     user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     answers_json TEXT NOT NULL,
+    candidate_zone TEXT CHECK (candidate_zone IN ('cocody', 'bingerville', 'yopougon', 'online')),
     submitted_at TEXT NOT NULL,
     UNIQUE(exam_id, user_id)
   );
@@ -283,6 +284,11 @@ database.exec(`
 const bacExamSettingsColumns = database.prepare("PRAGMA table_info(bac_exam_settings)").all() as Array<{ name: string }>;
 if (!bacExamSettingsColumns.some((column) => column.name === "subject_published")) {
   database.exec("ALTER TABLE bac_exam_settings ADD COLUMN subject_published INTEGER NOT NULL DEFAULT 0 CHECK (subject_published IN (0, 1))");
+}
+
+const bacExamSubmissionColumns = database.prepare("PRAGMA table_info(bac_exam_submissions)").all() as Array<{ name: string }>;
+if (!bacExamSubmissionColumns.some((column) => column.name === "candidate_zone")) {
+  database.exec("ALTER TABLE bac_exam_submissions ADD COLUMN candidate_zone TEXT CHECK (candidate_zone IN ('cocody', 'bingerville', 'yopougon', 'online'))");
 }
 
 database.prepare(`

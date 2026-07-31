@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { BAC_CI_2024_EXAM_ID, type BacExamAnswers } from "../../data/bacCi2024Exam";
-import type { BacExamState } from "../../domain/bacExam";
+import type { BacExamState, BacExamZone } from "../../domain/bacExam";
 import { apiRequest } from "../../lib/api";
 
 const previewState: BacExamState = {
@@ -47,10 +47,15 @@ export function useBacExam({ preview = false }: { preview?: boolean } = {}) {
     void reload();
   }, [reload]);
 
-  const submit = useCallback(async (answers: BacExamAnswers) => {
+  const submit = useCallback(async (answers: BacExamAnswers, candidateZone: BacExamZone) => {
     if (preview) {
       const submittedAt = new Date().toISOString();
-      setState((current) => ({ ...(current ?? previewState), submittedAt, submittedAnswers: answers }));
+      setState((current) => ({
+        ...(current ?? previewState),
+        submittedAt,
+        submittedAnswers: answers,
+        candidateZone,
+      }));
       return submittedAt;
     }
     setSubmitting(true);
@@ -58,7 +63,7 @@ export function useBacExam({ preview = false }: { preview?: boolean } = {}) {
     try {
       const response = await apiRequest<{ submittedAt: string }>(
         `/bac-exams/${BAC_CI_2024_EXAM_ID}/submissions`,
-        { method: "POST", body: JSON.stringify({ answers }) },
+        { method: "POST", body: JSON.stringify({ answers, candidateZone }) },
       );
       await reload();
       return response.submittedAt;

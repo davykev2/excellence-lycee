@@ -8,6 +8,7 @@ import {
   FileText,
   Hourglass,
   LockKey,
+  MapPin,
   Medal,
   SealCheck,
   WarningCircle,
@@ -23,7 +24,12 @@ import {
   type BacExamQuestion,
 } from "../../data/bacCi2024Exam";
 import type { LearnerProfile } from "../../domain/learning";
-import type { BacExamCorrectionEntry } from "../../domain/bacExam";
+import {
+  bacExamZoneLabel,
+  bacExamZones,
+  type BacExamCorrectionEntry,
+  type BacExamZone,
+} from "../../domain/bacExam";
 import { useAuth } from "../auth/AuthProvider";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
 import { useBacExam } from "./useBacExam";
@@ -52,6 +58,10 @@ function draftStorageKey(userId: string) {
   return `excellence-bac-ci-2024-draft:${userId}`;
 }
 
+function zoneStorageKey(userId: string) {
+  return `excellence-bac-ci-2024-zone:${userId}`;
+}
+
 function readDraft(userId: string): BacExamAnswers {
   try {
     const parsed = JSON.parse(window.localStorage.getItem(draftStorageKey(userId)) ?? "{}") as BacExamAnswers;
@@ -59,6 +69,11 @@ function readDraft(userId: string): BacExamAnswers {
   } catch {
     return {};
   }
+}
+
+function readDraftZone(userId: string): BacExamZone | undefined {
+  const value = window.localStorage.getItem(zoneStorageKey(userId));
+  return bacExamZones.some((zone) => zone.id === value) ? value as BacExamZone : undefined;
 }
 
 function QuestionClues({ question }: { question: BacExamQuestion }) {
@@ -164,6 +179,7 @@ export function BacCi2024ExamPage({
   const exam = useBacExam({ preview: localOnly });
   const storageUserId = user?.id ?? "preview";
   const [answers, setAnswers] = useState<BacExamAnswers>(() => readDraft(storageUserId));
+  const [candidateZone, setCandidateZone] = useState<BacExamZone | undefined>(() => readDraftZone(storageUserId));
   const [confirming, setConfirming] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const state = exam.state;
@@ -171,15 +187,19 @@ export function BacCi2024ExamPage({
   useEffect(() => {
     if (state?.submittedAnswers) {
       setAnswers(state.submittedAnswers);
+      setCandidateZone(state.candidateZone);
       window.localStorage.removeItem(draftStorageKey(storageUserId));
+      window.localStorage.removeItem(zoneStorageKey(storageUserId));
     }
-  }, [state?.submittedAnswers, storageUserId]);
+  }, [state?.candidateZone, state?.submittedAnswers, storageUserId]);
 
   useEffect(() => {
     if (!state?.submittedAt) {
       window.localStorage.setItem(draftStorageKey(storageUserId), JSON.stringify(answers));
+      if (candidateZone) window.localStorage.setItem(zoneStorageKey(storageUserId), candidateZone);
+      else window.localStorage.removeItem(zoneStorageKey(storageUserId));
     }
-  }, [answers, state?.submittedAt, storageUserId]);
+  }, [answers, candidateZone, state?.submittedAt, storageUserId]);
 
   const answeredCount = Object.keys(answers).filter((key) => answers[key]).length;
   const missingQuestions = useMemo(
@@ -195,11 +215,15 @@ export function BacCi2024ExamPage({
   };
 
   const submitCopy = async () => {
+    if (!candidateZone) {
+      document.getElementById("bac-candidate-zone")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
     if (missingQuestions.length > 0) {
       document.getElementById(`bac-question-${missingQuestions[0].id}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
       return;
     }
-    await exam.submit(answers);
+    await exam.submit(answers, candidateZone);
     setSubmitSuccess(true);
     setConfirming(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -273,6 +297,7 @@ export function BacCi2024ExamPage({
                 <p className="path-kicker">Résultat officiel</p>
                 <h1>{profile.name}, voici ta note</h1>
                 <p>Chaque bonne réponse vaut un point. Consulte ensuite le corrigé détaillé question par question.</p>
+                {state.candidateZone && <span className="bac-result-zone"><MapPin size={17} weight="fill" />{bacExamZoneLabel(state.candidateZone)}</span>}
               </div>
               <div className="bac-result-score">
                 <Medal size={31} weight="duotone" />
@@ -354,12 +379,47 @@ export function BacCi2024ExamPage({
             <p className="path-kicker">{state?.resultsPublished ? "Résultats disponibles" : "Copie bien enregistrée"}</p>
             <h2>{state?.resultsPublished ? "Davy a activé les résultats." : "Attends que Davy active les résultats pour voir ta note et la correction."}</h2>
             {state?.submittedAt && <span>Validée le {formatSubmissionDate(state.submittedAt)}</span>}
+            {state?.candidateZone && <span><MapPin size={15} weight="fill" />{bacExamZoneLabel(state.candidateZone)}</span>}
           </div>
           {state?.resultsPublished
             ? <button className="primary-action is-compact" type="button" onClick={onOpenResults}>Voir ma note et la correction <ArrowRight size={19} weight="bold" /></button>
             : <button className="secondary-action" type="button" onClick={() => void exam.reload()}>Actualiser</button>}
         </section>
       )}
+
+      <section id="bac-candidate-zone" className={`bac-exam-zone-picker ${!candidateZone && !submitted ? "is-required" : ""}`}>
+        <header>
+          <span><MapPin size={24} weight="duotone" /></span>
+          <div>
+            <p className="path-kicker">Origine de la copie</p>
+            <h2>Choisis ta zone</h2>
+            <p>Cette information permet à l’équipe Excellence de suivre la participation de chaque centre.</p>
+          </div>
+          {candidateZone && <strong>{bacExamZoneLabel(candidateZone)}</strong>}
+        </header>
+        <div className="bac-exam-zone-options" role="radiogroup" aria-label="Zone du candidat">
+          {bacExamZones.map((zone) => {
+            const selected = candidateZone === zone.id;
+            return (
+              <button
+                className={selected ? "is-selected" : ""}
+                type="button"
+                role="radio"
+                aria-checked={selected}
+                disabled={submitted}
+                key={zone.id}
+                onClick={() => setCandidateZone(zone.id)}
+              >
+                <span>{selected ? <CheckCircle size={21} weight="fill" /> : <MapPin size={21} weight="duotone" />}</span>
+                <strong>{zone.label}</strong>
+                <small>{zone.description}</small>
+              </button>
+            );
+          })}
+        </div>
+        {!candidateZone && !submitted && <p className="bac-exam-zone-required"><WarningCircle size={17} weight="fill" />Choisis une zone avant de valider ta copie.</p>}
+        {submitted && !state?.candidateZone && <p className="bac-exam-zone-legacy">Cette ancienne copie a été déposée avant l’ajout du suivi par zone.</p>}
+      </section>
 
       <article className="bac-exam-paper">
         <header className="bac-exam-official-header">
@@ -437,16 +497,23 @@ export function BacCi2024ExamPage({
               <div className="bac-exam-submit-summary">
                 <strong>{answeredCount} réponse{answeredCount > 1 ? "s" : ""} sur 69</strong>
                 <span>{missingQuestions.length === 0 ? "Ta copie est prête à être envoyée." : `Il reste ${missingQuestions.length} question${missingQuestions.length > 1 ? "s" : ""}.`}</span>
+                <small><MapPin size={15} weight="fill" />{candidateZone ? bacExamZoneLabel(candidateZone) : "Zone à choisir"}</small>
               </div>
               <button
                 className="primary-action"
                 type="button"
                 disabled={exam.submitting}
-                onClick={() => missingQuestions.length > 0
-                  ? document.getElementById(`bac-question-${missingQuestions[0].id}`)?.scrollIntoView({ behavior: "smooth", block: "center" })
-                  : setConfirming(true)}
+                onClick={() => !candidateZone
+                  ? document.getElementById("bac-candidate-zone")?.scrollIntoView({ behavior: "smooth", block: "center" })
+                  : missingQuestions.length > 0
+                    ? document.getElementById(`bac-question-${missingQuestions[0].id}`)?.scrollIntoView({ behavior: "smooth", block: "center" })
+                    : setConfirming(true)}
               >
-                {missingQuestions.length > 0 ? `Aller à la question ${missingQuestions[0].id}` : exam.submitting ? "Enregistrement…" : "Valider ma copie"}
+                {!candidateZone
+                  ? "Choisir ma zone"
+                  : missingQuestions.length > 0
+                    ? `Aller à la question ${missingQuestions[0].id}`
+                    : exam.submitting ? "Enregistrement…" : "Valider ma copie"}
                 <ArrowRight size={20} weight="bold" />
               </button>
             </>
@@ -469,6 +536,7 @@ export function BacCi2024ExamPage({
             <span><Hourglass size={30} weight="duotone" /></span>
             <h2 id="bac-confirm-title">Valider définitivement ta copie ?</h2>
             <p>Tes 69 réponses seront enregistrées et tu ne pourras plus les modifier.</p>
+            <p className="bac-exam-confirm-zone"><MapPin size={18} weight="fill" />Zone : <strong>{bacExamZoneLabel(candidateZone)}</strong></p>
             <div>
               <button className="secondary-action" type="button" disabled={exam.submitting} onClick={() => setConfirming(false)}>Relire encore</button>
               <button className="primary-action is-compact" type="button" disabled={exam.submitting} onClick={() => void submitCopy()}>

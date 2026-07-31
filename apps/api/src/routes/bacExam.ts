@@ -3,6 +3,7 @@ import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 import {
   BAC_CI_2024_EXAM_ID,
+  BAC_EXAM_ZONES,
   getBacExamAppreciation,
   getBacExamSectionScores,
   type BacExamAnswers,
@@ -10,6 +11,7 @@ import {
   type BacExamCorrectionEntry,
   type BacExamParticipantResult,
   type BacExamState,
+  type BacExamZone,
 } from "../bacExam.js";
 import { database, writeAuditLog } from "../database.js";
 import {
@@ -27,8 +29,10 @@ const paramsSchema = z.object({
 });
 
 const answerChoiceSchema = z.enum(["A", "B", "C", "D"]);
+const candidateZoneSchema = z.enum(BAC_EXAM_ZONES as [BacExamZone, ...BacExamZone[]]);
 const submitSchema = z.object({
   answers: z.record(z.string(), answerChoiceSchema),
+  candidateZone: candidateZoneSchema,
 });
 const publicationSchema = z.object({ published: z.boolean() });
 
@@ -45,6 +49,7 @@ interface LocalExamSettingsRow {
 
 interface LocalExamSubmissionRow {
   answers_json: string;
+  candidate_zone: BacExamZone | null;
   submitted_at: string;
 }
 
@@ -97,7 +102,7 @@ function localExamState(userId: string, isAdmin: boolean): BacExamState {
   if (!settings) throw Object.assign(new Error("Épreuve introuvable."), { statusCode: 404 });
 
   const submission = database.prepare(`
-    SELECT answers_json, submitted_at
+    SELECT answers_json, candidate_zone, submitted_at
     FROM bac_exam_submissions
     WHERE exam_id = ? AND user_id = ?
   `).get(BAC_CI_2024_EXAM_ID, userId) as LocalExamSubmissionRow | undefined;
@@ -119,6 +124,7 @@ function localExamState(userId: string, isAdmin: boolean): BacExamState {
     canManageSubject: isAdmin,
     submittedAt: submission?.submitted_at,
     submittedAnswers: submission ? JSON.parse(submission.answers_json) as BacExamAnswers : undefined,
+    candidateZone: submission?.candidate_zone ?? undefined,
   };
 
   if (isAdmin) {
@@ -174,6 +180,7 @@ function localExamParticipantResults(examId: string): BacExamParticipantResult[]
       profile.level_id,
       profile.photo_url,
       submission.answers_json,
+      submission.candidate_zone,
       submission.submitted_at
     FROM bac_exam_submissions AS submission
     INNER JOIN users AS profile ON profile.id = submission.user_id
@@ -191,6 +198,7 @@ function localExamParticipantResults(examId: string): BacExamParticipantResult[]
         email: row.email,
         levelId: row.level_id,
         photoUrl: row.photo_url ?? undefined,
+        candidateZone: row.candidate_zone ?? undefined,
         submittedAt: row.submitted_at,
         correctAnswers,
         scoreMax: settings.question_count,
@@ -205,7 +213,7 @@ function localExamParticipantResults(examId: string): BacExamParticipantResult[]
     ));
 }
 
-function submitLocalExam(userId: string, answers: BacExamAnswers) {
+function submitLocalExam(userId: string, answers: BacExamAnswers, candidateZone: BacExamZone) {
   const settings = database.prepare(`
     SELECT question_count, subject_published FROM bac_exam_settings WHERE exam_id = ?
   `).get(BAC_CI_2024_EXAM_ID) as { question_count: number; subject_published: number } | undefined;
@@ -222,10 +230,13 @@ function submitLocalExam(userId: string, answers: BacExamAnswers) {
   if (existing) throw Object.assign(new Error("Ta copie a déjà été validée."), { statusCode: 409 });
   const submittedAt = new Date().toISOString();
   database.prepare(`
-    INSERT INTO bac_exam_submissions (id, exam_id, user_id, answers_json, submitted_at)
-    VALUES (?, ?, ?, ?, ?)
-  `).run(randomUUID(), BAC_CI_2024_EXAM_ID, userId, JSON.stringify(answers), submittedAt);
-  writeAuditLog(userId, "bac_exam.submit", BAC_CI_2024_EXAM_ID, { questionCount: settings.question_count });
+    INSERT INTO bac_exam_submissions (id, exam_id, user_id, answers_json, candidate_zone, submitted_at)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `).run(randomUUID(), BAC_CI_2024_EXAM_ID, userId, JSON.stringify(answers), candidateZone, submittedAt);
+  writeAuditLog(userId, "bac_exam.submit", BAC_CI_2024_EXAM_ID, {
+    questionCount: settings.question_count,
+    candidateZone,
+  });
   return submittedAt;
 }
 
@@ -298,17 +309,25 @@ export async function bacExamRoutes(app: FastifyInstance) {
     const params = paramsSchema.safeParse(request.params);
     const body = submitSchema.safeParse(request.body);
     if (!params.success) return reply.code(404).send({ error: "EXAM_NOT_FOUND", message: "Épreuve introuvable." });
-    if (!body.success) return reply.code(400).send({ error: "VALIDATION_ERROR", message: "Les réponses sont incomplètes ou invalides." });
+    if (!body.success) return reply.code(400).send({
+      error: "VALIDATION_ERROR",
+      message: "Les réponses ou la zone choisie sont incomplètes ou invalides.",
+    });
     const submittedAt = supabaseConfigured
-      ? await submitSupabaseBacExam(request.authContext.accessToken!, params.data.examId, body.data.answers)
-      : submitLocalExam(request.authContext.id, body.data.answers);
+      ? await submitSupabaseBacExam(
+        request.authContext.accessToken!,
+        params.data.examId,
+        body.data.answers,
+        body.data.candidateZone,
+      )
+      : submitLocalExam(request.authContext.id, body.data.answers, body.data.candidateZone);
     if (supabaseConfigured) {
       await writeSupabaseAudit(
         request.authContext.accessToken!,
         request.authContext.id,
         "bac_exam.submit",
         params.data.examId,
-        { questionCount: Object.keys(body.data.answers).length },
+        { questionCount: Object.keys(body.data.answers).length, candidateZone: body.data.candidateZone },
       ).catch((error) => request.log.warn(error, "Supabase audit log failed"));
     }
     return reply.code(201).send({ submittedAt });

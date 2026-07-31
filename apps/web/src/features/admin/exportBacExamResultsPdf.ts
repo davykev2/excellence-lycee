@@ -1,5 +1,5 @@
 import { jsPDF } from "jspdf";
-import type { BacExamParticipantResult } from "../../domain/bacExam";
+import { bacExamZoneLabel, type BacExamParticipantResult } from "../../domain/bacExam";
 
 const navy = [8, 38, 90] as const;
 const green = [45, 145, 55] as const;
@@ -37,14 +37,15 @@ function drawPageFooter(doc: jsPDF, pageNumber: number) {
 
 function drawTableHeader(doc: jsPDF, y: number) {
   const columns = [
-    { label: "Rang", x: 12, width: 13, align: "center" as const },
-    { label: "Élève", x: 25, width: 58, align: "left" as const },
-    { label: "Classe", x: 83, width: 30, align: "left" as const },
-    { label: "Anglais", x: 113, width: 24, align: "center" as const },
-    { label: "Culture G.", x: 137, width: 27, align: "center" as const },
-    { label: "Culture S.", x: 164, width: 27, align: "center" as const },
-    { label: "Total", x: 191, width: 25, align: "center" as const },
-    { label: "Appréciation", x: 216, width: 69, align: "left" as const },
+    { label: "Rang", x: 12, width: 12, align: "center" as const },
+    { label: "Élève", x: 24, width: 48, align: "left" as const },
+    { label: "Classe", x: 72, width: 25, align: "left" as const },
+    { label: "Zone", x: 97, width: 32, align: "left" as const },
+    { label: "Anglais", x: 129, width: 22, align: "center" as const },
+    { label: "Culture G.", x: 151, width: 24, align: "center" as const },
+    { label: "Culture S.", x: 175, width: 24, align: "center" as const },
+    { label: "Total", x: 199, width: 24, align: "center" as const },
+    { label: "Appréciation", x: 223, width: 62, align: "left" as const },
   ];
 
   doc.setFillColor(...navy);
@@ -155,34 +156,35 @@ export function exportBacExamResultsPdf(
     doc.setFont("helvetica", "normal");
     doc.setFontSize(7.4);
     doc.setTextColor(...ink);
-    doc.text(String(index + 1), 18.5, y + 5.8, { align: "center" });
+    doc.text(String(index + 1), 18, y + 5.8, { align: "center" });
     doc.setFont("helvetica", "bold");
-    doc.text(fitText(doc, participant.name, 54), 27, y + 5.8);
+    doc.text(fitText(doc, participant.name, 44), 26, y + 5.8);
     doc.setFont("helvetica", "normal");
-    doc.text(fitText(doc, getLevelLabel(participant.levelId), 26), 85, y + 5.8);
+    doc.text(fitText(doc, getLevelLabel(participant.levelId), 21), 74, y + 5.8);
+    doc.text(fitText(doc, bacExamZoneLabel(participant.candidateZone), 28), 99, y + 5.8);
     doc.text(
       `${participant.sectionScores.english.correctAnswers}/${participant.sectionScores.english.scoreMax}`,
-      125,
+      140,
       y + 5.8,
       { align: "center" },
     );
     doc.text(
       `${participant.sectionScores.generalKnowledge.correctAnswers}/${participant.sectionScores.generalKnowledge.scoreMax}`,
-      150.5,
+      163,
       y + 5.8,
       { align: "center" },
     );
     doc.text(
       `${participant.sectionScores.scientificKnowledge.correctAnswers}/${participant.sectionScores.scientificKnowledge.scoreMax}`,
-      177.5,
+      187,
       y + 5.8,
       { align: "center" },
     );
     doc.setFont("helvetica", "bold");
     doc.setTextColor(...navy);
-    doc.text(`${participant.correctAnswers}/${participant.scoreMax}`, 203.5, y + 5.8, { align: "center" });
+    doc.text(`${participant.correctAnswers}/${participant.scoreMax}`, 211, y + 5.8, { align: "center" });
     doc.setTextColor(...ink);
-    doc.text(fitText(doc, participant.appreciation.label, 64), 218, y + 5.8);
+    doc.text(fitText(doc, participant.appreciation.label, 58), 225, y + 5.8);
     y += rowHeight;
   });
 

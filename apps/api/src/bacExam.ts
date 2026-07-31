@@ -2,6 +2,9 @@ export const BAC_CI_2024_EXAM_ID = "bac-ci-2024-level-test";
 
 export type BacExamChoice = "A" | "B" | "C" | "D";
 export type BacExamAnswers = Record<string, BacExamChoice>;
+export type BacExamZone = "cocody" | "bingerville" | "yopougon" | "online";
+
+export const BAC_EXAM_ZONES: readonly BacExamZone[] = ["cocody", "bingerville", "yopougon", "online"];
 
 export interface BacExamCorrectionEntry {
   answer: BacExamChoice;
@@ -33,6 +36,7 @@ export interface BacExamParticipantResult {
   email: string;
   levelId: string;
   photoUrl?: string;
+  candidateZone?: BacExamZone;
   submittedAt: string;
   correctAnswers: number;
   scoreMax: number;
@@ -53,6 +57,7 @@ export interface BacExamState {
   canManageSubject: boolean;
   submittedAt?: string;
   submittedAnswers?: BacExamAnswers;
+  candidateZone?: BacExamZone;
   totalSubmissions?: number;
   result?: {
     correctAnswers: number;

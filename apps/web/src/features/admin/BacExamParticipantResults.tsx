@@ -5,6 +5,7 @@ import {
   ChartBar,
   FilePdf,
   LockKey,
+  MapPin,
   MagnifyingGlass,
   Medal,
   Student,
@@ -12,7 +13,12 @@ import {
   WarningCircle,
 } from "@phosphor-icons/react";
 import { schoolLevels } from "../../data/programme";
-import type { BacExamParticipantResult } from "../../domain/bacExam";
+import {
+  bacExamZoneLabel,
+  bacExamZones,
+  type BacExamParticipantResult,
+  type BacExamZone,
+} from "../../domain/bacExam";
 import { useBacExamParticipantResults } from "./useBacExamParticipantResults";
 
 type ParticipantSort = "score" | "recent" | "name" | "level";
@@ -51,6 +57,7 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
   const participants = useBacExamParticipantResults({ preview });
   const [query, setQuery] = useState("");
   const [levelId, setLevelId] = useState("all");
+  const [candidateZone, setCandidateZone] = useState<BacExamZone | "all" | "unknown">("all");
   const [sort, setSort] = useState<ParticipantSort>("score");
   const [exportingPdf, setExportingPdf] = useState(false);
   const [exportError, setExportError] = useState<string | null>(null);
@@ -64,9 +71,12 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
     const normalizedQuery = query.trim().toLocaleLowerCase("fr");
     const next = participants.items.filter((participant) => {
       const matchesLevel = levelId === "all" || participant.levelId === levelId;
+      const matchesZone = candidateZone === "all"
+        || (candidateZone === "unknown" ? !participant.candidateZone : participant.candidateZone === candidateZone);
       const matchesQuery = !normalizedQuery
-        || `${participant.name} ${participant.email}`.toLocaleLowerCase("fr").includes(normalizedQuery);
-      return matchesLevel && matchesQuery;
+        || `${participant.name} ${participant.email} ${bacExamZoneLabel(participant.candidateZone)}`
+          .toLocaleLowerCase("fr").includes(normalizedQuery);
+      return matchesLevel && matchesZone && matchesQuery;
     });
 
     return next.sort((left, right) => {
@@ -82,7 +92,14 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
       return right.correctAnswers - left.correctAnswers
         || left.name.localeCompare(right.name, "fr");
     });
-  }, [levelId, participants.items, query, sort]);
+  }, [candidateZone, levelId, participants.items, query, sort]);
+
+  const zoneCounts = useMemo(() => Object.fromEntries(
+    bacExamZones.map((zone) => [
+      zone.id,
+      participants.items.filter((participant) => participant.candidateZone === zone.id).length,
+    ]),
+  ) as Record<BacExamZone, number>, [participants.items]);
 
   const average = participants.items.length
     ? Math.round(participants.items.reduce((sum, item) => sum + item.correctAnswers, 0) / participants.items.length * 10) / 10
@@ -131,6 +148,20 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
         </div>
       </div>
 
+      <div className="admin-bac-zone-stats" aria-label="Répartition des copies par zone">
+        {bacExamZones.map((zone) => (
+          <button
+            className={candidateZone === zone.id ? "is-active" : ""}
+            type="button"
+            key={zone.id}
+            onClick={() => setCandidateZone((current) => current === zone.id ? "all" : zone.id)}
+          >
+            <MapPin size={18} weight={candidateZone === zone.id ? "fill" : "duotone"} />
+            <span><strong>{zoneCounts[zone.id]}</strong><small>{zone.label}</small></span>
+          </button>
+        ))}
+      </div>
+
       <div className="admin-bac-participant-toolbar">
         <label className="admin-bac-participant-search">
           <MagnifyingGlass size={18} weight="bold" />
@@ -147,6 +178,14 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
           <select value={levelId} onChange={(event) => setLevelId(event.target.value)}>
             <option value="all">Toutes les classes</option>
             {availableLevels.map((id) => <option key={id} value={id}>{levelLabel(id)}</option>)}
+          </select>
+        </label>
+        <label>
+          <span className="sr-only">Filtrer par zone</span>
+          <select value={candidateZone} onChange={(event) => setCandidateZone(event.target.value as BacExamZone | "all" | "unknown")}>
+            <option value="all">Toutes les zones</option>
+            {bacExamZones.map((zone) => <option key={zone.id} value={zone.id}>{zone.label}</option>)}
+            <option value="unknown">Zone non renseignée</option>
           </select>
         </label>
         <label>
@@ -224,6 +263,7 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
             <div className="admin-bac-results-head" role="row">
               <span role="columnheader">Élève</span>
               <span role="columnheader">Classe</span>
+              <span role="columnheader">Zone</span>
               <span role="columnheader">Copie déposée</span>
               <span role="columnheader">Anglais</span>
               <span role="columnheader">Culture G.</span>
@@ -241,6 +281,10 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
                   </p>
                 </div>
                 <span className="admin-bac-class" role="cell">{levelLabel(participant.levelId)}</span>
+                <span className={`admin-bac-zone ${participant.candidateZone ? "" : "is-unknown"}`} role="cell">
+                  <MapPin size={16} weight="duotone" />
+                  {bacExamZoneLabel(participant.candidateZone)}
+                </span>
                 <span className="admin-bac-date" role="cell">
                   <CalendarBlank size={17} weight="duotone" />
                   {formatSubmissionDate(participant.submittedAt)}
@@ -287,6 +331,7 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
                 </header>
                 <div className="admin-bac-result-card-meta">
                   <span>{levelLabel(participant.levelId)}</span>
+                  <span className="admin-bac-zone"><MapPin size={16} weight="duotone" />{bacExamZoneLabel(participant.candidateZone)}</span>
                   <span><CalendarBlank size={16} weight="duotone" />{formatSubmissionDate(participant.submittedAt)}</span>
                 </div>
                 <div className="admin-bac-card-section-scores" aria-label="Notes par matière">

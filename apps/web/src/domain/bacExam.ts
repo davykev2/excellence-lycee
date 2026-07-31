@@ -1,5 +1,22 @@
 import type { BacExamAnswers, BacExamChoiceId } from "../data/bacCi2024Exam";
 
+export type BacExamZone = "cocody" | "bingerville" | "yopougon" | "online";
+
+export const bacExamZones: readonly {
+  id: BacExamZone;
+  label: string;
+  description: string;
+}[] = [
+  { id: "cocody", label: "Cocody", description: "Je suis rattaché au centre de Cocody." },
+  { id: "bingerville", label: "Bingerville", description: "Je suis rattaché au centre de Bingerville." },
+  { id: "yopougon", label: "Yopougon", description: "Je suis rattaché au centre de Yopougon." },
+  { id: "online", label: "Cours en ligne", description: "Je suis les cours entièrement à distance." },
+] as const;
+
+export function bacExamZoneLabel(zone?: BacExamZone) {
+  return bacExamZones.find((item) => item.id === zone)?.label ?? "Zone non renseignée";
+}
+
 export interface BacExamCorrectionEntry {
   answer: BacExamChoiceId;
   explanation?: string;
@@ -30,6 +47,7 @@ export interface BacExamParticipantResult {
   email: string;
   levelId: string;
   photoUrl?: string;
+  candidateZone?: BacExamZone;
   submittedAt: string;
   correctAnswers: number;
   scoreMax: number;
@@ -50,6 +68,7 @@ export interface BacExamState {
   canManageSubject: boolean;
   submittedAt?: string;
   submittedAnswers?: BacExamAnswers;
+  candidateZone?: BacExamZone;
   totalSubmissions?: number;
   result?: {
     correctAnswers: number;

@@ -26,6 +26,7 @@ import {
   type BacExamAnswers,
   type BacExamParticipantResult,
   type BacExamState,
+  type BacExamZone,
 } from "./bacExam.js";
 
 export interface PublicAuthUser {
@@ -1280,11 +1281,17 @@ export async function getSupabaseBacExamState(accessToken: string, examId: strin
   return { ...data, ...availability } as unknown as BacExamState;
 }
 
-export async function submitSupabaseBacExam(accessToken: string, examId: string, answers: BacExamAnswers) {
+export async function submitSupabaseBacExam(
+  accessToken: string,
+  examId: string,
+  answers: BacExamAnswers,
+  candidateZone: BacExamZone,
+) {
   const client = userDataClient(accessToken);
   const { data, error } = await client.rpc("submit_bac_exam", {
     p_exam_id: examId,
     p_answers: answers,
+    p_candidate_zone: candidateZone,
   });
   if (error) {
     const status = error.code === "P0002" ? 404
@@ -1303,9 +1310,13 @@ export async function listSupabaseBacExamParticipantResults(
   examId: string,
 ): Promise<BacExamParticipantResult[]> {
   const client = userDataClient(accessToken);
-  const { data, error } = await client.rpc("get_bac_exam_participant_results", {
-    p_exam_id: examId,
-  });
+  const [
+    { data, error },
+    { data: zoneData, error: zoneError },
+  ] = await Promise.all([
+    client.rpc("get_bac_exam_participant_results", { p_exam_id: examId }),
+    client.rpc("get_bac_exam_participant_zones", { p_exam_id: examId }),
+  ]);
   if (error) {
     const status = error.code === "42501" ? 403
       : error.code === "P0002" ? 404
@@ -1314,6 +1325,18 @@ export async function listSupabaseBacExamParticipantResults(
             : 500;
     throw new SupabaseOperationError(error.message, status, error.code);
   }
+  if (zoneError) {
+    const status = zoneError.code === "42501" ? 403
+      : zoneError.code === "P0002" ? 404
+        : zoneError.code === "PGRST202" ? 503
+          : 500;
+    throw new SupabaseOperationError(zoneError.message, status, zoneError.code);
+  }
+
+  const zoneByUserId = new Map(
+    ((zoneData ?? []) as unknown as Array<{ user_id: string; candidate_zone: BacExamZone | null }>)
+      .map((row) => [row.user_id, row.candidate_zone] as const),
+  );
 
   const rows = (data ?? []) as unknown as Array<{
     user_id: string;
@@ -1338,6 +1361,7 @@ export async function listSupabaseBacExamParticipantResults(
     email: row.student_email,
     levelId: row.level_id,
     photoUrl: row.photo_url ?? undefined,
+    candidateZone: zoneByUserId.get(row.user_id) ?? undefined,
     submittedAt: row.submitted_at,
     correctAnswers: row.correct_answers,
     scoreMax: row.score_max,
