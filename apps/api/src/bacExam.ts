@@ -3,6 +3,8 @@ export const BAC_CI_2017_EXAM_ID = "bac-ci-2017-archive";
 export const BAC_CI_2018_EXAM_ID = "bac-ci-2018-archive";
 export const BAC_CI_2019_EXAM_ID = "bac-ci-2019-archive";
 export const BAC_CI_2020_EXAM_ID = "bac-ci-2020-archive";
+export const BAC_CI_2022_EXAM_ID = "bac-ci-2022-archive";
+export const BAC_CI_2023_EXAM_ID = "bac-ci-2023-archive";
 
 export type BacExamChoice = "A" | "B" | "C" | "D" | "E";
 export type BacExamAnswers = Record<string, BacExamChoice>;
@@ -15,6 +17,8 @@ export const BAC_EXAM_IDS = [
   BAC_CI_2018_EXAM_ID,
   BAC_CI_2019_EXAM_ID,
   BAC_CI_2020_EXAM_ID,
+  BAC_CI_2022_EXAM_ID,
+  BAC_CI_2023_EXAM_ID,
   BAC_CI_2024_EXAM_ID,
 ] as const;
 
@@ -75,6 +79,30 @@ export const BAC_EXAM_CONFIGURATIONS: readonly BacExamConfiguration[] = [
     questionCount: 60,
     allowedChoices: ["A", "B", "C", "D"],
     sectionQuestionNumbers: standardSixtyQuestionSections,
+  },
+  {
+    id: BAC_CI_2022_EXAM_ID,
+    title: "Sujet type BAC — Session 2022",
+    durationMinutes: 180,
+    questionCount: 41,
+    allowedChoices: ["A", "B", "C", "D"],
+    sectionQuestionNumbers: {
+      english: Array.from({ length: 15 }, (_, index) => index + 27),
+      generalKnowledge: Array.from({ length: 9 }, (_, index) => index + 18),
+      scientificKnowledge: Array.from({ length: 17 }, (_, index) => index + 1),
+    },
+  },
+  {
+    id: BAC_CI_2023_EXAM_ID,
+    title: "Sujet type BAC — Session 2023",
+    durationMinutes: 180,
+    questionCount: 43,
+    allowedChoices: ["A", "B", "C", "D"],
+    sectionQuestionNumbers: {
+      english: Array.from({ length: 20 }, (_, index) => index + 1),
+      generalKnowledge: Array.from({ length: 20 }, (_, index) => index + 21),
+      scientificKnowledge: Array.from({ length: 3 }, (_, index) => index + 41),
+    },
   },
   {
     id: BAC_CI_2024_EXAM_ID,

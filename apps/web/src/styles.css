@@ -12317,6 +12317,15 @@ textarea:focus-visible {
   margin: 22px auto 0;
 }
 
+.bac-archive-workspace.is-readonly {
+  grid-template-columns: minmax(0, 980px);
+  justify-content: center;
+}
+
+.bac-archive-workspace.is-readonly .bac-archive-document > div {
+  max-height: none;
+}
+
 .bac-archive-document,
 .bac-archive-answer-sheet {
   min-width: 0;

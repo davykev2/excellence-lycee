@@ -69,11 +69,16 @@ function BacExamPublicationCard({ definition, preview }: { definition: BacExamCa
             <div><Student size={24} weight="duotone" /><span><strong>{state?.totalSubmissions ?? 0}</strong><small>copies reçues</small></span></div>
             <div className={state?.correctionReady ? "is-ready" : "is-waiting"}>
               {state?.correctionReady ? <CheckCircle size={24} weight="fill" /> : <WarningCircle size={24} weight="duotone" />}
-              <span><strong>{state?.correctionReady ? "Prête" : "En attente"}</strong><small>{definition.questionCount} réponses expliquées</small></span>
+              <span><strong>{definition.responseSheetAvailable ? state?.correctionReady ? "Prête" : "En attente" : "À venir"}</strong><small>{definition.responseSheetAvailable ? `${definition.questionCount} réponses expliquées` : "interactivité et correction"}</small></span>
             </div>
           </div>
 
-          {!state?.correctionReady && (
+          {!definition.responseSheetAvailable ? (
+            <div className="admin-bac-warning">
+              <FileText size={23} weight="duotone" />
+              <p><strong>Consultation seule.</strong><span>Tu peux ouvrir ou fermer cette annale. La feuille de réponses et le corrigé seront ajoutés plus tard.</span></p>
+            </div>
+          ) : !state?.correctionReady && (
             <div className="admin-bac-warning">
               <WarningCircle size={23} weight="duotone" />
               <p><strong>Correction séparée.</strong><span>Tu peux ouvrir le sujet maintenant. Les résultats resteront masqués jusqu’au chargement des {definition.questionCount} réponses expliquées.</span></p>
@@ -99,10 +104,12 @@ function BacExamPublicationCard({ definition, preview }: { definition: BacExamCa
             <button
               className={`primary-action is-compact ${state?.resultsPublished ? "is-danger" : ""}`}
               type="button"
-              disabled={exam.submitting || !state || (!state.resultsPublished && !state.canPublishResults)}
+              disabled={!definition.responseSheetAvailable || exam.submitting || !state || (!state.resultsPublished && !state.canPublishResults)}
               onClick={() => void togglePublication()}
             >
-              {exam.submitting
+              {!definition.responseSheetAvailable
+                ? "Interactivité à venir"
+                : exam.submitting
                 ? "Mise à jour…"
                 : state?.resultsPublished
                   ? "Masquer les résultats"

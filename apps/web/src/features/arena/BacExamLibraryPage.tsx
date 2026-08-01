@@ -30,7 +30,7 @@ function BacExamLibraryCard({
       <header>
         <span>{exam.year}</span>
         <div>
-          <small>{exam.format === "interactive" ? "Sujet interactif" : "Archive officielle"}</small>
+          <small>{exam.responseSheetAvailable ? (exam.format === "interactive" ? "Sujet interactif" : "Archive officielle") : "Sujet à consulter"}</small>
           <h2>{exam.shortTitle}</h2>
         </div>
         <span className="bac-library-status">
@@ -55,9 +55,9 @@ function BacExamLibraryCard({
         onClick={() => onOpen(exam.slug)}
       >
         {state?.subjectPublished
-          ? "Commencer le sujet"
+          ? exam.responseSheetAvailable ? "Commencer le sujet" : "Consulter le sujet"
           : state?.canManageSubject || preview
-            ? "Prévisualiser en administrateur"
+            ? exam.responseSheetAvailable ? "Prévisualiser en administrateur" : "Consulter en administrateur"
             : "Sujet fermé par Davy"}
         {accessible ? <ArrowRight size={19} weight="bold" /> : <LockKey size={18} weight="duotone" />}
       </button>
@@ -87,11 +87,11 @@ export function BacExamLibraryPage({
         <div>
           <p className="path-kicker">Annales Excellence</p>
           <h1>Choisis ton sujet</h1>
-          <p>Entraîne-toi sur une session complète : anglais, culture générale et culture scientifique.</p>
+          <p>Entraîne-toi sur les sessions complètes ou consulte les extraits officiels déjà disponibles.</p>
           <div>
-            <span><strong>5</strong> sessions</span>
+            <span><strong>{bacExamCatalog.length}</strong> sessions</span>
             <span><strong>4</strong> zones de participation</span>
-            <span><strong>1</strong> seule copie par sujet</span>
+            <span><strong>{bacExamCatalog.filter((exam) => !exam.responseSheetAvailable).length}</strong> sujets en consultation</span>
           </div>
         </div>
         <div className="bac-library-davy">

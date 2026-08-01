@@ -140,8 +140,8 @@ export function BacArchiveExamPage({
     <main className="bac-archive-page">
       <header className="bac-archive-topbar">
         <button className="path-back-button" type="button" onClick={onBackLibrary}><ArrowLeft size={20} weight="bold" />Tous les sujets</button>
-        <div><strong>{exam.shortTitle}</strong><span>{answeredCount}/{exam.questionCount} réponses</span></div>
-        <span className={submitted ? "is-submitted" : ""}>{submitted ? <CheckCircle size={18} weight="fill" /> : <FileText size={18} weight="duotone" />}{submitted ? "Copie envoyée" : "Sujet en cours"}</span>
+        <div><strong>{exam.shortTitle}</strong><span>{exam.responseSheetAvailable ? `${answeredCount}/${exam.questionCount} réponses` : `${exam.pageCount} pages à consulter`}</span></div>
+        <span className={submitted ? "is-submitted" : ""}>{submitted ? <CheckCircle size={18} weight="fill" /> : <FileText size={18} weight="duotone" />}{submitted ? "Copie envoyée" : exam.responseSheetAvailable ? "Sujet en cours" : "Consultation"}</span>
       </header>
 
       <section className="bac-archive-hero">
@@ -149,7 +149,7 @@ export function BacArchiveExamPage({
           <p className="path-kicker">Annale officielle</p>
           <h1>{exam.title}</h1>
           <p>{exam.description}</p>
-          <div><span><strong>{exam.pageCount}</strong> pages</span><span><strong>{exam.questionCount}</strong> réponses</span><span><strong>3 h</strong> indicatives</span></div>
+          <div><span><strong>{exam.pageCount}</strong> pages</span><span><strong>{exam.questionCount}</strong> questions visibles</span><span><strong>{exam.responseSheetAvailable ? "3 h" : "Libre"}</strong> {exam.responseSheetAvailable ? "indicatives" : "consultation"}</span></div>
         </div>
         <CompanionAvatar motion="idle" decorative />
       </section>
@@ -158,12 +158,14 @@ export function BacArchiveExamPage({
         <div className="bac-archive-admin-preview"><LockKey size={20} weight="duotone" /><span><strong>Aperçu administrateur.</strong> Ce sujet est encore fermé pour les élèves.</span></div>
       )}
 
-      <nav className="bac-archive-mobile-tabs" aria-label="Partie du sujet affichée">
-        <button type="button" className={activePane === "subject" ? "is-active" : ""} onClick={() => setActivePane("subject")}><FileText size={19} weight="duotone" />Sujet</button>
-        <button type="button" className={activePane === "answers" ? "is-active" : ""} onClick={() => setActivePane("answers")}><ClipboardText size={19} weight="duotone" />Réponses <span>{answeredCount}</span></button>
-      </nav>
+      {exam.responseSheetAvailable && (
+        <nav className="bac-archive-mobile-tabs" aria-label="Partie du sujet affichée">
+          <button type="button" className={activePane === "subject" ? "is-active" : ""} onClick={() => setActivePane("subject")}><FileText size={19} weight="duotone" />Sujet</button>
+          <button type="button" className={activePane === "answers" ? "is-active" : ""} onClick={() => setActivePane("answers")}><ClipboardText size={19} weight="duotone" />Réponses <span>{answeredCount}</span></button>
+        </nav>
+      )}
 
-      <div className="bac-archive-workspace" data-mobile-pane={activePane}>
+      <div className={`bac-archive-workspace ${exam.responseSheetAvailable ? "" : "is-readonly"}`} data-mobile-pane={activePane}>
         <section className="bac-archive-document" aria-label={`Pages du sujet ${exam.year}`}>
           <header><FileText size={22} weight="duotone" /><div><strong>Sujet original</strong><span>Fais défiler les {exam.pageCount} pages sans quitter l’épreuve.</span></div></header>
           <div>
@@ -176,7 +178,7 @@ export function BacArchiveExamPage({
           </div>
         </section>
 
-        <aside className="bac-archive-answer-sheet" aria-label="Feuille de réponses">
+        {exam.responseSheetAvailable && <aside className="bac-archive-answer-sheet" aria-label="Feuille de réponses">
           <header>
             <span><ClipboardText size={25} weight="duotone" /></span>
             <div><strong>Ta feuille de réponses</strong><p>Reporte ici la lettre cochée dans le sujet.</p></div>
@@ -281,7 +283,7 @@ export function BacArchiveExamPage({
               </section>
             </>
           )}
-        </aside>
+        </aside>}
       </div>
 
       {confirming && (
