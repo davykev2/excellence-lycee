@@ -289,6 +289,44 @@ export async function loginWithSupabase(email: string, password: string) {
   };
 }
 
+export async function requestSupabasePasswordReset(email: string) {
+  const { error } = await requireAuthClient().auth.resetPasswordForEmail(email, {
+    redirectTo: `${config.webOrigin.replace(/\/$/, "")}/?auth=recovery`,
+  });
+  if (error) throw authFailure(error);
+}
+
+export async function confirmSupabasePasswordReset(accessToken: string, password: string) {
+  const response = await fetch(`${config.supabaseUrl}/auth/v1/user`, {
+    method: "PUT",
+    headers: {
+      apikey: config.supabasePublishableKey,
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ password }),
+  });
+
+  if (!response.ok) {
+    const payload = await response.json().catch(() => ({})) as { message?: string; msg?: string; error_code?: string };
+    throw new SupabaseOperationError(
+      payload.message ?? payload.msg ?? "Le lien de récupération est invalide ou expiré.",
+      response.status,
+      payload.error_code ?? "PASSWORD_RECOVERY_FAILED",
+    );
+  }
+
+  // Révoque les anciennes sessions après le changement. L'élève se reconnecte
+  // ensuite normalement avec son nouveau mot de passe.
+  await fetch(`${config.supabaseUrl}/auth/v1/logout?scope=global`, {
+    method: "POST",
+    headers: {
+      apikey: config.supabasePublishableKey,
+      Authorization: `Bearer ${accessToken}`,
+    },
+  }).catch(() => undefined);
+}
+
 export async function refreshWithSupabase(refreshToken: string) {
   const { data, error } = await requireAuthClient().auth.refreshSession({ refresh_token: refreshToken });
   if (error || !data.session || !data.user) {

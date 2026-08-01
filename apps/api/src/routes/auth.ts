@@ -18,8 +18,10 @@ import {
 import {
   loginWithSupabase,
   logoutFromSupabase,
+  confirmSupabasePasswordReset,
   refreshWithSupabase,
   registerWithSupabase,
+  requestSupabasePasswordReset,
   SupabaseOperationError,
   supabaseConfigured,
 } from "../supabase.js";
@@ -45,6 +47,15 @@ const registerSchema = z.object({
 const loginSchema = z.object({
   email: z.string().trim().email(),
   password: z.string().min(1).max(128),
+});
+
+const passwordResetRequestSchema = z.object({
+  email: z.string().trim().email().max(180),
+});
+
+const passwordResetConfirmSchema = z.object({
+  accessToken: z.string().min(40).max(4096),
+  password: passwordSchema,
 });
 
 function invalidPayload(reply: FastifyReply, error: z.ZodError) {
@@ -148,6 +159,60 @@ export async function authRoutes(app: FastifyInstance) {
     setRefreshCookie(reply, refreshToken);
     writeAuditLog(user.id, "auth.login", user.id);
     return { accessToken: signAccessToken(app, user), user: publicUser(user) };
+  });
+
+  app.post("/password-reset/request", {
+    config: { rateLimit: { max: 4, timeWindow: "15 minutes" } },
+  }, async (request, reply) => {
+    const parsed = passwordResetRequestSchema.safeParse(request.body);
+    if (!parsed.success) return invalidPayload(reply, parsed.error);
+
+    if (!supabaseConfigured) {
+      return reply.code(503).send({
+        error: "PASSWORD_RESET_UNAVAILABLE",
+        message: "La récupération du mot de passe est momentanément indisponible.",
+      });
+    }
+
+    try {
+      await requestSupabasePasswordReset(parsed.data.email.toLocaleLowerCase("fr"));
+      // Réponse volontairement identique, que le compte existe ou non.
+      return reply.code(202).send({
+        message: "Si un compte utilise cette adresse, un lien de récupération vient d’être envoyé.",
+      });
+    } catch (error) {
+      request.log.error(error, "Password recovery email failed");
+      return reply.code(503).send({
+        error: "PASSWORD_RESET_UNAVAILABLE",
+        message: "Le lien n’a pas pu être envoyé pour le moment. Réessaie dans quelques minutes.",
+      });
+    }
+  });
+
+  app.post("/password-reset/confirm", {
+    config: { rateLimit: { max: 8, timeWindow: "15 minutes" } },
+  }, async (request, reply) => {
+    const parsed = passwordResetConfirmSchema.safeParse(request.body);
+    if (!parsed.success) return invalidPayload(reply, parsed.error);
+
+    if (!supabaseConfigured) {
+      return reply.code(503).send({
+        error: "PASSWORD_RESET_UNAVAILABLE",
+        message: "La récupération du mot de passe est momentanément indisponible.",
+      });
+    }
+
+    try {
+      await confirmSupabasePasswordReset(parsed.data.accessToken, parsed.data.password);
+      clearRefreshCookie(reply);
+      return reply.code(200).send({ message: "Ton mot de passe a été modifié. Tu peux maintenant te connecter." });
+    } catch (error) {
+      request.log.warn(error, "Password recovery confirmation failed");
+      return reply.code(400).send({
+        error: "PASSWORD_RECOVERY_LINK_INVALID",
+        message: "Ce lien de récupération est invalide ou expiré. Demande un nouveau lien.",
+      });
+    }
   });
 
   app.post("/refresh", { config: { rateLimit: { max: 30, timeWindow: "1 minute" } } }, async (request, reply) => {

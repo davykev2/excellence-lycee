@@ -81,6 +81,26 @@ export async function closeSession() {
   setAccessToken(null);
 }
 
+export async function requestPasswordReset(email: string) {
+  const response = await fetch(`${apiUrl}/auth/password-reset/request`, {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  });
+  return parseResponse<{ message: string }>(response);
+}
+
+export async function confirmPasswordReset(accessToken: string, password: string) {
+  const response = await fetch(`${apiUrl}/auth/password-reset/confirm`, {
+    method: "POST",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ accessToken, password }),
+  });
+  return parseResponse<{ message: string }>(response);
+}
+
 export async function apiRequest<T>(path: string, init: RequestInit = {}, retry = true): Promise<T> {
   const headers = new Headers(init.headers);
   if (init.body && !headers.has("Content-Type")) headers.set("Content-Type", "application/json");

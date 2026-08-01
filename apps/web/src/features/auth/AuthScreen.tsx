@@ -18,13 +18,18 @@ import {
 import type { SchoolLevel } from "../../domain/learning";
 import type { AccountType } from "../../domain/auth";
 import { schoolLevels } from "../../data/programme";
-import { ApiError } from "../../lib/api";
+import { ApiError, confirmPasswordReset, requestPasswordReset } from "../../lib/api";
 import { CompanionAvatar, type CompanionMotion } from "../companion/CompanionAvatar";
 import { useAuth } from "./AuthProvider";
 import officialLogo from "../../assets/logo-excellence-officiel.png";
 
 type AuthMode = "login" | "register";
-type OnboardingStep = "welcome" | "access" | "form" | "confirmation";
+type OnboardingStep = "welcome" | "access" | "form" | "confirmation" | "reset-request" | "reset-sent" | "reset-password" | "reset-success";
+
+function readRecoveryAccessToken() {
+  const params = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+  return params.get("type") === "recovery" ? params.get("access_token") : null;
+}
 
 const stageLabels: Record<SchoolLevel["stage"], string> = {
   seconde: "Seconde",
@@ -58,7 +63,8 @@ const accountChoices = [
 
 export function AuthScreen() {
   const { login, register } = useAuth();
-  const [step, setStep] = useState<OnboardingStep>("welcome");
+  const [recoveryAccessToken] = useState(() => readRecoveryAccessToken());
+  const [step, setStep] = useState<OnboardingStep>(() => recoveryAccessToken ? "reset-password" : "welcome");
   const [accountType, setAccountType] = useState<AccountType | null>(null);
   const [mode, setMode] = useState<AuthMode>("register");
   const [motion, setMotion] = useState<CompanionMotion>("wave");
@@ -68,6 +74,8 @@ export function AuthScreen() {
   const [stage, setStage] = useState<SchoolLevel["stage"]>("seconde");
   const [levelId, setLevelId] = useState("seconde-c");
   const [showPassword, setShowPassword] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordConfirmation, setNewPasswordConfirmation] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [confirmationEmail, setConfirmationEmail] = useState<string | null>(null);
@@ -131,6 +139,53 @@ export function AuthScreen() {
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const submitPasswordResetRequest = async (event: FormEvent) => {
+    event.preventDefault();
+    setSubmitting(true);
+    setError(null);
+    try {
+      await requestPasswordReset(email);
+      setStep("reset-sent");
+    } catch (caught) {
+      setError(caught instanceof ApiError ? caught.message : "Le lien n’a pas pu être envoyé pour le moment.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const submitNewPassword = async (event: FormEvent) => {
+    event.preventDefault();
+    setError(null);
+    if (!recoveryAccessToken) {
+      setError("Ce lien de récupération est invalide ou expiré. Demande un nouveau lien.");
+      return;
+    }
+    if (newPassword !== newPasswordConfirmation) {
+      setError("Les deux mots de passe ne correspondent pas.");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      await confirmPasswordReset(recoveryAccessToken, newPassword);
+      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+      setPassword("");
+      setNewPassword("");
+      setNewPasswordConfirmation("");
+      setStep("reset-success");
+    } catch (caught) {
+      setError(caught instanceof ApiError ? caught.message : "Le mot de passe n’a pas pu être modifié.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const returnToLogin = () => {
+    if (!accountType) setAccountType("student");
+    setMode("login");
+    setStep("form");
+    setError(null);
   };
 
   const registrationLevelLabel = accountType === "student"
@@ -233,6 +288,12 @@ export function AuthScreen() {
                 <label><span>Adresse e-mail</span><input required type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="tonadresse@exemple.com" /></label>
                 <label><span>Mot de passe</span><span className="auth-password-field"><LockKey size={19} /><input required minLength={mode === "register" ? 10 : 1} type={showPassword ? "text" : "password"} autoComplete={mode === "register" ? "new-password" : "current-password"} value={password} onChange={(event) => setPassword(event.target.value)} placeholder={mode === "register" ? "10 caractères, majuscule et chiffre" : "Ton mot de passe"} /><button type="button" aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"} onClick={() => setShowPassword((value) => !value)}>{showPassword ? <EyeSlash size={20} /> : <Eye size={20} />}</button></span></label>
 
+                {mode === "login" && (
+                  <button className="auth-forgot-password" type="button" onClick={() => { setStep("reset-request"); setError(null); }}>
+                    Mot de passe oublié&nbsp;?
+                  </button>
+                )}
+
                 {mode === "register" && (
                   <fieldset className="auth-school-choice">
                     <legend>{registrationLevelLabel}</legend>
@@ -246,6 +307,65 @@ export function AuthScreen() {
                 <button className="primary-action auth-submit" type="submit" disabled={submitting}>{submitting ? "Vérification…" : mode === "register" ? "Créer mon espace" : "Me connecter"}<ArrowRight size={22} weight="bold" /></button>
               </form>
               <p className="auth-trust"><CheckCircle size={17} weight="fill" /> Tes informations restent privées et protégées.</p>
+            </div>
+          )}
+
+          {step === "reset-request" && (
+            <div className="onboarding-step onboarding-form-step">
+              <button className="onboarding-back" type="button" onClick={returnToLogin}>
+                <ArrowLeft size={18} weight="bold" /> Retour à la connexion
+              </button>
+              <div className="onboarding-form-heading">
+                <span className="onboarding-selected-profile"><LockKey size={20} weight="duotone" /> Récupération sécurisée</span>
+                <h1 id="onboarding-title">Retrouve ton compte</h1>
+                <p>Indique ton adresse e-mail. Davy t’enverra un lien personnel pour choisir un nouveau mot de passe.</p>
+              </div>
+              <form className="auth-form" onSubmit={submitPasswordResetRequest}>
+                <label><span>Adresse e-mail</span><input required type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="tonadresse@exemple.com" /></label>
+                {error && <p className="auth-error" role="alert">{error}</p>}
+                <button className="primary-action auth-submit" type="submit" disabled={submitting}>{submitting ? "Envoi…" : "Recevoir mon lien"}<ArrowRight size={22} weight="bold" /></button>
+              </form>
+              <p className="auth-trust"><ShieldCheck size={17} weight="fill" /> Le lien est temporaire et utilisable uniquement par son destinataire.</p>
+            </div>
+          )}
+
+          {step === "reset-sent" && (
+            <div className="onboarding-step onboarding-confirmation-step">
+              <span className="onboarding-confirmation-icon"><EnvelopeSimpleOpen size={38} weight="duotone" /></span>
+              <p className="onboarding-kicker"><CheckCircle size={16} weight="fill" /> Demande prise en compte</p>
+              <h1 id="onboarding-title">Vérifie ta boîte mail</h1>
+              <p className="onboarding-lead">Si un compte utilise <strong>{email}</strong>, il recevra un lien pour choisir un nouveau mot de passe. Pense aussi à vérifier les courriers indésirables.</p>
+              <button className="primary-action onboarding-confirmation-action" type="button" onClick={returnToLogin}>
+                Retour à la connexion <ArrowRight size={21} weight="bold" />
+              </button>
+            </div>
+          )}
+
+          {step === "reset-password" && (
+            <div className="onboarding-step onboarding-form-step">
+              <div className="onboarding-form-heading">
+                <span className="onboarding-selected-profile"><ShieldCheck size={20} weight="duotone" /> Lien vérifié</span>
+                <h1 id="onboarding-title">Choisis ton nouveau mot de passe</h1>
+                <p>Utilise au moins 10 caractères, avec une majuscule, une minuscule et un chiffre.</p>
+              </div>
+              <form className="auth-form" onSubmit={submitNewPassword}>
+                <label><span>Nouveau mot de passe</span><span className="auth-password-field"><LockKey size={19} /><input required minLength={10} type={showPassword ? "text" : "password"} autoComplete="new-password" value={newPassword} onChange={(event) => setNewPassword(event.target.value)} placeholder="10 caractères, majuscule et chiffre" /><button type="button" aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"} onClick={() => setShowPassword((value) => !value)}>{showPassword ? <EyeSlash size={20} /> : <Eye size={20} />}</button></span></label>
+                <label><span>Confirme le mot de passe</span><span className="auth-password-field"><LockKey size={19} /><input required minLength={10} type={showPassword ? "text" : "password"} autoComplete="new-password" value={newPasswordConfirmation} onChange={(event) => setNewPasswordConfirmation(event.target.value)} placeholder="Retape exactement le même mot de passe" /></span></label>
+                {error && <p className="auth-error" role="alert">{error}</p>}
+                <button className="primary-action auth-submit" type="submit" disabled={submitting}>{submitting ? "Modification…" : "Enregistrer mon mot de passe"}<ArrowRight size={22} weight="bold" /></button>
+              </form>
+            </div>
+          )}
+
+          {step === "reset-success" && (
+            <div className="onboarding-step onboarding-confirmation-step">
+              <span className="onboarding-confirmation-icon"><CheckCircle size={38} weight="fill" /></span>
+              <p className="onboarding-kicker"><ShieldCheck size={16} weight="fill" /> Compte sécurisé</p>
+              <h1 id="onboarding-title">Mot de passe modifié</h1>
+              <p className="onboarding-lead">Tu peux maintenant te connecter avec ton nouveau mot de passe.</p>
+              <button className="primary-action onboarding-confirmation-action" type="button" onClick={returnToLogin}>
+                Me connecter <ArrowRight size={21} weight="bold" />
+              </button>
             </div>
           )}
 
