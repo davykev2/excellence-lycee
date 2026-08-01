@@ -211,7 +211,8 @@ export function BacArchiveExamPage({
                             key={choice.value}
                             type="button"
                             disabled={submitted}
-                            className={answers[key] === choice.value ? "is-selected" : ""}
+                            className={`${answers[key] === choice.value ? "is-selected" : ""} notranslate`}
+                            translate="no"
                             aria-label={`${section.label}, question ${displayNumber}, réponse ${choice.label}`}
                             onClick={() => setAnswers((current) => ({ ...current, [key]: choice.value as BacExamChoiceId }))}
                           >{choice.label}</button>
@@ -270,7 +271,7 @@ export function BacArchiveExamPage({
                                 : <XCircle size={20} weight="fill" />}
                               <div>
                                 <strong>Question {displayNumber}</strong>
-                                <span>Ta réponse : <b>{displayedAnswer(exam, questionNumber, learnerAnswer)}</b> · Bonne réponse : <b>{displayedAnswer(exam, questionNumber, correction?.answer)}</b></span>
+                                <span>Ta réponse : <b className="notranslate" translate="no">{displayedAnswer(exam, questionNumber, learnerAnswer)}</b> · Bonne réponse : <b className="notranslate" translate="no">{displayedAnswer(exam, questionNumber, correction?.answer)}</b></span>
                                 {correction?.explanation && <p>{correction.explanation}</p>}
                               </div>
                             </article>

@@ -728,7 +728,7 @@ export function LessonWorkspace({
                     return (
                       <label htmlFor={optionId} className={answers[questionIndex] === optionIndex ? "is-selected" : ""} key={option}>
                         <input id={optionId} type="radio" name={`question-${questionIndex}`} checked={answers[questionIndex] === optionIndex} onChange={() => setAnswers((current) => current.map((answer, index) => index === questionIndex ? optionIndex : answer))} />
-                        <span>{String.fromCharCode(65 + optionIndex)}</span><strong><MathText>{option}</MathText></strong>
+                        <span className="notranslate" translate="no">{String.fromCharCode(65 + optionIndex)}</span><strong><MathText>{option}</MathText></strong>
                       </label>
                     );
                   })}</div>}

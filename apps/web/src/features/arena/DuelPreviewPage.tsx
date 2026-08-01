@@ -954,7 +954,7 @@ function DuelBattleMockup({
                   onClick={() => setSelectedAnswer(index)}
                   aria-pressed={isSelected}
                 >
-                  {String.fromCharCode(65 + index)}
+                  <span className="notranslate" translate="no">{String.fromCharCode(65 + index)}</span>
                   <strong>{answer}</strong>
                   {isSelected ? <CheckCircle size={20} weight="fill" /> : null}
                 </button>

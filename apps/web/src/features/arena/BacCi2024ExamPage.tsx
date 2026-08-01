@@ -132,7 +132,7 @@ function QuestionCard({
                 disabled={readOnly}
                 onChange={() => onAnswer(id)}
               />
-              <span>{id}</span>
+              <span className="notranslate" translate="no">{id}</span>
               <strong><MathText>{choice}</MathText></strong>
               {expected && <CheckCircle size={20} weight="fill" aria-label="Bonne réponse" />}
             </label>
@@ -143,7 +143,7 @@ function QuestionCard({
         <div className="bac-exam-correction">
           <SealCheck size={22} weight="duotone" />
           <div>
-            <strong>Bonne réponse : {correction.answer}</strong>
+            <strong>Bonne réponse : <span className="notranslate" translate="no">{correction.answer}</span></strong>
             <MarkdownContent
               markdown={correction.explanation || "La correction détaillée sera complétée par l’équipe pédagogique."}
               preserveLineBreaks

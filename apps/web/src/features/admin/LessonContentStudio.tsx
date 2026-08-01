@@ -433,7 +433,7 @@ export function LessonContentStudio({
                           {question.options.map((option, optionIndex) => (
                             <label key={`option-${optionIndex}`} className={question.correctIndex === optionIndex ? "is-correct" : ""}>
                               <input type="radio" name={`correct-${questionIndex}`} checked={question.correctIndex === optionIndex} onChange={() => updateQuestion(questionIndex, { correctIndex: optionIndex })} />
-                              <span>{String.fromCharCode(65 + optionIndex)}</span>
+                              <span className="notranslate" translate="no">{String.fromCharCode(65 + optionIndex)}</span>
                               <input value={option} onChange={(event) => updateQuestion(questionIndex, { options: question.options.map((item, index) => index === optionIndex ? event.target.value : item) })} />
                               {question.options.length > 2 && <button type="button" onClick={() => updateQuestion(questionIndex, { options: question.options.filter((_, index) => index !== optionIndex), correctIndex: question.correctIndex === optionIndex ? 0 : question.correctIndex > optionIndex ? question.correctIndex - 1 : question.correctIndex })} aria-label={`Supprimer la proposition ${optionIndex + 1}`}><X size={15} /></button>}
                             </label>
@@ -467,7 +467,7 @@ export function LessonContentStudio({
                     </section>
                     <section className="content-preview-quiz">
                       <p className="path-kicker">Évaluation du niveau</p><h2>À toi de jouer</h2>
-                      {draft.questions.map((question, index) => <div key={`preview-${index}`}><strong>{index + 1}. <MathText>{question.prompt}</MathText></strong>{question.sourceLabel && <small className="content-preview-source">{question.sourceLabel}</small>}{question.type === "short-answer" ? <label className="content-preview-short-answer"><span>Réponse courte</span><input disabled placeholder="L’élève saisira son résultat ici" /></label> : <ul>{question.options.map((option, optionIndex) => <li className={question.correctIndex === optionIndex ? "is-correct" : ""} key={`${option}-${optionIndex}`}><span>{String.fromCharCode(65 + optionIndex)}</span><MathText>{option}</MathText>{question.correctIndex === optionIndex && <Check size={15} weight="bold" />}</li>)}</ul>}</div>)}
+                      {draft.questions.map((question, index) => <div key={`preview-${index}`}><strong>{index + 1}. <MathText>{question.prompt}</MathText></strong>{question.sourceLabel && <small className="content-preview-source">{question.sourceLabel}</small>}{question.type === "short-answer" ? <label className="content-preview-short-answer"><span>Réponse courte</span><input disabled placeholder="L’élève saisira son résultat ici" /></label> : <ul>{question.options.map((option, optionIndex) => <li className={question.correctIndex === optionIndex ? "is-correct" : ""} key={`${option}-${optionIndex}`}><span className="notranslate" translate="no">{String.fromCharCode(65 + optionIndex)}</span><MathText>{option}</MathText>{question.correctIndex === optionIndex && <Check size={15} weight="bold" />}</li>)}</ul>}</div>)}
                     </section>
                   </article>
                 </aside>
