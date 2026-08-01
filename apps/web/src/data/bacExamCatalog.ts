@@ -23,6 +23,8 @@ export interface BacExamCatalogEntry {
   choiceReadingHint?: string;
   format: "facsimile" | "interactive";
   responseSheetAvailable: boolean;
+  sourceVerified?: boolean;
+  sourceNotice?: string;
   pageUrls: readonly string[];
   pageCount: number;
   sections: readonly {
@@ -97,6 +99,8 @@ export const bacExamCatalog: readonly BacExamCatalogEntry[] = [
     choiceIds: ["A", "B", "C", "D", "E"],
     format: "facsimile",
     responseSheetAvailable: true,
+    sourceVerified: false,
+    sourceNotice: "Le document transmis répète exactement les questions de la session 2019. Le véritable sujet 2018 doit encore être fourni.",
     pageUrls: archivePages(2018, 10),
     pageCount: 10,
     sections: [

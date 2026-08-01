@@ -30,6 +30,7 @@ export interface BacExamConfiguration {
   durationMinutes: number;
   questionCount: number;
   allowedChoices: readonly BacExamChoice[];
+  sourceVerified?: boolean;
   sectionQuestionNumbers: {
     english: readonly number[];
     generalKnowledge: readonly number[];
@@ -62,6 +63,7 @@ export const BAC_EXAM_CONFIGURATIONS: readonly BacExamConfiguration[] = [
     durationMinutes: 180,
     questionCount: 60,
     allowedChoices: ["A", "B", "C", "D", "E"],
+    sourceVerified: false,
     sectionQuestionNumbers: standardSixtyQuestionSections,
   },
   {
@@ -126,6 +128,10 @@ export const BAC_EXAM_CONFIGURATIONS: readonly BacExamConfiguration[] = [
 
 export function getBacExamConfiguration(examId: string) {
   return BAC_EXAM_CONFIGURATIONS.find((configuration) => configuration.id === examId);
+}
+
+export function isBacExamSourceVerified(examId: string) {
+  return getBacExamConfiguration(examId)?.sourceVerified !== false;
 }
 
 export interface BacExamCorrectionEntry {

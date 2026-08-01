@@ -115,6 +115,17 @@ export function BacArchiveExamPage({
     ),
   })), [exam.sections]);
 
+  if (exam.sourceVerified === false) {
+    return (
+      <main className="bac-archive-feedback is-locked">
+        <WarningCircle size={45} weight="duotone" />
+        <h1>Le sujet {exam.year} doit être remplacé.</h1>
+        <p>{exam.sourceNotice}</p>
+        <button className="secondary-action" type="button" onClick={onBackLibrary}><ArrowLeft size={19} weight="bold" />Voir les autres sujets</button>
+      </main>
+    );
+  }
+
   const submitCopy = async () => {
     if (!candidateZone || missingCount > 0) return;
     try {

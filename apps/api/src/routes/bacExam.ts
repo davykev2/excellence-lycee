@@ -7,6 +7,7 @@ import {
   getBacExamAppreciation,
   getBacExamConfiguration,
   getBacExamSectionScores,
+  isBacExamSourceVerified,
   type BacExamAnswers,
   type BacExamChoice,
   type BacExamCorrectionEntry,
@@ -92,6 +93,16 @@ function requireAdmin(request: FastifyRequest, reply: FastifyReply) {
     return false;
   }
   return true;
+}
+
+function hideUnverifiedSourcePublication(state: BacExamState): BacExamState {
+  if (isBacExamSourceVerified(state.examId)) return state;
+  return {
+    ...state,
+    subjectPublished: false,
+    resultsPublished: false,
+    canPublishResults: false,
+  };
 }
 
 function localExamState(examId: string, userId: string, isAdmin: boolean): BacExamState {
@@ -289,7 +300,7 @@ export async function bacExamRoutes(app: FastifyInstance) {
     const state = supabaseConfigured
       ? await getSupabaseBacExamState(request.authContext.accessToken!, parsed.data.examId)
       : localExamState(parsed.data.examId, request.authContext.id, request.authContext.role === "admin");
-    return state;
+    return hideUnverifiedSourcePublication(state);
   });
 
   app.get("/:examId/participant-results", { preHandler: app.authenticate }, async (request, reply) => {
@@ -311,6 +322,10 @@ export async function bacExamRoutes(app: FastifyInstance) {
     const params = paramsSchema.safeParse(request.params);
     const body = submitSchema.safeParse(request.body);
     if (!params.success) return reply.code(404).send({ error: "EXAM_NOT_FOUND", message: "Épreuve introuvable." });
+    if (!isBacExamSourceVerified(params.data.examId)) return reply.code(409).send({
+      error: "EXAM_SOURCE_UNVERIFIED",
+      message: "Ce sujet est indisponible : le document transmis duplique une autre session.",
+    });
     if (!body.success) return reply.code(400).send({
       error: "VALIDATION_ERROR",
       message: "Les réponses ou la zone choisie sont incomplètes ou invalides.",
@@ -342,6 +357,10 @@ export async function bacExamRoutes(app: FastifyInstance) {
     const body = publicationSchema.safeParse(request.body);
     if (!params.success) return reply.code(404).send({ error: "EXAM_NOT_FOUND", message: "Épreuve introuvable." });
     if (!body.success) return reply.code(400).send({ error: "VALIDATION_ERROR", message: "État de publication invalide." });
+    if (body.data.published && !isBacExamSourceVerified(params.data.examId)) return reply.code(409).send({
+      error: "EXAM_SOURCE_UNVERIFIED",
+      message: "Impossible de publier les résultats d’un sujet dont la source n’est pas vérifiée.",
+    });
     if (supabaseConfigured) {
       await setSupabaseBacExamResultsPublished(request.authContext.accessToken!, params.data.examId, body.data.published);
       await writeSupabaseAudit(
@@ -363,6 +382,10 @@ export async function bacExamRoutes(app: FastifyInstance) {
     const body = publicationSchema.safeParse(request.body);
     if (!params.success) return reply.code(404).send({ error: "EXAM_NOT_FOUND", message: "Épreuve introuvable." });
     if (!body.success) return reply.code(400).send({ error: "VALIDATION_ERROR", message: "État du sujet invalide." });
+    if (body.data.published && !isBacExamSourceVerified(params.data.examId)) return reply.code(409).send({
+      error: "EXAM_SOURCE_UNVERIFIED",
+      message: "Impossible d’ouvrir ce sujet : le document transmis duplique une autre session.",
+    });
     if (supabaseConfigured) {
       await setSupabaseBacExamSubjectPublished(request.authContext.accessToken!, params.data.examId, body.data.published);
       await writeSupabaseAudit(
@@ -378,8 +401,9 @@ export async function bacExamRoutes(app: FastifyInstance) {
   });
 
   async function getSupabaseOrLocalState(request: FastifyRequest, examId: string) {
-    return supabaseConfigured
+    const state = supabaseConfigured
       ? getSupabaseBacExamState(request.authContext.accessToken!, examId)
       : localExamState(examId, request.authContext.id, request.authContext.role === "admin");
+    return hideUnverifiedSourcePublication(await state);
   }
 }

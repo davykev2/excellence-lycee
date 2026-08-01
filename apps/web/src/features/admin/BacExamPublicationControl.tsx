@@ -16,9 +16,10 @@ function BacExamPublicationCard({ definition, preview }: { definition: BacExamCa
   const exam = useBacExam({ preview, examId: definition.id });
   const [notice, setNotice] = useState<string | null>(null);
   const state = exam.state;
+  const sourceVerified = definition.sourceVerified !== false;
 
   const toggleSubject = async () => {
-    if (!state) return;
+    if (!state || !sourceVerified) return;
     setNotice(null);
     try {
       await exam.setSubjectPublished(!state.subjectPublished);
@@ -31,7 +32,7 @@ function BacExamPublicationCard({ definition, preview }: { definition: BacExamCa
   };
 
   const togglePublication = async () => {
-    if (!state) return;
+    if (!state || !sourceVerified) return;
     setNotice(null);
     try {
       await exam.setResultsPublished(!state.resultsPublished);
@@ -49,9 +50,9 @@ function BacExamPublicationCard({ definition, preview }: { definition: BacExamCa
           <h2>{definition.title}</h2>
         </div>
         <div className="admin-bac-statuses">
-          <span className={`admin-bac-status ${state?.subjectPublished ? "is-published" : "is-locked"}`}>
-            {state?.subjectPublished ? <Eye size={18} weight="fill" /> : <EyeSlash size={18} weight="duotone" />}
-            {state?.subjectPublished ? "Sujet ouvert" : "Sujet fermé"}
+          <span className={`admin-bac-status ${sourceVerified && state?.subjectPublished ? "is-published" : "is-locked"}`}>
+            {sourceVerified && state?.subjectPublished ? <Eye size={18} weight="fill" /> : <EyeSlash size={18} weight="duotone" />}
+            {!sourceVerified ? "Source à remplacer" : state?.subjectPublished ? "Sujet ouvert" : "Sujet fermé"}
           </span>
           <span className={`admin-bac-status ${state?.resultsPublished ? "is-published" : "is-locked"}`}>
             {state?.resultsPublished ? <CheckCircle size={18} weight="fill" /> : <LockKey size={18} weight="duotone" />}
@@ -73,7 +74,12 @@ function BacExamPublicationCard({ definition, preview }: { definition: BacExamCa
             </div>
           </div>
 
-          {!definition.responseSheetAvailable ? (
+          {!sourceVerified ? (
+            <div className="admin-bac-warning">
+              <WarningCircle size={23} weight="duotone" />
+              <p><strong>Ouverture bloquée.</strong><span>{definition.sourceNotice}</span></p>
+            </div>
+          ) : !definition.responseSheetAvailable ? (
             <div className="admin-bac-warning">
               <FileText size={23} weight="duotone" />
               <p><strong>Consultation seule.</strong><span>Tu peux ouvrir ou fermer cette annale. La feuille de réponses et le corrigé seront ajoutés plus tard.</span></p>
@@ -86,16 +92,22 @@ function BacExamPublicationCard({ definition, preview }: { definition: BacExamCa
           )}
 
           <div className="admin-bac-actions">
-            <a className="secondary-action" href={`/arene/exos-types-bac/${definition.slug}`}>
-              Prévisualiser le sujet <ArrowSquareOut size={18} weight="bold" />
-            </a>
+            {sourceVerified ? (
+              <a className="secondary-action" href={`/arene/exos-types-bac/${definition.slug}`}>
+                Prévisualiser le sujet <ArrowSquareOut size={18} weight="bold" />
+              </a>
+            ) : (
+              <span className="secondary-action" aria-disabled="true">Source à remplacer <WarningCircle size={18} weight="duotone" /></span>
+            )}
             <button
               className={`secondary-action ${state?.subjectPublished ? "is-danger" : ""}`}
               type="button"
-              disabled={exam.submitting || !state}
+              disabled={!sourceVerified || exam.submitting || !state}
               onClick={() => void toggleSubject()}
             >
-              {exam.submitting
+              {!sourceVerified
+                ? "Ouverture bloquée"
+                : exam.submitting
                 ? "Mise à jour…"
                 : state?.subjectPublished
                   ? <><EyeSlash size={18} weight="bold" />Fermer le sujet</>
@@ -104,10 +116,12 @@ function BacExamPublicationCard({ definition, preview }: { definition: BacExamCa
             <button
               className={`primary-action is-compact ${state?.resultsPublished ? "is-danger" : ""}`}
               type="button"
-              disabled={!definition.responseSheetAvailable || exam.submitting || !state || (!state.resultsPublished && !state.canPublishResults)}
+              disabled={!sourceVerified || !definition.responseSheetAvailable || exam.submitting || !state || (!state.resultsPublished && !state.canPublishResults)}
               onClick={() => void togglePublication()}
             >
-              {!definition.responseSheetAvailable
+              {!sourceVerified
+                ? "Résultats bloqués"
+                : !definition.responseSheetAvailable
                 ? "Interactivité à venir"
                 : exam.submitting
                 ? "Mise à jour…"

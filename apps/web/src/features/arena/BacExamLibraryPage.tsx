@@ -7,6 +7,7 @@ import {
   GraduationCap,
   LockKey,
   SealCheck,
+  WarningCircle,
 } from "@phosphor-icons/react";
 import { bacExamCatalog, type BacExamCatalogEntry, type BacExamSlug } from "../../data/bacExamCatalog";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
@@ -23,10 +24,11 @@ function BacExamLibraryCard({
 }) {
   const remote = useBacExam({ examId: exam.id, preview });
   const state = remote.state;
-  const accessible = Boolean(state?.subjectPublished || state?.canManageSubject || preview);
+  const sourceVerified = exam.sourceVerified !== false;
+  const accessible = sourceVerified && Boolean(state?.subjectPublished || state?.canManageSubject || preview);
 
   return (
-    <article className={`bac-library-card ${state?.subjectPublished ? "is-open" : "is-closed"}`}>
+    <article className={`bac-library-card ${sourceVerified && state?.subjectPublished ? "is-open" : "is-closed"}`}>
       <header>
         <span>{exam.year}</span>
         <div>
@@ -34,14 +36,16 @@ function BacExamLibraryCard({
           <h2>{exam.shortTitle}</h2>
         </div>
         <span className="bac-library-status">
-          {remote.loading
+          {!sourceVerified
+            ? <><WarningCircle size={17} weight="duotone" />Source à remplacer</>
+            : remote.loading
             ? "Vérification…"
             : state?.subjectPublished
               ? <><CheckCircle size={17} weight="fill" />Ouvert</>
               : <><LockKey size={17} weight="duotone" />Fermé</>}
         </span>
       </header>
-      <p>{exam.description}</p>
+      <p>{exam.sourceNotice ?? exam.description}</p>
       <div className="bac-library-metadata">
         <span><FileText size={18} weight="duotone" /><strong>{exam.questionCount}</strong> questions</span>
         <span><Clock size={18} weight="duotone" /><strong>{exam.durationMinutes / 60} h</strong> indicatives</span>
@@ -54,7 +58,9 @@ function BacExamLibraryCard({
         disabled={!accessible || remote.loading}
         onClick={() => onOpen(exam.slug)}
       >
-        {state?.subjectPublished
+        {!sourceVerified
+          ? "Sujet indisponible"
+          : state?.subjectPublished
           ? exam.responseSheetAvailable ? "Commencer le sujet" : "Consulter le sujet"
           : state?.canManageSubject || preview
             ? exam.responseSheetAvailable ? "Prévisualiser en administrateur" : "Consulter en administrateur"
@@ -74,6 +80,8 @@ export function BacExamLibraryPage({
   onBackArena: () => void;
   onOpenExam: (slug: BacExamSlug) => void;
 }) {
+  const verifiedSessionCount = bacExamCatalog.filter((exam) => exam.sourceVerified !== false).length;
+
   return (
     <main className="bac-library-page">
       <header className="bac-library-topbar">
@@ -89,7 +97,7 @@ export function BacExamLibraryPage({
           <h1>Choisis ton sujet</h1>
           <p>Entraîne-toi sur les sessions complètes ou consulte les extraits officiels déjà disponibles.</p>
           <div>
-            <span><strong>{bacExamCatalog.length}</strong> sessions</span>
+            <span><strong>{verifiedSessionCount}</strong> sessions disponibles</span>
             <span><strong>4</strong> zones de participation</span>
             <span><strong>{bacExamCatalog.filter((exam) => !exam.responseSheetAvailable).length}</strong> sujets en consultation</span>
           </div>
