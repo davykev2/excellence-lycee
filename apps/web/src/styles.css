@@ -12434,6 +12434,20 @@ textarea:focus-visible {
 .bac-archive-answer-row button.is-selected { border-color: #118132; color: white; background: #24943c; box-shadow: 0 3px 8px rgba(36, 148, 60, 0.25); }
 .bac-archive-answer-row button:disabled { cursor: default; }
 
+.bac-archive-choice-guide {
+  display: grid;
+  gap: 4px;
+  margin: 14px 14px 0;
+  padding: 13px 15px;
+  border: 1px solid #d9e7d8;
+  border-radius: 12px;
+  color: var(--navy-800);
+  background: #f1f8ee;
+}
+.bac-archive-choice-guide strong { font-size: 0.82rem; }
+.bac-archive-choice-guide p { margin: 0; color: var(--slate-700); font-size: 0.76rem; line-height: 1.5; }
+.bac-archive-choice-guide small { color: #257a37; font-size: 0.69rem; font-weight: 800; }
+
 .bac-archive-submit { position: sticky; bottom: 0; display: grid; gap: 12px; padding: 16px 18px; border-top: 1px solid var(--slate-200); background: rgba(255, 255, 255, 0.97); }
 .bac-archive-submit > div:not(.bac-archive-submitted) { display: grid; }
 .bac-archive-submit > div span { color: var(--slate-500); font-size: 0.76rem; }

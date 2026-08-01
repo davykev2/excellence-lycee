@@ -13,7 +13,7 @@ import {
   XCircle,
 } from "@phosphor-icons/react";
 import type { BacExamAnswers, BacExamChoiceId } from "../../data/bacCi2024Exam";
-import type { BacExamCatalogEntry } from "../../data/bacExamCatalog";
+import { getBacExamChoiceIds, type BacExamCatalogEntry } from "../../data/bacExamCatalog";
 import { bacExamZoneLabel, bacExamZones, type BacExamZone } from "../../domain/bacExam";
 import { useAuth } from "../auth/AuthProvider";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
@@ -30,7 +30,7 @@ function answerChoices(exam: BacExamCatalogEntry, questionNumber: number) {
       { value: "B" as const, label: "F" },
     ];
   }
-  return exam.choiceIds.map((choice) => ({ value: choice, label: choice }));
+  return getBacExamChoiceIds(exam, questionNumber).map((choice) => ({ value: choice, label: choice }));
 }
 
 function displayedAnswer(exam: BacExamCatalogEntry, questionNumber: number, answer?: string) {
@@ -41,10 +41,25 @@ function storageKey(examId: string, userId: string, suffix: "answers" | "zone") 
   return `excellence-bac-archive:${examId}:${userId}:${suffix}`;
 }
 
-function readAnswers(examId: string, userId: string): BacExamAnswers {
+function sanitizeDraftAnswers(exam: BacExamCatalogEntry, value: unknown): BacExamAnswers {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+
+  return Object.fromEntries(
+    Object.entries(value).filter(([key, answer]) => {
+      const match = /^q(\d+)$/.exec(key);
+      if (!match || typeof answer !== "string") return false;
+      const questionNumber = Number(match[1]);
+      return questionNumber >= 1
+        && questionNumber <= exam.questionCount
+        && getBacExamChoiceIds(exam, questionNumber).includes(answer as BacExamChoiceId);
+    }),
+  ) as BacExamAnswers;
+}
+
+function readAnswers(exam: BacExamCatalogEntry, userId: string): BacExamAnswers {
   try {
-    const value = JSON.parse(window.localStorage.getItem(storageKey(examId, userId, "answers")) ?? "{}");
-    return value && typeof value === "object" ? value as BacExamAnswers : {};
+    const value = JSON.parse(window.localStorage.getItem(storageKey(exam.id, userId, "answers")) ?? "{}");
+    return sanitizeDraftAnswers(exam, value);
   } catch {
     return {};
   }
@@ -67,7 +82,7 @@ export function BacArchiveExamPage({
   const { user } = useAuth();
   const userId = user?.id ?? "preview-user";
   const remote = useBacExam({ examId: exam.id, preview });
-  const [answers, setAnswers] = useState<BacExamAnswers>(() => readAnswers(exam.id, userId));
+  const [answers, setAnswers] = useState<BacExamAnswers>(() => readAnswers(exam, userId));
   const [candidateZone, setCandidateZone] = useState<BacExamZone | undefined>(() => readZone(exam.id, userId));
   const [activePane, setActivePane] = useState<"subject" | "answers">("subject");
   const [confirming, setConfirming] = useState(false);
@@ -184,6 +199,14 @@ export function BacArchiveExamPage({
             <div><strong>Ta feuille de réponses</strong><p>Reporte ici la lettre cochée dans le sujet.</p></div>
             <b>{answeredCount}/{exam.questionCount}</b>
           </header>
+
+          {exam.choiceReadingHint && (
+            <div className="bac-archive-choice-guide" role="note">
+              <strong>Comment choisir la lettre ?</strong>
+              <p>{exam.choiceReadingHint}</p>
+              <small>Pour les questions V/F, utilise directement les boutons V et F.</small>
+            </div>
+          )}
 
           <section className="bac-archive-zone" aria-labelledby="bac-archive-zone-title">
             <div><MapPin size={21} weight="fill" /><span><strong id="bac-archive-zone-title">Ta zone</strong><small>Obligatoire avant l’envoi</small></span></div>

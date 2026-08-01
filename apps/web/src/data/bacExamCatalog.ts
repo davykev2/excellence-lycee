@@ -1,4 +1,4 @@
-import { BAC_CI_2024_EXAM_ID } from "./bacCi2024Exam";
+import { BAC_CI_2024_EXAM_ID, type BacExamChoiceId } from "./bacCi2024Exam";
 
 export const BAC_CI_2017_EXAM_ID = "bac-ci-2017-archive";
 export const BAC_CI_2018_EXAM_ID = "bac-ci-2018-archive";
@@ -18,7 +18,9 @@ export interface BacExamCatalogEntry {
   description: string;
   durationMinutes: number;
   questionCount: number;
-  choiceIds: readonly ("A" | "B" | "C" | "D" | "E")[];
+  choiceIds: readonly BacExamChoiceId[];
+  choiceIdsByQuestion?: Readonly<Record<number, readonly BacExamChoiceId[]>>;
+  choiceReadingHint?: string;
   format: "facsimile" | "interactive";
   responseSheetAvailable: boolean;
   pageUrls: readonly string[];
@@ -44,6 +46,15 @@ const bac2017GeneralKnowledgeLabels = [
   "22a", "22b", "22c", "22d", "22e",
 ] as const;
 
+const bac2017ChoiceIdsByQuestion: Readonly<Record<number, readonly BacExamChoiceId[]>> = {
+  ...Object.fromEntries(
+    Array.from({ length: 7 }, (_, index) => [index + 6, ["A", "B"] as const]),
+  ),
+  ...Object.fromEntries(
+    Array.from({ length: 20 }, (_, index) => [index + 30, ["A", "B", "C"] as const]),
+  ),
+};
+
 function archivePages(year: number, pageCount: number) {
   return Array.from(
     { length: pageCount },
@@ -62,6 +73,8 @@ export const bacExamCatalog: readonly BacExamCatalogEntry[] = [
     durationMinutes: 180,
     questionCount: 86,
     choiceIds: ["A", "B", "C", "D"],
+    choiceIdsByQuestion: bac2017ChoiceIdsByQuestion,
+    choiceReadingHint: "Quand les cases du sujet n’ont pas de lettre : A = 1re proposition, B = 2e, C = 3e et D = 4e, en lisant de gauche à droite puis de haut en bas.",
     format: "facsimile",
     responseSheetAvailable: true,
     pageUrls: archivePages(2017, 10),
@@ -198,4 +211,8 @@ export const bacExamById = new Map(bacExamCatalog.map((exam) => [exam.id, exam])
 
 export function getBacExamBySlug(slug?: string) {
   return slug ? bacExamBySlug.get(slug as BacExamSlug) : undefined;
+}
+
+export function getBacExamChoiceIds(exam: BacExamCatalogEntry, questionNumber: number) {
+  return exam.choiceIdsByQuestion?.[questionNumber] ?? exam.choiceIds;
 }
