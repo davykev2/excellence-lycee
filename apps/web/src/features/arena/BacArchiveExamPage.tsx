@@ -10,6 +10,7 @@ import {
   MapPin,
   Medal,
   WarningCircle,
+  XCircle,
 } from "@phosphor-icons/react";
 import type { BacExamAnswers, BacExamChoiceId } from "../../data/bacCi2024Exam";
 import type { BacExamCatalogEntry } from "../../data/bacExamCatalog";
@@ -20,6 +21,20 @@ import { useBacExam } from "./useBacExam";
 
 function answerKey(questionNumber: number) {
   return `q${String(questionNumber).padStart(2, "0")}`;
+}
+
+function answerChoices(exam: BacExamCatalogEntry, questionNumber: number) {
+  if (exam.slug === "2017" && questionNumber >= 6 && questionNumber <= 12) {
+    return [
+      { value: "A" as const, label: "V" },
+      { value: "B" as const, label: "F" },
+    ];
+  }
+  return exam.choiceIds.map((choice) => ({ value: choice, label: choice }));
+}
+
+function displayedAnswer(exam: BacExamCatalogEntry, questionNumber: number, answer?: string) {
+  return answerChoices(exam, questionNumber).find((choice) => choice.value === answer)?.label ?? answer ?? "—";
 }
 
 function storageKey(examId: string, userId: string, suffix: "answers" | "zone") {
@@ -179,24 +194,25 @@ export function BacArchiveExamPage({
 
           {questionsBySection.map((section) => (
             <section className="bac-archive-answer-section" key={section.label}>
-              <header><div><strong>{section.label}</strong><span>{section.questionNumbers.length} réponse{section.questionNumbers.length > 1 ? "s" : ""}</span></div><small>Questions 1 à {section.questionNumbers.length}</small></header>
+              <header><div><strong>{section.label}</strong><span>{section.questionNumbers.length} réponse{section.questionNumbers.length > 1 ? "s" : ""}</span></div><small>{section.questionLabels ? "Repères du sujet" : `Questions 1 à ${section.questionNumbers.length}`}</small></header>
               <div>
-                {section.questionNumbers.map((questionNumber) => {
+                {section.questionNumbers.map((questionNumber, questionIndex) => {
                   const key = answerKey(questionNumber);
-                  const displayNumber = questionNumber - section.firstQuestion + 1;
+                  const displayNumber = section.questionLabels?.[questionIndex]
+                    ?? String(questionNumber - section.firstQuestion + 1);
                   return (
-                    <div className="bac-archive-answer-row" key={key}>
+                    <div className="bac-archive-answer-row" key={key} data-custom-label={section.questionLabels ? "true" : undefined}>
                       <strong>{displayNumber}</strong>
                       <div>
-                        {exam.choiceIds.map((choice) => (
+                        {answerChoices(exam, questionNumber).map((choice) => (
                           <button
-                            key={choice}
+                            key={choice.value}
                             type="button"
                             disabled={submitted}
-                            className={answers[key] === choice ? "is-selected" : ""}
-                            aria-label={`${section.label}, question ${displayNumber}, réponse ${choice}`}
-                            onClick={() => setAnswers((current) => ({ ...current, [key]: choice as BacExamChoiceId }))}
-                          >{choice}</button>
+                            className={answers[key] === choice.value ? "is-selected" : ""}
+                            aria-label={`${section.label}, question ${displayNumber}, réponse ${choice.label}`}
+                            onClick={() => setAnswers((current) => ({ ...current, [key]: choice.value as BacExamChoiceId }))}
+                          >{choice.label}</button>
                         ))}
                       </div>
                     </div>
@@ -219,10 +235,51 @@ export function BacArchiveExamPage({
           </footer>
 
           {state.result && (
-            <section className="bac-archive-result">
-              <Medal size={32} weight="duotone" />
-              <div><strong>{state.result.correctAnswers}/{state.result.scoreMax}</strong><span>{state.result.appreciation.label}</span><p>{state.result.appreciation.message}</p></div>
-            </section>
+            <>
+              <section className="bac-archive-result">
+                <Medal size={32} weight="duotone" />
+                <div><strong>{state.result.correctAnswers}/{state.result.scoreMax}</strong><span>{state.result.appreciation.label}</span><p>{state.result.appreciation.message}</p></div>
+              </section>
+              <section className="bac-archive-correction" aria-labelledby="bac-archive-correction-title">
+                <header>
+                  <div><strong id="bac-archive-correction-title">Correction de ta copie</strong><span>Compare chaque réponse avec le corrigé officiel.</span></div>
+                </header>
+                {questionsBySection.map((section, sectionIndex) => {
+                  const sectionScore = sectionIndex === 0
+                    ? state.result!.sectionScores.english
+                    : sectionIndex === 1
+                      ? state.result!.sectionScores.generalKnowledge
+                      : state.result!.sectionScores.scientificKnowledge;
+                  return (
+                    <details key={section.label} open={sectionIndex === 0}>
+                      <summary><span>{section.label}</span><strong>{sectionScore.correctAnswers}/{sectionScore.scoreMax}</strong></summary>
+                      <div>
+                        {section.questionNumbers.map((questionNumber, questionIndex) => {
+                          const key = answerKey(questionNumber);
+                          const correction = state.result!.corrections[key];
+                          const learnerAnswer = state.submittedAnswers?.[key] ?? answers[key];
+                          const isCorrect = learnerAnswer === correction?.answer;
+                          const displayNumber = section.questionLabels?.[questionIndex]
+                            ?? String(questionNumber - section.firstQuestion + 1);
+                          return (
+                            <article key={key} className={isCorrect ? "is-correct" : "is-incorrect"}>
+                              {isCorrect
+                                ? <CheckCircle size={20} weight="fill" />
+                                : <XCircle size={20} weight="fill" />}
+                              <div>
+                                <strong>Question {displayNumber}</strong>
+                                <span>Ta réponse : <b>{displayedAnswer(exam, questionNumber, learnerAnswer)}</b> · Bonne réponse : <b>{displayedAnswer(exam, questionNumber, correction?.answer)}</b></span>
+                                {correction?.explanation && <p>{correction.explanation}</p>}
+                              </div>
+                            </article>
+                          );
+                        })}
+                      </div>
+                    </details>
+                  );
+                })}
+              </section>
+            </>
           )}
         </aside>
       </div>

@@ -20,8 +20,26 @@ export interface BacExamCatalogEntry {
   format: "facsimile" | "interactive";
   pageUrls: readonly string[];
   pageCount: number;
-  sections: readonly { label: string; firstQuestion: number; lastQuestion: number }[];
+  sections: readonly {
+    label: string;
+    firstQuestion: number;
+    lastQuestion: number;
+    questionLabels?: readonly string[];
+  }[];
 }
+
+const bac2017EnglishLabels = [
+  "A1", "A2", "A3", "A4", "A5",
+  "B1", "B2", "B3", "B4", "B5", "B6", "B7",
+  "C1", "C2", "C3", "C4", "C5", "C6",
+  "2.1", "2.2", "2.3", "2.4", "2.5", "2.6", "2.7", "2.8", "2.9", "2.10", "2.11",
+] as const;
+
+const bac2017GeneralKnowledgeLabels = [
+  ...Array.from({ length: 20 }, (_, index) => String(index + 1)),
+  "21a", "21b", "21c", "21d", "21e", "21f", "21g", "21h", "21i",
+  "22a", "22b", "22c", "22d", "22e",
+] as const;
 
 function archivePages(year: number, pageCount: number) {
   return Array.from(
@@ -39,15 +57,15 @@ export const bacExamCatalog: readonly BacExamCatalogEntry[] = [
     shortTitle: "Session 2017",
     description: "Anglais, culture générale et culture scientifique, reproduits fidèlement sur 10 pages.",
     durationMinutes: 180,
-    questionCount: 74,
+    questionCount: 86,
     choiceIds: ["A", "B", "C", "D"],
     format: "facsimile",
     pageUrls: archivePages(2017, 10),
     pageCount: 10,
     sections: [
-      { label: "Anglais", firstQuestion: 1, lastQuestion: 29 },
-      { label: "Culture générale", firstQuestion: 30, lastQuestion: 51 },
-      { label: "Culture scientifique", firstQuestion: 52, lastQuestion: 74 },
+      { label: "Anglais", firstQuestion: 1, lastQuestion: 29, questionLabels: bac2017EnglishLabels },
+      { label: "Culture générale", firstQuestion: 30, lastQuestion: 63, questionLabels: bac2017GeneralKnowledgeLabels },
+      { label: "Culture scientifique", firstQuestion: 64, lastQuestion: 86 },
     ],
   },
   {

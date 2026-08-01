@@ -44,12 +44,12 @@ export const BAC_EXAM_CONFIGURATIONS: readonly BacExamConfiguration[] = [
     id: BAC_CI_2017_EXAM_ID,
     title: "Sujet type BAC — Session 2017",
     durationMinutes: 180,
-    questionCount: 74,
+    questionCount: 86,
     allowedChoices: ["A", "B", "C", "D"],
     sectionQuestionNumbers: {
       english: Array.from({ length: 29 }, (_, index) => index + 1),
-      generalKnowledge: Array.from({ length: 22 }, (_, index) => index + 30),
-      scientificKnowledge: Array.from({ length: 23 }, (_, index) => index + 52),
+      generalKnowledge: Array.from({ length: 34 }, (_, index) => index + 30),
+      scientificKnowledge: Array.from({ length: 23 }, (_, index) => index + 64),
     },
   },
   {
