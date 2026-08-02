@@ -89,6 +89,8 @@ export function BacArchiveExamPage({
   const state = remote.state;
   const submitted = Boolean(state?.submittedAt);
   const accessible = Boolean(state?.subjectPublished || state?.canManageSubject || preview);
+  const isEsatic = exam.collection === "esatic";
+  const paperCount = exam.papers?.length ?? exam.sections.length;
 
   useEffect(() => {
     if (state?.submittedAnswers) setAnswers(state.submittedAnswers);
@@ -172,13 +174,24 @@ export function BacArchiveExamPage({
 
       <section className="bac-archive-hero">
         <div>
-          <p className="path-kicker">Annale officielle</p>
+          <p className="path-kicker">{isEsatic ? "Concours ESATIC" : "Annale officielle"}</p>
           <h1>{exam.title}</h1>
           <p>{exam.description}</p>
-          <div><span><strong>{exam.pageCount}</strong> pages</span><span><strong>{exam.questionCount}</strong> questions visibles</span><span><strong>{exam.responseSheetAvailable ? "3 h" : "Libre"}</strong> {exam.responseSheetAvailable ? "indicatives" : "consultation"}</span></div>
+          <div><span><strong>{exam.pageCount}</strong> pages</span><span><strong>{exam.questionCount}</strong> questions visibles</span><span><strong>{paperCount}</strong> {isEsatic ? "épreuves" : "matières"}</span></div>
         </div>
         <CompanionAvatar motion="idle" decorative />
       </section>
+
+      {exam.papers && exam.papers.length > 0 && (
+        <nav className="bac-archive-paper-tabs" aria-label="Épreuves du sujet">
+          {exam.papers.map((paper) => (
+            <a key={paper.id} href={`#${exam.slug}-page-${paper.firstPage}`}>
+              <strong>{paper.label}</strong>
+              <span>{paper.questionCount} questions · pages {paper.firstPage} à {paper.lastPage}</span>
+            </a>
+          ))}
+        </nav>
+      )}
 
       {!state.subjectPublished && state.canManageSubject && (
         <div className="bac-archive-admin-preview"><LockKey size={20} weight="duotone" /><span><strong>Aperçu administrateur.</strong> Ce sujet est encore fermé pour les élèves.</span></div>
@@ -196,7 +209,12 @@ export function BacArchiveExamPage({
           <header><FileText size={22} weight="duotone" /><div><strong>Sujet original</strong><span>Fais défiler les {exam.pageCount} pages sans quitter l’épreuve.</span></div></header>
           <div>
             {exam.pageUrls.map((url, index) => (
-              <figure key={url}>
+              <figure key={url} id={`${exam.slug}-page-${index + 1}`}>
+                {exam.papers?.find((paper) => paper.firstPage === index + 1) && (
+                  <h3 className="bac-archive-paper-heading">
+                    {exam.papers.find((paper) => paper.firstPage === index + 1)?.label}
+                  </h3>
+                )}
                 <img src={url} alt={`Sujet ${exam.year}, page ${index + 1} sur ${exam.pageCount}`} loading={index < 2 ? "eager" : "lazy"} />
                 <figcaption>Page {index + 1} / {exam.pageCount}</figcaption>
               </figure>

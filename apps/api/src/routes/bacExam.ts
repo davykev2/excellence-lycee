@@ -8,6 +8,7 @@ import {
   getBacExamConfiguration,
   getBacExamSectionScores,
   isBacExamSourceVerified,
+  isBacExamSubmissionEnabled,
   type BacExamAnswers,
   type BacExamChoice,
   type BacExamCorrectionEntry,
@@ -322,6 +323,10 @@ export async function bacExamRoutes(app: FastifyInstance) {
     const params = paramsSchema.safeParse(request.params);
     const body = submitSchema.safeParse(request.body);
     if (!params.success) return reply.code(404).send({ error: "EXAM_NOT_FOUND", message: "Épreuve introuvable." });
+    if (!isBacExamSubmissionEnabled(params.data.examId)) return reply.code(409).send({
+      error: "EXAM_CONSULTATION_ONLY",
+      message: "Ce sujet est disponible en consultation. La feuille de réponses interactive sera ajoutée plus tard.",
+    });
     if (!isBacExamSourceVerified(params.data.examId)) return reply.code(409).send({
       error: "EXAM_SOURCE_UNVERIFIED",
       message: "Ce sujet est indisponible : le document transmis duplique une autre session.",
@@ -357,6 +362,10 @@ export async function bacExamRoutes(app: FastifyInstance) {
     const body = publicationSchema.safeParse(request.body);
     if (!params.success) return reply.code(404).send({ error: "EXAM_NOT_FOUND", message: "Épreuve introuvable." });
     if (!body.success) return reply.code(400).send({ error: "VALIDATION_ERROR", message: "État de publication invalide." });
+    if (body.data.published && !isBacExamSubmissionEnabled(params.data.examId)) return reply.code(409).send({
+      error: "EXAM_RESULTS_UNAVAILABLE",
+      message: "Les résultats ne sont pas encore disponibles pour ce sujet de consultation.",
+    });
     if (body.data.published && !isBacExamSourceVerified(params.data.examId)) return reply.code(409).send({
       error: "EXAM_SOURCE_UNVERIFIED",
       message: "Impossible de publier les résultats d’un sujet dont la source n’est pas vérifiée.",

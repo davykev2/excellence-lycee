@@ -17,6 +17,8 @@ function BacExamPublicationCard({ definition, preview }: { definition: BacExamCa
   const [notice, setNotice] = useState<string | null>(null);
   const state = exam.state;
   const sourceVerified = definition.sourceVerified !== false;
+  const isEsatic = definition.collection === "esatic";
+  const paperCount = definition.papers?.length ?? definition.sections.length;
 
   const toggleSubject = async () => {
     if (!state || !sourceVerified) return;
@@ -46,7 +48,7 @@ function BacExamPublicationCard({ definition, preview }: { definition: BacExamCa
     <article className="admin-panel admin-bac-publication">
       <header className="admin-panel-header">
         <div>
-          <p className="admin-eyebrow">Épreuve nationale · {definition.year}</p>
+          <p className="admin-eyebrow">{isEsatic ? "Concours ESATIC" : "Épreuve nationale"} · {definition.year}</p>
           <h2>{definition.title}</h2>
         </div>
         <div className="admin-bac-statuses">
@@ -66,8 +68,8 @@ function BacExamPublicationCard({ definition, preview }: { definition: BacExamCa
       ) : (
         <>
           <div className="admin-bac-metrics">
-            <div><FileText size={24} weight="duotone" /><span><strong>{definition.questionCount}</strong><small>questions dans le sujet</small></span></div>
-            <div><Student size={24} weight="duotone" /><span><strong>{state?.totalSubmissions ?? 0}</strong><small>copies reçues</small></span></div>
+            <div><FileText size={24} weight="duotone" /><span><strong>{definition.responseSheetAvailable ? definition.questionCount : definition.pageCount}</strong><small>{definition.responseSheetAvailable ? "questions dans le sujet" : "pages du sujet"}</small></span></div>
+            <div><Student size={24} weight="duotone" /><span><strong>{definition.responseSheetAvailable ? state?.totalSubmissions ?? 0 : paperCount}</strong><small>{definition.responseSheetAvailable ? "copies reçues" : "épreuves à consulter"}</small></span></div>
             <div className={state?.correctionReady ? "is-ready" : "is-waiting"}>
               {state?.correctionReady ? <CheckCircle size={24} weight="fill" /> : <WarningCircle size={24} weight="duotone" />}
               <span><strong>{definition.responseSheetAvailable ? state?.correctionReady ? "Prête" : "En attente" : "À venir"}</strong><small>{definition.responseSheetAvailable ? `${definition.questionCount} réponses expliquées` : "interactivité et correction"}</small></span>
@@ -145,10 +147,10 @@ export function BacExamPublicationControl({ preview = false }: { preview?: boole
   return (
     <section className="admin-bac-publication-list" aria-labelledby="admin-bac-publication-title">
       <header>
-        <div><p className="admin-eyebrow">Exos type BAC</p><h2 id="admin-bac-publication-title">Ouverture des sujets</h2></div>
-        <span>{bacExamCatalog.length} sessions indépendantes</span>
+        <div><p className="admin-eyebrow">Annales et concours</p><h2 id="admin-bac-publication-title">Ouverture des sujets</h2></div>
+        <span>{bacExamCatalog.length} sujets indépendants</span>
       </header>
-      <p>Ouvre ou ferme chaque année séparément. Un sujet fermé reste visible dans la bibliothèque avec un cadenas.</p>
+      <p>Ouvre ou ferme chaque année séparément, y compris les sujets ESATIC. Un sujet fermé reste visible dans la bibliothèque avec un cadenas.</p>
       <div>
         {bacExamCatalog.map((definition) => (
           <BacExamPublicationCard key={definition.id} definition={definition} preview={preview} />

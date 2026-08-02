@@ -6,13 +6,24 @@ export const BAC_CI_2019_EXAM_ID = "bac-ci-2019-archive";
 export const BAC_CI_2020_EXAM_ID = "bac-ci-2020-archive";
 export const BAC_CI_2022_EXAM_ID = "bac-ci-2022-archive";
 export const BAC_CI_2023_EXAM_ID = "bac-ci-2023-archive";
+export const ESATIC_2023_EXAM_ID = "esatic-2023-archive";
+export const ESATIC_2024_EXAM_ID = "esatic-2024-archive";
 
-export type BacExamSlug = "2017" | "2018" | "2019" | "2020" | "2022" | "2023" | "2024";
+export type BacExamSlug = "2017" | "2018" | "2019" | "2020" | "2022" | "2023" | "2024" | "esatic-2023" | "esatic-2024";
+
+export interface BacExamPaper {
+  id: string;
+  label: string;
+  firstPage: number;
+  lastPage: number;
+  questionCount: number;
+}
 
 export interface BacExamCatalogEntry {
   id: string;
   slug: BacExamSlug;
   year: number;
+  collection?: "bac" | "esatic";
   title: string;
   shortTitle: string;
   description: string;
@@ -27,6 +38,7 @@ export interface BacExamCatalogEntry {
   sourceNotice?: string;
   pageUrls: readonly string[];
   pageCount: number;
+  papers?: readonly BacExamPaper[];
   sections: readonly {
     label: string;
     firstQuestion: number;
@@ -61,6 +73,13 @@ function archivePages(year: number, pageCount: number) {
   return Array.from(
     { length: pageCount },
     (_, index) => `/exams/bac-archives/${year}/page-${String(index + 1).padStart(2, "0")}.webp`,
+  );
+}
+
+function esaticPages(year: number, pageCount: number) {
+  return Array.from(
+    { length: pageCount },
+    (_, index) => `/exams/esatic/${year}/page-${String(index + 1).padStart(2, "0")}.webp`,
   );
 }
 
@@ -188,6 +207,50 @@ export const bacExamCatalog: readonly BacExamCatalogEntry[] = [
       { label: "Culture générale", firstQuestion: 21, lastQuestion: 40 },
       { label: "Culture scientifique", firstQuestion: 41, lastQuestion: 43 },
     ],
+  },
+  {
+    id: ESATIC_2023_EXAM_ID,
+    slug: "esatic-2023",
+    year: 2023,
+    collection: "esatic",
+    title: "Concours d’entrée à l’ESATIC — Session 2023",
+    shortTitle: "ESATIC 2023",
+    description: "80 QCM de mathématiques, physique et anglais, reproduits fidèlement sur 15 pages.",
+    durationMinutes: 0,
+    questionCount: 80,
+    choiceIds: ["A", "B", "C", "D"],
+    format: "facsimile",
+    responseSheetAvailable: false,
+    pageUrls: esaticPages(2023, 15),
+    pageCount: 15,
+    papers: [
+      { id: "mathematics", label: "Mathématiques", firstPage: 1, lastPage: 5, questionCount: 25 },
+      { id: "physics", label: "Physique", firstPage: 6, lastPage: 12, questionCount: 25 },
+      { id: "english", label: "Anglais", firstPage: 13, lastPage: 15, questionCount: 30 },
+    ],
+    sections: [],
+  },
+  {
+    id: ESATIC_2024_EXAM_ID,
+    slug: "esatic-2024",
+    year: 2024,
+    collection: "esatic",
+    title: "Concours d’entrée à l’ESATIC — Session 2024",
+    shortTitle: "ESATIC 2024",
+    description: "100 QCM de mathématiques, sciences physiques, français et anglais, reproduits fidèlement sur 14 pages.",
+    durationMinutes: 0,
+    questionCount: 100,
+    choiceIds: ["A", "B", "C", "D"],
+    format: "facsimile",
+    responseSheetAvailable: false,
+    pageUrls: esaticPages(2024, 14),
+    pageCount: 14,
+    papers: [
+      { id: "mathematics", label: "Mathématiques", firstPage: 1, lastPage: 4, questionCount: 25 },
+      { id: "physics", label: "Sciences physiques", firstPage: 5, lastPage: 9, questionCount: 25 },
+      { id: "languages", label: "Français et anglais", firstPage: 10, lastPage: 14, questionCount: 50 },
+    ],
+    sections: [],
   },
   {
     id: BAC_CI_2024_EXAM_ID,

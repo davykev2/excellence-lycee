@@ -5,6 +5,8 @@ export const BAC_CI_2019_EXAM_ID = "bac-ci-2019-archive";
 export const BAC_CI_2020_EXAM_ID = "bac-ci-2020-archive";
 export const BAC_CI_2022_EXAM_ID = "bac-ci-2022-archive";
 export const BAC_CI_2023_EXAM_ID = "bac-ci-2023-archive";
+export const ESATIC_2023_EXAM_ID = "esatic-2023-archive";
+export const ESATIC_2024_EXAM_ID = "esatic-2024-archive";
 
 export type BacExamChoice = "A" | "B" | "C" | "D" | "E";
 export type BacExamAnswers = Record<string, BacExamChoice>;
@@ -19,6 +21,8 @@ export const BAC_EXAM_IDS = [
   BAC_CI_2020_EXAM_ID,
   BAC_CI_2022_EXAM_ID,
   BAC_CI_2023_EXAM_ID,
+  ESATIC_2023_EXAM_ID,
+  ESATIC_2024_EXAM_ID,
   BAC_CI_2024_EXAM_ID,
 ] as const;
 
@@ -31,6 +35,7 @@ export interface BacExamConfiguration {
   questionCount: number;
   allowedChoices: readonly BacExamChoice[];
   sourceVerified?: boolean;
+  submissionsEnabled?: boolean;
   sectionQuestionNumbers: {
     english: readonly number[];
     generalKnowledge: readonly number[];
@@ -107,6 +112,32 @@ export const BAC_EXAM_CONFIGURATIONS: readonly BacExamConfiguration[] = [
     },
   },
   {
+    id: ESATIC_2023_EXAM_ID,
+    title: "Concours d’entrée à l’ESATIC — Session 2023",
+    durationMinutes: 180,
+    questionCount: 80,
+    allowedChoices: ["A", "B", "C", "D"],
+    submissionsEnabled: false,
+    sectionQuestionNumbers: {
+      english: [],
+      generalKnowledge: [],
+      scientificKnowledge: [],
+    },
+  },
+  {
+    id: ESATIC_2024_EXAM_ID,
+    title: "Concours d’entrée à l’ESATIC — Session 2024",
+    durationMinutes: 180,
+    questionCount: 100,
+    allowedChoices: ["A", "B", "C", "D"],
+    submissionsEnabled: false,
+    sectionQuestionNumbers: {
+      english: [],
+      generalKnowledge: [],
+      scientificKnowledge: [],
+    },
+  },
+  {
     id: BAC_CI_2024_EXAM_ID,
     title: "Concours BAC & BT 2024 — Test de niveau",
     durationMinutes: 180,
@@ -132,6 +163,10 @@ export function getBacExamConfiguration(examId: string) {
 
 export function isBacExamSourceVerified(examId: string) {
   return getBacExamConfiguration(examId)?.sourceVerified !== false;
+}
+
+export function isBacExamSubmissionEnabled(examId: string) {
+  return getBacExamConfiguration(examId)?.submissionsEnabled !== false;
 }
 
 export interface BacExamCorrectionEntry {
