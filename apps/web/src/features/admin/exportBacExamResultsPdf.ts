@@ -35,15 +35,15 @@ function drawPageFooter(doc: jsPDF, pageNumber: number) {
   doc.text(`Page ${pageNumber}`, pageWidth - 12, pageHeight - 5, { align: "right" });
 }
 
-function drawTableHeader(doc: jsPDF, y: number) {
+function drawTableHeader(doc: jsPDF, y: number, sectionLabels: readonly [string, string, string]) {
   const columns = [
     { label: "Rang", x: 12, width: 12, align: "center" as const },
     { label: "Élève", x: 24, width: 48, align: "left" as const },
     { label: "Classe", x: 72, width: 25, align: "left" as const },
     { label: "Zone", x: 97, width: 32, align: "left" as const },
-    { label: "Anglais", x: 129, width: 22, align: "center" as const },
-    { label: "Culture G.", x: 151, width: 24, align: "center" as const },
-    { label: "Culture S.", x: 175, width: 24, align: "center" as const },
+    { label: sectionLabels[0], x: 129, width: 22, align: "center" as const },
+    { label: sectionLabels[1], x: 151, width: 24, align: "center" as const },
+    { label: sectionLabels[2], x: 175, width: 24, align: "center" as const },
     { label: "Total", x: 199, width: 24, align: "center" as const },
     { label: "Appréciation", x: 223, width: 62, align: "left" as const },
   ];
@@ -55,7 +55,7 @@ function drawTableHeader(doc: jsPDF, y: number) {
   doc.setTextColor(255, 255, 255);
   columns.forEach((column) => {
     const textX = column.align === "center" ? column.x + column.width / 2 : column.x + 2;
-    doc.text(column.label, textX, y + 5.8, { align: column.align });
+    doc.text(fitText(doc, column.label, column.width - 4), textX, y + 5.8, { align: column.align });
   });
   return y + 9;
 }
@@ -81,12 +81,17 @@ function drawSummaryCard(
   doc.setFont("helvetica", "normal");
   doc.setFontSize(7);
   doc.setTextColor(...muted);
-  doc.text(label, x + 11, y + 14);
+  doc.text(fitText(doc, label, width - 15), x + 11, y + 14);
 }
 
 export function exportBacExamResultsPdf(
   participants: BacExamParticipantResult[],
   getLevelLabel: (levelId: string) => string,
+  options: {
+    title: string;
+    sectionLabels: readonly [string, string, string];
+    fileName: string;
+  },
 ) {
   const ranked = [...participants].sort((left, right) => (
     right.correctAnswers - left.correctAnswers
@@ -114,7 +119,7 @@ export function exportBacExamResultsPdf(
   doc.setTextColor(255, 255, 255);
   doc.text("EXCELLENCE LYCÉE", 12, 11);
   doc.setFontSize(11);
-  doc.text("Classement — Concours BAC & BT 2024", 12, 20);
+  doc.text(fitText(doc, `Classement — ${options.title}`, 190), 12, 20);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(7.5);
   doc.setTextColor(219, 230, 243);
@@ -126,13 +131,14 @@ export function exportBacExamResultsPdf(
   const scientificAverage = roundedAverage(ranked.map((item) => item.sectionScores.scientificKnowledge.correctAnswers));
 
   drawSummaryCard(doc, 12, 34, 49, "participants classés", String(ranked.length), green);
-  drawSummaryCard(doc, 66, 34, 49, "moyenne globale", `${overallAverage}/69`, navy);
-  drawSummaryCard(doc, 120, 34, 49, "moyenne Anglais", `${englishAverage}/20`, gold);
-  drawSummaryCard(doc, 174, 34, 49, "moyenne Culture générale", `${generalAverage}/25`, green);
-  drawSummaryCard(doc, 228, 34, 57, "moyenne Culture scientifique", `${scientificAverage}/24`, navy);
+  const firstResult = ranked[0];
+  drawSummaryCard(doc, 66, 34, 49, "moyenne globale", `${overallAverage}/${firstResult?.scoreMax ?? 0}`, navy);
+  drawSummaryCard(doc, 120, 34, 49, `moyenne ${options.sectionLabels[0]}`, `${englishAverage}/${firstResult?.sectionScores.english.scoreMax ?? 0}`, gold);
+  drawSummaryCard(doc, 174, 34, 49, `moyenne ${options.sectionLabels[1]}`, `${generalAverage}/${firstResult?.sectionScores.generalKnowledge.scoreMax ?? 0}`, green);
+  drawSummaryCard(doc, 228, 34, 57, `moyenne ${options.sectionLabels[2]}`, `${scientificAverage}/${firstResult?.sectionScores.scientificKnowledge.scoreMax ?? 0}`, navy);
 
   let pageNumber = 1;
-  let y = drawTableHeader(doc, 58);
+  let y = drawTableHeader(doc, 58, options.sectionLabels);
   const rowHeight = 9;
 
   ranked.forEach((participant, index) => {
@@ -143,8 +149,8 @@ export function exportBacExamResultsPdf(
       doc.setFont("helvetica", "bold");
       doc.setFontSize(11);
       doc.setTextColor(...navy);
-      doc.text("Classement — Concours BAC & BT 2024", 12, 13);
-      y = drawTableHeader(doc, 18);
+      doc.text(fitText(doc, `Classement — ${options.title}`, 190), 12, 13);
+      y = drawTableHeader(doc, 18, options.sectionLabels);
     }
 
     if (index % 2 === 0) {
@@ -189,5 +195,5 @@ export function exportBacExamResultsPdf(
   });
 
   drawPageFooter(doc, pageNumber);
-  doc.save("classement-concours-bac-bt-2024.pdf");
+  doc.save(options.fileName);
 }

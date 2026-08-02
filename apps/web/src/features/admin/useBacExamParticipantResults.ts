@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import { BAC_CI_2024_EXAM_ID } from "../../data/bacCi2024Exam";
 import type { BacExamParticipantResult } from "../../domain/bacExam";
 import { apiRequest } from "../../lib/api";
 
@@ -82,7 +81,13 @@ const previewItems: BacExamParticipantResult[] = [
   },
 ];
 
-export function useBacExamParticipantResults({ preview = false }: { preview?: boolean } = {}) {
+export function useBacExamParticipantResults({
+  examId,
+  preview = false,
+}: {
+  examId: string;
+  preview?: boolean;
+}) {
   const [items, setItems] = useState<BacExamParticipantResult[]>(preview ? previewItems : []);
   const [loading, setLoading] = useState(!preview);
   const [error, setError] = useState<string | null>(null);
@@ -99,7 +104,7 @@ export function useBacExamParticipantResults({ preview = false }: { preview?: bo
     setError(null);
     try {
       const response = await apiRequest<{ items: BacExamParticipantResult[]; total: number }>(
-        `/bac-exams/${BAC_CI_2024_EXAM_ID}/participant-results`,
+        `/bac-exams/${examId}/participant-results`,
       );
       setItems(response.items);
     } catch (loadError) {
@@ -109,7 +114,7 @@ export function useBacExamParticipantResults({ preview = false }: { preview?: bo
     } finally {
       setLoading(false);
     }
-  }, [preview]);
+  }, [examId, preview]);
 
   useEffect(() => {
     void reload();

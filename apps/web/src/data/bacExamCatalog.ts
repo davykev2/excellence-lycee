@@ -216,11 +216,11 @@ export const bacExamCatalog: readonly BacExamCatalogEntry[] = [
     title: "Concours d’entrée à l’ESATIC — Session 2023",
     shortTitle: "ESATIC 2023",
     description: "80 QCM de mathématiques, physique et anglais, reproduits fidèlement sur 15 pages.",
-    durationMinutes: 0,
+    durationMinutes: 180,
     questionCount: 80,
     choiceIds: ["A", "B", "C", "D"],
     format: "facsimile",
-    responseSheetAvailable: false,
+    responseSheetAvailable: true,
     pageUrls: esaticPages(2023, 15),
     pageCount: 15,
     papers: [
@@ -228,7 +228,11 @@ export const bacExamCatalog: readonly BacExamCatalogEntry[] = [
       { id: "physics", label: "Physique", firstPage: 6, lastPage: 12, questionCount: 25 },
       { id: "english", label: "Anglais", firstPage: 13, lastPage: 15, questionCount: 30 },
     ],
-    sections: [],
+    sections: [
+      { label: "Mathématiques", firstQuestion: 1, lastQuestion: 25 },
+      { label: "Physique", firstQuestion: 26, lastQuestion: 50 },
+      { label: "Anglais", firstQuestion: 51, lastQuestion: 80 },
+    ],
   },
   {
     id: ESATIC_2024_EXAM_ID,
@@ -238,11 +242,11 @@ export const bacExamCatalog: readonly BacExamCatalogEntry[] = [
     title: "Concours d’entrée à l’ESATIC — Session 2024",
     shortTitle: "ESATIC 2024",
     description: "100 QCM de mathématiques, sciences physiques, français et anglais, reproduits fidèlement sur 14 pages.",
-    durationMinutes: 0,
+    durationMinutes: 180,
     questionCount: 100,
     choiceIds: ["A", "B", "C", "D"],
     format: "facsimile",
-    responseSheetAvailable: false,
+    responseSheetAvailable: true,
     pageUrls: esaticPages(2024, 14),
     pageCount: 14,
     papers: [
@@ -250,7 +254,11 @@ export const bacExamCatalog: readonly BacExamCatalogEntry[] = [
       { id: "physics", label: "Sciences physiques", firstPage: 5, lastPage: 9, questionCount: 25 },
       { id: "languages", label: "Français et anglais", firstPage: 10, lastPage: 14, questionCount: 50 },
     ],
-    sections: [],
+    sections: [
+      { label: "Mathématiques", firstQuestion: 1, lastQuestion: 25 },
+      { label: "Sciences physiques", firstQuestion: 26, lastQuestion: 50 },
+      { label: "Français et anglais", firstQuestion: 51, lastQuestion: 100 },
+    ],
   },
   {
     id: BAC_CI_2024_EXAM_ID,

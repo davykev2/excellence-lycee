@@ -117,11 +117,10 @@ export const BAC_EXAM_CONFIGURATIONS: readonly BacExamConfiguration[] = [
     durationMinutes: 180,
     questionCount: 80,
     allowedChoices: ["A", "B", "C", "D"],
-    submissionsEnabled: false,
     sectionQuestionNumbers: {
-      english: [],
-      generalKnowledge: [],
-      scientificKnowledge: [],
+      english: Array.from({ length: 25 }, (_, index) => index + 1),
+      generalKnowledge: Array.from({ length: 25 }, (_, index) => index + 26),
+      scientificKnowledge: Array.from({ length: 30 }, (_, index) => index + 51),
     },
   },
   {
@@ -130,11 +129,10 @@ export const BAC_EXAM_CONFIGURATIONS: readonly BacExamConfiguration[] = [
     durationMinutes: 180,
     questionCount: 100,
     allowedChoices: ["A", "B", "C", "D"],
-    submissionsEnabled: false,
     sectionQuestionNumbers: {
-      english: [],
-      generalKnowledge: [],
-      scientificKnowledge: [],
+      english: Array.from({ length: 25 }, (_, index) => index + 1),
+      generalKnowledge: Array.from({ length: 25 }, (_, index) => index + 26),
+      scientificKnowledge: Array.from({ length: 50 }, (_, index) => index + 51),
     },
   },
   {

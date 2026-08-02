@@ -13,6 +13,8 @@ import {
   WarningCircle,
 } from "@phosphor-icons/react";
 import { schoolLevels } from "../../data/programme";
+import { BAC_CI_2024_EXAM_ID } from "../../data/bacCi2024Exam";
+import { bacExamCatalog } from "../../data/bacExamCatalog";
 import {
   bacExamZoneLabel,
   bacExamZones,
@@ -54,7 +56,15 @@ function ParticipantAvatar({ participant }: { participant: BacExamParticipantRes
 }
 
 export function BacExamParticipantResults({ preview = false }: { preview?: boolean }) {
-  const participants = useBacExamParticipantResults({ preview });
+  const resultExams = useMemo(() => bacExamCatalog.filter((exam) => (
+    exam.responseSheetAvailable && exam.sourceVerified !== false
+  )), []);
+  const [examId, setExamId] = useState(BAC_CI_2024_EXAM_ID);
+  const selectedExam = resultExams.find((exam) => exam.id === examId) ?? resultExams[0];
+  const sectionLabels = selectedExam?.sections.length === 3
+    ? selectedExam.sections.map((section) => section.label)
+    : ["Anglais", "Culture générale", "Culture scientifique"];
+  const participants = useBacExamParticipantResults({ examId: selectedExam?.id ?? BAC_CI_2024_EXAM_ID, preview });
   const [query, setQuery] = useState("");
   const [levelId, setLevelId] = useState("all");
   const [candidateZone, setCandidateZone] = useState<BacExamZone | "all" | "unknown">("all");
@@ -111,7 +121,11 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
     setExportError(null);
     try {
       const { exportBacExamResultsPdf } = await import("./exportBacExamResultsPdf");
-      exportBacExamResultsPdf(participants.items, levelLabel);
+      exportBacExamResultsPdf(participants.items, levelLabel, {
+        title: selectedExam?.title ?? "Concours BAC & BT 2024",
+        sectionLabels: sectionLabels as [string, string, string],
+        fileName: `classement-${selectedExam?.slug ?? "concours-2024"}.pdf`,
+      });
     } catch {
       setExportError("Le PDF n’a pas pu être généré. Réessaie dans quelques instants.");
     } finally {
@@ -133,6 +147,13 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
         </span>
       </header>
 
+      <label className="admin-bac-exam-selector">
+        <span>Épreuve suivie</span>
+        <select value={selectedExam?.id} onChange={(event) => setExamId(event.target.value)}>
+          {resultExams.map((exam) => <option key={exam.id} value={exam.id}>{exam.shortTitle}</option>)}
+        </select>
+      </label>
+
       <div className="admin-bac-participant-stats" aria-label="Synthèse des résultats">
         <div>
           <span><Users size={22} weight="duotone" /></span>
@@ -140,11 +161,11 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
         </div>
         <div>
           <span><ChartBar size={22} weight="duotone" /></span>
-          <p><strong>{average.toLocaleString("fr-CI")}/69</strong><small>moyenne générale</small></p>
+          <p><strong>{average.toLocaleString("fr-CI")}/{selectedExam?.questionCount ?? 0}</strong><small>moyenne générale</small></p>
         </div>
         <div>
           <span><Medal size={22} weight="duotone" /></span>
-          <p><strong>{bestScore}/69</strong><small>meilleure note</small></p>
+          <p><strong>{bestScore}/{selectedExam?.questionCount ?? 0}</strong><small>meilleure note</small></p>
         </div>
       </div>
 
@@ -265,9 +286,9 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
               <span role="columnheader">Classe</span>
               <span role="columnheader">Zone</span>
               <span role="columnheader">Copie déposée</span>
-              <span role="columnheader">Anglais</span>
-              <span role="columnheader">Culture G.</span>
-              <span role="columnheader">Culture S.</span>
+              <span role="columnheader">{sectionLabels[0]}</span>
+              <span role="columnheader">{sectionLabels[1]}</span>
+              <span role="columnheader">{sectionLabels[2]}</span>
               <span role="columnheader">Total</span>
               <span role="columnheader">Appréciation</span>
             </div>
@@ -336,15 +357,15 @@ export function BacExamParticipantResults({ preview = false }: { preview?: boole
                 </div>
                 <div className="admin-bac-card-section-scores" aria-label="Notes par matière">
                   <span>
-                    <small>Anglais</small>
+                    <small>{sectionLabels[0]}</small>
                     <strong>{participant.sectionScores.english.correctAnswers}/{participant.sectionScores.english.scoreMax}</strong>
                   </span>
                   <span>
-                    <small>Culture générale</small>
+                    <small>{sectionLabels[1]}</small>
                     <strong>{participant.sectionScores.generalKnowledge.correctAnswers}/{participant.sectionScores.generalKnowledge.scoreMax}</strong>
                   </span>
                   <span>
-                    <small>Culture scientifique</small>
+                    <small>{sectionLabels[2]}</small>
                     <strong>{participant.sectionScores.scientificKnowledge.correctAnswers}/{participant.sectionScores.scientificKnowledge.scoreMax}</strong>
                   </span>
                 </div>
