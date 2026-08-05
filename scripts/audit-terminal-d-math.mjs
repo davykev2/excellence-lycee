@@ -29,6 +29,7 @@ const primitivesPath = loadTypeScript("apps/web/src/data/terminalCPrimitivesPath
 const conicsPath = loadTypeScript("apps/web/src/data/terminalCConicsPath.ts");
 const logarithmsPath = loadTypeScript("apps/web/src/data/terminalCLogarithmsPath.ts");
 const complexNumbersPath = loadTypeScript("apps/web/src/data/terminalCComplexNumbersPath.ts");
+const exponentialPowerPath = loadTypeScript("apps/web/src/data/terminalCExponentialPowerPath.ts");
 const c01to05 = loadTypeScript("apps/web/src/data/terminalCMathPaths01to05.ts", {
   "./officialMathPathBuilder": builder,
   "./terminalCLimitsContinuityPath": limitsPath,
@@ -43,6 +44,7 @@ const c06to10 = loadTypeScript("apps/web/src/data/terminalCMathPaths06to10.ts", 
   "./terminalCConicsPath": conicsPath,
   "./terminalCLogarithmsPath": logarithmsPath,
   "./terminalCComplexNumbersPath": complexNumbersPath,
+  "./terminalCExponentialPowerPath": exponentialPowerPath,
 });
 const c11to15 = loadTypeScript("apps/web/src/data/terminalCMathPaths11to15.ts", { "./officialMathPathBuilder": builder });
 const c16to19 = loadTypeScript("apps/web/src/data/terminalCMathPaths16to19.ts", { "./officialMathPathBuilder": builder });
