@@ -14,6 +14,7 @@ import type {
   ArenaExerciseStatus,
   PublishedArenaExerciseLevel,
 } from "./arenaExercises.js";
+import type { BroadcastRecipient, EmailAudience } from "./email.js";
 import type { GlobalMessageSummary, MessageRecipientSummary, MessageThreadSummary, ThreadMessageSummary } from "./messaging.js";
 import type {
   AdminFeedbackItem,
@@ -1288,6 +1289,108 @@ export async function getSupabaseAdminFeedbackFeed(accessToken: string, limit = 
     throw new SupabaseOperationError(error.message, status, error.code);
   }
   return (data ?? []) as unknown as AdminFeedbackItem[];
+}
+
+/* --------------------------------------------------------------------------
+ * Notifications par e-mail.
+ * ----------------------------------------------------------------------- */
+
+function emailRpcFailure(error: { message: string; code?: string }) {
+  const status = error.code === "42501" ? 403 : error.code === "PGRST202" ? 503 : 500;
+  return new SupabaseOperationError(error.message, status, error.code);
+}
+
+/** Coordonnées d'un destinataire pour un e-mail transactionnel. Réservé aux admins par RLS. */
+export async function getSupabaseProfileContact(
+  accessToken: string,
+  userId: string,
+): Promise<{ email: string; name: string } | null> {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client
+    .from("profiles")
+    .select("email,name")
+    .eq("id", userId)
+    .maybeSingle();
+  if (error) throw emailRpcFailure(error);
+  if (!data?.email) return null;
+  return { email: data.email as string, name: (data.name as string) ?? "" };
+}
+
+export async function getSupabaseBroadcastAudience(
+  accessToken: string,
+  audience: EmailAudience,
+): Promise<BroadcastRecipient[]> {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("get_email_broadcast_audience", { p_audience: audience });
+  if (error) throw emailRpcFailure(error);
+  return (data ?? []) as unknown as BroadcastRecipient[];
+}
+
+export async function countSupabaseBroadcastAudience(
+  accessToken: string,
+  audience: EmailAudience,
+): Promise<number> {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("count_email_broadcast_audience", { p_audience: audience });
+  if (error) throw emailRpcFailure(error);
+  return Number(data ?? 0);
+}
+
+export async function recordSupabaseBroadcast(
+  accessToken: string,
+  audience: EmailAudience,
+  subject: string,
+  body: string,
+  recipientCount: number,
+  deliveries: unknown[],
+): Promise<string> {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("record_email_broadcast", {
+    p_audience: audience,
+    p_subject: subject,
+    p_body: body,
+    p_recipient_count: recipientCount,
+    p_deliveries: deliveries,
+  });
+  if (error) throw emailRpcFailure(error);
+  return String(data ?? "");
+}
+
+export async function recordSupabaseEmailDelivery(
+  accessToken: string,
+  userId: string,
+  email: string,
+  status: "sent" | "failed",
+  providerMessageId?: string,
+  failure?: string,
+) {
+  const client = userDataClient(accessToken);
+  const { error } = await client.rpc("record_email_delivery", {
+    p_user_id: userId,
+    p_email: email,
+    p_status: status,
+    p_provider_message_id: providerMessageId ?? null,
+    p_error: failure ?? null,
+  });
+  if (error) throw emailRpcFailure(error);
+}
+
+export async function listSupabaseBroadcasts(accessToken: string, limit = 10) {
+  const client = userDataClient(accessToken);
+  const { data, error } = await client.rpc("list_email_broadcasts", { p_limit: limit });
+  if (error) throw emailRpcFailure(error);
+  return (data ?? []) as unknown[];
+}
+
+/**
+ * Désabonnement depuis le lien d'un e-mail : il n'y a pas de session, on passe
+ * donc par la clé publiable. Le jeton HMAC a déjà été vérifié par l'API, et la
+ * fonction ne sait que désabonner.
+ */
+export async function unsubscribeSupabaseProfile(userId: string): Promise<boolean> {
+  const { data, error } = await requireAuthClient().rpc("unsubscribe_from_emails", { p_user_id: userId });
+  if (error) throw emailRpcFailure(error);
+  return Boolean(data);
 }
 
 export async function getSupabaseBacExamState(accessToken: string, examId: string): Promise<BacExamState> {

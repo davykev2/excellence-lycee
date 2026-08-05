@@ -233,7 +233,7 @@ function getSqliteMessages(userId: string, threadId: string): ThreadMessageSumma
   }));
 }
 
-function startSqliteThread(userId: string, input: z.infer<typeof createThreadSchema>) {
+export function startSqliteThread(userId: string, input: z.infer<typeof createThreadSchema>) {
   const actor = sqliteUser(userId);
   const recipient = sqliteUser(input.recipientId);
   if (!actor || !recipient) return null;

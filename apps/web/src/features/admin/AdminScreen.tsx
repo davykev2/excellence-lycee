@@ -51,6 +51,7 @@ import { LessonContentStudio } from "./LessonContentStudio";
 import { EditorialOverview } from "./EditorialOverview";
 import { BacExamPublicationControl } from "./BacExamPublicationControl";
 import { BacExamParticipantResults } from "./BacExamParticipantResults";
+import { EmailBroadcastPanel } from "./EmailBroadcastPanel";
 
 const reactionMeta: Record<LessonReaction, { label: string; Icon: typeof Heart }> = {
   useful: { label: "a trouvé utile", Icon: ThumbsUp },
@@ -426,7 +427,9 @@ export function AdminScreen({
       const location = target
         ? `${target.subjectLabel} · ${target.pathTitle} — ${target.lessonTitle}`
         : `${item.pathId} · ${item.lessonId}`;
-      await apiRequest<{ threadId: string }>("/messages/threads", {
+      // Le serveur crée la conversation privée puis prévient l'élève par e-mail :
+      // il ne faut pas que l'e-mail dépende du navigateur de l'administration.
+      const outcome = await apiRequest<{ threadId: string; emailSent: boolean }>("/lesson-feedback/admin/reply", {
         method: "POST",
         body: JSON.stringify({
           recipientId: item.authorId,
@@ -441,13 +444,17 @@ export function AdminScreen({
             "",
             `— ${currentAdminName}, administration Excellence Lycée`,
           ].join("\n").slice(0, 2000),
+          replyMessage: body,
+          location: location.slice(0, 200),
         }),
       });
       window.dispatchEvent(new Event("excellence:messages-updated"));
       setRepliedFeedbackIds((current) => new Set(current).add(feedbackId));
       setReplyingToFeedbackId(null);
       setFeedbackReplyDraft("");
-      notify(`Retour envoyé à ${item.authorName} dans Messages.`);
+      notify(outcome.emailSent
+        ? `Retour envoyé à ${item.authorName} dans Messages, et par e-mail.`
+        : `Retour envoyé à ${item.authorName} dans Messages.`);
     } catch (reason) {
       setFeedbackReplyError(reason instanceof Error ? reason.message : "Le retour n’a pas pu être envoyé.");
     } finally {
@@ -804,6 +811,7 @@ export function AdminScreen({
       {activeSection === "operations" && (
         <section className="admin-section" data-testid="admin-operations">
           <div className="admin-section-heading"><div><p className="admin-eyebrow">Supervision</p><h2>Opérations et qualité</h2><p>Traite les validations, signalements et contrôles indispensables.</p></div><span className="admin-live-pill"><i /> Surveillance active</span></div>
+          <EmailBroadcastPanel preview={preview} />
           <BacExamPublicationControl preview={preview} />
           <BacExamParticipantResults preview={preview} />
           <div className="admin-operations-grid">

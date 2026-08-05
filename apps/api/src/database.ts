@@ -280,7 +280,39 @@ database.exec(`
 
   CREATE INDEX IF NOT EXISTS bac_exam_submissions_user_idx
     ON bac_exam_submissions(user_id, submitted_at DESC);
+
+  CREATE TABLE IF NOT EXISTS email_broadcasts (
+    id TEXT PRIMARY KEY,
+    actor_user_id TEXT REFERENCES users(id) ON DELETE SET NULL,
+    audience TEXT NOT NULL CHECK (audience IN ('students', 'students-and-parents', 'everyone')),
+    subject TEXT NOT NULL,
+    body TEXT NOT NULL,
+    recipient_count INTEGER NOT NULL DEFAULT 0,
+    sent_count INTEGER NOT NULL DEFAULT 0,
+    failed_count INTEGER NOT NULL DEFAULT 0,
+    created_at TEXT NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS email_deliveries (
+    id TEXT PRIMARY KEY,
+    broadcast_id TEXT REFERENCES email_broadcasts(id) ON DELETE CASCADE,
+    user_id TEXT REFERENCES users(id) ON DELETE SET NULL,
+    kind TEXT NOT NULL CHECK (kind IN ('broadcast', 'feedback_reply')),
+    email TEXT NOT NULL,
+    status TEXT NOT NULL CHECK (status IN ('sent', 'failed')),
+    provider_message_id TEXT,
+    error TEXT,
+    created_at TEXT NOT NULL
+  );
+
+  CREATE INDEX IF NOT EXISTS email_deliveries_broadcast_idx
+    ON email_deliveries(broadcast_id, created_at DESC);
 `);
+
+const userEmailColumns = database.prepare("PRAGMA table_info(users)").all() as Array<{ name: string }>;
+if (!userEmailColumns.some((column) => column.name === "email_opt_out")) {
+  database.exec("ALTER TABLE users ADD COLUMN email_opt_out INTEGER NOT NULL DEFAULT 0 CHECK (email_opt_out IN (0, 1))");
+}
 
 const bacExamSettingsColumns = database.prepare("PRAGMA table_info(bac_exam_settings)").all() as Array<{ name: string }>;
 if (!bacExamSettingsColumns.some((column) => column.name === "subject_published")) {

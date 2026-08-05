@@ -14,6 +14,10 @@ const supabaseUrl = process.env.SUPABASE_URL?.trim() ?? "";
 const supabasePublishableKey = (process.env.SUPABASE_PUBLISHABLE_KEY ?? process.env.SUPABASE_ANON_KEY)?.trim() ?? "";
 const elevenLabsApiKey = process.env.ELEVENLABS_API_KEY?.trim() ?? "";
 const davyVoiceId = process.env.DAVY_VOICE_ID?.trim() ?? "";
+const resendApiKey = process.env.RESEND_API_KEY?.trim() ?? "";
+// Resend exige un domaine vérifié : tant que le porteur n'en a pas, EMAIL_FROM
+// reste vide et tout l'envoi est inerte plutôt que de partir en erreur.
+const emailFrom = process.env.EMAIL_FROM?.trim() ?? "";
 
 if (isProduction && jwtSecret.length < 32) {
   throw new Error("JWT_SECRET doit contenir au moins 32 caractères en production.");
@@ -33,6 +37,13 @@ export const config = {
   davyVoiceId,
   davyVoiceModelId: process.env.DAVY_VOICE_MODEL_ID?.trim() || "eleven_multilingual_v2",
   davyVoiceConfigured: Boolean(elevenLabsApiKey && davyVoiceId),
+  resendApiKey,
+  emailFrom,
+  emailReplyTo: process.env.EMAIL_REPLY_TO?.trim() ?? "",
+  // Adresse publique du frontend, utilisée pour les liens des e-mails. En local
+  // elle vaut l'origine du serveur Vite ; en production, le domaine Vercel.
+  publicWebUrl: (process.env.PUBLIC_WEB_URL?.trim() || process.env.WEB_ORIGIN?.trim() || "http://localhost:4173").replace(/\/+$/, ""),
+  emailConfigured: Boolean(resendApiKey && emailFrom),
   dataProvider: supabaseUrl && supabasePublishableKey ? "supabase" as const : "sqlite" as const,
   isProduction,
 };

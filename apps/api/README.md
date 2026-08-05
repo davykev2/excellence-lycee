@@ -40,6 +40,27 @@ Les routes authentifiées sous `/messages` permettent de rechercher les destinat
 
 Le script `npm run test:messages` vérifie le parcours complet avec le fournisseur SQLite local.
 
+## Notifications par e-mail
+
+Deux canaux, servis par Resend appelé en HTTP depuis `src/email.ts` (aucun SDK). Ils sont **inertes tant que la configuration est absente** : `POST /notifications/broadcast` renvoie alors `503` avec un message explicite et l’écran d’administration affiche un bandeau.
+
+```bash
+RESEND_API_KEY=re_...
+EMAIL_FROM=Excellence Lycée <contact@ton-domaine.ci>
+EMAIL_REPLY_TO=            # facultatif
+PUBLIC_WEB_URL=https://excellence-lycee.vercel.app
+```
+
+`EMAIL_FROM` doit utiliser un **domaine vérifié dans Resend** : un sous-domaine `vercel.app` ne peut pas convenir, faute d’accès DNS pour SPF et DKIM. Installer le fournisseur avec `vercel integration add resend/resend-email` sur le projet `excellence-lycee-api`, puis renseigner les deux autres variables.
+
+- `GET /notifications/status` — état de la configuration (admin).
+- `GET /notifications/audience?audience=students|students-and-parents|everyone` — **nombre seul** de destinataires, jamais les adresses (admin).
+- `POST /notifications/broadcast` — diffusion, 3 par heure. Le corps porte `confirmRecipientCount` : le serveur recalcule la cible et répond `409` si elle a changé depuis l’affichage. C’est le garde-fou contre un envoi accidentel à plusieurs centaines de personnes.
+- `GET`/`POST /notifications/unsubscribe?token=…` — public, sans session. Le jeton est un HMAC signé avec `JWT_SECRET`, sans table ni expiration.
+- `POST /lesson-feedback/admin/reply` — réponse de l’administration à un avis : crée la conversation privée **puis** envoie l’e-mail. L’échec de l’e-mail ne fait jamais échouer la réponse.
+
+Le désabonnement ne vaut que pour les diffusions : une réponse à un avis reste envoyée, puisque l’élève a initié l’échange. L’offre gratuite de Resend plafonne à 100 e-mails par jour et 3 000 par mois — l’envoi se fait par lots de 100 avec gestion des `429`, et chaque destinataire est journalisé dans `email_deliveries`.
+
 ## Voix officielle de Davy
 
 La voix clonée de Davy est générée exclusivement côté API. Aucun secret fournisseur, échantillon vocal ni fichier d’autorisation ne doit être placé dans le frontend ou dans les assets publiés.

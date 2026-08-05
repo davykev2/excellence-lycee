@@ -1,16 +1,22 @@
 import { randomUUID } from "node:crypto";
 import type { FastifyInstance, FastifyReply } from "fastify";
 import { z } from "zod";
+import { config } from "../config.js";
 import { database, writeAuditLog, type UserRole } from "../database.js";
 import { getLessonReward } from "../curriculum.js";
+import { renderFeedbackReplyEmail, sendEmails } from "../email.js";
+import { startSqliteThread } from "./messages.js";
 import {
   createSupabaseLessonComment,
   deleteSupabaseLessonComment,
   editSupabaseLessonComment,
   getSupabaseAdminFeedbackFeed,
   getSupabaseLessonFeedback,
+  getSupabaseProfileContact,
+  recordSupabaseEmailDelivery,
   setSupabaseLessonCommentReaction,
   setSupabaseLessonReaction,
+  startSupabaseMessageThread,
   supabaseConfigured,
   writeSupabaseAudit,
 } from "../supabase.js";
@@ -34,6 +40,16 @@ const reactionSchema = z.object({ reaction: z.enum(lessonReactionValues).nullabl
 const commentReactionSchema = z.object({ reaction: z.enum(commentReactionValues).nullable() });
 const commentSchema = z.object({ body: z.string().trim().min(1).max(1000) });
 const feedQuerySchema = z.object({ limit: z.coerce.number().int().min(1).max(100).optional() });
+const feedbackReplySchema = z.object({
+  recipientId: z.string().uuid("Destinataire invalide."),
+  subject: z.string().trim().min(2, "Ajoute un objet.").max(120),
+  /** Message complet déposé dans la conversation privée. */
+  body: z.string().trim().min(1, "Écris ton message.").max(2000),
+  /** Uniquement les mots de l'administration, cités dans l'e-mail. */
+  replyMessage: z.string().trim().min(1).max(2000),
+  /** Libellé lisible du niveau concerné, affiché dans l'e-mail. */
+  location: z.string().trim().min(1).max(200),
+});
 
 interface SqliteFeedRow {
   kind: "comment" | "reaction" | "comment_reaction";
@@ -240,6 +256,83 @@ export async function lessonFeedbackRoutes(app: FastifyInstance) {
       ? await getSupabaseAdminFeedbackFeed(request.authContext.accessToken!, limit)
       : sqliteAdminFeed(limit);
     return { items };
+  });
+
+  /**
+   * Réponse de l'administration à un avis, depuis la cloche.
+   *
+   * La conversation privée reste la source de vérité : elle est créée d'abord, et
+   * l'e-mail qui la signale est au mieux. Un incident chez Resend ne doit jamais
+   * faire croire à l'administration que sa réponse n'est pas partie.
+   */
+  app.post("/admin/reply", {
+    preHandler: app.authenticate,
+    config: { rateLimit: { max: 30, timeWindow: "1 minute" } },
+  }, async (request, reply) => {
+    if (request.authContext.role !== "admin") {
+      return reply.code(403).send({ error: "FORBIDDEN", message: "Accès réservé à l’administration." });
+    }
+    const parsed = feedbackReplySchema.safeParse(request.body);
+    if (!parsed.success) {
+      return reply.code(400).send({ error: "VALIDATION_ERROR", message: parsed.error.issues[0]?.message });
+    }
+    const { recipientId, subject, body, replyMessage, location } = parsed.data;
+
+    const threadInput = { recipientId, subject, body };
+    const threadId = supabaseConfigured
+      ? await startSupabaseMessageThread(request.authContext.accessToken!, threadInput)
+      : startSqliteThread(request.authContext.id, threadInput);
+    if (threadId === null) return reply.code(404).send({ error: "RECIPIENT_NOT_FOUND", message: "Destinataire introuvable." });
+    if (threadId === false) return reply.code(403).send({ error: "RECIPIENT_NOT_ALLOWED", message: "Tu ne peux pas écrire à ce destinataire." });
+
+    let emailSent = false;
+    if (config.emailConfigured) {
+      try {
+        const contact = supabaseConfigured
+          ? await getSupabaseProfileContact(request.authContext.accessToken!, recipientId)
+          : (database.prepare("SELECT email, name FROM users WHERE id = ?").get(recipientId) as { email: string; name: string } | undefined) ?? null;
+
+        if (contact?.email) {
+          // Le nom de l'administration vient de la base, jamais du client.
+          const author = supabaseConfigured
+            ? await getSupabaseProfileContact(request.authContext.accessToken!, request.authContext.id)
+            : (database.prepare("SELECT email, name FROM users WHERE id = ?").get(request.authContext.id) as { email: string; name: string } | undefined) ?? null;
+
+          const rendered = renderFeedbackReplyEmail({
+            name: contact.name,
+            adminName: author?.name?.trim() || "L’administration",
+            message: replyMessage,
+            location,
+          });
+          const [outcome] = await sendEmails([{
+            to: contact.email,
+            subject: `Réponse de l’administration — ${location}`.slice(0, 160),
+            html: rendered.html,
+            text: rendered.text,
+          }]);
+          emailSent = outcome?.status === "sent";
+
+          if (supabaseConfigured) {
+            await recordSupabaseEmailDelivery(
+              request.authContext.accessToken!, recipientId, contact.email,
+              emailSent ? "sent" : "failed", outcome?.providerMessageId, outcome?.error,
+            ).catch((reason) => request.log.warn(reason, "Email delivery log failed"));
+          } else {
+            database.prepare(`
+              INSERT INTO email_deliveries (id, broadcast_id, user_id, kind, email, status, provider_message_id, error, created_at)
+              VALUES (?, NULL, ?, 'feedback_reply', ?, ?, ?, ?, ?)
+            `).run(
+              randomUUID(), recipientId, contact.email, emailSent ? "sent" : "failed",
+              outcome?.providerMessageId ?? null, outcome?.error ?? null, new Date().toISOString(),
+            );
+          }
+        }
+      } catch (reason) {
+        request.log.warn(reason, "Feedback reply email failed");
+      }
+    }
+
+    return reply.code(201).send({ threadId, emailSent });
   });
 
   app.get("/:pathId/:lessonId", { preHandler: app.authenticate }, async (request, reply) => {
