@@ -10338,6 +10338,12 @@ textarea:focus-visible {
 
 .admin-notification-item {
   width: 100%;
+  /* Obligatoire : la liste est un conteneur flex à hauteur contrainte. Sans ce
+     flex-shrink, les cartes se compriment pour tenir dans le panneau (7 px au
+     lieu de 111 px à partir d'une quarantaine d'éléments), leur overflow:hidden
+     masque le contenu et scrollHeight tombe à clientHeight — donc aucune barre
+     de défilement n'apparaît et la cloche semble vide. */
+  flex-shrink: 0;
   overflow: hidden;
   border: 1px solid transparent;
   border-radius: 14px;
