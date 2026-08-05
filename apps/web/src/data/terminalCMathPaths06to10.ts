@@ -1,31 +1,12 @@
 import { buildOfficialMathPath, officialMathTopic as t } from "./officialMathPathBuilder";
+import { terminalCComplexNumbersPath } from "./terminalCComplexNumbersPath";
 import { terminalCConicsPath } from "./terminalCConicsPath";
 import { terminalCLogarithmsPath } from "./terminalCLogarithmsPath";
 import { terminalCPrimitivesPath } from "./terminalCPrimitivesPath";
 
 const levelIds = ["terminale-c"];
 
-export { terminalCConicsPath, terminalCLogarithmsPath, terminalCPrimitivesPath };
-
-export const terminalCComplexNumbersPath = buildOfficialMathPath({
-  id: "terminale-c-math-l09-complex-numbers", levelIds, chapterNumber: 9, themeNumber: 4,
-  themeTitle: "Nombres complexes", title: "Nombres complexes",
-  description: "Forme algébrique, conjugué, module, argument, formes trigonométrique et exponentielle, racines et équations.",
-  outcomes: ["Calculer dans $\\mathbb C$", "Passer entre les formes d’un complexe", "Résoudre des équations complexes"],
-  documentTitle: "TC Maths leçon 09 Nombres complexes.pdf",
-  topics: [
-    t("complex-algebra", "Forme algébrique et opérations", "1-3", "I. Calculs dans $\\mathbb C$", "Tout complexe s’écrit de façon unique $a+ib$. Les opérations suivent les règles usuelles avec $i^2=-1$.", "Regrouper séparément les parties réelle et imaginaire.", String.raw`(a+ib)+(c+id)=(a+c)+i(b+d)`, "Calcule $(2+3i)+(1-5i)$.", "$3-2i$.", 50),
-    t("complex-powers", "Puissances de $i$ et binôme", "3-4", "I-2. Puissances", "Les puissances de $i$ sont périodiques de période $4$ ; le binôme de Newton s’applique ensuite comme dans $\\mathbb R$.", "Réduire l’exposant modulo $4$.", String.raw`i^{4q+r}=i^r`, "Combien vaut $i^{2026}$ ?", "$-1$.", 55),
-    t("complex-conjugate", "Conjugué et quotient", "4-6", "II. Conjugué", "Le conjugué de $a+ib$ est $a-ib$. Multiplier par le conjugué rend réel le dénominateur d’un quotient.", "$z\\bar z=|z|^2$ est réel positif.", String.raw`\frac zw=\frac{z\bar w}{|w|^2}`, "Quel est le conjugué de $3-4i$ ?", "$3+4i$.", 60),
-    t("complex-modulus", "Module et distances", "6-8", "III. Module", "Le module de $a+ib$ vaut $\\sqrt{a^2+b^2}$ et représente la distance à l’origine dans le plan complexe.", "Le module d’un produit est le produit des modules.", String.raw`|a+ib|=\sqrt{a^2+b^2}`, "Quel est le module de $3-4i$ ?", "$5$.", 60),
-    t("complex-arguments", "Arguments d’un complexe", "8-10", "IV. Arguments", "Un argument de $z\\ne0$ est une mesure de l’angle orienté entre l’axe réel et le vecteur image de $z$.", "Les arguments sont définis modulo $2\\pi$.", String.raw`z=|z|(\cos\theta+i\sin\theta)`, "Un argument de $-i$ est-il $-\\pi/2$ ?", "Oui.", 65),
-    t("trigonometric-form", "Forme trigonométrique", "10-12", "V-1. Forme trigonométrique", "La forme trigonométrique associe module et argument et rend simples les produits et quotients.", "Multiplier les modules et additionner les arguments.", String.raw`z=r(\cos\theta+i\sin\theta)`, "Quelle est la forme trigonométrique de $1+i$ ?", "$\\sqrt2(\\cos(\\pi/4)+i\\sin(\\pi/4))$.", 65),
-    t("exponential-form", "Forme exponentielle", "12-14", "V-2. Forme exponentielle", "La notation $re^{i\\theta}$ condense la forme trigonométrique et respecte les règles des puissances.", "Un quotient divise les modules et soustrait les arguments.", String.raw`z=re^{i\theta}`, "Calcule $e^{i\\pi}$.", "$-1$.", 65),
-    t("moivre-linearization", "Formule de Moivre et linéarisation", "14-17", "VI. Puissances", "La formule de Moivre calcule les puissances d’un complexe trigonométrique et permet de linéariser les puissances de sinus ou cosinus.", "Développer aussi $(e^{ix}+e^{-ix})/2$ pour les linéarisations.", String.raw`(\cos\theta+i\sin\theta)^n=\cos(n\theta)+i\sin(n\theta)`, "La formule de Moivre transforme $(\\cos x+i\\sin x)^4$ en quoi ?", "$\\cos4x+i\\sin4x$.", 70),
-    t("complex-equations", "Racines carrées et équations du second degré", "17-20", "VII. Équations", "La recherche des racines carrées de $a+ib$ ramène à un système réel ; les équations quadratiques utilisent ensuite le discriminant complexe.", "Vérifier les solutions par substitution.", String.raw`(x+iy)^2=(x^2-y^2)+2xyi`, "Quelles sont les racines carrées de $-4$ ?", "$2i$ et $-2i$.", 75),
-    t("roots-of-unity", "Racines n-ièmes et racines de l’unité", "20-23", "VIII. Racines n-ièmes", "Les racines n-ièmes d’un complexe sont régulièrement réparties sur un cercle. Celles de l’unité forment un polygone régulier.", "Diviser l’argument augmenté de $2k\\pi$ par $n$ pour $k=0,\\ldots,n-1$.", String.raw`z_k=r^{1/n}e^{i(\theta+2k\pi)/n}`, "Combien l’équation $z^5=1$ possède-t-elle de solutions distinctes ?", "$5$.", 85, "challenge"),
-  ],
-});
+export { terminalCComplexNumbersPath, terminalCConicsPath, terminalCLogarithmsPath, terminalCPrimitivesPath };
 
 export const terminalCExponentialPowerPath = buildOfficialMathPath({
   id: "terminale-c-math-l10-exponential-power", levelIds, chapterNumber: 10, themeNumber: 1,

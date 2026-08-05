@@ -3,11 +3,13 @@ import {
   ArrowLeft,
   ArrowRight,
   ArrowClockwise,
+  Backspace,
   BookOpenText,
   CheckCircle,
   Lightbulb,
   ListNumbers,
   Medal,
+  Keyboard,
   SlidersHorizontal,
   Sparkle,
   Trophy,
@@ -38,7 +40,29 @@ interface LessonWorkspaceProps {
 
 type Phase = "learn" | "quiz" | "result";
 type LessonAnswer = number | string | null;
-const mathInputSymbols = ["+∞", "−∞", "∞", "≤", "≥", "∈", "ℝ", "√", "π", "∅"];
+
+const formulaKeyboardGroups = [
+  {
+    label: "Calcul",
+    symbols: ["+", "−", "×", "÷", "=", "≠", "≈", "<", ">", "≤", "≥", "±", "(", ")", "[", "]", "{", "}", "|", "/", ",", ";"],
+  },
+  {
+    label: "Puissances et racines",
+    symbols: ["²", "³", "^", "√(", "∛(", "10^", "e^(", "×10^", "%"],
+  },
+  {
+    label: "Ensembles et limites",
+    symbols: ["+∞", "−∞", "∞", "ℕ", "ℤ", "ℚ", "ℝ", "ℂ", "∈", "∉", "⊂", "∪", "∩", "∅", "→"],
+  },
+  {
+    label: "Analyse",
+    symbols: ["ln(", "log(", "exp(", "sin(", "cos(", "tan(", "lim", "f′(", "∫", "dx", "Σ"],
+  },
+  {
+    label: "Géométrie et physique",
+    symbols: ["π", "α", "β", "γ", "θ", "φ", "λ", "μ", "ρ", "σ", "ω", "Δ", "°", "⟂", "∥", "·", "‖"],
+  },
+] as const;
 
 function normalizeAnswer(value: string) {
   return value
@@ -47,6 +71,12 @@ function normalizeAnswer(value: string) {
     .toLocaleLowerCase("fr")
     .replace(/[−–—]/g, "-")
     .replace(/∞/g, "infini")
+    .replace(/[×·*]/g, "")
+    .replace(/÷/g, "/")
+    .replace(/²/g, "^2")
+    .replace(/³/g, "^3")
+    .replace(/√/g, "sqrt")
+    .replace(/π/g, "pi")
     .replace(/\+inf(?:inity|ini)?/g, "+infini")
     .replace(/-inf(?:inity|ini)?/g, "-infini")
     .replace(/\s+/g, "")
@@ -496,6 +526,7 @@ export function LessonWorkspace({
   const questions = lesson.questions?.length ? lesson.questions : [lesson.question];
   const [phase, setPhase] = useState<Phase>("learn");
   const [answers, setAnswers] = useState<LessonAnswer[]>(() => questions.map(() => null));
+  const [openFormulaKeyboardIndex, setOpenFormulaKeyboardIndex] = useState<number | null>(null);
   const [inputValue, setInputValue] = useState(() => initialInteractionValue(lesson));
   const [result, setResult] = useState<AttemptResult | null>(null);
   const [score, setScore] = useState(0);
@@ -503,10 +534,12 @@ export function LessonWorkspace({
   const [resultSynced, setResultSynced] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const mainRef = useRef<HTMLElement>(null);
+  const answerInputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
   useEffect(() => {
     setPhase("learn");
     setAnswers(questions.map(() => null));
+    setOpenFormulaKeyboardIndex(null);
     setInputValue(initialInteractionValue(lesson));
     setResult(null);
     setScore(0);
@@ -534,6 +567,7 @@ export function LessonWorkspace({
     : null;
   const answeredCount = answers.filter((answer) => answer !== null && (typeof answer !== "string" || Boolean(answer.trim()))).length;
   const allAnswered = answers.every((answer) => answer !== null && (typeof answer !== "string" || Boolean(answer.trim())));
+  const supportsFormulaKeyboard = path.subjectId === "mathematics" || path.subjectId === "physics-chemistry";
 
   const synchronizeAttempt = async (scoreOutOf20: number) => {
     if (submitting) return;
@@ -570,16 +604,47 @@ export function LessonWorkspace({
     await synchronizeAttempt(scoreOutOf20);
   };
 
+  const updateAnswerAtCursor = (questionIndex: number, nextValue: string, nextCursor: number) => {
+    setAnswers((current) => current.map((answer, index) => index === questionIndex ? nextValue : answer));
+    window.requestAnimationFrame(() => {
+      const input = answerInputRefs.current[questionIndex];
+      input?.focus();
+      input?.setSelectionRange(nextCursor, nextCursor);
+    });
+  };
+
   const insertAnswerSymbol = (questionIndex: number, symbol: string) => {
-    setAnswers((current) => current.map((answer, index) => {
-      if (index !== questionIndex) return answer;
-      const currentValue = typeof answer === "string" ? answer : "";
-      return `${currentValue}${symbol}`;
-    }));
+    const currentValue = typeof answers[questionIndex] === "string" ? answers[questionIndex] : "";
+    const input = answerInputRefs.current[questionIndex];
+    const selectionStart = input?.selectionStart ?? currentValue.length;
+    const selectionEnd = input?.selectionEnd ?? selectionStart;
+    const nextValue = `${currentValue.slice(0, selectionStart)}${symbol}${currentValue.slice(selectionEnd)}`;
+    updateAnswerAtCursor(questionIndex, nextValue, selectionStart + symbol.length);
+  };
+
+  const removeAnswerCharacter = (questionIndex: number) => {
+    const currentValue = typeof answers[questionIndex] === "string" ? answers[questionIndex] : "";
+    const input = answerInputRefs.current[questionIndex];
+    const selectionStart = input?.selectionStart ?? currentValue.length;
+    const selectionEnd = input?.selectionEnd ?? selectionStart;
+    if (selectionStart !== selectionEnd) {
+      updateAnswerAtCursor(questionIndex, `${currentValue.slice(0, selectionStart)}${currentValue.slice(selectionEnd)}`, selectionStart);
+      return;
+    }
+    if (selectionStart === 0) return;
+    const beforeCursor = Array.from(currentValue.slice(0, selectionStart));
+    beforeCursor.pop();
+    const nextPrefix = beforeCursor.join("");
+    updateAnswerAtCursor(questionIndex, `${nextPrefix}${currentValue.slice(selectionEnd)}`, nextPrefix.length);
+  };
+
+  const clearAnswer = (questionIndex: number) => {
+    updateAnswerAtCursor(questionIndex, "", 0);
   };
 
   const retry = () => {
     setAnswers(questions.map(() => null));
+    setOpenFormulaKeyboardIndex(null);
     setResult(null);
     setScore(0);
     setResultSynced(false);
@@ -708,17 +773,49 @@ export function LessonWorkspace({
                       <label>
                         <span>Ta réponse</span>
                         <input
+                          ref={(element) => { answerInputRefs.current[questionIndex] = element; }}
                           type="text"
                           value={typeof answers[questionIndex] === "string" ? answers[questionIndex] : ""}
                           onChange={(event) => setAnswers((current) => current.map((answer, index) => index === questionIndex ? event.target.value : answer))}
-                          placeholder="Écris le résultat ou utilise les symboles ci-dessous"
+                          placeholder="Écris le résultat ou ouvre le clavier de formules"
                           autoComplete="off"
                         />
                       </label>
-                      {path.subjectId === "mathematics" && (
-                        <div className="mastery-symbol-pad" aria-label="Clavier de symboles mathématiques">
-                          <span>Symboles utiles</span>
-                          {mathInputSymbols.map((symbol) => <button type="button" key={symbol} onClick={() => insertAnswerSymbol(questionIndex, symbol)} aria-label={`Insérer ${symbol}`}>{symbol}</button>)}
+                      {supportsFormulaKeyboard && (
+                        <div className="mastery-formula-tools">
+                          <button
+                            className="mastery-formula-toggle"
+                            type="button"
+                            onClick={() => setOpenFormulaKeyboardIndex((current) => current === questionIndex ? null : questionIndex)}
+                            aria-expanded={openFormulaKeyboardIndex === questionIndex}
+                            aria-controls={`mastery-formula-keyboard-${lesson.id}-${questionIndex}`}
+                          >
+                            <Keyboard size={19} weight="duotone" />
+                            {openFormulaKeyboardIndex === questionIndex ? "Masquer le clavier" : "Clavier de formules"}
+                          </button>
+                          {openFormulaKeyboardIndex === questionIndex && (
+                            <div
+                              id={`mastery-formula-keyboard-${lesson.id}-${questionIndex}`}
+                              className="mastery-symbol-pad"
+                              role="group"
+                              aria-label="Clavier de symboles mathématiques et scientifiques"
+                            >
+                              {formulaKeyboardGroups.map((group) => (
+                                <section key={group.label}>
+                                  <span>{group.label}</span>
+                                  <div>
+                                    {group.symbols.map((symbol) => (
+                                      <button type="button" key={symbol} onClick={() => insertAnswerSymbol(questionIndex, symbol)} aria-label={`Insérer ${symbol}`}>{symbol}</button>
+                                    ))}
+                                  </div>
+                                </section>
+                              ))}
+                              <div className="mastery-symbol-pad-controls">
+                                <button type="button" onClick={() => removeAnswerCharacter(questionIndex)} aria-label="Effacer le caractère précédent"><Backspace size={18} weight="duotone" /> Effacer</button>
+                                <button type="button" onClick={() => clearAnswer(questionIndex)}>Tout effacer</button>
+                              </div>
+                            </div>
+                          )}
                         </div>
                       )}
                       <small className="mastery-answer-hint">Tu peux aussi écrire « +infini » ou « -infini » : les deux formes sont acceptées.</small>

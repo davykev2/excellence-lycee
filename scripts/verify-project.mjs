@@ -35,6 +35,7 @@ for (const script of [
   "audit-terminal-c-math.mjs",
   "audit-terminal-d-math.mjs",
   "audit-terminal-c-conics-katex.mjs",
+  "audit-terminal-c-complex-numbers-katex.mjs",
   "audit-terminal-c-derivatives-katex.mjs",
   "audit-terminal-c-logarithms-katex.mjs",
   "audit-terminal-c-primitives-katex.mjs",
