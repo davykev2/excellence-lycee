@@ -35,6 +35,101 @@
   --radius-lg: 32px;
 }
 
+.app-error-boundary {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  color: #082758;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(76, 175, 80, 0.12), transparent 30%),
+    radial-gradient(circle at 85% 80%, rgba(244, 82, 9, 0.1), transparent 34%),
+    #fbfaf6;
+}
+
+.app-error-boundary > section {
+  width: min(620px, 100%);
+  padding: clamp(28px, 6vw, 52px);
+  border: 1px solid rgba(8, 39, 88, 0.12);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 24px 70px rgba(8, 39, 88, 0.12);
+  text-align: center;
+}
+
+.app-error-boundary__mark {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 18px;
+  border-radius: 18px;
+  color: #fff;
+  background: #f45209;
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.app-error-boundary__eyebrow {
+  margin: 0 0 8px;
+  color: #299a43;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.app-error-boundary h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  line-height: 1.05;
+}
+
+.app-error-boundary section > p:not(.app-error-boundary__eyebrow) {
+  margin: 18px auto 24px;
+  max-width: 480px;
+  color: #61708a;
+  line-height: 1.65;
+}
+
+.app-error-boundary section > div {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.app-error-boundary button,
+.app-error-boundary a {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  border: 1px solid #082758;
+  border-radius: 14px;
+  font: inherit;
+  font-weight: 850;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.app-error-boundary button {
+  color: #fff;
+  background: #082758;
+}
+
+.app-error-boundary a {
+  color: #082758;
+  background: #fff;
+}
+
+.app-error-boundary small {
+  display: block;
+  margin-top: 20px;
+  color: #8994a7;
+}
+
 /* Codex mathématique */
 .codex-page {
   min-width: 0;

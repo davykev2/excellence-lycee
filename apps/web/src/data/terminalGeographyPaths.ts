@@ -17,6 +17,60 @@ const geographyCourses = [
         summary: "Relier relief, climats, eaux et sous-sol aux activités économiques ivoiriennes.",
         conceptTitle: "Un milieu naturel riche et diversifié",
         explanation: "Le relief généralement plat facilite l’agriculture, l’installation humaine et les infrastructures. Les trois grands ensembles climatiques permettent des productions variées, tandis que le réseau hydrographique, la façade maritime et le sous-sol soutiennent l’énergie, les échanges, la pêche et les industries.",
+        bodyMarkdown: String.raw`## Un milieu physique au service de l’économie
+
+Située entre **4°30 et 10°30 de latitude nord**, la Côte d’Ivoire couvre **322 462 km²** (environ 1 % du continent africain). Son milieu naturel constitue le premier atout de son développement économique.
+
+## Un relief plat et favorable
+
+Le relief ivoirien est **peu accidenté** : il se caractérise par sa **monotonie** et sa **platitude générale**. On distingue trois ensembles :
+
+- les **plaines** occupent le sud du pays ;
+- les **plateaux** dominent la majeure partie du territoire ;
+- les **montagnes** se situent à l’ouest.
+
+Ce relief plat favorise l’installation des hommes, offre de grandes surfaces pour l’agriculture et facilite les aménagements (routes, autoroutes, chemin de fer).
+
+## Trois domaines climatiques, trois agricultures
+
+À sa situation en latitude, la Côte d’Ivoire doit un climat chaud et humide. Les nuances de pluviométrie dessinent **trois zones climatiques**, chacune liée à des sols, une végétation et des productions particulières.
+
+| Domaine climatique | Localisation | Pluies (mm/an) | Sols et végétation | Productions |
+|---|---|---|---|---|
+| Subéquatorial (attiéen) | Sud et ouest montagneux | 1500 à 2300 | Sols ferralitiques fertiles, forêt dense (acajou, iroko, bété, makoré, sipo) | Cacao, café, hévéa, palmier à huile, ananas, banane ; vivriers |
+| Tropical humide (baouléen) | Centre | 1100 à 1500 | Sols moins fertiles, savanes arborées et forêts claires | Café, hévéa, teck ; vivriers ; élevage (bovins, ovins, caprins, porcins) |
+| Soudanais | Nord | ≤ 1000 | Sols ferrugineux cuirassés, savane arbustive | Anacarde, coton, canne à sucre, mangue, karité ; élevage ; écotourisme (parcs) |
+
+> **Astuce mémoire de Davy.** Du **sud vers le nord**, les pluies **diminuent** et la forêt cède la place à la savane : « plus on monte vers le nord, moins il pleut ». Retiens un couple climat → culture-phare : subéquatorial → **cacao**, soudanais → **anacarde/coton**.
+
+## Un réseau hydrographique dense
+
+Les ressources en eau sont importantes : **quatre grands fleuves**, des fleuves côtiers, des affluents du Volta et du Niger, et un **système lagunaire** sur la côte Est. Le pays compte **6 lacs de barrages hydroélectriques** :
+
+| Barrage | Fleuve |
+|---|---|
+| Taabo, Kossou | Bandama |
+| Buyo, Soubré | Sassandra |
+| Ayamé 1 et 2 | Bia |
+
+Les réserves souterraines atteignent **87,6 milliards de m³** (dont 37,7 renouvelables). Avec **520 km de côte** et deux grands ports (**Abidjan**, **San-Pédro**), le littoral ouvre le pays sur le monde et permet pêche, tourisme balnéaire et échanges.
+
+## Un sous-sol riche mais sous-exploité
+
+Le sous-sol regorge de ressources **minières** et **énergétiques** encore insuffisamment exploitées.
+
+| Ressource | Principaux gisements |
+|---|---|
+| Or | Ity, Tongon, Bonikro, Aboisso, Toumodi, Bouaflé |
+| Nickel | Sipilou, Biankouma, Touba, Odienné |
+| Diamant | Séguéla, Tortiya, Man |
+| Manganèse | Grand-Lahou, Odienné, Bondoukou |
+| Fer | Man, San-Pédro |
+| Bauxite / aluminium | Divo, Bongouanou, Toumodi, Sinfra |
+
+Sur le littoral, des gisements de **pétrole et de gaz naturel** sont exploités au large de **Jacqueville**. Le gaz alimente les centrales thermiques d’**Azito** et de **Vridi** : en 2019, la Côte d’Ivoire a produit **2230 mégawatts**, dont 75 % assurés par Azito (35 %) et Ciprel (40 %).
+
+> **À retenir.** Le pétrole et le gaz sont des ressources **énergétiques**, pas minières : c’est un piège fréquent. L’or, le nickel ou le diamant, eux, sont des ressources **minières**.`,
         keyPoint: "Les ressources naturelles deviennent des atouts lorsqu’elles sont aménagées et mises au service des activités économiques.",
         example: "Les ports d’Abidjan et de San-Pédro ouvrent le pays sur le commerce mondial ; les barrages de Taabo, Kossou, Buyo, Soubré et Ayamé produisent de l’hydroélectricité.",
         timelineTitle: "Explorer les grandes familles d’atouts",
@@ -28,6 +82,15 @@ const geographyCourses = [
         ],
         observation: "Un même atout peut soutenir plusieurs secteurs : l’eau sert à l’irrigation, à la pêche, au transport et à l’électricité.",
         check: { prompt: "Quel caractère du relief ivoirien facilite particulièrement les aménagements ?", options: ["Son altitude très élevée", "Sa platitude générale", "Son caractère désertique", "Son instabilité volcanique"], correctIndex: 1, explanation: "Le relief ivoirien est peu accidenté et globalement plat." },
+        extraQuestions: [
+          { prompt: "« Système lagunaire » est un atout…", options: ["naturel", "humain"], correctIndex: 0, explanation: "Le système lagunaire fait partie du milieu physique : c’est un atout naturel.", sourceLabel: "Activité d’application n°1", points: 1 },
+          { prompt: "En Côte d’Ivoire, le climat dominant est de type…", options: ["tropical", "polaire", "désertique", "tempéré"], correctIndex: 0, explanation: "Le pays connaît un climat chaud et humide de type tropical, avec des nuances du sud au nord.", sourceLabel: "Exercice 2", points: 1 },
+          { prompt: "L’or est une ressource…", options: ["minière", "énergétique", "agricole", "halieutique"], correctIndex: 0, explanation: "L’or fait partie des ressources minières du sous-sol ivoirien.", sourceLabel: "Exercice 2", points: 1 },
+          { prompt: "Le climat subéquatorial (attiéen) se rencontre notamment à…", options: ["Danané (ouest)", "Bouaké (centre)", "Touba (nord-ouest)", "Odienné (nord)"], correctIndex: 0, explanation: "Le subéquatorial couvre le sud et l’ouest montagneux (Danané). Bouaké relève du baouléen, Touba et Odienné du soudanais.", sourceLabel: "Exercice 2", points: 2 },
+          { prompt: "Le pétrole et le gaz naturel sont des ressources minières de la Côte d’Ivoire.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Ce sont des ressources énergétiques, et non minières.", sourceLabel: "Exercice 3", points: 2 },
+          { prompt: "Le réseau hydrographique ivoirien comprend aussi des lacs.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Il compte notamment 6 lacs de barrages hydroélectriques (Taabo, Kossou, Buyo, Soubré, Ayamé 1 et 2).", sourceLabel: "Exercice 3", points: 1 },
+          { prompt: "La monotonie du relief signifie que la Côte d’Ivoire a un sous-sol riche.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "La monotonie décrit la platitude du relief ; elle ne dit rien du sous-sol.", sourceLabel: "Exercice 3", points: 1 },
+        ],
         distractors: ["Le développement ivoirien repose uniquement sur les ressources minières.", "Le climat soudanais couvre tout le territoire ivoirien.", "La façade maritime n’a aucun rôle économique."],
       },
       {
@@ -36,6 +99,25 @@ const geographyCourses = [
         summary: "Expliquer comment une population jeune alimente travail, consommation et entrepreneuriat.",
         conceptTitle: "Une population nombreuse, jeune et dynamique",
         explanation: "La croissance de la population ivoirienne élargit le marché intérieur et fournit une main-d’œuvre abondante. La jeunesse représente un potentiel de renouvellement et d’entrepreneuriat, même si elle accroît aussi les besoins de scolarisation, d’emploi, de santé et de logement.",
+        bodyMarkdown: String.raw`## Une population nombreuse et en forte croissance
+
+La population ivoirienne a été multipliée par près de **sept** depuis l’indépendance.
+
+| Année | Population |
+|---|---|
+| 1960 | 3,8 millions |
+| 2014 (RGPH) | 22,7 millions |
+| 2020 (estimation) | plus de 26 millions |
+
+Cette croissance, **enrichie par l’apport étranger**, procure au pays un vaste **marché de consommation** et une **main-d’œuvre abondante et bon marché**, facteur qui stimule l’investissement.
+
+## Une population jeune et diverse
+
+La structure par âge révèle une population **très jeune** : les **moins de 15 ans représentent environ 45 %** des habitants. Cette jeunesse est un atout — renouvellement, dynamisme, esprit d’entreprise — mais aussi un défi, car elle accroît les besoins de **scolarisation, d’emploi, de santé et de logement**.
+
+La population se compose enfin d’une **grande variété de groupes ethniques**, source de **diversité culturelle** et donc de **richesse touristique**.
+
+> **Astuce mémoire de Davy.** La jeunesse ivoirienne est à **double tranchant** : c’est une **main-d’œuvre** et un **marché** (atout), mais aussi une **charge** en services publics (défi). À l’examen, présente toujours les **deux faces** pour une réponse nuancée. Aujourd’hui, encouragés par l’État, les jeunes diplômés se regroupent pour créer des **PME et des PMI**.`,
         keyPoint: "La population est un moteur économique si la formation et l’emploi transforment son dynamisme en capital humain.",
         example: "Les moins de 15 ans représentent environ 45 % de la population mentionnée dans le cours ; cette jeunesse est à la fois une ressource et un défi social.",
         timelineTitle: "Observer la croissance démographique",
@@ -47,6 +129,14 @@ const geographyCourses = [
         ],
         observation: "L’augmentation de la population agrandit le marché, mais oblige aussi l’État à développer les services sociaux et les emplois.",
         check: { prompt: "Pourquoi une population jeune peut-elle favoriser le développement ?", options: ["Elle supprime automatiquement le chômage", "Elle fournit une main-d’œuvre et un marché de consommation", "Elle réduit tous les besoins sociaux", "Elle remplace les ressources naturelles"], correctIndex: 1, explanation: "La jeunesse peut fournir travail, consommation et initiative économique lorsqu’elle est formée." },
+        extraQuestions: [
+          { prompt: "« Population dynamique » est un atout…", options: ["humain", "naturel"], correctIndex: 0, explanation: "Le dynamisme de la population relève des atouts humains.", sourceLabel: "Activité d’application n°1", points: 1 },
+          { prompt: "« Main-d’œuvre bon marché » est un atout…", options: ["humain", "naturel"], correctIndex: 0, explanation: "Elle stimule l’investissement : c’est un atout humain.", sourceLabel: "Activité d’application n°1", points: 1 },
+          { prompt: "« Diversité ethnique » est un atout…", options: ["humain", "naturel"], correctIndex: 0, explanation: "La variété des groupes ethniques nourrit la diversité culturelle et touristique : atout humain.", sourceLabel: "Activité d’application n°1", points: 1 },
+          { prompt: "Les moins de 15 ans représentent environ 45 % de la population ivoirienne.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "La structure par âge indique bien une population très jeune.", sourceLabel: "Exercice 3", points: 1 },
+          { prompt: "En quelle année la population ivoirienne était-elle estimée à environ 3,8 millions d’habitants ?", options: ["1960", "1980", "2014", "2020"], correctIndex: 0, explanation: "3,8 millions en 1960 (indépendance), contre plus de 26 millions en 2020.", sourceLabel: "Introduction / Exercice 1", points: 1 },
+          { prompt: "Pourquoi la jeunesse ivoirienne est-elle aussi un défi pour l’État ?", options: ["Elle accroît les besoins de scolarisation, d’emploi et de logement", "Elle fait disparaître le marché intérieur", "Elle supprime la main-d’œuvre disponible", "Elle réduit la diversité culturelle"], correctIndex: 0, explanation: "La jeunesse est une charge en services publics autant qu’une ressource.", sourceLabel: "I-2", points: 2 },
+        ],
         distractors: ["La croissance démographique ne crée aucun besoin nouveau.", "La population ivoirienne a diminué depuis 1960.", "Le capital humain dépend seulement du nombre d’habitants."],
       },
       {
@@ -67,6 +157,80 @@ const geographyCourses = [
         observation: "Le choix libéral reste constant, mais la place concrète de l’État change selon le contexte économique.",
         check: { prompt: "Quel choix économique la Côte d’Ivoire fait-elle dès 1960 ?", options: ["L’autarcie", "Le libéralisme économique", "La suppression du secteur privé", "La collectivisation intégrale"], correctIndex: 1, explanation: "Le cours présente le libéralisme économique comme le choix effectué dès l’indépendance." },
         distractors: ["L’État cesse toute intervention économique dès 1960.", "Les programmes d’ajustement structurel commencent avant l’indépendance.", "La privatisation signifie la disparition des infrastructures publiques."],
+        parts: [
+          {
+            summary: "Comprendre le libéralisme dirigé choisi dès 1960 : intervention de l’État, libre entreprise et ouverture.",
+            bodyMarkdown: String.raw`## Un choix : le libéralisme économique (dès 1960)
+
+Dès l’indépendance, la Côte d’Ivoire fait le choix du **libéralisme économique**. Mais c’est un libéralisme **dirigé** par l’État, qui repose sur trois piliers.
+
+## 1. Une forte intervention de l’État
+
+L’État **planifie** l’économie : il choisit les secteurs à développer et oriente les investisseurs par des **lois-plans**.
+
+| Type de plan | Durée | Exemples |
+|---|---|---|
+| Plans décennaux | 10 ans | 1960-1970 ; 1970-1980 |
+| Plans quinquennaux | 5 ans | 1971-1975 ; 1976-1980 ; 1981-1986 |
+
+C’est un **capitalisme d’État** (ou capitalisme dirigé) : l’État est lui-même **entrepreneur** (SOTRA, SIR, PALMINDUSTRIE, SODESUCRE, SODEMI, CAISTAB…).
+
+## 2. La libre entreprise
+
+L’État encourage l’**initiative privée**, nationale et surtout étrangère, par des mesures attractives :
+
+- exonérations et **allègements fiscaux** ;
+- un **code des investissements souple** ;
+- la **liberté de transfert des fonds** vers l’extérieur ;
+- l’**engagement à ne jamais nationaliser** les entreprises.
+
+## 3. L’ouverture sur l’extérieur
+
+Cette ouverture attire les **capitaux** et la **main-d’œuvre qualifiée** étrangers, et ouvre les produits ivoiriens aux **meilleurs marchés mondiaux**.
+
+> **À retenir.** Ce choix a permis, entre **1960 et 1980**, de bâtir des infrastructures, de développer l’agriculture et de diversifier l’industrie. Mais la **crise des années 1980** obligera l’État à réformer sa politique.`,
+            extraQuestions: [
+              { prompt: "La politique économique de la Côte d’Ivoire est le libéralisme.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Le pays a choisi le libéralisme économique dès 1960.", sourceLabel: "Activité d’application n°2", points: 1 },
+              { prompt: "Dès 1960, le libéralisme ivoirien s’accompagne d’une forte intervention de l’État.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "C’est un capitalisme dirigé : l’État planifie et est lui-même entrepreneur.", sourceLabel: "Activité d’application n°2", points: 2 },
+              { prompt: "Le système économique ivoirien repose sur le capitalisme.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Il s’agit d’un capitalisme d’État, puis de plus en plus libéral.", sourceLabel: "Exercice 3", points: 1 },
+              { prompt: "L’ouverture sur l’extérieur sert seulement à attirer la main-d’œuvre étrangère.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Elle attire aussi les capitaux et ouvre les produits ivoiriens aux marchés mondiaux.", sourceLabel: "Activité d’application n°2", points: 2 },
+              { prompt: "Quelle mesure ne fait pas partie de la libre entreprise encouragée par l’État ?", options: ["La nationalisation des entreprises privées", "L’allègement fiscal", "Un code des investissements souple", "La liberté de transfert des fonds"], correctIndex: 0, explanation: "Au contraire, l’État s’engage à ne jamais nationaliser.", sourceLabel: "II-1", points: 2 },
+            ],
+          },
+          {
+            summary: "Relier les réformes libérales : PAS de 1981, privatisation de 1990 et nouveau rôle d’arbitre de l’État.",
+            bodyMarkdown: String.raw`## Réformer face à la crise (à partir de 1981)
+
+La crise des années 1980 conduit l’État à **réorienter** sa politique économique en deux temps.
+
+## 1. Les programmes d’ajustement structurel — PAS (1981)
+
+Dès **1981**, la Côte d’Ivoire signe des **PAS** avec le **FMI** et la **Banque mondiale** pour créer les conditions d’une relance et d’une croissance « saine et durable ».
+
+> **Nuance importante.** Les PAS n’ont **pas** produit immédiatement la croissance espérée : ils fixent des conditions, souvent au prix d’un effort social important. Ne réponds jamais qu’ils ont « aussitôt » assaini l’économie.
+
+## 2. La privatisation et le désengagement de l’État (1990)
+
+Le programme de **privatisation** commence en **1990** : il concerne les entreprises où l’État détient une part importante du capital. Ses objectifs :
+
+- accroître la **participation du secteur privé** au financement de l’économie ;
+- **susciter davantage d’investissements** ;
+- permettre à un nombre croissant d’**Ivoiriens** de prendre part au développement ;
+- financer les **programmes d’investissement public**.
+
+## Un État désormais arbitre
+
+L’État **se désengage** de la production et se recentre sur ses missions : il organise l’espace économique, garantit la **libre concurrence**, mobilise les capitaux (trésor public, emprunt obligataire) et attire les investisseurs via le **CEPICI**. Il joue le rôle d’**arbitre** entre les acteurs et finance les secteurs régaliens (routes, écoles, hôpitaux) grâce à une fiscalité souple.`,
+            extraQuestions: [
+              { prompt: "La Côte d’Ivoire a signé des programmes d’ajustement structurel (PAS) avec le FMI et la Banque mondiale.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Ces PAS sont signés à partir de 1981 pour relancer l’économie.", sourceLabel: "Activité d’application n°2", points: 1 },
+              { prompt: "Dès leur adoption, les PAS ont assuré à la Côte d’Ivoire une croissance saine et durable.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Ils visaient à créer les conditions de la relance, sans résultat immédiat.", sourceLabel: "Activité d’application n°2", points: 2 },
+              { prompt: "En quelle année débute le programme de privatisation ?", options: ["1990", "1960", "1981", "2000"], correctIndex: 0, explanation: "La privatisation commence en 1990 et concerne les entreprises à forte participation de l’État.", sourceLabel: "Exercice 3", points: 1 },
+              { prompt: "Un objectif de la privatisation est de permettre aux Ivoiriens de participer activement au développement.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "C’est l’un des quatre objectifs affichés du programme.", sourceLabel: "Activité d’application n°2", points: 1 },
+              { prompt: "Désormais, quel rôle l’État joue-t-il principalement dans l’économie ?", options: ["Un rôle d’arbitre entre les acteurs économiques", "Le rôle d’unique entrepreneur du pays", "Aucun rôle économique", "Le rôle de seul importateur"], correctIndex: 0, explanation: "L’État régule, mobilise les capitaux (CEPICI) et arbitre entre les acteurs.", sourceLabel: "Activité d’application n°2", points: 2 },
+              { prompt: "L’impôt est la seule source de financement des secteurs régaliens de l’État.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "L’État mobilise aussi d’autres ressources (emprunt obligataire, trésor public, investisseurs).", sourceLabel: "Activité d’application n°2", points: 1 },
+            ],
+          },
+        ],
       },
     ],
   },

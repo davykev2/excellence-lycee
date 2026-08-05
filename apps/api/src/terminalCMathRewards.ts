@@ -39,8 +39,9 @@ export const terminalCMathLessonIds = [
     "conic-from-focus-directrix-reinforcement", "complex-hyperbola-mission",
   ]],
   ["terminale-c-math-l08-logarithms", [
-    "natural-log-definition", "log-algebra", "log-equations", "log-limits", "log-derivative",
-    "log-primitives", "other-log-bases",
+    "natural-log-definition", "log-algebra", "log-equations", "log-limits",
+    "log-limit-fixation-workshop", "log-derivative", "log-primitives", "other-log-bases",
+    "revenue-log-mission", "official-log-workshop", "log-rational-function-mission",
   ]],
   ["terminale-c-math-l09-complex-numbers", [
     "complex-algebra", "complex-powers", "complex-conjugate", "complex-modulus", "complex-arguments",

@@ -27,6 +27,7 @@ const derivativesPath = loadTypeScript("apps/web/src/data/terminalCDerivativesPa
 const spaceGeometryPath = loadTypeScript("apps/web/src/data/terminalCSpaceGeometryPath.ts");
 const primitivesPath = loadTypeScript("apps/web/src/data/terminalCPrimitivesPath.ts");
 const conicsPath = loadTypeScript("apps/web/src/data/terminalCConicsPath.ts");
+const logarithmsPath = loadTypeScript("apps/web/src/data/terminalCLogarithmsPath.ts");
 const pathModules = [
   loadTypeScript("apps/web/src/data/terminalCMathPaths01to05.ts", {
     "./officialMathPathBuilder": builder,
@@ -40,6 +41,7 @@ const pathModules = [
     "./officialMathPathBuilder": builder,
     "./terminalCPrimitivesPath": primitivesPath,
     "./terminalCConicsPath": conicsPath,
+    "./terminalCLogarithmsPath": logarithmsPath,
   }),
   loadTypeScript("apps/web/src/data/terminalCMathPaths11to15.ts", { "./officialMathPathBuilder": builder }),
   loadTypeScript("apps/web/src/data/terminalCMathPaths16to19.ts", { "./officialMathPathBuilder": builder }),
@@ -59,6 +61,7 @@ const migrationFiles = [
   "supabase/migrations/20260724020000_terminal_c_space_geometry_expansion.sql",
   "supabase/migrations/20260724030000_terminal_c_d_primitives_expansion.sql",
   "supabase/migrations/20260724040000_terminal_c_conics_expansion.sql",
+  "supabase/migrations/20260724050000_terminal_c_logarithms_expansion.sql",
 ];
 for (const migrationFile of migrationFiles) {
   const migration = readFileSync(resolve(root, migrationFile), "utf8");
@@ -111,6 +114,6 @@ paths.forEach((path, pathIndex) => {
   });
 });
 
-if (allLevelKeys.size !== 178) throw new Error(`178 niveaux attendus, ${allLevelKeys.size} reçus.`);
+if (allLevelKeys.size !== 182) throw new Error(`182 niveaux attendus, ${allLevelKeys.size} reçus.`);
 console.table(report);
 console.log(`Audit réussi : 19 leçons, ${allLevelKeys.size} niveaux et 190 000 XP.`);

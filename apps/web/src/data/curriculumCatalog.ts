@@ -554,8 +554,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Cinématique du point", strand: "Physique", pathId: "seconde-c-kinematics" },
       { title: "Mouvement du centre d’inertie d’un solide", strand: "Physique", pathId: "terminale-cd-inertia-motion" },
       { title: "Interaction gravitationnelle", strand: "Physique", pathId: "terminale-c-gravitation" },
+      { title: "Mouvements dans les champs g et E uniformes", strand: "Physique", pathId: "terminale-cd-uniform-fields" },
       ...withStrand("Physique", [
-        "Mouvements dans les champs uniformes",
         "Oscillations mécaniques libres",
         "Champ magnétique",
         "Mouvement d’une particule chargée dans un champ magnétique uniforme",
@@ -645,8 +645,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
     "physics-chemistry": [
       { title: "Cinématique du point", strand: "Physique", pathId: "seconde-c-kinematics" },
       { title: "Mouvement du centre d’inertie d’un solide", strand: "Physique", pathId: "terminale-cd-inertia-motion" },
+      { title: "Mouvements dans les champs g et E uniformes", strand: "Physique", pathId: "terminale-cd-uniform-fields" },
       ...withStrand("Physique", [
-        "Mouvements dans les champs uniformes",
         "Oscillations mécaniques libres",
         "Champ magnétique",
         "Mouvement d’une particule chargée dans un champ magnétique uniforme",

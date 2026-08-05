@@ -60,6 +60,8 @@ Le projet est entré en phase de **prototype interactif** après le GO explicite
 - Le premier tableau de bord élève, centré sur les Mathématiques, est disponible dans `apps/web`.
 - Le logo officiel de la structure est intégré.
 - Les données de programme, matières, niveaux et navigation sont séparées des composants visuels pour faciliter les évolutions.
+- La phase 1 de stabilisation technique est en place : zéro vulnérabilité npm connue dans les dépendances de production, typage Web/API, audits pédagogiques Terminale A/C/D, contrôles KaTeX, validation du pipeline de contenu, tests de cohérence XP/Boutique/Codex et builds sont réunis dans `node scripts/verify-project.mjs` et rejoués automatiquement par GitHub Actions.
+- Le chargement public a été fortement allégé : le shell pédagogique et les écrans secondaires sont chargés à la demande après authentification. Le JavaScript initial compressé est passé d’environ 922 Ko à 80 Ko, tandis qu’un écran de secours permet de recharger proprement l’application en cas d’erreur de rendu inattendue.
 - La reprise de leçon, le graphe manipulable, le tuteur contextuel et les panneaux d’objectifs/révisions fonctionnent côté frontend.
 - Le niveau et la série sont choisis à l’inscription puis affichés comme contexte fixe; le choix de la matière est un contrôle séparé.
 - La photo de profil est facultative et peut être ajoutée, remplacée ou retirée à tout moment depuis Profil. L’image est recadrée en carré et optimisée avant son envoi dans le dossier Supabase Storage privé en écriture de l’utilisateur; un avatar neutre reste affiché en son absence.

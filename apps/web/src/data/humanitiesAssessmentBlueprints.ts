@@ -42,6 +42,26 @@ export const humanitiesAssessmentBlueprints: Record<string, HumanitiesAssessment
         question("Pourquoi le choix économique des premiers dirigeants peut-il être qualifié de pertinent ?", "Il associait intervention de l’État, initiative privée et ouverture sur l’extérieur", ["Il supprimait toute entreprise privée", "Il isolait totalement le pays", "Il reposait uniquement sur les ressources minières"], "Le libéralisme ivoirien était encadré par un État planificateur et ouvert aux investissements.", 2),
         question("Quelle prise de position est la mieux justifiée ?", "L’ouverture a soutenu l’économie, même si elle a aussi créé des dépendances à corriger", ["L’ouverture n’a produit aucun effet", "Seul le relief explique le développement", "Toute intervention de l’État est inutile"], "Une bonne réponse prend position, cite les apports et apporte une nuance.", 0),
       ],
+      bodyMarkdown: String.raw`## Document — Un débat entre deux élèves
+
+> **Élève A :** « Le pays a atteint un niveau de développement envié dans la sous-région. Les premiers dirigeants ont fait un choix économique pertinent. La politique d’ouverture sur l’extérieur a contribué à enrichir les ressources humaines. »
+>
+> **Élève B :** « La politique d’ouverture n’a rien apporté à la Côte d’Ivoire. Au contraire, elle n’a fait qu’augmenter les problèmes socio-économiques. »
+
+## Évolution de la population ivoirienne (1960-2020)
+
+| Année | 1960 | 1980 | 1998 | 2014 | 2020 |
+|---|---|---|---|---|---|
+| Population (millions) | 3,8 | 8,1 | 15,4 | 22,7 | 26,5 |
+
+*Source : d’après www.ins.ci*
+
+> **Méthode.** Pour « expliquer » un passage, reformule-le, donne la **cause** (« parce que… ») et un **exemple précis** du cours (un climat, un barrage, une réforme). Pour « partager ou non un avis », prends position **nettement**, donne **deux arguments** puis une **nuance** avec « cependant ».`,
+      extraQuestions: [
+        { prompt: "D’après le tableau, en quelle année la population ivoirienne dépasse-t-elle 22 millions d’habitants ?", options: ["2014", "1980", "1998", "1960"], correctIndex: 0, explanation: "Le RGPH de 2014 recense environ 22,7 millions d’habitants.", sourceLabel: "Document — tableau", points: 1 },
+        { prompt: "L’affirmation de l’élève B (« l’ouverture n’a rien apporté ») est-elle pleinement justifiée ?", options: ["Non : l’ouverture a apporté capitaux, compétences et marchés, malgré des limites", "Oui : l’ouverture a été totalement inutile", "Oui : elle n’a créé que des problèmes", "Non : l’ouverture n’a eu aucun effet"], correctIndex: 0, explanation: "Une bonne réponse nuance : des apports réels, mais aussi des dépendances à corriger.", sourceLabel: "Consigne 3", points: 2 },
+        { prompt: "Quel argument soutient le mieux l’idée que « le milieu naturel est riche et varié » ?", options: ["Trois domaines climatiques permettent des cultures variées, du cacao au sud à l’anacarde au nord", "Le pays ne possède qu’un seul type de sol", "Le relief montagneux couvre tout le territoire", "Le sous-sol est totalement dépourvu de ressources"], correctIndex: 0, explanation: "La diversité des climats, des sols, des eaux et du sous-sol illustre la richesse du milieu naturel.", sourceLabel: "Consigne 2", points: 2 },
+      ],
     },
   },
   "terminale-hg-g2-cote-ivoire-economic-sectors": {

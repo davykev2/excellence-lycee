@@ -1,0 +1,41 @@
+name: Qualité
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Vérifier le projet
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            apps/web/package-lock.json
+            apps/api/package-lock.json
+
+      - name: Installer le frontend
+        run: npm ci --prefix apps/web
+
+      - name: Installer l’API
+        run: npm ci --prefix apps/api
+
+      - name: Lancer tous les contrôles
+        run: node scripts/verify-project.mjs

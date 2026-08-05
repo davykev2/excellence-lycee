@@ -1,0 +1,68 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+import test from "node:test";
+import { fileURLToPath } from "node:url";
+
+import { getLessonReward, getPathRewardTotal, XP_PER_LESSON } from "../apps/api/src/curriculum.ts";
+import { storeItems } from "../apps/api/src/storeCatalog.ts";
+import { learningPaths } from "../apps/web/src/data/learningPaths.ts";
+import { storeCatalog } from "../apps/web/src/data/storeCatalog.ts";
+import { numericalDerivative, parseMathExpression } from "../apps/web/src/features/codex/mathEngine.ts";
+
+const projectRoot = fileURLToPath(new URL("../", import.meta.url));
+
+test("chaque parcours publié garde un registre XP Web/API cohérent", () => {
+  const pathIds = new Set<string>();
+  const levelKeys = new Set<string>();
+
+  for (const path of learningPaths) {
+    assert.equal(pathIds.has(path.id), false, `Parcours dupliqué : ${path.id}`);
+    pathIds.add(path.id);
+
+    const lessons = path.modules.flatMap((module) => module.lessons);
+    assert.ok(lessons.length > 0, `Parcours vide : ${path.id}`);
+    assert.equal(
+      lessons.reduce((total, lesson) => total + lesson.xp, 0),
+      XP_PER_LESSON,
+      `Budget frontend incorrect : ${path.id}`,
+    );
+    assert.equal(getPathRewardTotal(path.id), XP_PER_LESSON, `Budget API incorrect : ${path.id}`);
+
+    for (const lesson of lessons) {
+      const key = `${path.id}:${lesson.id}`;
+      assert.equal(levelKeys.has(key), false, `Niveau dupliqué : ${key}`);
+      levelKeys.add(key);
+      assert.equal(getLessonReward(path.id, lesson.id), lesson.xp, `Décalage XP Web/API : ${key}`);
+    }
+  }
+});
+
+test("le catalogue de la boutique reste synchronisé entre Web, API et Supabase", () => {
+  const webItems = new Map(storeCatalog.map((item) => [item.id, item]));
+  const apiItems = new Map(storeItems.map((item) => [item.id, item]));
+  assert.deepEqual([...webItems.keys()].sort(), [...apiItems.keys()].sort());
+
+  const migration = readFileSync(
+    resolve(projectRoot, "supabase/migrations/20260725120000_store_gold_shop.sql"),
+    "utf8",
+  );
+  for (const [id, apiItem] of apiItems) {
+    assert.equal(webItems.get(id)?.price, apiItem.price, `Prix Web/API différent : ${id}`);
+    assert.match(migration, new RegExp(`\\('${id.replace(/[.*+?^${}()|[\\]\\]/g, "\\$&")}',\\s*'[^']+',\\s*'[^']+',\\s*${apiItem.price},`));
+  }
+});
+
+test("le moteur Codex évalue les écritures scolaires usuelles sans exécuter de code", () => {
+  const polynomial = parseMathExpression("x² + 5x + 4");
+  assert.equal(polynomial.evaluate(2), 18);
+
+  const decimalComma = parseMathExpression("2,5x - 1");
+  assert.equal(decimalComma.evaluate(4), 9);
+
+  const logarithm = parseMathExpression("ln(x)");
+  assert.ok(Math.abs(logarithm.evaluate(Math.E) - 1) < 1e-10);
+  assert.ok(Math.abs(numericalDerivative(polynomial.evaluate, 3) - 11) < 1e-4);
+
+  assert.throws(() => parseMathExpression("fetch(x)"), /fonction|reconnu|invalide/i);
+});

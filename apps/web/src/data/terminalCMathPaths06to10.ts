@@ -1,27 +1,11 @@
 import { buildOfficialMathPath, officialMathTopic as t } from "./officialMathPathBuilder";
 import { terminalCConicsPath } from "./terminalCConicsPath";
+import { terminalCLogarithmsPath } from "./terminalCLogarithmsPath";
 import { terminalCPrimitivesPath } from "./terminalCPrimitivesPath";
 
 const levelIds = ["terminale-c"];
 
-export { terminalCConicsPath, terminalCPrimitivesPath };
-
-export const terminalCLogarithmsPath = buildOfficialMathPath({
-  id: "terminale-c-math-l08-logarithms", levelIds, chapterNumber: 8, themeNumber: 1,
-  themeTitle: "Analyse", title: "Fonctions logarithmes",
-  description: "Logarithme népérien, calcul algébrique, équations, limites, dérivation, primitives et logarithmes de base quelconque.",
-  outcomes: ["Calculer avec le logarithme", "Résoudre des équations logarithmiques", "Dériver et intégrer des formes logarithmiques"],
-  documentTitle: "TC Maths leçon 08 FONCTIONS LOGARITHMES.pdf",
-  topics: [
-    t("natural-log-definition", "Définition et propriétés de $\\ln$", "1-2", "I. Fonction logarithme népérien", "La fonction $\\ln$ est la primitive de $1/x$ sur $]0,+\\infty[$ qui s’annule en $1$. Elle est strictement croissante.", "Toujours imposer la stricte positivité de l’argument.", String.raw`(\ln x)'=\frac1x,\quad \ln 1=0`, "Quel est l’ensemble de définition de $\\ln(2x-3)$ ?", "$]3/2,+\\infty[$.", 55),
-    t("log-algebra", "Calcul algébrique avec les logarithmes", "2-3", "II-1. Propriétés algébriques", "Le logarithme transforme les produits en sommes, les quotients en différences et les puissances en facteurs.", "Simplifier seulement après avoir vérifié que tous les arguments sont positifs.", String.raw`\ln(ab)=\ln a+\ln b,\quad\ln(a^r)=r\ln a`, "Simplifie $\\ln 8-\\ln 2$.", "$\\ln4$.", 60),
-    t("log-equations", "Équations et inéquations logarithmiques", "3-5", "II-2. Équations", "L’injectivité et la croissance de $\\ln$ permettent de comparer les arguments après avoir posé les conditions d’existence.", "Écrire le domaine avant toute transformation.", String.raw`\ln u=\ln v\Longleftrightarrow u=v>0`, "Résous $\\ln(x-1)=\\ln3$.", "$x=4$.", 65),
-    t("log-limits", "Limites logarithmiques", "5-6", "III. Limites", "$\\ln x$ tend vers $-\\infty$ en $0^+$ et vers $+\\infty$ en $+\\infty$. Les limites de référence permettent de lever les formes indéterminées.", "Reconnaître notamment $\\ln(1+u)/u$ lorsque $u\\to0$.", String.raw`\lim_{u\to0}\frac{\ln(1+u)}u=1`, "Quelle est la limite de $\\ln x/x$ en $+\\infty$ ?", "$0$.", 65),
-    t("log-derivative", "Dérivée de $\\ln|u|$", "6-7", "IV-1. Dérivation", "Si $u$ est dérivable et ne s’annule pas, $\\ln|u|$ est dérivable avec pour dérivée $u'/u$.", "Sur un intervalle où $u>0$, on peut écrire simplement $\\ln u$.", String.raw`(\ln|u|)'=\frac{u'}u`, "Quelle est la dérivée de $\\ln(x^2+1)$ ?", "$2x/(x^2+1)$.", 70),
-    t("log-primitives", "Primitives de la forme $u'/u$", "7-8", "IV-2. Primitives", "Une quotient contenant exactement la dérivée du dénominateur se primitive par un logarithme de valeur absolue.", "Ajuster le coefficient puis ajouter la constante.", String.raw`\int\frac{u'}u=\ln|u|+C`, "Une primitive de $2x/(x^2+1)$ est-elle $\\ln(x^2+1)$ ?", "Oui.", 70),
-    t("other-log-bases", "Logarithmes de base $a$", "8-9", "V. Autres bases", "Pour $a>0$, $a\\ne1$, le logarithme de base $a$ est défini par changement de base.", "La base $10$ donne le logarithme décimal.", String.raw`\log_a x=\frac{\ln x}{\ln a}`, "Combien vaut $\\log_2 8$ ?", "$3$.", 75, "challenge"),
-  ],
-});
+export { terminalCConicsPath, terminalCLogarithmsPath, terminalCPrimitivesPath };
 
 export const terminalCComplexNumbersPath = buildOfficialMathPath({
   id: "terminale-c-math-l09-complex-numbers", levelIds, chapterNumber: 9, themeNumber: 4,

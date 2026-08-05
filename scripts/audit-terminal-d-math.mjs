@@ -26,6 +26,8 @@ const divisibilityPath = loadTypeScript("apps/web/src/data/terminalCDivisibility
 const derivativesPath = loadTypeScript("apps/web/src/data/terminalCDerivativesPath.ts");
 const spaceGeometryPath = loadTypeScript("apps/web/src/data/terminalCSpaceGeometryPath.ts");
 const primitivesPath = loadTypeScript("apps/web/src/data/terminalCPrimitivesPath.ts");
+const conicsPath = loadTypeScript("apps/web/src/data/terminalCConicsPath.ts");
+const logarithmsPath = loadTypeScript("apps/web/src/data/terminalCLogarithmsPath.ts");
 const c01to05 = loadTypeScript("apps/web/src/data/terminalCMathPaths01to05.ts", {
   "./officialMathPathBuilder": builder,
   "./terminalCLimitsContinuityPath": limitsPath,
@@ -37,6 +39,8 @@ const c01to05 = loadTypeScript("apps/web/src/data/terminalCMathPaths01to05.ts", 
 const c06to10 = loadTypeScript("apps/web/src/data/terminalCMathPaths06to10.ts", {
   "./officialMathPathBuilder": builder,
   "./terminalCPrimitivesPath": primitivesPath,
+  "./terminalCConicsPath": conicsPath,
+  "./terminalCLogarithmsPath": logarithmsPath,
 });
 const c11to15 = loadTypeScript("apps/web/src/data/terminalCMathPaths11to15.ts", { "./officialMathPathBuilder": builder });
 const c16to19 = loadTypeScript("apps/web/src/data/terminalCMathPaths16to19.ts", { "./officialMathPathBuilder": builder });
@@ -53,6 +57,7 @@ const paths = dModule.terminalDMathematicsPaths;
 const apiPaths = new Map(dRewards.terminalDMathLessonIds.map(([pathId, ids]) => [pathId, [...ids]]));
 
 const migration = readFileSync(resolve(root, "supabase/migrations/20260722001000_terminal_d_math_complete_courses.sql"), "utf8");
+const logarithmsMigration = readFileSync(resolve(root, "supabase/migrations/20260724050000_terminal_c_logarithms_expansion.sql"), "utf8");
 const sqlMappings = new Map();
 for (const match of migration.matchAll(/\('([^']+)',\s*'(terminale-c-math-[^']+)'\)/g)) {
   sqlMappings.set(match[1], match[2]);
@@ -61,6 +66,9 @@ for (const match of migration.matchAll(/\('([^']+)',\s*'(terminale-c-math-[^']+)
 if (!Array.isArray(paths) || paths.length !== 12) throw new Error(`12 parcours attendus, ${paths?.length ?? 0} reçus.`);
 if (apiPaths.size !== 12) throw new Error(`12 parcours API attendus, ${apiPaths.size} reçus.`);
 if (sqlMappings.size !== 12) throw new Error(`12 correspondances SQL attendues, ${sqlMappings.size} reçues.`);
+if (!logarithmsMigration.includes("'terminale-d-math-l05-logarithms'")) {
+  throw new Error("La migration des logarithmes ne réaligne pas le parcours miroir de Terminale D.");
+}
 
 function normalize(levels) {
   const totalWeight = levels.reduce((sum, level) => sum + level.xp, 0);
@@ -88,6 +96,6 @@ paths.forEach((path, index) => {
   report.push({ lesson: index + 1, path: path.id, levels: levels.length, exercises: levels.length, totalXp });
 });
 
-if (levelCount !== 109) throw new Error(`109 niveaux attendus, ${levelCount} reçus.`);
+if (levelCount !== 113) throw new Error(`113 niveaux attendus, ${levelCount} reçus.`);
 console.table(report);
 console.log(`Audit réussi : 12 leçons, ${levelCount} niveaux, ${levelCount} exercices et 120 000 XP.`);

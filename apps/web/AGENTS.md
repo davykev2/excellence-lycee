@@ -1,5 +1,20 @@
 # Prototype Instructions
 
+## Stabilisation technique — phase 1 (05/08/2026)
+
+- Le point d'entrée public reste léger : `App.tsx` ne charge le gros shell pédagogique `LearningApp.tsx` qu'après authentification ou activation d'un aperçu de développement. Les écrans secondaires (Admin, Arène, Messages, Profil, Classement, Boutique, etc.) restent importés avec `React.lazy` et affichés derrière un `Suspense`. Ne pas réintroduire les catalogues pédagogiques complets dans le bundle public.
+- `AppErrorBoundary` enveloppe l'application au plus haut niveau et fournit un écran de reprise en français (recharger ou revenir à l'accueil) lorsqu'un rendu React échoue. Toute future télémétrie doit partir de cette frontière sans envoyer de données personnelles ni de contenu pédagogique saisi par l'élève.
+- `tests/stability.test.ts` protège trois contrats transverses : concordance exacte des identifiants/XP entre Web et API, concordance du catalogue Boutique entre Web/API/migration, et sûreté de l'analyseur du Codex mathématique. Le script racine `scripts/verify-project.mjs` ajoute audits npm, typage, audits pédagogiques A/C/D, contrôles KaTeX, validation du pipeline de contenu et builds de production.
+- La CI `.github/workflows/quality.yml` exécute ce script sur chaque push et pull request. Une livraison n'est valide que si `node scripts/verify-project.mjs` passe intégralement.
+
+## État pédagogique — Physique C/D, champs uniformes
+
+- Le parcours commun Terminale C/D « Champs électrostatiques et gravitationnels uniformes » vit dans `terminalCDUniformFieldsPath.ts` : 6 niveaux, 30 questions et exactement 10 000 XP après normalisation. Les poids bruts **40/55/65/70/80/95** doivent rester identiques dans les données Web, `apps/api/src/curriculum.ts` et la migration `20260727110000_physics_uniform_fields_path.sql`.
+
+## État pédagogique — Géographie Terminale, leçon 01
+
+- La leçon « Les fondements du développement économique de la Côte d’Ivoire » est enrichie via `terminalGeographyPaths.ts` et `humanitiesAssessmentBlueprints.ts` selon la fabrique Humanités. Conserver les identifiants et poids des six niveaux ; l'enrichissement du corps, des parties scindées et de la mission ne nécessite pas de migration XP.
+
 ## État pédagogique - Terminale C, leçon 08
 
 - La leçon « Fonctions logarithmes » vit dans `terminalCLogarithmsPath.ts` : 11 niveaux, tous les exercices officiels et exactement 10 000 XP. Les sept identifiants historiques restent stables ; quatre niveaux ajoutent l’atelier des limites, la mission financière, les exercices 1 à 4 et l’étude complète de `g(x)=ln(x)/(x−2)²`.
