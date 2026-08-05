@@ -18,6 +18,7 @@ import {
 import {
   loginWithSupabase,
   logoutFromSupabase,
+  changeSupabasePassword,
   confirmSupabasePasswordReset,
   refreshWithSupabase,
   registerWithSupabase,
@@ -55,6 +56,11 @@ const passwordResetRequestSchema = z.object({
 
 const passwordResetConfirmSchema = z.object({
   accessToken: z.string().min(40).max(4096),
+  password: passwordSchema,
+});
+
+const passwordChangeSchema = z.object({
+  currentPassword: z.string().min(1).max(128),
   password: passwordSchema,
 });
 
@@ -213,6 +219,54 @@ export async function authRoutes(app: FastifyInstance) {
         message: "Ce lien de récupération est invalide ou expiré. Demande un nouveau lien.",
       });
     }
+  });
+
+  app.post("/password/change", {
+    preHandler: app.authenticate,
+    config: { rateLimit: { max: 6, timeWindow: "15 minutes" } },
+  }, async (request, reply) => {
+    const parsed = passwordChangeSchema.safeParse(request.body);
+    if (!parsed.success) return invalidPayload(reply, parsed.error);
+    if (parsed.data.currentPassword === parsed.data.password) {
+      return reply.code(400).send({
+        error: "PASSWORD_UNCHANGED",
+        message: "Le nouveau mot de passe doit être différent de l’actuel.",
+      });
+    }
+
+    const { email } = request.authContext;
+
+    if (supabaseConfigured) {
+      try {
+        await changeSupabasePassword(email, parsed.data.currentPassword, parsed.data.password, request.authContext.id);
+      } catch (error) {
+        if (error instanceof SupabaseOperationError && error.code === "INVALID_CURRENT_PASSWORD") {
+          return reply.code(401).send({
+            error: "INVALID_CURRENT_PASSWORD",
+            message: "Le mot de passe actuel est incorrect.",
+          });
+        }
+        return supabaseFailure(reply, error);
+      }
+      clearRefreshCookie(reply);
+      return reply.code(200).send({ message: "Ton mot de passe a été modifié. Reconnecte-toi avec le nouveau." });
+    }
+
+    const user = database.prepare("SELECT * FROM users WHERE id = ?").get(request.authContext.id) as UserRow | undefined;
+    if (!user || !(await verifyPassword(parsed.data.currentPassword, user.password_hash))) {
+      return reply.code(401).send({
+        error: "INVALID_CURRENT_PASSWORD",
+        message: "Le mot de passe actuel est incorrect.",
+      });
+    }
+
+    database
+      .prepare("UPDATE users SET password_hash = ? WHERE id = ?")
+      .run(await hashPassword(parsed.data.password), user.id);
+    revokeAllUserSessions(user.id);
+    writeAuditLog(user.id, "auth.password.change", user.id);
+    clearRefreshCookie(reply);
+    return reply.code(200).send({ message: "Ton mot de passe a été modifié. Reconnecte-toi avec le nouveau." });
   });
 
   app.post("/refresh", { config: { rateLimit: { max: 30, timeWindow: "1 minute" } } }, async (request, reply) => {

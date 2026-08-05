@@ -297,7 +297,12 @@ export async function requestSupabasePasswordReset(email: string) {
   if (error) throw authFailure(error);
 }
 
-export async function confirmSupabasePasswordReset(accessToken: string, password: string) {
+/**
+ * Applique un nouveau mot de passe. `auth.updateUser()` de supabase-js exigerait
+ * une session interne au client (persistSession est désactivé ici) : on appelle
+ * donc directement GoTrue.
+ */
+async function applySupabasePassword(accessToken: string, password: string) {
   const response = await fetch(`${config.supabaseUrl}/auth/v1/user`, {
     method: "PUT",
     headers: {
@@ -316,9 +321,10 @@ export async function confirmSupabasePasswordReset(accessToken: string, password
       payload.error_code ?? "PASSWORD_RECOVERY_FAILED",
     );
   }
+}
 
-  // Révoque les anciennes sessions après le changement. L'élève se reconnecte
-  // ensuite normalement avec son nouveau mot de passe.
+/** Déconnexion globale : toutes les sessions du compte deviennent invalides. */
+async function revokeAllSupabaseSessions(accessToken: string) {
   await fetch(`${config.supabaseUrl}/auth/v1/logout?scope=global`, {
     method: "POST",
     headers: {
@@ -326,6 +332,42 @@ export async function confirmSupabasePasswordReset(accessToken: string, password
       Authorization: `Bearer ${accessToken}`,
     },
   }).catch(() => undefined);
+}
+
+export async function confirmSupabasePasswordReset(accessToken: string, password: string) {
+  await applySupabasePassword(accessToken, password);
+  // Révoque les anciennes sessions après le changement. L'élève se reconnecte
+  // ensuite normalement avec son nouveau mot de passe.
+  await revokeAllSupabaseSessions(accessToken);
+}
+
+export async function changeSupabasePassword(
+  email: string,
+  currentPassword: string,
+  newPassword: string,
+  actorUserId?: string,
+) {
+  // 1. Revérifie le mot de passe actuel : c'est la preuve que la personne
+  // devant l'écran est bien la propriétaire du compte, et pas quelqu'un qui
+  // profiterait d'une session restée ouverte.
+  const { data, error } = await requireAuthClient().auth.signInWithPassword({ email, password: currentPassword });
+  if (error) {
+    throw new SupabaseOperationError("Le mot de passe actuel est incorrect.", 401, "INVALID_CURRENT_PASSWORD");
+  }
+
+  // 2. Applique le nouveau mot de passe.
+  await applySupabasePassword(data.session.access_token, newPassword);
+
+  // 3. Journalise **avant** la déconnexion globale : après, plus aucun jeton du
+  // compte n'est valide et l'écriture dans audit_logs échouerait. L'échec de
+  // l'audit ne doit pas annuler un changement déjà appliqué.
+  if (actorUserId) {
+    await writeSupabaseAudit(data.session.access_token, actorUserId, "auth.password.change", actorUserId)
+      .catch(() => undefined);
+  }
+
+  // 4. Révoque toutes les sessions.
+  await revokeAllSupabaseSessions(data.session.access_token);
 }
 
 export async function refreshWithSupabase(refreshToken: string) {

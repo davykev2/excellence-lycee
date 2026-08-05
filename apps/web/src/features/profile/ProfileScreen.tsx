@@ -12,6 +12,7 @@ import {
   Student,
   Trash,
 } from "@phosphor-icons/react";
+import { ChangePasswordSection } from "./ChangePasswordSection";
 import { useRef, useState, type ChangeEvent } from "react";
 import type { AuthUser } from "../../domain/auth";
 import type { LearnerProfile, SchoolLevel } from "../../domain/learning";
@@ -227,6 +228,10 @@ export function ProfileScreen({ profile, currentLevel, onBackHome, email, roleLa
             <button type="button" onClick={onLogout}><SignOut size={18} weight="bold" /> Se déconnecter</button>
           </div>
         </aside>
+      </section>
+
+      <section className="profile-school-grid">
+        <ChangePasswordSection onPasswordChanged={onLogout} />
       </section>
     </main>
   );
