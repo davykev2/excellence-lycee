@@ -6,7 +6,13 @@ import { fileURLToPath } from "node:url";
 
 import { getLessonReward, getPathRewardTotal, XP_PER_LESSON } from "../apps/api/src/curriculum.ts";
 import { storeItems } from "../apps/api/src/storeCatalog.ts";
+import {
+  clearLearningPathBundleCacheForTests,
+  loadLearningPathsForLevel,
+} from "../apps/web/src/data/learningPathLoader.ts";
 import { learningPaths } from "../apps/web/src/data/learningPaths.ts";
+import { AVAILABLE_EXERCISES } from "../apps/web/src/data/learningPathMetrics.ts";
+import { schoolLevels } from "../apps/web/src/data/programme.ts";
 import { storeCatalog } from "../apps/web/src/data/storeCatalog.ts";
 import { numericalDerivative, parseMathExpression } from "../apps/web/src/features/codex/mathEngine.ts";
 
@@ -36,6 +42,48 @@ test("chaque parcours publié garde un registre XP Web/API cohérent", () => {
       assert.equal(getLessonReward(path.id, lesson.id), lesson.xp, `Décalage XP Web/API : ${key}`);
     }
   }
+});
+
+test("le chargement à la demande restitue exactement les parcours de chaque classe", async () => {
+  clearLearningPathBundleCacheForTests();
+
+  for (const level of schoolLevels) {
+    const expectedIds = learningPaths
+      .filter((path) => path.levelIds.includes(level.id))
+      .map((path) => path.id)
+      .sort();
+    const loaded = await loadLearningPathsForLevel(level.id);
+    const loadedIds = loaded.map((path) => path.id).sort();
+
+    assert.deepEqual(loadedIds, expectedIds, `Bundle incomplet pour ${level.id}`);
+    assert.equal(new Set(loadedIds).size, loadedIds.length, `Doublon dans le bundle ${level.id}`);
+    for (const path of loaded) {
+      assert.equal(
+        path.modules.flatMap((module) => module.lessons).reduce((total, lesson) => total + lesson.xp, 0),
+        XP_PER_LESSON,
+        `Budget du bundle incorrect : ${path.id}`,
+      );
+    }
+  }
+
+  const administrativePaths = await loadLearningPathsForLevel("terminale-a", true);
+  assert.deepEqual(
+    administrativePaths.map((path) => path.id).sort(),
+    learningPaths.map((path) => path.id).sort(),
+    "Le bundle administrateur doit conserver le référentiel intégral",
+  );
+});
+
+test("le compteur public d'exercices reste aligné sur le catalogue complet", () => {
+  const exerciseCount = learningPaths.reduce((pathTotal, path) => pathTotal + path.modules.reduce(
+    (moduleTotal, module) => moduleTotal + module.lessons.reduce(
+      (lessonTotal, lesson) => lessonTotal + (lesson.questions?.length || 1),
+      0,
+    ),
+    0,
+  ), 0);
+
+  assert.equal(AVAILABLE_EXERCISES, exerciseCount);
 });
 
 test("le catalogue de la boutique reste synchronisé entre Web, API et Supabase", () => {

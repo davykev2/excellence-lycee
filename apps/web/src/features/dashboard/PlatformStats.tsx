@@ -1,6 +1,6 @@
 import { Exam, UsersThree } from "@phosphor-icons/react";
-import { useEffect, useMemo, useState } from "react";
-import type { LearningPath } from "../../domain/paths";
+import { useEffect, useState } from "react";
+import { AVAILABLE_EXERCISES } from "../../data/learningPathMetrics";
 import { apiRequest } from "../../lib/api";
 
 export interface PlatformStatsValue {
@@ -8,19 +8,8 @@ export interface PlatformStatsValue {
   availableExercises: number;
 }
 
-function countAvailableExercises(paths: LearningPath[]) {
-  return paths.reduce((pathTotal, path) => pathTotal + path.modules.reduce(
-    (moduleTotal, module) => moduleTotal + module.lessons.reduce(
-      (lessonTotal, lesson) => lessonTotal + (lesson.questions?.length || 1),
-      0,
-    ),
-    0,
-  ), 0);
-}
-
-export function usePlatformStats(paths: LearningPath[], localOnly = false): PlatformStatsValue {
+export function usePlatformStats(localOnly = false): PlatformStatsValue {
   const [registeredUsers, setRegisteredUsers] = useState<number | null>(localOnly ? 1 : null);
-  const availableExercises = useMemo(() => countAvailableExercises(paths), [paths]);
 
   useEffect(() => {
     if (localOnly) return;
@@ -31,7 +20,7 @@ export function usePlatformStats(paths: LearningPath[], localOnly = false): Plat
     return () => { active = false; };
   }, [localOnly]);
 
-  return { registeredUsers, availableExercises };
+  return { registeredUsers, availableExercises: AVAILABLE_EXERCISES };
 }
 
 function formatCount(value: number) {
@@ -56,4 +45,3 @@ export function PlatformStats({ stats }: { stats: PlatformStatsValue }) {
     </section>
   );
 }
-

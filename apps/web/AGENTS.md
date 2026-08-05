@@ -1,10 +1,17 @@
 # Prototype Instructions
 
+## MVP Mathématiques — phase 2 (05/08/2026)
+
+- Après authentification, `LearningApp.tsx` ne doit plus importer le registre `learningPaths` statiquement. `learningPathLoader.ts` charge uniquement les parcours compatibles avec la classe enregistrée ; seuls les administrateurs et l'aperçu du studio chargent le référentiel intégral. Toute nouvelle classe ou nouvelle famille de parcours doit être ajoutée au chargeur et couverte par `tests/stability.test.ts`.
+- Le bundle Mathématiques de Terminale A vit dans `terminalAMathPaths.ts`, séparé des séries C/D. Garder les agrégateurs par classe sans réintroduire d'import transversal qui forcerait le navigateur d'un élève à télécharger les cours des autres séries.
+- Le nombre public d'exercices est un compteur léger dans `learningPathMetrics.ts`. Le test de stabilité le recalcule depuis le catalogue complet : mettre la constante à jour lorsqu'une question est ajoutée ou retirée. Ne pas recharger tous les parcours depuis l'accueil uniquement pour calculer cette statistique.
+- Le registre chargé à la demande doit rester strictement équivalent à `learningPaths.filter(path.levelIds.includes(levelId))`, sans doublon, et chaque parcours doit toujours totaliser 10 000 XP.
+
 ## Stabilisation technique — phase 1 (05/08/2026)
 
 - Le point d'entrée public reste léger : `App.tsx` ne charge le gros shell pédagogique `LearningApp.tsx` qu'après authentification ou activation d'un aperçu de développement. Les écrans secondaires (Admin, Arène, Messages, Profil, Classement, Boutique, etc.) restent importés avec `React.lazy` et affichés derrière un `Suspense`. Ne pas réintroduire les catalogues pédagogiques complets dans le bundle public.
 - `AppErrorBoundary` enveloppe l'application au plus haut niveau et fournit un écran de reprise en français (recharger ou revenir à l'accueil) lorsqu'un rendu React échoue. Toute future télémétrie doit partir de cette frontière sans envoyer de données personnelles ni de contenu pédagogique saisi par l'élève.
-- `tests/stability.test.ts` protège trois contrats transverses : concordance exacte des identifiants/XP entre Web et API, concordance du catalogue Boutique entre Web/API/migration, et sûreté de l'analyseur du Codex mathématique. Le script racine `scripts/verify-project.mjs` ajoute audits npm, typage, audits pédagogiques A/C/D, contrôles KaTeX, validation du pipeline de contenu et builds de production.
+- `tests/stability.test.ts` protège cinq contrats transverses : concordance exacte des identifiants/XP entre Web et API, équivalence des bundles par classe, exactitude du compteur global d'exercices, concordance du catalogue Boutique entre Web/API/migration, et sûreté de l'analyseur du Codex mathématique. Le script racine `scripts/verify-project.mjs` ajoute audits npm, typage, audits pédagogiques A/C/D, contrôles KaTeX, validation du pipeline de contenu et builds de production.
 - La CI `.github/workflows/quality.yml` exécute ce script sur chaque push et pull request. Une livraison n'est valide que si `node scripts/verify-project.mjs` passe intégralement.
 
 ## État pédagogique — Physique C/D, champs uniformes

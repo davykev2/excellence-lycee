@@ -63,6 +63,15 @@ Déploiement manuel de secours du **frontend** — **depuis la racine du dépôt
 npx vercel --prod
 ```
 
+### Migrations Supabase ciblées
+
+L'historique distant n'est pas encore totalement réconcilié avec les anciens
+fichiers locaux. Ne jamais lancer directement `supabase db push` depuis le
+dépôt. Utiliser `scripts/push-supabase-migrations.mjs` avec une liste explicite
+de fichiers : d'abord le mode `--dry-run`, puis le mode `--apply` accompagné de
+`--confirm-project=oqvzbaneyvidmrxjtasn` après autorisation du porteur. Le
+script isole l'historique distant et refuse toute migration non demandée.
+
 ## 4. Où vit le contenu pédagogique
 
 Le contenu des leçons de mathématiques est **codé en dur dans des fichiers TypeScript** sous `apps/web/src/data/` (`terminalAPolynomialRationalPath.ts`, `terminalCMathPaths*.ts`, `terminalDMathPaths.ts`, etc.).

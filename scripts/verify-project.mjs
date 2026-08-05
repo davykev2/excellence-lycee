@@ -24,6 +24,11 @@ run("Audit de sécurité API", npm, [...npmPrefix, "audit", "--omit=dev", "--aud
 run("Typage Web", npm, [...npmPrefix, "run", "typecheck"], web);
 run("Typage API", npm, [...npmPrefix, "run", "typecheck"], api);
 run("Tests de stabilité", npm, [...npmPrefix, "run", "test:stability"], api);
+run(
+  "Syntaxe du garde-fou Supabase",
+  process.execPath,
+  ["--check", resolve(root, "scripts", "push-supabase-migrations.mjs")],
+);
 
 for (const script of [
   "audit-terminal-a-math.mjs",
