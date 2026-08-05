@@ -15,8 +15,22 @@ import { AVAILABLE_EXERCISES } from "../apps/web/src/data/learningPathMetrics.ts
 import { schoolLevels } from "../apps/web/src/data/programme.ts";
 import { storeCatalog } from "../apps/web/src/data/storeCatalog.ts";
 import { numericalDerivative, parseMathExpression } from "../apps/web/src/features/codex/mathEngine.ts";
+import {
+  canOpenMasteryLevel,
+  MASTERY_LEVELS_REQUIRE_SEQUENCE,
+} from "../apps/web/src/config/masteryAccess.ts";
 
 const projectRoot = fileURLToPath(new URL("../", import.meta.url));
+
+test("les niveaux publiés sont librement accessibles pendant la phase ouverte", () => {
+  assert.equal(MASTERY_LEVELS_REQUIRE_SEQUENCE, false);
+  assert.equal(canOpenMasteryLevel({
+    isAdmin: false,
+    lessonIndex: 8,
+    lessonCompleted: false,
+    previousLessonCompleted: false,
+  }), true);
+});
 
 test("chaque parcours publié garde un registre XP Web/API cohérent", () => {
   const pathIds = new Set<string>();

@@ -26,6 +26,10 @@ import {
   routeForNavigation,
   type AppRoute,
 } from "./routing/appRoute";
+import {
+  canOpenMasteryLevel,
+  MASTERY_LEVELS_REQUIRE_SEQUENCE,
+} from "./config/masteryAccess";
 
 const AdminScreen = lazy(() =>
   import("./features/admin/AdminScreen").then((module) => ({ default: module.AdminScreen })),
@@ -326,10 +330,13 @@ function LearningAppShell({
       const requestedLessons = getPathLessons(requestedPath);
       const requestedLessonIndex = requestedLessons.findIndex((lesson) => lesson.id === route.lessonId);
       const completedForRequestedPath = completedLessonsByPath[requestedPath.id] ?? emptyCompletedLessons;
-      const lessonIsUnlocked = user.role === "admin"
-        || requestedLessonIndex === 0
-        || completedForRequestedPath.has(route.lessonId)
-        || (requestedLessonIndex > 0 && completedForRequestedPath.has(requestedLessons[requestedLessonIndex - 1].id));
+      const lessonIsUnlocked = requestedLessonIndex >= 0 && canOpenMasteryLevel({
+        isAdmin: user.role === "admin",
+        lessonIndex: requestedLessonIndex,
+        lessonCompleted: completedForRequestedPath.has(route.lessonId),
+        previousLessonCompleted: requestedLessonIndex > 0
+          && completedForRequestedPath.has(requestedLessons[requestedLessonIndex - 1].id),
+      });
       if (requestedLessonIndex < 0 || !lessonIsUnlocked) {
         navigate({
           navigation: "paths",
@@ -446,7 +453,7 @@ function LearningAppShell({
           subject={subjects[selectedPath.subjectId]}
           progressByLesson={progressByPath[selectedPath.id] ?? {}}
           completedLessonIds={completedLessonIds}
-          unlockAllLessons={user.role === "admin"}
+          allLessonsAccessible={user.role === "admin" || !MASTERY_LEVELS_REQUIRE_SEQUENCE}
           onOpenLesson={openPathLesson}
           onBackToLibrary={() => navigate({ navigation: "paths", subjectId: selectedPath.subjectId })}
         />
