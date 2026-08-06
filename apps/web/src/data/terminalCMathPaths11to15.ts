@@ -1,30 +1,11 @@
 import { buildOfficialMathPath, officialMathTopic as t } from "./officialMathPathBuilder";
 import { terminalCLcmGcdPath } from "./terminalCLcmGcdPath";
 import { terminalCSequencesPath } from "./terminalCSequencesPath";
+import { terminalCComplexGeometryPath } from "./terminalCComplexGeometryPath";
 
-export { terminalCLcmGcdPath, terminalCSequencesPath };
+export { terminalCLcmGcdPath, terminalCSequencesPath, terminalCComplexGeometryPath };
 
 const levelIds = ["terminale-c"];
-
-export const terminalCComplexGeometryPath = buildOfficialMathPath({
-  id: "terminale-c-math-l13-complex-geometry", levelIds, chapterNumber: 13, themeNumber: 2,
-  themeTitle: "Géométrie complexe", title: "Nombres complexes et géométrie du plan",
-  description: "Angles, distances, configurations géométriques et transformations écrites avec les nombres complexes.",
-  outcomes: ["Traduire une propriété géométrique en complexes", "Reconnaître une transformation", "Déterminer et construire une similitude"],
-  documentTitle: "TC Maths lecon 13 Nombres complexes et géometrie du plan.pdf",
-  topics: [
-    t("complex-angle", "Quotient complexe et angle orienté", "1-3", "I-1. Angles", "Pour des points $A,B,C,D$, l’argument d’un quotient de différences d’affixes représente un angle orienté.", "Écrire les vecteurs dans le même ordre que l’angle demandé.", String.raw`\arg\frac{z_D-z_C}{z_B-z_A}=\operatorname{Mes}(\overrightarrow{AB},\overrightarrow{CD})`, "Que représente $\\arg((z_C-z_A)/(z_B-z_A))$ ?", "$\\operatorname{Mes}(\\overrightarrow{AB},\\overrightarrow{AC})$.", 55),
-    t("complex-distance-ratio", "Module d’un quotient et rapport de distances", "3-4", "I-2. Distances", "Le module d’un quotient de différences d’affixes donne le rapport des longueurs correspondantes.", "Associer chaque différence d’affixes au segment qu’elle représente.", String.raw`\left|\frac{z_C-z_A}{z_B-z_A}\right|=\frac{AC}{AB}`, "Si le module du quotient vaut $1$, que peut-on conclure ?", "$AC=AB$.", 55),
-    t("complex-loci", "Lieux géométriques complexes", "4-6", "II. Ensembles de points", "Une condition sur un module donne souvent une droite, un cercle ou un cercle d’Apollonius ; une condition sur un argument donne une droite ou un arc capable.", "Traduire d’abord module et argument en distances et angles.", String.raw`|z-a|=r\Longleftrightarrow M\in\mathcal C(A,r)`, "Quel lieu vérifie $|z-(2+i)|=3$ ?", "Le cercle de centre d’affixe $2+i$ et de rayon $3$.", 65),
-    t("complex-align-orthogonal", "Alignement, parallélisme et orthogonalité", "6-8", "III-1. Configurations", "Un quotient réel traduit des directions parallèles ; un quotient imaginaire pur traduit des directions orthogonales.", "Exclure les cas où un dénominateur est nul.", String.raw`\frac{z_C-z_A}{z_B-z_A}\in\mathbb R\Longleftrightarrow A,B,C\text{ alignés}`, "Si le quotient est imaginaire pur non nul, quelle configuration obtient-on ?", "Les directions correspondantes sont perpendiculaires.", 65),
-    t("complex-cyclic-triangles", "Cocyclicité et triangles particuliers", "8-10", "III-2. Figures", "Les arguments permettent d’établir qu’un angle est droit ou que quatre points sont cocycliques ; modules et arguments caractérisent aussi les triangles isocèles, rectangles ou équilatéraux.", "Combiner une condition de longueur et une condition d’angle.", String.raw`\arg\frac{z_D-z_A}{z_C-z_A}\equiv\arg\frac{z_D-z_B}{z_C-z_B}\ [\pi]`, "Quelle propriété suffit pour montrer qu’un triangle est équilatéral ?", "Deux côtés égaux et un angle de mesure $\\pi/3$.", 70),
-    t("complex-transformation", "Écriture complexe d’une transformation", "10-13", "IV-1. Transformations", "Une application $z'=az+b$ avec $a\\ne0$ représente une similitude directe ; sa nature précise dépend du module et de l’argument de $a$.", "$|a|=1$ donne une isométrie directe.", String.raw`z'=az+b`, "Quelle transformation représente $z'=z+2-i$ ?", "La translation de vecteur d’affixe $2-i$.", 65),
-    t("similarity-elements", "Éléments caractéristiques d’une similitude", "13-16", "IV-2. Similitudes", "Pour $a\\ne1$, le centre est l’unique point fixe ; le rapport vaut $|a|$ et l’angle vaut $\\arg a$.", "Résoudre $z=az+b$ pour trouver le centre.", String.raw`\omega=\frac b{1-a},\quad k=|a|,\quad\theta=\arg a`, "Quel est le rapport de $z'=2iz+1$ ?", "$2$.", 70),
-    t("similarity-from-data", "Déterminer une similitude à partir d’images", "16-19", "V-1. Détermination", "Les images de deux points distincts déterminent une unique similitude directe, obtenue en résolvant les deux équations complexes.", "Soustraire les équations élimine immédiatement $b$.", String.raw`a=\frac{z_{B'}-z_{A'}}{z_B-z_A},\quad b=z_{A'}-az_A`, "Combien d’images de points distincts faut-il pour déterminer $z'=az+b$ ?", "Deux.", 75),
-    t("similarity-decomposition", "Décomposition et construction", "19-23", "V-2. Décomposition", "Une similitude directe de centre $\\Omega$ se décompose en une homothétie de même centre et une rotation de même centre, dans n’importe quel ordre.", "Construire d’abord l’angle puis appliquer le rapport, ou inversement.", String.raw`s=h_{\Omega,k}\circ r_{\Omega,\theta}=r_{\Omega,\theta}\circ h_{\Omega,k}`, "Quelles transformations composent une similitude directe de rapport $2$ et d’angle $\\pi/3$ ?", "Une homothétie de rapport $2$ et une rotation d’angle $\\pi/3$ de même centre.", 80),
-    t("similarity-images", "Images de droites, cercles et figures", "23-26", "VI. Applications", "Une similitude directe conserve les angles orientés, l’alignement et les formes, et multiplie toutes les longueurs par son rapport.", "L’image d’un cercle est un cercle dont le rayon est multiplié par $k$.", String.raw`A'B'=k\,AB`, "Quelle est l’image d’un cercle de rayon $3$ par une similitude de rapport $2$ ?", "Un cercle de rayon $6$.", 85, "challenge"),
-  ],
-});
 
 export const terminalCIsometriesPath = buildOfficialMathPath({
   id: "terminale-c-math-l14-plane-isometries", levelIds, chapterNumber: 14, themeNumber: 2,
