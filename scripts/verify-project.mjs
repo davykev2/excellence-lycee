@@ -41,6 +41,7 @@ for (const script of [
   "audit-terminal-c-logarithms-katex.mjs",
   "audit-terminal-c-lcm-gcd-katex.mjs",
   "audit-terminal-c-primitives-katex.mjs",
+  "audit-terminal-c-sequences-katex.mjs",
   "audit-terminal-c-space-geometry-katex.mjs",
 ]) {
   run(`Contenu · ${script}`, process.execPath, [resolve(root, "scripts", script)]);

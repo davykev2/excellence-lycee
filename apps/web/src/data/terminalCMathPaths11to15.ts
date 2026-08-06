@@ -1,27 +1,10 @@
 import { buildOfficialMathPath, officialMathTopic as t } from "./officialMathPathBuilder";
 import { terminalCLcmGcdPath } from "./terminalCLcmGcdPath";
+import { terminalCSequencesPath } from "./terminalCSequencesPath";
 
-export { terminalCLcmGcdPath };
+export { terminalCLcmGcdPath, terminalCSequencesPath };
 
 const levelIds = ["terminale-c"];
-
-export const terminalCSequencesPath = buildOfficialMathPath({
-  id: "terminale-c-math-l12-sequences", levelIds, chapterNumber: 12, themeNumber: 1,
-  themeTitle: "Analyse", title: "Suites numériques",
-  description: "Raisonnement par récurrence, monotonie, bornes, convergence, limites et suites récurrentes.",
-  outcomes: ["Démontrer une propriété par récurrence", "Étudier la monotonie et la convergence", "Déterminer la limite d’une suite récurrente"],
-  documentTitle: "TC Maths leçon 12 Suites numériques.pdf",
-  topics: [
-    t("sequence-induction", "Raisonnement par récurrence", "1-2", "I. Récurrence", "Une preuve par récurrence comporte une initialisation, une hypothèse au rang $n$, puis l’hérédité au rang $n+1$.", "Ne jamais oublier de préciser le premier rang concerné.", String.raw`P(n_0),\quad P(n)\Rightarrow P(n+1)`, "Quelles sont les trois étapes d’une récurrence ?", "Initialisation, hérédité et conclusion.", 55),
-    t("sequence-monotonicity", "Monotonie et bornes", "2-4", "II. Monotonie", "On étudie le signe de $u_{n+1}-u_n$, le quotient lorsque les termes sont positifs, ou les variations d’une fonction associée.", "Une suite croissante et majorée, ou décroissante et minorée, converge.", String.raw`u_{n+1}-u_n\ge0\Longrightarrow(u_n)\text{ croissante}`, "Si $u_{n+1}-u_n=1/(n+1)>0$, quel est le sens de variation ?", "La suite est strictement croissante.", 60),
-    t("sequence-limit-algebra", "Calcul algébrique des limites", "4-6", "III-1. Opérations", "Les règles sur les sommes, produits et quotients s’appliquent aux suites, avec prudence en présence de formes indéterminées.", "Factoriser par la plus grande puissance de $n$ dans une fraction rationnelle.", String.raw`\frac{a_pn^p+\cdots}{b_qn^q+\cdots}\sim\frac{a_p}{b_q}n^{p-q}`, "Quelle est la limite de $(3n^2-n)/(n^2+1)$ ?", "$3$.", 60),
-    t("monotone-convergence", "Théorème de convergence monotone", "6-7", "III-2. Convergence", "La monotonie accompagnée d’une borne du bon côté garantit une limite finie.", "Établir séparément la monotonie et la borne avant de conclure.", String.raw`u_n\nearrow,\ u_n\le M\Longrightarrow u_n\to\ell`, "Une suite croissante non majorée peut-elle converger vers un réel ?", "Non.", 65),
-    t("reference-sequences", "Suites de référence", "7-9", "IV. Limites usuelles", "Les suites géométriques, puissances, racines et logarithmes fournissent des limites de référence à reconnaître.", "Pour $q^n$, distinguer $|q|<1$, $q=1$ et $|q|>1$.", String.raw`|q|<1\Longrightarrow q^n\to0`, "Quelle est la limite de $(2/3)^n$ ?", "$0$.", 60),
-    t("sequence-growth", "Croissances comparées", "9-10", "IV-2. Croissances comparées", "Les exponentielles de base supérieure à $1$ dominent les puissances de $n$, qui dominent les logarithmes.", "Transformer une racine n-ième avec l’exponentielle et le logarithme si nécessaire.", String.raw`\ln n\ll n^\alpha\ll a^n\quad(a>1)`, "Quelle est la limite de $n^4/2^n$ ?", "$0$.", 65),
-    t("small-angle-sequence", "Suites trigonométriques et petit angle", "10-11", "IV-3. Limites trigonométriques", "Lorsque $u_n\\to0$, le quotient $\\sin u_n/u_n$ tend vers $1$.", "Faire apparaître explicitement le quotient de référence.", String.raw`\lim_{u\to0}\frac{\sin u}{u}=1`, "Quelle est la limite de $n\\sin(1/n)$ ?", "$1$.", 70),
-    t("recursive-sequence-limit", "Suites définies par récurrence", "11-13", "V. Suites récurrentes", "Après avoir prouvé qu’une suite récurrente converge, sa limite vérifie l’équation de point fixe $\\ell=f(\\ell)$ si $f$ est continue.", "L’équation de point fixe donne des candidats ; la convergence et les bornes sélectionnent la bonne limite.", String.raw`u_{n+1}=f(u_n),\ u_n\to\ell\Longrightarrow\ell=f(\ell)`, "Si $u_{n+1}=\\sqrt{2+u_n}$ et $u_n\\to\\ell\\ge0$, quelle limite convient ?", "$\\ell=2$.", 85, "challenge"),
-  ],
-});
 
 export const terminalCComplexGeometryPath = buildOfficialMathPath({
   id: "terminale-c-math-l13-complex-geometry", levelIds, chapterNumber: 13, themeNumber: 2,
