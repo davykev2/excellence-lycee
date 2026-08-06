@@ -20,6 +20,7 @@ function loadTypeScript(relativePath, dependencies = {}) {
 }
 
 const builder = loadTypeScript("apps/web/src/data/officialMathPathBuilder.ts");
+const lcmGcdPath = loadTypeScript("apps/web/src/data/terminalCLcmGcdPath.ts");
 const limitsPath = loadTypeScript("apps/web/src/data/terminalCLimitsContinuityPath.ts");
 const barycenterPath = loadTypeScript("apps/web/src/data/terminalCBarycenterPath.ts");
 const divisibilityPath = loadTypeScript("apps/web/src/data/terminalCDivisibilityPath.ts");
@@ -46,7 +47,10 @@ const c06to10 = loadTypeScript("apps/web/src/data/terminalCMathPaths06to10.ts", 
   "./terminalCComplexNumbersPath": complexNumbersPath,
   "./terminalCExponentialPowerPath": exponentialPowerPath,
 });
-const c11to15 = loadTypeScript("apps/web/src/data/terminalCMathPaths11to15.ts", { "./officialMathPathBuilder": builder });
+const c11to15 = loadTypeScript("apps/web/src/data/terminalCMathPaths11to15.ts", {
+  "./officialMathPathBuilder": builder,
+  "./terminalCLcmGcdPath": lcmGcdPath,
+});
 const c16to19 = loadTypeScript("apps/web/src/data/terminalCMathPaths16to19.ts", { "./officialMathPathBuilder": builder });
 const dModule = loadTypeScript("apps/web/src/data/terminalDMathPaths.ts", {
   "./terminalCMathPaths01to05": c01to05,

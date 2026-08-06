@@ -1,24 +1,9 @@
 import { buildOfficialMathPath, officialMathTopic as t } from "./officialMathPathBuilder";
+import { terminalCLcmGcdPath } from "./terminalCLcmGcdPath";
+
+export { terminalCLcmGcdPath };
 
 const levelIds = ["terminale-c"];
-
-export const terminalCLcmGcdPath = buildOfficialMathPath({
-  id: "terminale-c-math-l11-lcm-gcd", levelIds, chapterNumber: 11, themeNumber: 3,
-  themeTitle: "Arithmétique", title: "PPCM et PGCD de deux entiers relatifs",
-  description: "Multiples et diviseurs communs, algorithme d’Euclide, Bézout, Gauss et équations diophantiennes.",
-  outcomes: ["Calculer un PGCD et un PPCM", "Utiliser Bézout et Gauss", "Résoudre une équation diophantienne"],
-  documentTitle: "TC Maths leçon 11 PPCM et PGCD de deux entiers relatifs.pdf",
-  topics: [
-    t("common-multiples-lcm", "Multiples communs et PPCM", "1-3", "I. PPCM", "Le PPCM de deux entiers non nuls est le plus petit entier strictement positif multiple de chacun d’eux.", "La décomposition en facteurs premiers retient pour chaque facteur l’exposant maximal.", String.raw`\operatorname{ppcm}(a,b)=\prod p^{\max(\alpha_p,\beta_p)}`, "Quel est le PPCM de $12$ et $18$ ?", "$36$.", 50),
-    t("common-divisors-gcd", "Diviseurs communs et PGCD", "3-5", "II-1. PGCD", "Le PGCD est le plus grand diviseur positif commun. Les diviseurs communs de $a$ et $b$ sont exactement les diviseurs de leur PGCD.", "Par décomposition, retenir les exposants minimaux.", String.raw`\operatorname{pgcd}(a,b)=\prod p^{\min(\alpha_p,\beta_p)}`, "Quel est le PGCD de $84$ et $126$ ?", "$42$.", 55),
-    t("euclidean-algorithm", "Algorithme d’Euclide", "5-7", "II-2. Algorithme d’Euclide", "Le PGCD ne change pas lorsqu’on remplace le plus grand entier par le reste de sa division par le plus petit.", "Enchaîner les divisions jusqu’au dernier reste non nul.", String.raw`\operatorname{pgcd}(a,b)=\operatorname{pgcd}(b,r)`, "Quel est le PGCD de $252$ et $105$ ?", "$21$.", 65),
-    t("bezout-identity", "Identité et théorème de Bézout", "7-9", "III-1. Bézout", "Le PGCD de $a$ et $b$ s’écrit comme combinaison entière $au+bv$. En particulier, $a$ et $b$ sont premiers entre eux si cette combinaison vaut $1$.", "Remonter l’algorithme d’Euclide pour trouver les coefficients.", String.raw`\operatorname{pgcd}(a,b)=au+bv`, "Que prouve une égalité $17u+43v=1$ avec $u,v\\in\\mathbb Z$ ?", "$17$ et $43$ sont premiers entre eux.", 70),
-    t("gauss-theorem", "Théorème de Gauss", "9-10", "III-2. Gauss", "Si $a$ divise $bc$ et si $a$ est premier avec $b$, alors $a$ divise $c$.", "La condition de coprimalité est indispensable pour simplifier une divisibilité.", String.raw`a\mid bc,\ \operatorname{pgcd}(a,b)=1\Longrightarrow a\mid c`, "Si $7\\mid12n$, que peut-on conclure ?", "$7\\mid n$, car $7$ et $12$ sont premiers entre eux.", 70),
-    t("gcd-lcm-relation", "Relation entre PGCD et PPCM", "10-11", "IV. Relation fondamentale", "Le produit du PGCD et du PPCM de deux entiers non nuls est égal au produit de leurs valeurs absolues.", "Une fois le PGCD connu, cette relation donne rapidement le PPCM.", String.raw`\operatorname{pgcd}(a,b)\operatorname{ppcm}(a,b)=|ab|`, "Si $\\operatorname{pgcd}(24,90)=6$, quel est leur PPCM ?", "$360$.", 65),
-    t("diophantine-solvability", "Existence des solutions diophantiennes", "11-13", "V-1. Équations diophantiennes", "L’équation $ax+by=c$ admet des solutions entières si et seulement si le PGCD de $a$ et $b$ divise $c$.", "Tester d’abord cette divisibilité évite des calculs inutiles.", String.raw`ax+by=c\text{ soluble}\Longleftrightarrow\operatorname{pgcd}(a,b)\mid c`, "L’équation $12x+18y=5$ admet-elle une solution entière ?", "Non, car $6$ ne divise pas $5$.", 75),
-    t("diophantine-congruences", "Résoudre une équation diophantienne et une congruence", "13-16", "V-2. Résolution", "Une solution particulière obtenue par Bézout engendre toutes les solutions en ajoutant les multiples adaptés. Une congruence linéaire se ramène au même raisonnement.", "Diviser d’abord par le PGCD, puis paramétrer avec un entier relatif.", String.raw`x=x_0+\frac bdt,\quad y=y_0-\frac adt`, "Combien de classes de solutions modulo $15$ possède $6x\\equiv9[15]$ ?", "$3$ classes.", 85, "challenge"),
-  ],
-});
 
 export const terminalCSequencesPath = buildOfficialMathPath({
   id: "terminale-c-math-l12-sequences", levelIds, chapterNumber: 12, themeNumber: 1,

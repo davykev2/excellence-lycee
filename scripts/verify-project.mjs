@@ -39,6 +39,7 @@ for (const script of [
   "audit-terminal-c-exponential-power-katex.mjs",
   "audit-terminal-c-derivatives-katex.mjs",
   "audit-terminal-c-logarithms-katex.mjs",
+  "audit-terminal-c-lcm-gcd-katex.mjs",
   "audit-terminal-c-primitives-katex.mjs",
   "audit-terminal-c-space-geometry-katex.mjs",
 ]) {
