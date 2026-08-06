@@ -26,10 +26,21 @@ export interface AdminUser {
   levelId?: string;
   levelLabel?: string;
   status: UserStatus;
+  /** Dernière activité pédagogique, déjà mise en forme. */
   lastActive: string;
   progress: number;
   completedLessons?: number;
   totalXp?: number;
+  /** Administrateur suprême : un seul compte sur la plateforme. */
+  isOwner: boolean;
+  /**
+   * Dernier signe de vie, brut, pour que l'affichage reste juste sans recharger.
+   * Absent si la personne ne s'est jamais connectée depuis la mise en place du
+   * suivi, ou si la connectivité est volontairement retenue par le serveur.
+   */
+  lastSeenAt?: string;
+  /** Le serveur a retenu la connectivité : à afficher en tiret, pas en « hors ligne ». */
+  presenceHidden: boolean;
 }
 
 export interface AdminTask {

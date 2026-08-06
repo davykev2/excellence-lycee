@@ -53,6 +53,18 @@ const userIdParamsSchema = z.object({
   userId: z.string().uuid("Identifiant utilisateur invalide."),
 });
 
+/**
+ * Repli SQLite du garde-fou que les fonctions Supabase appliquent déjà en base :
+ * seul l'administrateur suprême peut modifier son propre compte. Sans lui, la
+ * confidentialité de sa connectivité se contournerait en lui retirant son rôle.
+ */
+function blockedOwnerTarget(actorUserId: string, targetUserId: string) {
+  const owner = database.prepare("SELECT is_owner FROM users WHERE id = ?").get(targetUserId) as { is_owner: number } | undefined;
+  if (!owner?.is_owner) return false;
+  const actor = database.prepare("SELECT is_owner FROM users WHERE id = ?").get(actorUserId) as { is_owner: number } | undefined;
+  return !actor?.is_owner;
+}
+
 export async function userRoutes(app: FastifyInstance) {
   app.get("/", { preHandler: app.authenticate }, async (request, reply) => {
     if (request.authContext.role !== "admin") {
@@ -68,32 +80,49 @@ export async function userRoutes(app: FastifyInstance) {
       SELECT users.*,
         COUNT(lesson_progress.id) AS completed_lessons,
         COALESCE(SUM(lesson_progress.xp_awarded), 0) AS total_xp,
-        COALESCE(MAX(lesson_progress.completed_at), users.updated_at) AS last_active_at
+        COALESCE(MAX(lesson_progress.completed_at), users.updated_at) AS last_active_at,
+        user_presence.last_seen_at AS last_seen_at
       FROM users
       LEFT JOIN lesson_progress ON lesson_progress.user_id = users.id
+      LEFT JOIN user_presence ON user_presence.user_id = users.id
       GROUP BY users.id
       ORDER BY users.created_at DESC
     `).all() as Array<UserRow & {
       completed_lessons: number;
       total_xp: number;
       last_active_at: string;
+      last_seen_at: string | null;
+      is_owner: number;
     }>;
 
+    // Même règle qu'en base Supabase : la connectivité de l'administrateur
+    // suprême n'est transmise qu'à lui-même.
+    const viewerIsOwner = Boolean(
+      (database.prepare("SELECT is_owner FROM users WHERE id = ?").get(request.authContext.id) as { is_owner: number } | undefined)?.is_owner,
+    );
+
     return {
-      users: users.map((user) => ({
-        id: user.id,
-        email: user.email,
-        name: user.name,
-        role: user.role,
-        accountType: user.audience,
-        levelId: user.level_id,
-        photoUrl: user.photo_url ?? undefined,
-        createdAt: user.created_at,
-        updatedAt: user.updated_at,
-        lastActiveAt: user.last_active_at,
-        completedLessons: user.completed_lessons,
-        totalXp: user.total_xp,
-      })),
+      users: users.map((user) => {
+        const isOwner = Boolean(user.is_owner);
+        const presenceHidden = isOwner && !viewerIsOwner;
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          role: user.role,
+          accountType: user.audience,
+          levelId: user.level_id,
+          photoUrl: user.photo_url ?? undefined,
+          createdAt: user.created_at,
+          updatedAt: user.updated_at,
+          lastActiveAt: user.last_active_at,
+          completedLessons: user.completed_lessons,
+          totalXp: user.total_xp,
+          isOwner,
+          lastSeenAt: presenceHidden ? undefined : user.last_seen_at ?? undefined,
+          presenceHidden,
+        };
+      }),
     };
   });
 
@@ -117,6 +146,13 @@ export async function userRoutes(app: FastifyInstance) {
         body.data.levelId,
       );
       return { user };
+    }
+
+    if (blockedOwnerTarget(request.authContext.id, params.data.userId)) {
+      return reply.code(403).send({
+        error: "OWNER_PROTECTED",
+        message: "Le compte de l’administrateur suprême ne peut pas être modifié.",
+      });
     }
 
     const now = new Date().toISOString();
@@ -150,6 +186,13 @@ export async function userRoutes(app: FastifyInstance) {
         body.data.role,
       );
       return { user };
+    }
+
+    if (blockedOwnerTarget(request.authContext.id, params.data.userId)) {
+      return reply.code(403).send({
+        error: "OWNER_PROTECTED",
+        message: "Le compte de l’administrateur suprême ne peut pas être modifié.",
+      });
     }
 
     const now = new Date().toISOString();

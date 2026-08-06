@@ -79,6 +79,8 @@ export const initialAdminWorkspace: AdminWorkspaceState = {
       status: "active",
       lastActive: "Il y a 4 min",
       progress: 57,
+      isOwner: false,
+      presenceHidden: false,
     },
     {
       id: "user-yannick",
@@ -89,6 +91,8 @@ export const initialAdminWorkspace: AdminWorkspaceState = {
       status: "active",
       lastActive: "Il y a 18 min",
       progress: 42,
+      isOwner: false,
+      presenceHidden: false,
     },
     {
       id: "user-fatou",
@@ -99,6 +103,8 @@ export const initialAdminWorkspace: AdminWorkspaceState = {
       status: "active",
       lastActive: "Hier, 21:12",
       progress: 73,
+      isOwner: false,
+      presenceHidden: false,
     },
     {
       id: "user-serge",
@@ -109,6 +115,8 @@ export const initialAdminWorkspace: AdminWorkspaceState = {
       status: "suspended",
       lastActive: "16 juil. 2026",
       progress: 18,
+      isOwner: false,
+      presenceHidden: false,
     },
     {
       id: "user-kouadio",
@@ -118,6 +126,8 @@ export const initialAdminWorkspace: AdminWorkspaceState = {
       status: "active",
       lastActive: "Il y a 36 min",
       progress: 0,
+      isOwner: false,
+      presenceHidden: false,
     },
     {
       id: "user-admin",
@@ -127,6 +137,8 @@ export const initialAdminWorkspace: AdminWorkspaceState = {
       status: "active",
       lastActive: "Maintenant",
       progress: 0,
+      isOwner: false,
+      presenceHidden: false,
     },
   ],
   tasks: [

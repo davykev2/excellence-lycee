@@ -20,6 +20,7 @@ import {
   ShieldCheck,
   Student,
   ThumbsUp,
+  Crown,
   UserCircle,
   Users,
   WarningCircle,
@@ -43,7 +44,7 @@ import { adminActivity } from "../../data/admin";
 import { formatXp } from "../../data/xpRewards";
 import { apiRequest } from "../../lib/api";
 import { useAuth } from "../auth/AuthProvider";
-import { useAdminUsers } from "./useAdminUsers";
+import { presenceLabel, useAdminUsers } from "./useAdminUsers";
 import { useAdminWorkspace } from "./useAdminWorkspace";
 import { useAdminLessonContents } from "./useAdminLessonContents";
 import { useAdminFeedback } from "./useAdminFeedback";
@@ -339,7 +340,9 @@ export function AdminScreen({
   const [contentQuery, setContentQuery] = useState("");
   const [contentStatus, setContentStatus] = useState<PublicationStatus | "all">("all");
   const [userQuery, setUserQuery] = useState("");
-  const [userStatus, setUserStatus] = useState<UserStatus | "all">("all");
+  const [userRole, setUserRole] = useState<UserRole | "all">("all");
+  const [userLevel, setUserLevel] = useState<string>("all");
+  const [userPresence, setUserPresence] = useState<"all" | "online" | "offline" | "never">("all");
   const [showCreateDialog, setShowCreateDialog] = useState(false);
   const [internalContentStudioOpen, setInternalContentStudioOpen] = useState(preview);
   const [editingUser, setEditingUser] = useState<AdminUser | null>(null);
@@ -398,9 +401,62 @@ export function AdminScreen({
     const query = userQuery.trim().toLocaleLowerCase("fr");
     return adminUsers.filter((user) => {
       const matchesQuery = !query || `${user.name} ${user.email} ${user.levelLabel ?? ""}`.toLocaleLowerCase("fr").includes(query);
-      return matchesQuery && (userStatus === "all" || user.status === userStatus);
+      const matchesRole = userRole === "all" || user.role === userRole;
+      // Deux granularités : « cycle:seconde » prend toute la Seconde, séries
+      // confondues ; « level:seconde-c » ne prend que la Seconde C.
+      const matchesLevel = userLevel === "all"
+        || (userLevel.startsWith("cycle:")
+          ? Boolean(user.levelId?.startsWith(`${userLevel.slice(6)}-`))
+          : user.levelId === userLevel.slice(6));
+      const presence = presenceLabel(user).state;
+      // Un compte dont la connectivité est masquée ne doit apparaître ni dans
+      // « en ligne » ni dans « hors ligne » : le serveur n'a rien dit de lui.
+      const matchesPresence = userPresence === "all" || presence === userPresence;
+      return matchesQuery && matchesRole && matchesLevel && matchesPresence;
     });
-  }, [adminUsers, userQuery, userStatus]);
+  }, [adminUsers, userQuery, userRole, userLevel, userPresence]);
+
+  /**
+   * Niveaux réellement présents en base, groupés par cycle. Chaque cycle offre
+   * une entrée « tout » avant ses séries, pour couvrir les deux façons de
+   * chercher : « toute la Seconde » ou « la Seconde C seulement ».
+   */
+  const levelFilterGroups = useMemo(() => {
+    const cycleLabels: Record<string, string> = {
+      seconde: "Seconde",
+      premiere: "Première",
+      terminale: "Terminale",
+    };
+    const byCycle = new Map<string, { id: string; label: string }[]>();
+    adminUsers.forEach((user) => {
+      if (!user.levelId) return;
+      const cycle = user.levelId.split("-")[0];
+      const levels = byCycle.get(cycle) ?? [];
+      if (!levels.some((level) => level.id === user.levelId)) {
+        levels.push({ id: user.levelId, label: user.levelLabel ?? user.levelId });
+      }
+      byCycle.set(cycle, levels);
+    });
+    const cycleOrder = ["seconde", "premiere", "terminale"];
+    return [...byCycle.entries()]
+      .sort((a, b) => cycleOrder.indexOf(a[0]) - cycleOrder.indexOf(b[0]))
+      .map(([cycle, levels]) => ({
+        cycle,
+        label: cycleLabels[cycle] ?? cycle,
+        levels: [...levels].sort((a, b) => a.label.localeCompare(b.label, "fr")),
+      }));
+  }, [adminUsers]);
+
+  const onlineCount = useMemo(
+    () => adminUsers.filter((user) => presenceLabel(user).state === "online").length,
+    [adminUsers],
+  );
+
+  /** Le serveur fait foi ; l'interface s'aligne pour ne pas proposer l'impossible. */
+  const viewerIsOwner = useMemo(
+    () => adminUsers.some((user) => user.id === currentAdmin?.id && user.isOwner),
+    [adminUsers, currentAdmin?.id],
+  );
 
   const notify = (message: string) => {
     setNotice(message);
@@ -774,14 +830,46 @@ export function AdminScreen({
         <section className="admin-section" data-testid="admin-users">
           <div className="admin-section-heading">
             <div><p className="admin-eyebrow">Communauté</p><h2>Utilisateurs et accès</h2><p>Contrôle les élèves, enseignants et comptes administrateurs.</p></div>
-            <div className="admin-section-summary"><Users size={23} weight="duotone" /><strong>{activeUsers}</strong><span>comptes actifs dans cet aperçu</span></div>
+            <div className="admin-section-summary"><Users size={23} weight="duotone" /><strong>{activeUsers}</strong><span>comptes · {onlineCount} en ligne</span></div>
           </div>
           <div className="admin-toolbar">
             <label className="admin-search"><MagnifyingGlass size={20} /><input value={userQuery} onChange={(event) => setUserQuery(event.target.value)} placeholder="Nom, adresse e-mail ou classe…" /></label>
-            <label className="admin-filter"><span>État</span><select value={userStatus} onChange={(event) => setUserStatus(event.target.value as UserStatus | "all")}><option value="all">Tous</option><option value="active">Actifs</option><option value="suspended">Suspendus</option></select></label>
+            <label className="admin-filter">
+              <span>Rôle</span>
+              <select value={userRole} onChange={(event) => setUserRole(event.target.value as UserRole | "all")}>
+                <option value="all">Tous les rôles</option>
+                <option value="student">Élèves</option>
+                <option value="teacher">Enseignants</option>
+                <option value="content_editor">Éditeurs de contenus</option>
+                <option value="admin">Administrateurs</option>
+              </select>
+            </label>
+            <label className="admin-filter">
+              <span>Niveau et série</span>
+              <select value={userLevel} onChange={(event) => setUserLevel(event.target.value)}>
+                <option value="all">Tous les niveaux</option>
+                {levelFilterGroups.map((group) => (
+                  <optgroup key={group.cycle} label={group.label}>
+                    <option value={`cycle:${group.cycle}`}>Toute la {group.label}</option>
+                    {group.levels.map((level) => (
+                      <option key={level.id} value={`level:${level.id}`}>{level.label}</option>
+                    ))}
+                  </optgroup>
+                ))}
+              </select>
+            </label>
+            <label className="admin-filter">
+              <span>Connexion</span>
+              <select value={userPresence} onChange={(event) => setUserPresence(event.target.value as typeof userPresence)}>
+                <option value="all">Peu importe</option>
+                <option value="online">En ligne</option>
+                <option value="offline">Hors ligne</option>
+                <option value="never">Jamais vus</option>
+              </select>
+            </label>
           </div>
           <div className="admin-user-table" role="table" aria-label="Liste des utilisateurs">
-            <div className="admin-user-row is-header" role="row"><span>Utilisateur</span><span>Rôle</span><span>Progression</span><span>Dernière activité</span><span>État et action</span></div>
+            <div className="admin-user-row is-header" role="row"><span>Utilisateur</span><span>Rôle</span><span>Progression</span><span>Connexion</span><span>Action</span></div>
             {usersLoading && <div className="admin-users-feedback" role="status">Chargement des profils Supabase…</div>}
             {usersError && (
               <div className="admin-users-feedback is-error" role="alert">
@@ -789,20 +877,39 @@ export function AdminScreen({
                 <button type="button" onClick={() => void reloadUsers()}>Réessayer</button>
               </div>
             )}
-            {!usersLoading && !usersError && filteredUsers.map((user) => (
-              <div className="admin-user-row" role="row" key={user.id}>
-                <div className="admin-user-identity"><span><UserCircle size={25} weight="duotone" /></span><div><strong>{user.name}</strong><small>{user.email}</small></div></div>
-                <span className={`admin-role is-${user.role}`}>{roleLabels[user.role]}{user.levelLabel && <small>{user.levelLabel}</small>}</span>
-                <div className="admin-user-progress"><div><i style={{ width: `${user.role === "student" ? user.progress : 100}%` }} /></div><span>{user.role === "student" ? `${user.completedLessons ?? 0} leç. · ${formatXp(user.totalXp ?? 0)} XP` : "—"}</span></div>
-                <span className="admin-last-active">{user.lastActive}</span>
-                <div className="admin-user-action">
-                  <span className={`admin-user-state is-${user.status}`}>{user.status === "active" ? "Actif" : "Suspendu"}</span>
-                  <button type="button" disabled={updatingUserId === user.id} onClick={() => setEditingUser(user)}>
-                    Gérer l’accès
-                  </button>
+            {!usersLoading && !usersError && filteredUsers.map((user) => {
+              const presence = presenceLabel(user);
+              const locked = user.isOwner && !viewerIsOwner;
+              return (
+                <div className={`admin-user-row ${user.isOwner ? "is-owner" : ""}`} role="row" key={user.id}>
+                  <div className="admin-user-identity">
+                    <span><UserCircle size={25} weight="duotone" /></span>
+                    <div>
+                      <strong>{user.name}{user.isOwner && <b className="admin-owner-badge"><Crown size={13} weight="fill" /> Administrateur suprême</b>}</strong>
+                      <small>{user.email}</small>
+                    </div>
+                  </div>
+                  <span className={`admin-role is-${user.role}`}>{roleLabels[user.role]}{user.levelLabel && <small>{user.levelLabel}</small>}</span>
+                  <div className="admin-user-progress"><div><i style={{ width: `${user.role === "student" ? user.progress : 100}%` }} /></div><span>{user.role === "student" ? `${user.completedLessons ?? 0} leç. · ${formatXp(user.totalXp ?? 0)} XP` : "—"}</span></div>
+                  <div className="admin-user-presence">
+                    <span className={`admin-presence is-${presence.state}`} title={presence.state === "hidden" ? "Connectivité réservée à l’administrateur suprême" : undefined}>
+                      <i /> {presence.label}
+                    </span>
+                    <small>Activité : {user.lastActive}</small>
+                  </div>
+                  <div className="admin-user-action">
+                    <button
+                      type="button"
+                      disabled={updatingUserId === user.id || locked}
+                      title={locked ? "Ce compte ne peut être modifié que par son titulaire." : undefined}
+                      onClick={() => setEditingUser(user)}
+                    >
+                      {locked ? "Protégé" : "Gérer l’accès"}
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
             {!usersLoading && !usersError && filteredUsers.length === 0 && <div className="admin-users-feedback">Aucun utilisateur ne correspond à ces filtres.</div>}
           </div>
         </section>

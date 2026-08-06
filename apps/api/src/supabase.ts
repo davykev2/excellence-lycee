@@ -121,9 +121,32 @@ export interface AdminUserSummary {
   photoUrl?: string;
   createdAt: string;
   updatedAt: string;
+  /** Dernière activité pédagogique (leçon terminée), pas une connexion. */
   lastActiveAt: string;
   completedLessons: number;
   totalXp: number;
+  /** Administrateur suprême : un seul compte, garanti par un index unique. */
+  isOwner: boolean;
+  /** Dernier battement de présence. Absent si jamais vu, ou si masqué. */
+  lastSeenAt?: string;
+  /** Vrai quand la connectivité est volontairement retenue côté base. */
+  presenceHidden: boolean;
+}
+
+/** Forme renvoyée par la fonction `get_admin_user_directory`. */
+interface AdminDirectoryRow {
+  id: string;
+  email: string;
+  name: string;
+  role: UserRole;
+  accountType: AccountAudience;
+  levelId: string;
+  photoUrl: string | null;
+  createdAt: string;
+  updatedAt: string;
+  isOwner: boolean;
+  lastSeenAt: string | null;
+  presenceHidden: boolean;
 }
 
 export type LeaderboardPeriod = "week" | "month" | "all-time";
@@ -476,11 +499,12 @@ export async function deleteSupabaseProfilePhoto(accessToken: string, userId: st
 
 export async function listSupabaseAdminUsers(accessToken: string): Promise<AdminUserSummary[]> {
   const client = userDataClient(accessToken);
+  // L'annuaire passe par une fonction security definer plutôt que par un select
+  // direct : c'est elle qui joint `user_presence` (table verrouillée, RLS active
+  // sans aucune politique) et qui masque la connectivité de l'administrateur
+  // suprême. Le masquage est donc appliqué en base, pas ici.
   const [profilesResult, progressResult] = await Promise.all([
-    client
-      .from("profiles")
-      .select("id,email,name,role,account_type,level_id,photo_url,created_at,updated_at")
-      .order("created_at", { ascending: false }),
+    client.rpc("get_admin_user_directory"),
     client
       .from("lesson_progress")
       .select("user_id,path_id,lesson_id,xp_awarded,best_score,attempt_count,completed_at")
@@ -488,7 +512,8 @@ export async function listSupabaseAdminUsers(accessToken: string): Promise<Admin
   ]);
 
   if (profilesResult.error) {
-    throw new SupabaseOperationError(profilesResult.error.message, 500, profilesResult.error.code);
+    const status = profilesResult.error.code === "42501" ? 403 : 500;
+    throw new SupabaseOperationError(profilesResult.error.message, status, profilesResult.error.code);
   }
   if (progressResult.error) {
     throw new SupabaseOperationError(progressResult.error.message, 500, progressResult.error.code);
@@ -507,23 +532,26 @@ export async function listSupabaseAdminUsers(accessToken: string): Promise<Admin
     progressByUser.set(row.user_id, current);
   }
 
-  return ((profilesResult.data ?? []) as ProfileRow[]).map((profile) => {
+  return ((profilesResult.data ?? []) as unknown as AdminDirectoryRow[]).map((profile) => {
     const progress = progressByUser.get(profile.id);
     return {
       id: profile.id,
       email: profile.email,
       name: profile.name,
       role: profile.role,
-      accountType: profile.account_type,
-      levelId: profile.level_id,
-      photoUrl: profile.photo_url ?? undefined,
-      createdAt: profile.created_at,
-      updatedAt: profile.updated_at,
-      lastActiveAt: progress?.lastActiveAt && progress.lastActiveAt > profile.updated_at
+      accountType: profile.accountType,
+      levelId: profile.levelId,
+      photoUrl: profile.photoUrl ?? undefined,
+      createdAt: profile.createdAt,
+      updatedAt: profile.updatedAt,
+      lastActiveAt: progress?.lastActiveAt && progress.lastActiveAt > profile.updatedAt
         ? progress.lastActiveAt
-        : profile.updated_at,
+        : profile.updatedAt,
       completedLessons: progress?.completedLessons ?? 0,
       totalXp: progress?.totalXp ?? 0,
+      isOwner: profile.isOwner,
+      lastSeenAt: profile.lastSeenAt ?? undefined,
+      presenceHidden: profile.presenceHidden,
     };
   });
 }
@@ -1010,6 +1038,12 @@ export async function listSupabaseMessageRecipients(accessToken: string, search 
     online: row.user_online,
     lastSeenAt: row.user_last_seen_at ?? undefined,
   }));
+}
+
+/** Rafraîchit le dernier signe de vie du compte connecté. */
+export async function touchSupabasePresence(accessToken: string) {
+  const { error } = await userDataClient(accessToken).rpc("touch_user_presence");
+  if (error) throw new SupabaseOperationError(error.message, 500, error.code);
 }
 
 export async function listSupabaseMessageThreads(accessToken: string, includeArchived = false): Promise<MessageThreadSummary[]> {

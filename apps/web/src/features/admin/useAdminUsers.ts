@@ -12,7 +12,17 @@ interface AdminApiUser {
   lastActiveAt: string;
   completedLessons: number;
   totalXp: number;
+  isOwner: boolean;
+  lastSeenAt?: string;
+  presenceHidden: boolean;
 }
+
+/**
+ * Le battement de présence part toutes les 30 secondes depuis chaque session
+ * ouverte (`useUnreadMessages`). Deux minutes laissent donc passer un battement
+ * manqué sans déclarer quelqu'un hors ligne à tort.
+ */
+export const ONLINE_THRESHOLD_MS = 2 * 60 * 1000;
 
 const publishedLessonCount = 7;
 
@@ -44,7 +54,31 @@ function mapAdminUser(user: AdminApiUser): AdminUser {
     progress: Math.min(100, Math.round((user.completedLessons / publishedLessonCount) * 100)),
     completedLessons: user.completedLessons,
     totalXp: user.totalXp,
+    isOwner: Boolean(user.isOwner),
+    // Conservé brut : la mise en forme se fait au rendu pour qu'un « en ligne »
+    // ne reste pas affiché après coup sans recharger la liste.
+    lastSeenAt: user.lastSeenAt,
+    presenceHidden: Boolean(user.presenceHidden),
   };
+}
+
+/** Étiquette de connexion, calculée au moment du rendu. */
+export function presenceLabel(user: AdminUser): { label: string; state: "hidden" | "online" | "offline" | "never" } {
+  if (user.presenceHidden) return { label: "—", state: "hidden" };
+  if (!user.lastSeenAt) return { label: "Jamais vu en ligne", state: "never" };
+  const elapsed = Date.now() - new Date(user.lastSeenAt).getTime();
+  if (!Number.isFinite(elapsed)) return { label: "Jamais vu en ligne", state: "never" };
+  if (elapsed < ONLINE_THRESHOLD_MS) return { label: "En ligne", state: "online" };
+
+  const minutes = Math.floor(elapsed / 60_000);
+  if (minutes < 60) return { label: `Hors ligne depuis ${minutes} min`, state: "offline" };
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return { label: `Hors ligne depuis ${hours} h`, state: "offline" };
+  const days = Math.floor(hours / 24);
+  if (days < 7) return { label: `Hors ligne depuis ${days} j`, state: "offline" };
+  const formatted = new Intl.DateTimeFormat("fr-CI", { day: "numeric", month: "short", year: "numeric" })
+    .format(new Date(user.lastSeenAt));
+  return { label: `Vu le ${formatted}`, state: "offline" };
 }
 
 export function useAdminUsers() {

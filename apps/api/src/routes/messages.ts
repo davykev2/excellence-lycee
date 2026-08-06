@@ -12,6 +12,7 @@ import {
   listSupabaseGlobalMessages,
   listSupabaseMessageRecipients,
   listSupabaseMessageThreads,
+  touchSupabasePresence,
   markSupabaseThreadRead,
   sendSupabaseGlobalMessage,
   sendSupabaseThreadMessage,
@@ -412,6 +413,20 @@ export async function messageRoutes(app: FastifyInstance) {
   app.get("/threads", { preHandler: app.authenticate }, async (request, reply) => {
     const parsed = listThreadsQuerySchema.safeParse(request.query);
     if (!parsed.success) return reply.code(400).send({ error: "VALIDATION_ERROR", message: "Filtre invalide." });
+
+    // Battement de présence. Cette route est appelée toutes les 30 secondes par
+    // `useUnreadMessages` pour toute personne connectée : c'est le seul endroit
+    // qui voit passer l'ensemble des utilisateurs actifs, sans coûter une requête
+    // de plus. Avant cela, la présence n'était rafraîchie qu'en ouvrant Messages
+    // ou le sélecteur de duel — d'où un « en ligne » qui ne voulait rien dire.
+    // Un échec ici ne doit jamais empêcher la liste des conversations de sortir.
+    if (supabaseConfigured) {
+      await touchSupabasePresence(request.authContext.accessToken!)
+        .catch((reason) => request.log.warn(reason, "Presence heartbeat failed"));
+    } else {
+      touchSqlitePresence(request.authContext.id);
+    }
+
     const threads = supabaseConfigured
       ? await listSupabaseMessageThreads(request.authContext.accessToken!, parsed.data.archived)
       : listSqliteThreads(request.authContext.id, parsed.data.archived);

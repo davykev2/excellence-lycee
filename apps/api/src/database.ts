@@ -313,6 +313,12 @@ const userEmailColumns = database.prepare("PRAGMA table_info(users)").all() as A
 if (!userEmailColumns.some((column) => column.name === "email_opt_out")) {
   database.exec("ALTER TABLE users ADD COLUMN email_opt_out INTEGER NOT NULL DEFAULT 0 CHECK (email_opt_out IN (0, 1))");
 }
+if (!userEmailColumns.some((column) => column.name === "is_owner")) {
+  // Administrateur suprême : un seul compte, garanti par un index unique partiel
+  // comme côté Supabase. Le drapeau ne se pose jamais depuis l'interface.
+  database.exec("ALTER TABLE users ADD COLUMN is_owner INTEGER NOT NULL DEFAULT 0 CHECK (is_owner IN (0, 1))");
+  database.exec("CREATE UNIQUE INDEX IF NOT EXISTS users_single_owner_idx ON users(is_owner) WHERE is_owner = 1");
+}
 
 const bacExamSettingsColumns = database.prepare("PRAGMA table_info(bac_exam_settings)").all() as Array<{ name: string }>;
 if (!bacExamSettingsColumns.some((column) => column.name === "subject_published")) {

@@ -4435,6 +4435,9 @@ textarea:focus-visible {
 .admin-toolbar {
   display: flex;
   align-items: center;
+  /* La barre porte désormais jusqu'à quatre contrôles : elle doit passer à la
+     ligne plutôt que déborder. */
+  flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 15px;
 }
@@ -4618,12 +4621,90 @@ textarea:focus-visible {
 
 .admin-user-row {
   display: grid;
-  grid-template-columns: minmax(230px, 1.25fr) minmax(110px, 0.65fr) minmax(140px, 0.8fr) minmax(110px, 0.6fr) minmax(160px, 0.75fr);
+  /* La colonne « Connexion » gagne de la place sur « Action », qui a perdu sa
+     pastille d'état décorative. */
+  grid-template-columns: minmax(230px, 1.25fr) minmax(110px, 0.65fr) minmax(140px, 0.8fr) minmax(155px, 0.85fr) minmax(125px, 0.55fr);
   align-items: center;
   gap: 14px;
   min-height: 82px;
   padding: 13px 20px;
   border-bottom: 1px solid var(--line);
+}
+
+.admin-user-row.is-owner {
+  background: rgba(251, 107, 22, 0.045);
+}
+
+.admin-owner-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 7px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(251, 107, 22, 0.14);
+  color: var(--orange-600);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.admin-user-presence {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.admin-presence {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 750;
+  color: var(--navy-800);
+}
+
+.admin-presence > i {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ink-muted);
+}
+
+.admin-presence.is-online { color: var(--green-600); }
+.admin-presence.is-online > i {
+  background: var(--green-600);
+  box-shadow: 0 0 0 3px rgba(74, 177, 71, 0.18);
+}
+
+.admin-presence.is-offline > i { background: #c3ccdb; }
+
+.admin-presence.is-never {
+  color: var(--ink-muted);
+  font-weight: 650;
+}
+.admin-presence.is-never > i { background: #dfe4ec; }
+
+/* Connectivité retenue par le serveur : un tiret neutre, surtout pas « hors
+   ligne » qui laisserait déduire une information. */
+.admin-presence.is-hidden {
+  color: var(--ink-muted);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.admin-presence.is-hidden > i { background: transparent; }
+
+.admin-user-presence > small {
+  font-size: 11px;
+  color: var(--ink-muted);
+  font-weight: 620;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .admin-user-row:last-child {
@@ -6588,10 +6669,12 @@ textarea:focus-visible {
   }
 
   .admin-user-row {
-    grid-template-columns: minmax(210px, 1.15fr) minmax(105px, 0.6fr) minmax(125px, 0.7fr) minmax(150px, 0.8fr);
+    grid-template-columns: minmax(200px, 1.1fr) minmax(105px, 0.6fr) minmax(155px, 0.85fr) minmax(120px, 0.55fr);
   }
 
-  .admin-user-row > :nth-child(4) {
+  /* C'est la progression qui cède la place, pas la connexion : savoir qui est
+     en ligne est justement ce qu'on vient chercher dans cet écran. */
+  .admin-user-row > :nth-child(3) {
     display: none;
   }
 
@@ -6745,15 +6828,16 @@ textarea:focus-visible {
     background: #ffffff;
   }
 
-  .admin-user-row > :nth-child(4) {
-    display: none;
-  }
-
   .admin-user-identity {
     grid-column: 1 / -1;
   }
 
   .admin-user-progress {
+    grid-column: 1 / -1;
+  }
+
+  /* Sur téléphone la carte empile tout : la connexion reste visible. */
+  .admin-user-presence {
     grid-column: 1 / -1;
   }
 
