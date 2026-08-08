@@ -84,6 +84,8 @@ Le contenu des leçons de mathématiques est **codé en dur dans des fichiers Ty
 
 Dernier travail livré et déployé en production :
 
+- Refonte de la **leçon 15 de Terminale C** (« Calcul intégral ») dans `terminalCIntegralCalculusPath.ts` : 8 identifiants et poids historiques conservés, 153 réponses évaluables issues des 16 pages, deux courbes interactives, un schéma de valeur moyenne et correction explicite des erreurs de la source. La leçon 10 de Terminale D réutilise le même contenu ; l’enrichissement ajoute donc 145 questions dans chacune des deux séries. L’audit `audit-terminal-c-integral-calculus-katex.mjs` protège désormais la structure et les 913 formules. Aucun changement API ni migration Supabase ; le compteur public passe à 4 151 exercices.
+
 - Refonte de la **leçon 14 de Terminale C** (« Isométries du plan ») dans `terminalCIsometriesPath.ts` : 8 identifiants et poids historiques conservés, 188 réponses évaluables issues des 23 pages et des exercices 1 à 19, trois schémas interactifs et mission finale du motif de pagne. Aucun changement API ni migration Supabase ; le compteur public passe à 3 861 exercices.
 
 - Refonte de la leçon 01 de Terminale A (« Étude de fonctions polynômes et de fonctions rationnelles ») : 19 niveaux enrichis, tableaux de propriétés et de variations, exemples rédigés, encadrés pédagogiques, situations d'apprentissage retirées.
