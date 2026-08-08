@@ -84,6 +84,8 @@ Le contenu des leçons de mathématiques est **codé en dur dans des fichiers Ty
 
 Dernier travail livré et déployé en production :
 
+- Refonte de la **leçon 14 de Terminale C** (« Isométries du plan ») dans `terminalCIsometriesPath.ts` : 8 identifiants et poids historiques conservés, 188 réponses évaluables issues des 23 pages et des exercices 1 à 19, trois schémas interactifs et mission finale du motif de pagne. Aucun changement API ni migration Supabase ; le compteur public passe à 3 861 exercices.
+
 - Refonte de la leçon 01 de Terminale A (« Étude de fonctions polynômes et de fonctions rationnelles ») : 19 niveaux enrichis, tableaux de propriétés et de variations, exemples rédigés, encadrés pédagogiques, situations d'apprentissage retirées.
 - Nouvelle interaction **`curve`** dans le moteur de leçons : graphique SVG avec repère gradué, asymptotes en pointillés et point mobile piloté au curseur. Définie dans `apps/web/src/domain/paths.ts`, rendue par `apps/web/src/features/lesson/LessonWorkspace.tsx`, stylée dans `apps/web/src/styles.css`. Douze niveaux l'utilisent.
 - Correctifs d'affichage transverses : résumés de niveaux rendus via `MathText`, références sources détachées en pastille, formules clés en mode display, bouton Davy réduit sous 520 px.

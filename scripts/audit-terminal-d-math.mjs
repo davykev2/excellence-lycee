@@ -33,6 +33,10 @@ const complexNumbersPath = loadTypeScript("apps/web/src/data/terminalCComplexNum
 const exponentialPowerPath = loadTypeScript("apps/web/src/data/terminalCExponentialPowerPath.ts");
 const sequencesPath = loadTypeScript("apps/web/src/data/terminalCSequencesPath.ts");
 const complexGeometryPath = loadTypeScript("apps/web/src/data/terminalCComplexGeometryPath.ts");
+const isometriesPath = loadTypeScript("apps/web/src/data/terminalCIsometriesPath.ts");
+const integralCalculusPath = loadTypeScript("apps/web/src/data/terminalCIntegralCalculusPath.ts", {
+  "./officialMathPathBuilder": builder,
+});
 const c01to05 = loadTypeScript("apps/web/src/data/terminalCMathPaths01to05.ts", {
   "./officialMathPathBuilder": builder,
   "./terminalCLimitsContinuityPath": limitsPath,
@@ -54,6 +58,8 @@ const c11to15 = loadTypeScript("apps/web/src/data/terminalCMathPaths11to15.ts", 
   "./terminalCLcmGcdPath": lcmGcdPath,
   "./terminalCSequencesPath": sequencesPath,
   "./terminalCComplexGeometryPath": complexGeometryPath,
+  "./terminalCIsometriesPath": isometriesPath,
+  "./terminalCIntegralCalculusPath": integralCalculusPath,
 });
 const c16to19 = loadTypeScript("apps/web/src/data/terminalCMathPaths16to19.ts", { "./officialMathPathBuilder": builder });
 const dModule = loadTypeScript("apps/web/src/data/terminalDMathPaths.ts", {
