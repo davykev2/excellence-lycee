@@ -8,6 +8,7 @@ import type {
 } from "../domain/paths";
 import { carbonylCompoundsPath } from "./terminalCDCarbonylCompoundsPath";
 import { carboxylicAcidsPath } from "./terminalCDCarboxylicAcidsPath";
+import { soapMakingPath } from "./terminalCDSoapMakingPath";
 
 const sourceDocument = "TleD_CH_L1_Les alcools.pdf";
 
@@ -623,4 +624,4 @@ export const alcoholsPath: LearningPath = {
   ],
 };
 
-export const chemistryPaths: LearningPath[] = [alcoholsPath, carbonylCompoundsPath, carboxylicAcidsPath];
+export const chemistryPaths: LearningPath[] = [alcoholsPath, carbonylCompoundsPath, carboxylicAcidsPath, soapMakingPath];
