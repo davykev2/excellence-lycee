@@ -8,6 +8,7 @@ import { uniformFieldsPaths } from "./terminalCDUniformFieldsPath";
 import { freeMechanicalOscillationsPaths } from "./terminalCDFreeMechanicalOscillationsPath";
 import { magneticFieldPaths } from "./terminalCDMagneticFieldPath";
 import { laplaceLawPaths } from "./terminalCDLaplaceLawPath";
+import { inductionElectromagneticPaths } from "./terminalCInductionElectromagneticPath";
 import { terminalGeographyPaths } from "./terminalGeographyPaths";
 import { terminalHistoryPaths } from "./terminalHistoryPaths";
 import { terminalMathematicsPaths } from "./terminalMathPaths";
@@ -27,6 +28,7 @@ const baseLearningPaths: LearningPath[] = [
   ...freeMechanicalOscillationsPaths,
   ...magneticFieldPaths,
   ...laplaceLawPaths,
+  ...inductionElectromagneticPaths,
   ...chemistryPaths,
   ...terminalGeographyPaths,
   ...terminalHistoryPaths,

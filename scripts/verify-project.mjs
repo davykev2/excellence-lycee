@@ -53,6 +53,7 @@ for (const script of [
   "audit-physics-free-oscillations-katex.mjs",
   "audit-physics-magnetic-field-katex.mjs",
   "audit-physics-laplace-law-katex.mjs",
+  "audit-physics-induction-electromagnetic-katex.mjs",
 ]) {
   run(`Contenu · ${script}`, process.execPath, [resolve(root, "scripts", script)]);
 }

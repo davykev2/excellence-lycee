@@ -132,6 +132,9 @@ test("l'audit éditorial révèle les leçons du programme encore non publiées"
   const laplaceLaw = terminalCPhysics.find((audit) => audit.id === "terminale-cd-laplace-law");
   assert.equal(laplaceLaw?.published, true);
   assert.equal(laplaceLaw && editorialStatusOf(laplaceLaw), "complete");
+  const induction = terminalCPhysics.find((audit) => audit.id === "terminale-c-induction-electromagnetic");
+  assert.equal(induction?.published, true);
+  assert.equal(induction && editorialStatusOf(induction), "complete");
 });
 
 test("le catalogue de la boutique reste synchronisé entre Web, API et Supabase", () => {
