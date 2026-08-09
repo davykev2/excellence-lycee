@@ -37,6 +37,7 @@ const isometriesPath = loadTypeScript("apps/web/src/data/terminalCIsometriesPath
 const integralCalculusPath = loadTypeScript("apps/web/src/data/terminalCIntegralCalculusPath.ts", {
   "./officialMathPathBuilder": builder,
 });
+const directSimilaritiesPath = loadTypeScript("apps/web/src/data/terminalCDirectSimilaritiesPath.ts");
 const c01to05 = loadTypeScript("apps/web/src/data/terminalCMathPaths01to05.ts", {
   "./officialMathPathBuilder": builder,
   "./terminalCLimitsContinuityPath": limitsPath,
@@ -61,7 +62,10 @@ const c11to15 = loadTypeScript("apps/web/src/data/terminalCMathPaths11to15.ts", 
   "./terminalCIsometriesPath": isometriesPath,
   "./terminalCIntegralCalculusPath": integralCalculusPath,
 });
-const c16to19 = loadTypeScript("apps/web/src/data/terminalCMathPaths16to19.ts", { "./officialMathPathBuilder": builder });
+const c16to19 = loadTypeScript("apps/web/src/data/terminalCMathPaths16to19.ts", {
+  "./officialMathPathBuilder": builder,
+  "./terminalCDirectSimilaritiesPath": directSimilaritiesPath,
+});
 const dModule = loadTypeScript("apps/web/src/data/terminalDMathPaths.ts", {
   "./terminalCMathPaths01to05": c01to05,
   "./terminalCMathPaths06to10": c06to10,

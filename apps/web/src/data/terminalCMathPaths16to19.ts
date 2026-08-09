@@ -1,25 +1,7 @@
 import { buildOfficialMathPath, officialMathTopic as t } from "./officialMathPathBuilder";
+import { terminalCDirectSimilaritiesPath } from "./terminalCDirectSimilaritiesPath";
 
 const levelIds = ["terminale-c"];
-
-export const terminalCDirectSimilaritiesPath = buildOfficialMathPath({
-  id: "terminale-c-math-l16-direct-similarities", levelIds, chapterNumber: 16, themeNumber: 2,
-  themeTitle: "Transformations du plan", title: "Similitudes directes",
-  description: "Définition, invariants, écriture complexe, détermination, construction et applications des similitudes directes.",
-  outcomes: ["Caractériser une similitude directe", "Déterminer ses éléments", "Construire son centre et ses images"],
-  documentTitle: "TC Maths leçon 16 Similitudes directes.pdf",
-  topics: [
-    t("similarity-definition", "Rapport et angle d’une similitude directe", "1-3", "I. Définition", "Une similitude directe multiplie toutes les distances par un même rapport $k>0$ et conserve les angles orientés en ajoutant un angle constant $\\theta$.", "Le couple $(k,\\theta)$ décrit l’effet sur toute paire de vecteurs.", String.raw`A'B'=kAB,\quad\operatorname{Mes}(\overrightarrow{A'B'},\overrightarrow{AB})=\theta`, "Une similitude de rapport $3$ transforme une longueur $4$ en quelle longueur ?", "$12$.", 50),
-    t("similarity-composition-inverse", "Composition et réciproque", "3-5", "II-1. Opérations", "Les rapports se multiplient et les angles s’additionnent lors d’une composition. La réciproque inverse le rapport et change le signe de l’angle.", "Travailler modulo $2\\pi$ pour les angles.", String.raw`k_{g\circ f}=k_gk_f,\quad\theta_{g\circ f}=\theta_g+\theta_f`, "Quel est le rapport de la réciproque d’une similitude de rapport $5$ ?", "$1/5$.", 55),
-    t("similarity-invariants", "Propriétés géométriques conservées", "5-7", "II-2. Invariants", "Une similitude directe conserve l’alignement, les angles orientés, les rapports de longueurs, les barycentres et la forme des figures.", "Les aires sont multipliées par $k^2$.", String.raw`\mathcal A'=k^2\mathcal A`, "Par combien une aire est-elle multipliée si $k=3$ ?", "$9$.", 60),
-    t("similarity-canonical", "Décomposition canonique", "7-10", "III. Décomposition", "Une similitude directe non translation possède un centre unique et se décompose en une rotation et une homothétie de ce même centre.", "Le rapport $1$ donne une rotation ; l’angle nul donne une homothétie positive.", String.raw`s=h_{\Omega,k}\circ r_{\Omega,\theta}`, "Quelle nature obtient-on si $k=1$ et $\\theta\\ne0$ ?", "Une rotation.", 65),
-    t("similarity-complex-form", "Écriture complexe et reconnaissance", "10-13", "IV-1. Forme complexe", "Toute similitude directe s’écrit $z'=az+b$ avec $a\\ne0$ ; son rapport est $|a|$ et son angle est un argument de $a$.", "Le cas $a=1$ correspond à une translation.", String.raw`z'=az+b,\quad k=|a|,\quad\theta=\arg a`, "Pour $z'=(1+i)z-2$, quel est le rapport ?", "$\\sqrt2$.", 65),
-    t("similarity-center-form", "Écriture à partir du centre", "13-16", "IV-2. Centre", "Si $\\Omega$ est le centre d’affixe $\\omega$, l’écriture $z'-\\omega=a(z-\\omega)$ fait apparaître directement le point fixe.", "Résoudre $\\omega=a\\omega+b$ lorsque $a\\ne1$.", String.raw`z'-\omega=ke^{i\theta}(z-\omega)`, "Quel point reste fixe dans cette écriture ?", "$\\Omega$.", 70),
-    t("similarity-from-images", "Déterminer une similitude par deux images", "16-20", "V. Détermination", "Les images de deux points distincts fournissent deux équations linéaires qui déterminent $a$ et $b$.", "Soustraire les équations pour obtenir d’abord $a$.", String.raw`a=\frac{z_{B'}-z_{A'}}{z_B-z_A}`, "Si $0\\mapsto1$ et $1\\mapsto1+i$, quelle est l’écriture ?", "$z'=iz+1$.", 70),
-    t("similarity-center-construction", "Construire le centre", "20-25", "VI. Construction", "Le centre se trouve en combinant les médiatrices liées au rapport et les arcs capables liés à l’angle, ou grâce à une construction par triangles directement semblables.", "Traiter séparément les cas $k=1$ et $\\theta=0$.", String.raw`\frac{\Omega A'}{\Omega A}=k,\quad\operatorname{Mes}(\overrightarrow{\Omega A},\overrightarrow{\Omega A'})=\theta`, "Que vérifie le centre par rapport à un point $A$ et son image $A'$ ?", "$\\Omega A'=k\\,\\Omega A$ et l’angle orienté vaut $\\theta$.", 75),
-    t("similarity-applications", "Triangles directement semblables et applications", "25-32", "VII. Applications", "Deux triangles directement semblables sont reliés par une similitude directe unique lorsque les sommets homologues sont ordonnés. Cette transformation sert aux constructions et aux lieux géométriques.", "Identifier les sommets homologues avant de comparer rapports et angles.", String.raw`\frac{A'B'}{AB}=\frac{B'C'}{BC}=\frac{C'A'}{CA}=k`, "Que faut-il vérifier pour reconnaître deux triangles directement semblables ?", "L’égalité des rapports des côtés homologues et la conservation des angles orientés.", 90, "challenge"),
-  ],
-});
 
 export const terminalCProbabilityPath = buildOfficialMathPath({
   id: "terminale-c-math-l17-probability", levelIds, chapterNumber: 17, themeNumber: 5,

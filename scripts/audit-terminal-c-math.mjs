@@ -37,6 +37,7 @@ const isometriesPath = loadTypeScript("apps/web/src/data/terminalCIsometriesPath
 const integralCalculusPath = loadTypeScript("apps/web/src/data/terminalCIntegralCalculusPath.ts", {
   "./officialMathPathBuilder": builder,
 });
+const directSimilaritiesPath = loadTypeScript("apps/web/src/data/terminalCDirectSimilaritiesPath.ts");
 const pathModules = [
   loadTypeScript("apps/web/src/data/terminalCMathPaths01to05.ts", {
     "./officialMathPathBuilder": builder,
@@ -62,7 +63,10 @@ const pathModules = [
     "./terminalCIsometriesPath": isometriesPath,
     "./terminalCIntegralCalculusPath": integralCalculusPath,
   }),
-  loadTypeScript("apps/web/src/data/terminalCMathPaths16to19.ts", { "./officialMathPathBuilder": builder }),
+  loadTypeScript("apps/web/src/data/terminalCMathPaths16to19.ts", {
+    "./officialMathPathBuilder": builder,
+    "./terminalCDirectSimilaritiesPath": directSimilaritiesPath,
+  }),
 ];
 
 const paths = pathModules.flatMap((module, index) => module[`terminalCMathPaths${index === 0 ? "01to05" : index === 1 ? "06to10" : index === 2 ? "11to15" : "16to19"}`]);
