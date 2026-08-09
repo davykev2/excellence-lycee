@@ -129,6 +129,9 @@ test("l'audit éditorial révèle les leçons du programme encore non publiées"
   const magneticField = terminalCPhysics.find((audit) => audit.id === "terminale-cd-magnetic-field");
   assert.equal(magneticField?.published, true);
   assert.equal(magneticField && editorialStatusOf(magneticField), "complete");
+  const laplaceLaw = terminalCPhysics.find((audit) => audit.id === "terminale-cd-laplace-law");
+  assert.equal(laplaceLaw?.published, true);
+  assert.equal(laplaceLaw && editorialStatusOf(laplaceLaw), "complete");
 });
 
 test("le catalogue de la boutique reste synchronisé entre Web, API et Supabase", () => {

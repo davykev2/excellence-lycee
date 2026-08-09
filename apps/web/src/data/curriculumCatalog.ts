@@ -557,9 +557,9 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Mouvements dans les champs g et E uniformes", strand: "Physique", pathId: "terminale-cd-uniform-fields" },
       { title: "Oscillations mécaniques libres", strand: "Physique", pathId: "terminale-cd-free-mechanical-oscillations" },
       { title: "Champ magnétique", strand: "Physique", pathId: "terminale-cd-magnetic-field" },
+      ...withStrand("Physique", ["Mouvement d’une particule chargée dans un champ magnétique uniforme"]),
+      { title: "Loi de Laplace", strand: "Physique", pathId: "terminale-cd-laplace-law" },
       ...withStrand("Physique", [
-        "Mouvement d’une particule chargée dans un champ magnétique uniforme",
-        "Loi de Laplace",
         "Induction électromagnétique",
         "Auto-induction",
         "Montages dérivateur et intégrateur",
@@ -648,9 +648,9 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Mouvements dans les champs g et E uniformes", strand: "Physique", pathId: "terminale-cd-uniform-fields" },
       { title: "Oscillations mécaniques libres", strand: "Physique", pathId: "terminale-cd-free-mechanical-oscillations" },
       { title: "Champ magnétique", strand: "Physique", pathId: "terminale-cd-magnetic-field" },
+      ...withStrand("Physique", ["Mouvement d’une particule chargée dans un champ magnétique uniforme"]),
+      { title: "Loi de Laplace", strand: "Physique", pathId: "terminale-cd-laplace-law" },
       ...withStrand("Physique", [
-        "Mouvement d’une particule chargée dans un champ magnétique uniforme",
-        "Loi de Laplace",
         "Auto-induction",
         "Montages dérivateur et intégrateur",
         "Oscillations électriques libres dans un circuit LC",
