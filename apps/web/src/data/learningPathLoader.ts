@@ -22,7 +22,7 @@ async function loadTerminalCommonPaths() {
 }
 
 async function loadTerminalPhysicsPaths(levelId: string) {
-  const [kinematics, inertia, uniformFields, freeOscillations, magneticField, laplaceLaw, induction, autoInduction, chemistry, gravitation] = await Promise.all([
+  const [kinematics, inertia, uniformFields, freeOscillations, magneticField, laplaceLaw, induction, autoInduction, derivatorIntegrator, chemistry, gravitation] = await Promise.all([
     import("./physicsPaths").then((module) => module.physicsPaths),
     import("./terminalCDInertiaMotionPath").then((module) => module.inertiaMotionPaths),
     import("./terminalCDUniformFieldsPath").then((module) => module.uniformFieldsPaths),
@@ -33,12 +33,13 @@ async function loadTerminalPhysicsPaths(levelId: string) {
       ? import("./terminalCInductionElectromagneticPath").then((module) => module.inductionElectromagneticPaths)
       : Promise.resolve([] as LearningPath[]),
     import("./terminalCDAutoInductionPath").then((module) => module.autoInductionPaths),
+    import("./terminalCDDerivatorIntegratorPath").then((module) => module.derivatorIntegratorPaths),
     import("./chemistryPaths").then((module) => module.chemistryPaths),
     levelId === "terminale-c"
       ? import("./terminalCGravitationPath").then((module) => module.gravitationPaths)
       : Promise.resolve([] as LearningPath[]),
   ]);
-  return [...kinematics, ...inertia, ...gravitation, ...uniformFields, ...freeOscillations, ...magneticField, ...laplaceLaw, ...induction, ...autoInduction, ...chemistry];
+  return [...kinematics, ...inertia, ...gravitation, ...uniformFields, ...freeOscillations, ...magneticField, ...laplaceLaw, ...induction, ...autoInduction, ...derivatorIntegrator, ...chemistry];
 }
 
 async function loadPathsForLevel(levelId: string) {

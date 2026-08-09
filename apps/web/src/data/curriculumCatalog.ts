@@ -561,8 +561,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Loi de Laplace", strand: "Physique", pathId: "terminale-cd-laplace-law" },
       { title: "Induction électromagnétique", strand: "Physique", pathId: "terminale-c-induction-electromagnetic" },
       { title: "Auto-induction", strand: "Physique", pathId: "terminale-cd-auto-induction" },
+      { title: "Montages dérivateur et intégrateur", strand: "Physique", pathId: "terminale-cd-derivator-integrator" },
       ...withStrand("Physique", [
-        "Montages dérivateur et intégrateur",
         "Oscillations électriques libres dans un circuit LC",
         "Circuit RLC en régime sinusoïdal forcé",
         "Résonance d’intensité d’un circuit RLC série",
@@ -651,8 +651,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       ...withStrand("Physique", ["Mouvement d’une particule chargée dans un champ magnétique uniforme"]),
       { title: "Loi de Laplace", strand: "Physique", pathId: "terminale-cd-laplace-law" },
       { title: "Auto-induction", strand: "Physique", pathId: "terminale-cd-auto-induction" },
+      { title: "Montages dérivateur et intégrateur", strand: "Physique", pathId: "terminale-cd-derivator-integrator" },
       ...withStrand("Physique", [
-        "Montages dérivateur et intégrateur",
         "Oscillations électriques libres dans un circuit LC",
         "Circuit RLC en régime sinusoïdal forcé",
         "Résonance d’intensité d’un circuit RLC série",

@@ -138,6 +138,9 @@ test("l'audit éditorial révèle les leçons du programme encore non publiées"
   const autoInduction = terminalCPhysics.find((audit) => audit.id === "terminale-cd-auto-induction");
   assert.equal(autoInduction?.published, true);
   assert.equal(autoInduction && editorialStatusOf(autoInduction), "complete");
+  const derivatorIntegrator = terminalCPhysics.find((audit) => audit.id === "terminale-cd-derivator-integrator");
+  assert.equal(derivatorIntegrator?.published, true);
+  assert.equal(derivatorIntegrator && editorialStatusOf(derivatorIntegrator), "complete");
 });
 
 test("le catalogue de la boutique reste synchronisé entre Web, API et Supabase", () => {

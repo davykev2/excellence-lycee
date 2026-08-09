@@ -55,6 +55,7 @@ for (const script of [
   "audit-physics-laplace-law-katex.mjs",
   "audit-physics-induction-electromagnetic-katex.mjs",
   "audit-physics-auto-induction-katex.mjs",
+  "audit-physics-derivator-integrator-katex.mjs",
 ]) {
   run(`Contenu · ${script}`, process.execPath, [resolve(root, "scripts", script)]);
 }

@@ -10,6 +10,7 @@ import { magneticFieldPaths } from "./terminalCDMagneticFieldPath";
 import { laplaceLawPaths } from "./terminalCDLaplaceLawPath";
 import { inductionElectromagneticPaths } from "./terminalCInductionElectromagneticPath";
 import { autoInductionPaths } from "./terminalCDAutoInductionPath";
+import { derivatorIntegratorPaths } from "./terminalCDDerivatorIntegratorPath";
 import { terminalGeographyPaths } from "./terminalGeographyPaths";
 import { terminalHistoryPaths } from "./terminalHistoryPaths";
 import { terminalMathematicsPaths } from "./terminalMathPaths";
@@ -31,6 +32,7 @@ const baseLearningPaths: LearningPath[] = [
   ...laplaceLawPaths,
   ...inductionElectromagneticPaths,
   ...autoInductionPaths,
+  ...derivatorIntegratorPaths,
   ...chemistryPaths,
   ...terminalGeographyPaths,
   ...terminalHistoryPaths,
