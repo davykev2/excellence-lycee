@@ -560,8 +560,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       ...withStrand("Physique", ["Mouvement d’une particule chargée dans un champ magnétique uniforme"]),
       { title: "Loi de Laplace", strand: "Physique", pathId: "terminale-cd-laplace-law" },
       { title: "Induction électromagnétique", strand: "Physique", pathId: "terminale-c-induction-electromagnetic" },
+      { title: "Auto-induction", strand: "Physique", pathId: "terminale-cd-auto-induction" },
       ...withStrand("Physique", [
-        "Auto-induction",
         "Montages dérivateur et intégrateur",
         "Oscillations électriques libres dans un circuit LC",
         "Circuit RLC en régime sinusoïdal forcé",
@@ -575,8 +575,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Les alcools", strand: "Chimie", pathId: "terminale-cd-chemistry-alcohols" },
       { title: "Composés carbonylés : aldéhydes et cétones", strand: "Chimie", pathId: "terminale-cd-chemistry-carbonyl" },
       { title: "Acides carboxyliques et dérivés", strand: "Chimie", pathId: "terminale-cd-chemistry-carboxylic-acids" },
+      { title: "Fabrication d’un savon", strand: "Chimie", pathId: "terminale-cd-chemistry-soap" },
       ...withStrand("Chimie", [
-        "Fabrication d’un savon",
         "Solutions aqueuses : notion de pH",
         "Acide fort - base forte",
         "Acide faible - base faible",
@@ -650,8 +650,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Champ magnétique", strand: "Physique", pathId: "terminale-cd-magnetic-field" },
       ...withStrand("Physique", ["Mouvement d’une particule chargée dans un champ magnétique uniforme"]),
       { title: "Loi de Laplace", strand: "Physique", pathId: "terminale-cd-laplace-law" },
+      { title: "Auto-induction", strand: "Physique", pathId: "terminale-cd-auto-induction" },
       ...withStrand("Physique", [
-        "Auto-induction",
         "Montages dérivateur et intégrateur",
         "Oscillations électriques libres dans un circuit LC",
         "Circuit RLC en régime sinusoïdal forcé",
@@ -664,8 +664,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Composés carbonylés : aldéhydes et cétones", strand: "Chimie", pathId: "terminale-cd-chemistry-carbonyl" },
       ...withStrand("Chimie", ["Les amines"]),
       { title: "Acides carboxyliques et dérivés", strand: "Chimie", pathId: "terminale-cd-chemistry-carboxylic-acids" },
+      { title: "Fabrication d’un savon", strand: "Chimie", pathId: "terminale-cd-chemistry-soap" },
       ...withStrand("Chimie", [
-        "Fabrication d’un savon",
         "Les acides α-aminés",
         "Solutions aqueuses : notion de pH",
         "Acide fort - base forte",
