@@ -1,26 +1,11 @@
 import { buildOfficialMathPath, officialMathTopic as t } from "./officialMathPathBuilder";
+import { terminalCDifferentialEquationsPath } from "./terminalCDifferentialEquationsPath";
 import { terminalCDirectSimilaritiesPath } from "./terminalCDirectSimilaritiesPath";
 import { terminalCProbabilityPath } from "./terminalCProbabilityPath";
 
-export { terminalCProbabilityPath };
+export { terminalCDifferentialEquationsPath, terminalCProbabilityPath };
 
 const levelIds = ["terminale-c"];
-
-export const terminalCDifferentialEquationsPath = buildOfficialMathPath({
-  id: "terminale-c-math-l18-differential-equations", levelIds, chapterNumber: 18, themeNumber: 1,
-  themeTitle: "Analyse", title: "Équations différentielles",
-  description: "Équations linéaires du premier ordre et équations homogènes du second ordre à coefficients constants.",
-  outcomes: ["Résoudre une équation du premier ordre", "Déterminer une solution avec condition initiale", "Résoudre les équations du second ordre du cours"],
-  documentTitle: "TC Maths leçon 18 Equations différentielles.pdf",
-  topics: [
-    t("first-order-homogeneous", "Équation $y'+ay=0$", "1-2", "I-1-a. Premier ordre homogène", "Les solutions de $y'+ay=0$ sont les multiples de $e^{-ax}$.", "Isoler d’abord le coefficient $a$ sous la forme normalisée.", String.raw`y'+ay=0\Longrightarrow y(x)=ke^{-ax}`, "Quelles sont les solutions de $y'+2y=0$ ?", "$y(x)=ke^{-2x}$, $k\\in\\mathbb R$.", 55),
-    t("first-order-constant", "Équation $y'+ay=b$", "2", "I-1-b. Second membre constant", "Une solution constante $b/a$ s’ajoute à la solution de l’équation homogène lorsque $a\\ne0$.", "Vérifier la solution particulière constante avant d’ajouter $ke^{-ax}$.", String.raw`y(x)=ke^{-ax}+\frac ba`, "Quelles sont les solutions de $y'+2y=6$ ?", "$y(x)=ke^{-2x}+3$.", 60),
-    t("first-order-initial-value", "Condition initiale au premier ordre", "2-3", "I-1-c. Condition initiale", "Une condition $y(x_0)=y_0$ détermine l’unique constante de la solution générale.", "Remplacer $x_0$ et $y_0$, puis résoudre l’équation en $k$.", String.raw`y(x_0)=y_0`, "Pour $y'-3y=7$ et $y(0)=1$, quelle solution obtient-on ?", "$y(x)=\\frac{10}{3}e^{3x}-\\frac73$.", 70),
-    t("second-order-hyperbolic", "Équation $y''-\\omega^2y=0$", "3", "I-2-a. Second ordre, signe négatif", "Lorsque l’équation caractéristique possède deux racines réelles opposées, les solutions combinent deux exponentielles.", "Associer les racines $\\pm\\omega$ aux exponentielles correspondantes.", String.raw`y''-\omega^2y=0\Longrightarrow y=ae^{-\omega x}+be^{\omega x}`, "Quelles sont les solutions de $y''-4y=0$ ?", "$y(x)=ae^{-2x}+be^{2x}$.", 65),
-    t("second-order-oscillatory", "Équation $y''+\\omega^2y=0$", "3-4", "I-2-b. Oscillations", "Lorsque le coefficient est positif, les solutions sont des combinaisons de cosinus et sinus de pulsation $\\omega$.", "Lire $\\omega$ comme la racine carrée du coefficient de $y$.", String.raw`y''+\omega^2y=0\Longrightarrow y=a\cos(\omega x)+b\sin(\omega x)`, "Quelles sont les solutions de $y''+4y=0$ ?", "$y(x)=a\\cos(2x)+b\\sin(2x)$.", 65),
-    t("second-order-initial-values", "Conditions initiales au second ordre", "4-5", "I-2-c. Conditions initiales", "Deux conditions indépendantes déterminent les deux constantes d’une équation du second ordre.", "Calculer $y'$ avant de remplacer les deux conditions.", String.raw`y(x_0)=y_0,\quad y'(x_1)=y_1`, "Pour $y''+25y=0$, $y(0)=1$ et $y'(\\pi/5)=-2$, quelle solution donne le cours ?", "$y(x)=\\cos(5x)+\\frac25\\sin(5x)$.", 85, "challenge"),
-  ],
-});
 
 export const terminalCStatisticsPath = buildOfficialMathPath({
   id: "terminale-c-math-l19-statistics", levelIds, chapterNumber: 19, themeNumber: 6,
