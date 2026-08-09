@@ -48,6 +48,7 @@ for (const script of [
   "audit-terminal-c-direct-similarities-katex.mjs",
   "audit-terminal-c-probability-katex.mjs",
   "audit-terminal-c-differential-equations-katex.mjs",
+  "audit-terminal-c-statistics-katex.mjs",
   "audit-terminal-c-space-geometry-katex.mjs",
 ]) {
   run(`Contenu · ${script}`, process.execPath, [resolve(root, "scripts", script)]);

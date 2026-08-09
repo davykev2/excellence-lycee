@@ -1038,7 +1038,8 @@
 .mastery-course-card > ol li { display: grid; grid-template-columns: 30px 1fr; align-items: center; gap: 10px; }
 .mastery-course-card > ol li > span { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px; background: var(--navy-800); color: #fff; font-size: 12px; font-weight: 900; }
 .mastery-course-card > ol li p { margin: 0; color: #475c73; font-size: 14px; line-height: 1.5; }
-.mastery-worked-example { display: grid; gap: 6px; padding: 17px; border-left: 4px solid var(--green-500); border-radius: 0 13px 13px 0; background: #f3f8f1; }
+.mastery-worked-example { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 17px; border-left: 4px solid var(--green-500); border-radius: 0 13px 13px 0; background: #f3f8f1; }
+.mastery-worked-example > * { min-width: 0; }
 .mastery-worked-example strong { color: var(--navy-950); }
 .mastery-worked-example span { color: var(--ink-muted); }
 .mastery-worked-example b { color: var(--green-700); }
@@ -2937,13 +2938,17 @@ textarea:focus-visible {
 
 .lesson-example {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr);
   gap: 13px;
   margin-top: 20px;
   padding: 18px 20px;
   border: 1px solid #dce7d8;
   border-radius: 17px;
   background: #f5faf3;
+}
+
+.lesson-example > * {
+  min-width: 0;
 }
 
 .lesson-example svg {
