@@ -1,25 +1,10 @@
 import { buildOfficialMathPath, officialMathTopic as t } from "./officialMathPathBuilder";
 import { terminalCDirectSimilaritiesPath } from "./terminalCDirectSimilaritiesPath";
+import { terminalCProbabilityPath } from "./terminalCProbabilityPath";
+
+export { terminalCProbabilityPath };
 
 const levelIds = ["terminale-c"];
-
-export const terminalCProbabilityPath = buildOfficialMathPath({
-  id: "terminale-c-math-l17-probability", levelIds, chapterNumber: 17, themeNumber: 5,
-  themeTitle: "Probabilités", title: "Probabilité conditionnelle et variable aléatoire",
-  description: "Conditionnement, indépendance, probabilités totales, variables aléatoires, lois de Bernoulli et binomiales.",
-  outcomes: ["Calculer une probabilité conditionnelle", "Utiliser un arbre ou une partition", "Étudier une variable aléatoire discrète"],
-  documentTitle: "TC Maths leçon 17 Probabilité.pdf",
-  topics: [
-    t("conditional-probability", "Probabilité conditionnelle", "1-2", "I-1. Conditionnement", "La probabilité de $B$ sachant $A$ mesure la fréquence de $B$ dans l’univers restreint à $A$.", "Le conditionnement exige $P(A)>0$.", String.raw`P_A(B)=\frac{P(A\cap B)}{P(A)}`, "Si $P(F)=0{,}75$ et $P_F(I)=0{,}45$, combien vaut $P(F\\cap I)$ ?", "$0{,}3375$.", 55),
-    t("product-independence", "Formule du produit et indépendance", "2-3", "I-2. Indépendance", "La formule du produit reconstruit l’intersection. Deux événements sont indépendants lorsque le conditionnement ne modifie pas la probabilité.", "Ne pas confondre indépendance et incompatibilité.", String.raw`P(A\cap B)=P(A)P_A(B),\quad A\perp B\Longleftrightarrow P(A\cap B)=P(A)P(B)`, "Pour deux lancers indépendants d’une pièce équilibrée, combien vaut la probabilité d’obtenir deux piles ?", "$1/4$.", 60),
-    t("partition-total-probability", "Partition, arbre et probabilités totales", "3-4", "I-3. Probabilités totales", "Une partition découpe l’univers en événements incompatibles couvrant tous les cas. Un arbre pondéré organise les probabilités conditionnelles.", "Multiplier le long d’une branche puis additionner les branches conduisant à l’événement.", String.raw`P(B)=\sum_iP(A_i)P_{A_i}(B)`, "Quelle opération combine les probabilités des branches menant toutes à $B$ ?", "On les additionne.", 65),
-    t("random-variable-law", "Loi d’une variable aléatoire", "4-6", "II-1. Variable aléatoire", "Une variable aléatoire associe un nombre réel à chaque issue. Sa loi donne la probabilité de chacune de ses valeurs.", "La somme des probabilités de la loi doit valoir $1$.", String.raw`\sum_iP(X=x_i)=1`, "Dans une urne de $2$ boules blanches et $4$ rouges, que doit vérifier toute loi de gain construite ?", "La somme de ses probabilités vaut $1$.", 60),
-    t("expectation-variance", "Espérance, variance et écart-type", "6-7", "II-2. Paramètres", "L’espérance est la moyenne théorique ; la variance mesure la dispersion quadratique et l’écart-type est sa racine carrée.", "Utiliser $V(X)=E(X^2)-E(X)^2$ pour simplifier les calculs.", String.raw`E(X)=\sum x_ip_i,\quad V(X)=E(X^2)-E(X)^2`, "Que vaut l’écart-type en fonction de la variance ?", "$\\sigma(X)=\\sqrt{V(X)}$.", 65),
-    t("bernoulli-binomial", "Épreuve de Bernoulli et loi binomiale", "7-9", "III. Loi binomiale", "La répétition indépendante de $n$ épreuves de Bernoulli de probabilité de succès $p$ donne une variable $X\\sim\\mathcal B(n,p)$.", "Pour exactement $k$ succès, choisir leurs positions puis multiplier les probabilités.", String.raw`P(X=k)=\binom nkp^k(1-p)^{n-k}`, "Dans $5$ lancers d’un dé, quelle est la probabilité d’obtenir exactement quatre fois le six ?", "$\\binom54(1/6)^4(5/6)$.", 70),
-    t("binomial-parameters", "Espérance et variance binomiales", "9-10", "III-2. Paramètres binomiaux", "Pour $X\\sim\\mathcal B(n,p)$, l’espérance vaut $np$ et la variance $np(1-p)$.", "L’espérance s’interprète comme le nombre moyen de succès sur de nombreuses répétitions.", String.raw`E(X)=np,\quad V(X)=np(1-p)`, "Pour $X\\sim\\mathcal B(5,3/4)$, combien vaut $E(X)$ ?", "$15/4$.", 65),
-    t("cumulative-distribution", "Fonction de répartition", "10-12", "IV. Fonction de répartition", "La fonction de répartition $F(x)=P(X\\le x)$ cumule les probabilités et forme une fonction en escalier croissante de $0$ à $1$.", "À chaque valeur possible, ajouter sa probabilité à la somme précédente.", String.raw`F(x)=P(X\le x)`, "Pour la loi de probabilités $1/8,3/8,3/8,1/8$, quelle est la valeur cumulée après les deux premières issues ?", "$1/2$.", 80, "challenge"),
-  ],
-});
 
 export const terminalCDifferentialEquationsPath = buildOfficialMathPath({
   id: "terminale-c-math-l18-differential-equations", levelIds, chapterNumber: 18, themeNumber: 1,

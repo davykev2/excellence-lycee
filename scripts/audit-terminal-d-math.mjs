@@ -38,6 +38,7 @@ const integralCalculusPath = loadTypeScript("apps/web/src/data/terminalCIntegral
   "./officialMathPathBuilder": builder,
 });
 const directSimilaritiesPath = loadTypeScript("apps/web/src/data/terminalCDirectSimilaritiesPath.ts");
+const probabilityPath = loadTypeScript("apps/web/src/data/terminalCProbabilityPath.ts");
 const c01to05 = loadTypeScript("apps/web/src/data/terminalCMathPaths01to05.ts", {
   "./officialMathPathBuilder": builder,
   "./terminalCLimitsContinuityPath": limitsPath,
@@ -65,6 +66,7 @@ const c11to15 = loadTypeScript("apps/web/src/data/terminalCMathPaths11to15.ts", 
 const c16to19 = loadTypeScript("apps/web/src/data/terminalCMathPaths16to19.ts", {
   "./officialMathPathBuilder": builder,
   "./terminalCDirectSimilaritiesPath": directSimilaritiesPath,
+  "./terminalCProbabilityPath": probabilityPath,
 });
 const dModule = loadTypeScript("apps/web/src/data/terminalDMathPaths.ts", {
   "./terminalCMathPaths01to05": c01to05,

@@ -298,8 +298,8 @@ function DiagramLab({ interaction, selectedIndex, onSelect }: {
   return (
     <div className="mastery-diagram-lab">
       <div className="diagram-root">
-        <strong>{interaction.rootLabel}</strong>
-        {interaction.rootDetail && <span>{interaction.rootDetail}</span>}
+        <strong><MathText>{interaction.rootLabel}</MathText></strong>
+        {interaction.rootDetail && <MathText>{interaction.rootDetail}</MathText>}
       </div>
       <div className="diagram-stem" aria-hidden="true" />
       {groups.map((group) => (
@@ -314,15 +314,15 @@ function DiagramLab({ interaction, selectedIndex, onSelect }: {
                 onClick={() => onSelect(index)}
                 type="button"
               >
-                <strong>{node.label}</strong>
-                <span>{node.role}</span>
+                <strong><MathText>{node.label}</MathText></strong>
+                <MathText>{node.role}</MathText>
               </button>
             ))}
           </div>
         </div>
       ))}
       <div className="diagram-focus" aria-live="polite">
-        <strong>{selected.label}</strong>
+        <strong><MathText>{selected.label}</MathText></strong>
         <p><MathText>{selected.detail}</MathText></p>
       </div>
     </div>

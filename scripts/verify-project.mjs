@@ -46,6 +46,7 @@ for (const script of [
   "audit-terminal-c-isometries-katex.mjs",
   "audit-terminal-c-integral-calculus-katex.mjs",
   "audit-terminal-c-direct-similarities-katex.mjs",
+  "audit-terminal-c-probability-katex.mjs",
   "audit-terminal-c-space-geometry-katex.mjs",
 ]) {
   run(`Contenu · ${script}`, process.execPath, [resolve(root, "scripts", script)]);

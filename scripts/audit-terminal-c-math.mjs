@@ -38,6 +38,7 @@ const integralCalculusPath = loadTypeScript("apps/web/src/data/terminalCIntegral
   "./officialMathPathBuilder": builder,
 });
 const directSimilaritiesPath = loadTypeScript("apps/web/src/data/terminalCDirectSimilaritiesPath.ts");
+const probabilityPath = loadTypeScript("apps/web/src/data/terminalCProbabilityPath.ts");
 const pathModules = [
   loadTypeScript("apps/web/src/data/terminalCMathPaths01to05.ts", {
     "./officialMathPathBuilder": builder,
@@ -66,6 +67,7 @@ const pathModules = [
   loadTypeScript("apps/web/src/data/terminalCMathPaths16to19.ts", {
     "./officialMathPathBuilder": builder,
     "./terminalCDirectSimilaritiesPath": directSimilaritiesPath,
+    "./terminalCProbabilityPath": probabilityPath,
   }),
 ];
 
