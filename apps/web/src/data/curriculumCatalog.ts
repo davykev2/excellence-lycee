@@ -556,8 +556,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Interaction gravitationnelle", strand: "Physique", pathId: "terminale-c-gravitation" },
       { title: "Mouvements dans les champs g et E uniformes", strand: "Physique", pathId: "terminale-cd-uniform-fields" },
       { title: "Oscillations mécaniques libres", strand: "Physique", pathId: "terminale-cd-free-mechanical-oscillations" },
+      { title: "Champ magnétique", strand: "Physique", pathId: "terminale-cd-magnetic-field" },
       ...withStrand("Physique", [
-        "Champ magnétique",
         "Mouvement d’une particule chargée dans un champ magnétique uniforme",
         "Loi de Laplace",
         "Induction électromagnétique",
@@ -647,8 +647,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Mouvement du centre d’inertie d’un solide", strand: "Physique", pathId: "terminale-cd-inertia-motion" },
       { title: "Mouvements dans les champs g et E uniformes", strand: "Physique", pathId: "terminale-cd-uniform-fields" },
       { title: "Oscillations mécaniques libres", strand: "Physique", pathId: "terminale-cd-free-mechanical-oscillations" },
+      { title: "Champ magnétique", strand: "Physique", pathId: "terminale-cd-magnetic-field" },
       ...withStrand("Physique", [
-        "Champ magnétique",
         "Mouvement d’une particule chargée dans un champ magnétique uniforme",
         "Loi de Laplace",
         "Auto-induction",

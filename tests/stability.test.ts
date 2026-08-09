@@ -117,12 +117,18 @@ test("l'audit éditorial révèle les leçons du programme encore non publiées"
   assert.equal(terminalCPhysics.length, terminalCCatalogCount);
   assert.ok(terminalCPhysics.some((audit) => !audit.published), "Les leçons seulement titrées ont disparu de l'audit.");
   assert.ok(
-    terminalCPhysics.some((audit) => audit.title === "Champ magnétique" && editorialStatusOf(audit) === "todo"),
-    "Le champ magnétique doit rester signalé comme parcours à construire.",
+    terminalCPhysics.some((audit) => (
+      audit.title === "Mouvement d’une particule chargée dans un champ magnétique uniforme"
+      && editorialStatusOf(audit) === "todo"
+    )),
+    "La prochaine leçon de magnétisme doit rester signalée comme parcours à construire.",
   );
   const oscillations = terminalCPhysics.find((audit) => audit.id === "terminale-cd-free-mechanical-oscillations");
   assert.equal(oscillations?.published, true);
   assert.equal(oscillations && editorialStatusOf(oscillations), "complete");
+  const magneticField = terminalCPhysics.find((audit) => audit.id === "terminale-cd-magnetic-field");
+  assert.equal(magneticField?.published, true);
+  assert.equal(magneticField && editorialStatusOf(magneticField), "complete");
 });
 
 test("le catalogue de la boutique reste synchronisé entre Web, API et Supabase", () => {

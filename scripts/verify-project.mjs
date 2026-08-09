@@ -51,6 +51,7 @@ for (const script of [
   "audit-terminal-c-statistics-katex.mjs",
   "audit-terminal-c-space-geometry-katex.mjs",
   "audit-physics-free-oscillations-katex.mjs",
+  "audit-physics-magnetic-field-katex.mjs",
 ]) {
   run(`Contenu · ${script}`, process.execPath, [resolve(root, "scripts", script)]);
 }
