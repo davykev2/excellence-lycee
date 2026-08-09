@@ -57,6 +57,14 @@ http://localhost:<port>/?__paths-preview&__path-preview=<pathId>&__level-preview
 >
 > (Vérifier ensuite : `curl https://excellence-lycee.vercel.app/api/<route>` doit renvoyer 401 et non 404.)
 
+> **Plusieurs sessions travaillent sur ce dépôt** (Claude et ChatGPT en alternance). Chacune ne connaît que ses propres déploiements : **ne jamais déduire l'état de la production depuis l'historique git**, on conclut à un retard qui n'existe pas. La seule source de vérité est l'alias public. Avant de déployer ou de signaler un problème :
+>
+> ```bash
+> node scripts/check-api-deploy.mjs
+> ```
+>
+> Il compare le dernier commit touchant `apps/api/` au déploiement réellement servi par `excellence-lycee-api.vercel.app`, et sort en erreur si l'API est en retard.
+
 Déploiement manuel de secours du **frontend** — **depuis la racine du dépôt**, jamais depuis `apps/web` (le Root Directory est déjà réglé côté Vercel) :
 
 ```bash
