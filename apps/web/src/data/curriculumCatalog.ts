@@ -573,8 +573,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
         "Réactions nucléaires provoquées",
       ]),
       { title: "Les alcools", strand: "Chimie", pathId: "terminale-cd-chemistry-alcohols" },
+      { title: "Composés carbonylés : aldéhydes et cétones", strand: "Chimie", pathId: "terminale-cd-chemistry-carbonyl" },
       ...withStrand("Chimie", [
-        "Composés carbonylés : aldéhydes et cétones",
         "Acides carboxyliques et dérivés",
         "Fabrication d’un savon",
         "Solutions aqueuses : notion de pH",
@@ -661,8 +661,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
         "Réactions nucléaires provoquées",
       ]),
       { title: "Les alcools", strand: "Chimie", pathId: "terminale-cd-chemistry-alcohols" },
+      { title: "Composés carbonylés : aldéhydes et cétones", strand: "Chimie", pathId: "terminale-cd-chemistry-carbonyl" },
       ...withStrand("Chimie", [
-        "Composés carbonylés : aldéhydes et cétones",
         "Les amines",
         "Acides carboxyliques et dérivés",
         "Fabrication d’un savon",

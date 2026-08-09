@@ -6,6 +6,7 @@ import type {
   LessonQuestion,
   TimelineInteractionItem,
 } from "../domain/paths";
+import { carbonylCompoundsPath } from "./terminalCDCarbonylCompoundsPath";
 
 const sourceDocument = "TleD_CH_L1_Les alcools.pdf";
 
@@ -621,4 +622,4 @@ export const alcoholsPath: LearningPath = {
   ],
 };
 
-export const chemistryPaths: LearningPath[] = [alcoholsPath];
+export const chemistryPaths: LearningPath[] = [alcoholsPath, carbonylCompoundsPath];
