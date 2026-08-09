@@ -10507,10 +10507,12 @@ textarea:focus-visible {
 .editorial-status.is-todo { color: var(--orange-600); }
 
 @media (max-width: 900px) {
-  .editorial-row { grid-template-columns: 1fr auto; row-gap: 8px; }
+  .editorial-row { width: 100%; min-width: 0; grid-template-columns: minmax(0, 1fr) auto; row-gap: 8px; }
   .editorial-row.is-head { display: none; }
+  .editorial-row > span[role="cell"] { min-width: 0; max-width: 100%; }
   .editorial-row > span[role="cell"]:nth-child(n+2)::before { content: attr(data-label); }
   .editorial-cell-path { grid-column: 1 / -1; }
+  .editorial-cell-enrich { flex-wrap: wrap; }
 }
 
 /* ===== Cloche admin : courrier des réactions et commentaires ===== */

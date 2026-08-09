@@ -1,87 +1,12 @@
 import { useMemo, useState } from "react";
 import { BookOpenText, CheckCircle, Circle, MagnifyingGlass, Sparkle, Warning } from "@phosphor-icons/react";
-import type { LearningPath } from "../../domain/paths";
 import type { SubjectId } from "../../domain/learning";
 import { learningPaths } from "../../data/learningPaths";
+import { curriculumLessonTitles } from "../../data/curriculumCatalog";
 import { subjects, schoolLevels, isSubjectAvailableForLevel } from "../../data/programme";
+import { buildEditorialAudits, editorialStatusOf, type EditorialStatus } from "./editorialAudit";
 
-// Interactions considérées comme « riches » (au-delà de la frise/numérique de base).
-const richInteractionKinds = new Set(["diagram", "curve", "orbit", "schema"]);
-
-const seriesByLevelId = new Map(schoolLevels.map((level) => [level.id, level.series] as const));
-
-interface PathAudit {
-  id: string;
-  subjectId: SubjectId;
-  title: string;
-  chapterNumber: number;
-  themeTitle: string;
-  levelIds: string[];
-  series: string[];
-  levels: number;
-  enrichedLevels: number;
-  bodyLevels: number;
-  richLevels: number;
-  questions: number;
-  xp: number;
-}
-
-function auditPath(path: LearningPath): PathAudit {
-  const lessons = path.modules.flatMap((module) => module.lessons);
-  let enrichedLevels = 0;
-  let bodyLevels = 0;
-  let richLevels = 0;
-  let questions = 0;
-  let xp = 0;
-  for (const lesson of lessons) {
-    const bodyLength = lesson.concept.bodyMarkdown?.trim().length ?? 0;
-    const hasBody = bodyLength > 0;
-    const hasRich = richInteractionKinds.has(lesson.interaction.kind ?? "");
-    const questionCount = lesson.questions?.length ?? 1;
-    // La carte de synthèse « Les repères essentiels » des leçons Humanités est
-    // produite par la fabrique : elle est déjà rédigée et n'attend aucun cours
-    // supplémentaire, on la considère donc comme enrichie.
-    const isSynthesis = lesson.id.endsWith("-overview");
-    // Les anciens parcours de maths compacts possèdent eux aussi un petit bloc
-    // bodyMarkdown généré automatiquement et une seule question. Cela ne suffit
-    // pas à les déclarer « enrichis ». Un niveau de maths doit avoir un vrai
-    // développement, plusieurs exercices, ou une interaction riche accompagnée
-    // d'une pratique minimale.
-    const isSubstantiveMathLevel = bodyLength >= 600 || questionCount >= 3 || (hasRich && questionCount >= 2);
-    const isEnriched = path.subjectId === "mathematics"
-      ? isSubstantiveMathLevel
-      : hasBody || hasRich || isSynthesis;
-    if (hasBody) bodyLevels += 1;
-    if (hasRich) richLevels += 1;
-    if (isEnriched) enrichedLevels += 1;
-    questions += questionCount;
-    xp += lesson.xp;
-  }
-  const series = [...new Set(path.levelIds.map((id) => seriesByLevelId.get(id) ?? id))];
-  return {
-    id: path.id,
-    subjectId: path.subjectId,
-    title: path.title,
-    chapterNumber: path.chapterNumber,
-    themeTitle: path.theme.title,
-    levelIds: path.levelIds,
-    series,
-    levels: lessons.length,
-    enrichedLevels,
-    bodyLevels,
-    richLevels,
-    questions,
-    xp,
-  };
-}
-
-type StatusFilter = "all" | "complete" | "partial" | "todo";
-
-function statusOf(audit: PathAudit): Exclude<StatusFilter, "all"> {
-  if (audit.enrichedLevels === 0) return "todo";
-  if (audit.enrichedLevels >= audit.levels) return "complete";
-  return "partial";
-}
+type StatusFilter = "all" | EditorialStatus;
 
 const statusMeta: Record<Exclude<StatusFilter, "all">, { label: string; className: string }> = {
   complete: { label: "Complet", className: "is-complete" },
@@ -95,7 +20,7 @@ export function EditorialOverview() {
   const [subjectFilter, setSubjectFilter] = useState<SubjectId | "all">("all");
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
 
-  const audits = useMemo(() => learningPaths.map(auditPath), []);
+  const audits = useMemo(() => buildEditorialAudits(learningPaths, curriculumLessonTitles), []);
 
   // Tout est cadré par le niveau choisi (KPI, couverture par matière et tableau).
   const scopedAudits = useMemo(
@@ -103,43 +28,50 @@ export function EditorialOverview() {
     [audits, levelFilter],
   );
 
+  const kpiAudits = useMemo(
+    () => (subjectFilter === "all" ? scopedAudits : scopedAudits.filter((audit) => audit.subjectId === subjectFilter)),
+    [scopedAudits, subjectFilter],
+  );
+
   const totals = useMemo(() => {
-    const levels = scopedAudits.reduce((sum, a) => sum + a.levels, 0);
-    const enriched = scopedAudits.reduce((sum, a) => sum + a.enrichedLevels, 0);
-    const questions = scopedAudits.reduce((sum, a) => sum + a.questions, 0);
-    const subjectsCovered = new Set(scopedAudits.map((a) => a.subjectId)).size;
-    return { paths: scopedAudits.length, levels, enriched, questions, subjectsCovered };
-  }, [scopedAudits]);
+    const lessons = kpiAudits.length;
+    const published = kpiAudits.filter((audit) => audit.published).length;
+    const enriched = kpiAudits.filter((audit) => editorialStatusOf(audit) === "complete").length;
+    const questions = kpiAudits.reduce((sum, a) => sum + a.questions, 0);
+    const subjectsCovered = new Set(kpiAudits.filter((audit) => audit.published).map((a) => a.subjectId)).size;
+    return { lessons, published, enriched, questions, subjectsCovered };
+  }, [kpiAudits]);
 
   const perSubject = useMemo(() => {
     return Object.values(subjects).map((subject) => {
       const available = levelFilter === "all" || isSubjectAvailableForLevel(subject, levelFilter);
       const rows = scopedAudits.filter((a) => a.subjectId === subject.id);
-      const levels = rows.reduce((sum, a) => sum + a.levels, 0);
-      const enriched = rows.reduce((sum, a) => sum + a.enrichedLevels, 0);
+      const lessons = rows.length;
+      const published = rows.filter((audit) => audit.published).length;
+      const enriched = rows.filter((audit) => editorialStatusOf(audit) === "complete").length;
       return {
         id: subject.id,
         label: subject.label,
         accent: subject.theme.accent,
         available,
-        paths: rows.length,
-        levels,
+        lessons,
+        published,
         enriched,
-        coverage: levels === 0 ? 0 : Math.round((enriched / levels) * 100),
+        coverage: lessons === 0 ? 0 : Math.round((enriched / lessons) * 100),
       };
     })
       // Vue globale : tout ce qui a du contenu. Vue par niveau : uniquement les
       // matières réellement enseignées à ce niveau (ex. la Seconde ne fait pas de philo),
       // y compris celles encore vides pour révéler les manques.
-      .filter((row) => (levelFilter === "all" ? row.paths > 0 : row.available))
-      .sort((a, b) => a.coverage - b.coverage || b.paths - a.paths);
+      .filter((row) => (levelFilter === "all" ? row.lessons > 0 : row.available))
+      .sort((a, b) => a.coverage - b.coverage || b.lessons - a.lessons);
   }, [scopedAudits, levelFilter]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return scopedAudits
       .filter((a) => subjectFilter === "all" || a.subjectId === subjectFilter)
-      .filter((a) => statusFilter === "all" || statusOf(a) === statusFilter)
+      .filter((a) => statusFilter === "all" || editorialStatusOf(a) === statusFilter)
       .filter((a) => !q || a.title.toLowerCase().includes(q) || a.themeTitle.toLowerCase().includes(q) || subjects[a.subjectId].label.toLowerCase().includes(q))
       .sort((a, b) => {
         const ra = a.levels ? a.enrichedLevels / a.levels : 1;
@@ -149,7 +81,7 @@ export function EditorialOverview() {
       });
   }, [scopedAudits, query, subjectFilter, statusFilter]);
 
-  const coveragePct = totals.levels === 0 ? 0 : Math.round((totals.enriched / totals.levels) * 100);
+  const coveragePct = totals.lessons === 0 ? 0 : Math.round((totals.enriched / totals.lessons) * 100);
 
   return (
     <section className="admin-section editorial-overview" data-testid="admin-editorial">
@@ -157,49 +89,49 @@ export function EditorialOverview() {
         <div>
           <p className="admin-eyebrow">Vue d’ensemble éditoriale</p>
           <h2>Couverture du catalogue</h2>
-          <p>Tous les parcours en ligne, leur découpage et l’état d’enrichissement de chaque niveau — calculé en direct depuis le contenu réel de l’application.</p>
+          <p>Toutes les leçons du programme, y compris celles qui n’ont pas encore de parcours, comparées au contenu réellement publié dans l’application.</p>
         </div>
       </div>
 
       <div className="editorial-kpis">
         <article className="editorial-kpi is-navy">
-          <span>Parcours publiés</span>
-          <strong>{totals.paths}</strong>
+          <span>Leçons au programme</span>
+          <strong>{totals.lessons}</strong>
           <small>{totals.subjectsCovered} matières couvertes</small>
         </article>
         <article className="editorial-kpi">
-          <span>Niveaux au total</span>
-          <strong>{totals.levels}</strong>
+          <span>Parcours publiés</span>
+          <strong>{totals.published} <em>/ {totals.lessons}</em></strong>
           <small>{totals.questions.toLocaleString("fr-FR")} questions</small>
         </article>
         <article className="editorial-kpi is-accent">
-          <span>Niveaux enrichis</span>
-          <strong>{totals.enriched} <em>/ {totals.levels}</em></strong>
+          <span>Leçons enrichies</span>
+          <strong>{totals.enriched} <em>/ {totals.lessons}</em></strong>
           <small>{coveragePct}% du catalogue</small>
         </article>
         <article className="editorial-kpi">
           <span>Reste à enrichir</span>
-          <strong>{totals.levels - totals.enriched}</strong>
-          <small>niveaux sans cours rédigé ni interaction riche</small>
+          <strong>{totals.lessons - totals.enriched}</strong>
+          <small>leçons à construire ou à compléter</small>
         </article>
       </div>
 
       <div className="editorial-legend">
         <Sparkle size={16} weight="fill" />
-        <span>Un niveau est <strong>enrichi</strong> s’il possède un cours substantiel, plusieurs exercices ou une interaction riche réellement exploitable. Les petits résumés automatiques ne sont plus comptés comme des cours complets.</span>
+        <span>Une leçon n’est <strong>complète</strong> que si tous ses niveaux possèdent un cours substantiel, plusieurs exercices ou une interaction riche exploitable. Un simple titre ou un petit résumé automatique reste visible comme travail à faire.</span>
       </div>
 
       <section className="editorial-subject-panel">
         <h3>Par matière</h3>
         <div className="editorial-subject-grid">
           {perSubject.map((row) => (
-            <article className={row.paths === 0 ? "is-empty" : ""} key={row.id} style={{ "--subj-accent": row.accent } as React.CSSProperties}>
+            <article className={row.published === 0 ? "is-empty" : ""} key={row.id} style={{ "--subj-accent": row.accent } as React.CSSProperties}>
               <div className="editorial-subject-head">
                 <strong>{row.label}</strong>
-                <b>{row.paths === 0 ? "—" : `${row.coverage}%`}</b>
+                <b>{row.lessons === 0 ? "—" : `${row.coverage}%`}</b>
               </div>
               <div className="editorial-bar"><i style={{ width: `${row.coverage}%` }} /></div>
-              <small>{row.paths === 0 ? "Aucun contenu à ce niveau" : `${row.paths} parcours • ${row.enriched}/${row.levels} niveaux enrichis`}</small>
+              <small>{row.lessons === 0 ? "Aucune leçon au programme" : `${row.enriched}/${row.lessons} leçons enrichies • ${row.published} publiées`}</small>
             </article>
           ))}
         </div>
@@ -239,28 +171,29 @@ export function EditorialOverview() {
           <span role="columnheader">État</span>
         </div>
         {filtered.map((audit) => {
-          const status = statusOf(audit);
+          const status = editorialStatusOf(audit);
           const pct = audit.levels === 0 ? 0 : Math.round((audit.enrichedLevels / audit.levels) * 100);
           const subject = subjects[audit.subjectId];
+          const statusLabel = !audit.published ? "À construire" : statusMeta[status].label;
           return (
             <div className={`editorial-row ${statusMeta[status].className}`} role="row" key={audit.id}>
               <span className="editorial-cell-path" role="cell">
                 <i className="editorial-subject-dot" style={{ background: subject.theme.accent }} aria-hidden="true" />
                 <span>
                   <strong>{audit.title}</strong>
-                  <small>{subject.label} • Ch. {audit.chapterNumber} • {audit.themeTitle}</small>
+                  <small>{subject.label} • {audit.themeTitle} • {audit.published ? `Ch. ${audit.chapterNumber}` : "parcours non publié"}</small>
                 </span>
               </span>
-              <span className="editorial-cell-series" role="cell">{audit.series.join(" · ")}</span>
-              <span className="editorial-cell-enrich" role="cell">
+              <span className="editorial-cell-series" role="cell" data-label="Séries">{audit.series.join(" · ")}</span>
+              <span className="editorial-cell-enrich" role="cell" data-label="Enrichissement">
                 <span className="editorial-mini-bar"><i style={{ width: `${pct}%` }} /></span>
-                <b>{audit.enrichedLevels}/{audit.levels}</b>
+                <b>{audit.published ? `${audit.enrichedLevels}/${audit.levels}` : "Non publié"}</b>
               </span>
-              <span role="cell">{audit.questions}</span>
-              <span role="cell">{audit.xp.toLocaleString("fr-FR")}</span>
-              <span className={`editorial-status ${statusMeta[status].className}`} role="cell">
+              <span role="cell" data-label="Questions">{audit.published ? audit.questions : "—"}</span>
+              <span role="cell" data-label="XP">{audit.published ? audit.xp.toLocaleString("fr-FR") : "—"}</span>
+              <span className={`editorial-status ${statusMeta[status].className}`} role="cell" data-label="État">
                 {status === "complete" ? <CheckCircle size={15} weight="fill" /> : status === "todo" ? <Warning size={15} weight="fill" /> : <Circle size={15} weight="fill" />}
-                {statusMeta[status].label}
+                {statusLabel}
               </span>
             </div>
           );

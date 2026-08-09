@@ -12,7 +12,12 @@ import {
 } from "../apps/web/src/data/learningPathLoader.ts";
 import { learningPaths } from "../apps/web/src/data/learningPaths.ts";
 import { AVAILABLE_EXERCISES } from "../apps/web/src/data/learningPathMetrics.ts";
+import { curriculumLessonTitles } from "../apps/web/src/data/curriculumCatalog.ts";
 import { schoolLevels } from "../apps/web/src/data/programme.ts";
+import {
+  buildEditorialAudits,
+  editorialStatusOf,
+} from "../apps/web/src/features/admin/editorialAudit.ts";
 import { storeCatalog } from "../apps/web/src/data/storeCatalog.ts";
 import { numericalDerivative, parseMathExpression } from "../apps/web/src/features/codex/mathEngine.ts";
 import {
@@ -98,6 +103,26 @@ test("le compteur public d'exercices reste aligné sur le catalogue complet", ()
   ), 0);
 
   assert.equal(AVAILABLE_EXERCISES, exerciseCount);
+});
+
+test("l'audit éditorial révèle les leçons du programme encore non publiées", () => {
+  const audits = buildEditorialAudits(learningPaths, curriculumLessonTitles);
+  const terminalCPhysics = audits.filter((audit) => (
+    audit.subjectId === "physics-chemistry" && audit.levelIds.includes("terminale-c")
+  ));
+  const terminalCCatalogCount = curriculumLessonTitles.filter((lesson) => (
+    lesson.subjectId === "physics-chemistry" && lesson.levelId === "terminale-c"
+  )).length;
+
+  assert.equal(terminalCPhysics.length, terminalCCatalogCount);
+  assert.ok(terminalCPhysics.some((audit) => !audit.published), "Les leçons seulement titrées ont disparu de l'audit.");
+  assert.ok(
+    terminalCPhysics.some((audit) => audit.title === "Champ magnétique" && editorialStatusOf(audit) === "todo"),
+    "Le champ magnétique doit rester signalé comme parcours à construire.",
+  );
+  const oscillations = terminalCPhysics.find((audit) => audit.id === "terminale-cd-free-mechanical-oscillations");
+  assert.equal(oscillations?.published, true);
+  assert.equal(oscillations && editorialStatusOf(oscillations), "complete");
 });
 
 test("le catalogue de la boutique reste synchronisé entre Web, API et Supabase", () => {
