@@ -156,6 +156,9 @@ test("l'audit éditorial révèle les leçons du programme encore non publiées"
   const waveLight = terminalCPhysics.find((audit) => audit.id === "terminale-c-wave-light");
   assert.equal(waveLight?.published, true);
   assert.equal(waveLight && editorialStatusOf(waveLight), "complete");
+  const corpuscularLight = terminalCPhysics.find((audit) => audit.id === "terminale-c-corpuscular-light");
+  assert.equal(corpuscularLight?.published, true);
+  assert.equal(corpuscularLight && editorialStatusOf(corpuscularLight), "complete");
 });
 
 test("le catalogue de la boutique reste synchronisé entre Web, API et Supabase", () => {
