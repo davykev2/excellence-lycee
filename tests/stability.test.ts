@@ -141,6 +141,9 @@ test("l'audit éditorial révèle les leçons du programme encore non publiées"
   const derivatorIntegrator = terminalCPhysics.find((audit) => audit.id === "terminale-cd-derivator-integrator");
   assert.equal(derivatorIntegrator?.published, true);
   assert.equal(derivatorIntegrator && editorialStatusOf(derivatorIntegrator), "complete");
+  const freeElectricalOscillations = terminalCPhysics.find((audit) => audit.id === "terminale-cd-free-electrical-oscillations");
+  assert.equal(freeElectricalOscillations?.published, true);
+  assert.equal(freeElectricalOscillations && editorialStatusOf(freeElectricalOscillations), "complete");
 });
 
 test("le catalogue de la boutique reste synchronisé entre Web, API et Supabase", () => {

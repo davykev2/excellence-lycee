@@ -562,8 +562,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Induction électromagnétique", strand: "Physique", pathId: "terminale-c-induction-electromagnetic" },
       { title: "Auto-induction", strand: "Physique", pathId: "terminale-cd-auto-induction" },
       { title: "Montages dérivateur et intégrateur", strand: "Physique", pathId: "terminale-cd-derivator-integrator" },
+      { title: "Oscillations électriques libres dans un circuit LC", strand: "Physique", pathId: "terminale-cd-free-electrical-oscillations" },
       ...withStrand("Physique", [
-        "Oscillations électriques libres dans un circuit LC",
         "Circuit RLC en régime sinusoïdal forcé",
         "Résonance d’intensité d’un circuit RLC série",
         "Puissance en courant alternatif",
@@ -652,8 +652,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Loi de Laplace", strand: "Physique", pathId: "terminale-cd-laplace-law" },
       { title: "Auto-induction", strand: "Physique", pathId: "terminale-cd-auto-induction" },
       { title: "Montages dérivateur et intégrateur", strand: "Physique", pathId: "terminale-cd-derivator-integrator" },
+      { title: "Oscillations électriques libres dans un circuit LC", strand: "Physique", pathId: "terminale-cd-free-electrical-oscillations" },
       ...withStrand("Physique", [
-        "Oscillations électriques libres dans un circuit LC",
         "Circuit RLC en régime sinusoïdal forcé",
         "Résonance d’intensité d’un circuit RLC série",
         "Puissance en courant alternatif",
