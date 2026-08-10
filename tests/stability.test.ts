@@ -144,6 +144,9 @@ test("l'audit éditorial révèle les leçons du programme encore non publiées"
   const freeElectricalOscillations = terminalCPhysics.find((audit) => audit.id === "terminale-cd-free-electrical-oscillations");
   assert.equal(freeElectricalOscillations?.published, true);
   assert.equal(freeElectricalOscillations && editorialStatusOf(freeElectricalOscillations), "complete");
+  const rlcForcedSinusoidal = terminalCPhysics.find((audit) => audit.id === "terminale-cd-rlc-forced-sinusoidal");
+  assert.equal(rlcForcedSinusoidal?.published, true);
+  assert.equal(rlcForcedSinusoidal && editorialStatusOf(rlcForcedSinusoidal), "complete");
 });
 
 test("le catalogue de la boutique reste synchronisé entre Web, API et Supabase", () => {

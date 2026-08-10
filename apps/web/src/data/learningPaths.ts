@@ -12,6 +12,7 @@ import { inductionElectromagneticPaths } from "./terminalCInductionElectromagnet
 import { autoInductionPaths } from "./terminalCDAutoInductionPath";
 import { derivatorIntegratorPaths } from "./terminalCDDerivatorIntegratorPath";
 import { freeElectricalOscillationsPaths } from "./terminalCDFreeElectricalOscillationsPath";
+import { rlcForcedSinusoidalPaths } from "./terminalCDRlcForcedPath";
 import { terminalGeographyPaths } from "./terminalGeographyPaths";
 import { terminalHistoryPaths } from "./terminalHistoryPaths";
 import { terminalMathematicsPaths } from "./terminalMathPaths";
@@ -35,6 +36,7 @@ const baseLearningPaths: LearningPath[] = [
   ...autoInductionPaths,
   ...derivatorIntegratorPaths,
   ...freeElectricalOscillationsPaths,
+  ...rlcForcedSinusoidalPaths,
   ...chemistryPaths,
   ...terminalGeographyPaths,
   ...terminalHistoryPaths,

@@ -563,8 +563,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Auto-induction", strand: "Physique", pathId: "terminale-cd-auto-induction" },
       { title: "Montages dérivateur et intégrateur", strand: "Physique", pathId: "terminale-cd-derivator-integrator" },
       { title: "Oscillations électriques libres dans un circuit LC", strand: "Physique", pathId: "terminale-cd-free-electrical-oscillations" },
+      { title: "Circuit RLC en régime sinusoïdal forcé", strand: "Physique", pathId: "terminale-cd-rlc-forced-sinusoidal" },
       ...withStrand("Physique", [
-        "Circuit RLC en régime sinusoïdal forcé",
         "Résonance d’intensité d’un circuit RLC série",
         "Puissance en courant alternatif",
         "Modèle ondulatoire de la lumière",
@@ -653,8 +653,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Auto-induction", strand: "Physique", pathId: "terminale-cd-auto-induction" },
       { title: "Montages dérivateur et intégrateur", strand: "Physique", pathId: "terminale-cd-derivator-integrator" },
       { title: "Oscillations électriques libres dans un circuit LC", strand: "Physique", pathId: "terminale-cd-free-electrical-oscillations" },
+      { title: "Circuit RLC en régime sinusoïdal forcé", strand: "Physique", pathId: "terminale-cd-rlc-forced-sinusoidal" },
       ...withStrand("Physique", [
-        "Circuit RLC en régime sinusoïdal forcé",
         "Résonance d’intensité d’un circuit RLC série",
         "Puissance en courant alternatif",
         "Réactions nucléaires spontanées",
