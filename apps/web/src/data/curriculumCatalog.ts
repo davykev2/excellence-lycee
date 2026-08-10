@@ -578,8 +578,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Fabrication d’un savon", strand: "Chimie", pathId: "terminale-cd-chemistry-soap" },
       { title: "Solutions aqueuses : notion de pH", strand: "Chimie", pathId: "terminale-cd-chemistry-ph" },
       { title: "Acide fort - base forte", strand: "Chimie", pathId: "terminale-cd-chemistry-strong-acid-base" },
+      { title: "Acide faible - base faible", strand: "Chimie", pathId: "terminale-cd-chemistry-weak-acid-base" },
       ...withStrand("Chimie", [
-        "Acide faible - base faible",
         "Couples acide-base : classification",
         "Réactions acido-basiques et solutions tampons",
         "Dosage acido-basique",
@@ -668,8 +668,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       ...withStrand("Chimie", ["Les acides α-aminés"]),
       { title: "Solutions aqueuses : notion de pH", strand: "Chimie", pathId: "terminale-cd-chemistry-ph" },
       { title: "Acide fort - base forte", strand: "Chimie", pathId: "terminale-cd-chemistry-strong-acid-base" },
+      { title: "Acide faible - base faible", strand: "Chimie", pathId: "terminale-cd-chemistry-weak-acid-base" },
       ...withStrand("Chimie", [
-        "Acide faible - base faible",
         "Couples acide-base : classification",
         "Réactions acido-basiques et solutions tampons",
         "Dosage acido-basique",
