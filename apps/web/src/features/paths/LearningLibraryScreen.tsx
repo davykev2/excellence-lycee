@@ -39,7 +39,10 @@ const subjectIcons = {
 } satisfies Record<SubjectId, typeof Calculator>;
 
 export function LearningLibraryScreen({ level, subjects, selectedSubjectId, paths, catalogLessons, onSubjectChange, onSelectPath, onBackHome }: LearningLibraryScreenProps) {
-  const displayedSequence = (lesson: CurriculumLessonTitle) => paths.find((path) => path.id === lesson.pathId && path.levelIds.includes(level.id))?.chapterNumber ?? lesson.sequence;
+  const displayedSequence = (lesson: CurriculumLessonTitle) => {
+    const path = paths.find((item) => item.id === lesson.pathId && item.levelIds.includes(level.id));
+    return path ? (path.chapterNumberByLevel?.[level.id] ?? path.chapterNumber) : lesson.sequence;
+  };
   const visibleLessons = catalogLessons
     .filter((lesson) => lesson.subjectId === selectedSubjectId && lesson.levelId === level.id)
     .sort((left, right) => displayedSequence(left) - displayedSequence(right) || (left.trackLabel ?? "").localeCompare(right.trackLabel ?? "", "fr"));
@@ -81,7 +84,7 @@ export function LearningLibraryScreen({ level, subjects, selectedSubjectId, path
               const path = lesson.pathId ? paths.find((item) => item.id === lesson.pathId && item.levelIds.includes(level.id)) : undefined;
               const levelCount = path?.modules.reduce((count, module) => count + module.lessons.length, 0) ?? 0;
               const totalXp = path?.modules.flatMap((module) => module.lessons).reduce((sum, item) => sum + item.xp, 0) ?? 0;
-              const sequence = path?.chapterNumber ?? lesson.sequence;
+              const sequence = path ? (path.chapterNumberByLevel?.[level.id] ?? path.chapterNumber) : lesson.sequence;
               return (
                 <button className={`lesson-library-card ${path ? "is-ready" : "is-planned"}`} type="button" key={lesson.id} disabled={!path} onClick={() => path && onSelectPath(path.id)}>
                   <span className="lesson-library-number">{String(sequence).padStart(2, "0")}</span>

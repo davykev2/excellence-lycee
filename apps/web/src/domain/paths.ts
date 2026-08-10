@@ -247,6 +247,8 @@ export interface LearningPath {
     title: string;
   };
   chapterNumber: number;
+  /** Numéro propre à chaque classe lorsqu'un même contenu est partagé entre plusieurs progressions. */
+  chapterNumberByLevel?: Record<string, number>;
   title: string;
   description: string;
   estimatedMinutes: number;

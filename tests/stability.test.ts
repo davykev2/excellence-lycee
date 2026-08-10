@@ -159,6 +159,16 @@ test("l'audit éditorial révèle les leçons du programme encore non publiées"
   const corpuscularLight = terminalCPhysics.find((audit) => audit.id === "terminale-c-corpuscular-light");
   assert.equal(corpuscularLight?.published, true);
   assert.equal(corpuscularLight && editorialStatusOf(corpuscularLight), "complete");
+  const spontaneousNuclear = terminalCPhysics.find((audit) => audit.id === "terminale-cd-spontaneous-nuclear");
+  assert.equal(spontaneousNuclear?.published, true);
+  assert.equal(spontaneousNuclear && editorialStatusOf(spontaneousNuclear), "complete");
+  const terminalDPhysics = audits.filter((audit) => (
+    audit.subjectId === "physics-chemistry" && audit.levelIds.includes("terminale-d")
+  ));
+  const spontaneousNuclearD = terminalDPhysics.find((audit) => audit.id === "terminale-cd-spontaneous-nuclear");
+  assert.equal(spontaneousNuclearD?.published, true);
+  assert.equal(spontaneousNuclearD && editorialStatusOf(spontaneousNuclearD), "complete");
+  assert.equal(learningPaths.find((path) => path.id === "terminale-cd-spontaneous-nuclear")?.chapterNumberByLevel?.["terminale-d"], 14);
 });
 
 test("le catalogue de la boutique reste synchronisé entre Web, API et Supabase", () => {

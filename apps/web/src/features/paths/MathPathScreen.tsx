@@ -66,6 +66,7 @@ export function MathPathScreen({
   const completedCount = lessons.filter((lesson) => completedLessonIds.has(lesson.id)).length;
   const progress = Math.round((completedCount / lessons.length) * 100);
   const nextLesson = getNextLesson(path, completedLessonIds) ?? lessons[lessons.length - 1];
+  const chapterNumber = path.chapterNumberByLevel?.[level.id] ?? path.chapterNumber;
 
   return (
     <main className="mastery-page">
@@ -79,7 +80,7 @@ export function MathPathScreen({
 
       <section className="mastery-hero" aria-labelledby="mastery-title">
         <div className="mastery-hero-copy">
-          <p className="path-kicker">Chapitre {path.chapterNumber} • {path.theme.title}</p>
+          <p className="path-kicker">Chapitre {chapterNumber} • {path.theme.title}</p>
           <h1 id="mastery-title">{path.title}</h1>
           <p>{path.description}</p>
           <div className="mastery-metrics">
