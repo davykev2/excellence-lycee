@@ -147,6 +147,9 @@ test("l'audit éditorial révèle les leçons du programme encore non publiées"
   const rlcForcedSinusoidal = terminalCPhysics.find((audit) => audit.id === "terminale-cd-rlc-forced-sinusoidal");
   assert.equal(rlcForcedSinusoidal?.published, true);
   assert.equal(rlcForcedSinusoidal && editorialStatusOf(rlcForcedSinusoidal), "complete");
+  const rlcIntensityResonance = terminalCPhysics.find((audit) => audit.id === "terminale-cd-rlc-intensity-resonance");
+  assert.equal(rlcIntensityResonance?.published, true);
+  assert.equal(rlcIntensityResonance && editorialStatusOf(rlcIntensityResonance), "complete");
 });
 
 test("le catalogue de la boutique reste synchronisé entre Web, API et Supabase", () => {

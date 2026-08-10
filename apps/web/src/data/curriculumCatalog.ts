@@ -564,8 +564,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Montages dérivateur et intégrateur", strand: "Physique", pathId: "terminale-cd-derivator-integrator" },
       { title: "Oscillations électriques libres dans un circuit LC", strand: "Physique", pathId: "terminale-cd-free-electrical-oscillations" },
       { title: "Circuit RLC en régime sinusoïdal forcé", strand: "Physique", pathId: "terminale-cd-rlc-forced-sinusoidal" },
+      { title: "Résonance d’intensité d’un circuit RLC série", strand: "Physique", pathId: "terminale-cd-rlc-intensity-resonance" },
       ...withStrand("Physique", [
-        "Résonance d’intensité d’un circuit RLC série",
         "Puissance en courant alternatif",
         "Modèle ondulatoire de la lumière",
         "Modèle corpusculaire de la lumière",
@@ -654,8 +654,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Montages dérivateur et intégrateur", strand: "Physique", pathId: "terminale-cd-derivator-integrator" },
       { title: "Oscillations électriques libres dans un circuit LC", strand: "Physique", pathId: "terminale-cd-free-electrical-oscillations" },
       { title: "Circuit RLC en régime sinusoïdal forcé", strand: "Physique", pathId: "terminale-cd-rlc-forced-sinusoidal" },
+      { title: "Résonance d’intensité d’un circuit RLC série", strand: "Physique", pathId: "terminale-cd-rlc-intensity-resonance" },
       ...withStrand("Physique", [
-        "Résonance d’intensité d’un circuit RLC série",
         "Puissance en courant alternatif",
         "Réactions nucléaires spontanées",
         "Réactions nucléaires provoquées",
