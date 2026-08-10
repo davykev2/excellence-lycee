@@ -579,8 +579,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Solutions aqueuses : notion de pH", strand: "Chimie", pathId: "terminale-cd-chemistry-ph" },
       { title: "Acide fort - base forte", strand: "Chimie", pathId: "terminale-cd-chemistry-strong-acid-base" },
       { title: "Acide faible - base faible", strand: "Chimie", pathId: "terminale-cd-chemistry-weak-acid-base" },
+      { title: "Couples acide-base : classification", strand: "Chimie", pathId: "terminale-cd-chemistry-acid-base-couples" },
       ...withStrand("Chimie", [
-        "Couples acide-base : classification",
         "Réactions acido-basiques et solutions tampons",
         "Dosage acido-basique",
       ]),
@@ -669,8 +669,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Solutions aqueuses : notion de pH", strand: "Chimie", pathId: "terminale-cd-chemistry-ph" },
       { title: "Acide fort - base forte", strand: "Chimie", pathId: "terminale-cd-chemistry-strong-acid-base" },
       { title: "Acide faible - base faible", strand: "Chimie", pathId: "terminale-cd-chemistry-weak-acid-base" },
+      { title: "Couples acide-base : classification", strand: "Chimie", pathId: "terminale-cd-chemistry-acid-base-couples" },
       ...withStrand("Chimie", [
-        "Couples acide-base : classification",
         "Réactions acido-basiques et solutions tampons",
         "Dosage acido-basique",
       ]),
