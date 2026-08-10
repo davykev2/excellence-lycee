@@ -565,8 +565,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Oscillations électriques libres dans un circuit LC", strand: "Physique", pathId: "terminale-cd-free-electrical-oscillations" },
       { title: "Circuit RLC en régime sinusoïdal forcé", strand: "Physique", pathId: "terminale-cd-rlc-forced-sinusoidal" },
       { title: "Résonance d’intensité d’un circuit RLC série", strand: "Physique", pathId: "terminale-cd-rlc-intensity-resonance" },
+      { title: "Puissance en courant alternatif", strand: "Physique", pathId: "terminale-cd-ac-power" },
       ...withStrand("Physique", [
-        "Puissance en courant alternatif",
         "Modèle ondulatoire de la lumière",
         "Modèle corpusculaire de la lumière",
         "Réactions nucléaires spontanées",
@@ -655,8 +655,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Oscillations électriques libres dans un circuit LC", strand: "Physique", pathId: "terminale-cd-free-electrical-oscillations" },
       { title: "Circuit RLC en régime sinusoïdal forcé", strand: "Physique", pathId: "terminale-cd-rlc-forced-sinusoidal" },
       { title: "Résonance d’intensité d’un circuit RLC série", strand: "Physique", pathId: "terminale-cd-rlc-intensity-resonance" },
+      { title: "Puissance en courant alternatif", strand: "Physique", pathId: "terminale-cd-ac-power" },
       ...withStrand("Physique", [
-        "Puissance en courant alternatif",
         "Réactions nucléaires spontanées",
         "Réactions nucléaires provoquées",
       ]),

@@ -59,6 +59,7 @@ for (const script of [
   "audit-physics-free-electrical-oscillations-katex.mjs",
   "audit-physics-rlc-forced-katex.mjs",
   "audit-physics-rlc-resonance-katex.mjs",
+  "audit-physics-ac-power-katex.mjs",
 ]) {
   run(`Contenu · ${script}`, process.execPath, [resolve(root, "scripts", script)]);
 }

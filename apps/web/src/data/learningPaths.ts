@@ -14,6 +14,7 @@ import { derivatorIntegratorPaths } from "./terminalCDDerivatorIntegratorPath";
 import { freeElectricalOscillationsPaths } from "./terminalCDFreeElectricalOscillationsPath";
 import { rlcForcedSinusoidalPaths } from "./terminalCDRlcForcedPath";
 import { rlcIntensityResonancePaths } from "./terminalCDRlcResonancePath";
+import { acPowerPaths } from "./terminalCDAcPowerPath";
 import { terminalGeographyPaths } from "./terminalGeographyPaths";
 import { terminalHistoryPaths } from "./terminalHistoryPaths";
 import { terminalMathematicsPaths } from "./terminalMathPaths";
@@ -39,6 +40,7 @@ const baseLearningPaths: LearningPath[] = [
   ...freeElectricalOscillationsPaths,
   ...rlcForcedSinusoidalPaths,
   ...rlcIntensityResonancePaths,
+  ...acPowerPaths,
   ...chemistryPaths,
   ...terminalGeographyPaths,
   ...terminalHistoryPaths,
