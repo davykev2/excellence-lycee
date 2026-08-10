@@ -576,8 +576,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Composés carbonylés : aldéhydes et cétones", strand: "Chimie", pathId: "terminale-cd-chemistry-carbonyl" },
       { title: "Acides carboxyliques et dérivés", strand: "Chimie", pathId: "terminale-cd-chemistry-carboxylic-acids" },
       { title: "Fabrication d’un savon", strand: "Chimie", pathId: "terminale-cd-chemistry-soap" },
+      { title: "Solutions aqueuses : notion de pH", strand: "Chimie", pathId: "terminale-cd-chemistry-ph" },
       ...withStrand("Chimie", [
-        "Solutions aqueuses : notion de pH",
         "Acide fort - base forte",
         "Acide faible - base faible",
         "Couples acide-base : classification",
@@ -665,9 +665,9 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       ...withStrand("Chimie", ["Les amines"]),
       { title: "Acides carboxyliques et dérivés", strand: "Chimie", pathId: "terminale-cd-chemistry-carboxylic-acids" },
       { title: "Fabrication d’un savon", strand: "Chimie", pathId: "terminale-cd-chemistry-soap" },
+      ...withStrand("Chimie", ["Les acides α-aminés"]),
+      { title: "Solutions aqueuses : notion de pH", strand: "Chimie", pathId: "terminale-cd-chemistry-ph" },
       ...withStrand("Chimie", [
-        "Les acides α-aminés",
-        "Solutions aqueuses : notion de pH",
         "Acide fort - base forte",
         "Acide faible - base faible",
         "Couples acide-base : classification",
