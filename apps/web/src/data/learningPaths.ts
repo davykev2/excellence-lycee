@@ -15,6 +15,7 @@ import { freeElectricalOscillationsPaths } from "./terminalCDFreeElectricalOscil
 import { rlcForcedSinusoidalPaths } from "./terminalCDRlcForcedPath";
 import { rlcIntensityResonancePaths } from "./terminalCDRlcResonancePath";
 import { acPowerPaths } from "./terminalCDAcPowerPath";
+import { waveLightPaths } from "./terminalCWaveLightPath";
 import { terminalGeographyPaths } from "./terminalGeographyPaths";
 import { terminalHistoryPaths } from "./terminalHistoryPaths";
 import { terminalMathematicsPaths } from "./terminalMathPaths";
@@ -41,6 +42,7 @@ const baseLearningPaths: LearningPath[] = [
   ...rlcForcedSinusoidalPaths,
   ...rlcIntensityResonancePaths,
   ...acPowerPaths,
+  ...waveLightPaths,
   ...chemistryPaths,
   ...terminalGeographyPaths,
   ...terminalHistoryPaths,

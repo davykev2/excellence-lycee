@@ -566,8 +566,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Circuit RLC en régime sinusoïdal forcé", strand: "Physique", pathId: "terminale-cd-rlc-forced-sinusoidal" },
       { title: "Résonance d’intensité d’un circuit RLC série", strand: "Physique", pathId: "terminale-cd-rlc-intensity-resonance" },
       { title: "Puissance en courant alternatif", strand: "Physique", pathId: "terminale-cd-ac-power" },
+      { title: "Modèle ondulatoire de la lumière", strand: "Physique", pathId: "terminale-c-wave-light" },
       ...withStrand("Physique", [
-        "Modèle ondulatoire de la lumière",
         "Modèle corpusculaire de la lumière",
         "Réactions nucléaires spontanées",
         "Réactions nucléaires provoquées",
