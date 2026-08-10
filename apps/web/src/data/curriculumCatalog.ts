@@ -577,8 +577,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Acides carboxyliques et dérivés", strand: "Chimie", pathId: "terminale-cd-chemistry-carboxylic-acids" },
       { title: "Fabrication d’un savon", strand: "Chimie", pathId: "terminale-cd-chemistry-soap" },
       { title: "Solutions aqueuses : notion de pH", strand: "Chimie", pathId: "terminale-cd-chemistry-ph" },
+      { title: "Acide fort - base forte", strand: "Chimie", pathId: "terminale-cd-chemistry-strong-acid-base" },
       ...withStrand("Chimie", [
-        "Acide fort - base forte",
         "Acide faible - base faible",
         "Couples acide-base : classification",
         "Réactions acido-basiques et solutions tampons",
@@ -667,8 +667,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Fabrication d’un savon", strand: "Chimie", pathId: "terminale-cd-chemistry-soap" },
       ...withStrand("Chimie", ["Les acides α-aminés"]),
       { title: "Solutions aqueuses : notion de pH", strand: "Chimie", pathId: "terminale-cd-chemistry-ph" },
+      { title: "Acide fort - base forte", strand: "Chimie", pathId: "terminale-cd-chemistry-strong-acid-base" },
       ...withStrand("Chimie", [
-        "Acide fort - base forte",
         "Acide faible - base faible",
         "Couples acide-base : classification",
         "Réactions acido-basiques et solutions tampons",
