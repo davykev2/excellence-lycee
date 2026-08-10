@@ -162,6 +162,9 @@ test("l'audit éditorial révèle les leçons du programme encore non publiées"
   const spontaneousNuclear = terminalCPhysics.find((audit) => audit.id === "terminale-cd-spontaneous-nuclear");
   assert.equal(spontaneousNuclear?.published, true);
   assert.equal(spontaneousNuclear && editorialStatusOf(spontaneousNuclear), "complete");
+  const provokedNuclear = terminalCPhysics.find((audit) => audit.id === "terminale-cd-provoked-nuclear");
+  assert.equal(provokedNuclear?.published, true);
+  assert.equal(provokedNuclear && editorialStatusOf(provokedNuclear), "complete");
   const terminalDPhysics = audits.filter((audit) => (
     audit.subjectId === "physics-chemistry" && audit.levelIds.includes("terminale-d")
   ));
@@ -169,6 +172,10 @@ test("l'audit éditorial révèle les leçons du programme encore non publiées"
   assert.equal(spontaneousNuclearD?.published, true);
   assert.equal(spontaneousNuclearD && editorialStatusOf(spontaneousNuclearD), "complete");
   assert.equal(learningPaths.find((path) => path.id === "terminale-cd-spontaneous-nuclear")?.chapterNumberByLevel?.["terminale-d"], 14);
+  const provokedNuclearD = terminalDPhysics.find((audit) => audit.id === "terminale-cd-provoked-nuclear");
+  assert.equal(provokedNuclearD?.published, true);
+  assert.equal(provokedNuclearD && editorialStatusOf(provokedNuclearD), "complete");
+  assert.equal(learningPaths.find((path) => path.id === "terminale-cd-provoked-nuclear")?.chapterNumberByLevel?.["terminale-d"], 15);
 });
 
 test("le catalogue de la boutique reste synchronisé entre Web, API et Supabase", () => {

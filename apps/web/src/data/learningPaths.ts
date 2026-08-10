@@ -18,6 +18,7 @@ import { acPowerPaths } from "./terminalCDAcPowerPath";
 import { waveLightPaths } from "./terminalCWaveLightPath";
 import { corpuscularLightPaths } from "./terminalCCorpuscularLightPath";
 import { spontaneousNuclearPaths } from "./terminalCDSpontaneousNuclearPath";
+import { provokedNuclearPaths } from "./terminalCDProvokedNuclearPath";
 import { terminalGeographyPaths } from "./terminalGeographyPaths";
 import { terminalHistoryPaths } from "./terminalHistoryPaths";
 import { terminalMathematicsPaths } from "./terminalMathPaths";
@@ -47,6 +48,7 @@ const baseLearningPaths: LearningPath[] = [
   ...waveLightPaths,
   ...corpuscularLightPaths,
   ...spontaneousNuclearPaths,
+  ...provokedNuclearPaths,
   ...chemistryPaths,
   ...terminalGeographyPaths,
   ...terminalHistoryPaths,
