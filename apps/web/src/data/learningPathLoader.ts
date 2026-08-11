@@ -22,12 +22,13 @@ async function loadTerminalCommonPaths() {
 }
 
 async function loadTerminalPhysicsPaths(levelId: string) {
-  const [kinematics, inertia, uniformFields, freeOscillations, magneticField, laplaceLaw, induction, autoInduction, derivatorIntegrator, freeElectricalOscillations, rlcForcedSinusoidal, rlcIntensityResonance, acPower, waveLight, corpuscularLight, spontaneousNuclear, provokedNuclear, chemistry, gravitation] = await Promise.all([
+  const [kinematics, inertia, uniformFields, freeOscillations, magneticField, chargedParticle, laplaceLaw, induction, autoInduction, derivatorIntegrator, freeElectricalOscillations, rlcForcedSinusoidal, rlcIntensityResonance, acPower, waveLight, corpuscularLight, spontaneousNuclear, provokedNuclear, chemistry, gravitation] = await Promise.all([
     import("./physicsPaths").then((module) => module.physicsPaths),
     import("./terminalCDInertiaMotionPath").then((module) => module.inertiaMotionPaths),
     import("./terminalCDUniformFieldsPath").then((module) => module.uniformFieldsPaths),
     import("./terminalCDFreeMechanicalOscillationsPath").then((module) => module.freeMechanicalOscillationsPaths),
     import("./terminalCDMagneticFieldPath").then((module) => module.magneticFieldPaths),
+    import("./terminalCDChargedParticlePath").then((module) => module.chargedParticlePaths),
     import("./terminalCDLaplaceLawPath").then((module) => module.laplaceLawPaths),
     levelId === "terminale-c"
       ? import("./terminalCInductionElectromagneticPath").then((module) => module.inductionElectromagneticPaths)
@@ -51,7 +52,7 @@ async function loadTerminalPhysicsPaths(levelId: string) {
       ? import("./terminalCGravitationPath").then((module) => module.gravitationPaths)
       : Promise.resolve([] as LearningPath[]),
   ]);
-  return [...kinematics, ...inertia, ...gravitation, ...uniformFields, ...freeOscillations, ...magneticField, ...laplaceLaw, ...induction, ...autoInduction, ...derivatorIntegrator, ...freeElectricalOscillations, ...rlcForcedSinusoidal, ...rlcIntensityResonance, ...acPower, ...waveLight, ...corpuscularLight, ...spontaneousNuclear, ...provokedNuclear, ...chemistry];
+  return [...kinematics, ...inertia, ...gravitation, ...uniformFields, ...freeOscillations, ...magneticField, ...chargedParticle, ...laplaceLaw, ...induction, ...autoInduction, ...derivatorIntegrator, ...freeElectricalOscillations, ...rlcForcedSinusoidal, ...rlcIntensityResonance, ...acPower, ...waveLight, ...corpuscularLight, ...spontaneousNuclear, ...provokedNuclear, ...chemistry];
 }
 
 async function loadPathsForLevel(levelId: string) {

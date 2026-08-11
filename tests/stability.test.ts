@@ -116,13 +116,10 @@ test("l'audit éditorial révèle les leçons du programme encore non publiées"
 
   assert.equal(terminalCPhysics.length, terminalCCatalogCount);
   assert.ok(terminalCPhysics.some((audit) => !audit.published), "Les leçons seulement titrées ont disparu de l'audit.");
-  assert.ok(
-    terminalCPhysics.some((audit) => (
-      audit.title === "Mouvement d’une particule chargée dans un champ magnétique uniforme"
-      && editorialStatusOf(audit) === "todo"
-    )),
-    "La prochaine leçon de magnétisme doit rester signalée comme parcours à construire.",
-  );
+  const chargedParticle = terminalCPhysics.find((audit) => audit.id === "terminale-cd-charged-particle-magnetic-field");
+  assert.equal(chargedParticle?.published, true);
+  assert.equal(chargedParticle && editorialStatusOf(chargedParticle), "complete");
+  assert.equal(learningPaths.find((path) => path.id === "terminale-cd-charged-particle-magnetic-field")?.chapterNumberByLevel?.["terminale-c"], 7);
   const oscillations = terminalCPhysics.find((audit) => audit.id === "terminale-cd-free-mechanical-oscillations");
   assert.equal(oscillations?.published, true);
   assert.equal(oscillations && editorialStatusOf(oscillations), "complete");
@@ -176,6 +173,10 @@ test("l'audit éditorial révèle les leçons du programme encore non publiées"
   assert.equal(provokedNuclearD?.published, true);
   assert.equal(provokedNuclearD && editorialStatusOf(provokedNuclearD), "complete");
   assert.equal(learningPaths.find((path) => path.id === "terminale-cd-provoked-nuclear")?.chapterNumberByLevel?.["terminale-d"], 15);
+  const chargedParticleD = terminalDPhysics.find((audit) => audit.id === "terminale-cd-charged-particle-magnetic-field");
+  assert.equal(chargedParticleD?.published, true);
+  assert.equal(chargedParticleD && editorialStatusOf(chargedParticleD), "complete");
+  assert.equal(learningPaths.find((path) => path.id === "terminale-cd-charged-particle-magnetic-field")?.chapterNumberByLevel?.["terminale-d"], 6);
 });
 
 test("le catalogue de la boutique reste synchronisé entre Web, API et Supabase", () => {

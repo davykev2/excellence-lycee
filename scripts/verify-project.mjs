@@ -52,6 +52,7 @@ for (const script of [
   "audit-terminal-c-space-geometry-katex.mjs",
   "audit-physics-free-oscillations-katex.mjs",
   "audit-physics-magnetic-field-katex.mjs",
+  "audit-physics-charged-particle-katex.mjs",
   "audit-physics-laplace-law-katex.mjs",
   "audit-physics-induction-electromagnetic-katex.mjs",
   "audit-physics-auto-induction-katex.mjs",

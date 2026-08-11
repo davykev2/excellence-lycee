@@ -7,6 +7,7 @@ import { gravitationPaths } from "./terminalCGravitationPath";
 import { uniformFieldsPaths } from "./terminalCDUniformFieldsPath";
 import { freeMechanicalOscillationsPaths } from "./terminalCDFreeMechanicalOscillationsPath";
 import { magneticFieldPaths } from "./terminalCDMagneticFieldPath";
+import { chargedParticlePaths } from "./terminalCDChargedParticlePath";
 import { laplaceLawPaths } from "./terminalCDLaplaceLawPath";
 import { inductionElectromagneticPaths } from "./terminalCInductionElectromagneticPath";
 import { autoInductionPaths } from "./terminalCDAutoInductionPath";
@@ -37,6 +38,7 @@ const baseLearningPaths: LearningPath[] = [
   ...uniformFieldsPaths,
   ...freeMechanicalOscillationsPaths,
   ...magneticFieldPaths,
+  ...chargedParticlePaths,
   ...laplaceLawPaths,
   ...inductionElectromagneticPaths,
   ...autoInductionPaths,
