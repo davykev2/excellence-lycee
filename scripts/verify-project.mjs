@@ -65,6 +65,8 @@ for (const script of [
   "audit-physics-corpuscular-light-katex.mjs",
   "audit-physics-spontaneous-nuclear-katex.mjs",
   "audit-physics-provoked-nuclear-katex.mjs",
+  "audit-chemistry-amines-katex.mjs",
+  "audit-chemistry-alpha-amino-acids-katex.mjs",
 ]) {
   run(`Contenu · ${script}`, process.execPath, [resolve(root, "scripts", script)]);
 }

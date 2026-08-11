@@ -7,6 +7,8 @@ import type {
   TimelineInteractionItem,
 } from "../domain/paths";
 import { carbonylCompoundsPath } from "./terminalCDCarbonylCompoundsPath";
+import { aminesPath } from "./terminalDAminesPath";
+import { alphaAminoAcidsPath } from "./terminalDAlphaAminoAcidsPath";
 import { carboxylicAcidsPath } from "./terminalCDCarboxylicAcidsPath";
 import { soapMakingPath } from "./terminalCDSoapMakingPath";
 import { aqueousSolutionsPhPath } from "./terminalCDAqueousSolutionsPhPath";
@@ -630,4 +632,4 @@ export const alcoholsPath: LearningPath = {
   ],
 };
 
-export const chemistryPaths: LearningPath[] = [alcoholsPath, carbonylCompoundsPath, carboxylicAcidsPath, soapMakingPath, aqueousSolutionsPhPath, strongAcidBasePath, weakAcidBasePath, acidBaseCouplesPath, acidBaseBuffersPath, acidBaseTitrationPath];
+export const chemistryPaths: LearningPath[] = [alcoholsPath, carbonylCompoundsPath, aminesPath, carboxylicAcidsPath, soapMakingPath, alphaAminoAcidsPath, aqueousSolutionsPhPath, strongAcidBasePath, weakAcidBasePath, acidBaseCouplesPath, acidBaseBuffersPath, acidBaseTitrationPath];

@@ -105,7 +105,7 @@ test("le compteur public d'exercices reste aligné sur le catalogue complet", ()
   assert.equal(AVAILABLE_EXERCISES, exerciseCount);
 });
 
-test("l'audit éditorial révèle les leçons du programme encore non publiées", () => {
+test("l'audit éditorial reste aligné sur les leçons publiées et celles encore à construire", () => {
   const audits = buildEditorialAudits(learningPaths, curriculumLessonTitles);
   const terminalCPhysics = audits.filter((audit) => (
     audit.subjectId === "physics-chemistry" && audit.levelIds.includes("terminale-c")
@@ -115,7 +115,17 @@ test("l'audit éditorial révèle les leçons du programme encore non publiées"
   )).length;
 
   assert.equal(terminalCPhysics.length, terminalCCatalogCount);
-  assert.ok(terminalCPhysics.some((audit) => !audit.published), "Les leçons seulement titrées ont disparu de l'audit.");
+  assert.ok(terminalCPhysics.every((audit) => audit.published), "La Physique-Chimie de Terminale C doit être entièrement publiée.");
+  assert.ok(terminalCPhysics.every((audit) => editorialStatusOf(audit) === "complete"), "Une leçon de Terminale C est encore marquée incomplète.");
+  const terminalDPhysicsCoverage = audits.filter((audit) => (
+    audit.subjectId === "physics-chemistry" && audit.levelIds.includes("terminale-d")
+  ));
+  const terminalDCatalogCount = curriculumLessonTitles.filter((lesson) => (
+    lesson.subjectId === "physics-chemistry" && lesson.levelId === "terminale-d"
+  )).length;
+  assert.equal(terminalDPhysicsCoverage.length, terminalDCatalogCount);
+  assert.ok(terminalDPhysicsCoverage.every((audit) => audit.published), "La Physique-Chimie de Terminale D doit être entièrement publiée.");
+  assert.ok(terminalDPhysicsCoverage.every((audit) => editorialStatusOf(audit) === "complete"), "Une leçon de Terminale D est encore marquée incomplète.");
   const chargedParticle = terminalCPhysics.find((audit) => audit.id === "terminale-cd-charged-particle-magnetic-field");
   assert.equal(chargedParticle?.published, true);
   assert.equal(chargedParticle && editorialStatusOf(chargedParticle), "complete");
@@ -129,6 +139,16 @@ test("l'audit éditorial révèle les leçons du programme encore non publiées"
   const laplaceLaw = terminalCPhysics.find((audit) => audit.id === "terminale-cd-laplace-law");
   assert.equal(laplaceLaw?.published, true);
   assert.equal(laplaceLaw && editorialStatusOf(laplaceLaw), "complete");
+  const amines = audits.find((audit) => audit.id === "terminale-d-chemistry-amines");
+  assert.equal(amines?.published, true);
+  assert.equal(amines && editorialStatusOf(amines), "complete");
+  assert.deepEqual(amines?.levelIds, ["terminale-d"]);
+  assert.equal(amines?.chapterNumber, 18);
+  const alphaAminoAcids = audits.find((audit) => audit.title === "Les acides α-aminés");
+  assert.equal(alphaAminoAcids?.published, true);
+  assert.equal(alphaAminoAcids && editorialStatusOf(alphaAminoAcids), "complete");
+  assert.deepEqual(alphaAminoAcids?.levelIds, ["terminale-d"]);
+  assert.equal(alphaAminoAcids?.chapterNumber, 21);
   const induction = terminalCPhysics.find((audit) => audit.id === "terminale-c-induction-electromagnetic");
   assert.equal(induction?.published, true);
   assert.equal(induction && editorialStatusOf(induction), "complete");
