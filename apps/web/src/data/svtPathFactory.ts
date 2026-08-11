@@ -1,8 +1,10 @@
 import type {
   LearningLesson,
   LearningPath,
+  LessonInteraction,
   LessonKind,
   LessonQuestion,
+  LessonSourceMetadata,
   TimelineInteractionItem,
 } from "../domain/paths";
 
@@ -20,6 +22,10 @@ export interface SvtSectionSeed {
   observation: string;
   check: LessonQuestion;
   distractors: [string, string, string];
+  bodyMarkdown?: string;
+  interaction?: LessonInteraction;
+  extraQuestions?: LessonQuestion[];
+  source?: LessonSourceMetadata;
   durationMinutes?: number;
   kind?: LessonKind;
 }
@@ -31,6 +37,10 @@ export interface SvtMissionSeed {
   investigation: [TimelineInteractionItem, TimelineInteractionItem, ...TimelineInteractionItem[]];
   modelAnswer: string;
   questions: [LessonQuestion, LessonQuestion, LessonQuestion];
+  bodyMarkdown?: string;
+  interaction?: LessonInteraction;
+  extraQuestions?: LessonQuestion[];
+  source?: LessonSourceMetadata;
 }
 
 export interface SvtCourseSeed {
@@ -42,6 +52,10 @@ export interface SvtCourseSeed {
   description: string;
   centralQuestion: string;
   memorySentence: string;
+  overviewBodyMarkdown?: string;
+  overviewInteraction?: LessonInteraction;
+  overviewExtraQuestions?: LessonQuestion[];
+  overviewSource?: LessonSourceMetadata;
   sections: [SvtSectionSeed, SvtSectionSeed, SvtSectionSeed, SvtSectionSeed];
   mission: SvtMissionSeed;
 }
@@ -80,10 +94,11 @@ function sectionLesson(course: SvtCourseSeed, section: SvtSectionSeed, index: nu
       eyebrow: `Niveau ${index + 1} • SVT`,
       title: section.conceptTitle,
       explanation: section.explanation,
+      bodyMarkdown: section.bodyMarkdown,
       notation: section.keyPoint,
       example: section.example,
     },
-    interaction: {
+    interaction: section.interaction ?? {
       kind: "timeline",
       eyebrow: "Observer et raisonner",
       title: section.processTitle,
@@ -95,6 +110,7 @@ function sectionLesson(course: SvtCourseSeed, section: SvtSectionSeed, index: nu
     question: section.check,
     questions: [
       section.check,
+      ...(section.extraQuestions ?? []),
       {
         prompt: "Quelle proposition résume correctement ce niveau ?",
         options: [section.distractors[0], section.keyPoint, section.distractors[1], section.distractors[2]],
@@ -102,6 +118,7 @@ function sectionLesson(course: SvtCourseSeed, section: SvtSectionSeed, index: nu
         explanation: section.keyPoint,
       },
     ],
+    source: section.source,
   };
 }
 
@@ -117,10 +134,11 @@ function overviewLesson(course: SvtCourseSeed): LearningLesson {
       eyebrow: "Niveau 1 • Vue d’ensemble",
       title: course.centralQuestion,
       explanation: `${course.description} Le parcours suit quatre étapes : ${course.sections.map((section) => section.title).join(" ; ")}.`,
+      bodyMarkdown: course.overviewBodyMarkdown,
       notation: course.memorySentence,
       example: "Au devoir, pars toujours du document : relève les faits, explique-les avec le cours, puis formule une conclusion liée à la consigne.",
     },
-    interaction: {
+    interaction: course.overviewInteraction ?? {
       kind: "timeline",
       eyebrow: "Vue d’ensemble",
       title: "Les quatre étapes de la leçon",
@@ -164,7 +182,9 @@ function overviewLesson(course: SvtCourseSeed): LearningLesson {
         correctIndex: 0,
         explanation: "Le phénomène et les verbes de consigne indiquent quelles connaissances et quelle démarche utiliser.",
       },
+      ...(course.overviewExtraQuestions ?? []),
     ],
+    source: course.overviewSource,
   };
 }
 
@@ -181,10 +201,11 @@ function missionLesson(course: SvtCourseSeed): LearningLesson {
       eyebrow: "Niveau 6 • Situation d’évaluation",
       title: mission.title,
       explanation: mission.scenario,
+      bodyMarkdown: mission.bodyMarkdown,
       notation: mission.problem,
       example: mission.modelAnswer,
     },
-    interaction: {
+    interaction: mission.interaction ?? {
       kind: "timeline",
       eyebrow: "Enquêter",
       title: "Le chemin de résolution",
@@ -210,7 +231,8 @@ function missionLesson(course: SvtCourseSeed): LearningLesson {
       tip: "Un terme scientifique précis vaut mieux qu’une longue phrase vague.",
     },
     question: mission.questions[0],
-    questions: mission.questions,
+    questions: [...mission.questions, ...(mission.extraQuestions ?? [])],
+    source: mission.source,
   };
 }
 
