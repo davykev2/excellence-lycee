@@ -579,9 +579,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Acide faible - base faible", strand: "Chimie", pathId: "terminale-cd-chemistry-weak-acid-base" },
       { title: "Couples acide-base : classification", strand: "Chimie", pathId: "terminale-cd-chemistry-acid-base-couples" },
       { title: "Réactions acido-basiques et solutions tampons", strand: "Chimie", pathId: "terminale-cd-chemistry-acid-base-buffers" },
-      ...withStrand("Chimie", [
-        "Dosage acido-basique",
-      ]),
+      { title: "Dosage acido-basique", strand: "Chimie", pathId: "terminale-cd-chemistry-acid-base-titration" },
     ],
     french: [
       "Œuvre narrative",
@@ -667,9 +665,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Acide faible - base faible", strand: "Chimie", pathId: "terminale-cd-chemistry-weak-acid-base" },
       { title: "Couples acide-base : classification", strand: "Chimie", pathId: "terminale-cd-chemistry-acid-base-couples" },
       { title: "Réactions acido-basiques et solutions tampons", strand: "Chimie", pathId: "terminale-cd-chemistry-acid-base-buffers" },
-      ...withStrand("Chimie", [
-        "Dosage acido-basique",
-      ]),
+      { title: "Dosage acido-basique", strand: "Chimie", pathId: "terminale-cd-chemistry-acid-base-titration" },
     ],
     french: [
       "Œuvre narrative",

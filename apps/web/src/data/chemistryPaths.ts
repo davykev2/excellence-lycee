@@ -14,6 +14,7 @@ import { strongAcidBasePath } from "./terminalCDStrongAcidBasePath";
 import { weakAcidBasePath } from "./terminalCDWeakAcidBasePath";
 import { acidBaseCouplesPath } from "./terminalCDAcidBaseCouplesPath";
 import { acidBaseBuffersPath } from "./terminalCDAcidBaseBuffersPath";
+import { acidBaseTitrationPath } from "./terminalCDAcidBaseTitrationPath";
 
 const sourceDocument = "TleD_CH_L1_Les alcools.pdf";
 
@@ -629,4 +630,4 @@ export const alcoholsPath: LearningPath = {
   ],
 };
 
-export const chemistryPaths: LearningPath[] = [alcoholsPath, carbonylCompoundsPath, carboxylicAcidsPath, soapMakingPath, aqueousSolutionsPhPath, strongAcidBasePath, weakAcidBasePath, acidBaseCouplesPath, acidBaseBuffersPath];
+export const chemistryPaths: LearningPath[] = [alcoholsPath, carbonylCompoundsPath, carboxylicAcidsPath, soapMakingPath, aqueousSolutionsPhPath, strongAcidBasePath, weakAcidBasePath, acidBaseCouplesPath, acidBaseBuffersPath, acidBaseTitrationPath];
