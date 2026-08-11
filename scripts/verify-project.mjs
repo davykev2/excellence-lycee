@@ -80,6 +80,15 @@ run(
   ],
 );
 
+run(
+  "Contenu · audit-terminal-a-svt-brain-activity.ts",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    resolve(root, "scripts", "audit-terminal-a-svt-brain-activity.ts"),
+  ],
+);
+
 const batchesDirectory = resolve(root, "content_pipeline/batches");
 const batches = readdirSync(batchesDirectory)
   .filter((file) => file.endsWith("-v2.json"))
