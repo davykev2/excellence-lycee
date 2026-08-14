@@ -599,7 +599,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
     ],
     svt: [
       { title: "La communication nerveuse", pathId: "terminale-c-svt-l1-nervous-communication" },
-      "Les drogues et le système nerveux",
+      { title: "Les drogues et le système nerveux", pathId: "terminale-c-svt-l2-drugs-nervous-system" },
       "Les cycles sexuels chez la femme",
       "La transmission d’un caractère héréditaire chez l’Homme",
       "La production d’énergie par la cellule",
