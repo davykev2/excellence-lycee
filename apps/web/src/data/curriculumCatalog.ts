@@ -601,7 +601,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "La communication nerveuse", pathId: "terminale-c-svt-l1-nervous-communication" },
       { title: "Les drogues et le système nerveux", pathId: "terminale-c-svt-l2-drugs-nervous-system" },
       { title: "La production d’énergie par la cellule", pathId: "terminale-c-svt-l3-cell-energy-production" },
-      "L’utilisation de l’énergie par la cellule musculaire",
+      { title: "L’utilisation de l’énergie par la cellule musculaire", pathId: "terminale-c-svt-l4-muscle-energy-use" },
       "Le système de défense de l’organisme",
       "L’infection de l’organisme par le VIH",
       "Les cycles sexuels chez la femme",

@@ -70,15 +70,16 @@ async function loadPathsForLevel(levelId: string) {
   }
 
   if (levelId === "terminale-c") {
-    const [mathematics, physics, common, nervousSystem, drugsNervousSystem, cellEnergyProduction] = await Promise.all([
+    const [mathematics, physics, common, nervousSystem, drugsNervousSystem, cellEnergyProduction, muscleEnergyUse] = await Promise.all([
       import("./terminalCMathPaths").then((module) => module.terminalCMathematicsPaths),
       loadTerminalPhysicsPaths(levelId),
       loadTerminalCommonPaths(),
       import("./terminalCSvtNervousPath").then((module) => [module.terminalCSvtNervousPath]),
       import("./terminalCSvtDrugsPath").then((module) => [module.terminalCSvtDrugsPath]),
       import("./terminalCSvtCellEnergyPath").then((module) => [module.terminalCSvtCellEnergyPath]),
+      import("./terminalCSvtMuscleEnergyPath").then((module) => [module.terminalCSvtMuscleEnergyPath]),
     ]);
-    return [...mathematics, ...physics, ...common, ...nervousSystem, ...drugsNervousSystem, ...cellEnergyProduction];
+    return [...mathematics, ...physics, ...common, ...nervousSystem, ...drugsNervousSystem, ...cellEnergyProduction, ...muscleEnergyUse];
   }
 
   if (levelId === "terminale-d") {
