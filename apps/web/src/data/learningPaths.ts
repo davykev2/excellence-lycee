@@ -25,6 +25,7 @@ import { terminalHistoryPaths } from "./terminalHistoryPaths";
 import { terminalMathematicsPaths } from "./terminalMathPaths";
 import { terminalPhilosophyAdvancedPaths } from "./terminalPhilosophyAdvancedPaths";
 import { terminalPhilosophyPaths } from "./terminalPhilosophyPaths";
+import { terminalCSvtCellEnergyPath } from "./terminalCSvtCellEnergyPath";
 import { terminalCSvtDrugsPath } from "./terminalCSvtDrugsPath";
 import { terminalCSvtNervousPath } from "./terminalCSvtNervousPath";
 import { terminalSvtPaths } from "./terminalSvtPaths";
@@ -60,6 +61,7 @@ const baseLearningPaths: LearningPath[] = [
   ...terminalSvtPaths,
   terminalCSvtNervousPath,
   terminalCSvtDrugsPath,
+  terminalCSvtCellEnergyPath,
 ];
 
 export const learningPaths: LearningPath[] = baseLearningPaths.map(applyLessonXpBudget);
