@@ -17,6 +17,7 @@ import type { ProgressLesson } from "../progress/useLearningProgress";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
 import { MathText } from "../../components/MathText";
 import { formatXp } from "../../data/xpRewards";
+import { getNextLesson, getPathLessons } from "./pathLessons";
 
 interface MathPathScreenProps {
   path: LearningPath;
@@ -27,14 +28,6 @@ interface MathPathScreenProps {
   allLessonsAccessible?: boolean;
   onOpenLesson: (lessonId: string) => void;
   onBackToLibrary: () => void;
-}
-
-export function getPathLessons(path: LearningPath) {
-  return path.modules.flatMap((module) => module.lessons);
-}
-
-export function getNextLesson(path: LearningPath, completedLessonIds: Set<string>) {
-  return getPathLessons(path).find((lesson) => !completedLessonIds.has(lesson.id));
 }
 
 function getLessonState(

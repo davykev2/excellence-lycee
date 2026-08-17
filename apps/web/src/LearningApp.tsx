@@ -1,13 +1,12 @@
-import { lazy, Suspense, useCallback, useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { LearnerProfile, NavigationId, SubjectId } from "./domain/learning";
 import type { LearningPath } from "./domain/paths";
 import { schoolLevels, subjects, initialDashboard, isSubjectAvailableForLevel } from "./data/programme";
-import { loadLearningPathsForLevel } from "./data/learningPathLoader";
+import { loadLearningPathsForLevel, loadLearningPathsForSubject } from "./data/learningPathLoader";
 import { curriculumLessonTitles } from "./data/curriculumCatalog";
 import { Sidebar } from "./features/navigation/Sidebar";
 import { MobileHeader, MobileNavigation } from "./features/navigation/MobileNavigation";
-import { LessonWorkspace } from "./features/lesson/LessonWorkspace";
-import { MathPathScreen, getNextLesson, getPathLessons } from "./features/paths/MathPathScreen";
+import { getNextLesson, getPathLessons } from "./features/paths/pathLessons";
 import { TutorPanel } from "./features/tutor/TutorPanel";
 import { DetailsDialog } from "./features/details/DetailsDialog";
 import { usePlatformStats } from "./features/dashboard/PlatformStats";
@@ -33,6 +32,12 @@ import {
 
 const AdminScreen = lazy(() =>
   import("./features/admin/AdminScreen").then((module) => ({ default: module.AdminScreen })),
+);
+const LessonWorkspace = lazy(() =>
+  import("./features/lesson/LessonWorkspace").then((module) => ({ default: module.LessonWorkspace })),
+);
+const MathPathScreen = lazy(() =>
+  import("./features/paths/MathPathScreen").then((module) => ({ default: module.MathPathScreen })),
 );
 const ArenaScreen = lazy(() =>
   import("./features/arena/ArenaScreen").then((module) => ({ default: module.ArenaScreen })),
@@ -73,6 +78,17 @@ const requestedPreviewLevel = previewParams.get("__level-preview");
 const previewLevelId = schoolLevels.some((level) => level.id === requestedPreviewLevel) ? requestedPreviewLevel! : "seconde-c";
 const requestedPreviewPathId = previewParams.get("__path-preview");
 const requestedPreviewLessonId = previewParams.get("__lesson-preview");
+const initialRouteHint = readAppRoute(window.location, {
+  navigation: "home",
+  subjectId: initialDashboard.subjectId,
+});
+const explicitInitialSubjectId = previewParams.get("matiere");
+const requestedInitialPathId = requestedPreviewPathId ?? initialRouteHint.pathId;
+const requestedInitialSubjectId: SubjectId = explicitInitialSubjectId
+  && Object.prototype.hasOwnProperty.call(subjects, explicitInitialSubjectId)
+  ? explicitInitialSubjectId as SubjectId
+  : curriculumLessonTitles.find((lesson) => lesson.pathId === requestedInitialPathId)?.subjectId
+    ?? initialDashboard.subjectId;
 const previewUser: AuthUser = {
   id: "preview-user",
   email: "apprenant@excellence.local",
@@ -99,7 +115,11 @@ const arenaEditorPreviewUser: AuthUser = {
   accountType: "teacher",
 };
 
-function createRouteFallback(previewPath?: LearningPath, previewLessonId?: string | null): AppRoute {
+function createRouteFallback(
+  previewPath?: LearningPath,
+  previewLessonId?: string | null,
+  fallbackSubjectId: SubjectId = initialDashboard.subjectId,
+): AppRoute {
   return isArenaExerciseEditorPreview
     ? { navigation: "arena", subjectId: "mathematics", arenaMode: "exercises", arenaEditor: true }
     : isBacExamPreview
@@ -111,11 +131,17 @@ function createRouteFallback(previewPath?: LearningPath, previewLessonId?: strin
     : isPathPreview
       ? {
           navigation: "paths",
-          subjectId: previewPath?.subjectId ?? "mathematics",
+          subjectId: previewPath?.subjectId ?? fallbackSubjectId,
           pathId: previewPath?.id,
           lessonId: previewLessonId ?? undefined,
         }
-      : { navigation: "home", subjectId: initialDashboard.subjectId };
+      : { navigation: "home", subjectId: fallbackSubjectId };
+}
+
+function mergeLearningPaths(current: LearningPath[], incoming: LearningPath[]) {
+  const byId = new Map(current.map((path) => [path.id, path]));
+  for (const path of incoming) byId.set(path.id, path);
+  return [...byId.values()];
 }
 
 function routeAllowedForUser(route: AppRoute, user: AuthUser): AppRoute {
@@ -143,15 +169,53 @@ export function LearningApp({ user }: { user?: AuthUser }) {
 function LearningAppWithPaths({ user }: { user: AuthUser }) {
   const [baseLearningPaths, setBaseLearningPaths] = useState<LearningPath[] | null>(null);
   const [pathLoadingError, setPathLoadingError] = useState<Error | null>(null);
-  const includeAllPaths = user.role === "admin" || isAdminContentPreview;
+  const loadedSubjectIds = useRef(new Set<SubjectId>());
+  const pendingSubjectLoads = useRef(new Map<SubjectId, Promise<void>>());
+  const loadGeneration = useRef(0);
+  const includeAllPaths = user.role === "admin" || isAdminContentPreview || isPathPreview;
+
+  const ensureSubjectPaths = useCallback((subjectId: SubjectId) => {
+    if (includeAllPaths || loadedSubjectIds.current.has(subjectId)) return Promise.resolve();
+    const pending = pendingSubjectLoads.current.get(subjectId);
+    if (pending) return pending;
+
+    const generation = loadGeneration.current;
+    const loading = loadLearningPathsForSubject(user.levelId, subjectId)
+      .then((paths) => {
+        if (generation !== loadGeneration.current) return;
+        loadedSubjectIds.current.add(subjectId);
+        setBaseLearningPaths((current) => mergeLearningPaths(current ?? [], paths));
+      })
+      .catch((error: unknown) => {
+        const normalized = error instanceof Error ? error : new Error("Chargement de la matière impossible.");
+        if (generation === loadGeneration.current) setPathLoadingError(normalized);
+        throw normalized;
+      })
+      .finally(() => {
+        if (pendingSubjectLoads.current.get(subjectId) === loading) {
+          pendingSubjectLoads.current.delete(subjectId);
+        }
+      });
+
+    pendingSubjectLoads.current.set(subjectId, loading);
+    return loading;
+  }, [includeAllPaths, user.levelId]);
 
   useEffect(() => {
     let active = true;
+    const generation = ++loadGeneration.current;
+    loadedSubjectIds.current.clear();
+    pendingSubjectLoads.current.clear();
     setBaseLearningPaths(null);
     setPathLoadingError(null);
-    loadLearningPathsForLevel(user.levelId, includeAllPaths)
+    const initialLoading = includeAllPaths
+      ? loadLearningPathsForLevel(user.levelId, true)
+      : loadLearningPathsForSubject(user.levelId, requestedInitialSubjectId);
+    initialLoading
       .then((paths) => {
-        if (active) setBaseLearningPaths(paths);
+        if (!active || generation !== loadGeneration.current) return;
+        if (!includeAllPaths) loadedSubjectIds.current.add(requestedInitialSubjectId);
+        setBaseLearningPaths(paths);
       })
       .catch((error: unknown) => {
         if (active) setPathLoadingError(error instanceof Error ? error : new Error("Chargement des cours impossible."));
@@ -171,7 +235,7 @@ function LearningAppWithPaths({ user }: { user: AuthUser }) {
   const previewLessonId = requestedPreviewLessonId === "last"
     ? previewPathLessons[previewPathLessons.length - 1]?.id ?? null
     : previewPathLessons.some((lesson) => lesson.id === requestedPreviewLessonId) ? requestedPreviewLessonId : null;
-  const routeFallback = createRouteFallback(previewPath, previewLessonId);
+  const routeFallback = createRouteFallback(previewPath, previewLessonId, requestedInitialSubjectId);
 
   return (
     <LearningAppShell
@@ -179,6 +243,7 @@ function LearningAppWithPaths({ user }: { user: AuthUser }) {
       baseLearningPaths={baseLearningPaths}
       previewPath={previewPath}
       routeFallback={routeFallback}
+      ensureSubjectPaths={ensureSubjectPaths}
     />
   );
 }
@@ -188,16 +253,21 @@ function LearningAppShell({
   baseLearningPaths,
   previewPath,
   routeFallback,
+  ensureSubjectPaths,
 }: {
   user: AuthUser;
   baseLearningPaths: LearningPath[];
   previewPath?: LearningPath;
   routeFallback: AppRoute;
+  ensureSubjectPaths: (subjectId: SubjectId) => Promise<void>;
 }) {
   const [route, setRoute] = useState<AppRoute>(() => routeAllowedForUser(readAppRoute(window.location, routeFallback), user));
   const [openDialog, setOpenDialog] = useState<OpenDialog>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const [tourReplayKey, setTourReplayKey] = useState(0);
+  const [bundleNavigationLoading, setBundleNavigationLoading] = useState(false);
+  const [bundleNavigationError, setBundleNavigationError] = useState<Error | null>(null);
+  const navigationRequest = useRef(0);
   const { logout, updateUser } = useAuth();
   const localPreview = isPathPreview || isAdminContentPreview || isArenaExerciseEditorPreview || isDuelPreview || isBacExamPreview;
   const { progressByPath, completedLessonsByPath, submitAttempt, totalXp, loading: progressLoading } = useLearningProgress({ localOnly: localPreview });
@@ -211,15 +281,41 @@ function LearningAppShell({
   const selectedPathId = route.pathId ?? null;
   const activeLessonId = route.lessonId ?? null;
 
-  const navigate = useCallback((nextRoute: AppRoute, options?: { replace?: boolean; scroll?: boolean }) => {
+  const prepareRoute = useCallback((nextRoute: AppRoute, commit: (allowedRoute: AppRoute) => void) => {
     const allowedRoute = routeAllowedForUser(nextRoute, user);
-    const url = appRouteUrl(allowedRoute);
-    const state = { excellenceRoute: true };
-    if (options?.replace) window.history.replaceState(state, "", url);
-    else window.history.pushState(state, "", url);
-    setRoute(allowedRoute);
-    if (options?.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
-  }, [routeFallback, user]);
+    const nextSubjectId = allowedRoute.subjectId ?? initialDashboard.subjectId;
+    if (nextSubjectId === subjectId) {
+      commit(allowedRoute);
+      return;
+    }
+
+    const request = ++navigationRequest.current;
+    setBundleNavigationLoading(true);
+    setBundleNavigationError(null);
+    void ensureSubjectPaths(nextSubjectId)
+      .then(() => {
+        if (request === navigationRequest.current) commit(allowedRoute);
+      })
+      .catch((error: unknown) => {
+        if (request === navigationRequest.current) {
+          setBundleNavigationError(error instanceof Error ? error : new Error("Chargement de la matière impossible."));
+        }
+      })
+      .finally(() => {
+        if (request === navigationRequest.current) setBundleNavigationLoading(false);
+      });
+  }, [ensureSubjectPaths, subjectId, user]);
+
+  const navigate = useCallback((nextRoute: AppRoute, options?: { replace?: boolean; scroll?: boolean }) => {
+    prepareRoute(nextRoute, (allowedRoute) => {
+      const url = appRouteUrl(allowedRoute);
+      const state = { excellenceRoute: true };
+      if (options?.replace) window.history.replaceState(state, "", url);
+      else window.history.pushState(state, "", url);
+      setRoute(allowedRoute);
+      if (options?.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
+    });
+  }, [prepareRoute]);
 
   useEffect(() => {
     const canonicalUrl = appRouteUrl(route);
@@ -229,11 +325,11 @@ function LearningAppShell({
 
     const onPopState = () => {
       setOpenDialog(null);
-      setRoute(routeAllowedForUser(readAppRoute(window.location, routeFallback), user));
+      prepareRoute(readAppRoute(window.location, routeFallback), setRoute);
     };
     window.addEventListener("popstate", onPopState);
     return () => window.removeEventListener("popstate", onPopState);
-  }, [user]);
+  }, [prepareRoute, route, routeFallback, user]);
 
   const level = useMemo(
     () => schoolLevels.find((item) => item.id === profile.levelId) ?? schoolLevels[0],
@@ -368,7 +464,8 @@ function LearningAppShell({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [navigate, route.lessonId, route.pathId, subject.id]);
 
-  if (progressLoading) {
+  if (bundleNavigationError) throw bundleNavigationError;
+  if (progressLoading || bundleNavigationLoading) {
     return <main className="session-loading" role="status"><span className="session-loading-mark" />Synchronisation de ta progression…</main>;
   }
 
@@ -527,27 +624,29 @@ function LearningAppShell({
       )}
 
       {activeLesson && activePath && (
-        <LessonWorkspace
-          key={activeLesson.id}
-          lesson={activeLesson}
-          path={activePath}
-          nextLesson={nextLesson}
-          currentProgress={progressByLesson[activeLesson.id]}
-          currentUser={{
-            id: user.id,
-            name: profile.name,
-            photoUrl: profile.photoUrl,
-            role: user.role,
-          }}
-          localOnly={localPreview}
-          onClose={() => navigate({
-            navigation: "paths",
-            subjectId: activePath.subjectId,
-            pathId: activePath.id,
-          }, { replace: true, scroll: false })}
-          onSubmitAttempt={submitLessonAttempt}
-          onOpenNext={openPathLesson}
-        />
+        <Suspense fallback={<main className="admin-loading" role="status">Chargement de la leçon…</main>}>
+          <LessonWorkspace
+            key={activeLesson.id}
+            lesson={activeLesson}
+            path={activePath}
+            nextLesson={nextLesson}
+            currentProgress={progressByLesson[activeLesson.id]}
+            currentUser={{
+              id: user.id,
+              name: profile.name,
+              photoUrl: profile.photoUrl,
+              role: user.role,
+            }}
+            localOnly={localPreview}
+            onClose={() => navigate({
+              navigation: "paths",
+              subjectId: activePath.subjectId,
+              pathId: activePath.id,
+            }, { replace: true, scroll: false })}
+            onSubmitAttempt={submitLessonAttempt}
+            onOpenNext={openPathLesson}
+          />
+        </Suspense>
       )}
       {openDialog === "tutor" && (
         <TutorPanel

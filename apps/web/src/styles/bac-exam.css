@@ -1,0 +1,1141 @@
+/* Concours BAC & BT 2024 — sujet complet et publication différée. */
+.bac-exam-page {
+  min-width: 0;
+  padding: 34px clamp(20px, 4vw, 64px) 100px;
+  color: #08265a;
+  background:
+    radial-gradient(circle at 8% 4%, rgba(74, 177, 71, 0.08), transparent 23rem),
+    radial-gradient(circle at 94% 18%, rgba(245, 82, 4, 0.07), transparent 25rem),
+    #fbfaf6;
+}
+
+.bac-exam-topbar {
+  position: sticky;
+  z-index: 24;
+  top: 0;
+  display: grid;
+  grid-template-columns: 1fr minmax(220px, 440px) 1fr;
+  align-items: center;
+  gap: 22px;
+  margin: -34px clamp(-64px, -4vw, -20px) 28px;
+  padding: 18px clamp(20px, 4vw, 64px);
+  border-bottom: 1px solid #dfe5df;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 12px 30px rgba(8, 38, 90, 0.06);
+  backdrop-filter: blur(16px);
+}
+
+.bac-exam-topbar > span:last-child {
+  display: inline-flex;
+  justify-self: end;
+  align-items: center;
+  gap: 8px;
+  color: #596b86;
+  font-weight: 800;
+}
+
+.bac-exam-live-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bac-exam-live-progress > span {
+  overflow: hidden;
+  width: 100%;
+  height: 9px;
+  border-radius: 999px;
+  background: #e9edea;
+}
+
+.bac-exam-live-progress i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #42ad44, #74c84e);
+  transition: width 180ms ease;
+}
+
+.bac-exam-live-progress strong {
+  min-width: 58px;
+  color: #0b316c;
+  font-size: 0.84rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.bac-exam-zone-picker {
+  width: min(1050px, 100%);
+  margin: 0 auto 18px;
+  padding: 22px;
+  border: 1px solid #dce5dc;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 0 18px 45px rgba(8, 38, 90, 0.07);
+}
+
+.bac-exam-zone-picker.is-required {
+  border-color: #e7bd75;
+  box-shadow: 0 18px 45px rgba(169, 112, 12, 0.1);
+}
+
+.bac-exam-zone-picker > header {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.bac-exam-zone-picker > header > span {
+  display: grid;
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  color: #23813a;
+  background: #eaf6e7;
+  place-items: center;
+}
+
+.bac-exam-zone-picker > header > div {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.bac-exam-zone-picker h2,
+.bac-exam-zone-picker p {
+  margin: 0;
+}
+
+.bac-exam-zone-picker h2 {
+  color: #08265a;
+  font-size: 1.25rem;
+}
+
+.bac-exam-zone-picker > header > div > p:last-child {
+  margin-top: 4px;
+  color: #65768d;
+  font-size: 0.84rem;
+}
+
+.bac-exam-zone-picker > header > strong {
+  padding: 8px 11px;
+  border-radius: 999px;
+  color: #267d35;
+  background: #eaf6e7;
+  font-size: 0.76rem;
+  white-space: nowrap;
+}
+
+.bac-exam-zone-options {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.bac-exam-zone-options button {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 3px 9px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #dce3e6;
+  border-radius: 15px;
+  color: #5f7188;
+  background: #fafbf9;
+  text-align: left;
+  cursor: pointer;
+}
+
+.bac-exam-zone-options button:hover:not(:disabled),
+.bac-exam-zone-options button.is-selected {
+  border-color: #4dad43;
+  background: #f0f8ed;
+  box-shadow: 0 0 0 3px rgba(77, 173, 67, 0.1);
+}
+
+.bac-exam-zone-options button:disabled {
+  cursor: default;
+}
+
+.bac-exam-zone-options button > span {
+  grid-row: 1 / span 2;
+  color: #3fa63e;
+}
+
+.bac-exam-zone-options strong {
+  overflow: hidden;
+  color: #0c346d;
+  font-size: 0.88rem;
+  text-overflow: ellipsis;
+}
+
+.bac-exam-zone-options small {
+  color: #7b899a;
+  font-size: 0.69rem;
+  line-height: 1.35;
+}
+
+.bac-exam-zone-required,
+.bac-exam-zone-legacy {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 12px !important;
+  color: #a2610b;
+  font-size: 0.77rem;
+  font-weight: 850;
+}
+
+.bac-exam-zone-legacy {
+  color: #6d7d91;
+}
+
+.bac-exam-paper {
+  width: min(1050px, 100%);
+  margin: 0 auto;
+  border: 1px solid #dedfd8;
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 30px 75px rgba(8, 38, 90, 0.1);
+}
+
+.bac-exam-official-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 34px;
+  padding: clamp(28px, 5vw, 62px);
+  border-bottom: 1px solid #e5e5de;
+  text-align: center;
+}
+
+.bac-exam-official-header > div:first-child,
+.bac-exam-official-header > div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #1e355b;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.bac-exam-official-header > div:first-child strong,
+.bac-exam-official-header > div:nth-child(2) strong {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.bac-exam-official-header hr {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 3px 0;
+  border: 0;
+  border-top: 3px double #0b316c;
+}
+
+.bac-exam-official-header > p,
+.bac-exam-official-header > h1,
+.bac-exam-official-meta {
+  grid-column: 1 / -1;
+}
+
+.bac-exam-official-header > p {
+  margin: 8px 0 0;
+  color: #0c3473;
+  font-size: clamp(1.15rem, 2.1vw, 1.55rem);
+  font-weight: 900;
+}
+
+.bac-exam-official-header > p b {
+  margin-left: 10px;
+  color: #f35208;
+}
+
+.bac-exam-official-header > h1 {
+  margin: 0;
+  color: #061f4e;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  letter-spacing: -0.04em;
+}
+
+.bac-exam-official-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.bac-exam-official-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 13px;
+  border: 1px solid #e1e3dd;
+  border-radius: 999px;
+  color: #53647d;
+  background: #fafaf7;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.bac-exam-instructions {
+  display: flex;
+  gap: 16px;
+  margin: clamp(24px, 4vw, 42px);
+  padding: 20px 22px;
+  border: 1px solid #cde2c8;
+  border-left: 5px solid #42ad44;
+  border-radius: 18px;
+  color: #193e36;
+  background: #f1f8ee;
+}
+
+.bac-exam-instructions > svg {
+  flex: 0 0 auto;
+  color: #299b38;
+}
+
+.bac-exam-instructions strong {
+  display: block;
+  margin-bottom: 7px;
+  color: #0b316c;
+}
+
+.bac-exam-instructions ul {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding-left: 20px;
+  color: #516477;
+  line-height: 1.55;
+}
+
+.bac-exam-section {
+  padding: 15px clamp(24px, 5vw, 62px) 46px;
+}
+
+.bac-exam-section + .bac-exam-section {
+  border-top: 12px solid #f4f4ef;
+  padding-top: 48px;
+}
+
+.bac-exam-section > header {
+  margin-bottom: 26px;
+  padding-bottom: 16px;
+  border-bottom: 3px solid #0b316c;
+}
+
+.bac-exam-section > header p {
+  margin: 0 0 5px;
+  color: #3ba844;
+  font-size: 0.76rem;
+  font-weight: 950;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.bac-exam-section > header h2 {
+  margin: 0;
+  color: #062458;
+  font-size: clamp(1.45rem, 3vw, 2.25rem);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.bac-exam-section.is-continuation > header p {
+  color: #f35208;
+}
+
+.bac-exam-group + .bac-exam-group {
+  margin-top: 36px;
+}
+
+.bac-exam-group-heading {
+  margin-bottom: 20px;
+}
+
+.bac-exam-group-heading h3 {
+  margin: 0 0 5px;
+  color: #0b316c;
+  font-size: 1.15rem;
+}
+
+.bac-exam-group-heading p {
+  margin: 0;
+  color: #61718a;
+  font-size: 0.94rem;
+  line-height: 1.55;
+}
+
+.bac-exam-passage {
+  margin-bottom: 24px;
+  padding: clamp(20px, 4vw, 34px);
+  border: 1px solid #dce4e7;
+  border-radius: 20px;
+  color: #31465f;
+  background: #f8faf9;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.97rem;
+  line-height: 1.75;
+}
+
+.bac-exam-passage > strong {
+  display: block;
+  margin-bottom: 16px;
+  color: #08265a;
+  font-family: "Nunito Sans Variable", sans-serif;
+  font-size: 1.14rem;
+}
+
+.bac-exam-passage p {
+  margin: 0;
+}
+
+.bac-exam-passage p + p {
+  margin-top: 14px;
+}
+
+.bac-exam-question {
+  min-width: 0;
+  margin: 0 0 18px;
+  padding: clamp(18px, 3vw, 27px);
+  border: 1px solid #dfe3df;
+  border-radius: 19px;
+  background: #fff;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.bac-exam-question:focus-within {
+  border-color: #75bc70;
+  box-shadow: 0 0 0 4px rgba(66, 173, 68, 0.1);
+}
+
+.bac-exam-question > legend {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 13px;
+  width: 100%;
+  padding: 0;
+  color: #0b2e65;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.55;
+  white-space: pre-line;
+}
+
+.bac-exam-question > legend > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 49px;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 10px;
+  color: #fff;
+  background: #0b316c;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+.bac-exam-question .math-text {
+  min-width: 0;
+}
+
+.bac-exam-clues {
+  width: min(430px, calc(100% - 60px));
+  margin: 18px 0 20px 62px;
+  overflow: hidden;
+  border: 1px solid #d8dfdc;
+  border-radius: 14px;
+  background: #f8faf8;
+}
+
+.bac-exam-clues > div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  padding: 10px 15px;
+}
+
+.bac-exam-clues > div + div {
+  border-top: 1px solid #e3e7e3;
+}
+
+.bac-exam-clues code {
+  color: #092c63;
+  font-family: "Courier New", monospace;
+  font-size: 1rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.bac-exam-clues strong {
+  color: #e64c0a;
+  font-size: 0.82rem;
+}
+
+.bac-exam-clues > span {
+  display: block;
+  padding: 8px 15px;
+  color: #59708a;
+  background: #eef3ef;
+  font-size: 0.77rem;
+  font-weight: 800;
+  text-align: right;
+}
+
+.bac-exam-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0 0 62px;
+}
+
+.bac-exam-choices label {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 11px;
+  min-width: 0;
+  padding: 13px 15px;
+  border: 1px solid #dfe4df;
+  border-radius: 14px;
+  color: #41556f;
+  background: #fdfdfb;
+  cursor: pointer;
+  line-height: 1.45;
+  transition: transform 140ms ease, border-color 140ms ease, background 140ms ease;
+}
+
+.bac-exam-choices label:hover {
+  transform: translateY(-1px);
+  border-color: #85c27e;
+  background: #f7fbf4;
+}
+
+.bac-exam-choices label.is-selected {
+  border-color: #3fab46;
+  color: #163e34;
+  background: #edf7e9;
+  box-shadow: inset 4px 0 #3fab46;
+}
+
+.bac-exam-choices label.is-expected {
+  border-color: #3fab46;
+  background: #edf7e9;
+}
+
+.bac-exam-choices input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.bac-exam-choices label > span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 29px;
+  height: 29px;
+  border: 1px solid #cfd7d2;
+  border-radius: 9px;
+  color: #0b316c;
+  background: #fff;
+  font-size: 0.78rem;
+  font-weight: 950;
+}
+
+.bac-exam-choices label.is-selected > span {
+  border-color: #3fab46;
+  color: #fff;
+  background: #3fab46;
+}
+
+.bac-exam-choices label > strong {
+  min-width: 0;
+  padding-top: 3px;
+  font-size: 0.89rem;
+  font-weight: 700;
+}
+
+.bac-exam-choices label > svg {
+  color: #319f3c;
+}
+
+.bac-exam-question.is-correct {
+  border-color: #b9ddb4;
+  background: #fbfefa;
+}
+
+.bac-exam-question.is-incorrect {
+  border-color: #f3c1ae;
+  background: #fffaf8;
+}
+
+.bac-exam-correction {
+  display: flex;
+  gap: 12px;
+  margin: 17px 0 0 62px;
+  padding: 14px 16px;
+  border-radius: 13px;
+  color: #236d31;
+  background: #edf7e9;
+}
+
+.bac-exam-correction > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  margin: 0;
+}
+
+.bac-exam-correction .lesson-rich-content {
+  color: #58725f;
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
+.bac-exam-correction .lesson-rich-content > * {
+  margin: 0;
+}
+
+.bac-exam-correction .lesson-rich-content > * + * {
+  margin-top: 7px;
+}
+
+.bac-exam-correction .lesson-rich-content ul,
+.bac-exam-correction .lesson-rich-content ol {
+  padding-left: 20px;
+}
+
+.bac-exam-correction .math-text {
+  color: #58725f;
+}
+
+.bac-exam-correction-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin: 4px 0 0;
+  padding: 10px 11px;
+  border-radius: 10px;
+  color: #9a5a0b;
+  background: #fff5d8;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.bac-exam-correction-warning svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
+.bac-exam-correction a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: max-content;
+  max-width: 100%;
+  margin-top: 2px;
+  color: #0b5fc1;
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.bac-exam-correction a:hover {
+  text-decoration: underline;
+}
+
+.bac-exam-submit-panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 24px;
+  padding: 18px 20px;
+  border: 1px solid #ccd9ce;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 18px 46px rgba(8, 38, 90, 0.17);
+  backdrop-filter: blur(14px);
+}
+
+.bac-exam-submit-panel > svg {
+  flex: 0 0 auto;
+  color: #36a43f;
+}
+
+.bac-exam-submit-panel > div {
+  flex: 1 1 auto;
+}
+
+.bac-exam-submit-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.bac-exam-submit-summary small,
+.bac-result-zone,
+.bac-submission-banner > div > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.bac-exam-submit-summary small {
+  margin-top: 4px;
+  color: #2d7e3a;
+  font-size: 0.73rem;
+  font-weight: 850;
+}
+
+.bac-result-zone {
+  width: max-content;
+  margin-top: 10px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  color: #237c36;
+  background: #eaf6e7;
+  font-size: 0.77rem;
+  font-weight: 900;
+}
+
+.bac-exam-submit-summary strong,
+.bac-exam-submit-panel > div > strong {
+  color: #08265a;
+}
+
+.bac-exam-submit-summary span,
+.bac-exam-submit-panel > div > p {
+  margin: 0;
+  color: #64758d;
+  font-size: 0.86rem;
+}
+
+.bac-exam-inline-error {
+  flex-basis: 100%;
+  margin: 0;
+  color: #b74018;
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.bac-exam-floating-progress {
+  display: none;
+  position: fixed;
+  z-index: 17;
+  right: 22px;
+  bottom: 110px;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 13px 11px;
+  border: 1px solid #d7ded8;
+  border-radius: 16px;
+  color: #0b316c;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 12px 30px rgba(8, 38, 90, 0.12);
+  backdrop-filter: blur(10px);
+}
+
+.bac-exam-floating-progress > span {
+  position: relative;
+  overflow: hidden;
+  width: 5px;
+  height: 42px;
+  border-radius: 999px;
+  background: #e5eae6;
+}
+
+.bac-exam-floating-progress i {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: inherit;
+  background: #42ad44;
+}
+
+.bac-exam-floating-progress strong {
+  margin-top: 3px;
+  font-size: 0.95rem;
+}
+
+.bac-exam-floating-progress small {
+  color: #7b8a9d;
+  font-size: 0.64rem;
+}
+
+.bac-submission-banner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 20px;
+  width: min(1050px, 100%);
+  margin: 0 auto 24px;
+  padding: 19px 22px;
+  border: 1px solid #e1d5aa;
+  border-radius: 22px;
+  color: #78520d;
+  background: linear-gradient(120deg, #fff8df, #fffcf1);
+  box-shadow: 0 14px 38px rgba(94, 64, 5, 0.08);
+}
+
+.bac-submission-banner.is-published {
+  border-color: #b8ddb6;
+  color: #2a7332;
+  background: linear-gradient(120deg, #eff9ec, #fbfff9);
+}
+
+.bac-submission-davy {
+  width: 78px;
+  height: 78px;
+}
+
+.bac-submission-banner .path-kicker {
+  margin: 0 0 2px;
+}
+
+.bac-submission-banner h2 {
+  margin: 0;
+  color: #08265a;
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+
+.bac-submission-banner div > span {
+  display: block;
+  margin-top: 5px;
+  color: #7c8593;
+  font-size: 0.79rem;
+}
+
+.bac-exam-confirm-overlay {
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(5, 24, 57, 0.62);
+  backdrop-filter: blur(5px);
+}
+
+.bac-exam-confirm-overlay > section {
+  width: min(500px, 100%);
+  padding: 32px;
+  border-radius: 24px;
+  color: #63738b;
+  background: #fff;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.bac-exam-confirm-overlay > section > span {
+  display: inline-flex;
+  padding: 14px;
+  border-radius: 16px;
+  color: #f35208;
+  background: #fff0e8;
+}
+
+.bac-exam-confirm-overlay h2 {
+  margin: 16px 0 8px;
+  color: #08265a;
+  font-size: 1.55rem;
+}
+
+.bac-exam-confirm-overlay p {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.bac-exam-confirm-overlay section > div {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.bac-exam-confirm-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #237c36 !important;
+  font-weight: 800;
+}
+
+.bac-exam-loading,
+.bac-exam-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 50vh;
+  color: #65758d;
+  font-weight: 800;
+}
+
+.bac-exam-loading span {
+  width: 22px;
+  height: 22px;
+  border: 3px solid #dce3dc;
+  border-top-color: #42ad44;
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+.bac-exam-error {
+  flex-wrap: wrap;
+  min-height: auto;
+  margin-top: 40px;
+  padding: 28px;
+  border: 1px solid #f0c3b2;
+  border-radius: 20px;
+  color: #a63d1a;
+  background: #fff6f2;
+}
+
+.bac-exam-error p {
+  margin: 3px 0 0;
+}
+
+.bac-exam-error button {
+  padding: 10px 15px;
+  border: 1px solid currentColor;
+  border-radius: 11px;
+  color: inherit;
+  background: transparent;
+  font-weight: 900;
+}
+
+.bac-result-lock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(720px, 100%);
+  margin: 60px auto;
+  padding: clamp(32px, 6vw, 60px);
+  border: 1px solid #dedfd7;
+  border-radius: 28px;
+  color: #64748a;
+  background: #fff;
+  box-shadow: 0 28px 70px rgba(8, 38, 90, 0.09);
+  text-align: center;
+}
+
+.bac-result-lock > svg {
+  color: #f35208;
+}
+
+.bac-result-davy {
+  width: 150px;
+  height: 150px;
+}
+
+.bac-result-lock-icon {
+  display: inline-flex;
+  margin-top: -22px;
+  padding: 12px;
+  border: 4px solid #fff;
+  border-radius: 50%;
+  color: #f35208;
+  background: #fff0e8;
+}
+
+.bac-result-lock h1 {
+  margin: 15px 0 7px;
+  color: #08265a;
+  font-size: clamp(1.75rem, 4vw, 2.55rem);
+}
+
+.bac-result-lock p {
+  max-width: 530px;
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.bac-result-lock small {
+  margin: 14px 0 22px;
+  color: #8a96a6;
+}
+
+.bac-result-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  width: min(1050px, 100%);
+  margin: 0 auto 24px;
+  padding: clamp(26px, 5vw, 50px);
+  border-radius: 28px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 90% 20%, rgba(91, 184, 80, 0.46), transparent 18rem),
+    linear-gradient(135deg, #062458, #0a3f7f);
+  box-shadow: 0 25px 60px rgba(8, 38, 90, 0.2);
+}
+
+.bac-result-hero .path-kicker {
+  color: #ffd74a;
+}
+
+.bac-result-hero h1 {
+  margin: 5px 0 7px;
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  letter-spacing: -0.05em;
+}
+
+.bac-result-hero p {
+  margin: 0;
+  color: #cfdbef;
+}
+
+.bac-result-score {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  align-items: baseline;
+  min-width: 220px;
+  padding: 20px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.12);
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.bac-result-score svg {
+  grid-column: 1 / -1;
+  justify-self: center;
+  margin-bottom: 6px;
+  color: #ffd74a;
+}
+
+.bac-result-score > strong {
+  justify-self: end;
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.bac-result-score > span {
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+.bac-result-score small {
+  grid-column: 1 / -1;
+  margin-top: 7px;
+  color: #dce7f5;
+}
+
+.bac-result-appreciation {
+  grid-column: 1 / -1;
+  margin-top: 14px;
+  padding-top: 13px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.bac-result-appreciation strong {
+  display: block;
+  color: #ffd74a;
+  font-size: 1.05rem;
+}
+
+.bac-result-appreciation p {
+  margin: 4px 0 0;
+  color: #f1f6fd;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.bac-result-section-scores {
+  width: min(1050px, 100%);
+  margin: 0 auto 24px;
+  padding: clamp(22px, 4vw, 34px);
+  border: 1px solid #dfe6df;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 18px 45px rgba(8, 38, 90, 0.08);
+}
+
+.bac-result-section-scores > header {
+  margin-bottom: 18px;
+}
+
+.bac-result-section-scores > header h2 {
+  margin: 3px 0 4px;
+  color: #08265a;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+}
+
+.bac-result-section-scores > header > p:last-child {
+  margin: 0;
+  color: #728197;
+  font-size: 0.86rem;
+}
+
+.bac-result-section-scores > div {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.bac-result-section-scores article {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid #e1e7e2;
+  border-radius: 17px;
+  background: #f9fbf8;
+}
+
+.bac-result-section-scores article:nth-child(2) {
+  background: #f7f9fc;
+}
+
+.bac-result-section-scores article:nth-child(3) {
+  background: #fff9ed;
+}
+
+.bac-result-section-scores article > span {
+  display: block;
+  min-height: 2.4em;
+  color: #48617e;
+  font-size: 0.79rem;
+  font-weight: 950;
+  line-height: 1.2;
+}
+
+.bac-result-section-scores article p {
+  display: flex;
+  align-items: baseline;
+  margin: 7px 0 5px;
+  color: #08265a;
+}
+
+.bac-result-section-scores article strong {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.bac-result-section-scores article em {
+  color: #78879a;
+  font-size: 0.95rem;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.bac-result-section-scores article small {
+  color: #7c8999;
+  font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+.admin-bac-publication {
+  margin-bottom: 22px;
+  padding: 24px;
+}
+

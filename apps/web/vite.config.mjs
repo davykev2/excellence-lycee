@@ -4,6 +4,16 @@ import { spawn } from "node:child_process";
 import { createConnection } from "node:net";
 import { resolve } from "node:path";
 
+function contentChunkName(id) {
+  const normalizedId = id.replaceAll("\\", "/");
+  const match = normalizedId.match(/\/src\/data\/(terminal(?:A|C|D|CD)[^/]*Path)\.ts$/);
+  if (!match) return undefined;
+  return `lesson-${match[1]
+    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .toLowerCase()}`;
+}
+
 function apiIsRunning() {
   return new Promise((resolve) => {
     const socket = createConnection({ host: "127.0.0.1", port: 3333 });
@@ -58,6 +68,13 @@ function excellenceApiDevServer() {
 }
 
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: contentChunkName,
+      },
+    },
+  },
   optimizeDeps: {
     include: ["react", "react-dom/client"],
   },
@@ -74,7 +91,7 @@ export default defineConfig({
       },
     },
     warmup: {
-      clientFiles: ["./src/main.jsx"],
+      clientFiles: ["./src/main.tsx"],
     },
   },
   plugins: [excellenceApiDevServer(), react()],

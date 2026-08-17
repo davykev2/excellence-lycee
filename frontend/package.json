@@ -1,5 +1,6 @@
 {
-  "name": "frontend",
+  "name": "excellence-lycee-legacy-capacitor",
+  "description": "Archive gelée de l’ancienne application Web et de la coque Android/Capacitor.",
   "private": true,
   "version": "0.0.0",
   "type": "module",

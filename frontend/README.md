@@ -1,3 +1,11 @@
+# ARCHIVE — ancienne application Web et coque Capacitor
+
+> Ce dossier est gelé. L’application produit vit dans `apps/web` et aucun
+> déploiement Web ne doit partir de `frontend/`. Les fichiers sont conservés
+> uniquement pour migrer la coque Android/Capacitor ; voir [ARCHIVE.md](ARCHIVE.md).
+
+## Documentation historique
+
 # EXCELLENCE LYCÉE
 
 Application éducative React/Vite reliée à Supabase. Elle propose des cours, résumés, exercices guidés non notés, quiz, devoirs chronométrés, duels et compétitions.

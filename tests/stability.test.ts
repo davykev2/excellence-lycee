@@ -5,15 +5,17 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 import { getLessonReward, getPathRewardTotal, XP_PER_LESSON } from "../apps/api/src/curriculum.ts";
+import { resolveDataProvider, resolveJwtSecret } from "../apps/api/src/config.ts";
 import { storeItems } from "../apps/api/src/storeCatalog.ts";
 import {
   clearLearningPathBundleCacheForTests,
   loadLearningPathsForLevel,
+  loadLearningPathsForSubject,
 } from "../apps/web/src/data/learningPathLoader.ts";
 import { learningPaths } from "../apps/web/src/data/learningPaths.ts";
 import { AVAILABLE_EXERCISES } from "../apps/web/src/data/learningPathMetrics.ts";
 import { curriculumLessonTitles } from "../apps/web/src/data/curriculumCatalog.ts";
-import { schoolLevels } from "../apps/web/src/data/programme.ts";
+import { schoolLevels, subjects } from "../apps/web/src/data/programme.ts";
 import {
   buildEditorialAudits,
   editorialStatusOf,
@@ -26,6 +28,37 @@ import {
 } from "../apps/web/src/config/masteryAccess.ts";
 
 const projectRoot = fileURLToPath(new URL("../", import.meta.url));
+
+test("la production exige un JWT_SECRET explicite et suffisamment long", () => {
+  assert.throws(
+    () => resolveJwtSecret({}, true),
+    /défini explicitement en production/,
+  );
+  assert.throws(
+    () => resolveJwtSecret({ JWT_SECRET: "trop-court" }, true),
+    /au moins 32 caractères/,
+  );
+
+  const productionSecret = "production-test-secret-with-32-characters";
+  assert.equal(resolveJwtSecret({ JWT_SECRET: `  ${productionSecret}  ` }, true), productionSecret);
+  assert.ok(resolveJwtSecret({}, false).length >= 32, "Le repli local doit rester utilisable en développement.");
+});
+
+test("la production refuse le repli SQLite implicite", () => {
+  assert.equal(resolveDataProvider({}, false), "sqlite");
+  assert.throws(
+    () => resolveDataProvider({ SUPABASE_URL: "https://example.supabase.co" }, false),
+    /doivent être définis ensemble/,
+  );
+  assert.throws(
+    () => resolveDataProvider({}, true),
+    /configuré explicitement en production/,
+  );
+  assert.equal(resolveDataProvider({
+    SUPABASE_URL: "https://example.supabase.co",
+    SUPABASE_PUBLISHABLE_KEY: "sb_publishable_test",
+  }, true), "supabase");
+});
 
 test("les niveaux publiés sont librement accessibles pendant la phase ouverte", () => {
   assert.equal(MASTERY_LEVELS_REQUIRE_SEQUENCE, false);
@@ -197,6 +230,24 @@ test("l'audit éditorial reste aligné sur les leçons publiées et celles encor
   assert.equal(chargedParticleD?.published, true);
   assert.equal(chargedParticleD && editorialStatusOf(chargedParticleD), "complete");
   assert.equal(learningPaths.find((path) => path.id === "terminale-cd-charged-particle-magnetic-field")?.chapterNumberByLevel?.["terminale-d"], 6);
+});
+
+test("le chargement par matière ne récupère aucun contenu des autres matières", async () => {
+  clearLearningPathBundleCacheForTests();
+
+  for (const level of schoolLevels) {
+    for (const subject of Object.values(subjects)) {
+      const expectedIds = learningPaths
+        .filter((path) => path.levelIds.includes(level.id) && path.subjectId === subject.id)
+        .map((path) => path.id)
+        .sort();
+      const loaded = await loadLearningPathsForSubject(level.id, subject.id);
+      const loadedIds = loaded.map((path) => path.id).sort();
+
+      assert.deepEqual(loadedIds, expectedIds, `Bundle matière incorrect pour ${level.id}/${subject.id}`);
+      assert.ok(loaded.every((path) => path.subjectId === subject.id));
+    }
+  }
 });
 
 test("le catalogue de la boutique reste synchronisé entre Web, API et Supabase", () => {

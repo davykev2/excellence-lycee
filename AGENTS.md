@@ -9,15 +9,17 @@ Ce document permet de **reprendre le travail sans contexte préalable** : nouvel
 
 ## 1. Quelle application est active ?
 
-Le dépôt contient **deux frontends**. Ne pas se tromper :
+Le dépôt contient une application Web active et une archive mobile. Ne pas les confondre :
 
 | Dossier | Statut | Rôle |
 |---|---|---|
 | `apps/web` | **ACTIF** — tous les développements récents | Frontend React 19 + TypeScript + Vite. C'est l'app déployée en production. |
 | `apps/api` | **ACTIF** | API Fastify + TypeScript. Supabase en production, SQLite en repli local. |
-| `frontend/` | **Parallèle, non maintenu récemment** | Ancienne app React/Vite reliée directement à Supabase (+ Android/Capacitor). Aucun commit récent. Ne pas y travailler sans confirmation du porteur du projet. |
+| `frontend/` | **ARCHIVE MOBILE GELÉE** | Ancienne app React/Vite reliée directement à Supabase. Conservée uniquement parce qu’elle contient encore la coque Android/Capacitor et ses outils de reproduction. |
 
 Autres dossiers : `supabase/` (schéma canonique + migrations), `content_pipeline/` (lots JSON d'exercices guidés), `scripts/` (audits par série).
+
+> **Décision du 17 août 2026.** `apps/web` est l’unique frontend produit et l’unique cible Vercel. Ne jamais ajouter de fonctionnalité, de correction produit ou de nouveau déploiement Web dans `frontend/`. Ce dossier reste consultable pour migrer progressivement la coque Capacitor, le pont natif et les ressources Android vers l’application active. Il pourra être supprimé seulement après une migration Android validée ; voir `frontend/ARCHIVE.md`.
 
 ## 2. Lancer le projet en local
 
@@ -25,7 +27,7 @@ Autres dossiers : `supabase/` (schéma canonique + migrations), `content_pipelin
 cd apps/web && npm install && npm run dev
 ```
 
-Le serveur Vite démarre **automatiquement l'API** (`apps/api`) sur le port 3333 si elle ne tourne pas déjà — inutile de la lancer à la main. Le port du frontend peut varier (5173 ou 4173 selon la disponibilité).
+Le serveur Vite démarre **automatiquement l'API** (`apps/api`) sur le port 3333 si elle ne tourne pas déjà — inutile de la lancer à la main. Le frontend écoute sur le port fixe **4173** (`strictPort: true`).
 
 Vérifications avant de livrer :
 
@@ -39,7 +41,7 @@ cd apps/web && npx vite build     # build de production (ce que Vercel exécute)
 Des paramètres d'URL permettent d'ouvrir une leçon sans authentification. Ils sont **inactifs en production** (`import.meta.env.DEV`) :
 
 ```
-http://localhost:<port>/?__paths-preview&__path-preview=<pathId>&__level-preview=terminale-a
+http://localhost:4173/?__paths-preview&__path-preview=<pathId>&__level-preview=terminale-a
 ```
 
 ## 3. Déploiement
@@ -57,7 +59,7 @@ http://localhost:<port>/?__paths-preview&__path-preview=<pathId>&__level-preview
 >
 > (Vérifier ensuite : `curl https://excellence-lycee.vercel.app/api/<route>` doit renvoyer 401 et non 404.)
 
-> **Plusieurs sessions travaillent sur ce dépôt** (Claude et ChatGPT en alternance). Chacune ne connaît que ses propres déploiements : **ne jamais déduire l'état de la production depuis l'historique git**, on conclut à un retard qui n'existe pas. La seule source de vérité est l'alias public. Avant de déployer ou de signaler un problème :
+> **Plusieurs sessions travaillent sur ce dépôt**, parfois simultanément dans le même dossier (Claude et ChatGPT). Avant chaque lot et avant tout commit, relire `git status` : un fichier apparu ou modifié pendant la tâche appartient à la session qui l'a ouvert, sauf coordination explicite. Ne jamais écraser, embarquer dans un commit ou déployer les changements d'une autre session ; signaler immédiatement les fichiers qui se chevauchent et fusionner les ajouts intentionnellement. Chacune ne connaît que ses propres déploiements : **ne jamais déduire l'état de la production depuis l'historique git**, on conclut à un retard qui n'existe pas. La seule source de vérité est l'alias public. Avant de déployer ou de signaler un problème :
 >
 > ```bash
 > node scripts/check-api-deploy.mjs
@@ -166,7 +168,7 @@ Dernier travail livré et déployé en production :
 1c. **Poursuivre les Humanités restantes** avec la fabrique : les leçons de **Géographie** et les leçons de **Philosophie** encore générées sans `bodyMarkdown` (seule la leçon 01 de Philosophie est enrichie à ce jour).
 1b. **Appliquer à la base de production Supabase les trois migrations en attente** : `20260723180000_terminal_a_statistics_mission.sql`, `20260723200000_terminal_a_linear_systems_missions.sql` et `20260723220000_terminal_a_primitives_mission.sql` (le déploiement Vercel ne les exécute pas). La migration `20260723160000` des Suites a, elle, été appliquée et vérifiée le 23/07/2026.
 2. Créer le lot d'exercices guidés **`tle-a-maths`** manquant dans `content_pipeline/batches/` (les autres séries et matières en ont un).
-3. Trancher la question des deux frontends (`apps/web` vs `frontend/`).
+3. Migrer progressivement la coque Android/Capacitor archivée sous `frontend/` vers l’application active, puis supprimer l’archive après validation mobile.
 4. Migrer le contenu des fichiers TS vers le studio éditorial Supabase.
 
 ## 6. Conventions de travail

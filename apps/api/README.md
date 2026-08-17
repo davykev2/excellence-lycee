@@ -13,7 +13,7 @@ Service d’authentification et de persistance du MVP.
 - conversations privées, messages non lus, réponses, accusés de lecture, modification, suppression logique, silence et archivage ;
 - journal d’audit des actions sensibles.
 
-Supabase Auth et PostgreSQL sont le fournisseur principal. Les profils et la progression sont protégés par Row Level Security, les XP sont attribués par une fonction PostgreSQL contrôlée et le rafraîchissement de session reste dans un cookie `HttpOnly`. SQLite reste disponible comme solution locale de repli lorsque les variables Supabase sont absentes.
+Supabase Auth et PostgreSQL sont le fournisseur de production. Les profils et la progression sont protégés par Row Level Security, les XP sont attribués par une fonction PostgreSQL contrôlée et le rafraîchissement de session reste dans un cookie `HttpOnly`. SQLite reste disponible uniquement en développement local lorsque les variables Supabase sont absentes ; la production refuse désormais ce repli implicite.
 
 ## Configuration Supabase
 
@@ -23,7 +23,7 @@ Supabase Auth et PostgreSQL sont le fournisseur principal. Les profils et la pro
 
 ## Variables d’environnement
 
-Copier `.env.example` vers `.env`. En mode Supabase, `JWT_SECRET` n’est utilisé que par le fournisseur SQLite de repli ; la clé Publishable Supabase reste de faible privilège.
+Copier `.env.example` vers `.env`. En production, `JWT_SECRET` est obligatoire, doit contenir au moins 32 caractères et signe notamment les liens publics de désabonnement. `SUPABASE_URL` et `SUPABASE_PUBLISHABLE_KEY` sont également obligatoires et doivent être définis ensemble. La clé Publishable Supabase reste de faible privilège.
 
 ## Gestion administrateur des utilisateurs
 

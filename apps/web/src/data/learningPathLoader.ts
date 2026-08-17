@@ -1,4 +1,5 @@
 import type { LearningPath } from "../domain/paths";
+import type { SubjectId } from "../domain/learning";
 import { applyLessonXpBudget } from "./xpRewards";
 
 const bundleCache = new Map<string, Promise<LearningPath[]>>();
@@ -11,14 +12,20 @@ function uniquePaths(paths: LearningPath[]) {
   return [...byId.values()];
 }
 
-async function loadTerminalCommonPaths() {
-  const [geography, history, philosophy, advancedPhilosophy] = await Promise.all([
+async function loadTerminalHistoryGeographyPaths() {
+  const [geography, history] = await Promise.all([
     import("./terminalGeographyPaths").then((module) => module.terminalGeographyPaths),
     import("./terminalHistoryPaths").then((module) => module.terminalHistoryPaths),
+  ]);
+  return [...geography, ...history];
+}
+
+async function loadTerminalPhilosophyPaths() {
+  const [philosophy, advancedPhilosophy] = await Promise.all([
     import("./terminalPhilosophyPaths").then((module) => module.terminalPhilosophyPaths),
     import("./terminalPhilosophyAdvancedPaths").then((module) => module.terminalPhilosophyAdvancedPaths),
   ]);
-  return [...geography, ...history, ...philosophy, ...advancedPhilosophy];
+  return [...philosophy, ...advancedPhilosophy];
 }
 
 async function loadTerminalPhysicsPaths(levelId: string) {
@@ -55,25 +62,20 @@ async function loadTerminalPhysicsPaths(levelId: string) {
   return [...kinematics, ...inertia, ...gravitation, ...uniformFields, ...freeOscillations, ...magneticField, ...chargedParticle, ...laplaceLaw, ...induction, ...autoInduction, ...derivatorIntegrator, ...freeElectricalOscillations, ...rlcForcedSinusoidal, ...rlcIntensityResonance, ...acPower, ...waveLight, ...corpuscularLight, ...spontaneousNuclear, ...provokedNuclear, ...chemistry];
 }
 
-async function loadPathsForLevel(levelId: string) {
-  if (levelId === "seconde-c") {
-    return import("./mathPaths").then((module) => module.mathematicsPaths);
-  }
-
+async function loadSvtPaths(levelId: string) {
   if (levelId === "terminale-a") {
-    const [mathematics, common, svt] = await Promise.all([
-      import("./terminalAMathPaths").then((module) => module.terminalAMathematicsPaths),
-      loadTerminalCommonPaths(),
-      import("./terminalSvtPaths").then((module) => module.terminalSvtPaths),
+    return Promise.all([
+      import("./terminalASvtEmotionalReactionsPath").then((module) => module.terminalASvtEmotionalReactionsPath),
+      import("./terminalASvtBrainActivityPath").then((module) => module.terminalASvtBrainActivityPath),
+      import("./terminalASvtOriginOfLifePath").then((module) => module.terminalASvtOriginOfLifePath),
+      import("./terminalASvtHumanLineagePath").then((module) => module.terminalASvtHumanLineagePath),
+      import("./terminalASvtSexBloodHeredityPath").then((module) => module.terminalASvtSexBloodHeredityPath),
+      import("./terminalASvtGeneticPredictionsPath").then((module) => module.terminalASvtGeneticPredictionsPath),
+      import("./terminalASvtProteinBiosynthesisPath").then((module) => module.terminalASvtProteinBiosynthesisPath),
     ]);
-    return [...mathematics, ...common, ...svt];
   }
-
   if (levelId === "terminale-c") {
-    const [mathematics, physics, common, nervousSystem, drugsNervousSystem, cellEnergyProduction, muscleEnergyUse, immuneDefense, hivInfection] = await Promise.all([
-      import("./terminalCMathPaths").then((module) => module.terminalCMathematicsPaths),
-      loadTerminalPhysicsPaths(levelId),
-      loadTerminalCommonPaths(),
+    const [nervousSystem, drugsNervousSystem, cellEnergyProduction, muscleEnergyUse, immuneDefense, hivInfection] = await Promise.all([
       import("./terminalCSvtNervousPath").then((module) => [module.terminalCSvtNervousPath]),
       import("./terminalCSvtDrugsPath").then((module) => [module.terminalCSvtDrugsPath]),
       import("./terminalCSvtCellEnergyPath").then((module) => [module.terminalCSvtCellEnergyPath]),
@@ -81,19 +83,77 @@ async function loadPathsForLevel(levelId: string) {
       import("./terminalCSvtImmuneDefensePath").then((module) => [module.terminalCSvtImmuneDefensePath]),
       import("./terminalCSvtHivInfectionPath").then((module) => [module.terminalCSvtHivInfectionPath]),
     ]);
-    return [...mathematics, ...physics, ...common, ...nervousSystem, ...drugsNervousSystem, ...cellEnergyProduction, ...muscleEnergyUse, ...immuneDefense, ...hivInfection];
+    return [...nervousSystem, ...drugsNervousSystem, ...cellEnergyProduction, ...muscleEnergyUse, ...immuneDefense, ...hivInfection];
   }
-
-  if (levelId === "terminale-d") {
-    const [mathematics, physics, common] = await Promise.all([
-      import("./terminalDMathPaths").then((module) => module.terminalDMathematicsPaths),
-      loadTerminalPhysicsPaths(levelId),
-      loadTerminalCommonPaths(),
-    ]);
-    return [...mathematics, ...physics, ...common];
-  }
-
   return [];
+}
+
+async function loadMathematicsPaths(levelId: string) {
+  if (levelId === "seconde-c") {
+    return import("./mathPaths").then((module) => module.mathematicsPaths);
+  }
+  if (levelId === "terminale-a") {
+    return import("./terminalAMathPaths").then((module) => module.terminalAMathematicsPaths);
+  }
+  if (levelId === "terminale-c") {
+    return import("./terminalCMathPaths").then((module) => module.terminalCMathematicsPaths);
+  }
+  if (levelId === "terminale-d") {
+    return import("./terminalDMathPaths").then((module) => module.terminalDMathematicsPaths);
+  }
+  return [];
+}
+
+async function loadPathsForSubject(levelId: string, subjectId: SubjectId) {
+  if (subjectId === "mathematics") return loadMathematicsPaths(levelId);
+  if (subjectId === "physics-chemistry" && (levelId === "terminale-c" || levelId === "terminale-d")) {
+    return loadTerminalPhysicsPaths(levelId);
+  }
+  if (subjectId === "history-geography" && levelId.startsWith("terminale-")) {
+    return loadTerminalHistoryGeographyPaths();
+  }
+  if (subjectId === "philosophy" && levelId.startsWith("terminale-")) {
+    return loadTerminalPhilosophyPaths();
+  }
+  if (subjectId === "svt") return loadSvtPaths(levelId);
+  return [];
+}
+
+const loadableSubjectIds: SubjectId[] = [
+  "mathematics",
+  "physics-chemistry",
+  "french",
+  "english",
+  "svt",
+  "philosophy",
+  "history-geography",
+];
+
+async function loadPathsForLevel(levelId: string) {
+  const subjectBundles = await Promise.all(
+    loadableSubjectIds.map((subjectId) => loadLearningPathsForSubject(levelId, subjectId)),
+  );
+  return uniquePaths(subjectBundles.flat());
+}
+
+/** Charge un seul domaine pédagogique pour éviter de télécharger toute la classe à la connexion. */
+export function loadLearningPathsForSubject(levelId: string, subjectId: SubjectId): Promise<LearningPath[]> {
+  const cacheKey = `subject:${levelId}:${subjectId}`;
+  const cached = bundleCache.get(cacheKey);
+  if (cached) return cached;
+
+  const loading = loadPathsForSubject(levelId, subjectId)
+    .then((paths) => paths.filter((path) => (
+      path.levelIds.includes(levelId) && path.subjectId === subjectId
+    )))
+    .then(uniquePaths)
+    .catch((error) => {
+      bundleCache.delete(cacheKey);
+      throw error;
+    });
+
+  bundleCache.set(cacheKey, loading);
+  return loading;
 }
 
 /**
@@ -102,7 +162,7 @@ async function loadPathsForLevel(levelId: string) {
  * contrôle et de prévisualisation.
  */
 export function loadLearningPathsForLevel(levelId: string, includeAll = false): Promise<LearningPath[]> {
-  const cacheKey = includeAll ? "all" : levelId;
+  const cacheKey = includeAll ? "all" : `level:${levelId}`;
   const cached = bundleCache.get(cacheKey);
   if (cached) return cached;
 

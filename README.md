@@ -55,14 +55,14 @@ L’expérience s’inspire des grands principes qui rendent Brilliant efficace 
 
 ### Statut actuel
 
-Le projet est entré en phase de **prototype interactif** après le GO explicite du porteur du projet.
+Le projet est une **application interactive déployée**, encore en enrichissement éditorial continu.
 
-- Le premier tableau de bord élève, centré sur les Mathématiques, est disponible dans `apps/web`.
+- Le tableau de bord élève multi-matières et l’ensemble du frontend produit vivent dans `apps/web`.
 - Le logo officiel de la structure est intégré.
 - Les données de programme, matières, niveaux et navigation sont séparées des composants visuels pour faciliter les évolutions.
 - La phase 1 de stabilisation technique est en place : zéro vulnérabilité npm connue dans les dépendances de production, typage Web/API, audits pédagogiques Terminale A/C/D, contrôles KaTeX, validation du pipeline de contenu, tests de cohérence XP/Boutique/Codex et builds sont réunis dans `node scripts/verify-project.mjs` et rejoués automatiquement par GitHub Actions.
 - Le chargement public a été fortement allégé : le shell pédagogique et les écrans secondaires sont chargés à la demande après authentification. Le JavaScript initial compressé est passé d’environ 922 Ko à 80 Ko, tandis qu’un écran de secours permet de recharger proprement l’application en cas d’erreur de rendu inattendue.
-- La phase 2 charge maintenant le catalogue pédagogique selon la classe enregistrée : un élève ne télécharge plus les cours des autres séries, tandis qu'un administrateur conserve la vue complète. Le cœur authentifié compressé est passé d'environ 640 Ko à 143 Ko, sans modifier les identifiants de niveaux ni les budgets de 10 000 XP.
+- La phase 2 charge maintenant le catalogue pédagogique selon la classe **et la matière active** : un élève ne télécharge plus les cours des autres séries ni ceux des matières qu’il n’a pas encore ouvertes, tandis qu'un administrateur conserve la vue complète. Les gros contenus sont découpés par leçon ; le plus gros chunk JavaScript de production est passé d’environ 1 007 Ko à moins de 400 Ko et le shell `LearningApp` d’environ 517 Ko à 157 Ko, sans modifier les identifiants de niveaux ni les budgets de 10 000 XP.
 - Les migrations Supabase disposent désormais d'une commande ciblée qui reconstruit un environnement temporaire, effectue un dry-run obligatoire et refuse toute migration non explicitement autorisée ; elle évite de rejouer par erreur l'ancien historique local.
 - La reprise de leçon, le graphe manipulable, le tuteur contextuel et les panneaux d’objectifs/révisions fonctionnent côté frontend.
 - Le niveau et la série sont choisis à l’inscription puis affichés comme contexte fixe; le choix de la matière est un contrôle séparé.
@@ -1628,6 +1628,10 @@ apps/web/
 ├── src/ui/              # composants UI génériques
 ├── design-qa.md         # validation visuelle et fonctionnelle
 └── package.json
+
+frontend/
+├── ARCHIVE.md            # décision de gel et critères de suppression
+└── android/              # coque Capacitor historique à migrer
 ```
 
 ### Commandes de développement
@@ -1712,7 +1716,7 @@ gamification.
 
 ```
 .
-├── frontend/            # Application React (Vite)
+├── frontend/            # Archive gelée de l’ancienne app et de la coque Capacitor
 │   ├── src/
 │   │   ├── pages/       # Écrans (Dashboard, Quiz, Résumés, Admin, …)
 │   │   ├── components/  # UI, quiz, gamification, layout…

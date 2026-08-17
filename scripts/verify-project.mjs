@@ -23,6 +23,11 @@ run("Audit de sécurité Web", npm, [...npmPrefix, "audit", "--omit=dev", "--aud
 run("Audit de sécurité API", npm, [...npmPrefix, "audit", "--omit=dev", "--audit-level=high"], api);
 run("Typage Web", npm, [...npmPrefix, "run", "typecheck"], web);
 run("Typage API", npm, [...npmPrefix, "run", "typecheck"], api);
+run(
+  "Budget des fichiers source Web",
+  process.execPath,
+  [resolve(root, "scripts", "audit-web-source-sizes.mjs")],
+);
 run("Tests de stabilité", npm, [...npmPrefix, "run", "test:stability"], api);
 run(
   "Syntaxe du garde-fou Supabase",
@@ -197,6 +202,13 @@ run(
 );
 
 run("Build API", npm, [...npmPrefix, "run", "build"], api);
+run("Intégration API · messagerie privée", npm, [...npmPrefix, "run", "test:messages"], api);
+run("Intégration API · photo de profil", npm, [...npmPrefix, "run", "test:profile-photo"], api);
 run("Build Web", npm, [...npmPrefix, "run", "build"], web);
+run(
+  "Budget du build Web",
+  process.execPath,
+  [resolve(root, "scripts", "audit-web-build-sizes.mjs")],
+);
 
 console.log("\nTous les contrôles Excellence Lycée sont passés.");
