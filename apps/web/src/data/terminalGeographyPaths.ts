@@ -251,16 +251,129 @@ L’État **se désengage** de la production et se recentre sur ses missions : i
         explanation: "Le secteur primaire regroupe les activités qui exploitent directement les ressources naturelles. En Côte d’Ivoire, il est dominé par l’agriculture, mais comprend aussi l’élevage, la pêche et l’exploitation forestière.",
         keyPoint: "Le secteur primaire reste central parce qu’il emploie une grande partie de la population et alimente les exportations ainsi que l’agro-industrie.",
         example: "La région forestière du sud produit notamment cacao, café, hévéa et palmier à huile, tandis que le nord développe coton, anacarde, céréales et élevage.",
-        timelineTitle: "Parcourir les espaces de production",
-        timelineInstruction: "Compare les productions caractéristiques du sud forestier, du centre et du nord.",
+        timelineTitle: "Distinguer les activités du primaire",
+        timelineInstruction: "Passe de l’agriculture aux productions animales et halieutiques, puis à la forêt.",
         timeline: [
-          { label: "Sud forestier", shortLabel: "Sud", detail: "Cultures arborées d’exportation, exploitation forestière et pêche littorale." },
-          { label: "Centre", detail: "Cultures vivrières, café, hévéa et productions adaptées au climat de transition." },
-          { label: "Nord soudanais", shortLabel: "Nord", detail: "Coton, anacarde, mangue, céréales et élevage occupent une place importante." },
+          { label: "L’agriculture ivoirienne", shortLabel: "Agriculture", detail: "Cultures vivrières et cultures d’exportation se répartissent selon les milieux du sud forestier au nord soudanais." },
+          { label: "L’élevage et la pêche", shortLabel: "Élevage, pêche", detail: "Les productions animales et halieutiques progressent, mais ne couvrent pas encore tous les besoins nationaux." },
+          { label: "L’exploitation forestière", shortLabel: "forêt", detail: "Le bois alimente scieries et exportations, tandis que la diminution du couvert forestier impose une gestion durable." },
         ],
         observation: "Les productions varient selon le climat, les sols, la végétation et les équipements disponibles.",
         check: { prompt: "Quelle activité domine le secteur primaire ivoirien ?", options: ["L’aéronautique", "L’agriculture", "La banque", "Les télécommunications"], correctIndex: 1, explanation: "Le cours présente l’agriculture comme le pilier du secteur primaire." },
         distractors: ["Le primaire regroupe uniquement les services marchands.", "Toutes les régions ivoiriennes ont les mêmes productions.", "Le secteur primaire ne fournit aucune matière première aux industries."],
+        parts: [
+          {
+            summary: "Expliquer la diversité, la répartition et le poids économique de l’agriculture ivoirienne.",
+            bodyMarkdown: String.raw`## L’agriculture, pilier du secteur primaire
+
+Le **secteur primaire** rassemble les activités qui prélèvent ou produisent directement des ressources naturelles : agriculture, élevage, pêche et exploitation forestière. En Côte d’Ivoire, l’**agriculture** occupe une place dominante.
+
+## Des conditions généralement favorables
+
+Plusieurs facteurs se combinent :
+
+- un relief globalement **plat**, qui facilite les travaux et les transports ;
+- des climats chauds, des pluies et des sols variés ;
+- une main-d’œuvre abondante et un marché intérieur important ;
+- la recherche agronomique, la sélection des plants et l’appui des structures d’encadrement ;
+- des moyens de transport et de commercialisation qui relient les bassins de production aux villes et aux ports.
+
+Ces avantages ne rendent pas toutes les régions identiques : les cultures suivent les nuances du milieu.
+
+| Grand espace | Productions caractéristiques citées dans le document |
+|---|---|
+| Sud forestier | Cacao, café, hévéa, palmier à huile, banane, ananas, noix de coco et vivriers |
+| Centre et zone de transition | Vivriers, café, hévéa et productions adaptées à une pluviométrie plus faible |
+| Nord soudanais | Coton, anacarde, mangue, karité, maïs, riz, arachide, soja, mil, sorgho et haricot |
+
+> **Astuce mémoire de Davy.** **Forêt au sud = cultures arborées** ; **savane au nord = coton, anacarde, céréales et élevage**.
+
+## Deux grandes familles de cultures
+
+Les **cultures vivrières** servent d’abord à nourrir la population et alimentent surtout le marché intérieur : igname, manioc, banane plantain, riz, maïs, mil, sorgho, légumes ou fruits.
+
+Les **cultures d’exportation ou industrielles** alimentent le commerce extérieur et les usines de transformation : cacao, café, coton, hévéa, palmier à huile, anacarde, canne à sucre, banane dessert ou ananas.
+
+Une culture n’est toutefois pas enfermée dans une seule fonction : une partie d’une production peut être consommée localement, transformée ou exportée.
+
+## Un poids économique majeur
+
+Le document s’appuie sur des données datées de **2015 à 2018**. Il attribue alors à l’agriculture environ **66 % de la population active** et près de **70 % des recettes d’exportation**. Il souligne aussi le rang mondial du pays pour le cacao, ainsi que le rôle important de l’anacarde, du caoutchouc naturel, de la banane et du café.
+
+Ces chiffres servent à comprendre la structure de l’économie au moment étudié ; ils ne doivent pas être présentés comme des statistiques actuelles sans nouvelle source.
+
+> **Correction de source.** Le document affiche **1 230 000 tonnes de café** tout en classant la Côte d’Ivoire au **15e rang mondial** en 2018. Ces deux indications sont incompatibles. On retient ici le rang et le rôle économique du café, pas ce volume manifestement erroné.
+
+L’agriculture fournit enfin des matières premières à l’industrie, des emplois, des revenus aux producteurs et des devises grâce aux exportations. Elle relie donc directement le **primaire**, le **secondaire** et le **tertiaire**.`,
+            check: {
+              prompt: "Quelles sont les deux grandes familles de cultures présentées dans le cours ?",
+              options: ["Les cultures vivrières et les cultures d’exportation ou industrielles", "Les cultures urbaines et maritimes", "Les cultures minières et énergétiques", "Les cultures artisanales et bancaires"],
+              correctIndex: 0,
+              explanation: "Le cours distingue les productions vivrières, surtout destinées à l’alimentation, et les cultures d’exportation ou industrielles.",
+            },
+            extraQuestions: [
+              { prompt: "Le relief généralement plat de la Côte d’Ivoire constitue un facteur favorable à l’agriculture.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Il facilite les travaux agricoles, l’installation des exploitations et les transports.", sourceLabel: "I-A-1", points: 1 },
+              { prompt: "Toutes les régions ivoiriennes produisent exactement les mêmes cultures.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Les productions varient selon le climat, les sols, la végétation et les équipements.", sourceLabel: "I-A-1", points: 1 },
+              { prompt: "Quelle association géographique est correcte ?", options: ["Sud forestier : cacao et hévéa", "Nord soudanais : cocotier dominant", "Sud forestier : coton dominant", "Nord soudanais : forêt dense sempervirente"], correctIndex: 0, explanation: "Les cultures arborées comme le cacao et l’hévéa caractérisent surtout le sud forestier.", sourceLabel: "I-A-1", points: 2 },
+              { prompt: "Laquelle de ces productions est principalement classée parmi les cultures vivrières ?", options: ["L’igname", "L’hévéa", "Le coton", "Le cacao"], correctIndex: 0, explanation: "L’igname nourrit principalement le marché intérieur ; les autres sont surtout des cultures d’exportation ou industrielles.", sourceLabel: "I-A-1", points: 1 },
+              { prompt: "Pourquoi l’agriculture soutient-elle aussi le secteur secondaire ?", options: ["Elle fournit des matières premières aux usines", "Elle supprime les transports", "Elle remplace tous les services", "Elle interdit les exportations"], correctIndex: 0, explanation: "Cacao, coton, hévéa ou palmier à huile peuvent être transformés par l’industrie.", sourceLabel: "I-A-2", points: 2 },
+              { prompt: "Les parts de population active et de recettes d’exportation données par le document doivent être comprises comme…", options: ["des indicateurs historiques datés de 2015 à 2018", "des valeurs garanties pour toutes les années futures", "des prévisions pour 2050", "des chiffres sans lien avec l’agriculture"], correctIndex: 0, explanation: "Le cours utilise des statistiques anciennes : elles éclairent la période étudiée, mais ne constituent pas des données actuelles.", sourceLabel: "I-A-2", points: 2 },
+              { prompt: "Pourquoi le volume de café affiché dans le PDF ne doit-il pas être mémorisé ?", options: ["Il contredit le rang mondial donné dans le même passage", "Le café ne pousse pas en Côte d’Ivoire", "Le document ne cite jamais le café", "Il s’agit d’une donnée sur le coton"], correctIndex: 0, explanation: "Le volume de 1 230 000 tonnes est incompatible avec le 15e rang indiqué : le document comporte une coquille.", sourceLabel: "Correction de source", points: 2 },
+              { prompt: "Quel enchaînement décrit le mieux le rôle économique de l’agriculture ?", options: ["Production → transformation → transport et vente", "Transport → disparition des cultures → importation", "Banque → extraction minière → pêche", "Tourisme → élections → industrie lourde"], correctIndex: 0, explanation: "La production primaire alimente l’industrie, puis les services assurent transport et commercialisation.", sourceLabel: "Synthèse", points: 2 },
+            ],
+          },
+          {
+            summary: "Comparer élevage, pêche et forêt, puis expliquer leurs apports et leurs fragilités.",
+            bodyMarkdown: String.raw`## L’élevage : surtout au nord, sous deux formes
+
+Le nord et le centre-nord offrent des conditions favorables à l’élevage : espaces de savane, pâturages et savoir-faire des populations. On distingue :
+
+- l’**élevage traditionnel**, souvent extensif et familial ;
+- l’**élevage moderne**, mieux encadré, qui utilise des races sélectionnées, des soins vétérinaires et des aliments contrôlés.
+
+Les principales productions concernent les **bovins**, les **ovins**, les **caprins**, les **porcins** et la **volaille**. Malgré les progrès, la production nationale reste insuffisante pour couvrir toute la consommation.
+
+## La pêche : artisanale et industrielle
+
+La Côte d’Ivoire dispose d’un golfe, d’un littoral, de lagunes, de fleuves, de lacs et de ports. Deux formes de pêche coexistent :
+
+| Forme | Caractéristiques |
+|---|---|
+| Pêche artisanale | Pratiquée près des côtes, en lagune et dans les eaux continentales, avec de petites embarcations |
+| Pêche industrielle | Réalisée avec des navires équipés, surtout à partir des ports d’Abidjan et de San-Pédro |
+
+Le cours donne pour **2019** une production totale de **101 000 tonnes**, composée de **59 590 tonnes** de pêche artisanale et de **41 410 tonnes** de pêche industrielle. Même avec cette production, le pays recourt aux importations pour satisfaire la demande.
+
+> **Correction / précision.** La situation d’évaluation du même PDF utilise un autre total pour 2019 : **52 000 tonnes**, présentées comme 30 % des besoins. Ces valeurs sont incompatibles. On emploiera **52 000 tonnes uniquement comme donnée de la mission**, sans la confondre avec le total du cours.
+
+## La forêt : ressource et patrimoine à protéger
+
+Le bois alimente des scieries installées notamment à **Abidjan, Agboville, Daloa, Gagnoa, Man** et **San-Pédro**. Les essences citées — acajou, iroko, sipo ou samba — sont transformées en sciages, placages et contreplaqués, puis vendues localement ou exportées.
+
+Cette exploitation procure emplois, matières premières et recettes, mais la surexploitation agricole et forestière a fortement réduit le couvert forestier. L’exercice du document compare environ **16 millions d’hectares en 1960** à **moins de 3 millions d’hectares** au moment de sa rédaction.
+
+Les réponses attendues combinent :
+
+1. le respect des forêts classées et des aires protégées ;
+2. la lutte contre les coupes illégales et les feux ;
+3. le **reboisement** et l’agroforesterie ;
+4. une transformation du bois plus efficace, qui limite les pertes.
+
+> **À retenir.** Produire davantage ne suffit pas : élevage, pêche et forêt doivent aussi préserver la ressource pour rester durables.`,
+            extraQuestions: [
+              { prompt: "Les conditions de l’élevage sont également favorables sur toute l’étendue du territoire ivoirien.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Le nord et le centre-nord sont particulièrement favorables grâce aux savanes et aux pâturages.", sourceLabel: "Activité d’application n°1", points: 1 },
+              { prompt: "L’élevage et la pêche demeurent encore largement pratiqués de manière traditionnelle.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Des formes modernes existent, mais les pratiques traditionnelles restent importantes.", sourceLabel: "Activité d’application n°1", points: 1 },
+              { prompt: "La pêche industrielle se pratique traditionnellement en haute mer.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "La pêche industrielle utilise des navires équipés ; le mot « traditionnellement » rend la proposition fausse.", sourceLabel: "Activité d’application n°1", points: 2 },
+              { prompt: "Les productions animales ivoiriennes suffisent à couvrir tous les besoins nationaux.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Le cours insiste au contraire sur une production encore insuffisante.", sourceLabel: "Exercice 1", points: 1 },
+              { prompt: "La Côte d’Ivoire est-elle présentée comme un grand pays de pêche ?", options: ["Non, malgré des milieux aquatiques variés", "Oui, et elle n’importe aucun poisson", "Oui, uniquement grâce aux lacs", "Le pays ne possède aucune façade maritime"], correctIndex: 0, explanation: "La pêche existe sous plusieurs formes, mais sa production ne satisfait pas la forte consommation.", sourceLabel: "Exercice 1", points: 2 },
+              { prompt: "Quel port est associé à la pêche industrielle dans le cours ?", options: ["Abidjan", "Korhogo", "Bondoukou", "Ferkessédougou"], correctIndex: 0, explanation: "Abidjan, avec San-Pédro, accueille les activités de pêche industrielle.", sourceLabel: "I-C", points: 1 },
+              { prompt: "La forêt ivoirienne est en progression continue depuis 1960.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Le document décrit au contraire un recul très important du couvert forestier.", sourceLabel: "Activité d’application n°1", points: 1 },
+              { prompt: "L’exploitation abusive de la forêt a contribué à sa dégradation avancée.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Les coupes excessives et l’extension agricole figurent parmi les causes majeures du recul forestier.", sourceLabel: "Activité d’application n°1", points: 1 },
+              { prompt: "Quelle réponse associe production et protection de la forêt ?", options: ["Reboiser et contrôler les coupes", "Supprimer toutes les aires protégées", "Multiplier les feux de brousse", "Exporter les grumes sans contrôle"], correctIndex: 0, explanation: "Le reboisement, le contrôle et l’agroforesterie rendent l’exploitation plus durable.", sourceLabel: "Situation d’évaluation n°2", points: 2 },
+              { prompt: "Comment faut-il utiliser les deux chiffres de pêche de 2019 présents dans le PDF ?", options: ["Distinguer le total du cours et la donnée conventionnelle de la mission", "Les additionner pour créer un troisième total", "Considérer les deux comme strictement identiques", "Supprimer toute référence à la pêche"], correctIndex: 0, explanation: "Le document se contredit : 52 000 tonnes ne vaut que dans le cadre du calcul demandé par la mission.", sourceLabel: "Correction de source", points: 2 },
+            ],
+          },
+        ],
       },
       {
         id: "secondary-sector",
@@ -268,6 +381,64 @@ L’État **se désengage** de la production et se recentre sur ses missions : i
         summary: "Comprendre les phases, les types et les foyers de l’industrialisation ivoirienne.",
         conceptTitle: "Transformer localement pour créer plus de valeur",
         explanation: "Le secteur secondaire transforme les matières premières. L’industrie ivoirienne s’appuie surtout sur l’agroalimentaire, le textile, le bois, l’énergie, les matériaux de construction et les premières transformations minières.",
+        bodyMarkdown: String.raw`## Quatre phases d’industrialisation
+
+L’industrialisation ivoirienne ne suit pas une progression régulière. Le document distingue **quatre phases** :
+
+| Période | Orientation dominante | Idée essentielle |
+|---|---|---|
+| 1960-1970 | Import-substitution | Produire sur place une partie des biens auparavant importés |
+| 1970-1980 | Régionalisation industrielle | Diversifier les activités et implanter des unités hors du seul pôle abidjanais |
+| 1980-1994 | Stagnation | Les crises économiques freinent l’investissement et la production |
+| Depuis 1994 | Reprise et diversification | Relance des investissements et multiplication des branches industrielles |
+
+> **Précision chronologique.** La dévaluation du franc CFA intervient en **janvier 1994**. Elle marque la charnière entre la phase de stagnation et la reprise ; elle ne s’étend pas sur toute la période 1980-1994 comme pourrait le laisser croire la formulation du PDF.
+
+## Des industries variées, dominées par l’agro-industrie
+
+Le tissu industriel comprend :
+
+- les **industries agroalimentaires** : brasseries, huileries, sucreries, conserveries de poisson, transformation du cacao ou de l’anacarde ;
+- les industries **textiles et du bois** : filature, tissage, confection, sacherie, sciage et placage ;
+- les industries **chimiques, métallurgiques et du bâtiment** : engrais, produits phytosanitaires, peinture, métallurgie, ciment et matériaux ;
+- les industries **extractives** : exploitation et première transformation des ressources minières et énergétiques.
+
+L’industrie est surtout **légère**, fortement liée aux produits agricoles et inégalement répartie.
+
+## Des foyers industriels très concentrés
+
+| Espace | Centres cités |
+|---|---|
+| Sud lagunaire et Sud-Comoé | Abidjan, Grand-Bassam, Bonoua |
+| Centre | Yamoussoukro, Bouaké |
+| Nord | Korhogo |
+| Sud-Ouest | San-Pédro |
+
+Selon le document, environ **70 %** des industries se concentrent dans le district d’**Abidjan**. Cette concentration offre un grand marché, un port, de l’énergie, des capitaux et des services, mais elle renforce les déséquilibres territoriaux.
+
+## Transformer pour créer emplois et valeur ajoutée
+
+Le document, fondé sur des indicateurs de **2014 à 2018**, attribue au secondaire environ **14 % de la population active** et une valeur ajoutée équivalant à **30,8 % du PIB**. Ces ordres de grandeur sont datés : ils servent à analyser la période du cours, pas à décrire automatiquement la situation actuelle.
+
+La transformation locale évite d’exporter uniquement une matière brute. Le document donne plusieurs exemples :
+
+- **35 % du cacao** était transformé localement en 2015 ;
+- environ la moitié du **coton-graine** était égrenée localement en 2014-2015 ;
+- le **caoutchouc** et la quasi-totalité de l’**huile de palme** subissaient une première transformation ;
+- seulement **5 % de l’anacarde** était alors transformée.
+
+Transformer localement peut créer des emplois urbains et ruraux, augmenter la valeur ajoutée, fournir des recettes fiscales et réduire la dépendance aux cours des produits bruts.
+
+## Méthode : analyser un discours économique
+
+L’évaluation finale du document s’appuie sur un discours d’investiture du **3 novembre 2015**. Pour l’expliquer :
+
+1. présente la nature, l’auteur, la date et le thème du document ;
+2. reformule l’objectif : réformer l’économie et mieux partager les fruits de la croissance ;
+3. relie le moyen proposé — transformer les produits agricoles — aux effets attendus : emplois, valeur ajoutée et développement territorial ;
+4. apprécie le projet en indiquant ses conditions de réussite : énergie, capitaux, compétences, débouchés et implantation dans plusieurs régions.
+
+> **Astuce mémoire de Davy.** **Primaire = produire**, **secondaire = transformer**, **tertiaire = transporter et vendre**. Une fève de cacao suit les trois secteurs avant de devenir un produit consommé.`,
         keyPoint: "L’industrialisation réduit la dépendance aux produits bruts lorsqu’elle transforme localement les ressources et se diffuse hors d’Abidjan.",
         example: "La transformation du cacao, du coton, du caoutchouc et de l’huile de palme permet de conserver davantage de valeur ajoutée dans le pays.",
         timelineTitle: "Les phases de l’industrialisation",
@@ -275,10 +446,23 @@ L’État **se désengage** de la production et se recentre sur ses missions : i
         timeline: [
           { label: "1960-1970", detail: "Phase d’import-substitution : produire localement une partie des biens auparavant importés." },
           { label: "1970-1980", detail: "Diversification et régionalisation progressive des activités industrielles." },
-          { label: "Depuis 1994", detail: "Reprise et diversification après une période de stagnation liée aux crises." },
+          { label: "1980-1994", detail: "Stagnation de l’industrie dans un contexte de crises économiques." },
+          { label: "Depuis 1994", detail: "Reprise et diversification après la dévaluation de janvier 1994." },
         ],
         observation: "La transformation locale relie directement le secteur secondaire aux productions du secteur primaire.",
         check: { prompt: "Quel est le rôle principal du secteur secondaire ?", options: ["Transformer les matières premières", "Produire uniquement des services", "Fixer les frontières", "Organiser les élections"], correctIndex: 0, explanation: "Le secteur secondaire transforme les ressources issues du primaire." },
+        extraQuestions: [
+          { prompt: "Quelle phase industrielle correspond à la période 1960-1970 ?", options: ["L’import-substitution", "La stagnation", "La reprise après dévaluation", "La désindustrialisation totale"], correctIndex: 0, explanation: "La première phase vise à produire localement une partie des biens importés.", sourceLabel: "Activité d’application n°2", points: 1 },
+          { prompt: "Quel ordre chronologique est correct ?", options: ["Import-substitution → régionalisation → stagnation → reprise", "Stagnation → import-substitution → reprise → régionalisation", "Régionalisation → reprise → import-substitution → stagnation", "Reprise → stagnation → régionalisation → import-substitution"], correctIndex: 0, explanation: "Les quatre phases se succèdent en 1960, 1970, 1980 et 1994.", sourceLabel: "Activité d’application n°2", points: 2 },
+          { prompt: "La dévaluation du franc CFA a duré de 1980 à 1994.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Elle intervient en janvier 1994 ; la période 1980-1994 correspond à la stagnation.", sourceLabel: "Précision chronologique", points: 2 },
+          { prompt: "Quelle branche est présentée comme le poumon de l’industrie ivoirienne ?", options: ["L’agroalimentaire", "L’aéronautique", "La construction navale militaire", "L’industrie spatiale"], correctIndex: 0, explanation: "L’agro-industrie domine grâce à l’importance des matières premières agricoles.", sourceLabel: "II-1-b", points: 1 },
+          { prompt: "Quel caractère décrit correctement l’industrie ivoirienne ?", options: ["Une forte concentration à Abidjan", "Une répartition parfaitement équilibrée", "Une domination exclusive des industries lourdes", "Une absence de lien avec l’agriculture"], correctIndex: 0, explanation: "Le cours souligne la concentration abidjanaise, la prédominance des industries légères et le poids de l’agro-industrie.", sourceLabel: "II-2-b", points: 1 },
+          { prompt: "Pourquoi transformer le cacao localement peut-il être avantageux ?", options: ["Cela crée davantage de valeur ajoutée et d’emplois", "Cela supprime toute recette fiscale", "Cela empêche toute vente", "Cela transforme le cacao en minerai"], correctIndex: 0, explanation: "La transformation conserve une part plus importante de la valeur dans le pays.", sourceLabel: "Situation d’évaluation n°1", points: 2 },
+          { prompt: "Selon les données 2014-2015 du document, quelle production était très peu transformée localement ?", options: ["L’anacarde, à hauteur de 5 %", "L’huile de palme, à hauteur de 100 %", "Le caoutchouc, à hauteur de 0 %", "Le coton, à hauteur de 5 %"], correctIndex: 0, explanation: "Le PDF indique seulement 5 % pour les noix de cajou, contre une première transformation bien plus importante pour les autres produits.", sourceLabel: "II-3", points: 2 },
+          { prompt: "Dans l’analyse du discours de 2015, quel est le socle annoncé de l’industrialisation ?", options: ["La transformation des produits agricoles", "L’abandon de l’agriculture", "L’importation de tous les produits finis", "La fermeture des régions rurales"], correctIndex: 0, explanation: "Le projet relie transformation agricole, emplois et partage de la croissance.", sourceLabel: "Situation d’évaluation n°1", points: 1 },
+          { prompt: "Quelle condition aide la régionalisation industrielle à réussir ?", options: ["Des infrastructures et de l’énergie dans plusieurs régions", "La concentration de toutes les usines dans une seule ville", "L’absence de main-d’œuvre formée", "La suppression des débouchés"], correctIndex: 0, explanation: "Les usines ont besoin d’énergie, de routes, de compétences, de capitaux et de marchés.", sourceLabel: "Appréciation", points: 2 },
+          { prompt: "Les indicateurs industriels de 2014 à 2018 peuvent-ils être présentés sans précaution comme des chiffres actuels ?", options: ["Non, ils doivent être datés et attribués au document", "Oui, ils sont valables pour toujours", "Oui, car aucune économie ne change", "Non, parce qu’ils concernent le tourisme"], correctIndex: 0, explanation: "Une statistique ancienne éclaire une période précise ; elle doit rester datée.", sourceLabel: "Précision documentaire", points: 2 },
+        ],
         distractors: ["L’industrie ivoirienne repose seulement sur l’aéronautique.", "Transformer localement diminue toujours la valeur ajoutée.", "Le secteur secondaire est indépendant de l’agriculture."],
       },
       {
@@ -287,6 +471,72 @@ L’État **se désengage** de la production et se recentre sur ses missions : i
         summary: "Relier commerce, tourisme et transports à l’ouverture et à la circulation des richesses.",
         conceptTitle: "Les services connectent les producteurs, les marchés et les territoires",
         explanation: "Le tertiaire comprend notamment commerce, tourisme et transports. Le commerce intérieur distribue les produits, le commerce extérieur organise importations et exportations, tandis que les réseaux routier, ferroviaire, aérien, maritime et lagunaire assurent les flux.",
+        bodyMarkdown: String.raw`## Le commerce intérieur et extérieur
+
+Le **commerce intérieur** distribue les produits dans le pays. Il mobilise grandes entreprises commerciales, grossistes, demi-grossistes et détaillants.
+
+Le **commerce extérieur** regroupe :
+
+- les **exportations**, c’est-à-dire les biens vendus à l’étranger : cacao, café, coton, bois, pétrole et autres produits ;
+- les **importations**, c’est-à-dire les biens achetés à l’étranger : produits manufacturés, équipements, véhicules, produits pétroliers ou pharmaceutiques.
+
+Le document cite notamment la France, les États-Unis, les Pays-Bas ainsi que les espaces de l’Union européenne, de l’UEMOA et de la CEDEAO parmi les partenaires.
+
+## Calculer une balance commerciale
+
+La **balance commerciale** compare la valeur des exportations et celle des importations :
+
+**Balance commerciale = exportations − importations**
+
+- si le résultat est **positif**, la balance est excédentaire ;
+- s’il est **négatif**, elle est déficitaire ;
+- s’il est nul, elle est équilibrée.
+
+À partir du tableau du document, exprimé en **milliards de francs CFA** :
+
+| Année | Exportations | Importations | Balance |
+|---|---:|---:|---:|
+| 2010 | 5 063,15 | 3 881,17 | +1 181,98 |
+| 2011 | 5 232,21 | 3 173,95 | +2 058,26 |
+| 2012 | 5 538,24 | 4 987,06 | +551,18 |
+| 2013 | 6 782,30 | 6 275,57 | +506,73 |
+| 2014 | 6 254,24 | 5 530,93 | +723,31 |
+| 2015 | 7 423,76 | 6 167,73 | +1 256,03 |
+| 2016 | 6 404,41 | 5 088,75 | +1 315,66 |
+| 2017 | 7 302,31 | 5 594,01 | +1 708,30 |
+
+La balance est donc **excédentaire chaque année** du tableau, mais son montant varie fortement. Il ne faut pas confondre la **valeur** des échanges et leur **poids en tonnes** : un volume plus lourd ne vaut pas nécessairement plus cher.
+
+## Le tourisme : des atouts à valoriser
+
+La Côte d’Ivoire dispose de ressources touristiques variées :
+
+| Catégorie | Exemples du document |
+|---|---|
+| Nature | Plages, lagunes, parc de Taï, forêt du Banco, Azagny, mont Péko |
+| Culture | Diversité des peuples, fêtes de génération, initiations, arts culinaires |
+| Patrimoine | Basilique de Yamoussoukro, anciennes mosquées de Kong, Bondoukou et Mankono |
+| Équipements | Hôtels, routes, autoroutes et aéroports |
+
+Pour **2016**, le PDF attribue au tourisme **7,5 % du PIB** et **1 543,9 milliards de francs CFA**. Ces indicateurs sont historiques et doivent rester datés.
+
+> **Précision de source.** La phrase selon laquelle le tourisme représenterait « 62 % de l’économie en matière de services » ne définit pas son dénominateur et ne peut donc pas être interprétée comme une part statistique fiable. On retient l’idée du poids du tourisme, pas ce pourcentage ambigu.
+
+Le tourisme apporte recettes, emplois et taxes, mais son développement dépend de la sécurité, des investissements, de la formation, de la promotion de la destination et de l’accès aux sites.
+
+## Les transports : faire circuler personnes et richesses
+
+Le document décrit un réseau multimodal :
+
+- environ **68 000 km de routes**, dont **6 000 km** bitumés ou autoroutiers ;
+- une ligne ferroviaire **Abidjan-Ouagadougou** de **1 156 km**, dont **638 km** en Côte d’Ivoire ;
+- les aéroports cités d’Abidjan, Bouaké et Yamoussoukro ;
+- les ports d’**Abidjan** et de **San-Pédro** ;
+- des liaisons lagunaires par bateaux-bus et pinasses.
+
+Ces chiffres décrivent le réseau à la date du document. Les transports relient les lieux de production aux usines, aux marchés intérieurs, aux ports et aux frontières.
+
+> **Astuce mémoire de Davy.** **Commerce = échanger**, **tourisme = accueillir**, **transport = relier**. Les trois fonctions se renforcent : un site ou un produit mal relié reste difficile à vendre.`,
         keyPoint: "Le dynamisme du tertiaire dépend de réseaux performants et permet aux autres secteurs d’accéder aux marchés.",
         example: "Le Port autonome d’Abidjan assure l’essentiel du trafic maritime national, tandis que le port de San-Pédro dessert notamment l’ouest du pays.",
         timelineTitle: "Suivre la circulation des richesses",
@@ -298,6 +548,20 @@ L’État **se désengage** de la production et se recentre sur ses missions : i
         ],
         observation: "Sans transport ni commerce, les produits agricoles et industriels atteignent difficilement les consommateurs.",
         check: { prompt: "Quel réseau relie Abidjan à Ouagadougou selon le cours ?", options: ["Une voie ferrée", "Un canal maritime", "Un métro souterrain", "Une ligne de téléphérique"], correctIndex: 0, explanation: "La ligne ferroviaire Abidjan-Ouagadougou traverse la Côte d’Ivoire et le Burkina Faso." },
+        extraQuestions: [
+          { prompt: "Que sont les exportations ?", options: ["Les produits vendus à l’étranger", "Les produits reçus gratuitement", "Les biens achetés à l’étranger", "Les marchandises détruites"], correctIndex: 0, explanation: "Exporter signifie vendre des biens ou des services au reste du monde.", sourceLabel: "Exercice 2", points: 1 },
+          { prompt: "Les performances du commerce ivoirien reposent seulement sur le commerce intérieur.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Le commerce extérieur, avec exportations et importations, joue aussi un rôle majeur.", sourceLabel: "Exercice 2", points: 1 },
+          { prompt: "Le commerce extérieur ivoirien présenté dans le document est dominé à l’exportation par les matières premières agricoles.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Le cacao, le café et le coton figurent parmi les principaux produits exportés cités.", sourceLabel: "Exercice 2", points: 1 },
+          { prompt: "Quelle est la balance commerciale de 2015 d’après le tableau, en milliards de F CFA ?", options: ["+1 256,03", "−1 256,03", "+551,18", "+7 423,76"], correctIndex: 0, explanation: "7 423,76 − 6 167,73 = +1 256,03 milliards de F CFA.", sourceLabel: "Activité d’application n°3", points: 2 },
+          { prompt: "Quelle année du tableau présente le plus fort excédent commercial ?", options: ["2011", "2013", "2014", "2017"], correctIndex: 0, explanation: "L’excédent de 2011 atteint +2 058,26 milliards de F CFA, le maximum de la série.", sourceLabel: "Activité d’application n°3", points: 2 },
+          { prompt: "Un poids d’importations supérieur au poids des exportations signifie nécessairement une balance commerciale déficitaire.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "La balance se calcule avec les valeurs monétaires, pas avec les tonnages.", sourceLabel: "Activité d’application n°3", points: 2 },
+          { prompt: "Les atouts touristiques sont abondants mais restent insuffisamment valorisés en Côte d’Ivoire.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Le document distingue de nombreux atouts naturels, culturels et patrimoniaux, tout en soulignant les obstacles à leur exploitation.", sourceLabel: "Exercice 2", points: 1 },
+          { prompt: "Quel élément est un problème du tourisme ivoirien ?", options: ["La faiblesse des investissements", "La promotion de la destination", "La formation des agents", "La revalorisation de l’activité"], correctIndex: 0, explanation: "Les trois autres propositions sont des solutions ; le manque d’investissement est un problème.", sourceLabel: "Exercice 3", points: 1 },
+          { prompt: "Quelle mesure constitue une solution au développement touristique ?", options: ["Former les agents du secteur", "Accroître l’insécurité", "Multiplier les crises sociopolitiques", "Réduire l’accès aux sites"], correctIndex: 0, explanation: "La formation améliore l’accueil et la qualité des services.", sourceLabel: "Exercice 3", points: 1 },
+          { prompt: "Les infrastructures de transport constituent uniquement un frein au développement économique.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Routes, rail, ports, aéroports et lagunes soutiennent les échanges, même si le réseau peut encore être amélioré.", sourceLabel: "Exercice 2", points: 2 },
+          { prompt: "Quel port dessert notamment l’ouest et le sud-ouest du pays ?", options: ["San-Pédro", "Korhogo", "Bouaké", "Yamoussoukro"], correctIndex: 0, explanation: "Le port de San-Pédro complète celui d’Abidjan et ouvre l’ouest ivoirien sur le commerce maritime.", sourceLabel: "III-3", points: 1 },
+          { prompt: "Pourquoi faut-il dater les chiffres de 2016 sur le tourisme ?", options: ["Parce qu’une statistique décrit une période précise", "Parce que le tourisme n’existe plus", "Parce qu’ils concernent le secteur primaire", "Parce qu’un pourcentage ne change jamais"], correctIndex: 0, explanation: "Les indicateurs économiques évoluent ; leur date et leur source font partie de l’information.", sourceLabel: "Précision documentaire", points: 2 },
+        ],
         distractors: ["Le tertiaire produit uniquement des matières premières.", "Les transports n’ont aucun effet sur le commerce.", "Le tourisme ivoirien ne possède aucun atout culturel."],
       },
     ],

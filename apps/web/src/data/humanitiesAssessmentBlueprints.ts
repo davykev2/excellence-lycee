@@ -69,12 +69,58 @@ export const humanitiesAssessmentBlueprints: Record<string, HumanitiesAssessment
     memorySentence: "L’économie ivoirienne fonctionne par complémentarité entre secteur primaire, secteur secondaire et secteur tertiaire.",
     mission: {
       title: "Le paradoxe de la pêche ivoirienne",
-      scenario: "Malgré un réseau hydrographique important, la production halieutique ivoirienne ne couvre qu’une partie de la consommation nationale et le pays doit importer du poisson.",
-      modelAnswer: "Le déficit vient notamment de techniques peu modernes, d’équipements insuffisants, de la surexploitation et d’une aquaculture encore limitée. Moderniser la flotte, développer l’aquaculture et protéger les ressources permettrait de le réduire.",
+      scenario: "Le document d’évaluation affirme qu’en 2019 la Côte d’Ivoire a produit 52 000 tonnes de ressources halieutiques, soit 30 % de sa consommation. Malgré l’abondance des eaux, le pays doit donc importer massivement.",
+      modelAnswer: "Avec les données de la mission, la consommation atteindrait environ 173 333 tonnes et le déficit environ 121 333 tonnes. Il s’explique par des techniques et équipements insuffisants, une aquaculture limitée et la pression sur les ressources. Moderniser durablement la filière, développer l’aquaculture et mieux conserver les prises permettrait de le réduire.",
       questions: [
         question("Quel problème cette situation met-elle en évidence ?", "Le déficit de production halieutique en Côte d’Ivoire", ["L’absence totale de cours d’eau", "La disparition du commerce extérieur", "Le manque de cultures industrielles"], "Les ressources en eau existent, mais la production de poissons reste insuffisante.", 1),
         question("Quelle explication est la plus complète ?", "Des techniques, équipements et capacités d’aquaculture insuffisants limitent la production", ["Les Ivoiriens ne consomment jamais de poisson", "Tous les fleuves sont asséchés", "La pêche est interdite sur tout le territoire"], "Le potentiel naturel ne suffit pas : il faut des moyens de production et une gestion durable.", 2),
         question("Quelle solution répond directement au problème ?", "Moderniser la pêche, développer l’aquaculture et lutter contre la surexploitation", ["Supprimer tous les ports", "Abandonner la formation des pêcheurs", "Réduire volontairement la production locale"], "Les solutions doivent agir à la fois sur la production, les compétences et la protection de la ressource.", 0),
+      ],
+      bodyMarkdown: String.raw`## Situation d’évaluation — Une production insuffisante
+
+Lors de ses révisions du baccalauréat, un élève découvre l’affirmation suivante :
+
+> En 2019, la Côte d’Ivoire aurait produit **52 000 tonnes** de ressources halieutiques, soit **30 %** de sa consommation nationale. Des importations seraient donc nécessaires pour couvrir le reste des besoins.
+
+Cette situation paraît paradoxale : le pays dispose d’un littoral, de lagunes, de fleuves et de lacs, mais sa production ne répond pas à la demande.
+
+## Exploiter les données
+
+Dans le cadre de cette mission, on accepte la donnée de **52 000 tonnes** :
+
+| Calcul | Opération | Résultat approché |
+|---|---|---:|
+| Consommation nationale | 52 000 ÷ 0,30 | 173 333 t |
+| Déficit à couvrir | 173 333 − 52 000 | 121 333 t |
+| Part non couverte | 100 % − 30 % | 70 % |
+
+> **Correction / précision.** Le corps du même PDF annonce ailleurs **101 000 tonnes** en 2019, dont 59 590 tonnes de pêche artisanale et 41 410 tonnes de pêche industrielle. Les deux totaux sont incompatibles. Pour résoudre cette mission, utilise **52 000 tonnes comme hypothèse imposée**, sans prétendre qu’elle confirme le chiffre du cours.
+
+## Consignes
+
+1. Identifie précisément le problème posé.
+2. Explique le déficit malgré l’importance des ressources en eau.
+3. Propose des solutions réalistes et durables.
+
+## Construire une réponse complète
+
+Une bonne explication distingue :
+
+- les **moyens de production** : embarcations, motorisation, équipements et formation ;
+- la **conservation et la distribution** : glace, chaîne du froid, stockage et transport ;
+- la **gestion de la ressource** : repos biologique, contrôle des captures et lutte contre les pratiques destructrices ;
+- la **production complémentaire** : pisciculture et aquaculture.
+
+Les solutions doivent augmenter l’offre sans épuiser les stocks : moderniser la flotte, former les pêcheurs, développer la chaîne du froid, soutenir l’aquaculture et protéger les zones de reproduction.
+
+> **Méthode.** Présente d’abord le **constat chiffré**, explique ensuite au moins **deux causes**, puis propose des solutions qui répondent directement à ces causes.`,
+      extraQuestions: [
+        { prompt: "Si 52 000 tonnes représentent 30 % de la consommation, quelle est la consommation totale approchée ?", options: ["173 333 tonnes", "82 000 tonnes", "15 600 tonnes", "520 000 tonnes"], correctIndex: 0, explanation: "52 000 ÷ 0,30 ≈ 173 333 tonnes.", sourceLabel: "Exploitation des données", points: 2 },
+        { prompt: "Quel déficit la donnée de la mission implique-t-elle environ ?", options: ["121 333 tonnes", "52 000 tonnes", "30 000 tonnes", "225 333 tonnes"], correctIndex: 0, explanation: "173 333 − 52 000 ≈ 121 333 tonnes, soit 70 % de la consommation.", sourceLabel: "Exploitation des données", points: 2 },
+        { prompt: "Pourquoi la présence de nombreuses eaux ne garantit-elle pas une production suffisante ?", options: ["Il faut aussi des équipements, des compétences et une gestion durable", "L’eau empêche toute activité de pêche", "Tous les poissons sont nécessairement exportés", "Les lagunes ne contiennent jamais de ressources"], correctIndex: 0, explanation: "Une ressource naturelle ne devient production que si elle est aménagée et correctement gérée.", sourceLabel: "Consigne 2", points: 2 },
+        { prompt: "Quelle solution augmente directement la production locale sans dépendre seulement des captures sauvages ?", options: ["Développer l’aquaculture", "Supprimer la chaîne du froid", "Réduire la formation", "Fermer les marchés"], correctIndex: 0, explanation: "La pisciculture et l’aquaculture complètent la pêche de capture.", sourceLabel: "Consigne 3", points: 1 },
+        { prompt: "Quelle mesure protège la ressource sur le long terme ?", options: ["Respecter les périodes de repos biologique", "Capturer les juvéniles", "Détruire les mangroves", "Pêcher sans contrôle"], correctIndex: 0, explanation: "Le repos biologique permet la reproduction et le renouvellement des stocks.", sourceLabel: "Consigne 3", points: 2 },
+        { prompt: "Comment traiter les totaux de 52 000 et 101 000 tonnes présents dans le PDF ?", options: ["Signaler la contradiction et réserver 52 000 tonnes au calcul de la mission", "Les déclarer égaux", "Les additionner", "Choisir au hasard l’un des deux"], correctIndex: 0, explanation: "La transparence documentaire impose de signaler l’incompatibilité au lieu de la masquer.", sourceLabel: "Correction de source", points: 2 },
       ],
     },
   },

@@ -5,4 +5,4 @@
  * ce compteur léger permet d'afficher la statistique publique sans forcer un
  * élève à télécharger les contenus des autres classes.
  */
-export const AVAILABLE_EXERCISES = 7_898;
+export const AVAILABLE_EXERCISES = 8_039;
