@@ -602,7 +602,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Les drogues et le système nerveux", pathId: "terminale-c-svt-l2-drugs-nervous-system" },
       { title: "La production d’énergie par la cellule", pathId: "terminale-c-svt-l3-cell-energy-production" },
       { title: "L’utilisation de l’énergie par la cellule musculaire", pathId: "terminale-c-svt-l4-muscle-energy-use" },
-      "Le système de défense de l’organisme",
+      { title: "Le système de défense de l’organisme", pathId: "terminale-c-svt-l5-immune-defense" },
       "L’infection de l’organisme par le VIH",
       "Les cycles sexuels chez la femme",
       "La transmission d’un caractère héréditaire chez l’Homme",
