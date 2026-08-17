@@ -603,7 +603,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "La production d’énergie par la cellule", pathId: "terminale-c-svt-l3-cell-energy-production" },
       { title: "L’utilisation de l’énergie par la cellule musculaire", pathId: "terminale-c-svt-l4-muscle-energy-use" },
       { title: "Le système de défense de l’organisme", pathId: "terminale-c-svt-l5-immune-defense" },
-      "L’infection de l’organisme par le VIH",
+      { title: "L’infection de l’organisme par le VIH", pathId: "terminale-c-svt-l6-hiv-infection" },
       "Les cycles sexuels chez la femme",
       "La transmission d’un caractère héréditaire chez l’Homme",
       "La mise en place des gisements pétrolifères en Côte d’Ivoire",
