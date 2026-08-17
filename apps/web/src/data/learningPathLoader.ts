@@ -75,15 +75,16 @@ async function loadSvtPaths(levelId: string) {
     ]);
   }
   if (levelId === "terminale-c") {
-    const [nervousSystem, drugsNervousSystem, cellEnergyProduction, muscleEnergyUse, immuneDefense, hivInfection] = await Promise.all([
+    const [nervousSystem, drugsNervousSystem, cellEnergyProduction, muscleEnergyUse, immuneDefense, hivInfection, femaleCycles] = await Promise.all([
       import("./terminalCSvtNervousPath").then((module) => [module.terminalCSvtNervousPath]),
       import("./terminalCSvtDrugsPath").then((module) => [module.terminalCSvtDrugsPath]),
       import("./terminalCSvtCellEnergyPath").then((module) => [module.terminalCSvtCellEnergyPath]),
       import("./terminalCSvtMuscleEnergyPath").then((module) => [module.terminalCSvtMuscleEnergyPath]),
       import("./terminalCSvtImmuneDefensePath").then((module) => [module.terminalCSvtImmuneDefensePath]),
       import("./terminalCSvtHivInfectionPath").then((module) => [module.terminalCSvtHivInfectionPath]),
+      import("./terminalCSvtFemaleCyclesPath").then((module) => [module.terminalCSvtFemaleCyclesPath]),
     ]);
-    return [...nervousSystem, ...drugsNervousSystem, ...cellEnergyProduction, ...muscleEnergyUse, ...immuneDefense, ...hivInfection];
+    return [...nervousSystem, ...drugsNervousSystem, ...cellEnergyProduction, ...muscleEnergyUse, ...immuneDefense, ...hivInfection, ...femaleCycles];
   }
   return [];
 }
