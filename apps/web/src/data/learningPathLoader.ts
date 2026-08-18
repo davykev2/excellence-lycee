@@ -88,8 +88,11 @@ async function loadSvtPaths(levelId: string) {
     return [...nervousSystem, ...drugsNervousSystem, ...cellEnergyProduction, ...muscleEnergyUse, ...immuneDefense, ...hivInfection, ...femaleCycles, ...humanHeredity];
   }
   if (levelId === "terminale-d") {
-    return import("./terminalDSvtNervousTissuePath")
-      .then((module) => [module.terminalDSvtNervousTissuePath]);
+    const [nervousTissue, skeletalMuscle] = await Promise.all([
+      import("./terminalDSvtNervousTissuePath").then((module) => module.terminalDSvtNervousTissuePath),
+      import("./terminalDSvtSkeletalMusclePath").then((module) => module.terminalDSvtSkeletalMusclePath),
+    ]);
+    return [nervousTissue, skeletalMuscle];
   }
   return [];
 }

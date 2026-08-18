@@ -686,7 +686,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
     svt: [
       "Le réflexe conditionnel",
       { title: "Le fonctionnement du tissu nerveux", pathId: "terminale-d-svt-l2-nervous-tissue" },
-      "Le fonctionnement du muscle strié squelettique",
+      { title: "Le fonctionnement du muscle strié squelettique", pathId: "terminale-d-svt-l3-skeletal-muscle" },
       "Le fonctionnement du cœur",
       "Le devenir des cellules sexuelles chez les mammifères",
       "Le fonctionnement des organes sexuels chez l’Homme",
