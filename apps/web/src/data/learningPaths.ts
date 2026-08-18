@@ -30,6 +30,7 @@ import { terminalCSvtDrugsPath } from "./terminalCSvtDrugsPath";
 import { terminalCSvtImmuneDefensePath } from "./terminalCSvtImmuneDefensePath";
 import { terminalCSvtHivInfectionPath } from "./terminalCSvtHivInfectionPath";
 import { terminalCSvtFemaleCyclesPath } from "./terminalCSvtFemaleCyclesPath";
+import { terminalCSvtHumanHeredityPath } from "./terminalCSvtHumanHeredityPath";
 import { terminalCSvtMuscleEnergyPath } from "./terminalCSvtMuscleEnergyPath";
 import { terminalCSvtNervousPath } from "./terminalCSvtNervousPath";
 import { terminalSvtPaths } from "./terminalSvtPaths";
@@ -70,6 +71,7 @@ const baseLearningPaths: LearningPath[] = [
   terminalCSvtImmuneDefensePath,
   terminalCSvtHivInfectionPath,
   terminalCSvtFemaleCyclesPath,
+  terminalCSvtHumanHeredityPath,
 ];
 
 export const learningPaths: LearningPath[] = baseLearningPaths.map(applyLessonXpBudget);

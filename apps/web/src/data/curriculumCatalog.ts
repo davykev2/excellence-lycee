@@ -605,7 +605,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Le système de défense de l’organisme", pathId: "terminale-c-svt-l5-immune-defense" },
       { title: "L’infection de l’organisme par le VIH", pathId: "terminale-c-svt-l6-hiv-infection" },
       { title: "Les cycles sexuels chez la femme", pathId: "terminale-c-svt-l7-female-sexual-cycles" },
-      "La transmission d’un caractère héréditaire chez l’Homme",
+      { title: "La transmission d’un caractère héréditaire chez l’Homme", pathId: "terminale-c-svt-l8-human-heredity" },
       "La mise en place des gisements pétrolifères en Côte d’Ivoire",
       "L’exploitation des gisements pétrolifères",
       "L’amélioration de la fertilité du sol",
