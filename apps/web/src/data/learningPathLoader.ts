@@ -87,6 +87,10 @@ async function loadSvtPaths(levelId: string) {
     ]);
     return [...nervousSystem, ...drugsNervousSystem, ...cellEnergyProduction, ...muscleEnergyUse, ...immuneDefense, ...hivInfection, ...femaleCycles, ...humanHeredity];
   }
+  if (levelId === "terminale-d") {
+    return import("./terminalDSvtNervousTissuePath")
+      .then((module) => [module.terminalDSvtNervousTissuePath]);
+  }
   return [];
 }
 
