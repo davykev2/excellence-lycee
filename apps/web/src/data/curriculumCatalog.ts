@@ -693,7 +693,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       "La reproduction chez les spermaphytes",
       "La transmission d’un caractère héréditaire chez l’Homme",
       "La transmission de deux caractères héréditaires chez les êtres vivants",
-      "Le maintien de la constance du milieu intérieur",
+      { title: "Le maintien de la constance du milieu intérieur", pathId: "terminale-d-svt-l10-internal-environment" },
       "Le système de défense de l’organisme",
       "L’infection de l’organisme par le VIH",
       "La mise en place des gisements miniers en Côte d’Ivoire",
