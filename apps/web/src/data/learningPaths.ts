@@ -35,6 +35,7 @@ import { terminalCSvtMuscleEnergyPath } from "./terminalCSvtMuscleEnergyPath";
 import { terminalCSvtNervousPath } from "./terminalCSvtNervousPath";
 import { terminalDSvtNervousTissuePath } from "./terminalDSvtNervousTissuePath";
 import { terminalDSvtSkeletalMusclePath } from "./terminalDSvtSkeletalMusclePath";
+import { terminalDSvtHeartPath } from "./terminalDSvtHeartPath";
 import { terminalSvtPaths } from "./terminalSvtPaths";
 import { applyLessonXpBudget } from "./xpRewards";
 
@@ -76,6 +77,7 @@ const baseLearningPaths: LearningPath[] = [
   terminalCSvtHumanHeredityPath,
   terminalDSvtNervousTissuePath,
   terminalDSvtSkeletalMusclePath,
+  terminalDSvtHeartPath,
 ];
 
 export const learningPaths: LearningPath[] = baseLearningPaths.map(applyLessonXpBudget);
