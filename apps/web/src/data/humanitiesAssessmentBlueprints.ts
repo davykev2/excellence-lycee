@@ -206,15 +206,106 @@ Le dernier texte, mal numéroté une seconde fois « Document 3 », présente **
   },
   "terminale-hg-g4-south-korea-development-foundations": {
     splitSectionIndex: 2,
-    memorySentence: "Le décollage sud-coréen associe capital humain, État stratège, industrie exportatrice et influences extérieures adaptées.",
+    memorySentence: "La trajectoire sud-coréenne relie territoire aménagé, capital humain, aide extérieure, État stratège et montée en gamme exportatrice.",
     mission: {
-      title: "Expliquer le miracle sud-coréen",
-      scenario: "Un article présente la Corée du Sud comme une grande puissance industrielle, malgré ses faibles ressources naturelles, et insiste sur le rôle du capital humain et des influences japonaise et américaine.",
-      modelAnswer: "Les aides et modèles étrangers ont compté, mais le succès repose aussi sur l’éducation, l’épargne, l’action de l’État, les chaebols et une stratégie industrielle tournée vers l’exportation.",
+      title: "Expliquer le décollage sans raconter un miracle",
+      scenario: "Un article présente la Corée du Sud comme une grande puissance industrielle, malgré des ressources naturelles limitées. Il insiste sur ses indicateurs sociaux, son vieillissement et les influences japonaise et américaine. Tu dois vérifier les documents puis construire une explication multifactorielle.",
+      modelAnswer: "Les apports extérieurs ont soutenu la reconstruction, mais ils ne suffisent pas. L’éducation, les infrastructures, la planification, le crédit dirigé, le travail, les chaebols, l’entreprise publique POSCO, la recherche et les exportations ont construit la montée en gamme. Ce bilan doit aussi mentionner l’autoritarisme, la concentration économique et le vieillissement.",
+      bodyMarkdown: String.raw`## Situation d’évaluation du fascicule
+
+Le texte affirme trois idées : la Corée du Sud est devenue une puissance majeure ; ses indicateurs sociaux sont élevés alors que sa dynamique démographique ralentit ; ses performances viendraient surtout des influences japonaise et américaine.
+
+Les trois consignes demandent de :
+
+1. **dégager l’idée générale** ;
+2. **expliquer** le lien entre qualité de vie et recul démographique ;
+3. **prendre position** sur le poids des influences étrangères.
+
+Une bonne réponse n’oppose pas brutalement « étranger » et « national ». Elle classe les facteurs, explique leur rôle et ajoute une limite.
+
+## Documents cartographiques reconstruits
+
+Le drapeau, la vue satellitaire et la carte régionale des pages 12-13 ne sont pas reproduits. Ils servent à retenir :
+
+- une péninsule entre **Chine** et **Japon**, divisée entre Corée du Nord et Corée du Sud ;
+- **Séoul** au nord-ouest, dans une vaste région-capitale ;
+- des métropoles et ports industriels comme **Busan**, **Ulsan** et **Incheon** ;
+- des façades maritimes qui relient le pays aux chaînes de valeur asiatiques et mondiales.
+
+## Document 4 - Une courbe arrêtée en 2019
+
+Le graphique de la Banque mondiale compare la croissance démographique annuelle :
+
+| Territoire | Valeur affichée en 2019 |
+|---|---:|
+| Corée du Nord | +0,5 % |
+| Corée du Sud | +0,2 % |
+| Japon | -0,2 % |
+
+Il montre un ralentissement de long terme, mais ne permet pas d’annoncer à lui seul un « recul inexorable ». Une courbe datée décrit une période ; elle ne prédit pas automatiquement tout l’avenir.
+
+## Document 5 - Remplacer un tableau incohérent
+
+Le PDF juxtapose, sans millésime commun, croissance **-0,24 %**, natalité **0,59 %**, mortalité **0,57 %**, espérance de vie **82 ans**, alphabétisation **100 %** et chômage **4,9 %**. Le calcul **0,59 - 0,57 = +0,02 point** ne produit pas -0,24 % : années, arrondis, migration ou définitions ont été mélangés.
+
+Des données officielles récentes permettent une lecture plus rigoureuse :
+
+| Indicateur officiel | Valeur et date | Interprétation |
+|---|---:|---|
+| population recensée | 51,81 millions en 2024 | total incluant 2,04 millions de résidents étrangers |
+| 65 ans ou plus | 19,5 % en 2024 | vieillissement rapide |
+| fécondité | 0,75 enfant par femme en 2024 | niveau très inférieur au remplacement |
+| solde naturel | environ -120 000 en 2024 | plus de décès que de naissances |
+| espérance de vie | 83,5 ans en 2023 | niveau social élevé, sans résumer toutes les inégalités |
+
+La population totale peut augmenter légèrement avec les migrations alors que le **solde naturel** est négatif et que la population d’âge actif diminue. Ces phénomènes ne se confondent pas.
+
+Le taux d’alphabétisation « 100 % » doit aussi être écarté comme faux précis : l’enquête nationale de 2020 mesure plusieurs niveaux de littératie et observe encore des adultes sans maîtrise suffisante des compétences élémentaires.
+
+## Situation 1 - Capital humain et étapes du développement
+
+Le premier exercice décrit la Corée du Sud comme l’un des **quatre dragons d’Asie**. Il demande d’expliquer pourquoi les insuffisances naturelles ont encouragé l’investissement dans le capital humain, puis de montrer que le modèle s’est construit par étapes.
+
+**Réponse organisée :**
+
+- **identifier** : les fondements du décollage sud-coréen ;
+- **expliquer** : peu de minerais → former, importer, transformer et exporter ;
+- **classer** : substitution aux importations → produits légers exportés → industries lourdes → technologies ;
+- **nuancer** : ces phases se chevauchent et s’appuient aussi sur aide, réforme agraire, infrastructures et marchés mondiaux.
+
+## Situation 2 - Nature et intervention de l’État
+
+Le second exercice affirme que « la nature ne lui offre pas de réelles potentialités » et que l’intervention étatique a été décisive.
+
+La première formule est **excessive** : relief et sous-sol sont contraignants, mais fleuves, forêts, littoraux et position en Asie orientale sont de vraies potentialités. La seconde est défendable si l’on cite plans, Bureau de 1961, crédit, ports, instituts scientifiques et coopération avec les entreprises.
+
+Elle doit toutefois être nuancée : l’État de Park Chung-hee était autoritaire, les droits syndicaux ont été restreints et les soutiens ont favorisé une forte concentration économique.
+
+## Corriger la thèse des influences étrangères
+
+L’aide américaine, la protection stratégique, des technologies et capitaux étrangers ont compté. Mais la colonisation japonaise ne doit pas être présentée comme un simple avantage, et aucun apport n’aurait suffi sans décisions, compétences et travail en Corée.
+
+**Conclusion modèle :** les influences extérieures fournissent des ressources et des contraintes ; l’État, la société, les travailleurs et les entreprises les transforment en industrialisation. La causalité est donc **multiple**, jamais étrangère seule, culturelle seule ou étatique seule.
+
+> **Méthode BAC.** Utilise le plan **fait daté → mécanisme → résultat → limite**. Exemple : « En 1961, un Bureau de planification coordonne les priorités ; le crédit finance les secteurs exportateurs ; l’industrie monte en gamme ; cependant le pouvoir économique et politique se concentre. »` ,
       questions: [
-        question("Quelle est l’idée générale de la situation ?", "Les fondements du développement économique rapide de la Corée du Sud", ["L’échec définitif de l’industrie coréenne", "La disparition de la population coréenne", "La création de l’Union africaine"], "Le sujet cherche à expliquer la construction de la puissance sud-coréenne.", 1),
-        question("Pourquoi le capital humain est-il décisif ?", "Une population éduquée, disciplinée et qualifiée soutient l’innovation et l’industrie", ["Il remplace totalement les investissements", "Il rend inutiles les exportations", "Il repose sur l’analphabétisme"], "L’investissement dans l’éducation et la qualification compense en partie les limites naturelles.", 2),
-        question("Quelle appréciation des influences étrangères est équilibrée ?", "Elles ont aidé, mais la stratégie nationale a transformé ces apports en développement", ["Elles expliquent seules tout le succès", "Elles n’ont joué aucun rôle", "Elles ont empêché toute industrialisation"], "Il faut distinguer les apports extérieurs de la capacité interne à les utiliser.", 0),
+        question("Quelle est l’idée générale de la situation ?", "Expliquer les facteurs naturels, humains, extérieurs et politiques de la trajectoire sud-coréenne", ["L’échec définitif de l’industrie coréenne", "La disparition immédiate de toute la population", "La création de l’Union africaine"], "Le sujet cherche à relier plusieurs fondements du passage à une économie avancée.", 1),
+        question("Comment qualité de vie élevée et ralentissement démographique peuvent-ils coexister ?", "Longévité et éducation progressent tandis que faible fécondité et vieillissement réduisent le solde naturel", ["Une longue espérance de vie impose toujours beaucoup de naissances", "Le vieillissement crée des minerais", "Les deux phénomènes s’excluent nécessairement"], "Des indicateurs sociaux élevés n’empêchent ni la faible fécondité ni la diminution de la population d’âge actif.", 2),
+        question("Quelle appréciation des influences étrangères est équilibrée ?", "Elles ont aidé ou contraint, mais les acteurs nationaux ont transformé ces apports par leurs propres choix", ["Elles expliquent seules tout le succès", "Elles n’ont joué aucun rôle", "La colonisation fut uniquement bénéfique"], "Il faut distinguer aide, domination, capitaux et technologies, puis expliquer leur transformation par les institutions et la société.", 0),
+      ],
+      extraQuestions: [
+        { prompt: "Pourquoi le thème « pays émergent » doit-il être contextualisé aujourd’hui ?", options: ["La leçon étudie une trajectoire historique, mais la Corée du Sud est désormais une économie avancée et à revenu élevé", "La Corée du Sud n’a jamais eu d’économie", "Le mot signifie uniquement pays montagneux", "Le classement n’a aucune date"], correctIndex: 0, explanation: "Le thème scolaire porte sur le processus d’émergence, non sur le classement actuel du pays.", sourceLabel: "Mise à jour FMI / Banque mondiale", points: 2 },
+        { prompt: "Quelle croissance démographique le Document 4 affiche-t-il pour la Corée du Sud en 2019 ?", options: ["+0,2 %", "+0,5 %", "-0,2 %", "-2,4 %"], correctIndex: 0, explanation: "La courbe place la Corée du Sud à +0,2 %, entre la Corée du Nord et le Japon.", sourceLabel: "Document 4", points: 1 },
+        { prompt: "Quel territoire est à -0,2 % sur ce graphique ?", options: ["Le Japon", "La Corée du Sud", "La Corée du Nord", "La Côte d’Ivoire"], correctIndex: 0, explanation: "Le Japon est négatif dans la dernière année affichée, tandis que les deux Corées restent positives sur cette courbe datée.", sourceLabel: "Document 4", points: 1 },
+        { prompt: "Quel solde naturel résulte des taux 0,59 % et 0,57 % du Document 5 ?", options: ["+0,02 point", "-0,24 point", "+1,16 point", "-0,57 point"], correctIndex: 0, explanation: "Natalité moins mortalité donne +0,02 point, ce qui révèle l’incohérence du tableau.", sourceLabel: "Document 5", points: 2 },
+        { prompt: "Quelles informations manquent pour relier ce +0,02 au -0,24 % annoncé ?", options: ["Année commune, arrondis, migration et définitions", "Le nombre de montagnes uniquement", "La couleur du drapeau", "Le nom d’un chaebol"], correctIndex: 0, explanation: "Des séries de dates ou de périmètres différents ne peuvent pas être additionnées sans contrôle.", sourceLabel: "Critique documentaire", points: 2 },
+        { prompt: "Comment la population totale peut-elle légèrement augmenter malgré un déficit naturel ?", options: ["Le solde migratoire peut compenser davantage de décès que de naissances", "Le vieillissement crée automatiquement des naissances", "Les migrations n’entrent jamais dans la population", "Le déficit naturel mesure les exportations"], correctIndex: 0, explanation: "Variation totale = solde naturel + solde migratoire, sous réserve des ajustements statistiques.", sourceLabel: "Mise à jour KOSTAT 2024", points: 2 },
+        { prompt: "Pourquoi faut-il écarter « 100 % d’alphabétisation » comme mesure exacte ?", options: ["La littératie comporte plusieurs niveaux et l’enquête observe encore des difficultés élémentaires", "Personne ne sait lire en Corée", "L’alphabétisation ne peut jamais être mesurée", "Le chiffre mesure la mortalité"], correctIndex: 0, explanation: "Le résultat dépend du seuil ; l’enquête adulte de 2020 ne confirme pas une maîtrise parfaite de toute la population.", sourceLabel: "Correction KOSTAT, enquête de littératie", points: 2 },
+        { prompt: "Quels territoires forment traditionnellement les quatre dragons d’Asie ?", options: ["Corée du Sud, Taïwan, Hong Kong et Singapour", "Chine, Japon, Inde et Russie", "Corée du Nord, Laos, Cambodge et Népal", "France, Allemagne, Italie et Espagne"], correctIndex: 0, explanation: "L’expression désigne quatre économies d’Asie orientale à industrialisation rapide.", sourceLabel: "Situation d’évaluation, exercice 1", points: 1 },
+        { prompt: "Pourquoi « la nature n’offre pas de réelles potentialités » est-il excessif ?", options: ["Les eaux, littoraux, forêts et la position régionale sont des atouts aménageables", "Le pays possède toutes les réserves de pétrole du monde", "Le relief est entièrement plat", "Aucun typhon n’existe"], correctIndex: 0, explanation: "Le territoire est contraignant mais pas dépourvu de ressources et d’ouvertures.", sourceLabel: "Situation d’évaluation, exercice 2", points: 2 },
+        { prompt: "Quel fait prouve concrètement l’intervention économique de l’État ?", options: ["Création du Bureau de planification en 1961 et orientation du crédit", "Absence de tout plan", "Suppression de toutes les infrastructures", "Refus de former des ingénieurs"], correctIndex: 0, explanation: "Plans, financement, ports, énergie et recherche matérialisent la stratégie publique.", sourceLabel: "Situation d’évaluation, exercice 2", points: 2 },
+        { prompt: "Quel ordre restitue la montée en gamme ?", options: ["Substitution → exportations légères → industries lourdes → technologies", "Technologies → coton → colonisation → fermeture", "Industries lourdes → aucune exportation → farine", "Mousson → chaebol → relief → mortalité"], correctIndex: 0, explanation: "Chaque étape dominante réutilise une partie des capacités accumulées auparavant.", sourceLabel: "Situation d’évaluation, exercice 1", points: 1 },
+        { prompt: "Quelle distinction entre Samsung et POSCO est correcte pour la période étudiée ?", options: ["Samsung est un chaebol privé ; POSCO est alors une entreprise sidérurgique publique", "POSCO est un fleuve et Samsung un climat", "Les deux sont des religions", "Les deux sont des programmes de reforestation"], correctIndex: 0, explanation: "Le PDF les associe trop vite : POSCO n’était pas un chaebol et sa privatisation s’achève seulement en 2000.", sourceLabel: "Correction institutionnelle", points: 2 },
       ],
     },
   },

@@ -922,25 +922,111 @@ Le dernier texte du fascicule est intitulé une seconde fois **« Document n° 3
     themeNumber: 2,
     themeTitle: "La Corée du Sud : un exemple de pays émergent",
     title: "Les fondements du développement économique de la Corée du Sud",
-    description: "Comprendre comment territoire, capital humain et État-développeur ont construit une puissance émergente.",
+    description: "Retracer comment territoire aménagé, capital humain et État-développeur ont transformé un ancien pays pauvre en économie avancée.",
     sections: [
       {
         id: "territory",
         title: "Un territoire aux potentialités contrastées",
         summary: "Évaluer les contraintes du relief et des ressources ainsi que les atouts maritimes et hydrauliques.",
         conceptTitle: "Un territoire restreint, montagneux et ouvert sur les mers",
-        explanation: "La Corée du Sud est montagneuse sur environ 70 % de son territoire et dispose de peu de ressources minières ou énergétiques. Ses fleuves, ses littoraux et ses ports soutiennent toutefois pêche, hydroélectricité, irrigation, navigation et commerce.",
+        explanation: "La Corée du Sud est montagneuse sur environ 70 % de son territoire et dispose de peu de ressources minières ou énergétiques exploitables. Ses plaines, ses fleuves, ses forêts restaurées et son ouverture maritime deviennent toutefois des atouts lorsqu’ils sont aménagés.",
+        bodyMarkdown: String.raw`## Situer avant d’expliquer
+
+La République de Corée occupe le sud de la péninsule coréenne. Le fascicule lui attribue **98 480 km²**, une population de **plus de 51 millions d’habitants en 2017** et **Séoul** pour capitale. Ces nombres servent de repères datés : des sources gouvernementales récentes donnent une superficie proche de **100 000 km²**, selon le périmètre retenu.
+
+Le thème officiel parle d’un « pays émergent » parce qu’il étudie une **trajectoire d’émergence**. Aujourd’hui, la Corée du Sud est classée parmi les **économies avancées** par le FMI et dans le groupe des pays à **revenu élevé** par la Banque mondiale.
+
+La mer Jaune borde l’ouest. À l’est s’étend la mer appelée **mer de l’Est** en Corée et **mer du Japon** dans une grande partie de la cartographie internationale. Nommer les deux appellations évite de transformer une question de géographie en prise de position.
+
+## Un relief qui concentre les hommes et les activités
+
+Environ **70 % du territoire** est montagneux. La chaîne du **Taebaek** longe la côte orientale ; le mont Seorak en est un site majeur. Les chaînes du **Sobaek** et de **Gwangju** prolongent cet ensemble vers le sud. Sur l’île volcanique de **Jeju**, le Hallasan atteint près de **1 950 m**.
+
+Les plaines occupent moins d’un cinquième du pays et se concentrent surtout à l’ouest et au sud. Elles accueillent donc de fortes densités, l’agriculture, les villes et les grands axes. La montagne constitue une contrainte d’espace, mais aussi une ressource paysagère, forestière et touristique.
+
+| Composante | Contrainte | Potentialité mise en valeur |
+|---|---|---|
+| Montagnes dominantes | peu de plaines, fortes pentes | forêts, tourisme, châteaux d’eau |
+| Plaines occidentales et méridionales | espace rare et très occupé | cultures, villes, transports |
+| Île volcanique de Jeju | insularité et relief | tourisme, patrimoine naturel |
+
+## Quatre saisons et des risques
+
+Le climat tempéré combine influences continentales, influences océaniques et mousson d’Asie orientale. La convention météorologique distingue généralement **printemps de mars à mai**, **été de juin à août**, **automne de septembre à novembre** et **hiver de décembre à février** ; les transitions réelles varient :
+
+- l’**hiver** est froid et plutôt sec ;
+- l’**été** est chaud, humide et pluvieux ;
+- le **printemps** et l’**automne** sont plus modérés et favorables au tourisme ;
+- sécheresses, pluies intenses et **typhons** peuvent perturber les activités.
+
+Le fascicule parle simplement de « climat continental ». Cette formule est utile pour le contraste thermique, mais elle doit être complétée par le rôle de la mousson et des façades maritimes.
+
+## De la dégradation à la restauration forestière
+
+Les forêts tempérées associent conifères et feuillus caducs ; le sud possède aussi bambous, lauriers et chênes verts. Leur recul résulte de plusieurs périodes : exploitation sous la colonisation japonaise, pauvreté, prélèvements de bois et guerre de Corée.
+
+L’État lance ensuite de vastes programmes de restauration, notamment le **premier plan national décennal de reboisement en 1973**. Plantations, contrôle de l’érosion et participation des communautés permettent une forte reconstitution du couvert.
+
+> **Précision.** Le PDF attribue la dégradation à la seule occupation japonaise. Celle-ci a bien pesé, mais la guerre et les usages d’après-guerre ont aussi dévasté les sols. La restauration est, elle aussi, une œuvre collective et pas seulement une plantation administrative.
+
+> **Correction botanique.** Le « châtaignier d’Amérique » cité parmi les plantations commerciales est une mauvaise identification. L’espèce cultivée documentée est le **châtaignier japonais ou coréen (Castanea crenata)**.
+
+## Peu de minerais, mais beaucoup d’eau et trois façades
+
+Houille, argent, zinc, tungstène, fer ou kaolin existent, mais leur poids économique est présenté comme faible. Cette insuffisance pousse le pays à importer énergie et matières premières, puis à créer davantage de valeur par l’industrie et la technologie.
+
+Les fleuves prennent naissance dans les reliefs :
+
+| Fleuve du fascicule | Longueur indiquée | Repère spatial |
+|---|---:|---|
+| Nakdong | 521 km | traverse le sud-est |
+| Han | 514 km | coupe Séoul en deux |
+| Geum | 401 km | dessert l’ouest |
+| Yeongsan | 115 km | dessert le sud-ouest |
+
+Fleuves, barrages et littoraux soutiennent **eau potable, irrigation, hydroélectricité, pêche, ports, navigation, loisirs et commerce**. Les **2 413 km de côte** cités par le cours utilisent un ancien périmètre non explicité ; KOSTAT compte aujourd’hui près de **15 000 km, îles comprises**. Toute longueur de côte doit donc indiquer sa méthode de mesure.
+
+> **Astuce mémoire de Davy.** Retenir la chaîne **contrainte → aménagement → activité** : montagne → barrages et forêts ; peu de plaines → concentration et productivité ; peu de minerais → importations puis transformation ; mers → ports et exportations.` ,
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Relier",
+          title: "Transformer un territoire contraignant",
+          instruction: "Sélectionne une composante pour suivre le passage de la contrainte à la potentialité.",
+          observation: "Un milieu ne produit pas automatiquement du développement : les infrastructures, les techniques et les choix collectifs le transforment en ressource.",
+          rootLabel: "Territoire sud-coréen",
+          rootDetail: "Un espace restreint que l’aménagement connecte aux activités",
+          nodes: [
+            { id: "mountains", group: "Relief", label: "Montagnes", role: "70 % du territoire", detail: "Elles limitent les plaines, mais alimentent les cours d’eau et offrent forêts, paysages et sites touristiques." },
+            { id: "plains", group: "Relief", label: "Plaines", role: "Espaces rares", detail: "Concentrées à l’ouest et au sud, elles accueillent une grande partie de la population, des cultures et des réseaux." },
+            { id: "monsoon", group: "Climat", label: "Mousson et saisons", role: "Eau et risques", detail: "L’été humide alimente les ressources en eau, tandis que typhons, sécheresses et fortes pluies exigent prévention et aménagement." },
+            { id: "forests", group: "Milieux", label: "Forêts restaurées", role: "Protection des sols", detail: "Les programmes lancés notamment en 1973 restaurent des espaces dégradés par la colonisation, la guerre et les prélèvements." },
+            { id: "rivers", group: "Eaux", label: "Fleuves", role: "Irriguer et produire", detail: "Nakdong, Han, Geum et Yeongsan servent à l’eau, à l’irrigation, aux barrages, aux loisirs et à certains transports." },
+            { id: "coasts", group: "Eaux", label: "Mers et ports", role: "Ouvrir le pays", detail: "Les façades maritimes favorisent pêche, construction portuaire, importation de matières premières et commerce mondial." },
+          ],
+        },
         keyPoint: "La Corée du Sud a compensé des ressources naturelles limitées par l’aménagement, l’ouverture maritime et la valorisation de ses eaux.",
-        example: "Le Nakdong et le Han structurent le territoire ; la mer Jaune et la mer du Japon ouvrent le pays sur les échanges asiatiques et mondiaux.",
+        example: "Le Nakdong et le Han structurent le territoire ; les ports importent des matières premières et exportent les productions industrielles.",
         timelineTitle: "Lire les composantes du territoire",
         timelineInstruction: "Compare relief, climat et ressources pour évaluer contraintes et potentialités.",
         timeline: [
           { label: "Relief", detail: "Montagnes dominantes, plaines surtout occidentales et méridionales, fortes densités sur les espaces disponibles." },
-          { label: "Climat", detail: "Climat continental, hiver froid et sec, été chaud et humide sous l’effet de la mousson." },
-          { label: "Eaux et littoraux", shortLabel: "Eaux", detail: "Fleuves et 2 413 km de littoral favorisent ports, pêche, énergie, irrigation et loisirs." },
+          { label: "Climat", detail: "Hiver froid et plutôt sec, été chaud et humide sous l’effet de la mousson, avec sécheresses et typhons possibles." },
+          { label: "Eaux et littoraux", shortLabel: "Eaux", detail: "Fleuves et vaste littoral insulaire favorisent ports, pêche, énergie, irrigation et loisirs." },
         ],
         observation: "Le développement ne dépend pas seulement de l’abondance des matières premières, mais de la manière dont le territoire est aménagé.",
         check: { prompt: "Quelle part approximative du territoire sud-coréen est montagneuse ?", options: ["10 %", "30 %", "70 %", "100 %"], correctIndex: 2, explanation: "Le cours indique qu’environ 70 % du territoire est montagneux." },
+        extraQuestions: [
+          { prompt: "Le relief sud-coréen est très peu accidenté.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Environ 70 % du territoire est montagneux : le relief est donc largement accidenté.", sourceLabel: "Activité d’application n°1, affirmation 1", points: 1 },
+          { prompt: "Le contraste saisonnier sud-coréen s’explique notamment par…", options: ["des influences continentales et la mousson", "un climat polaire permanent", "l’absence de toute mer", "une saison unique"], correctIndex: 0, explanation: "L’hiver est froid et plutôt sec, tandis que l’été est chaud, humide et soumis à la mousson.", sourceLabel: "Activité d’application n°1, affirmation 2", points: 1 },
+          { prompt: "Pourquoi printemps et automne sont-ils mis en valeur dans le cours ?", options: ["Ils sont plus modérés et favorables au tourisme", "Ils sont toujours sans pluie", "Ils durent chacun six mois", "Ils empêchent tout déplacement"], correctIndex: 0, explanation: "Leur relative douceur les rend propices aux activités touristiques.", sourceLabel: "Activité d’application n°1, affirmation 3", points: 1 },
+          { prompt: "L’occupation japonaise a favorisé la conservation du couvert forestier.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Le fascicule relie au contraire cette période à une forte dégradation, complétée ensuite par les effets de la guerre et des prélèvements.", sourceLabel: "Activité d’application n°1, affirmation 4", points: 1 },
+          { prompt: "Quel repère précise le vaste programme de reforestation évoqué par le PDF ?", options: ["Le premier plan décennal lancé en 1973", "La fermeture de toutes les forêts en 1945", "La disparition des montagnes en 1960", "L’abandon du contrôle de l’érosion"], correctIndex: 0, explanation: "Le premier grand plan décennal national commence en 1973 et mobilise État et population.", sourceLabel: "Activité d’application n°1, affirmation 5", points: 2 },
+          { prompt: "Quelle affirmation décrit les ressources du sous-sol ?", options: ["Quelques gisements existent, mais leur poids économique est faible", "Le pays possède toutes les énergies fossiles nécessaires", "Aucun minerai n’existe", "Le sous-sol remplace le capital humain"], correctIndex: 0, explanation: "Le cours cite plusieurs minerais, tout en soulignant leur importance économique limitée.", sourceLabel: "Activité d’application n°1, affirmation 6", points: 1 },
+          { prompt: "La Corée du Sud ne possède pas de façade maritime.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Elle est bordée par plusieurs mers ; ports, pêche et commerce sont des potentialités majeures.", sourceLabel: "Activité d’application n°1, affirmation 7", points: 1 },
+          { prompt: "Quel fleuve traverse la capitale Séoul ?", options: ["Le Han", "Le Nakdong", "Le Geum", "Le Yeongsan"], correctIndex: 0, explanation: "Le Han traverse Séoul, tandis que le Nakdong structure surtout le sud-est.", sourceLabel: "I-5", points: 1 },
+          { prompt: "Quelle activité n’est pas directement une mise en valeur des ressources en eau citée par le cours ?", options: ["L’extraction d’uranium", "L’irrigation", "L’hydroélectricité", "La pêche"], correctIndex: 0, explanation: "Le PDF relie l’eau aux ports, à l’énergie, à la pêche, à l’irrigation, aux loisirs et à la navigation, pas à l’uranium.", sourceLabel: "I-5", points: 1 },
+          { prompt: "Pourquoi une faible dotation minière n’interdit-elle pas le développement ?", options: ["Le pays peut importer, transformer, innover et exporter", "Les matières premières sont inutiles partout", "La montagne fabrique automatiquement des usines", "Les ports empêchent les échanges"], correctIndex: 0, explanation: "L’aménagement, les compétences, les importations et la transformation industrielle peuvent compenser une partie des limites naturelles.", sourceLabel: "Synthèse I", points: 2 },
+        ],
         distractors: ["La Corée du Sud possède d’immenses réserves minières faciles à exploiter.", "Le pays n’a aucune façade maritime.", "Le climat coréen ne présente aucune saison contrastée."],
       },
       {
@@ -948,8 +1034,69 @@ Le dernier texte du fascicule est intitulé une seconde fois **« Document n° 3
         title: "Le capital humain",
         summary: "Expliquer le rôle de l’éducation, de la formation et des valeurs sociales dans la croissance.",
         conceptTitle: "L’éducation comme investissement productif",
-        explanation: "Face à la faiblesse des ressources naturelles, les dirigeants sud-coréens ont investi massivement dans l’enseignement et la formation. La révolution éducative engagée après 1945 améliore l’alphabétisation, forme cadres, ingénieurs et techniciens et renforce la productivité.",
-        keyPoint: "Le modèle coréen transforme l’éducation et la discipline du travail en avantage économique durable.",
+        explanation: "Face à la faiblesse des ressources naturelles, la Corée du Sud a étendu l’enseignement et la formation après 1945. L’alphabétisation, les compétences techniques, la santé et la recherche ont accru la productivité et la capacité d’innovation, sans que la population puisse être réduite à des traits culturels figés.",
+        bodyMarkdown: String.raw`## D’une population à un capital humain
+
+Le **capital humain** désigne les connaissances, compétences, expériences et capacités de santé qui permettent aux personnes d’agir et de produire. Une population nombreuse ne devient donc pas automatiquement un atout : il faut école, formation, soins, emplois et possibilité d’innover.
+
+Le PDF compte plus de **51 millions d’habitants en 2017** et insiste déjà sur le vieillissement. Le recensement officiel de **2024** dénombre **51,81 millions de résidents** :
+
+| Groupe d’âge | Part en 2024 | Évolution |
+|---|---:|---|
+| 0-14 ans | 10,5 % | en baisse |
+| 15-64 ans | 70,0 % | baisse continue depuis 2018 |
+| 65 ans ou plus | 19,5 % | en hausse |
+
+Le nombre de citoyens coréens résidents recule, mais l’ensemble de la population augmente légèrement de **0,1 %** en 2024 grâce notamment aux résidents étrangers. Il faut donc distinguer **solde naturel**, **migrations**, **population totale** et **vieillissement**.
+
+## Lire avec prudence le Document 5
+
+Le tableau documentaire, attribué à un site secondaire et composé autour de 2020, donne : croissance **-0,24 %**, natalité **0,59 %**, mortalité **0,57 %**, espérance de vie **82 ans**, alphabétisation **100 %** et chômage **4,9 %**.
+
+Or **0,59 - 0,57 = +0,02 point** : ces deux taux produisent un accroissement naturel légèrement positif, pas -0,24 %. Pour expliquer l’écart, il faudrait connaître la même année de référence, les arrondis, le solde migratoire et la méthode de chaque série. On ne mélange donc pas ces valeurs comme si elles formaient un bilan parfaitement cohérent.
+
+Le **100 % d’alphabétisation** n’est pas davantage une mesure exacte. L’enquête nationale de littératie des adultes distingue plusieurs niveaux : en 2020, **4,5 %** des adultes se situent au niveau 1, sans maîtrise suffisante des compétences élémentaires, tandis que **79,8 %** atteignent le niveau fonctionnel 4 ou plus. Le résultat dépend donc du seuil mesuré.
+
+## L’expansion scolaire après 1945
+
+Le cours décrit une « révolution éducative » : le taux d’alphabétisation passe, dans sa série, d’environ **22 % en 1945** à près de **88 % en 1970**, tandis qu’environ **4,5 % du PIB** est consacré à l’éducation. Ce dernier ratio n’est accompagné ni d’une année ni d’un périmètre public/privé : il illustre la priorité annoncée, mais ne doit pas être comparé directement à une statistique actuelle. L’accès au secondaire et au supérieur forme cadres, enseignants, ingénieurs et techniciens utiles à l’industrialisation.
+
+| Investissement | Capacité développée | Effet économique possible |
+|---|---|---|
+| enseignement primaire | lire, compter, apprendre | productivité et mobilité sociale |
+| secondaire technique | maîtriser procédés et machines | industrie et contrôle de qualité |
+| universités et recherche | concevoir, expérimenter, gérer | innovation et montée en gamme |
+| formation continue | adapter les compétences | réponse aux changements technologiques |
+
+> **Correction chronologique.** Park Chung-hee n’a pas dirigé de **1963 à 1679**, comme l’imprime le PDF, mais a été président de **1963 à 1979**. La coquille de trois siècles doit être corrigée.
+
+## Éviter une explication culturelle automatique
+
+Le fascicule attribue des parts religieuses de 46 % au bouddhisme, 39 % au protestantisme et 13 % au catholicisme, puis relie confucianisme, hiérarchie et travail à la croissance. Ces nombres ne décrivent pas la population totale : le recensement KOSTAT de **2015** comptait **56,1 % de personnes sans religion**, **19,7 % de protestants**, **15,5 % de bouddhistes** et **7,9 % de catholiques**.
+
+Les héritages confucéens peuvent éclairer le prestige accordé aux études ou certaines relations sociales, mais ils n’expliquent jamais seuls la croissance. Politiques scolaires, investissements, travail des femmes et des hommes, urbanisation, institutions, commerce mondial et progrès techniques ont agi ensemble.
+
+> **Précision historique.** L’école ne doit pas être présentée comme un simple « acquis positif » de la colonisation japonaise. La domination coloniale fut coercitive et inégalitaire ; l’éducation de masse et l’élévation rapide des niveaux scolaires s’accélèrent surtout après la libération, sous l’action de la société et des politiques sud-coréennes.
+
+> **Astuce mémoire de Davy.** La chaîne à restituer est **éduquer → qualifier → produire mieux → rechercher → innover**. Elle explique un mécanisme ; elle ne transforme pas tous les Coréens en un portrait identique.` ,
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Comprendre",
+          title: "La chaîne du capital humain",
+          instruction: "Sélectionne un levier pour voir comment une capacité humaine peut soutenir la transformation économique.",
+          observation: "L’éducation devient productive lorsqu’elle rencontre santé, emplois, investissements, recherche et débouchés.",
+          rootLabel: "Capital humain",
+          rootDetail: "Développer des capacités, pas seulement compter des habitants",
+          nodes: [
+            { id: "mass-school", group: "Éducation", label: "École de masse", role: "Alphabétiser", detail: "Lire, écrire et compter donnent accès à la formation, à l’information et à des emplois plus qualifiés." },
+            { id: "technical", group: "Éducation", label: "Formation technique", role: "Maîtriser les procédés", detail: "Techniciens et ouvriers qualifiés font fonctionner, entretenir et améliorer les équipements industriels." },
+            { id: "higher", group: "Éducation", label: "Enseignement supérieur", role: "Former cadres et ingénieurs", detail: "Universités et instituts alimentent la gestion, la recherche scientifique et la conception technologique." },
+            { id: "health", group: "Capacités", label: "Santé", role: "Préserver l’autonomie", detail: "Une meilleure santé augmente les possibilités d’apprendre, de travailler et de participer à la vie sociale." },
+            { id: "jobs", group: "Économie", label: "Emplois productifs", role: "Utiliser les compétences", detail: "Sans emplois, investissement et mobilité professionnelle, les qualifications peuvent rester sous-utilisées." },
+            { id: "innovation", group: "Économie", label: "Recherche et innovation", role: "Monter en gamme", detail: "Compétences scientifiques et apprentissage industriel permettent de passer de l’imitation à la conception de produits complexes." },
+          ],
+        },
+        keyPoint: "Le modèle coréen transforme l’éducation, la santé, les compétences et la recherche en capacités productives et innovantes.",
         example: "Le taux d’alphabétisation mentionné dans le cours passe d’environ 22 % en 1945 à près de 88 % en 1970.",
         timelineTitle: "Suivre la révolution éducative",
         timelineInstruction: "Parcours les repères qui montrent la montée en puissance du capital humain.",
@@ -960,6 +1107,18 @@ Le dernier texte du fascicule est intitulé une seconde fois **« Document n° 3
         ],
         observation: "Une population nombreuse ne devient un capital humain que grâce à l’éducation, à la santé et aux compétences.",
         check: { prompt: "Quel choix compense la faiblesse des ressources naturelles sud-coréennes ?", options: ["L’abandon de l’éducation", "L’optimisation du capital humain", "La fermeture des ports", "La suppression de la recherche"], correctIndex: 1, explanation: "La Corée du Sud place l’éducation et la formation au cœur de son développement." },
+        extraQuestions: [
+          { prompt: "Complète le début de l’activité : « Dépourvue de …, la Corée du Sud a fait le choix d’optimiser son … »", options: ["ressources naturelles / capital humain", "capital humain / relief", "ports / climat", "écoles / sous-sol"], correctIndex: 0, explanation: "Le texte oppose faibles ressources naturelles et optimisation du capital humain.", sourceLabel: "Activité d’application n°2", points: 1 },
+          { prompt: "Dans le texte à trous, l’éducation est au centre du … et améliore la qualité des …", options: ["modèle coréen / ressources humaines", "littoral / minerais", "climat / moussons", "relief / chaebols"], correctIndex: 0, explanation: "Les expressions attendues sont « modèle coréen » et « ressources humaines ».", sourceLabel: "Activité d’application n°2", points: 1 },
+          { prompt: "À quoi l’amélioration des ressources humaines contribue-t-elle selon l’activité ?", options: ["Au développement économique", "À la disparition des études", "À l’enclavement maritime", "À la baisse des compétences"], correctIndex: 0, explanation: "La formation élève la qualité du travail, la productivité et la capacité d’innovation.", sourceLabel: "Activité d’application n°2", points: 1 },
+          { prompt: "Quel trio complète la fin du texte à trous ?", options: ["compétents et forts / renaissance de la nation / hiérarchie", "isolés / recul de la nation / littoral", "sans formation / fermeture / mousson", "miniers / désertification / exportation"], correctIndex: 0, explanation: "Ce sont les trois groupes de mots laissés par la liste du fascicule ; leur portée culturelle doit ensuite être nuancée.", sourceLabel: "Activité d’application n°2", points: 1 },
+          { prompt: "Quel effet du vieillissement est explicitement étudié ?", options: ["La diminution progressive de la population d’âge actif", "La multiplication des ressources minières", "La disparition immédiate des villes", "L’augmentation automatique des exportations"], correctIndex: 0, explanation: "Le vieillissement réduit la part et, progressivement, le nombre de personnes d’âge actif.", sourceLabel: "II-1", points: 1 },
+          { prompt: "Combien de résidents le recensement officiel dénombre-t-il en 2024 ?", options: ["51,81 millions", "9,61 millions", "36,26 millions", "2,04 millions"], correctIndex: 0, explanation: "KOSTAT recense 51,81 millions de résidents au 1er novembre 2024.", sourceLabel: "Mise à jour KOSTAT 2024", points: 2 },
+          { prompt: "Quelle part de la population a 65 ans ou plus en 2024 ?", options: ["19,5 %", "70,0 %", "10,5 %", "51,8 %"], correctIndex: 0, explanation: "Les 65 ans ou plus représentent 19,5 %, contre 18,6 % en 2023.", sourceLabel: "Mise à jour KOSTAT 2024", points: 2 },
+          { prompt: "Pourquoi les parts religieuses du PDF ne peuvent-elles pas décrire toute la population ?", options: ["Le recensement 2015 compte 56,1 % de personnes sans religion", "Elles totalisent exactement tous les habitants avec les non-croyants", "La Corée interdit les recensements", "Le confucianisme est un minerai"], correctIndex: 0, explanation: "Les parts bouddhiste, protestante et catholique du PDF omettent la majorité déclarée sans religion en 2015.", sourceLabel: "Correction statistique KOSTAT 2015", points: 2 },
+          { prompt: "Quelle période corrige la coquille « Park Chung-hee (1963-1679) » ?", options: ["1963-1979", "1948-1960", "1679-1979", "1971-1981"], correctIndex: 0, explanation: "Park Chung-hee a été président de 1963 à 1979.", sourceLabel: "Correction de source, page 5", points: 2 },
+          { prompt: "Avec 0,59 % de natalité et 0,57 % de mortalité, quel solde naturel obtient-on ?", options: ["+0,02 point", "-0,24 point", "+1,16 point", "-0,57 point"], correctIndex: 0, explanation: "0,59 - 0,57 = +0,02. Le -0,24 % du document nécessite d’autres données ou une autre date pour être expliqué.", sourceLabel: "Exploitation critique du Document 5", points: 2 },
+        ],
         distractors: ["Le développement coréen repose uniquement sur le vieillissement de la population.", "L’éducation n’a aucun lien avec l’industrialisation.", "La Corée du Sud interdit l’enseignement supérieur."],
       },
       {
@@ -967,15 +1126,157 @@ Le dernier texte du fascicule est intitulé une seconde fois **« Document n° 3
         title: "L’État-développeur et les phases industrielles",
         summary: "Relier aide extérieure, planification, chaebols, exportations et industries lourdes.",
         conceptTitle: "Un État stratège orienté vers les exportations",
-        explanation: "Avec le soutien initial des États-Unis, l’État sud-coréen planifie, finance les secteurs prioritaires et coopère avec les chaebols. Le pays passe de la substitution aux importations à la promotion des exportations, puis aux industries lourdes et technologiques.",
+        explanation: "Après la colonisation et la guerre, l’aide américaine soutient la reconstruction. L’État sud-coréen planifie, dirige le crédit, coopère avec les chaebols et pousse les entreprises vers l’exportation, puis vers les industries lourdes et technologiques.",
+        parts: [
+          {
+            bodyMarkdown: String.raw`## Des influences extérieures réelles, mais non suffisantes
+
+La Corée subit la colonisation japonaise de **1910 à août 1945**, puis la péninsule est divisée et ravagée par la guerre de **1950-1953**. Dans la Guerre froide, les États-Unis assurent protection militaire, subventions, prêts et importations nécessaires à la reconstruction.
+
+Pour **1953-1961**, le fascicule annonce **8 % du PNB**, **64 % des investissements** et **70 % des importations**. Les deux premiers ratios ne sont ni définis ni correctement sourcés. Une synthèse du KDI retient plutôt les ordres de grandeur suivants :
+
+| Indicateur documenté | Part financée par l’aide étrangère |
+|---|---:|
+| importations | environ 70 % |
+| formation brute de capital fixe | environ 75 % |
+
+Ces chiffres montrent une dépendance initiale forte. Ils ne prouvent pourtant pas que l’aide aurait produit mécaniquement le développement : encore fallait-il sélectionner les investissements, former les travailleurs, organiser les entreprises et conquérir des marchés.
+
+> **Précision historique.** Une influence japonaise ne se résume ni à un « don » ni à un bénéfice colonial. La domination de 1910-1945 fut coercitive. Les apports de capitaux et de technologies japonais deviennent surtout importants dans un autre contexte, après la normalisation de 1965.
+
+## Un État-développeur
+
+À partir de **1961**, l’État organise des plans quinquennaux et crée un **Bureau de planification économique**. Il oriente le crédit vers des secteurs jugés prioritaires, soutient les exportateurs, investit dans les infrastructures et mobilise l’épargne intérieure.
+
+| Instrument | Fonction |
+|---|---|
+| plans quinquennaux | fixer priorités, objectifs et équipements |
+| crédit dirigé et prêts bonifiés | financer les entreprises choisies |
+| avantages fiscaux à l’exportation | rendre les ventes extérieures plus compétitives |
+| infrastructures | fournir ports, routes, énergie et zones industrielles |
+| épargne intérieure | alimenter l’investissement national |
+| instituts scientifiques | former chercheurs et ingénieurs |
+
+Le PDF appelle déjà l’établissement créé en 1971 « KAIST ». Plus précisément, le **Korea Advanced Institute of Science (KAIS)** est fondé en **1971** ; le nom **KAIST** naît en **1981** après sa fusion avec le KIST. La correction ne diminue pas son rôle : former des scientifiques de haut niveau était bien un choix industriel majeur.
+
+## État et chaebols : une alliance sous conditions
+
+Les **chaebols** sont de grands groupes privés diversifiés, contrôlés par des familles et organisés autour de nombreuses filiales. Samsung, Hyundai ou LG deviennent des moteurs d’investissement et d’exportation ; POSCO, créé comme entreprise publique, porte la sidérurgie.
+
+L’alliance permet vitesse, taille et coordination. Elle comporte aussi des risques : concentration du pouvoir économique, endettement, dépendance au crédit public, faible concurrence et coûts sociaux. L’État-développeur de Park Chung-hee est en outre **autoritaire** : la croissance ne doit pas faire oublier répression politique et restrictions des droits du travail.
+
+> **Méthode.** Pour évaluer ce modèle, formule toujours deux colonnes : **levier** (planifier, financer, exporter) et **limite** (concentration, autoritarisme, vulnérabilité).` ,
+            interaction: {
+              kind: "diagram",
+              eyebrow: "Organiser",
+              title: "Les leviers de l’État-développeur",
+              instruction: "Sélectionne un levier pour comprendre son rôle dans le décollage et sa limite possible.",
+              observation: "L’aide extérieure apporte des moyens ; les institutions nationales décident comment les convertir en capacités productives.",
+              rootLabel: "Décollage industriel",
+              rootDetail: "Coordonner ressources extérieures, État, travail et entreprises",
+              nodes: [
+                { id: "us-aid", group: "Extérieur", label: "Aide américaine", role: "Reconstruire et importer", detail: "Subventions, prêts et biens importés soutiennent la reconstruction des années 1950, sans expliquer seuls la trajectoire ultérieure." },
+                { id: "planning", group: "État", label: "Planification", role: "Fixer des priorités", detail: "Le Bureau créé en 1961 coordonne plans, infrastructures et filières stratégiques." },
+                { id: "credit", group: "État", label: "Crédit et fiscalité", role: "Orienter l’investissement", detail: "Prêts bonifiés et avantages fiscaux récompensent notamment les performances à l’exportation." },
+                { id: "savings", group: "Financement", label: "Épargne intérieure", role: "Mobiliser du capital", detail: "La politique monétaire cherche à transformer l’épargne nationale en investissements productifs." },
+                { id: "science", group: "Capacités", label: "KAIS et recherche", role: "Former des scientifiques", detail: "L’institut créé en 1971 renforce recherche et formation technologique ; il prend le nom KAIST en 1981." },
+                { id: "chaebols", group: "Entreprises", label: "Chaebols", role: "Produire à grande échelle", detail: "De grands groupes réalisent les projets et exportent, mais leur poids crée aussi concentration et risques de dépendance." },
+              ],
+            },
+            check: { prompt: "Pourquoi l’aide extérieure ne suffit-elle pas à expliquer le décollage ?", options: ["Elle doit être transformée par des politiques, des compétences et des entreprises", "Elle interdit toute décision nationale", "Elle remplace automatiquement l’éducation", "Elle supprime le besoin de marchés"], correctIndex: 0, explanation: "Les apports extérieurs comptent, mais leurs effets dépendent des institutions et de la stratégie nationale." },
+            extraQuestions: [
+              { prompt: "Quelle période correspond à la colonisation japonaise de la Corée ?", options: ["1910-1945", "1953-1961", "1961-1973", "1973-1980"], correctIndex: 0, explanation: "La domination japonaise s’étend de 1910 à la libération d’août 1945.", sourceLabel: "III-1", points: 1 },
+              { prompt: "Pourquoi le ratio « 8 % du PNB » du fascicule ne doit-il pas être mémorisé comme un fait établi ?", options: ["Son périmètre et sa source ne sont pas précisés", "Le PNB n’existe dans aucun pays", "Toute aide est impossible", "Il mesure en réalité le relief"], correctIndex: 0, explanation: "Sans définition, année détaillée et source, ce ratio reste une affirmation du fascicule.", sourceLabel: "Correction documentaire, III-1", points: 2 },
+              { prompt: "Quel ordre de grandeur le KDI retient-il pour les importations financées par l’aide étrangère ?", options: ["Environ 70 %", "Environ 7 %", "Environ 100 %", "Moins de 1 %"], correctIndex: 0, explanation: "La synthèse KDI confirme une très forte dépendance des importations à l’aide durant la reconstruction.", sourceLabel: "Mise en perspective KDI", points: 2 },
+              { prompt: "Quel ordre de grandeur concerne la formation brute de capital fixe ?", options: ["Environ 75 %", "Environ 5 %", "Environ 25 %", "Environ 150 %"], correctIndex: 0, explanation: "Le KDI estime qu’environ trois quarts de la formation de capital fixe sont alors financés par l’aide étrangère.", sourceLabel: "Mise en perspective KDI", points: 2 },
+              { prompt: "Quel organisme de planification est créé en 1961 ?", options: ["Le Bureau de planification économique", "La CEDEAO", "L’Union africaine", "La Banque centrale européenne"], correctIndex: 0, explanation: "Il conçoit les grandes orientations du développement et de l’industrialisation.", sourceLabel: "III-2", points: 1 },
+              { prompt: "Quelle correction historique faut-il apporter à la fondation scientifique de 1971 ?", options: ["KAIS est créé en 1971 ; le nom KAIST date de 1981", "KAIST disparaît en 1971", "L’institut est fondé en 1679", "Aucune formation scientifique n’existe"], correctIndex: 0, explanation: "L’institut initial est le KAIS ; la fusion de 1981 crée le KAIST sous ce nom.", sourceLabel: "Correction institutionnelle", points: 2 },
+              { prompt: "Quelle mesure soutient directement les entreprises exportatrices ?", options: ["Prêts à taux réduit et avantages fiscaux", "Fermeture de tous les ports", "Interdiction d’importer des matières premières", "Suppression des infrastructures"], correctIndex: 0, explanation: "Le gouvernement réduit certains coûts de financement et de fiscalité liés aux exportations.", sourceLabel: "III-2", points: 1 },
+              { prompt: "Quel rôle joue la mobilisation de l’épargne intérieure ?", options: ["Financer davantage l’investissement", "Réduire toutes les compétences", "Supprimer le crédit", "Remplacer les entreprises par des fleuves"], correctIndex: 0, explanation: "L’épargne fournit une partie du capital nécessaire aux équipements et aux entreprises.", sourceLabel: "III-2", points: 1 },
+              { prompt: "Qu’est-ce qu’un chaebol ?", options: ["Un grand groupe privé diversifié organisé en nombreuses filiales", "Un fleuve de Séoul", "Une saison de mousson", "Un minerai énergétique"], correctIndex: 0, explanation: "Samsung, Hyundai ou LG illustrent ces conglomérats familiaux de grande taille.", sourceLabel: "III-2", points: 1 },
+              { prompt: "Quelle évaluation de l’État-développeur est équilibrée ?", options: ["Il a coordonné le décollage, mais aussi concentré le pouvoir et limité des droits", "Il n’a joué aucun rôle", "Il n’a produit que des avantages sans coût", "Il a supprimé toute entreprise privée"], correctIndex: 0, explanation: "Une analyse complète relie efficacité économique, concentration et contexte autoritaire.", sourceLabel: "Précision critique", points: 2 },
+            ],
+          },
+          {
+            bodyMarkdown: String.raw`## Une montée en gamme en trois grandes phases
+
+Le PDF organise le décollage entre **1953 et 1980**. Ce découpage est un outil : dans la réalité, certaines politiques se chevauchent et la promotion des exportations commence avant que toute substitution aux importations soit abandonnée.
+
+| Phase | Productions et moyens | Logique dominante |
+|---|---|---|
+| 1953-1961 | agriculture, pêche, agroalimentaire, confection, fils ; « trois blancs » : coton, sucre, farine | produire localement des biens auparavant importés |
+| 1961-1973 | textiles, vêtements, chaussures ; prêts et avantages aux exportateurs | vendre massivement des produits légers à l’extérieur |
+| 1973-1980 | acier, construction navale, chimie, machines ; ports, énergie, parcs industriels | investir dans les industries lourdes et chimiques |
+| après 1980-1990 | automobile, électronique puis technologies avancées | monter en qualité, en technologie et en marque |
+
+## 1. Reconstruire par la substitution aux importations
+
+Après l’armistice de 1953, le pays fabrique davantage de biens de consommation courante. Les activités sont intensives en travail et demandent encore peu de capital ou de haute technologie. Les « **trois blancs** » désignent **coton, sucre et farine**, pas trois minerais.
+
+> **Correction de nom.** Le président de cette première période est **Syngman Rhee**, et non « Syngnam Rhee » comme l’imprime le fascicule.
+
+Cette politique reconstitue une base productive et limite certaines importations. Sa demande intérieure reste cependant trop petite pour soutenir seule une croissance durable.
+
+## 2. Se tourner vers les exportations
+
+À partir de 1961, puis plus nettement après la dévaluation du won et les réformes de **1964**, les entreprises reçoivent des incitations liées aux ventes extérieures. Les industries légères exportent textiles, vêtements et chaussures.
+
+Le KDI mesure entre **1962 et 1973** une croissance annuelle moyenne des exportations supérieure à **40 %** ; la part des produits manufacturés dans les exportations passe d’environ **27 % à près de 90 %**. Ces séries contemporaines confirment le mécanisme général, même si elles ne sont pas identiques aux ratios du PDF.
+
+> **Correction statistique majeure.** Le fascicule transforme **48,2 %** en part des exportations dans le PNB et mélange aussi la composition des ventes manufacturières. Dans le tableau de la Banque mondiale dont proviennent ces valeurs, **48,2 % est un taux annuel moyen de croissance des exportations manufacturières**. Pour 1977, les exportations de marchandises représentent environ **25 % du PIB** et les produits manufacturés environ **85 % des exportations**. L’idée de changement d’échelle reste juste ; les colonnes, elles, doivent être rétablies.
+
+## 3. Développer les industries lourdes et chimiques
+
+À partir de 1973, l’État finance acier, chantiers navals, chimie, machines, énergie et grands complexes portuaires. **POSCO** fournit l’acier ; les chaebols investissent dans l’électronique, la construction navale et l’automobile. Écoles techniques et instituts de recherche forment ingénieurs et ouvriers qualifiés.
+
+Selon le PDF, la part de l’industrie lourde dans l’industrie manufacturière passe de **25 % en 1962** à **55 % en 1979**. Cette montée en gamme rend possibles, après 1990, la puissance automobile, l’électronique grand public puis les semi-conducteurs et le numérique.
+
+## Lire la trajectoire sans raconter un miracle automatique
+
+Le décollage associe **continuité** et **rupture** : chaque phase conserve des acquis de la précédente, tandis que crises pétrolières, concurrence, endettement et crise asiatique de 1997 obligent ensuite le modèle à évoluer. « Miracle » désigne la rapidité du changement ; il ne supprime ni le travail, ni les choix, ni les conflits, ni les vulnérabilités.
+
+> **Astuce mémoire de Davy.** Retenir **remplacer → exporter → alourdir → innover** : remplacer des importations ; exporter du léger ; construire du lourd ; monter vers la technologie.` ,
+            interaction: {
+              kind: "diagram",
+              eyebrow: "Classer",
+              title: "La montée en gamme industrielle",
+              instruction: "Sélectionne un maillon pour rattacher une action à sa phase principale.",
+              observation: "Les phases s’enchaînent et se chevauchent : elles montrent une direction dominante, pas des frontières parfaitement étanches.",
+              rootLabel: "1953 → technologies avancées",
+              rootDetail: "Produire localement, exporter, s’équiper puis innover",
+              nodes: [
+                { id: "reconstruction", group: "1953-1961", label: "Reconstruction", role: "Relancer la production", detail: "Après la guerre, agriculture, pêche et biens courants répondent aux besoins immédiats." },
+                { id: "three-whites", group: "1953-1961", label: "Trois blancs", role: "Substituer aux importations", detail: "Coton, sucre et farine illustrent les premières productions locales soutenues." },
+                { id: "light-exports", group: "1961-1973", label: "Textiles et chaussures", role: "Exporter du léger", detail: "Une main-d’œuvre de mieux en mieux formée produit pour des marchés extérieurs." },
+                { id: "heavy", group: "1973-1980", label: "Acier et navires", role: "Construire du lourd", detail: "POSCO, chantiers navals, chimie et parcs industriels augmentent l’intensité capitalistique." },
+                { id: "electronics", group: "Après 1980", label: "Automobile et électronique", role: "Monter en gamme", detail: "Les capacités accumulées servent des biens plus complexes, des marques et des chaînes mondiales." },
+                { id: "innovation", group: "Après 1990", label: "Recherche et numérique", role: "Innover", detail: "R&D, universités et entreprises soutiennent semi-conducteurs, télécommunications et services technologiques." },
+              ],
+            },
+            extraQuestions: [
+              { prompt: "À quelle phase rattacher la production locale de biens de consommation courante ?", options: ["Substitution aux importations", "Industries lourdes", "Technologies numériques", "Union monétaire"], correctIndex: 0, explanation: "Entre 1953 et 1961, le pays reconstruit une base locale de biens auparavant importés.", sourceLabel: "Activité d’application n°3", points: 1 },
+              { prompt: "Que désignent les « trois blancs » ?", options: ["Coton, sucre et farine", "Argent, zinc et fer", "Riz, thé et café", "Acier, navires et automobiles"], correctIndex: 0, explanation: "Cette politique de première phase concerne coton, sucre et farine.", sourceLabel: "Activité d’application n°3", points: 1 },
+              { prompt: "Le développement de l’agroalimentaire appartient principalement à…", options: ["la phase de substitution aux importations", "la phase des semi-conducteurs", "la seule période après 1990", "la disparition de l’État"], correctIndex: 0, explanation: "Il contribue d’abord à satisfaire localement les besoins de la reconstruction.", sourceLabel: "Exercice 2", points: 1 },
+              { prompt: "Quelle phase domine entre 1961 et 1973 ?", options: ["La promotion audacieuse des exportations", "La fermeture commerciale", "La désindustrialisation", "La reforestation uniquement"], correctIndex: 0, explanation: "L’État pousse les industries légères vers les marchés extérieurs.", sourceLabel: "III-3", points: 1 },
+              { prompt: "Quels produits symbolisent les exportations légères ?", options: ["Textiles, vêtements et chaussures", "Pétrole brut et uranium", "Avions et satellites dès 1953", "Seulement du blé"], correctIndex: 0, explanation: "Les industries légères intensives en travail ouvrent la phase exportatrice.", sourceLabel: "III-3", points: 1 },
+              { prompt: "Quel repère le KDI donne-t-il pour les exportations entre 1962 et 1973 ?", options: ["Plus de 40 % de croissance annuelle moyenne", "Une baisse annuelle de 40 %", "Aucune exportation manufacturée", "Une part toujours limitée à 1 %"], correctIndex: 0, explanation: "Cette croissance très rapide accompagne le passage à une stratégie tournée vers l’extérieur.", sourceLabel: "Mise en perspective KDI", points: 2 },
+              { prompt: "Que mesure correctement la valeur de 48,2 % dans le tableau d’origine ?", options: ["La croissance annuelle moyenne des exportations manufacturières", "La part des exportations dans le PNB", "La part de l’industrie lourde en 1979", "Le taux d’alphabétisation"], correctIndex: 0, explanation: "Le PDF a confondu la colonne de croissance annuelle avec une part du PNB.", sourceLabel: "Correction Banque mondiale, III-3", points: 2 },
+              { prompt: "Quelle phase commence en 1973 ?", options: ["Les industries lourdes et chimiques", "La substitution primaire uniquement", "La colonisation japonaise", "La suppression de POSCO"], correctIndex: 0, explanation: "Acier, chimie, construction navale et grands complexes deviennent prioritaires.", sourceLabel: "Activité d’application n°3", points: 1 },
+              { prompt: "Quelle entreprise illustre la sidérurgie ?", options: ["POSCO", "KOSTAT", "KAIS", "Nakdong"], correctIndex: 0, explanation: "La Pohang Iron and Steel Company, devenue POSCO, porte la production d’acier.", sourceLabel: "III-3", points: 1 },
+              { prompt: "Quelle évolution de l’industrie lourde le PDF annonce-t-il ?", options: ["25 % en 1962 à 55 % en 1979", "55 % en 1962 à 25 % en 1979", "3,3 % en 1962 à 4,9 % en 1979", "88 % en 1945 à 22 % en 1970"], correctIndex: 0, explanation: "La part de l’industrie lourde augmente nettement dans la valeur manufacturière.", sourceLabel: "III-3", points: 1 },
+              { prompt: "Quels secteurs se renforcent particulièrement après 1990 selon le cours ?", options: ["Automobile et électronique grand public", "Coton et farine seulement", "Pêche artisanale uniquement", "Extraction massive de pétrole"], correctIndex: 0, explanation: "Ils prolongent la montée en gamme industrielle sud-coréenne.", sourceLabel: "III-3", points: 1 },
+              { prompt: "Quelle phrase classe correctement deux actions ?", options: ["Produits légers exportés : phase 2 ; coopération État-chaebols pour le lourd : phase 3", "Trois blancs : phase 3 ; acier : phase 1", "Substitution : après 1990 uniquement ; exportation : avant 1945", "Automobile : phase de reconstruction ; farine : haute technologie"], correctIndex: 0, explanation: "L’exportation de produits légers précède l’effort coordonné dans l’industrie lourde.", sourceLabel: "Exercice 2", points: 2 },
+            ],
+          },
+        ],
         keyPoint: "La réussite sud-coréenne associe planification publique, entreprises puissantes, recherche, épargne et conquête des marchés extérieurs.",
-        example: "Samsung dans l’électronique et POSCO dans la sidérurgie illustrent la coopération entre l’État et les grands conglomérats.",
+        example: "Samsung, chaebol privé, et POSCO, entreprise sidérurgique alors publique, illustrent deux formes distinctes de coopération avec l’État.",
         timelineTitle: "Les trois phases du décollage industriel",
         timelineInstruction: "Fais défiler les étapes de la stratégie économique sud-coréenne entre 1953 et 1980.",
         timeline: [
-          { label: "1953-1961", detail: "Substitution aux importations et développement d’industries légères à forte intensité de main-d’œuvre." },
-          { label: "1961-1973", detail: "Promotion audacieuse des exportations de textiles, vêtements, chaussures et autres produits manufacturés." },
-          { label: "1973-1980", detail: "Investissements massifs dans la sidérurgie, la construction navale, la chimie et les industries lourdes." },
+          { label: "1953-1971 : influences extérieures et État-développeur", shortLabel: "Aides et État stratège", detail: "L’aide américaine soutient la reconstruction ; à partir de 1961, planification, crédit, épargne, science et chaebols organisent l’investissement." },
+          { label: "1953-1973 : substitution puis exportation", shortLabel: "Substitution-exportation", detail: "Le pays produit d’abord des biens courants, puis exporte massivement textiles, vêtements et chaussures." },
+          { label: "1973-1990 : industrie lourde puis montée technologique", shortLabel: "Industries lourdes-technologie", detail: "Sidérurgie, construction navale et chimie préparent automobile, électronique et innovation." },
         ],
         observation: "Chaque phase s’appuie sur les acquis de la précédente et augmente progressivement la valeur technologique des productions.",
         check: { prompt: "Comment appelle-t-on les grands conglomérats sud-coréens ?", options: ["Les sovkhozes", "Les chaebols", "Les ACP", "Les EAMA"], correctIndex: 1, explanation: "Les chaebols regroupent de grandes entreprises de secteurs variés." },
