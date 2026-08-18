@@ -311,15 +311,79 @@ L’aide américaine, la protection stratégique, des technologies et capitaux �
   },
   "terminale-hg-g6-ecowas": {
     splitSectionIndex: 2,
-    memorySentence: "La CEDEAO transforme des potentialités communes en intégration grâce à ses institutions, mais reste freinée par des obstacles politiques et économiques.",
+    memorySentence: "CEDEAO : un projet d’intégration à douze membres, porté par des institutions et des acquis concrets, mais fragilisé par les crises et l’application incomplète des décisions.",
     mission: {
       title: "La CEDEAO est-elle à la hauteur de ses ambitions ?",
-      scenario: "Des élèves soulignent les potentialités de la CEDEAO, mais constatent la persistance d’obstacles à l’intégration économique et au projet de monnaie commune.",
-      modelAnswer: "La CEDEAO facilite la libre circulation, des projets communs et la coopération régionale. Son efficacité reste limitée par les écarts de développement, l’instabilité, les intérêts nationaux et l’application incomplète des décisions.",
+      scenario: "Après avoir étudié la solidarité régionale pendant l’épidémie d’Ebola, les sanctions contre la junte malienne en 2020, un communiqué sur les attaques de 2021 et deux textes critiques datés de 2005, une classe doit apprécier le bilan de la CEDEAO sans confondre les documents historiques avec sa configuration actuelle à douze membres.",
+      modelAnswer: "La CEDEAO a construit des droits de circulation, des règles commerciales, des réseaux et des mécanismes de médiation. Elle reste néanmoins confrontée à des obstacles frontaliers, aux crises politiques et sécuritaires, à une faible transformation régionale et au retrait de trois États en 2025. Le bilan est donc réel mais inachevé ; il doit être jugé par ses effets sur les populations.",
       questions: [
-        question("Quel problème principal est posé ?", "L’écart entre les ambitions d’intégration de la CEDEAO et leurs résultats", ["L’absence d’États en Afrique de l’Ouest", "La disparition de toutes les frontières mondiales", "La création de l’ONU"], "Le débat porte sur les potentialités, les réalisations et les obstacles de l’organisation.", 1),
-        question("Pourquoi la CEDEAO est-elle importante ?", "Elle organise un vaste marché, la libre circulation et des coopérations régionales", ["Elle interdit tout commerce entre ses membres", "Elle remplace tous les gouvernements nationaux", "Elle ne s’occupe que de sport"], "L’intégration permet de mutualiser marchés, ressources et infrastructures.", 2),
-        question("Quelle difficulté freine réellement l’intégration ?", "Les écarts économiques, l’instabilité et le non-respect de certaines décisions", ["La trop grande uniformité économique", "L’absence de toute population", "L’excès de monnaie commune déjà en circulation"], "Les obstacles sont à la fois économiques, politiques et institutionnels.", 0),
+        { ...question("Quel problème principal relie les documents ?", "L’écart entre les ambitions, les actions et les résultats de l’intégration régionale", ["L’absence de tout État en Afrique de l’Ouest", "La disparition de toutes les frontières mondiales", "La création de l’ONU"], "Le dossier confronte solidarité, sanctions, potentialités, réalisations et obstacles.", 1), sourceLabel: "Dossiers A à D du fascicule", points: 1 },
+        { ...question("Pourquoi la CEDEAO reste-t-elle importante malgré les retraits de 2025 ?", "Elle organise libre circulation, commerce, réseaux et coopération pour des populations interdépendantes", ["Elle interdit tout commerce entre ses membres", "Elle remplace tous les gouvernements nationaux", "Elle ne s’occupe que de sport"], "Les liens humains, économiques et sécuritaires ne disparaissent pas avec une modification institutionnelle.", 2), sourceLabel: "Configuration actualisée en 2025-2026", points: 2 },
+        { ...question("Quelle appréciation finale est la mieux justifiée ?", "Des acquis existent, mais crises, obstacles et application inégale rendent l’intégration inachevée", ["La CEDEAO a déjà réalisé tous ses objectifs", "Aucune action régionale n’a jamais existé", "La monnaie ECO circule déjà dans les douze États"], "Une appréciation argumentée met en regard résultats, limites et effets sur les populations.", 0), sourceLabel: "Synthèse des situations d’évaluation", points: 2 },
+      ],
+      bodyMarkdown: String.raw`## Dossier A — La solidarité face à Ebola (2013-2014)
+
+La situation d’évaluation du fascicule part de la mobilisation des chefs d’État pendant l’épidémie qui touche notamment la Guinée, le Liberia et la Sierra Leone. Deux groupes débattent :
+
+- le premier juge que cette solidarité ne fait pas disparaître les obstacles à l’intégration ;
+- le second rappelle les nombreuses actions menées depuis 1975.
+
+Le problème à traiter n’est donc ni « succès » ni « échec » absolu, mais **la portée et les limites de l’intégration régionale**.
+
+## Dossier B — Un commentaire critique publié en 2005
+
+Un article de Didier Samson présente les ambitions de marché commun, de tarif extérieur, d’harmonisation et d’union monétaire, puis déplore la faiblesse des échanges intrarégionaux, annoncés autour de **11 %**.
+
+> **Précision documentaire.** Ce 11 % est un chiffre de **2005**, pas une statistique actuelle. L’article affirme aussi que « la plupart » des pays utilisaient le franc CFA : à l’époque, huit des quinze membres appartenaient à l’UEMOA. Depuis le retrait de trois États sahéliens, seuls cinq des douze membres actuels utilisent ce franc. Il faut dater avant de généraliser.
+
+Le passage sur les « langues coloniales » invite surtout à expliquer un choix politique : **privilégier une règle régionale commune lorsque des intérêts nationaux ou des administrations différentes compliquent la coopération**. Les langues africaines transfrontalières montrent en même temps que les sociétés sont déjà reliées.
+
+## Dossier C — Gérer les crises : Mali 2020 et Côte d’Ivoire 2021
+
+Le premier document relate la réponse de la CEDEAO au coup d’État malien d’août **2020** : suspension des organes de décision, fermeture de frontières, restrictions financières et commerciales, puis conditions pour une transition civile. Le texte résume ces mesures comme un arrêt de « tous » les flux ; le communiqué officiel exemptait pourtant les aliments essentiels, produits pharmaceutiques et médicaux, produits pétroliers et électricité.
+
+Le second document est un communiqué du **30 mars 2021** condamnant les attaques de Kafolo et Kolobougou en Côte d’Ivoire et appelant à la solidarité contre le terrorisme.
+
+| Moyen d’action | But recherché | Limite à discuter |
+|---|---|---|
+| sanctions et suspension | défendre l’ordre constitutionnel et obtenir une transition | effets économiques et sociaux sur une population enclavée |
+| communiqué et solidarité | condamner une attaque et mobiliser les partenaires | une déclaration ne neutralise pas seule les groupes armés |
+| médiation | négocier une sortie de crise | dépend de la confiance, du rapport de forces et de l’application des accords |
+
+> **Correction de consigne.** La page 9 demande la thématique commune à « **trois documents** », mais le fascicule n’en fournit que **deux** : l’article sur le Mali et le communiqué sur les attaques en Côte d’Ivoire. La réponse doit donc s’appuyer sur ces deux pièces, sans inventer un troisième document.
+
+Le Mali n’est plus membre depuis le 29 janvier 2025. Le texte reste utile pour comprendre une méthode de gestion de crise en 2020, pas pour décrire sa situation institutionnelle actuelle.
+
+## Dossier D — Potentialités, candidature marocaine et conflits
+
+La situation sur le Maroc rappelle sa candidature présentée en **2017**. En juin, la Conférence soutient en principe l’adhésion et demande une étude de ses implications ; en décembre, elle exige aussi un cadre juridique et institutionnel adapté. En 2026, le Maroc n’est pas membre.
+
+> **Correction du corrigé.** Répondre simplement « impossible » parce que le Maroc serait un concurrent du Nigeria ou voudrait « conquérir » la finance est spéculatif. Une réponse rigoureuse distingue : localisation géographique définie par le traité, procédure d’adhésion, étude des effets économiques et décision souveraine des États membres. La demande n’a pas abouti, mais elle a bien été examinée.
+
+Le texte de l’OCDE publié pour le trentième anniversaire en **2005** relie ressources, pauvreté, inégalités, coups d’État, rebellions, crises électorales et sécurité humaine. Il ne faut pas opposer caricaturalement « élites » et « masses » : on peut analyser plus précisément les écarts de revenus, d’accès aux services, de représentation et d’opportunités.
+
+## Barème reconstruit de la situation complexe
+
+| Critère | Points |
+|---|---:|
+| identifier correctement le problème | 1 |
+| expliquer le passage demandé | 2,5 |
+| apprécier de manière cohérente | 2,5 |
+| mobiliser des informations justes et datées | 1 |
+| **Total** | **7** |
+
+> **Méthode BAC.** Pour apprécier : **constat daté → moyen d’action → résultat → limite → jugement**. Une réponse peut donc conclure : « La CEDEAO agit par règles, projets, médiations et sanctions ; ces outils produisent des acquis, mais leur efficacité dépend de leur application, de leur proportionnalité et de leurs effets sur les populations. »` ,
+      extraQuestions: [
+        { prompt: "Quels pays sont particulièrement touchés par Ebola dans la situation étudiée ?", options: ["Nigeria, Ghana et Togo", "Maroc, Algérie et Tunisie", "Burkina Faso, Mali et Niger", "Guinée, Liberia et Sierra Leone"], correctIndex: 3, explanation: "La situation cite ces trois pays au cœur de l’épidémie ouest-africaine de 2013-2014.", sourceLabel: "Situation d’évaluation, page 7", points: 1 },
+        { prompt: "Que signifie l’affirmation selon laquelle la solidarité ne peut cacher les obstacles ?", options: ["La solidarité est toujours inutile", "Aucune épidémie n’a existé", "Une action commune ponctuelle n’efface pas les crises, les entraves et la faible application des décisions", "Tous les objectifs sont atteints"], correctIndex: 2, explanation: "Il faut distinguer une réussite précise du bilan général de l’intégration.", sourceLabel: "Situation d’évaluation, page 7", points: 2 },
+        { prompt: "Combien des quinze membres utilisaient le franc CFA dans le document de 2005 ?", options: ["Les quinze", "Huit", "Cinq", "Aucun"], correctIndex: 1, explanation: "Huit États appartenaient alors à l’UEMOA ; le chiffre doit rester rattaché à la configuration de 2005.", sourceLabel: "Commentaire de texte RFI, 2005", points: 2 },
+        { prompt: "Comment utiliser le chiffre de 11 % des échanges intrarégionaux ?", options: ["Comme une donnée de l’article publié en 2005, pas comme un taux actuel", "Comme un chiffre éternel", "Comme la part des États membres", "Comme le taux de création de monnaie"], correctIndex: 0, explanation: "Une statistique documentaire doit conserver son année et son périmètre.", sourceLabel: "Commentaire de texte RFI, 2005", points: 2 },
+        { prompt: "Que traduit l’idée de dépasser les langues coloniales et les intérêts nationaux ?", options: ["Supprimer toutes les langues africaines", "Fermer les frontières", "Construire des règles régionales malgré des administrations et priorités différentes", "Interdire toute souveraineté"], correctIndex: 2, explanation: "L’intégration cherche un intérêt commun sans nier les langues ni les États.", sourceLabel: "Commentaire de texte, pages 7-8", points: 2 },
+        { prompt: "Que signifient les restrictions de frontières et de flux décidées en août 2020 ?", options: ["Une adhésion du Mali à l’Union européenne", "La création de l’ECO", "Une opération agricole", "Une sanction politique, commerciale et financière visant la junte, assortie d’exemptions essentielles"], correctIndex: 3, explanation: "La CEDEAO voulait faire pression sur les auteurs du coup d’État tout en exemptant notamment aliments essentiels, médicaments, produits pétroliers et électricité.", sourceLabel: "Situation complexe, document 1", points: 2 },
+        { prompt: "Combien de documents la situation complexe fournit-elle réellement ?", options: ["Trois", "Deux", "Un", "Quatre"], correctIndex: 1, explanation: "L’article sur le Mali et le communiqué sur la Côte d’Ivoire sont les deux pièces visibles ; « trois » est une coquille.", sourceLabel: "Correction de la consigne, page 9", points: 2 },
+        { prompt: "Quelle appréciation de la gestion des crises est équilibrée ?", options: ["Sanctions, médiations et communiqués existent, mais ne suffisent pas toujours à prévenir de nouvelles crises", "Un communiqué règle toujours un conflit", "Les sanctions n’ont jamais d’effet sur les populations", "La CEDEAO ne prend aucune position"], correctIndex: 0, explanation: "Les documents montrent plusieurs moyens d’action et leurs limites.", sourceLabel: "Situation complexe, corrigé", points: 2 },
+        { prompt: "Quel est le statut exact de la candidature marocaine de 2017 ?", options: ["Adhésion automatique dès février 2017", "Refus sans examen", "Retrait d’un ancien membre", "Soutien de principe puis étude juridique et économique, sans adhésion réalisée"], correctIndex: 3, explanation: "La Conférence a demandé d’étudier les implications et le cadre de décision ; le Maroc n’est pas membre en 2026.", sourceLabel: "Correction de la situation Maroc", points: 2 },
+        { prompt: "Quelle idée générale ressort du texte de l’OCDE de 2005 ?", options: ["Les ressources suppriment automatiquement la pauvreté", "Tous les conflits ont disparu", "Les difficultés politiques et sociales éprouvent la paix, la démocratie et le potentiel économique régional", "L’intégration interdit les services publics"], correctIndex: 2, explanation: "Le texte relie transformations, inégalités, conflits et construction de la paix.", sourceLabel: "Exercice OCDE, pages 11-12", points: 2 },
       ],
     },
   },

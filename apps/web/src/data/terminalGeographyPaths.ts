@@ -1291,64 +1291,366 @@ Le décollage associe **continuité** et **rupture** : chaque phase conserve des
     themeNumber: 3,
     themeTitle: "Regroupements et coopération économique",
     title: "La CEDEAO : une organisation régionale à caractère économique",
-    description: "Présenter l’espace CEDEAO, comprendre ses institutions et apprécier ses réalisations et limites.",
+    description: "Présenter l’espace CEDEAO dans son évolution, comprendre ses institutions et apprécier avec nuance ses réalisations et ses limites.",
     sections: [
       {
         id: "creation-objectives",
-        title: "Création, espace et objectifs",
-        summary: "Situer la naissance de la CEDEAO et ses objectifs d’intégration ouest-africaine.",
-        conceptTitle: "Une organisation pour unir les économies ouest-africaines",
-        explanation: "La CEDEAO naît le 28 mai 1975 à Lagos à l’initiative de seize États ; après le retrait de la Mauritanie, elle compte quinze membres. Elle cherche à élever le niveau de vie, renforcer la stabilité et créer une union économique régionale.",
-        keyPoint: "L’objectif central de la CEDEAO est l’intégration par la libre circulation, la coopération et l’harmonisation des politiques.",
-        example: "La carte d’identité CEDEAO et le projet de monnaie commune traduisent la volonté de faciliter la mobilité et les échanges.",
-        timelineTitle: "Les repères fondateurs",
-        timelineInstruction: "Parcours les étapes qui conduisent à la création et à la configuration actuelle de la CEDEAO.",
+        title: "Naissance, espace et objectifs",
+        summary: "Retracer la formation de la CEDEAO, identifier ses membres actuels et expliquer son projet d’intégration.",
+        conceptTitle: "Une communauté ouest-africaine dont le périmètre a évolué",
+        explanation: "Quinze États signent le traité de Lagos le 28 mai 1975. Le Cabo Verde rejoint la Communauté en 1977, la Mauritanie se retire en décembre 2000, puis le Burkina Faso, le Mali et le Niger cessent officiellement d’en être membres le 29 janvier 2025. La CEDEAO compte donc douze États membres en 2026.",
+        bodyMarkdown: String.raw`## D’une idée régionale au traité de Lagos
+
+*Mise à jour institutionnelle : 18 août 2026.*
+
+Le projet d’unir les économies ouest-africaines ne naît pas en une seule réunion. En **1964**, le président libérien **William Tubman** propose une union économique ; un accord est signé en 1965 par la Côte d’Ivoire, la Guinée, le Liberia et la Sierra Leone. En **1972**, le Nigérian **Yakubu Gowon** et le Togolais **Gnassingbé Eyadéma** relancent le projet à l’échelle régionale.
+
+Le **28 mai 1975**, quinze États signent à Lagos le traité instituant la Communauté économique des États de l’Afrique de l’Ouest. Le Sénégal est représenté par son ministre des Affaires étrangères.
+
+| Repère | Configuration de la Communauté |
+|---|---|
+| 28 mai 1975 | 15 États signataires du traité de Lagos |
+| 1977 | le Cabo Verde adhère : 16 membres |
+| 1993 | le traité révisé élargit le projet économique aux enjeux politiques, juridiques et sécuritaires |
+| décembre 2000 | la Mauritanie se retire : 15 membres |
+| 29 janvier 2025 | retrait effectif du Burkina Faso, du Mali et du Niger : 12 membres |
+
+> **Corrections de chronologie.** Le fascicule attribue l’idée de 1968 à « Williams Tolbert », annonce **seize États dès la signature** et place le retrait mauritanien en **1999**. L’histoire officielle de la CEDEAO retient la proposition de William **Tubman** en 1964, quinze signataires en 1975, l’adhésion du Cabo Verde en 1977 et le retrait de la Mauritanie en décembre 2000.
+
+## Douze États membres en 2026
+
+La carte imprimée dans le PDF restitue la configuration à quinze membres qui existait lors de sa rédaction. Depuis le 29 janvier 2025, la liste institutionnelle est la suivante :
+
+| Langue officielle héritée de l’administration | États membres actuels |
+|---|---|
+| français | Bénin, Côte d’Ivoire, Guinée, Sénégal, Togo |
+| anglais | Gambie, Ghana, Liberia, Nigeria, Sierra Leone |
+| portugais | Cabo Verde, Guinée-Bissau |
+
+Ces trois catégories ne résument pas les peuples : la région compte de très nombreuses langues africaines transfrontalières. Elles peuvent faciliter les échanges au-delà des frontières et ne doivent pas être réduites à des « barrières » fixes.
+
+Le retrait du Burkina Faso, du Mali et du Niger est **juridiquement effectif**. La période formelle de transition du 29 janvier au **29 juillet 2025** est achevée. Pour éviter une rupture brutale dans la vie des populations, la CEDEAO demande néanmoins, jusqu’à nouvel ordre, la reconnaissance de leurs passeports et cartes d’identité portant son logo, le maintien de la circulation sans visa et le traitement de leurs biens selon le Schéma de libéralisation des échanges. Des négociations post-retrait se poursuivent avec l’Alliance des États du Sahel. **Appartenance institutionnelle, période de transition et mesures pratiques intérimaires ne sont donc pas la même chose.**
+
+> **Donnée datée.** Les quelque **5,1 millions de km²** et « plus de 300 millions d’habitants » du cours décrivaient l’ancienne configuration régionale. Le retrait de trois grands États sahéliens change mécaniquement ces totaux : ils ne doivent pas être présentés comme les dimensions actuelles des douze membres.
+
+## Un objectif : transformer la coopération en union économique
+
+Le traité révisé définit un enchaînement : **coopérer → coordonner les politiques → intégrer les marchés → améliorer les conditions de vie**.
+
+Les objectifs du fascicule restent pertinents :
+
+- supprimer progressivement les obstacles douaniers et faciliter le commerce régional ;
+- assurer la libre circulation des personnes, des biens, des services et des capitaux ;
+- coordonner agriculture, industrie, énergie, transports et télécommunications ;
+- progresser vers une union économique et monétaire ;
+- élever le niveau de vie, renforcer la stabilité et contribuer au développement du continent.
+
+Ils s’appuient sur l’égalité et l’interdépendance des États, la solidarité, la non-agression, le règlement pacifique des différends, la démocratie, l’État de droit et le respect des droits fondamentaux.
+
+> **Astuce mémoire de Davy.** Retenir **CIRCULER – COORDONNER – STABILISER – PROSPÉRER** : la mobilité et les échanges nécessitent des politiques communes ; celles-ci doivent servir la paix et l’amélioration des conditions de vie.` ,
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Actualiser",
+          title: "Une communauté au périmètre évolutif",
+          instruction: "Sélectionne un repère pour distinguer fondation, adhésion, retraits et continuité de l’intégration.",
+          observation: "Le nombre d’États membres dépend d’une date précise ; une carte ancienne ne décrit pas automatiquement la situation actuelle.",
+          rootLabel: "CEDEAO",
+          rootDetail: "Coopérer et intégrer les économies ouest-africaines",
+          nodes: [
+            { id: "proposal", group: "Genèse", label: "1964-1972", role: "Préparer l’union", detail: "William Tubman propose une union en 1964 ; Yakubu Gowon et Gnassingbé Eyadéma portent un projet régional en 1972." },
+            { id: "lagos", group: "Fondation", label: "Lagos 1975", role: "15 signataires", detail: "Le traité du 28 mai crée la Communauté avec un mandat d’intégration économique." },
+            { id: "cabo-verde", group: "Élargissement", label: "Cabo Verde 1977", role: "16 membres", detail: "L’adhésion du Cabo Verde ajoute le second État lusophone de la Communauté." },
+            { id: "revised-treaty", group: "Réforme", label: "Traité révisé 1993", role: "Élargir le mandat", detail: "L’intégration économique est reliée à la paix, au droit, aux institutions et à la sécurité régionale." },
+            { id: "mauritania", group: "Retrait", label: "Mauritanie 2000", role: "15 membres", detail: "La Mauritanie se retire en décembre 2000, puis conclut un accord d’association en 2017." },
+            { id: "withdrawals", group: "Retraits", label: "29 janvier 2025", role: "12 membres", detail: "Burkina Faso, Mali et Niger se retirent ; des arrangements pratiques protègent encore la mobilité et les échanges jusqu’à nouvel ordre." },
+          ],
+        },
+        keyPoint: "La CEDEAO vise une union économique au service des populations, mais son périmètre institutionnel est passé de quinze signataires en 1975 à douze membres en 2026.",
+        example: "La libre circulation et le Schéma de libéralisation des échanges donnent une traduction concrète au projet d’intégration.",
+        timelineTitle: "De l’idée d’union à la configuration actuelle",
+        timelineInstruction: "Parcours les étapes qui transforment une initiative politique en communauté régionale.",
         timeline: [
-          { label: "1968", detail: "L’idée d’une union ouest-africaine est portée au Ghana par le président libérien William Tolbert." },
-          { label: "28 mai 1975", shortLabel: "1975", detail: "Signature du traité de Lagos et naissance de la CEDEAO avec seize États." },
-          { label: "1999", detail: "Le retrait de la Mauritanie ramène l’organisation à quinze États membres." },
+          { label: "1964-1972", detail: "La proposition de William Tubman, puis la tournée de Yakubu Gowon et Gnassingbé Eyadéma, préparent le traité." },
+          { label: "28 mai 1975", shortLabel: "Lagos 1975", detail: "Quinze États signent le traité de Lagos et créent la CEDEAO." },
+          { label: "1993", detail: "Le traité révisé élargit le mandat et renforce l’architecture institutionnelle." },
+          { label: "1977-2000", shortLabel: "Adhésion et retrait", detail: "Le Cabo Verde adhère en 1977 ; la Mauritanie se retire en décembre 2000." },
+          { label: "29 janvier 2025", shortLabel: "12 membres", detail: "Le retrait du Burkina Faso, du Mali et du Niger devient effectif." },
         ],
-        observation: "L’intégration régionale cherche à dépasser l’étroitesse des marchés nationaux et les frontières héritées de la colonisation.",
+        observation: "L’intégration régionale cherche à dépasser l’étroitesse des marchés nationaux tout en respectant les choix souverains prévus par le traité.",
         check: { prompt: "Où et quand la CEDEAO est-elle créée ?", options: ["À Lagos en 1975", "À Addis-Abeba en 1963", "À Rome en 1957", "À Lomé en 2000"], correctIndex: 0, explanation: "La CEDEAO est créée le 28 mai 1975 à Lagos." },
-        distractors: ["La CEDEAO regroupe tous les États du continent africain.", "Son objectif principal est de fermer les frontières régionales.", "Elle interdit toute coopération économique entre ses membres."],
+        extraQuestions: [
+          { prompt: "La CEDEAO a été créée en 1957.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Elle naît le 28 mai 1975 ; 1957 renvoie notamment au traité de Rome, pas au traité de Lagos.", sourceLabel: "Activité d’application n°1, affirmation 1", points: 1 },
+          { prompt: "Combien d’États signent le traité de Lagos en 1975 ?", options: ["12", "16", "15", "27"], correctIndex: 2, explanation: "Quinze États sont signataires ; le Cabo Verde adhère ensuite.", sourceLabel: "Correction historique CEDEAO", points: 2 },
+          { prompt: "Quel événement porte la Communauté à seize membres ?", options: ["Le retrait de la Mauritanie", "Le traité de Rome", "La création de l’Union africaine", "L’adhésion du Cabo Verde en 1977"], correctIndex: 3, explanation: "Le Cabo Verde rejoint les quinze signataires initiaux en 1977.", sourceLabel: "Mise à jour historique", points: 2 },
+          { prompt: "Quand la Mauritanie se retire-t-elle officiellement ?", options: ["En mai 1975", "En décembre 2000", "En janvier 2025", "En juillet 1993"], correctIndex: 1, explanation: "Le retrait intervient en décembre 2000, et non en 1999 comme l’indique le PDF.", sourceLabel: "Correction de source", points: 2 },
+          { prompt: "Combien d’États la CEDEAO compte-t-elle depuis le 29 janvier 2025 ?", options: ["15", "16", "12", "5"], correctIndex: 2, explanation: "Burkina Faso, Mali et Niger se sont retirés de la Communauté.", sourceLabel: "Mise à jour CEDEAO 2025", points: 2 },
+          { prompt: "Quels trois États ont cessé d’être membres à cette date ?", options: ["Ghana, Nigeria et Togo", "Cabo Verde, Gambie et Guinée-Bissau", "Bénin, Sénégal et Côte d’Ivoire", "Burkina Faso, Mali et Niger"], correctIndex: 3, explanation: "Leur préavis d’un an a abouti au retrait effectif du 29 janvier 2025.", sourceLabel: "Mise à jour CEDEAO 2025", points: 2 },
+          { prompt: "La superficie actuelle des douze membres est exactement de 5 900 162 km².", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Le PDF fournit deux chiffres incompatibles — 5 900 162 km² dans l’activité et environ 5,1 millions de km² dans le cours — calculés sur l’ancien périmètre. Aucun ne décrit les douze membres actuels.", sourceLabel: "Activité d’application n°1, affirmation 2", points: 1 },
+          { prompt: "Comment traiter l’affirmation du PDF selon laquelle la CEDEAO compte quinze États ?", options: ["Comme une vérité intemporelle", "Comme la liste de tous les pays africains", "Comme un repère historique valable avant le retrait effectif de 2025", "Comme le nombre de langues locales"], correctIndex: 2, explanation: "Une donnée institutionnelle doit toujours être rattachée à une date.", sourceLabel: "Activité d’application n°1, affirmation 3", points: 2 },
+          { prompt: "Contribuer au développement du continent africain fait partie des objectifs de la CEDEAO.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Le traité relie intégration ouest-africaine, amélioration du niveau de vie et progrès continental.", sourceLabel: "Activité d’application n°1, affirmation 4", points: 1 },
+          { prompt: "La non-agression entre les États membres est un principe communautaire.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Elle accompagne le règlement pacifique des différends, la solidarité et la stabilité régionale.", sourceLabel: "Activité d’application n°1, affirmation 5", points: 1 },
+          { prompt: "Quel objectif traduit le mieux l’intégration régionale ?", options: ["Fermer chaque marché national", "Supprimer toute institution commune", "Interdire les infrastructures transfrontalières", "Faciliter la circulation et coordonner les politiques"], correctIndex: 3, explanation: "La Communauté veut relier les marchés, les réseaux et les politiques publiques.", sourceLabel: "I-2, objectifs spécifiques", points: 1 },
+        ],
+        distractors: ["La CEDEAO conserve exactement le même périmètre depuis 1975.", "Son objectif principal est de fermer les frontières régionales.", "Elle interdit toute coopération économique entre ses membres."],
       },
       {
         id: "institutions",
         title: "Structure et fonctionnement",
-        summary: "Distinguer les organes de décision, d’exécution, de justice et de financement.",
-        conceptTitle: "Des institutions pour décider et appliquer",
-        explanation: "La Conférence des chefs d’État fixe les grandes orientations. Le Conseil des ministres, la Commission, le Parlement communautaire, la Cour de justice et les institutions financières assurent préparation, exécution, contrôle et financement.",
-        keyPoint: "L’efficacité de la CEDEAO dépend de la coordination entre décision politique, administration, justice et financement régional.",
-        example: "La Banque d’investissement et de développement de la CEDEAO finance des projets, tandis que la Cour de justice veille au respect du droit communautaire.",
-        timelineTitle: "Du choix politique à l’action",
-        timelineInstruction: "Suis le chemin d’une décision depuis les dirigeants jusqu’aux institutions spécialisées.",
+        summary: "Classer les organes de décision, d’exécution, de représentation, de justice et de financement.",
+        conceptTitle: "Décider, exécuter, représenter, juger et financer",
+        explanation: "La Conférence des chefs d’État et de gouvernement fixe les orientations ; le Conseil des ministres prépare les politiques ; la Commission les exécute. Le Parlement, la Cour de justice, la BIDC et les agences spécialisées complètent cette architecture sans exercer les mêmes pouvoirs.",
+        bodyMarkdown: String.raw`## Une architecture, plusieurs fonctions
+
+Une institution régionale n’agit pas comme un gouvernement unique. Les États décident ensemble, puis des organes communautaires préparent, exécutent, contrôlent, représentent ou financent.
+
+| Institution | Fonction essentielle | Repère à retenir |
+|---|---|---|
+| Conférence des chefs d’État et de gouvernement | fixe les orientations et prend les décisions majeures | organe suprême de la Communauté |
+| Conseil des ministres | formule des recommandations, adopte des règlements et prépare les dossiers | réunit les ministres compétents pour les affaires de la CEDEAO |
+| Commission | exécute les décisions, prépare programmes et budgets, administre la Communauté | siège à Abuja |
+| Parlement de la Communauté | débat, représente les peuples et rend des avis | première législature inaugurée le 16 novembre 2000 |
+| Cour de justice | interprète le droit communautaire et juge notamment des violations des droits humains | cinq juges ; accès direct des particuliers élargi en 2005 |
+| BIDC | finance des projets publics et privés ainsi que le commerce régional | siège à Lomé |
+
+## La chaîne de décision
+
+1. La **Conférence** fixe une orientation commune.
+2. Le **Conseil** examine les politiques et les textes nécessaires.
+3. La **Commission** prépare et met en œuvre programmes, budget et suivi.
+4. Le **Parlement** débat et formule des avis ; il n’est pas encore un législateur supranational comparable à un parlement national.
+5. La **Cour** vérifie le respect du droit dans les affaires dont elle est saisie.
+6. La **BIDC** peut financer les infrastructures, l’énergie, les télécommunications, l’agriculture ou le secteur privé.
+
+> **Corrections institutionnelles.** Le fascicule date la création du Parlement de **2006** et lui attribue le pouvoir de « légiférer sur des lois uniformes ». Le traité révisé l’institue en 1993 et sa première législature est inaugurée en **2000** ; sa fonction demeure surtout consultative et représentative. Les noms d’Issoufou Mahamadou et de Jean-Claude Brou décrivaient les responsables de **2019-2021** : une fonction doit être apprise avant son titulaire, qui change.
+
+## Des institutions et agences spécialisées
+
+- l’**Organisation ouest-africaine de la santé (OOAS/WAHO)** coordonne les questions sanitaires ;
+- le **Système d’échanges d’énergie électrique ouest-africain (WAPP)** relie progressivement les réseaux électriques ;
+- le **Centre de coordination des ressources en eau** soutient la gestion régionale ;
+- l’**Agence monétaire de l’Afrique de l’Ouest (AMAO/WAMA)** contribue à la coopération monétaire ;
+- l’**Institut monétaire de l’Afrique de l’Ouest (IMAO/WAMI)** prépare les travaux de la zone monétaire ouest-africaine : AMAO et IMAO ne sont pas deux noms du même organisme ;
+- la **BIDC** finance le développement et le commerce intrarégional.
+
+> **Correction de vocabulaire.** Le PDF écrit « système d’échange d’énergie **électronique** ». Il s’agit d’énergie **électrique** et d’interconnexion des réseaux.
+
+Il faut aussi distinguer les ensembles : la **BOAD** relève de l’UEMOA, pas de la CEDEAO ; **Ecobank** est une banque commerciale privée, même si son histoire est régionale. Les citer comme acteurs de l’Afrique de l’Ouest ne les transforme pas en organes communautaires.
+
+> **Astuce mémoire de Davy.** **C-C-C-P-C-B** : Conférence décide ; Conseil prépare ; Commission exécute ; Parlement représente ; Cour juge ; Banque finance.` ,
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Organiser",
+          title: "Du choix politique au résultat régional",
+          instruction: "Sélectionne une institution pour identifier son pouvoir propre et éviter de confondre les rôles.",
+          observation: "L’efficacité dépend de la continuité entre décision commune, mise en œuvre nationale, contrôle juridique et financement.",
+          rootLabel: "Action communautaire",
+          rootDetail: "Une décision ne produit d’effet que si plusieurs institutions coopèrent",
+          nodes: [
+            { id: "authority", group: "Direction", label: "Conférence", role: "Décider", detail: "Les chefs d’État et de gouvernement fixent les orientations et arbitrent les grandes questions." },
+            { id: "council", group: "Direction", label: "Conseil des ministres", role: "Préparer et réglementer", detail: "Les ministres examinent les dossiers, adoptent des règlements et préparent les sessions de la Conférence." },
+            { id: "commission", group: "Exécution", label: "Commission", role: "Mettre en œuvre", detail: "Elle administre la Communauté, prépare programmes et budgets, puis suit leur exécution." },
+            { id: "parliament", group: "Représentation", label: "Parlement", role: "Débattre et conseiller", detail: "Il représente les peuples et formule des avis, sans disposer encore de tous les pouvoirs d’un parlement national." },
+            { id: "court", group: "Justice", label: "Cour de justice", role: "Dire le droit", detail: "Elle interprète le droit communautaire et peut être saisie dans des affaires de droits humains." },
+            { id: "ebid", group: "Financement", label: "BIDC", role: "Financer", detail: "Basée à Lomé, elle soutient projets publics, entreprises privées et échanges intrarégionaux." },
+          ],
+        },
+        keyPoint: "La CEDEAO répartit l’action entre décision politique, préparation, exécution, représentation, justice, expertise et financement.",
+        example: "La BIDC finance des projets, tandis que la Cour de justice veille à l’interprétation et à l’application du droit communautaire.",
+        timelineTitle: "Suivre une politique communautaire",
+        timelineInstruction: "Suis le chemin d’une orientation depuis la Conférence jusqu’à sa mise en œuvre et son contrôle.",
         timeline: [
-          { label: "Conférence", detail: "Les chefs d’État et de gouvernement définissent les grandes orientations de la communauté." },
-          { label: "Conseil et Commission", shortLabel: "Exécution", detail: "Les ministres et la Commission préparent et mettent en œuvre les politiques communes." },
-          { label: "Cour, Parlement et banques", shortLabel: "Contrôle", detail: "Justice, représentation et financement complètent le fonctionnement régional." },
+          { label: "Conférence", detail: "Les chefs d’État et de gouvernement définissent les orientations de la Communauté." },
+          { label: "Conseil et Commission", shortLabel: "Préparation et exécution", detail: "Les ministres préparent et réglementent ; la Commission administre et met en œuvre." },
+          { label: "Parlement, Cour et BIDC", shortLabel: "Représentation, droit et financement", detail: "Débat, contrôle juridique et financement complètent la chaîne d’action." },
         ],
         observation: "Une décision régionale n’est utile que si les États l’appliquent effectivement dans leurs politiques nationales.",
         check: { prompt: "Quel organe réunit les chefs d’État et fixe les grandes orientations ?", options: ["La Conférence", "La Cour internationale de justice", "Le STABEX", "L’UNESCO"], correctIndex: 0, explanation: "La Conférence des chefs d’État et de gouvernement est l’organe politique majeur." },
-        distractors: ["La CEDEAO ne possède aucune institution financière.", "La Cour de justice dirige les armées nationales.", "La Commission n’intervient jamais dans l’exécution des décisions."],
+        extraQuestions: [
+          { prompt: "Dans l’activité de classement, où placer le Conseil des ministres ?", options: ["Organes politiques et administratifs", "Organes judiciaires", "Organes miniers", "Organes sportifs"], correctIndex: 0, explanation: "Il prépare les politiques et participe à la direction de la Communauté.", sourceLabel: "Activité d’application n°2", points: 1 },
+          { prompt: "Dans quelle catégorie placer la Commission ?", options: ["Judiciaire", "Économique privée", "Politique et administrative", "Militaire nationale"], correctIndex: 2, explanation: "La Commission assure l’administration et l’exécution quotidiennes.", sourceLabel: "Activité d’application n°2", points: 1 },
+          { prompt: "Le Parlement communautaire appartient surtout à quelle fonction ?", options: ["Financement bancaire", "Commandement militaire", "Extraction minière", "Représentation et débat politique"], correctIndex: 3, explanation: "Il représente les peuples, débat et rend des avis.", sourceLabel: "Activité d’application n°2", points: 1 },
+          { prompt: "Où classer le Conseil économique et social mentionné par le fascicule ?", options: ["Organes judiciaires", "Organes militaires", "Organes économiques et sociaux", "Entreprises privées"], correctIndex: 2, explanation: "Sa fonction annoncée est consultative sur les questions économiques et sociales.", sourceLabel: "Activité d’application n°2", points: 1 },
+          { prompt: "Où classer la Banque d’investissement et de développement de la CEDEAO ?", options: ["Organes judiciaires", "Chefferies d’État", "Associations sportives", "Organes économiques et financiers"], correctIndex: 3, explanation: "La BIDC finance des projets et des activités économiques.", sourceLabel: "Activité d’application n°2", points: 1 },
+          { prompt: "Quel élément de la liste est l’organe judiciaire ?", options: ["La Cour de justice de la Communauté", "La Commission", "La BIDC", "Le Conseil des ministres"], correctIndex: 0, explanation: "La Cour interprète le droit communautaire et tranche les affaires relevant de sa compétence.", sourceLabel: "Activité d’application n°2", points: 1 },
+          { prompt: "Pourquoi vaut-il mieux mémoriser la fonction d’un organe que le nom de son titulaire ?", options: ["Les fonctions disparaissent à chaque sommet", "Tous les titulaires sont élus à vie", "Les titulaires changent, tandis que le rôle institutionnel reste le repère durable", "Les institutions n’ont aucun mandat"], correctIndex: 2, explanation: "Les noms cités par le PDF décrivaient la période 2019-2021, alors que les fonctions demeurent les repères stables.", sourceLabel: "Précision institutionnelle", points: 2 },
+          { prompt: "Quel repère corrige la date 2006 donnée par le PDF pour le Parlement ?", options: ["Création en 1957", "Suppression en 1993", "Transfert à Lomé en 2025", "Institué en 1993 ; première législature inaugurée en novembre 2000"], correctIndex: 3, explanation: "Le traité révisé l’institue en 1993 et la première législature s’ouvre en 2000.", sourceLabel: "Correction de source", points: 2 },
+          { prompt: "Quelle association concernant la BIDC est exacte ?", options: ["Siège à Lomé et financement de projets publics ou privés", "Siège à Rome et contrôle des élections", "Siège à Bamako et commandement des armées", "Siège à Paris et impression de l’euro"], correctIndex: 0, explanation: "La BIDC est l’institution financière de développement de la Communauté.", sourceLabel: "II-2", points: 1 },
+          { prompt: "Quelle distinction monétaire est correcte ?", options: ["L’AMAO et l’IMAO sont deux noms d’une même banque privée", "L’IMAO dirige la Cour de justice", "L’AMAO/WAMA coordonne la coopération monétaire ; l’IMAO/WAMI prépare la zone monétaire ouest-africaine", "L’AMAO imprime déjà l’ECO"], correctIndex: 2, explanation: "Les deux organismes ont des mandats liés mais distincts et ne doivent pas être confondus.", sourceLabel: "Commissions techniques", points: 2 },
+          { prompt: "Quelle institution ne doit pas être confondue avec un organe de la CEDEAO ?", options: ["La Commission", "La Cour de justice", "La Conférence", "La BOAD, institution de l’UEMOA"], correctIndex: 3, explanation: "La BOAD intervient en Afrique de l’Ouest, mais relève de l’UEMOA.", sourceLabel: "Précision institutionnelle", points: 2 },
+        ],
+        distractors: ["Toutes les institutions de la CEDEAO exercent le même pouvoir.", "La Cour de justice dirige les armées nationales.", "La Commission n’intervient jamais dans l’exécution des décisions."],
       },
       {
         id: "achievements-limits",
         title: "Forces, réalisations et limites",
         summary: "Évaluer libre circulation, interventions de paix, infrastructures et obstacles à l’intégration.",
-        conceptTitle: "Des avancées réelles mais une intégration inachevée",
-        explanation: "La CEDEAO facilite la circulation, soutient des infrastructures et intervient dans les crises grâce à l’ECOMOG. Elle reste freinée par instabilité politique, terrorisme, faible industrialisation, monnaies multiples, dépendance extérieure et faibles échanges intrarégionaux.",
-        keyPoint: "Le potentiel de la CEDEAO est important, mais les crises politiques, les écarts de développement et l’application incomplète des décisions limitent ses résultats.",
-        example: "L’ECOMOG est intervenue notamment au Liberia et en Sierra Leone, tandis que des entraves persistent encore aux frontières.",
-        timelineTitle: "Comparer acquis et difficultés",
-        timelineInstruction: "Explore les actions politiques, économiques puis les limites structurelles de la CEDEAO.",
+        conceptTitle: "Mettre les acquis en regard des obstacles",
+        explanation: "L’espace ouest-africain associe ressources, population, littoraux et institutions régionales. Libre circulation, commerce, énergie, santé, infrastructures et médiations traduisent cette coopération, mais crises politiques, insécurité, faible transformation locale, obstacles frontaliers et retraits d’États maintiennent l’intégration inachevée.",
+        parts: [
+          {
+            keyPoint: "Ressources, population et position deviennent des atouts lorsque des règles communes, des réseaux et des institutions les transforment en bénéfices partagés.",
+            example: "Le WAPP transforme des capacités électriques nationales en échanges régionaux grâce aux interconnexions.",
+            bodyMarkdown: String.raw`## Des potentialités, pas un développement automatique
+
+Le fascicule rassemble trois familles d’atouts. Elles doivent être reliées à des **aménagements**, des compétences et des règles communes :
+
+| Potentialité | Exemples du cours | Condition de valorisation |
+|---|---|---|
+| minerais et énergie | or, bauxite, fer, manganèse, uranium, pétrole, gaz | transformer localement, sécuriser les sites, partager les revenus et protéger l’environnement |
+| agriculture et eau | cacao, café, riz, maïs, arachide, palmier, hydrographie et pêche | irrigation, stockage, recherche, chaînes de valeur et accès au marché |
+| façades maritimes | ports du golfe de Guinée et ouverture atlantique | corridors, douanes efficaces et sécurité maritime |
+| population et villes | main-d’œuvre, consommateurs, entrepreneuriat et mobilités | éducation, santé, emplois, inclusion et infrastructures |
+| institutions financières | BIDC, agences monétaires et banques régionales | projets viables, transparence et financement de long terme |
+
+Les pourcentages miniers, pétroliers ou agricoles du PDF ne sont pas datés et changent selon le périmètre. Il faut retenir la **diversité des ressources**, non des parts mondiales présentées comme permanentes.
+
+## Des réalisations politiques et humaines
+
+Le Protocole de 1979 organise la **libre circulation, la résidence et l’établissement**. Il prévoit notamment une entrée sans visa pouvant aller jusqu’à **90 jours**. Passeport et carte d’identité biométrique rendent l’appartenance régionale concrète, même si tous les contrôles ne sont pas fluides. En avril 2026, sept membres avaient effectivement déployé la carte biométrique : l’outil commun reste donc en cours d’harmonisation.
+
+La CEDEAO intervient aussi dans la prévention et la gestion des crises :
+
+- médiations, sommets et sanctions contre certaines ruptures anticonstitutionnelles ;
+- opérations historiques de l’**ECOMOG**, notamment au Liberia et en Sierra Leone ;
+- mécanismes d’alerte, coopération sécuritaire et communiqués de solidarité ;
+- coordination sanitaire, illustrée par l’OOAS lors des épidémies.
+
+Une sanction n’est cependant ni une preuve de succès automatique ni une réponse sans coût : il faut examiner son objectif, sa légalité, ses effets sur les dirigeants et ses conséquences pour les populations.
+
+## Des réalisations économiques et techniques
+
+- le **Schéma de libéralisation des échanges de la CEDEAO (SLE/ETLS)** accorde un traitement préférentiel aux produits originaires ;
+- le **tarif extérieur commun** rapproche les politiques douanières ;
+- **SIGMAT** interconnecte progressivement les systèmes douaniers pour suivre le transit ;
+- le **WAPP** relie les réseaux électriques et favorise les échanges d’énergie ;
+- routes, télécommunications, corridors, santé, agriculture et financement de la BIDC soutiennent des projets régionaux.
+
+> **Corrections d’attribution.** La **BOAD** finance les pays de l’UEMOA, pas la CEDEAO entière. **Ecobank** est une entreprise bancaire privée. L’ADRAO, aujourd’hui AfricaRice, est un centre régional de recherche : le réduire à un simple « projet de riz de la CEDEAO » est imprécis.
+
+La « ceinture verte » du fascicule doit elle aussi être attribuée avec prudence : la **Grande Muraille verte** est une initiative portée à l’échelle de l’Union africaine avec plusieurs États et partenaires, non une création exclusive de la CEDEAO.
+
+> **Astuce mémoire de Davy.** Un acquis régional se vérifie avec trois questions : **quelle règle ? quel outil ? quel effet concret pour les populations ?**` ,
+            interaction: {
+              kind: "diagram",
+              eyebrow: "Relier",
+              title: "Transformer les potentialités en réalisations",
+              instruction: "Sélectionne un levier pour suivre le passage de la ressource à l’intégration.",
+              observation: "Une ressource naturelle ou humaine devient un atout seulement si des institutions, des réseaux et des règles communes la valorisent.",
+              rootLabel: "Potentialités régionales",
+              rootDetail: "Ressources, population et position ne produisent des résultats qu’après coopération",
+              nodes: [
+                { id: "mobility", group: "Population", label: "Libre circulation", role: "Relier les personnes", detail: "L’entrée sans visa jusqu’à 90 jours, puis la résidence et l’établissement organisés progressivement, facilitent les mobilités régionales." },
+                { id: "trade", group: "Marché", label: "ETLS et tarif commun", role: "Relier les marchés", detail: "Le traitement préférentiel des produits originaires et des règles douanières communes réduisent certains obstacles." },
+                { id: "transit", group: "Marché", label: "SIGMAT", role: "Sécuriser le transit", detail: "L’échange numérique d’informations douanières suit les marchandises et peut réduire délais et détournements." },
+                { id: "energy", group: "Réseaux", label: "WAPP", role: "Échanger l’électricité", detail: "Les interconnexions permettent de partager des capacités électriques entre systèmes nationaux." },
+                { id: "health", group: "Services", label: "OOAS", role: "Coordonner la santé", detail: "La coopération sanitaire et la surveillance régionale répondent aux épidémies transfrontalières." },
+                { id: "peace", group: "Sécurité", label: "Médiation et ECOMOG", role: "Protéger la stabilité", detail: "La Communauté combine diplomatie, décisions politiques et, historiquement, opérations de paix." },
+              ],
+            },
+            extraQuestions: [
+              { prompt: "Pourquoi les minerais sont-ils seulement des potentialités ?", options: ["Ils doivent être transformés, gérés et reliés à l’économie locale", "Ils créent automatiquement des emplois décents", "Ils suppriment tous les conflits", "Ils remplacent l’éducation"], correctIndex: 0, explanation: "La ressource brute ne garantit ni valeur ajoutée locale ni développement partagé.", sourceLabel: "III-1, atouts naturels", points: 2 },
+              { prompt: "Quel atout la diversité climatique soutient-elle ?", options: ["Une monnaie déjà unique", "La disparition de toutes les sécheresses", "Une variété de cultures agricoles", "Un seul produit exporté"], correctIndex: 2, explanation: "Les zones subéquatoriales, tropicales et sahéliennes permettent des productions différentes.", sourceLabel: "III-1", points: 1 },
+              { prompt: "En quoi une population nombreuse peut-elle soutenir l’intégration ?", options: ["Elle garantit seule la prospérité", "Elle empêche tout commerce", "Elle uniformise toutes les langues", "Elle forme un marché, une main-d’œuvre et des réseaux de mobilité"], correctIndex: 3, explanation: "Cet atout suppose éducation, santé, emplois, infrastructures et inclusion.", sourceLabel: "III-1, plan humain", points: 1 },
+              { prompt: "Quel droit régional facilite déplacements, résidence et activités économiques ?", options: ["Le traité de Rome", "Le pacte de Varsovie", "Le Protocole de libre circulation", "Le STABEX"], correctIndex: 2, explanation: "Le protocole de 1979 organise circulation, résidence et établissement.", sourceLabel: "III-2, réalisations politiques", points: 1 },
+              { prompt: "Quel organisme illustre la coordination sanitaire régionale ?", options: ["L’OTAN", "La BOAD", "Le COMECON", "L’OOAS/WAHO"], correctIndex: 3, explanation: "L’Organisation ouest-africaine de la santé coordonne les réponses sanitaires et la surveillance régionale.", sourceLabel: "III-2, réalisations sanitaires", points: 1 },
+              { prompt: "À quoi sert l’ETLS ?", options: ["À faciliter le commerce de produits originaires de la Communauté", "À fermer tous les corridors", "À imprimer l’ECO", "À remplacer les élections"], correctIndex: 0, explanation: "Le schéma de libéralisation réduit certains obstacles au commerce communautaire.", sourceLabel: "Mise à jour commerciale", points: 2 },
+              { prompt: "Quel outil interconnecte des systèmes douaniers de transit ?", options: ["ECOMOG", "OOAS", "SIGMAT", "BIDC"], correctIndex: 2, explanation: "SIGMAT permet l’échange de messages électroniques sur les marchandises en transit.", sourceLabel: "Mise à jour CEDEAO 2024-2025", points: 2 },
+              { prompt: "Quel réseau favorise les échanges d’électricité ?", options: ["Le Parlement", "Le Conseil de sécurité de l’ONU", "La Cour pénale internationale", "Le WAPP"], correctIndex: 3, explanation: "Le West African Power Pool développe les interconnexions électriques.", sourceLabel: "Commissions techniques", points: 1 },
+              { prompt: "À quelle échelle faut-il attribuer la Grande Muraille verte ?", options: ["À une initiative de l’Union africaine mise en œuvre avec les États et des partenaires", "À une banque commerciale privée", "À une création exclusive du Parlement de la CEDEAO", "À un programme monétaire de l’UEMOA"], correctIndex: 0, explanation: "La Grande Muraille verte est portée à l’échelle de l’Union africaine et ne doit pas être présentée comme une création exclusive de la CEDEAO.", sourceLabel: "Correction III-2", points: 2 },
+              { prompt: "Dans l’activité à trous, quel exemple représente un succès industriel cité par le cours ?", options: ["La fermeture de tous les ports", "La suppression du riz", "La construction d’une cimenterie au Togo", "L’abandon des télécommunications"], correctIndex: 2, explanation: "Le texte propose « la construction d’une cimenterie » parmi les réalisations.", sourceLabel: "Activité d’application n°3", points: 1 },
+              { prompt: "Quel couple complète correctement deux autres réussites de l’activité ?", options: ["Dans le domaine des échanges : fermeture ; sur le plan politique : absence de protocole", "Dans la santé : cimenterie ; dans l’énergie : Parlement", "Dans la justice : monnaie ; dans le sport : Cour", "Dans le domaine des échanges : libre circulation ; sur le plan politique : protocole de non-agression de 1978"], correctIndex: 3, explanation: "L’activité associe la libre circulation aux échanges et le protocole de non-agression de 1978 au domaine politique.", sourceLabel: "Activité d’application n°3", points: 2 },
+            ],
+          },
+          {
+            keyPoint: "Crises politiques, insécurité, obstacles commerciaux, faible transformation et inégalités limitent encore les effets quotidiens de l’intégration.",
+            example: "Les retraits de 2025 réduisent le bloc institutionnel sans supprimer les échanges, les familles ni les risques transfrontaliers.",
+            bodyMarkdown: String.raw`## Des crises qui éprouvent le projet régional
+
+Le fascicule cite coups d’État, contentieux électoraux, conflits armés, terrorisme et insuffisance de l’anticipation. Ces difficultés sont réelles, mais une analyse évite les jugements globaux comme « faible gouvernance » ou « corruption généralisée ». Elle nomme plutôt les mécanismes :
+
+- rupture de l’ordre constitutionnel ou institutions fragilisées ;
+- contestation d’une élection et absence de médiation crédible ;
+- groupes armés, trafic transfrontalier et insécurité des populations ;
+- sanctions qui cherchent à rétablir une règle, mais peuvent aussi perturber mobilité, finance et approvisionnement ;
+- intérêts nationaux divergents et application inégale des décisions communes.
+
+Le retrait effectif du Burkina Faso, du Mali et du Niger en 2025 constitue une limite majeure : il réduit le périmètre institutionnel alors que les échanges, les familles, les écosystèmes et les risques sécuritaires restent transfrontaliers.
+
+## Des freins économiques et commerciaux
+
+Le cours identifie plusieurs obstacles durables : dépendance aux matières premières, transformation industrielle insuffisante, infrastructures incomplètes, écarts de développement, coûts de transport et faiblesse relative du commerce intrarégional.
+
+La CEDEAO dispose de règles communes, mais leur application reste imparfaite. En 2024, sa propre Task Force relevait encore sur les corridors : contrôles et prélèvements irréguliers, listes d’interdiction, difficultés de reconnaissance des certificats d’origine et coopération douanière incomplète.
+
+| Ambition | Outil | Limite observée |
+|---|---|---|
+| libre circulation | protocole, passeport, carte biométrique | contrôles, tracasseries et application inégale |
+| marché régional | ETLS, tarif extérieur commun, SIGMAT | obstacles non tarifaires et faible transformation locale |
+| énergie régionale | WAPP et interconnexions | financement, maintenance et accès encore inégal |
+| monnaie unique | feuille de route de l’ECO | convergence macroéconomique et choix politiques non achevés |
+
+Au sommet de juillet 2026, la CEDEAO visait encore **2027** pour un lancement de l’**ECO**, d’abord avec les États prêts et respectant les critères retenus. L’ECO n’est donc **pas en circulation** : une cible politique ne doit jamais être présentée comme un résultat déjà acquis. Parmi les douze membres, cinq utilisent le franc CFA ouest-africain, six appartiennent à la Zone monétaire de l’Afrique de l’Ouest et le Cabo Verde utilise l’escudo. Le retrait de trois pays de la CEDEAO ne vaut pas retrait automatique de l’UMOA.
+
+## Des défis sociaux à formuler sans stigmatiser
+
+Pauvreté, accès insuffisant à l’eau, aux soins, à l’école ou au numérique, sous-emploi des jeunes et migrations dangereuses limitent l’intégration vécue. Les langues officielles française, anglaise et portugaise compliquent parfois l’administration, mais de nombreuses langues africaines traversent les frontières et soutiennent déjà marchés, familles et mobilités.
+
+Le développement régional suppose donc :
+
+1. des institutions prévisibles et responsables ;
+2. une sécurité centrée sur les personnes ;
+3. davantage de transformation locale et de commerce régional ;
+4. des corridors réellement fluides ;
+5. l’éducation, la santé, l’emploi et la participation des jeunes et des femmes ;
+6. un dialogue durable avec les pays de l’Alliance des États du Sahel.
+
+> **Correction de l’activité 3.** La liste fournit **neuf groupes de mots pour dix blancs**. La phrase « de nombreux conflits entre les pays mettent en mal… » exige un complément absent, par exemple **la construction de l’intégration**. Il faut signaler ce défaut au lieu de forcer une réponse impossible.
+
+> **Astuce mémoire de Davy.** Pour apprécier le bilan : **ACQUIS → OBSTACLE → EFFET SUR LES POPULATIONS → PISTE D’ACTION**.` ,
+            interaction: {
+              kind: "diagram",
+              eyebrow: "Diagnostiquer",
+              title: "Pourquoi l’intégration reste-t-elle inachevée ?",
+              instruction: "Sélectionne un frein pour relier sa cause à son effet régional.",
+              observation: "Les difficultés se renforcent : l’insécurité ralentit l’investissement, les obstacles économiques nourrissent les frustrations et le manque de confiance affaiblit les décisions communes.",
+              rootLabel: "Intégration inachevée",
+              rootDetail: "Des obstacles politiques, sécuritaires, économiques et sociaux se combinent",
+              nodes: [
+                { id: "political", group: "Politique", label: "Ruptures institutionnelles", role: "Fragiliser la confiance", detail: "Coups d’État, crises électorales et désaccords sur les sanctions compliquent les décisions communes." },
+                { id: "security", group: "Sécurité", label: "Conflits et terrorisme", role: "Fermer et détourner", detail: "Insécurité, déplacements et dépenses d’urgence perturbent corridors, services et investissements." },
+                { id: "withdrawals", group: "Institution", label: "Retraits de 2025", role: "Réduire le bloc", detail: "Trois États quittent la Communauté alors que les interdépendances sociales et économiques persistent." },
+                { id: "trade-barriers", group: "Économie", label: "Obstacles aux échanges", role: "Renforcer les coûts", detail: "Contrôles, interdictions, lenteurs et certificats mal reconnus limitent encore la circulation des biens." },
+                { id: "structure", group: "Économie", label: "Faible transformation", role: "Exporter peu de valeur", detail: "La dépendance à des produits bruts expose aux prix mondiaux et limite les chaînes de valeur régionales." },
+                { id: "social", group: "Société", label: "Inégalités d’accès", role: "Éloigner les populations", detail: "Quand école, santé, eau, numérique et emploi manquent, l’intégration paraît lointaine dans la vie quotidienne." },
+              ],
+            },
+            extraQuestions: [
+              { prompt: "Quel couple ouvre correctement l’activité à trous ?", options: ["Sur le plan politique / la non-application des décisions", "Dans l’agriculture / la monnaie unique", "Sur le plan judiciaire / la cimenterie", "Dans le sport / le Parlement"], correctIndex: 0, explanation: "Le texte commence par les difficultés politiques et l’application incomplète des décisions.", sourceLabel: "Activité d’application n°3", points: 1 },
+              { prompt: "Pourquoi l’activité à trous ne peut-elle pas être complétée exactement avec sa liste ?", options: ["Elle ne contient aucun blanc", "Toutes les réponses sont des dates", "Elle propose neuf réponses pour dix blancs", "Elle demande une carte"], correctIndex: 2, explanation: "Le complément après « mettent en mal » manque dans la liste fournie.", sourceLabel: "Correction de source, activité n°3", points: 2 },
+              { prompt: "Quel groupe de mots décrit les rivalités d’influence entre certains États ?", options: ["La force d’interposition", "La cimenterie", "Le domaine des échanges", "Le problème de leadership"], correctIndex: 3, explanation: "Le leadership régional peut faire l’objet de négociations ou de rivalités politiques.", sourceLabel: "Activité d’application n°3", points: 1 },
+              { prompt: "Quel mot introduit le bilan positif après les problèmes ?", options: ["Conflits", "Non-application", "Succès", "Retrait"], correctIndex: 2, explanation: "La phrase attend « de nombreux succès sont à enregistrer ».", sourceLabel: "Activité d’application n°3", points: 1 },
+              { prompt: "Comment l’activité qualifie-t-elle l’ECOMOG ?", options: ["Une banque privée", "Une monnaie commune", "Une université", "Une force d’interposition"], correctIndex: 3, explanation: "L’ECOMOG est associée au règlement de plusieurs conflits ouest-africains.", sourceLabel: "Activité d’application n°3", points: 1 },
+              { prompt: "Quel statut décrit l’ECO en 2026 ?", options: ["Une monnaie commune projetée, non encore en circulation", "La monnaie déjà utilisée par les douze membres", "Le nom du Parlement", "Un corridor routier"], correctIndex: 0, explanation: "La feuille de route reste discutée ; la cible de 2027 n’est pas un lancement déjà réalisé.", sourceLabel: "Sommet de la CEDEAO, juillet 2026", points: 2 },
+              { prompt: "Quelle limite aux échanges la CEDEAO relevait-elle encore en 2024 ?", options: ["L’absence de toute route dans la région", "Une monnaie unique trop ancienne", "Des obstacles et contrôles irréguliers sur les corridors", "La disparition du commerce mondial"], correctIndex: 2, explanation: "Le cadre existe, mais l’application nationale reste incomplète.", sourceLabel: "Task Force ETLS, 2024", points: 2 },
+              { prompt: "Pourquoi les retraits de 2025 constituent-ils un défi d’intégration ?", options: ["Les frontières effacent toutes les familles", "Ils créent immédiatement une monnaie unique", "Ils suppriment les risques sécuritaires", "Les interdépendances demeurent malgré la séparation institutionnelle"], correctIndex: 3, explanation: "Commerce, mobilité, ressources et sécurité continuent de relier les populations.", sourceLabel: "Mise à jour CEDEAO 2025", points: 2 },
+              { prompt: "Quelle formulation évite une généralisation abusive ?", options: ["Des mécanismes de transparence et d’application des règles restent à renforcer", "Tous les milieux d’affaires sont corrompus", "Toutes les élections sont contestées", "Aucun État n’applique jamais une décision"], correctIndex: 0, explanation: "Une analyse identifie les mécanismes et les écarts sans juger indistinctement tous les acteurs.", sourceLabel: "Précision critique, III-3", points: 2 },
+              { prompt: "Quel effet économique peut produire une crise sécuritaire durable ?", options: ["Créer automatiquement une industrie", "Supprimer tous les coûts", "Ralentir corridors, investissement et services publics", "Garantir la convergence monétaire"], correctIndex: 2, explanation: "Insécurité, déplacements et dépenses d’urgence détournent des ressources de l’intégration.", sourceLabel: "III-3 et document OCDE", points: 1 },
+              { prompt: "Quelle priorité répond le mieux aux faiblesses structurelles ?", options: ["Exporter seulement des produits bruts", "Multiplier les obstacles douaniers", "Retarder toutes les infrastructures", "Transformer davantage sur place et fluidifier le commerce régional"], correctIndex: 3, explanation: "Chaînes de valeur, corridors, énergie et compétences peuvent accroître la valeur créée dans la région.", sourceLabel: "Synthèse III", points: 2 },
+            ],
+          },
+        ],
+        keyPoint: "La CEDEAO possède des potentialités et des acquis réels, mais l’intégration reste inachevée tant que décisions, corridors, sécurité et transformation économique ne produisent pas des effets partagés.",
+        example: "La libre circulation et l’ETLS facilitent des mobilités et des échanges, tandis que les contrôles irréguliers et les retraits de 2025 montrent la fragilité de l’acquis.",
+        timelineTitle: "Comparer réalisations et freins",
+        timelineInstruction: "Explore d’abord les potentialités et acquis, puis les limites politiques, sécuritaires, économiques et sociales.",
         timeline: [
-          { label: "Paix et mobilité", detail: "ECOMOG, condamnation des coups d’État, carte d’identité régionale et libre circulation." },
-          { label: "Économie et société", detail: "Routes, télécommunications, projets agricoles, institutions financières, sports et culture." },
-          { label: "Limites", detail: "Terrorisme, instabilité, faiblesse industrielle, monnaies multiples, pauvreté et retards de cotisation." },
+          { label: "Potentialités, libre circulation, commerce, réseaux et médiations", shortLabel: "Potentialités et réalisations", detail: "Ressources, population et position deviennent utiles grâce aux règles de mobilité, à l’ETLS, aux infrastructures, aux agences et aux actions de paix." },
+          { label: "Crises politiques, conflits, terrorisme et retraits", shortLabel: "Crises", detail: "Les ruptures institutionnelles, l’insécurité et le départ de trois États fragilisent la confiance et la coopération." },
+          { label: "Faible transformation, obstacles commerciaux et inégalités d’accès", shortLabel: "freins structurels", detail: "Coûts, infrastructures, dépendances et services insuffisants limitent les effets quotidiens de l’intégration." },
         ],
         observation: "Le bilan doit toujours mettre en regard les réalisations et les obstacles qui empêchent leur généralisation.",
-        check: { prompt: "Quelle force régionale est associée aux interventions de paix de la CEDEAO ?", options: ["L’ECOMOG", "L’OTAN", "Le FLN", "Le COMECON"], correctIndex: 0, explanation: "L’ECOMOG est la force d’intervention liée à la CEDEAO." },
-        distractors: ["La libre circulation est déjà parfaite à toutes les frontières.", "La CEDEAO ne mène aucune action politique ou militaire.", "Les quinze États utilisent tous une monnaie unique."],
+        check: { prompt: "Quelle condition transforme le mieux une potentialité régionale en réalisation ?", options: ["Des règles communes, des réseaux et une mise en œuvre effective", "La seule présence d’une ressource brute", "La fermeture durable des corridors", "L’absence de coopération entre États"], correctIndex: 0, explanation: "Une ressource ou une population devient un atout partagé grâce aux institutions, aux infrastructures et à l’application des décisions." },
+        distractors: ["La libre circulation est déjà parfaite à toutes les frontières.", "La CEDEAO ne mène aucune action politique, économique ou sanitaire.", "Les douze États utilisent déjà une monnaie unique."],
       },
     ],
   },
