@@ -33,6 +33,7 @@ import { terminalCSvtFemaleCyclesPath } from "./terminalCSvtFemaleCyclesPath";
 import { terminalCSvtHumanHeredityPath } from "./terminalCSvtHumanHeredityPath";
 import { terminalCSvtMuscleEnergyPath } from "./terminalCSvtMuscleEnergyPath";
 import { terminalCSvtNervousPath } from "./terminalCSvtNervousPath";
+import { terminalDSvtConditionedReflexPath } from "./terminalDSvtConditionedReflexPath";
 import { terminalDSvtNervousTissuePath } from "./terminalDSvtNervousTissuePath";
 import { terminalDSvtSkeletalMusclePath } from "./terminalDSvtSkeletalMusclePath";
 import { terminalDSvtHeartPath } from "./terminalDSvtHeartPath";
@@ -75,6 +76,7 @@ const baseLearningPaths: LearningPath[] = [
   terminalCSvtHivInfectionPath,
   terminalCSvtFemaleCyclesPath,
   terminalCSvtHumanHeredityPath,
+  terminalDSvtConditionedReflexPath,
   terminalDSvtNervousTissuePath,
   terminalDSvtSkeletalMusclePath,
   terminalDSvtHeartPath,

@@ -684,7 +684,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       "Contemporary Africa",
     ],
     svt: [
-      "Le réflexe conditionnel",
+      { title: "Le réflexe conditionnel", pathId: "terminale-d-svt-l1-conditioned-reflex" },
       { title: "Le fonctionnement du tissu nerveux", pathId: "terminale-d-svt-l2-nervous-tissue" },
       { title: "Le fonctionnement du muscle strié squelettique", pathId: "terminale-d-svt-l3-skeletal-muscle" },
       { title: "Le fonctionnement du cœur", pathId: "terminale-d-svt-l4-heart" },

@@ -203,6 +203,15 @@ run(
 );
 
 run(
+  "Contenu · audit-terminal-d-svt-conditioned-reflex.ts",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    resolve(root, "scripts", "audit-terminal-d-svt-conditioned-reflex.ts"),
+  ],
+);
+
+run(
   "Contenu · audit-terminal-d-svt-nervous-tissue.ts",
   process.execPath,
   [
