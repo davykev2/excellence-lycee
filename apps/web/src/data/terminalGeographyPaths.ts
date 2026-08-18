@@ -578,21 +578,174 @@ Ces chiffres décrivent le réseau à la date du document. Les transports relien
       {
         id: "general-challenges",
         title: "Les problèmes généraux",
-        summary: "Relier dépendance économique, croissance démographique et dégradation environnementale.",
-        conceptTitle: "Des contraintes qui touchent toute l’économie",
-        explanation: "L’économie reste exposée à la fluctuation des matières premières, à l’endettement, à la faiblesse de l’épargne et à l’insuffisance des recettes. La croissance démographique rapide augmente les besoins, tandis que déforestation, insalubrité et pollutions dégradent le cadre de vie.",
-        keyPoint: "Les problèmes généraux se renforcent mutuellement : la dépendance économique limite les investissements nécessaires pour répondre aux besoins sociaux et environnementaux.",
-        example: "Une économie qui exporte surtout des produits bruts perd des recettes lorsque leurs cours internationaux baissent.",
-        timelineTitle: "Distinguer trois familles de problèmes",
-        timelineInstruction: "Passe des contraintes économiques aux défis démographiques puis environnementaux.",
+        summary: "Relier dépendances économiques, dynamique démographique, capital humain et dégradation environnementale.",
+        conceptTitle: "Des contraintes structurelles qui se renforcent",
+        explanation: "L’économie reste exposée à la fluctuation des produits bruts, au coût de la dette et aux difficultés de financement. La croissance de la population accroît les besoins d’emplois et de services, tandis que déforestation, urbanisation mal maîtrisée et pollutions fragilisent les milieux.",
+        keyPoint: "Un diagnostic solide relie économie, population et environnement sans transformer une ressource, une catégorie de personnes ou la croissance elle-même en cause unique.",
+        example: "Une baisse des cours d’un produit exporté réduit les recettes, limite l’investissement et peut retarder les équipements sociaux ou environnementaux.",
+        timelineTitle: "Distinguer les trois familles de fragilités",
+        timelineInstruction: "Passe des contraintes économiques aux besoins démographiques, puis aux pressions sur les milieux.",
         timeline: [
-          { label: "Économie", detail: "Dépendance aux matières premières, dette, faiblesse de l’épargne et recettes fiscales insuffisantes." },
-          { label: "Population", detail: "Croissance rapide, besoins d’emplois, de logements, d’éducation, de santé et de nutrition." },
-          { label: "Environnement", detail: "Déforestation, pollution, insalubrité, bidonvilles et effets du changement climatique." },
+          { label: "Dépendances économiques et financement", shortLabel: "Économie", detail: "Exportation de produits peu transformés, fluctuations des cours, service de la dette, épargne limitée et recettes fiscales insuffisantes." },
+          { label: "Dynamique démographique et capital humain", shortLabel: "Population", detail: "Une population jeune peut être un atout si éducation, santé, formation, logements et emplois progressent au même rythme." },
+          { label: "Dégradation des milieux", shortLabel: "environnement", detail: "Déforestation, pollutions, assainissement insuffisant, urbanisation précaire et changement climatique détériorent les conditions de vie et de production." },
         ],
-        observation: "Un problème économique peut produire des effets sociaux, puis rendre plus difficile la protection de l’environnement.",
-        check: { prompt: "Pourquoi la dépendance aux matières premières est-elle risquée ?", options: ["Leurs cours mondiaux peuvent fluctuer", "Elles ne peuvent jamais être exportées", "Elles rendent toute agriculture impossible", "Elles suppriment automatiquement la dette"], correctIndex: 0, explanation: "La fluctuation des cours réduit les recettes et les capacités d’investissement." },
+        observation: "Une même difficulté peut se propager : faibles recettes, investissements retardés, services sous pression et milieux moins bien protégés.",
+        check: { prompt: "Pourquoi l’exportation de produits peu transformés rend-elle l’économie vulnérable ?", options: ["Les cours mondiaux peuvent fluctuer et peu de valeur est créée localement", "Ces produits ne peuvent jamais être vendus", "L’agriculture interdit toute industrie", "La transformation locale supprime les emplois"], correctIndex: 0, explanation: "La fluctuation des cours agit sur les recettes, tandis que l’absence de transformation limite la valeur ajoutée locale." },
         distractors: ["La croissance démographique réduit toujours les besoins sociaux.", "La déforestation améliore durablement tous les sols.", "La dette ne peut jamais limiter l’investissement public."],
+        parts: [
+          {
+            summary: "Analyser la dépendance aux produits bruts, le financement et les inégalités territoriales à partir de données datées.",
+            bodyMarkdown: String.raw`## Une économie ouverte, mais vulnérable aux chocs
+
+Le PDF qualifie l’économie ivoirienne d’**extravertie** : une grande partie de la production agricole est destinée aux marchés extérieurs, parfois avec peu de transformation locale. L’ouverture n’est pas un problème en elle-même. La fragilité apparaît lorsque :
+
+- quelques produits fournissent une part importante des recettes ;
+- leurs cours sont fixés sur des marchés internationaux instables ;
+- les produits sont exportés bruts, donc avec une valeur ajoutée limitée ;
+- les équipements ou financements dépendent fortement de l’extérieur.
+
+> **Réflexe d’analyse.** Une matière première est une **ressource**. Le problème est la dépendance excessive à son cours, l’insuffisance de transformation et le manque de diversification.
+
+## Dette, épargne et recettes publiques
+
+Le document présente la dette comme une contrainte de financement. Il donne les valeurs suivantes, en **milliards de francs CFA** :
+
+| Année | Dette publique indiquée |
+|---|---:|
+| 2018 | 11 607,8 |
+| 2019 | 13 300,2 |
+| Septembre 2020 | 16 133,3 |
+
+Entre 2018 et septembre 2020, l’augmentation donnée est de **4 525,5 milliards**, soit environ **39 %** :
+
+**(16 133,3 - 11 607,8) / 11 607,8 x 100 ≈ 39 %**
+
+Pour septembre 2020, le total se décompose en **10 587,3 milliards de dette extérieure** et **5 546 milliards de dette intérieure**. Le PDF annonce aussi un **service de la dette** prévu à 2 132 milliards en 2020. Il faut distinguer :
+
+- le **stock**, montant total dû à une date donnée ;
+- le **service**, remboursements de principal et intérêts à payer pendant une période.
+
+Ces chiffres décrivent la situation connue lors de la rédaction en **2021**. Ils ne sont pas des statistiques actuelles.
+
+## Mobiliser des ressources sans simplifier à l’excès
+
+Le cours relie la faiblesse de l’épargne à la pauvreté et l’insuffisance des recettes fiscales à la fraude ou à l’incivisme. Il faut compléter ce diagnostic : le financement dépend aussi des revenus disponibles, de l’accès aux banques et à la microfinance, de la confiance, de la qualité des services publics et de l’efficacité de la collecte.
+
+Les investissements étrangers peuvent financer des équipements et des entreprises. Ils deviennent toutefois une dépendance s’ils remplacent durablement l’épargne, le crédit et l’entrepreneuriat locaux au lieu de les renforcer.
+
+## Croissance et développement inclusif
+
+Le **Document 1**, consulté en avril 2021, affirme que l’activité économique reste très concentrée à Abidjan et que l’emploi informel occupe une place dominante. Il appelle à une croissance plus **inclusive**, c’est-à-dire capable d’améliorer les revenus, les services et les possibilités d’emploi dans plusieurs régions.
+
+> **Précision documentaire.** Les parts « 80 % de l’activité à Abidjan », « 30 à 40 % du PIB informel » et « plus de 90 % de la force de travail informelle » sont des estimations citées par le document. Leur date et leur source font partie de l’information ; elles ne doivent pas être récitées comme des constantes.` ,
+            interaction: {
+              kind: "diagram",
+              eyebrow: "Relier",
+              title: "La chaîne des fragilités économiques",
+              instruction: "Sélectionne un nœud pour comprendre comment une difficulté économique agit sur l’investissement et le niveau de vie.",
+              observation: "Le diagnostic ne s’arrête pas au constat : il suit la cause, le mécanisme et l’effet.",
+              rootLabel: "Financement du développement",
+              rootDetail: "Créer des recettes, investir et mieux répartir les possibilités",
+              nodes: [
+                { id: "raw-exports", group: "Structure productive", label: "Produits peu transformés", role: "Valeur ajoutée limitée", detail: "Exporter surtout des matières premières expose aux cours mondiaux et conserve moins d’étapes de transformation dans le pays." },
+                { id: "prices", group: "Structure productive", label: "Cours fluctuants", role: "Recettes instables", detail: "Une baisse des prix internationaux peut réduire devises, revenus des producteurs, impôts et investissements." },
+                { id: "debt-stock", group: "Financement", label: "Stock de dette", role: "Montant dû", detail: "Le stock mesure l’encours total à une date donnée ; il ne se confond pas avec les remboursements annuels." },
+                { id: "debt-service", group: "Financement", label: "Service de la dette", role: "Paiements de la période", detail: "Principal et intérêts mobilisent une partie du budget qui ne peut pas être utilisée simultanément ailleurs." },
+                { id: "savings-tax", group: "Financement", label: "Épargne et fiscalité", role: "Ressources intérieures", detail: "Revenus, inclusion financière, confiance et efficacité de la collecte conditionnent l’épargne et les recettes publiques." },
+                { id: "territories", group: "Répartition", label: "Inégalités territoriales", role: "Croissance peu inclusive", detail: "La concentration des activités, infrastructures et emplois dans un petit nombre d’espaces limite la diffusion des bénéfices." },
+              ],
+            },
+            check: {
+              prompt: "Quelle distinction est correcte ?",
+              options: ["Le stock est le total dû ; le service correspond aux paiements d’une période", "Le stock et le service sont toujours identiques", "Le service désigne uniquement les exportations", "Le stock mesure le nombre d’entreprises"],
+              correctIndex: 0,
+              explanation: "Le stock est un encours à une date ; le service regroupe principal et intérêts payés pendant une période.",
+            },
+            extraQuestions: [
+              { prompt: "Pourquoi une économie dépendante de quelques produits bruts est-elle exposée ?", options: ["Leurs cours peuvent varier et peu de valeur est transformée localement", "Ces produits ne sont jamais demandés", "Ils empêchent toute recette fiscale", "Ils rendent les routes inutiles"], correctIndex: 0, explanation: "Concentration des exportations et faible transformation amplifient les effets d’un choc de prix.", sourceLabel: "I-1", points: 2 },
+              { prompt: "Quel total de dette le PDF indique-t-il pour septembre 2020 ?", options: ["16 133,3 milliards de F CFA", "10 587,3 milliards de F CFA", "5 546 milliards de F CFA", "2 132 milliards de F CFA"], correctIndex: 0, explanation: "10 587,3 milliards de dette extérieure plus 5 546 milliards de dette intérieure donnent 16 133,3 milliards.", sourceLabel: "Document 2", points: 1 },
+              { prompt: "De combien le stock indiqué augmente-t-il entre 2018 et septembre 2020 ?", options: ["4 525,5 milliards de F CFA", "2 525,5 milliards de F CFA", "16 133,3 milliards de F CFA", "39 milliards de F CFA"], correctIndex: 0, explanation: "16 133,3 - 11 607,8 = 4 525,5 milliards de F CFA.", sourceLabel: "Document 2", points: 2 },
+              { prompt: "L’augmentation donnée entre 2018 et septembre 2020 représente environ…", options: ["39 %", "9 %", "139 %", "4 %"], correctIndex: 0, explanation: "4 525,5 / 11 607,8 x 100 ≈ 39 %.", sourceLabel: "Exploitation du document 2", points: 2 },
+              { prompt: "Le service de la dette prévu à 2 132 milliards en 2020 désigne…", options: ["les paiements de principal et d’intérêts de la période", "le stock total de dette", "les recettes d’exportation", "le nombre de créanciers"], correctIndex: 0, explanation: "Le service correspond aux sommes à payer pendant la période, pas à tout l’encours.", sourceLabel: "I-1", points: 2 },
+              { prompt: "Laquelle de ces propositions favorise les ressources intérieures ?", options: ["Améliorer l’inclusion financière et l’efficacité fiscale", "Réduire la confiance dans les institutions", "Supprimer toute épargne", "Exporter sans transformer"], correctIndex: 0, explanation: "L’accès aux services financiers et une collecte efficace renforcent épargne, crédit et recettes publiques.", sourceLabel: "I-1", points: 1 },
+              { prompt: "Les investissements étrangers sont-ils nécessairement nuisibles ?", options: ["Non, ils peuvent financer le développement mais doivent aussi renforcer les capacités locales", "Oui, dans tous les cas", "Oui, car aucun pays ne reçoit d’investissement", "Non, parce qu’ils remplacent toujours l’épargne"], correctIndex: 0, explanation: "L’enjeu porte sur leurs conditions, leurs retombées locales et la réduction d’une dépendance durable.", sourceLabel: "I-1", points: 2 },
+              { prompt: "Que signifie une croissance plus inclusive ?", options: ["Des bénéfices mieux diffusés entre populations et territoires", "Une croissance limitée à une seule ville", "La disparition des services publics", "L’exclusion du secteur privé local"], correctIndex: 0, explanation: "Le développement inclusif associe croissance, emplois, services, réduction des inégalités et équilibre territorial.", sourceLabel: "Document 1", points: 2 },
+              { prompt: "Comment faut-il utiliser les estimations du Document 1 ?", options: ["En les datant et en les attribuant au document consulté en 2021", "Comme des chiffres valables pour toujours", "Sans préciser leur unité", "Comme des données de 1960"], correctIndex: 0, explanation: "Une statistique n’a de sens qu’avec sa période, sa définition et sa source.", sourceLabel: "Précision documentaire", points: 2 },
+              { prompt: "Quel enchaînement est le plus rigoureux ?", options: ["Baisse d’un cours → recettes moindres → investissements plus difficiles", "Baisse d’un cours → dette automatiquement supprimée", "Dette → disparition immédiate de toute production", "Épargne → suppression des emplois"], correctIndex: 0, explanation: "La réponse relie le choc économique à son mécanisme budgétaire et à son effet sur l’investissement.", sourceLabel: "Synthèse", points: 2 },
+            ],
+          },
+          {
+            summary: "Comprendre les besoins d’une population croissante et corriger les données contradictoires sur le couvert forestier.",
+            bodyMarkdown: String.raw`## Une population jeune : potentiel et besoins à satisfaire
+
+Le PDF estime la population à **plus de 26 millions d’habitants en 2020** et un taux d’accroissement naturel supérieur à 2,5 % par an. Le recensement officiel **RGPH 2021**, publié après la rédaction, a dénombré **29 389 150 habitants** et mesure une croissance annuelle moyenne de **2,9 % entre 1998 et 2021**.
+
+> **Mise à jour de source.** Le chiffre de 2020 doit être lu comme une estimation antérieure au recensement. Le RGPH 2021 devient le repère statistique vérifié pour la population dénombrée.
+
+Le document emploie le mot **« fardeau »**. Cette formulation est à nuancer : une population nombreuse et jeune constitue aussi un capital humain. La difficulté apparaît lorsque la création d’emplois, les logements, l’école, la santé, la nutrition, l’eau et l’assainissement ne progressent pas assez vite.
+
+Une réponse responsable propose : éducation des filles et des garçons, santé reproductive, planification familiale **volontaire**, formation, emplois productifs, urbanisme et accès équitable aux services. Elle ne rend ni une naissance ni l’immigration responsables à elles seules des difficultés économiques.
+
+## Déforestation : quatre chiffres qu’il ne faut pas confondre
+
+Le PDF se contredit : le cours annonce **plus de 16 millions d’hectares en 1960**, puis **moins de 2 millions** « aujourd’hui », tandis que l’exercice lacunaire attend **3 millions d’hectares**.
+
+Les données institutionnelles permettent de corriger et d’expliquer l’écart :
+
+| Repère | Superficie indiquée | Précision |
+|---|---:|---|
+| 1900 | plus de 16 millions ha | début de la série historique officielle |
+| 1960 | environ 12 millions ha | et non 16 millions selon la série la plus récente du Ministère |
+| 2015 | 3,4 millions ha | estimation du couvert forestier |
+| 2020 | 2,97 millions ha | définition nationale du Code forestier |
+| 2020 | 5,4 millions ha | terres forestières selon la définition FAO |
+
+> **Correction de source.** Les nombres **moins de 2 millions**, **3 millions**, **2,97 millions** et **5,4 millions** ne sont pas interchangeables : ils peuvent viser une date, une définition ou seulement la forêt naturelle. On retient la tendance de forte diminution et on indique toujours le repère choisi.
+
+## Des pressions environnementales multiples
+
+Le défrichement agricole extensif, l’exploitation forestière illégale, les feux, l’urbanisation, les activités minières et la demande de bois-énergie contribuent à la perte forestière. D’autres difficultés concernent :
+
+- les déchets et l’assainissement insuffisant dans certains quartiers ;
+- la pollution de l’air, des sols, des eaux de surface et des nappes ;
+- l’habitat précaire et l’exposition aux inondations ;
+- la dégradation des sols et de la biodiversité ;
+- les sécheresses, fortes pluies et chaleurs accentuées par le changement climatique.
+
+La déforestation locale perturbe les sols, l’eau et les microclimats, mais elle n’explique pas à elle seule le changement climatique mondial. Une réponse rigoureuse distingue causes locales, phénomène global et vulnérabilités du territoire.` ,
+            interaction: {
+              kind: "diagram",
+              eyebrow: "Comparer",
+              title: "Population, services et environnement",
+              instruction: "Sélectionne un repère pour relier un besoin à une politique publique ou à une protection du milieu.",
+              observation: "La population devient un moteur de développement lorsque les capacités humaines et les services progressent avec elle.",
+              rootLabel: "Développement humain durable",
+              rootDetail: "Transformer une dynamique démographique en capacités, emplois et milieux habitables",
+              nodes: [
+                { id: "education", group: "Capital humain", label: "Éducation et formation", role: "Développer les compétences", detail: "L’école, l’alphabétisation et la formation professionnelle permettent de participer à une économie plus productive." },
+                { id: "health", group: "Capital humain", label: "Santé et nutrition", role: "Renforcer les capacités", detail: "Prévention, soins, alimentation et santé reproductive améliorent l’autonomie et la qualité de vie." },
+                { id: "jobs", group: "Capital humain", label: "Emplois et logements", role: "Accueillir la croissance", detail: "Les villes et territoires ont besoin d’activités productives, de logements planifiés, d’eau, d’assainissement et de mobilité." },
+                { id: "forests", group: "Milieux", label: "Forêts", role: "Protéger et restaurer", detail: "Contrôle des coupes, aires protégées, reboisement et agroforesterie doivent ralentir les pertes et restaurer les fonctions écologiques." },
+                { id: "pollution", group: "Milieux", label: "Pollutions et déchets", role: "Prévenir les risques", detail: "Collecte, traitement, assainissement et contrôle des rejets réduisent maladies et contamination des eaux et des sols." },
+                { id: "climate", group: "Milieux", label: "Climat et résilience", role: "S’adapter", detail: "Protection des bassins versants, agriculture adaptée, alertes et urbanisme réduisent la vulnérabilité aux sécheresses et inondations." },
+              ],
+            },
+            extraQuestions: [
+              { prompt: "Combien d’habitants le RGPH 2021 a-t-il dénombrés ?", options: ["29 389 150", "26 000 000", "16 133 300", "3 400 000"], correctIndex: 0, explanation: "Le recensement officiel de 2021 dénombre 29 389 150 résidents.", sourceLabel: "Mise à jour RGPH 2021", points: 2 },
+              { prompt: "Quel taux moyen de croissance annuelle le RGPH mesure-t-il entre 1998 et 2021 ?", options: ["2,9 %", "0,9 %", "9,2 %", "29 %"], correctIndex: 0, explanation: "Le taux annuel moyen officiel est de 2,9 % entre les deux recensements.", sourceLabel: "Mise à jour RGPH 2021", points: 2 },
+              { prompt: "Pourquoi le mot « fardeau » doit-il être nuancé ?", options: ["Une population jeune peut devenir un capital humain si les services et emplois progressent", "Toute population empêche le développement", "Les jeunes ne peuvent jamais travailler", "Les besoins sociaux disparaissent avec la croissance"], correctIndex: 0, explanation: "La relation dépend des capacités, des politiques publiques et des possibilités économiques.", sourceLabel: "I-2", points: 2 },
+              { prompt: "Quelle réponse démographique respecte les droits des personnes ?", options: ["Éducation et planification familiale volontaire", "Contrainte des familles", "Exclusion des migrants", "Suppression de la santé reproductive"], correctIndex: 0, explanation: "Information, autonomie, santé et éducation permettent des choix libres et responsables.", sourceLabel: "Précision pédagogique", points: 2 },
+              { prompt: "Quel repère forestier officiel corrige la série du PDF pour 1960 ?", options: ["Environ 12 millions d’hectares", "Moins de 2 millions d’hectares", "29 millions d’hectares", "5 546 hectares"], correctIndex: 0, explanation: "La série institutionnelle récente indique plus de 16 millions en 1900, puis environ 12 millions en 1960.", sourceLabel: "Correction de source", points: 2 },
+              { prompt: "Quelle estimation correspond au couvert forestier selon la définition nationale en 2020 ?", options: ["2,97 millions d’hectares", "16 millions d’hectares", "12 millions d’hectares", "29,4 millions d’hectares"], correctIndex: 0, explanation: "L’Inventaire forestier et faunique national retient 2,97 millions d’hectares selon la définition nationale.", sourceLabel: "Correction de source", points: 2 },
+              { prompt: "Pourquoi le chiffre FAO de 5,4 millions d’hectares diffère-t-il de 2,97 millions ?", options: ["La définition des terres forestières n’est pas la même", "L’un est une dette", "Les deux chiffres ont la même définition", "La FAO mesure la population"], correctIndex: 0, explanation: "La date est la même, mais le périmètre statistique change avec la définition utilisée.", sourceLabel: "Lecture critique", points: 2 },
+              { prompt: "La déforestation massive est un problème de développement.", options: ["Vrai", "Faux"], correctIndex: 0, explanation: "Elle fragilise sols, eau, biodiversité, agriculture et conditions de vie.", sourceLabel: "Activité d’application n°1", points: 1 },
+              { prompt: "La déforestation ivoirienne explique à elle seule tout le changement climatique mondial.", options: ["Vrai", "Faux"], correctIndex: 1, explanation: "Elle a des effets locaux et contribue aux émissions, mais le changement climatique est un phénomène mondial multicausal.", sourceLabel: "Précision scientifique", points: 2 },
+              { prompt: "Quel ensemble répond aux pressions environnementales ?", options: ["Reboisement, assainissement, contrôle des rejets et urbanisme résilient", "Coupes illégales, dépôts sauvages et habitat en zone inondable", "Suppression des aires protégées", "Extension des feux de brousse"], correctIndex: 0, explanation: "La réponse combine protection des forêts, gestion des déchets, lutte contre les pollutions et adaptation.", sourceLabel: "I-3", points: 2 },
+              { prompt: "Comment traiter les chiffres « moins de 2 millions » et « 3 millions » du PDF ?", options: ["Signaler leur contradiction et utiliser un repère institutionnel défini", "Les considérer comme exactement identiques", "Les additionner", "Supprimer toute analyse de la forêt"], correctIndex: 0, explanation: "Les chiffres du fascicule se contredisent ; date et définition doivent être explicitées.", sourceLabel: "Correction de source", points: 2 },
+            ],
+          },
+        ],
       },
       {
         id: "sector-challenges",
@@ -600,6 +753,66 @@ Ces chiffres décrivent le réseau à la date du document. Les transports relien
         summary: "Comparer les difficultés du primaire, de l’industrie et des services.",
         conceptTitle: "Chaque secteur possède des fragilités particulières",
         explanation: "Le primaire souffre d’une agriculture extensive, d’aléas climatiques et de pertes après récolte. L’industrie reste concentrée, peu intégrée et dépendante de capitaux ou intrants extérieurs. Les transports, le tourisme et le commerce rencontrent problèmes d’infrastructures, d’organisation et de compétitivité.",
+        bodyMarkdown: String.raw`## Primaire : produire sans épuiser les ressources
+
+Le document associe l’agriculture extensive au recul forestier, à la dégradation des sols et à la pollution des eaux par certains intrants. Il ajoute plusieurs fragilités :
+
+- dépendance d’une grande partie des exploitations à la pluie ;
+- sécheresses, inondations et irrégularité des saisons ;
+- vieillissement des vergers et d’une partie des actifs agricoles ;
+- stockage et conservation insuffisants ;
+- pertes après récolte et déséquilibres saisonniers entre offre et demande ;
+- déficit de certaines productions vivrières, illustré par les importations de riz.
+
+L’agriculture ne doit donc pas seulement produire davantage : elle doit améliorer les rendements, conserver les récoltes, protéger sols, eaux et forêts, et mieux relier producteurs et marchés.
+
+## Secondaire : transformer davantage et mieux répartir les usines
+
+Le PDF décrit un tissu industriel dominé par l’**agro-industrie**, le textile, le bâtiment et l’extraction. Ses principaux problèmes sont :
+
+| Fragilité interne | Conséquence possible |
+|---|---|
+| Entreprises souvent petites et peu intégrées | chaînes de valeur incomplètes et capacités limitées |
+| Plus de 75 % des capacités indiquées dans le sud, surtout à Abidjan | déséquilibre territorial et congestion |
+| Transformation locale insuffisante | perte de valeur ajoutée et d’emplois |
+| Accès difficile au financement, à l’énergie ou aux compétences | investissements et productivité freinés |
+
+Le document affirme aussi que plus de **60 % des capitaux** et près de **50 % des matières premières industrielles** seraient importés. Ces parts ne sont ni datées ni précisément sourcées dans le fascicule : elles doivent être comprises comme des affirmations du cours, pas comme des statistiques actuelles vérifiées.
+
+> **Précision.** Les industries lourdes ou de pointe ne sont pas l’unique base possible du développement. La transformation agroalimentaire, les PME, l’énergie fiable, le numérique, la logistique, les compétences et l’innovation peuvent également créer valeur et emplois.
+
+## Tertiaire : organiser les réseaux et les marchés
+
+| Branche | Difficultés citées | Effets |
+|---|---|---|
+| Transports | routes dégradées, accidents, désorganisation, insécurité et tracasseries | coûts, délais et compétitivité dégradés |
+| Tourisme | accès aux sites, sécurité, insalubrité, formation et choc de la Covid-19 | fréquentation et emplois fragilisés |
+| Commerce | enclavement, stockage insuffisant, offre irrégulière, fraude et concurrence déloyale | pénuries locales, pertes et prix instables |
+
+La pandémie de Covid-19 et la crise politique des années 2000 sont des **contextes historiques datés**. Elles expliquent une partie du diagnostic du fascicule, mais ne décrivent pas automatiquement la situation présente.
+
+> **Correction de formulation.** Le PDF présente « l’hégémonie des étrangers dans la distribution » comme un problème. La nationalité d’un commerçant n’est pas un diagnostic économique. Les enjeux analysables sont l’accès équitable au financement et au marché, l’informalité, la concentration, le respect des règles, la fraude et la concurrence loyale.
+
+## Des secteurs interdépendants
+
+Une route dégradée augmente les pertes agricoles ; un stockage insuffisant réduit les revenus ; une transformation limitée oblige à exporter brut ; une énergie instable ralentit les usines. Le problème n’est donc jamais enfermé dans un seul secteur.` ,
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Diagnostiquer",
+          title: "Les blocages d’une chaîne de valeur",
+          instruction: "Sélectionne un maillon pour voir comment primaire, secondaire et tertiaire se répondent.",
+          observation: "Résoudre un seul maillon sans traiter les autres déplace souvent le problème au lieu de le supprimer.",
+          rootLabel: "Du champ au consommateur",
+          rootDetail: "Produire, conserver, transformer, transporter et vendre",
+          nodes: [
+            { id: "produce", group: "Secteur primaire", label: "Produire", role: "Rendements et durabilité", detail: "Climat, sols, plants, équipements et renouvellement des vergers déterminent quantité et régularité." },
+            { id: "store", group: "Secteur primaire", label: "Conserver", role: "Limiter les pertes", detail: "Entrepôts, chaîne du froid et organisation de la collecte évitent la perte des produits bord champ." },
+            { id: "transform", group: "Secteur secondaire", label: "Transformer", role: "Créer de la valeur", detail: "Des usines accessibles, financées et alimentées en énergie convertissent la matière brute en produits vendables." },
+            { id: "regionalize", group: "Secteur secondaire", label: "Déconcentrer", role: "Équilibrer le territoire", detail: "Installer des capacités dans plusieurs régions rapproche l’usine des bassins de production et diffuse les emplois." },
+            { id: "transport", group: "Secteur tertiaire", label: "Transporter", role: "Réduire coûts et délais", detail: "Routes sûres et entretenues, rail, ports et logistique relient producteurs, usines et marchés." },
+            { id: "sell", group: "Secteur tertiaire", label: "Commercialiser", role: "Organiser les débouchés", detail: "Information sur les prix, stockage, financement et concurrence loyale rapprochent offre et demande." },
+          ],
+        },
         keyPoint: "Le développement sectoriel exige transformation locale, modernisation, diversification et meilleur équilibre territorial.",
         example: "Plus des trois quarts des capacités industrielles évoquées dans le cours se concentrent dans le sud, notamment autour d’Abidjan.",
         timelineTitle: "Comparer les difficultés par secteur",
@@ -611,25 +824,93 @@ Ces chiffres décrivent le réseau à la date du document. Les transports relien
         ],
         observation: "Les faiblesses d’un secteur peuvent bloquer les autres : une route dégradée accroît par exemple les pertes agricoles.",
         check: { prompt: "Où se concentre l’essentiel du parc industriel ivoirien selon le cours ?", options: ["Dans le district d’Abidjan et le sud", "Uniquement dans le nord", "Dans les zones désertiques", "Hors du territoire national"], correctIndex: 0, explanation: "Le cours souligne le fort déséquilibre au profit du sud et d’Abidjan." },
+        extraQuestions: [
+          { prompt: "La population active agricole est présentée dans le PDF comme…", options: ["vieillissante", "exclusivement adolescente", "absente du nord", "entièrement urbaine"], correctIndex: 0, explanation: "Le vieillissement des actifs et des vergers figure parmi les fragilités du primaire.", sourceLabel: "Activité d’application n°2", points: 1 },
+          { prompt: "Selon l’activité, les aléas climatiques favorisent surtout…", options: ["la baisse et l’irrégularité des productions", "une hausse garantie chaque année", "la disparition des besoins de stockage", "une industrialisation automatique"], correctIndex: 0, explanation: "Sécheresses, inondations et pluies irrégulières peuvent réduire les rendements.", sourceLabel: "Activité d’application n°2", points: 1 },
+          { prompt: "Quelle branche domine le tissu industriel décrit ?", options: ["Les industries agroalimentaires", "Les industries spatiales", "La construction aéronautique", "Les industries lourdes uniquement"], correctIndex: 0, explanation: "L’agro-industrie transforme les nombreuses matières premières agricoles du pays.", sourceLabel: "Activité d’application n°2", points: 1 },
+          { prompt: "Où le PDF localise-t-il plus de 75 % des capacités industrielles ?", options: ["Dans le sud, notamment le district d’Abidjan", "Dans le nord uniquement", "À l’étranger", "Dans les parcs nationaux"], correctIndex: 0, explanation: "Cette concentration crée un déséquilibre régional.", sourceLabel: "II-2", points: 1 },
+          { prompt: "Le secteur des transports est caractérisé dans l’activité par…", options: ["la désorganisation et l’insécurité sur certaines routes", "une organisation parfaite", "l’absence totale de route", "la gratuité de tous les déplacements"], correctIndex: 0, explanation: "Le fascicule cite désorganisation, accidents, routes dégradées, tracasseries et insécurité.", sourceLabel: "Activité d’application n°2", points: 1 },
+          { prompt: "Comment corriger la formule « hégémonie des étrangers » ?", options: ["Analyser plutôt accès au marché, financement, informalité et concurrence loyale", "Désigner une nationalité comme cause du sous-développement", "Interdire toute distribution", "Ignorer les règles commerciales"], correctIndex: 0, explanation: "La nationalité ne remplace pas l’analyse des structures, des règles et des pratiques économiques.", sourceLabel: "Correction de formulation", points: 2 },
+          { prompt: "Quel aménagement réduit directement les pertes après récolte ?", options: ["Des entrepôts et une chaîne du froid", "La suppression des marchés", "La dégradation des routes", "L’absence de collecte"], correctIndex: 0, explanation: "Stockage, conservation et collecte limitent les pertes et stabilisent l’offre.", sourceLabel: "II-1", points: 2 },
+          { prompt: "Pourquoi les importations de riz apparaissent-elles dans le diagnostic ?", options: ["Elles illustrent un déficit de certaines productions vivrières", "Elles prouvent l’absence d’agriculture", "Elles remplacent toute culture d’exportation", "Elles mesurent la dette publique"], correctIndex: 0, explanation: "Un pays agricole peut rester importateur lorsqu’une production vivrière ne couvre pas la demande.", sourceLabel: "II-1", points: 2 },
+          { prompt: "Comment faut-il traiter les parts de capitaux et d’intrants importés indiquées par le PDF ?", options: ["Comme des affirmations non datées à ne pas actualiser sans source", "Comme des constantes éternelles", "Comme des données démographiques", "Comme des superficies forestières"], correctIndex: 0, explanation: "Le fascicule ne donne ni millésime ni source précise pour ces pourcentages.", sourceLabel: "Précision documentaire", points: 2 },
+          { prompt: "Le choc de la Covid-19 sur le tourisme doit être présenté comme…", options: ["un contexte daté autour de 2020", "une situation permanente", "une cause du recul forestier en 1960", "une industrie lourde"], correctIndex: 0, explanation: "La pandémie explique une rupture historique, pas automatiquement l’état actuel du secteur.", sourceLabel: "II-3", points: 2 },
+          { prompt: "Quelle difficulté du commerce relie primaire et tertiaire ?", options: ["L’enclavement des régions productrices", "La présence de matières premières", "La formation hôtelière", "La création de parcs nationaux"], correctIndex: 0, explanation: "Sans routes et logistique, les denrées atteignent difficilement les marchés.", sourceLabel: "II-3", points: 1 },
+          { prompt: "Quel enchaînement montre l’interdépendance des secteurs ?", options: ["Récolte → stockage → transformation → transport → vente", "Dette → forêt → disparition des marchés", "Tourisme → absence de route → production", "Importation → suppression de toute usine"], correctIndex: 0, explanation: "Une chaîne de valeur mobilise successivement production, conservation, industrie et services.", sourceLabel: "Synthèse", points: 2 },
+        ],
         distractors: ["Le tissu industriel ivoirien est dominé par les industries lourdes de pointe.", "Le primaire ne dépend jamais du climat.", "Les transports n’influencent pas la compétitivité."],
       },
       {
         id: "solutions",
         title: "Les tentatives de solutions",
-        summary: "Situer les réformes économiques et proposer des solutions générales et sectorielles.",
-        conceptTitle: "Des politiques successives pour transformer l’économie",
-        explanation: "L’État a combiné ajustement, privatisation, diversification, civisme fiscal, restructuration du CEPICI, plans nationaux de développement, investissement agricole et construction d’infrastructures. Les solutions doivent aussi protéger l’environnement et développer le capital humain.",
-        keyPoint: "Une solution durable associe réformes économiques, infrastructures, formation, transformation locale et protection des ressources.",
-        example: "Les PND 2012-2015, 2016-2020 et 2021-2025 structurent les investissements publics récents présentés dans le cours.",
+        summary: "Situer les réformes, en mesurer les limites et associer chaque problème à une réponse durable.",
+        conceptTitle: "Des politiques successives, à évaluer dans leur contexte",
+        explanation: "L’État a combiné libéralisme encadré, ajustement, diversification, allègement de dette, promotion de l’investissement, plans nationaux et infrastructures. Les solutions durables associent aussi capital humain, équilibre territorial, transformation locale et protection des milieux.",
+        bodyMarkdown: String.raw`## Des politiques économiques en quatre temps
+
+| Période | Actions présentées | Lecture critique |
+|---|---|---|
+| 1960-début des années 1980 | Libéralisme économique associé à un capitalisme d’État | Croissance forte, mais dépendance aux exportations agricoles |
+| Années 1980-1990 | Programmes d’ajustement structurel, privatisations et ouverture | Réformes de crise aux effets économiques et sociaux à apprécier, pas un succès automatique |
+| Années 2000-2012 | Libéralisation de filières, diversification, civisme fiscal et processus PPTE | Recherche d’assainissement financier et de nouvelles productions |
+| 2012-2025 | CEPICI, code minier, PNIA, trois PND et grands travaux | Investissement, infrastructures et attractivité, avec enjeu d’inclusion |
+
+> **Correction chronologique.** La dévaluation du franc CFA a lieu le **12 janvier 1994**. Elle ne doit pas être rangée sans précision dans les seules « années 1980 ».
+
+La Côte d’Ivoire atteint le **point d’achèvement PPTE le 26 juin 2012**. Le FMI et la Banque mondiale annoncent alors plus de 4 milliards de dollars d’allègements PPTE et multilatéraux. Cela réduit une charge héritée, sans supprimer le besoin d’une gestion prudente des nouveaux emprunts.
+
+## Des PND datés, puis un nouveau cycle
+
+Le fascicule cite les PND **2012-2015**, **2016-2020** et **2021-2025**. Ils forment bien les trois cycles exécutés depuis 2012.
+
+> **Mise à jour institutionnelle.** Depuis la rédaction du PDF, le **PND 2026-2030** a été adopté en 2026. Il devient le cadre de référence actuel et s’organise autour de six piliers : stabilité ; agriculture et agro-industrie ; secteur privé et industrialisation ; capital humain ; infrastructures ; gouvernance. Cette mise à jour complète la chronologie sans réécrire les données anciennes du cours.
+
+## Répondre aux problèmes généraux
+
+- **Financement** : améliorer la collecte fiscale, lutter contre la fraude, développer épargne, microfinance et accès au crédit ;
+- **Structure économique** : diversifier et transformer davantage cacao, anacarde, caoutchouc ou riz ;
+- **Capital humain** : investir dans l’école, la santé, la formation, l’emploi et la planification familiale volontaire ;
+- **Environnement** : protéger les forêts, restaurer les sols, assainir les villes, traiter les déchets et adapter les territoires au climat.
+
+## Répondre secteur par secteur
+
+| Secteur | Réponses cohérentes |
+|---|---|
+| Primaire | irrigation, mécanisation adaptée, plants sélectionnés, agriculture responsable, jeunes agriculteurs, stockage, coopératives et riziculture |
+| Secondaire | transformation locale, énergie et financement, compétitivité, entrepreneurs nationaux et déconcentration industrielle |
+| Tertiaire | routes et sécurité, organisation des transports, hébergements, formation touristique, promotion nationale, lutte contre fraude et concurrence déloyale |
+
+Le PDF cite l’**ADERIZ**, le **CEPICI**, le **PNIA** et l’opération **Sublime Côte d’Ivoire**. Il faut savoir relier chaque instrument au problème auquel il répond au lieu d’apprendre une liste isolée.
+
+## Corriger la documentation finale
+
+Le dernier texte du fascicule est intitulé une seconde fois **« Document n° 3 »** : il s’agit logiquement du **Document 4**. Il présente 12 projets prioritaires du PND 2016-2020, évalués à **2 700 milliards de F CFA**, dans sept secteurs. Sa dernière phrase imprime **« PND 20216-2020 »** : il faut lire **PND 2016-2020**.` ,
+        keyPoint: "Une politique durable relie financement, production, compétences, territoires et environnement, puis mesure ses résultats au lieu d’aligner des annonces.",
+        example: "La transformation locale ne réussit que si les usines disposent aussi d’énergie, de financement, de main-d’œuvre formée, de routes et de débouchés.",
         timelineTitle: "Suivre les grandes phases de réponse",
-        timelineInstruction: "Parcours les trois périodes d’action publique distinguées par le document.",
+        timelineInstruction: "Parcours les réponses publiques de l’indépendance au PND actuel.",
         timeline: [
-          { label: "Avant les années 1990", shortLabel: "Avant 1990", detail: "Capitalisme d’État, croissance initiale puis programmes d’ajustement face à la crise des années 1980." },
-          { label: "Années 2000", detail: "Libéralisation de filières, diversification, civisme fiscal et recherche d’allègement de la dette." },
-          { label: "Depuis 2012", detail: "PND, réforme du CEPICI, code minier, PNIA et grands travaux d’infrastructures." },
+          { label: "1960-début 1980", shortLabel: "Croissance initiale", detail: "Libéralisme économique, intervention de l’État et croissance portée par les exportations agricoles." },
+          { label: "Années 1980-1990", shortLabel: "Ajustements", detail: "Crise, programmes d’ajustement, privatisations et dévaluation du 12 janvier 1994." },
+          { label: "Années 2000-2012", shortLabel: "Restructuration", detail: "Diversification, civisme fiscal, libéralisation et processus PPTE achevé en juin 2012." },
+          { label: "2012-2030", shortLabel: "Plans nationaux", detail: "Trois PND exécutés jusqu’en 2025, puis PND 2026-2030, infrastructures, capital humain et transformation." },
         ],
-        observation: "Les politiques sont plus efficaces lorsqu’elles traitent en même temps production, financement, compétences et environnement.",
-        check: { prompt: "Quel outil planifie les investissements récents de l’État ivoirien ?", options: ["Les PND", "Le Pacte de Varsovie", "Le STABEX", "La Charte de l’Atlantique"], correctIndex: 0, explanation: "Les Plans nationaux de développement organisent les priorités d’investissement." },
+        observation: "Une politique se juge par sa cohérence, son financement, son exécution et ses effets économiques, sociaux, territoriaux et environnementaux.",
+        check: { prompt: "Quel cadre succède au PND 2021-2025 ?", options: ["Le PND 2026-2030", "Le Pacte de Varsovie", "Le STABEX", "La Charte de l’Atlantique"], correctIndex: 0, explanation: "Le PND 2026-2030 est le cadre national de référence adopté en 2026." },
+        extraQuestions: [
+          { prompt: "Quel programme accompagne les réformes de crise des années 1980-1990 ?", options: ["Les programmes d’ajustement structurel", "Le plan Marshall", "Le Pacte de Varsovie", "La CECA"], correctIndex: 0, explanation: "Les PAS associent réduction de certaines dépenses, privatisations et ouverture économique.", sourceLabel: "III-1", points: 1 },
+          { prompt: "À quelle date la dévaluation du franc CFA intervient-elle ?", options: ["12 janvier 1994", "12 janvier 1980", "26 juin 2012", "1er janvier 2000"], correctIndex: 0, explanation: "La BCEAO situe la dévaluation le 12 janvier 1994.", sourceLabel: "Correction chronologique", points: 2 },
+          { prompt: "Quand la Côte d’Ivoire atteint-elle le point d’achèvement PPTE ?", options: ["26 juin 2012", "26 juin 1994", "30 avril 2021", "4 février 2026"], correctIndex: 0, explanation: "Le point d’achèvement rend l’allègement PPTE irrévocable en juin 2012.", sourceLabel: "Mise à jour institutionnelle", points: 2 },
+          { prompt: "Quels sont les trois PND cités par le PDF ?", options: ["2012-2015, 2016-2020 et 2021-2025", "1960-1970, 1970-1980 et 1980-1990", "2026-2030 uniquement", "1990-1995, 1995-2000 et 2000-2005"], correctIndex: 0, explanation: "Le fascicule énumère les trois cycles exécutés entre 2012 et 2025.", sourceLabel: "III-1", points: 1 },
+          { prompt: "Quel PND constitue le cadre de référence actuel après la période du fascicule ?", options: ["Le PND 2026-2030", "Le PND 2012-2015", "Le PND 2016-2020", "Aucun plan"], correctIndex: 0, explanation: "Le nouveau cycle a été adopté en 2026 et succède au PND 2021-2025.", sourceLabel: "Mise à jour institutionnelle", points: 2 },
+          { prompt: "Quel est le rôle du CEPICI dans le cours ?", options: ["Promouvoir l’investissement en Côte d’Ivoire", "Gérer les parcs nationaux", "Organiser le recensement", "Exploiter les ports"], correctIndex: 0, explanation: "La réforme du CEPICI cherche à attirer et faciliter les investissements.", sourceLabel: "III-1", points: 1 },
+          { prompt: "Quel programme vise l’investissement agricole ?", options: ["Le PNIA", "L’OMS", "Le FMI", "L’OACI"], correctIndex: 0, explanation: "Le Programme national d’investissement agricole soutient la relance et la modernisation du secteur.", sourceLabel: "III-1", points: 1 },
+          { prompt: "Quelle réponse remplace une politique démographique coercitive ?", options: ["Éducation, santé reproductive et planification familiale volontaire", "Exclusion et contrainte", "Suppression des services de santé", "Interdiction de la formation"], correctIndex: 0, explanation: "Une politique durable renforce les capacités et les choix libres des personnes.", sourceLabel: "III-2", points: 2 },
+          { prompt: "Quelle solution répond à la concentration industrielle à Abidjan ?", options: ["Déconcentrer les activités vers plusieurs régions", "Fermer toutes les usines régionales", "Concentrer 100 % des capacités", "Supprimer les routes intérieures"], correctIndex: 0, explanation: "La déconcentration rapproche les usines des ressources et diffuse emplois et infrastructures.", sourceLabel: "Activité d’application n°3", points: 1 },
+          { prompt: "Quelle solution répond au déficit vivrier cité ?", options: ["Développer une riziculture productive et durable", "Réduire le stockage", "Détruire les récoltes", "Abandonner l’irrigation"], correctIndex: 0, explanation: "Le document cite l’ADERIZ et l’objectif de renforcer la production de riz.", sourceLabel: "Activité d’application n°3", points: 1 },
+          { prompt: "Quelle combinaison soutient le tourisme ?", options: ["Accès aux sites, sécurité, formation et hébergements", "Insalubrité et enclavement", "Absence de promotion", "Dégradation des routes"], correctIndex: 0, explanation: "La qualité des accès, de l’accueil, des équipements et de la promotion conditionne le secteur.", sourceLabel: "III-3", points: 1 },
+          { prompt: "Quelles corrections faut-il apporter au dernier document ?", options: ["Le renommer Document 4 et lire PND 2016-2020", "Le supprimer sans explication", "Lire PND 20216-2020", "Le renommer Document 2"], correctIndex: 0, explanation: "La numérotation répète Document 3 et le millésime contient un chiffre supplémentaire.", sourceLabel: "Correction de source", points: 2 },
+        ],
         distractors: ["La diversification consiste à dépendre d’un seul produit d’exportation.", "Les infrastructures n’ont aucun rôle dans le développement.", "Le civisme fiscal diminue les ressources publiques."],
       },
     ],

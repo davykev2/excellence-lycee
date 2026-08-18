@@ -126,15 +126,81 @@ Les solutions doivent augmenter l’offre sans épuiser les stocks : moderniser 
   },
   "terminale-hg-g3-cote-ivoire-development-challenges": {
     splitSectionIndex: 0,
-    memorySentence: "Diagnostiquer le développement = distinguer problèmes structurels, difficultés sectorielles et solutions durables.",
+    memorySentence: "Diagnostiquer le développement = dater les faits, relier les mécanismes, nuancer les jugements et proposer des réponses cohérentes.",
     mission: {
-      title: "Comprendre les fragilités de l’économie ivoirienne",
-      scenario: "Un conférencier résume les difficultés ivoiriennes par l’endettement, la dégradation de l’environnement, la faiblesse de l’industrialisation et la forte croissance démographique.",
-      modelAnswer: "Ces problèmes se renforcent mutuellement : la dette limite les investissements, la faible industrialisation réduit la valeur ajoutée et l’emploi, tandis que la pression démographique et environnementale augmente les besoins.",
+      title: "Croissance, fragilités et solutions durables",
+      scenario: "Lors d’une conférence scolaire, un intervenant reconnaît les potentialités de la Côte d’Ivoire mais résume ses difficultés par l’endettement, la destruction de l’environnement, la faiblesse de l’industrialisation et une croissance démographique rapide. Il faut commenter ce diagnostic et proposer des réponses.",
+      modelAnswer: "Le diagnostic est globalement pertinent à condition de le dater et de le nuancer. La dette peut réduire les marges budgétaires, tandis qu’une transformation locale insuffisante limite valeur ajoutée et emplois. Une population jeune n’est pas un fardeau en soi : elle exige éducation, santé, formation, logements et emplois. La déforestation et les pollutions fragilisent enfin la production et le cadre de vie. Une stratégie cohérente associe gestion prudente de la dette, fiscalité efficace, industrialisation régionale, capital humain, infrastructures et restauration des milieux.",
       questions: [
-        question("Quel est le problème général posé ?", "Les obstacles au développement économique durable de la Côte d’Ivoire", ["L’absence de toute activité économique", "La création de la CEDEAO", "La fin de la bipolarisation"], "La situation rassemble plusieurs freins structurels et sectoriels au développement.", 1),
-        question("Pourquoi la faible industrialisation constitue-t-elle un frein ?", "Elle limite la transformation locale, la valeur ajoutée et les emplois", ["Elle augmente automatiquement les exportations industrielles", "Elle supprime toute dette publique", "Elle rend les matières premières plus rentables sans transformation"], "Transformer davantage les productions permet de conserver plus de richesse et de créer des emplois.", 2),
-        question("Quel ensemble de solutions est cohérent ?", "Diversifier l’économie, transformer localement, mieux former et protéger l’environnement", ["Accroître uniquement les importations", "Abandonner les infrastructures", "Encourager la déforestation"], "Une réponse durable combine économie, capital humain, gouvernance et environnement.", 0),
+        question("Quel est le problème général posé par la conférence ?", "Les obstacles à un développement ivoirien inclusif et durable malgré les potentialités du pays", ["L’absence de toute activité économique", "La création de la CEDEAO", "La disparition de toutes les ressources naturelles"], "La situation confronte performances et potentialités aux fragilités économiques, humaines, territoriales et environnementales.", 1),
+        question("Comment commenter correctement les quatre difficultés citées ?", "Montrer leurs mécanismes, leurs interactions et leurs limites sans transformer la population en cause unique", ["Réciter les quatre mots sans expliquer", "Accuser une catégorie de personnes", "Présenter chaque difficulté comme indépendante"], "Commenter signifie expliquer comment dette, industrie, services, capital humain et milieux agissent les uns sur les autres.", 2),
+        question("Quel ensemble de solutions est le plus cohérent ?", "Gérer prudemment la dette, transformer localement, investir dans les capacités humaines et restaurer les milieux", ["Accroître uniquement les importations", "Abandonner les infrastructures", "Encourager la déforestation"], "Une réponse durable combine financement, économie productive, inclusion, territoires et environnement.", 0),
+      ],
+      bodyMarkdown: String.raw`## Situation d’évaluation - Quatre difficultés à commenter
+
+Le club d’Histoire-Géographie organise une conférence sur l’économie ivoirienne. Après avoir rappelé les potentialités du pays, le conférencier insiste sur quatre difficultés :
+
+1. l’endettement ;
+2. la destruction de l’environnement ;
+3. la faiblesse de l’industrialisation ;
+4. la croissance démographique rapide.
+
+La mission demande d’**identifier** le problème, de **commenter** ce diagnostic et de **proposer** des solutions.
+
+## Construire le commentaire
+
+| Difficulté | Mécanisme à expliquer | Réponse cohérente |
+|---|---|---|
+| Dette | le service mobilise des ressources budgétaires ; le risque dépend aussi de l’usage des emprunts et de la capacité de remboursement | dette soutenable, transparence, recettes intérieures et investissements productifs |
+| Industrialisation limitée | matières premières peu transformées, valeur ajoutée et emplois réduits, forte concentration territoriale | agro-industrie, PME, énergie, financement, innovation et déconcentration |
+| Dynamique démographique | besoins rapides en école, santé, logements et emplois ; potentiel d’une population jeune | éducation, santé reproductive, formation, emploi et urbanisme |
+| Environnement dégradé | forêts, sols, eaux et villes fragilisés ; risques climatiques accrus | reboisement, agroforesterie, assainissement, contrôle des rejets et adaptation |
+
+## Mobiliser les quatre documents
+
+### Document 1 - Des performances inégalement partagées
+
+Le texte consulté en **avril 2021** oppose bonnes performances macroéconomiques, pauvreté, concentration des activités à Abidjan, emploi informel, gouvernance, insécurité foncière et difficulté d’accès au financement. Il appelle à une croissance plus **inclusive**. Ses pourcentages sont des estimations datées, non des valeurs permanentes.
+
+### Document 2 - Une dette en hausse sur la période étudiée
+
+| Année | Dette indiquée, en milliards de F CFA |
+|---|---:|
+| 2018 | 11 607,8 |
+| 2019 | 13 300,2 |
+| Septembre 2020 | 16 133,3 |
+
+L’augmentation entre 2018 et septembre 2020 atteint **4 525,5 milliards**, soit environ **39 %**. Ce calcul décrit la période du tableau ; il ne suffit pas, à lui seul, à juger la soutenabilité actuelle de la dette.
+
+### Document 3 - Population et services
+
+Le discours de **1997** relie croissance de la population, demande d’éducation et de santé, emploi, urbanisation et déboisement. Son vocabulaire de « fardeau » doit être contextualisé. Une politique actuelle raisonne en droits, capacités et planification familiale volontaire, sans rendre les familles ou les migrants responsables des difficultés.
+
+### Document 4 - Financer le PND 2016-2020
+
+Le dernier texte, mal numéroté une seconde fois « Document 3 », présente **12 projets prioritaires**, **2 700 milliards de F CFA** et **sept secteurs**. Il faut corriger la coquille finale **« PND 20216-2020 »** en **PND 2016-2020**.
+
+## Modèle de réponse organisée
+
+**Identifier.** Il s’agit des obstacles qui empêchent les performances économiques de devenir un développement inclusif, territorialement équilibré et durable.
+
+**Expliquer.** La hausse de la dette peut limiter les marges si les remboursements absorbent une part importante des recettes. La transformation locale insuffisante réduit les emplois et la valeur ajoutée. La croissance démographique accroît les besoins, mais une population jeune devient un atout si ses capacités progressent. Enfin, la déforestation, les pollutions et l’urbanisation précaire fragilisent les activités et la santé.
+
+**Proposer.** Il faut mieux mobiliser les ressources intérieures, financer des investissements productifs, développer des industries dans plusieurs régions, former les jeunes, améliorer les services et restaurer les forêts et les villes.
+
+**Nuancer et conclure.** La Côte d’Ivoire peut être une puissance économique régionale tout en conservant des fragilités. L’expression **« géant aux pieds d’argile »** n’est défendable que si elle est argumentée et nuancée par les progrès, les écarts territoriaux et la date des données.
+
+> **Méthode BAC.** Un bon commentaire suit toujours : **fait daté → mécanisme → effet → réponse → nuance**.` ,
+      extraQuestions: [
+        { prompt: "Quelle hausse de dette ressort du tableau entre 2018 et septembre 2020 ?", options: ["4 525,5 milliards de F CFA", "16 133,3 milliards de F CFA", "1 692,4 milliards de F CFA", "39 milliards de F CFA"], correctIndex: 0, explanation: "16 133,3 - 11 607,8 = 4 525,5 milliards de F CFA.", sourceLabel: "Document 2", points: 2 },
+        { prompt: "Cette hausse représente environ quelle proportion du montant de 2018 ?", options: ["39 %", "3,9 %", "139 %", "9 %"], correctIndex: 0, explanation: "4 525,5 / 11 607,8 x 100 ≈ 39 %.", sourceLabel: "Exploitation du document 2", points: 2 },
+        { prompt: "Quelle lecture du couvert forestier est correcte ?", options: ["La tendance est au recul, mais les valeurs varient selon date et définition", "Tous les chiffres du PDF sont exactement équivalents", "La forêt a toujours augmenté", "Le couvert forestier est une dette"], correctIndex: 0, explanation: "Le fascicule se contredit et les définitions institutionnelles donnent des périmètres différents.", sourceLabel: "Correction de source", points: 2 },
+        { prompt: "Pourquoi la faiblesse de l’industrialisation freine-t-elle le développement ?", options: ["Elle limite transformation, valeur ajoutée, emplois et diffusion territoriale", "Elle augmente automatiquement tous les revenus", "Elle supprime le besoin d’énergie", "Elle remplace le secteur primaire"], correctIndex: 0, explanation: "Une chaîne de transformation incomplète conserve moins de valeur et d’emplois dans le pays.", sourceLabel: "Consigne 2", points: 2 },
+        { prompt: "Quelle phrase traite correctement la dynamique démographique ?", options: ["Elle crée des besoins mais aussi un potentiel si les capacités humaines progressent", "Elle est toujours un fardeau", "Elle n’a aucun lien avec les services", "Elle interdit tout développement"], correctIndex: 0, explanation: "Le résultat dépend de l’éducation, de la santé, de la formation, des emplois et de l’urbanisme.", sourceLabel: "Consigne 2", points: 2 },
+        { prompt: "Que signifie l’appel du Document 1 à une croissance inclusive ?", options: ["Diffuser davantage les emplois, revenus et services entre populations et territoires", "Concentrer toutes les activités à Abidjan", "Réduire l’accès au financement local", "Exclure l’emploi informel sans transition"], correctIndex: 0, explanation: "L’inclusion cherche à transformer la croissance en amélioration plus largement partagée.", sourceLabel: "Document 1", points: 2 },
+        { prompt: "Quelle paire classe correctement un problème structurel et un problème conjoncturel ?", options: ["Agriculture peu modernisée / rationnement ponctuel de l’électricité", "Rationnement ponctuel / dégradation durable des sols", "Crise politique / concentration industrielle historique", "Vols ponctuels / faible transformation locale"], correctIndex: 0, explanation: "Le structurel est durable et lié à l’organisation de l’économie ; le conjoncturel dépend d’une circonstance plus temporaire.", sourceLabel: "Exercice 1", points: 2 },
+        { prompt: "Peut-on affirmer à la fois que l’économie est solide et qu’elle connaît des fragilités ?", options: ["Oui, si l’on distingue performances macroéconomiques, vulnérabilités et inégalités", "Non, les deux idées s’excluent toujours", "Oui, sans donner aucun argument", "Non, car une économie solide n’a jamais de dette"], correctIndex: 0, explanation: "La prise de position attendue doit être nuancée et appuyée sur des indicateurs datés.", sourceLabel: "Situation d’évaluation, exercice 1", points: 2 },
+        { prompt: "Comment utiliser l’expression « géant aux pieds d’argile » ?", options: ["Comme une thèse à justifier et à nuancer", "Comme un fait chiffré", "Comme une insulte sans argument", "Comme le titre du PND"], correctIndex: 0, explanation: "L’image oppose puissance apparente et fragilités ; elle demande des arguments dans les deux sens.", sourceLabel: "Situation d’évaluation, exercice 2", points: 2 },
       ],
     },
   },
