@@ -690,7 +690,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Le fonctionnement du cœur", pathId: "terminale-d-svt-l4-heart" },
       { title: "Le devenir des cellules sexuelles chez les mammifères", pathId: "terminale-d-svt-l5-gamete-fate" },
       { title: "Le fonctionnement des organes sexuels chez l’Homme", pathId: "terminale-d-svt-l6-human-sexual-organs" },
-      "La reproduction chez les spermaphytes",
+      { title: "La reproduction chez les spermaphytes", pathId: "terminale-d-svt-l7-spermaphyte-reproduction" },
       "La transmission d’un caractère héréditaire chez l’Homme",
       "La transmission de deux caractères héréditaires chez les êtres vivants",
       { title: "Le maintien de la constance du milieu intérieur", pathId: "terminale-d-svt-l10-internal-environment" },

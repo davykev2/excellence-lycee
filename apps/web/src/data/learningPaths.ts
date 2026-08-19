@@ -39,6 +39,7 @@ import { terminalDSvtSkeletalMusclePath } from "./terminalDSvtSkeletalMusclePath
 import { terminalDSvtHeartPath } from "./terminalDSvtHeartPath";
 import { terminalDSvtGameteFatePath } from "./terminalDSvtGameteFatePath";
 import { terminalDSvtHumanSexualOrgansPath } from "./terminalDSvtHumanSexualOrgansPath";
+import { terminalDSvtSpermaphyteReproductionPath } from "./terminalDSvtSpermaphyteReproductionPath";
 import { terminalDSvtInternalEnvironmentPath } from "./terminalDSvtInternalEnvironmentPath";
 import { terminalSvtPaths } from "./terminalSvtPaths";
 import { applyLessonXpBudget } from "./xpRewards";
@@ -85,6 +86,7 @@ const baseLearningPaths: LearningPath[] = [
   terminalDSvtHeartPath,
   terminalDSvtGameteFatePath,
   terminalDSvtHumanSexualOrgansPath,
+  terminalDSvtSpermaphyteReproductionPath,
   terminalDSvtInternalEnvironmentPath,
 ];
 

@@ -257,6 +257,15 @@ run(
 );
 
 run(
+  "Contenu · audit-terminal-d-svt-spermaphyte-reproduction.ts",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    resolve(root, "scripts", "audit-terminal-d-svt-spermaphyte-reproduction.ts"),
+  ],
+);
+
+run(
   "Contenu · audit-terminal-d-svt-internal-environment.ts",
   process.execPath,
   [
