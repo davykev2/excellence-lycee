@@ -32,7 +32,7 @@ export function PlatformStats({ stats }: { stats: PlatformStatsValue }) {
     <section className="platform-stats" aria-label="Statistiques de la plateforme Excellence Lycée">
       <div className="platform-stats-intro">
         <span className="platform-stats-pulse" aria-hidden="true" />
-        <div><strong>Excellence grandit avec toi</strong><span>Les chiffres de la communauté en temps réel</span></div>
+        <div><strong>Excellence grandit avec toi</strong><span>Les repères actuels de la communauté et du catalogue</span></div>
       </div>
       <div className="platform-stat platform-stat--members">
         <span className="platform-stat-icon"><UsersThree size={25} weight="duotone" /></span>

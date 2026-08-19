@@ -29,6 +29,8 @@ export interface UseStoreWalletResult {
   owned: Set<string>;
   loading: boolean;
   error: string | null;
+  /** Erreur du dernier chargement du solde, distincte d'un refus d'achat. */
+  syncError: string | null;
   purchasing: string | null;
   purchase: (itemId: string, price: number) => Promise<boolean>;
   refresh: () => void;
@@ -40,6 +42,7 @@ export function useStoreWallet({ localOnly = false, localTotalXp = 0 }: UseStore
   const [wallet, setWallet] = useState<StoreWallet>(emptyWallet);
   const [loading, setLoading] = useState(!localOnly);
   const [error, setError] = useState<string | null>(null);
+  const [syncError, setSyncError] = useState<string | null>(null);
   const [purchasing, setPurchasing] = useState<string | null>(null);
   const [refreshKey, setRefreshKey] = useState(0);
   const [localSpent, setLocalSpent] = useState(0);
@@ -49,6 +52,7 @@ export function useStoreWallet({ localOnly = false, localTotalXp = 0 }: UseStore
     if (localOnly) {
       const balance = Math.floor(localTotalXp / GOLD_XP_RATE) - localSpent;
       setWallet({ goldBalance: balance, goldSpent: localSpent, totalXp: localTotalXp, goldRate: GOLD_XP_RATE, ownedItemIds: localOwned });
+      setSyncError(null);
       setLoading(false);
       return;
     }
@@ -65,10 +69,13 @@ export function useStoreWallet({ localOnly = false, localTotalXp = 0 }: UseStore
           ownedItemIds: data.ownedItemIds ?? [],
         });
         setError(null);
+        setSyncError(null);
       })
       .catch((err: unknown) => {
         if (!active) return;
-        setError(err instanceof ApiError ? err.message : "Le porte-monnaie est momentanément indisponible.");
+        const message = err instanceof ApiError ? err.message : "Le porte-monnaie est momentanément indisponible.";
+        setError(message);
+        setSyncError(message);
       })
       .finally(() => {
         if (active) setLoading(false);
@@ -118,6 +125,7 @@ export function useStoreWallet({ localOnly = false, localTotalXp = 0 }: UseStore
     owned: new Set(wallet.ownedItemIds),
     loading,
     error,
+    syncError,
     purchasing,
     purchase,
     refresh,

@@ -26,9 +26,26 @@ import officialLogo from "../../assets/logo-excellence-officiel.png";
 type AuthMode = "login" | "register";
 type OnboardingStep = "welcome" | "access" | "form" | "confirmation" | "reset-request" | "reset-sent" | "reset-password" | "reset-success";
 
-function readRecoveryAccessToken() {
-  const params = new URLSearchParams(window.location.hash.replace(/^#/, ""));
-  return params.get("type") === "recovery" ? params.get("access_token") : null;
+export function readPasswordRecoveryState(location: Pick<Location, "hash" | "search"> = window.location) {
+  const searchParams = new URLSearchParams(location.search);
+  const hashParams = new URLSearchParams(location.hash.replace(/^#/, ""));
+  const hasRecoveryIntent = searchParams.get("auth") === "recovery" || hashParams.get("type") === "recovery";
+
+  return {
+    hasRecoveryIntent,
+    accessToken: hashParams.get("type") === "recovery" ? hashParams.get("access_token") : null,
+  };
+}
+
+function clearPasswordRecoveryUrl() {
+  const searchParams = new URLSearchParams(window.location.search);
+  if (searchParams.get("auth") === "recovery") searchParams.delete("auth");
+  const search = searchParams.toString();
+  window.history.replaceState(
+    window.history.state,
+    "",
+    `${window.location.pathname}${search ? `?${search}` : ""}`,
+  );
 }
 
 const stageLabels: Record<SchoolLevel["stage"], string> = {
@@ -63,8 +80,12 @@ const accountChoices = [
 
 export function AuthScreen() {
   const { login, register } = useAuth();
-  const [recoveryAccessToken] = useState(() => readRecoveryAccessToken());
-  const [step, setStep] = useState<OnboardingStep>(() => recoveryAccessToken ? "reset-password" : "welcome");
+  const [passwordRecovery, setPasswordRecovery] = useState(() => readPasswordRecoveryState());
+  const [step, setStep] = useState<OnboardingStep>(() => passwordRecovery.accessToken
+    ? "reset-password"
+    : passwordRecovery.hasRecoveryIntent
+      ? "reset-request"
+      : "welcome");
   const [accountType, setAccountType] = useState<AccountType | null>(null);
   const [mode, setMode] = useState<AuthMode>("register");
   const [motion, setMotion] = useState<CompanionMotion>("wave");
@@ -77,7 +98,9 @@ export function AuthScreen() {
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordConfirmation, setNewPasswordConfirmation] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(() => passwordRecovery.hasRecoveryIntent && !passwordRecovery.accessToken
+    ? "Ce lien de récupération est invalide ou expiré. Demande un nouveau lien."
+    : null);
   const [confirmationEmail, setConfirmationEmail] = useState<string | null>(null);
 
   const series = useMemo(() => schoolLevels.filter((level) => level.stage === stage), [stage]);
@@ -158,7 +181,7 @@ export function AuthScreen() {
   const submitNewPassword = async (event: FormEvent) => {
     event.preventDefault();
     setError(null);
-    if (!recoveryAccessToken) {
+    if (!passwordRecovery.accessToken) {
       setError("Ce lien de récupération est invalide ou expiré. Demande un nouveau lien.");
       return;
     }
@@ -168,8 +191,9 @@ export function AuthScreen() {
     }
     setSubmitting(true);
     try {
-      await confirmPasswordReset(recoveryAccessToken, newPassword);
-      window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+      await confirmPasswordReset(passwordRecovery.accessToken, newPassword);
+      clearPasswordRecoveryUrl();
+      setPasswordRecovery({ hasRecoveryIntent: false, accessToken: null });
       setPassword("");
       setNewPassword("");
       setNewPasswordConfirmation("");
@@ -182,6 +206,10 @@ export function AuthScreen() {
   };
 
   const returnToLogin = () => {
+    if (passwordRecovery.hasRecoveryIntent) {
+      clearPasswordRecoveryUrl();
+      setPasswordRecovery({ hasRecoveryIntent: false, accessToken: null });
+    }
     if (!accountType) setAccountType("student");
     setMode("login");
     setStep("form");

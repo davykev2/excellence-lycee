@@ -1,11 +1,18 @@
-import { ArrowRight, CaretDown, Hammer, Lightbulb, Student } from "@phosphor-icons/react";
+import { ArrowClockwise, ArrowRight, CaretDown, Hammer, Lightbulb, Student, WarningCircle } from "@phosphor-icons/react";
 import type { DashboardContent, SchoolLevel, SubjectDefinition, SubjectId } from "../../domain/learning";
 import { AppIcon } from "../../ui/AppIcon";
 import { ProfileAvatar } from "../../ui/ProfileAvatar";
 import heroDecoration from "../../assets/hero-math-decoration.png";
-import { MathPreviewChart } from "./MathPreviewChart";
 import { ProgressRing } from "./ProgressRing";
 import { PlatformStats, type PlatformStatsValue } from "./PlatformStats";
+import { SubjectPreview } from "./SubjectPreview";
+
+export type DashboardDailyGoal = DashboardContent["dailyGoal"];
+
+export interface DashboardSyncIssue {
+  message: string;
+  onRetry: () => void;
+}
 
 interface DashboardProps {
   content: DashboardContent;
@@ -19,6 +26,8 @@ interface DashboardProps {
   onOpenGoal: () => void;
   onOpenArena: () => void;
   stats: PlatformStatsValue;
+  dailyGoal?: DashboardDailyGoal;
+  syncIssue?: DashboardSyncIssue | null;
 }
 
 export function Dashboard({
@@ -33,6 +42,8 @@ export function Dashboard({
   onOpenGoal,
   onOpenArena,
   stats,
+  dailyGoal = content.dailyGoal,
+  syncIssue = null,
 }: DashboardProps) {
   return (
     <main className="dashboard">
@@ -94,6 +105,35 @@ export function Dashboard({
 
       <PlatformStats stats={stats} />
 
+      {syncIssue && (
+        <section
+          className="dashboard-construction-notice"
+          role="alert"
+          aria-label="Problème de synchronisation"
+        >
+          <span className="dashboard-construction-icon" aria-hidden="true">
+            <WarningCircle size={24} weight="duotone" />
+          </span>
+          <div>
+            <p>Synchronisation interrompue</p>
+            <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "6px 14px" }}>
+              <span style={{ color: "var(--ink-muted)", fontSize: 13, lineHeight: 1.45 }}>
+                {syncIssue.message}
+              </span>
+              <button
+                className="hint-action"
+                type="button"
+                onClick={syncIssue.onRetry}
+                style={{ marginTop: 0, padding: "4px 0", fontSize: 13 }}
+              >
+                <ArrowClockwise size={18} weight="bold" aria-hidden="true" />
+                <span>Réessayer</span>
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="lesson-hero" aria-labelledby="lesson-title">
         <div className="lesson-copy">
           <p className="lesson-eyebrow">{content.lesson.eyebrow}</p>
@@ -115,9 +155,9 @@ export function Dashboard({
           </button>
         </div>
 
-        <div className="lesson-visual" aria-label="Aperçu interactif de la leçon">
+        <div className="lesson-visual" aria-label="Aperçu de la leçon">
           <img src={heroDecoration} className="hero-decoration" alt="" aria-hidden="true" />
-          <MathPreviewChart />
+          <SubjectPreview subject={subject} lessonTitle={content.lesson.title} />
         </div>
       </section>
 
@@ -125,8 +165,8 @@ export function Dashboard({
         <button className="quick-action quick-action--goal" type="button" onClick={onOpenGoal}>
           <span className="quick-action-icon"><AppIcon name="target" size={29} weight="duotone" /></span>
           <span className="quick-action-copy">
-            <strong>{content.dailyGoal.title}</strong>
-            <span>{content.dailyGoal.completed}/{content.dailyGoal.target} étapes terminées</span>
+            <strong>{dailyGoal.title}</strong>
+            <span>{dailyGoal.completed}/{dailyGoal.target} étapes terminées</span>
           </span>
           <ArrowRight className="quick-action-arrow" size={25} weight="bold" aria-hidden="true" />
         </button>

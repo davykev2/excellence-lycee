@@ -65,7 +65,8 @@ export const subjects: Record<SubjectId, SubjectDefinition> = {
     id: "history-geography",
     label: "Histoire-Géographie",
     shortLabel: "H-G",
-    enabled: false,
+    enabled: true,
+    levelIds: ["terminale-a", "terminale-c", "terminale-d"],
     theme: { accent: "#a36a25", accentSoft: "#f7efe4" },
   },
 };
@@ -89,8 +90,8 @@ export const initialDashboard: DashboardContent = {
   },
   dailyGoal: {
     title: "Objectif du jour",
-    description: "Terminer une étape et résoudre 3 exercices.",
-    completed: 2,
+    description: "Valider 3 étapes aujourd’hui pour garder ton rythme.",
+    completed: 0,
     target: 3,
   },
   arena: {

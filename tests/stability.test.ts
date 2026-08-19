@@ -15,12 +15,16 @@ import {
 import { learningPaths } from "../apps/web/src/data/learningPaths.ts";
 import { AVAILABLE_EXERCISES } from "../apps/web/src/data/learningPathMetrics.ts";
 import { curriculumLessonTitles } from "../apps/web/src/data/curriculumCatalog.ts";
-import { schoolLevels, subjects } from "../apps/web/src/data/programme.ts";
+import { initialDashboard, schoolLevels, subjects } from "../apps/web/src/data/programme.ts";
 import {
   buildEditorialAudits,
   editorialStatusOf,
 } from "../apps/web/src/features/admin/editorialAudit.ts";
 import { storeCatalog } from "../apps/web/src/data/storeCatalog.ts";
+import {
+  completedLevelsToday,
+  selectDashboardPath,
+} from "../apps/web/src/features/dashboard/dashboardLearningState.ts";
 import { numericalDerivative, parseMathExpression } from "../apps/web/src/features/codex/mathEngine.ts";
 import {
   canOpenMasteryLevel,
@@ -230,6 +234,73 @@ test("l'audit éditorial reste aligné sur les leçons publiées et celles encor
   assert.equal(chargedParticleD?.published, true);
   assert.equal(chargedParticleD && editorialStatusOf(chargedParticleD), "complete");
   assert.equal(learningPaths.find((path) => path.id === "terminale-cd-charged-particle-magnetic-field")?.chapterNumberByLevel?.["terminale-d"], 6);
+});
+
+test("l'accueil reprend le parcours réellement utilisé et calcule l'objectif du jour", () => {
+  assert.equal(initialDashboard.dailyGoal.completed, 0, "Le seed d'accueil ne doit simuler aucune étape terminée.");
+  assert.equal(subjects["history-geography"].enabled, true);
+  assert.deepEqual(
+    subjects["history-geography"].levelIds,
+    ["terminale-a", "terminale-c", "terminale-d"],
+    "L'Histoire-Géographie publiée ne doit être proposée qu'aux Terminales.",
+  );
+  const candidates = learningPaths.filter((path) => (
+    path.subjectId === "mathematics" && path.levelIds.includes("terminale-c")
+  ));
+  assert.ok(candidates.length >= 2, "Le test de reprise exige au moins deux parcours de Terminale C.");
+  const [firstPath, recentPath] = candidates;
+  const progress = {
+    [firstPath.id]: {
+      first: {
+        pathId: firstPath.id,
+        lessonId: "first",
+        xpAwarded: 500,
+        bestScore: 20,
+        attemptCount: 1,
+        completedAt: "2026-08-18T10:00:00.000Z",
+      },
+    },
+    [recentPath.id]: {
+      recent: {
+        pathId: recentPath.id,
+        lessonId: "recent",
+        xpAwarded: 500,
+        bestScore: 20,
+        attemptCount: 1,
+        completedAt: "2026-08-19T09:00:00.000Z",
+      },
+      todayAgain: {
+        pathId: recentPath.id,
+        lessonId: "today-again",
+        xpAwarded: 500,
+        bestScore: 15,
+        attemptCount: 2,
+        completedAt: "2026-08-19T11:00:00.000Z",
+      },
+    },
+  };
+
+  assert.equal(selectDashboardPath({
+    paths: candidates,
+    progressByPath: progress,
+    levelId: "terminale-c",
+    subjectId: "mathematics",
+    preference: { pathId: firstPath.id, openedAt: "2026-08-18T12:00:00.000Z" },
+  })?.id, recentPath.id, "Une préférence locale ancienne ne doit pas masquer une progression plus récente.");
+
+  assert.equal(selectDashboardPath({
+    paths: candidates,
+    progressByPath: progress,
+    levelId: "terminale-c",
+    subjectId: "mathematics",
+    preference: { pathId: firstPath.id, openedAt: "2026-08-19T12:00:00.000Z" },
+  })?.id, firstPath.id, "Le dernier parcours ouvert doit rester reprenable avant sa première validation.");
+
+  assert.equal(
+    completedLevelsToday(progress, new Date("2026-08-19T15:00:00.000Z")),
+    2,
+    "L'objectif doit compter les niveaux validés pendant la journée en Côte d'Ivoire.",
+  );
 });
 
 test("le chargement par matière ne récupère aucun contenu des autres matières", async () => {

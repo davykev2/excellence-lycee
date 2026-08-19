@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { apiRequest } from "../../lib/api";
+import { apiRequest, describeApiFailure } from "../../lib/api";
+import type { ApiRequestFailure } from "../../lib/api";
 
 export interface ProgressLesson {
   pathId: string;
@@ -28,6 +29,23 @@ interface LearningProgressOptions {
   localOnly?: boolean;
 }
 
+export type LearningProgressError = ApiRequestFailure;
+
+export interface UseLearningProgressResult {
+  progressByPath: Record<string, Record<string, ProgressLesson>>;
+  completedLessonsByPath: Record<string, Set<string>>;
+  submitAttempt: (
+    pathId: string,
+    lessonId: string,
+    scoreOutOf20: number,
+    lessonReward?: number,
+  ) => Promise<AttemptResult>;
+  totalXp: number;
+  loading: boolean;
+  error: LearningProgressError | null;
+  retry: () => void;
+}
+
 const previewProgressStorageKey = "excellence-preview-progress-v1";
 
 function groupProgress(lessons: ProgressLesson[]) {
@@ -39,10 +57,13 @@ function groupProgress(lessons: ProgressLesson[]) {
   return grouped;
 }
 
-export function useLearningProgress({ localOnly = false }: LearningProgressOptions = {}) {
+export function useLearningProgress({ localOnly = false }: LearningProgressOptions = {}): UseLearningProgressResult {
   const [progressByPath, setProgressByPath] = useState<Record<string, Record<string, ProgressLesson>>>({});
   const [totalXp, setTotalXp] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<LearningProgressError | null>(null);
+  const [reloadKey, setReloadKey] = useState(0);
+  const retry = useCallback(() => setReloadKey((value) => value + 1), []);
 
   useEffect(() => {
     if (localOnly) {
@@ -54,22 +75,33 @@ export function useLearningProgress({ localOnly = false }: LearningProgressOptio
       } catch {
         window.localStorage.removeItem(previewProgressStorageKey);
       } finally {
+        setError(null);
         setLoading(false);
       }
       return;
     }
 
     let active = true;
-    apiRequest<ProgressResponse>("/progress/")
+    const controller = new AbortController();
+    setLoading(true);
+    setError(null);
+    apiRequest<ProgressResponse>("/progress/", { signal: controller.signal, timeoutMs: 12_000 })
       .then((response) => {
         if (!active) return;
         setProgressByPath(groupProgress(response.lessons));
         setTotalXp(response.totals.totalXp);
+        setError(null);
       })
-      .catch(() => undefined)
+      .catch((reason: unknown) => {
+        if (!active) return;
+        setError(describeApiFailure(reason, "La progression n’a pas pu être chargée. Réessaie dans quelques instants."));
+      })
       .finally(() => active && setLoading(false));
-    return () => { active = false; };
-  }, [localOnly]);
+    return () => {
+      active = false;
+      controller.abort();
+    };
+  }, [localOnly, reloadKey]);
 
   const completedLessonsByPath = useMemo(() => {
     const grouped: Record<string, Set<string>> = {};
@@ -126,5 +158,5 @@ export function useLearningProgress({ localOnly = false }: LearningProgressOptio
     return result;
   }, [localOnly, progressByPath]);
 
-  return { progressByPath, completedLessonsByPath, submitAttempt, totalXp, loading };
+  return { progressByPath, completedLessonsByPath, submitAttempt, totalXp, loading, error, retry };
 }

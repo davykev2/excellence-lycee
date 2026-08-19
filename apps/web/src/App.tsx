@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { AuthScreen } from "./features/auth/AuthScreen";
+import { AuthScreen, readPasswordRecoveryState } from "./features/auth/AuthScreen";
 import { useAuth } from "./features/auth/AuthProvider";
 
 const LearningApp = lazy(() =>
@@ -24,7 +24,9 @@ const learningFallback = (
 
 export function App() {
   const { user, loading } = useAuth();
+  const { hasRecoveryIntent } = readPasswordRecoveryState();
 
+  if (hasRecoveryIntent) return <AuthScreen />;
   if (hasDevelopmentPreview) {
     return <Suspense fallback={learningFallback}><LearningApp /></Suspense>;
   }

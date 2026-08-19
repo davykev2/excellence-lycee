@@ -10,6 +10,12 @@ import { getNextLesson, getPathLessons } from "./features/paths/pathLessons";
 import { TutorPanel } from "./features/tutor/TutorPanel";
 import { DetailsDialog } from "./features/details/DetailsDialog";
 import { usePlatformStats } from "./features/dashboard/PlatformStats";
+import {
+  completedLevelsToday,
+  dashboardPathPreferenceKey,
+  selectDashboardPath,
+  type DashboardPathPreference,
+} from "./features/dashboard/dashboardLearningState";
 import { useAuth } from "./features/auth/AuthProvider";
 import { useLearningProgress } from "./features/progress/useLearningProgress";
 import type { AuthUser } from "./domain/auth";
@@ -267,14 +273,27 @@ function LearningAppShell({
   const [tourReplayKey, setTourReplayKey] = useState(0);
   const [bundleNavigationLoading, setBundleNavigationLoading] = useState(false);
   const [bundleNavigationError, setBundleNavigationError] = useState<Error | null>(null);
+  const [dashboardPathPreference, setDashboardPathPreference] = useState<DashboardPathPreference | null>(null);
   const navigationRequest = useRef(0);
   const { logout, updateUser } = useAuth();
   const localPreview = isPathPreview || isAdminContentPreview || isArenaExerciseEditorPreview || isDuelPreview || isBacExamPreview;
-  const { progressByPath, completedLessonsByPath, submitAttempt, totalXp, loading: progressLoading } = useLearningProgress({ localOnly: localPreview });
+  const {
+    progressByPath,
+    completedLessonsByPath,
+    submitAttempt,
+    totalXp,
+    loading: progressLoading,
+    error: progressError,
+    retry: retryProgress,
+  } = useLearningProgress({ localOnly: localPreview });
   const store = useStoreWallet({ localOnly: localPreview, localTotalXp: totalXp });
   const availablePaths = usePublishedLessonContents(baseLearningPaths, localPreview);
   const platformStats = usePlatformStats(localPreview);
-  const unreadMessages = useUnreadMessages(localPreview);
+  const {
+    count: unreadMessages,
+    error: unreadMessagesError,
+    retry: retryUnreadMessages,
+  } = useUnreadMessages(localPreview);
   const profile: LearnerProfile = useMemo(() => ({ name: user.name, photoUrl: user.photoUrl, levelId: user.levelId }), [user]);
   const activeNavigation = route.navigation;
   const subjectId = route.subjectId ?? previewPath?.subjectId ?? initialDashboard.subjectId;
@@ -340,9 +359,34 @@ function LearningAppShell({
     [level.id],
   );
   const subject = subjectOptions.find((item) => item.id === subjectId) ?? subjects.mathematics;
+
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(dashboardPathPreferenceKey(user.id, level.id, subject.id));
+      if (!stored) {
+        setDashboardPathPreference(null);
+        return;
+      }
+      const parsed = JSON.parse(stored) as Partial<DashboardPathPreference>;
+      setDashboardPathPreference(
+        typeof parsed.pathId === "string" && typeof parsed.openedAt === "string"
+          ? { pathId: parsed.pathId, openedAt: parsed.openedAt }
+          : null,
+      );
+    } catch {
+      setDashboardPathPreference(null);
+    }
+  }, [level.id, subject.id, user.id]);
+
   const dashboardPath = useMemo(
-    () => availablePaths.find((path) => path.subjectId === subject.id && path.levelIds.includes(level.id)) ?? null,
-    [availablePaths, level.id, subject.id],
+    () => selectDashboardPath({
+      paths: availablePaths,
+      progressByPath,
+      levelId: level.id,
+      subjectId: subject.id,
+      preference: dashboardPathPreference,
+    }),
+    [availablePaths, dashboardPathPreference, level.id, progressByPath, subject.id],
   );
   const selectedPath = useMemo(
     () => availablePaths.find((path) => path.id === selectedPathId && path.levelIds.includes(level.id)) ?? null,
@@ -359,6 +403,7 @@ function LearningAppShell({
     [activePath, completedLessonIds, pathLessons],
   );
   const progress = pathLessons.length > 0 ? Math.round((completedLessonIds.size / pathLessons.length) * 100) : 0;
+  const completedToday = useMemo(() => completedLevelsToday(progressByPath), [progressByPath]);
   const activeLessonIndex = activeLessonId ? pathLessons.findIndex((lesson) => lesson.id === activeLessonId) : -1;
   const activeLesson = activeLessonIndex >= 0 ? pathLessons[activeLessonIndex] : null;
   const nextLesson = activeLessonIndex >= 0 ? pathLessons[activeLessonIndex + 1] : undefined;
@@ -369,6 +414,10 @@ function LearningAppShell({
       learnerName: profile.name,
       learnerPhotoUrl: profile.photoUrl,
       levelId: profile.levelId,
+      dailyGoal: {
+        ...initialDashboard.dailyGoal,
+        completed: Math.min(completedToday, initialDashboard.dailyGoal.target),
+      },
       lesson: {
         ...initialDashboard.lesson,
         id: currentLesson?.id ?? initialDashboard.lesson.id,
@@ -378,8 +427,38 @@ function LearningAppShell({
         ctaLabel: completedLessonIds.size === pathLessons.length ? "Revoir la leçon" : "Continuer le parcours",
       },
     }),
-    [completedLessonIds.size, currentLesson, pathLessons.length, profile],
+    [completedLessonIds.size, completedToday, currentLesson, pathLessons.length, profile],
   );
+  const dashboardSyncIssue = useMemo(() => {
+    const unavailable: string[] = [];
+    if (progressError) unavailable.push("ta progression");
+    if (store.syncError) unavailable.push("ton solde d’or");
+    if (unreadMessagesError) unavailable.push("tes messages non lus");
+    if (unavailable.length === 0) return null;
+
+    return {
+      message: `La synchronisation de ${unavailable.join(", ")} a échoué. Tes données enregistrées restent protégées.`,
+      onRetry: () => {
+        if (progressError) retryProgress();
+        if (store.syncError) store.refresh();
+        if (unreadMessagesError) retryUnreadMessages();
+      },
+    };
+  }, [progressError, retryProgress, retryUnreadMessages, store.refresh, store.syncError, unreadMessagesError]);
+
+  useEffect(() => {
+    if (!selectedPath) return;
+    const preference = { pathId: selectedPath.id, openedAt: new Date().toISOString() };
+    try {
+      window.localStorage.setItem(
+        dashboardPathPreferenceKey(user.id, level.id, selectedPath.subjectId),
+        JSON.stringify(preference),
+      );
+    } catch {
+      // La progression serveur reste le repli si le stockage local est indisponible.
+    }
+    if (selectedPath.subjectId === subject.id) setDashboardPathPreference(preference);
+  }, [level.id, selectedPath, subject.id, user.id]);
 
   const handleNavigate = (id: NavigationId) => {
     setOpenDialog(null);
@@ -471,8 +550,8 @@ function LearningAppShell({
 
   return (
     <div className="app-shell" style={{ "--subject-accent": subject.theme.accent, "--subject-accent-soft": subject.theme.accentSoft } as React.CSSProperties}>
-      <Sidebar activeItem={activeNavigation} onNavigate={handleNavigate} canAccessAdmin={user.role === "admin"} unreadMessages={unreadMessages} goldBalance={store.loading ? null : store.wallet.goldBalance} />
-      <MobileHeader goldBalance={store.loading ? null : store.wallet.goldBalance} onOpenStore={() => handleNavigate("store")} />
+      <Sidebar activeItem={activeNavigation} onNavigate={handleNavigate} canAccessAdmin={user.role === "admin"} unreadMessages={unreadMessages} goldBalance={store.loading || store.syncError ? null : store.wallet.goldBalance} />
+      <MobileHeader goldBalance={store.loading || store.syncError ? null : store.wallet.goldBalance} onOpenStore={() => handleNavigate("store")} />
 
       <Suspense fallback={<main className="admin-loading" role="status">Chargement de ton espace…</main>}>
         {activeNavigation === "admin" ? (
@@ -593,6 +672,8 @@ function LearningAppShell({
           onOpenGoal={() => setOpenDialog("goal")}
           onOpenArena={() => handleNavigate("arena")}
           stats={platformStats}
+          dailyGoal={dashboardContent.dailyGoal}
+          syncIssue={dashboardSyncIssue}
         />
         )}
       </Suspense>
