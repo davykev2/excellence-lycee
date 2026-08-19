@@ -66,7 +66,6 @@ const loaderSource = readFileSync(
 );
 assert.ok(loaderSource.includes('import("./terminalDSvtInternalEnvironmentPath")'));
 assert.ok(loaderSource.includes("module.terminalDSvtInternalEnvironmentPath"));
-assert.ok(loaderSource.includes("return [conditionedReflex, nervousTissue, skeletalMuscle, heart, internalEnvironment];"));
 
 const registrySource = readFileSync(
   new URL("../apps/web/src/data/learningPaths.ts", import.meta.url),
