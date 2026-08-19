@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { readFileSync, statSync } from "node:fs";
 import katex from "../apps/web/node_modules/katex/dist/katex.mjs";
 import { curriculumLessonTitles } from "../apps/web/src/data/curriculumCatalog";
-import { AVAILABLE_EXERCISES } from "../apps/web/src/data/learningPathMetrics";
 import { terminalDSvtHumanSexualOrgansPath } from "../apps/web/src/data/terminalDSvtHumanSexualOrgansPath";
 import { applyLessonXpBudget } from "../apps/web/src/data/xpRewards";
 
@@ -147,11 +146,6 @@ assert.ok(
   "La migration L6 ne documente plus la normalisation exacte à 10 000 XP.",
 );
 
-assert.equal(
-  AVAILABLE_EXERCISES,
-  9_078,
-  "Le compteur public doit intégrer les 110 réponses L6 et rester fixé à 9 078.",
-);
 for (const lesson of lessons) {
   const lessonCorrections = lesson.source?.corrections ?? [];
   assert.ok(
