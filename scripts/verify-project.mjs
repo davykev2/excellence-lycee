@@ -239,6 +239,15 @@ run(
 );
 
 run(
+  "Contenu · audit-terminal-d-svt-gamete-fate.ts",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    resolve(root, "scripts", "audit-terminal-d-svt-gamete-fate.ts"),
+  ],
+);
+
+run(
   "Contenu · audit-terminal-d-svt-internal-environment.ts",
   process.execPath,
   [
