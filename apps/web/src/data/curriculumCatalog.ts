@@ -689,7 +689,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Le fonctionnement du muscle strié squelettique", pathId: "terminale-d-svt-l3-skeletal-muscle" },
       { title: "Le fonctionnement du cœur", pathId: "terminale-d-svt-l4-heart" },
       { title: "Le devenir des cellules sexuelles chez les mammifères", pathId: "terminale-d-svt-l5-gamete-fate" },
-      "Le fonctionnement des organes sexuels chez l’Homme",
+      { title: "Le fonctionnement des organes sexuels chez l’Homme", pathId: "terminale-d-svt-l6-human-sexual-organs" },
       "La reproduction chez les spermaphytes",
       "La transmission d’un caractère héréditaire chez l’Homme",
       "La transmission de deux caractères héréditaires chez les êtres vivants",

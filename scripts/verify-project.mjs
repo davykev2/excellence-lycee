@@ -248,6 +248,15 @@ run(
 );
 
 run(
+  "Contenu · audit-terminal-d-svt-human-sexual-organs.ts",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    resolve(root, "scripts", "audit-terminal-d-svt-human-sexual-organs.ts"),
+  ],
+);
+
+run(
   "Contenu · audit-terminal-d-svt-internal-environment.ts",
   process.execPath,
   [
