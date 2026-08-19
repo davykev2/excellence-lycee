@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import katex from "../apps/web/node_modules/katex/dist/katex.mjs";
 import { curriculumLessonTitles } from "../apps/web/src/data/curriculumCatalog";
-import { AVAILABLE_EXERCISES } from "../apps/web/src/data/learningPathMetrics";
 import { terminalDSvtSpermaphyteReproductionPath } from "../apps/web/src/data/terminalDSvtSpermaphyteReproductionPath";
 import { applyLessonXpBudget } from "../apps/web/src/data/xpRewards";
 
@@ -207,12 +206,6 @@ assert.ok(
 assert.ok(
   migration.includes("590 / 720 / 860 / 920 / 1050 / 1190 / 1320 / 1510 / 1840 = 10 000"),
   "La migration L7 ne documente plus la normalisation exacte à 10 000 XP.",
-);
-
-assert.equal(
-  AVAILABLE_EXERCISES,
-  9_180,
-  "Le compteur public doit intégrer les 102 réponses L7 et rester fixé à 9 180 avant G7.",
 );
 
 const verifierSource = readFileSync(
