@@ -389,15 +389,76 @@ Le texte de l’OCDE publié pour le trentième anniversaire en **2005** relie r
   },
   "terminale-hg-g7-eu-acp-cooperation": {
     splitSectionIndex: 1,
-    memorySentence: "La coopération UE-ACP combine accords, aides et débouchés, mais son bilan dépend de la réduction des déséquilibres et de la dépendance.",
+    memorySentence: "Rome et Yaoundé associent, Lomé préfère et stabilise, Cotonou réforme, Samoa régionalise ; le bilan oppose acquis réels et dépendances persistantes.",
     mission: {
-      title: "Les accords UE-ACP ont-ils produit le développement attendu ?",
-      scenario: "Un débat porte sur l’accord de Cotonou : certains mettent en avant les aides et les échanges, d’autres constatent que plusieurs pays ACP restent en retard de développement.",
-      modelAnswer: "Les accords ont financé des projets et ouvert des marchés, mais ils n’ont pas supprimé la dépendance aux matières premières, la dette ni la faible transformation locale.",
+      title: "De Cotonou à Samoa : le partenariat a-t-il produit le développement attendu ?",
+      scenario: "Une classe confronte trois débats du fascicule et les analyses de Robert Dussey, Albert Tévoédjrè et Bernard Petit. Elle doit distinguer les acquis concrets de la coopération, ses déséquilibres structurels et les conditions d’un partenariat UE-OEACP plus équilibré dans le cadre actuel de Samoa.",
+      modelAnswer: "Les accords ont financé des infrastructures, des services, des formations et un dialogue politique, tout en ouvrant des marchés. Ils n’ont pourtant pas supprimé la dépendance aux produits primaires, la faiblesse de l’investissement productif, la pauvreté ni l’asymétrie commerciale. Un partenariat plus équilibré doit soutenir la transformation locale, l’intégration régionale, les capacités publiques et une évaluation transparente des résultats.",
+      bodyMarkdown: String.raw`## Dossier A — Trois situations, une même controverse
+
+La première situation rapporte un débat tenu à **Cotonou** lors d’un sommet France-Afrique. Un camp insiste sur l’intérêt mutuel des accords ; l’autre estime que le développement promis reste insuffisant. La réponse attendue doit donc identifier **le bilan de la coopération**, expliquer l’expression « à bénéfice mutuel » et prendre une position justifiée.
+
+Une deuxième situation, construite autour d’un entretien accordé en **octobre 2018** par le ministre togolais Robert Dussey, reconnaît l’apport de l’aide au développement tout en soulignant les résultats commerciaux et productifs insuffisants ainsi qu’un rapport jugé plus favorable à l’Europe.
+
+La troisième situation oppose deux affirmations absolues : « l’UE développe les ACP » contre « l’UE retarde et ruine les ACP ». Aucune ne suffit. Il faut répondre avec des **faits datés**, distinguer bénéficiaires et domaines, puis ajouter une nuance.
+
+## Dossier B — Réparer le texte lacunaire
+
+Le texte à compléter des pages 14-15 comporte **douze blancs**, alors que sa banque ne fournit que **dix éléments**. Il date aussi le traité de Rome du « 25 mars 1975 ».
+
+> **Corrections de source.** La date exacte est le **25 mars 1957**. Une reconstruction cohérente exige douze éléments : **Caraïbes ; Pacifique ; Communauté économique européenne ; puissances colonisatrices ; outre-mer ; union ; intérêts ; complémentarité ; accords ; espoirs ; ACP ; difficultés**. La banque originale étant incomplète, aucune copie à l’identique ne peut donner une solution unique.
+
+## Dossier C — Transformer les vrai/faux en jugements rigoureux
+
+Les six affirmations finales du fascicule portent sur infrastructures, débouchés, aide humanitaire, bénéficiaires, APE et concurrence européenne. Plusieurs sont trop générales.
+
+| Affirmation | Réponse rigoureuse |
+|---|---|
+| des infrastructures ont été développées | **vrai dans de nombreux projets**, sans généraliser à tous les pays ni à tous les besoins |
+| des produits ACP ont trouvé des débouchés européens | **vrai**, notamment sous les préférences de Lomé, mais avec des résultats variables |
+| l’action humanitaire fait partie de la coopération | **vrai** |
+| les ACP sont « les plus grands bénéficiaires » | **non démontré** : l’UE bénéficie aussi d’échanges, de marchés et d’approvisionnements |
+| les APE sont « très profitables » | formulation trop absolue : accès européen, transitions et sauvegardes coexistent avec des risques pour les recettes et producteurs |
+| les produits européens ont « envahi » les marchés ACP | remplacer le slogan par une analyse de la concurrence, des volumes, des secteurs et des périodes |
+
+## Dossier D — Deux lectures opposées à confronter
+
+Dans un texte publié en **2014**, Albert Tévoédjrè insiste sur l’héritage colonial, la dépendance et l’asymétrie. Dans un article publié en **2008**, Bernard Petit rappelle les aides, infrastructures et progrès en matière de droits, tout en reconnaissant que la pauvreté n’a pas été éradiquée.
+
+Ces documents ne s’annulent pas : ils posent des questions différentes. Le premier interroge le **rapport de pouvoir** ; le second mesure des **réalisations**. Leur point commun est que des projets réels ne garantissent pas, à eux seuls, une transformation structurelle.
+
+## Dossier E — Actualiser sans effacer l’histoire
+
+Depuis le **1er janvier 2024**, l’accord de Samoa succède provisoirement à Cotonou. Il relie l’UE à **77 pays partenaires**, tandis que l’OEACP conserve **79 membres**. Il combine un socle commun et trois protocoles régionaux. La conclusion doit donc proposer des critères actuels : valeur ajoutée créée localement, emplois, diversification, accès aux services, droits, climat, mobilité, transparence et participation des populations.
+
+## Barème reconstruit
+
+| Critère | Points |
+|---|---:|
+| identifier le problème et dater les documents | 1 |
+| expliquer le bénéfice mutuel avec un exemple pour chaque partenaire | 2 |
+| présenter au moins deux acquis et deux limites | 2 |
+| proposer deux conditions de rééquilibrage | 1 |
+| conclure par un jugement nuancé | 1 |
+| **Total** | **7** |
+
+> **Méthode BAC.** Construis chaque paragraphe avec **fait daté → bénéficiaire → résultat → limite → condition d’amélioration**.` ,
       questions: [
-        question("Quel est le cœur du débat ?", "Le bilan et les limites de la coopération entre l’UE et les pays ACP", ["La disparition de l’Union européenne", "La guerre d’Algérie", "Le fonctionnement des climats ivoiriens"], "Le sujet demande de confronter les acquis du partenariat à ses résultats insuffisants.", 1),
-        question("Quel apport de l’accord de Cotonou peut être retenu ?", "Il associe dialogue politique, développement et coopération commerciale", ["Il supprime toute coopération financière", "Il transforme les ACP en États membres de l’UE", "Il interdit les échanges agricoles"], "Cotonou élargit le partenariat au-delà de la seule aide commerciale.", 2),
-        question("Pourquoi le bilan reste-t-il mitigé ?", "Les aides existent, mais les dépendances et la faible transformation locale persistent", ["Aucun accord n’a jamais été signé", "Tous les ACP sont devenus industrialisés", "Le commerce a totalement disparu"], "Un bilan sérieux distingue réalisations concrètes et transformations structurelles inachevées.", 0),
+        { ...question("Quel problème commun relie les trois situations d’évaluation ?", "L’écart entre les objectifs, les réalisations et les résultats durables de la coopération UE-ACP", ["La disparition de l’Union européenne", "La guerre d’Algérie", "Le fonctionnement des climats ivoiriens"], "Les débats demandent tous d’apprécier le bilan du partenariat sans réponse absolue.", 1), sourceLabel: "Situations d’évaluation, pages 13-18", points: 1 },
+        { ...question("Que signifie ici une coopération « à bénéfice mutuel » ?", "Les partenaires peuvent tous deux gagner, mais pas nécessairement autant ni de la même manière", ["Les États ACP deviennent membres de l’UE", "Tout financement profite automatiquement à chaque habitant", "Les échanges sont identiques dans tous les secteurs"], "L’UE obtient notamment échanges et approvisionnements ; les partenaires ACP recherchent débouchés, financements et technologies, dans un rapport souvent asymétrique.", 2), sourceLabel: "Situation d’évaluation France-Afrique, consigne 2", points: 2 },
+        { ...question("Quelle prise de position répond le mieux au débat final ?", "Des acquis existent, mais ils restent insuffisants sans transformation locale, diversification et meilleur équilibre commercial", ["L’UE a tout réussi", "L’UE a volontairement ruiné tous les États ACP", "Aucun partenariat n’a jamais existé"], "Une conclusion recevable mobilise des faits, reconnaît les résultats et expose les limites structurelles.", 0), sourceLabel: "Synthèse des trois situations, consigne 3", points: 2 },
+      ],
+      extraQuestions: [
+        { prompt: "Quelle date doit remplacer « 25 mars 1975 » dans le texte lacunaire ?", options: ["25 mars 1957", "28 février 1975", "23 juin 2000", "15 novembre 2023"], correctIndex: 0, explanation: "Le traité instituant la CEE est signé à Rome le 25 mars 1957.", sourceLabel: "Exercice 2, correction de source", points: 2 },
+        { prompt: "Pourquoi le texte lacunaire ne peut-il pas être corrigé avec sa banque telle quelle ?", options: ["Il contient douze blancs pour dix éléments proposés", "Il ne contient aucun blanc", "Toutes les réponses sont des nombres", "Il porte uniquement sur Samoa"], correctIndex: 0, explanation: "Deux éléments nécessaires manquent ; la correction doit signaler le défaut au lieu d’inventer une correspondance.", sourceLabel: "Exercice 2, pages 14-15", points: 2 },
+        { prompt: "Quelle suite complète correctement les quatre premiers blancs reconstruits ?", options: ["Caraïbes ; Pacifique ; Communauté économique européenne ; puissances colonisatrices", "Europe ; Afrique ; CEDEAO ; pays enclavés", "Pacifique ; Rome ; STABEX ; Maastricht", "ACP ; Samoa ; FED ; APE"], correctIndex: 0, explanation: "Cette suite rétablit le périmètre géographique et le cadre historique de l’association.", sourceLabel: "Exercice 2, reconstruction corrigée", points: 2 },
+        { prompt: "Comment répondre aux affirmations sur infrastructures, débouchés et aide humanitaire ?", options: ["Reconnaître des réalisations documentées tout en précisant leur période et leur portée", "Les déclarer toutes fausses", "Les appliquer sans preuve à chaque pays", "Les confondre avec des adhésions à l’UE"], correctIndex: 0, explanation: "Les trois domaines existent, mais une réalisation située ne prouve pas que tous les besoins sont satisfaits.", sourceLabel: "Exercice 3, affirmations 1 à 3", points: 2 },
+        { prompt: "Pourquoi « les ACP sont les plus grands bénéficiaires » et « les APE sont très profitables » sont-ils de mauvais vrai/faux ?", options: ["Ils emploient des jugements absolus sans critère ni données suffisantes", "Ils contiennent trop de dates", "Ils décrivent uniquement la météo", "Ils sont des formules mathématiques"], correctIndex: 0, explanation: "Il faut définir bénéficiaire, profit, période et effets avant de conclure.", sourceLabel: "Exercice 3, affirmations 4 et 5", points: 2 },
+        { prompt: "Comment reformuler l’idée que les produits européens ont « envahi » les marchés ACP ?", options: ["Étudier la pression concurrentielle par produit, pays, période, prix et emploi local", "Affirmer une invasion militaire", "Conclure que tout commerce est interdit", "Supposer que tous les consommateurs perdent"], correctIndex: 0, explanation: "Une analyse économique remplace le slogan par des indicateurs vérifiables.", sourceLabel: "Exercice 3, affirmation 6", points: 2 },
+        { prompt: "Quel bilan Robert Dussey formule-t-il dans l’entretien de 2018 ?", options: ["L’aide a compté, mais commerce, investissement productif et progrès économique restent insuffisants et déséquilibrés", "Cotonou n’a jamais existé", "Tous les pays ACP sont industrialisés", "L’UE ne finance aucun projet"], correctIndex: 0, explanation: "Le document associe reconnaissance de l’aide et critique des promesses économiques non tenues.", sourceLabel: "Situation d’évaluation, document Robert Dussey, 2018", points: 2 },
+        { prompt: "Comment confronter Tévoédjrè et Bernard Petit ?", options: ["Le premier insiste sur dépendance et asymétrie ; le second sur les réalisations, sans nier la pauvreté persistante", "Ils affirment exactement que tout a réussi", "Ils décrivent la création de la CECA", "Ils rejettent tous deux toute coopération"], correctIndex: 0, explanation: "Le croisement des deux points de vue produit un bilan plus complet que l’adoption d’un seul.", sourceLabel: "Documents 1 et 2, pages 17-18", points: 2 },
+        { prompt: "Quelle distinction actuelle est exacte ?", options: ["L’OEACP compte 79 membres ; Samoa constitue le cadre juridique avec 77 pays partenaires", "L’UE compte 79 membres", "Samoa réunit uniquement les États européens", "Cotonou est signé en 1957"], correctIndex: 0, explanation: "Organisation et périmètre actuel de l’accord ne sont pas strictement identiques.", sourceLabel: "Actualisation 2024-2026", points: 2 },
+        { prompt: "Quelle proposition renforcerait le mieux l’équilibre du partenariat ?", options: ["Soutenir transformation locale, intégration régionale, compétences et suivi transparent des résultats", "Maintenir uniquement l’exportation de matières brutes", "Supprimer toute évaluation", "Écarter les acteurs locaux"], correctIndex: 0, explanation: "Créer davantage de valeur et de capacités locales répond aux limites structurelles relevées par les documents.", sourceLabel: "Proposition argumentée — mission finale", points: 2 },
       ],
     },
   },

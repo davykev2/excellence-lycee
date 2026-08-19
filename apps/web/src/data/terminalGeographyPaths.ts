@@ -1,6 +1,10 @@
 import type { HumanitiesCourseSeed } from "./humanitiesPathFactory";
 import { createHumanitiesPath } from "./humanitiesPathFactory";
 
+const g7Question = (prompt: string, options: string[], correctIndex: number, explanation: string, sourceLabel: string, points = 1) => ({
+  prompt, options, correctIndex, explanation, sourceLabel, points,
+});
+
 const geographyCourses = [
   {
     id: "terminale-hg-g1-cote-ivoire-development-foundations",
@@ -1661,64 +1665,267 @@ Le développement régional suppose donc :
     themeNumber: 3,
     themeTitle: "Regroupements et coopération économique",
     title: "Les relations UE-ACP : un exemple de coopération Nord-Sud",
-    description: "Présenter les partenaires, suivre l’évolution des accords et discuter le bilan de la coopération.",
+    description: "Présenter les partenaires, suivre l’évolution de Rome à Samoa et discuter les acquis comme les déséquilibres de cette coopération Nord-Sud.",
     sections: [
       {
         id: "partners",
         title: "Les partenaires UE et ACP",
-        summary: "Comparer une puissance économique intégrée et un groupe de pays riches en matières premières.",
+        summary: "Comparer l’Union européenne et l’OACPS sans confondre complémentarité des ressources et égalité de puissance.",
         conceptTitle: "Deux ensembles complémentaires mais inégaux",
-        explanation: "L’Union européenne regroupe vingt-sept États depuis la sortie du Royaume-Uni et constitue une grande puissance agricole, industrielle, commerciale et financière. Le groupe ACP rassemble soixante-dix-neuf États d’Afrique, des Caraïbes et du Pacifique disposant d’importantes ressources agricoles, minières et énergétiques.",
-        keyPoint: "La coopération UE-ACP relie des économies transformatrices du Nord à des pays du Sud souvent producteurs de matières premières.",
-        example: "Les ACP regroupent 48 pays africains, 16 caribéens et 15 du Pacifique selon le cours.",
+        explanation: "L’Union européenne réunit vingt-sept États depuis le 1er février 2020. L’ancien groupe ACP, devenu Organisation des États d’Afrique, des Caraïbes et du Pacifique (OEACP, ou OACPS en anglais), rassemble soixante-dix-neuf États. Leurs ressources et leurs marchés sont complémentaires, mais leurs capacités de transformation, de financement et de négociation restent inégales.",
+        bodyMarkdown: String.raw`## Deux partenaires à situer
+
+| Ensemble | Composition | Atouts dominants |
+|---|---:|---|
+| Union européenne | **27 États** depuis le 1er février 2020 | marché intégré, capitaux, technologies, agriculture, industrie et services |
+| OEACP, ancien groupe ACP | **79 États membres** | marchés, terres, minerais, énergie et biodiversité |
+
+> **Corrections.** Le Royaume-Uni quitte l’UE le 31 janvier 2020 : elle est à 27 depuis le **1er février**, non depuis décembre 2019. La CECA (1951) et la CEE (1957) sont deux communautés distinctes ; Maastricht, signé en 1992, établit l’UE à son entrée en vigueur en **1993**.
+
+> **Classement.** La couverture interne annonce « Leçon 2 » ; la progression fournie classe ce document comme **G7**. Le titre et le contenu, eux, correspondent bien aux relations UE-ACP.
+
+## Du lien colonial à l’OEACP
+
+Rome associe d’abord à la CEE les territoires d’outre-mer. Les indépendances conduisent à **Yaoundé** ; Arusha relie trois États est-africains en 1969 ; l’entrée britannique dans la CEE élargit le dialogue au Commonwealth ; **Georgetown** organise le groupe ACP en 1975.
+
+Le support répartit alors 79 membres en **48 africains, 16 caribéens et 15 pacifiques**. Ce repère est historique : l’Afrique du Sud quitte l’organisation et les Maldives la rejoignent en 2022. Aujourd’hui, il faut distinguer **79 membres de l’OEACP** et **77 pays couverts par Samoa** (47 africains, 15 caribéens, 15 pacifiques). Le Timor-Leste, asiatique par sa position, relève du groupe institutionnel Pacifique.
+
+## Une complémentarité asymétrique
+
+L’UE recherche échanges, approvisionnements et partenaires ; les États OEACP recherchent débouchés, capitaux et technologies. Mais exporter surtout des produits primaires et importer des biens transformés réduit la valeur captée localement.
+
+> **Prudence documentaire.** La carte a une source de **2005** et plusieurs chiffres des pages 2-5 sont non sourcés ou tronqués. Toujours donner année, source et périmètre.
+
+> **Astuce mémoire de Davy.** **27 / 79 / 77** : UE / OEACP / pays du cadre Samoa.` ,
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Comparer",
+          title: "Deux ensembles reliés, des pouvoirs différents",
+          instruction: "Sélectionne chaque carte pour distinguer partenaires, complémentarités et déséquilibres.",
+          observation: "Un partenariat peut procurer des avantages aux deux côtés tout en restant asymétrique dans la transformation et la négociation.",
+          rootLabel: "Partenariat UE-OACPS",
+          rootDetail: "Des relations historiques, commerciales, financières, politiques et culturelles",
+          nodes: [
+            { id: "eu", group: "Partenaires", label: "Union européenne", role: "Marché et puissance de transformation", detail: "Vingt-sept États, un marché intégré, des capitaux, des technologies et une forte capacité industrielle et tertiaire." },
+            { id: "oacps", group: "Partenaires", label: "OEACP", role: "79 États membres", detail: "Une organisation intergouvernementale issue du groupe ACP, dont les membres appartiennent à l’Afrique, aux Caraïbes et au Pacifique." },
+            { id: "complementarity", group: "Relations", label: "Complémentarité", role: "Échanger ressources, marchés et savoir-faire", detail: "Les partenaires recherchent débouchés, approvisionnements, investissements, technologies et coopération politique." },
+            { id: "asymmetry", group: "Relations", label: "Asymétrie", role: "Comparer le pouvoir de négociation", detail: "La spécialisation primaire et la faible transformation locale réduisent souvent la valeur captée par les économies OACPS." },
+          ],
+        },
+        keyPoint: "Le partenariat relie l’UE et l’OEACP, mais il faut distinguer les 79 membres de l’organisation des 77 pays couverts par Samoa ; la complémentarité n’efface pas l’inégalité économique.",
+        example: "L’UE compte 27 membres, l’OEACP en compte 79 et le cadre juridique actuel de Samoa couvre 77 pays partenaires.",
         timelineTitle: "La constitution des partenaires",
         timelineInstruction: "Parcours les repères qui structurent l’association entre l’Europe et les pays ACP.",
         timeline: [
-          { label: "1957", detail: "Le traité de Rome pose les premières bases des relations entre la CEE et les territoires associés." },
-          { label: "1975", detail: "L’accord de Georgetown institue officiellement le groupe ACP." },
-          { label: "Depuis 2019", shortLabel: "27 États UE", detail: "Après le retrait britannique, l’Union européenne compte vingt-sept États membres." },
+          { label: "1957", detail: "Le traité de Rome associe à la CEE des pays et territoires d’outre-mer liés aux États membres." },
+          { label: "1975", detail: "L’accord de Georgetown organise officiellement le groupe des États ACP." },
+          { label: "Depuis 2020", shortLabel: "OACPS et UE à 27", detail: "Le groupe devient OACPS et l’Union européenne compte vingt-sept États après le retrait britannique." },
         ],
         observation: "La complémentarité des ressources ne supprime pas l’inégalité de puissance économique et de négociation.",
-        check: { prompt: "Que signifie le sigle ACP ?", options: ["Afrique, Caraïbes et Pacifique", "Asie, Canada et Pérou", "Agriculture, Commerce et Ports", "Alliance des Capitales Pétrolières"], correctIndex: 0, explanation: "ACP désigne les pays d’Afrique, des Caraïbes et du Pacifique." },
-        distractors: ["Les ACP sont uniquement des pays européens.", "L’UE ne possède aucune activité industrielle.", "La coopération commence seulement après 2000."],
+        check: { prompt: "Que désigne aujourd’hui l’OEACP ?", options: ["L’Organisation des États d’Afrique, des Caraïbes et du Pacifique", "Une banque de l’Union européenne", "Une alliance militaire du Pacifique", "Une union douanière réservée à l’Afrique"], correctIndex: 0, explanation: "L’OEACP prolonge le groupe ACP dans un cadre institutionnel actualisé." },
+        extraQuestions: [
+          g7Question("Le traité de Rome de 1957 constitue-t-il un point de départ historique des relations étudiées ?", ["Vrai", "Faux"], 0, "Sa quatrième partie organise l’association des territoires d’outre-mer à la CEE.", "Activité d’application n°1, affirmation 1"),
+          g7Question("L’accord de Georgetown de 1975 organise-t-il officiellement le groupe ACP ?", ["Faux", "Vrai"], 1, "Georgetown donne au groupe ACP sa base institutionnelle commune.", "Activité d’application n°1, affirmation 2"),
+          g7Question("L’Union européenne compte-t-elle encore vingt-huit États ?", ["Oui, depuis Maastricht", "Non, elle en compte vingt-sept depuis le 1er février 2020"], 1, "Le Royaume-Uni a quitté l’UE le 31 janvier 2020.", "Activité d’application n°1, affirmation 3 actualisée", 2),
+          g7Question("Pourquoi le Timor-Leste figure-t-il parmi les partenaires ?", ["Il est membre de l’UE", "Il relève du groupe Pacifique malgré sa position en Asie", "Il a signé le traité de Rome", "Il appartient aux Caraïbes"], 1, "Classement institutionnel et découpage continental ne coïncident pas toujours.", "Activité d’application n°1, affirmation 4 précisée", 2),
+          g7Question("Le groupe étudié dépasse-t-il un milliard d’habitants ?", ["Oui, mais le chiffre tronqué du fascicule est inutilisable", "Non, il reste sous un million"], 0, "Les sources récentes dépassent 1,5 milliard selon le périmètre.", "Activité d’application n°1, affirmation 5", 2),
+          g7Question("Les États OEACP ont-ils d’importantes ressources naturelles ?", ["Non, aucune", "Oui, mais très inégalement réparties et valorisées"], 1, "Le potentiel ne garantit ni transformation ni développement.", "Activité d’application n°1, affirmation 6"),
+          g7Question("Quelle correction décrit la construction européenne ?", ["La CECA devient la CEE", "CECA et CEE sont distinctes puis participent à la construction européenne", "L’UE naît en 1945", "La CEE précède la CECA"], 1, "Il faut distinguer les communautés avant leur rapprochement.", "Correction historique, pages 2-3", 2),
+          g7Question("Comment utiliser la carte dont la source date de 2005 ?", ["Comme une carte actuelle", "Comme un document historique à dater", "Comme la preuve que l’OEACP n’existe plus", "Comme une carte européenne"], 1, "Une consultation en 2020 ne rajeunit pas la source.", "Document cartographique, page 2", 2),
+          g7Question("Quelle répartition le fascicule donne-t-il alors ?", ["27/27/25", "48 africains, 16 caribéens, 15 pacifiques", "48 européens, 16 asiatiques, 15 américains", "79 africains"], 1, "48 + 16 + 15 = 79 ; ce repère est historique.", "I-2, formation du groupe ACP"),
+          g7Question("Pourquoi les deux ensembles sont-ils complémentaires ?", ["Leurs économies sont identiques", "Marchés, ressources, capitaux et technologies peuvent se répondre", "Les OEACP sont dans l’UE", "Tout échange est interdit"], 1, "Complémentarité ne signifie pas égalité.", "I-3, raisons de la coopération"),
+          g7Question("Comment rendre un chiffre du fascicule utilisable ?", ["Le copier sans unité", "Donner année, source, périmètre et cohérence", "L’arrondir au hasard", "Le rendre permanent"], 1, "Une statistique exige son contexte.", "Lecture critique des données, pages 2-5", 2),
+        ],
+        distractors: ["L’OACPS est composée uniquement de pays européens.", "La complémentarité garantit une puissance économique identique.", "Les statistiques anciennes décrivent automatiquement la situation actuelle."],
       },
       {
         id: "agreements",
         title: "L’évolution des accords de coopération",
-        summary: "Situer association, conventions de Yaoundé, de Lomé et accord de Cotonou.",
+        summary: "Situer l’association, Yaoundé, Lomé, Cotonou et le cadre UE-OACPS de Samoa.",
         conceptTitle: "Des accords qui évoluent avec le contexte mondial",
-        explanation: "Les relations passent de l’association CEE-PTOM aux conventions de Yaoundé, puis de Lomé. Le STABEX et le SYSMIN cherchent à stabiliser les recettes d’exportation. L’accord de Cotonou élargit ensuite les dimensions politique, commerciale et de développement.",
-        keyPoint: "Les accords UE-ACP évoluent d’un régime préférentiel d’aide et de commerce vers un partenariat plus politique et soumis aux règles du commerce mondial.",
-        example: "Lomé I crée le STABEX pour compenser certaines pertes de recettes agricoles ; Lomé II ajoute le SYSMIN pour les produits miniers.",
-        timelineTitle: "De Yaoundé à Cotonou",
+        explanation: "Les relations passent de l’association CEE-PTOM aux conventions de Yaoundé, puis de Lomé. Cotonou ajoute un dialogue politique renforcé et prépare les accords de partenariat économique. Depuis janvier 2024, l’accord de Samoa fournit le cadre appliqué provisoirement entre l’UE et l’OACPS.",
+        parts: [
+          {
+            keyPoint: "Rome établit l’association des territoires d’outre-mer ; Yaoundé transforme ensuite ce lien en conventions négociées avec des États africains indépendants.",
+            example: "Yaoundé I est signée en 1963 avec dix-huit États africains et malgache associés ; Yaoundé II est signée en 1969.",
+            bodyMarkdown: String.raw`## De Rome à Yaoundé
+
+Le traité de Rome du **25 mars 1957** institue la CEE et associe les territoires d’outre-mer. Une convention couvre 1958-1962 ; le premier **FED** finance ensuite des projets.
+
+| Accord | Signature | Repère |
+|---|---:|---|
+| Yaoundé I | 20 juillet 1963 | 6 CEE + 18 États africains et malgache associés |
+| Yaoundé II | 29 juillet 1969 | mêmes partenaires ; Maurice adhère en 1972 |
+| Arusha | 24 septembre 1969 | Kenya, Tanzanie et Ouganda |
+
+> **Double correction.** Le texte lacunaire écrit **25 mars 1975** : lire **1957**. La BEI n’est pas créée par Yaoundé ; elle découle elle aussi du traité de Rome, puis apporte des prêts à la coopération.
+
+Yaoundé combine aide, commerce et financement en affirmant égalité, souveraineté et libre choix du développement. Ces principes doivent être confrontés au rapport de forces réel.
+
+> **Astuce mémoire de Davy.** **R-Y-Y** : Rome 1957, Yaoundé I 1963, Yaoundé II 1969.` ,
+            interaction: {
+              kind: "diagram",
+              eyebrow: "Relier",
+              title: "De l’association coloniale aux conventions",
+              instruction: "Sélectionne un repère pour comprendre ce qui change entre Rome et Yaoundé.",
+              observation: "Les indépendances transforment une association de territoires en coopération conventionnelle avec des États souverains.",
+              rootLabel: "Première phase de coopération",
+              rootDetail: "Association, financement puis conventions négociées",
+              nodes: [
+                { id: "rome", group: "Fondation", label: "Rome, 1957", role: "Associer les PTOM", detail: "La quatrième partie du traité prévoit l’association des pays et territoires d’outre-mer à la CEE." },
+                { id: "edf", group: "Financement", label: "Premier FED", role: "Financer des projets", detail: "Le Fonds européen de développement soutient les territoires associés puis les partenaires ACP." },
+                { id: "yaounde-1", group: "Conventions", label: "Yaoundé I, 1963", role: "Coopérer avec des États indépendants", detail: "La convention porte sur l’aide, le commerce et la coopération financière et technique." },
+                { id: "yaounde-2", group: "Conventions", label: "Yaoundé II, 1969", role: "Prolonger le dispositif", detail: "La seconde convention renouvelle la coopération et accroît les moyens annoncés." },
+              ],
+            },
+            check: { prompt: "Quelle date corrige celle du traité de Rome dans le texte lacunaire ?", options: ["25 mars 1957", "25 mars 1975", "1er janvier 2000", "15 novembre 2023"], correctIndex: 0, explanation: "Le traité instituant la CEE est signé le 25 mars 1957." },
+            extraQuestions: [
+              g7Question("Que prévoit la quatrième partie du traité de Rome ?", ["L’association des territoires d’outre-mer à la CEE", "La création de l’OEACP", "La suppression de l’UE", "L’indépendance immédiate des colonies"], 0, "C’est le premier cadre des relations étudiées.", "II-2-a, première association"),
+              g7Question("Quel mécanisme finance les premiers projets ?", ["Le FED", "Le STABEX", "L’ECOMOG", "La CEDEAO"], 0, "Le FED accompagne l’association dès la fin des années 1950.", "II-2-a"),
+              g7Question("Qui signe Yaoundé I avec la CEE ?", ["Dix-huit États africains et malgache associés", "Les 27 membres actuels de l’UE", "Les seuls États caribéens", "Les membres de l’OTAN"], 0, "La convention adapte le partenariat aux indépendances.", "Convention de Yaoundé I"),
+              g7Question("Quelle chronologie est correcte ?", ["Yaoundé II, Rome, Yaoundé I", "Rome 1957, Yaoundé I 1963, Yaoundé II 1969", "Rome 1975, Yaoundé I 2000, Yaoundé II 2023", "Georgetown 1951, Rome 1969, Samoa 1975"], 1, "Elle montre le passage de l’association aux conventions.", "Repères, pages 7-8"),
+              g7Question("Yaoundé I a-t-elle créé la BEI ?", ["Oui", "Non, la BEI vient du traité de Rome"], 1, "Yaoundé mobilise ses prêts sans créer l’institution.", "Correction institutionnelle", 2),
+              g7Question("Que prolonge Yaoundé II ?", ["La coopération de Yaoundé I", "Le pacte de Varsovie", "La politique de la CEDEAO", "Une alliance du Pacifique"], 0, "La convention de 1969 renouvelle celle de 1963.", "Convention de Yaoundé II"),
+              g7Question("Quel accord de 1969 concerne Kenya, Tanzanie et Ouganda ?", ["Arusha", "Georgetown", "Samoa", "Maastricht"], 0, "Arusha élargit la coopération à l’Afrique de l’Est.", "Formation du groupe ACP, page 4"),
+              g7Question("Pourquoi les indépendances changent-elles la relation ?", ["Des États souverains négocient", "Ils entrent tous dans la CEE", "Le commerce disparaît", "La CEE cesse en 1960"], 0, "Le statut politique appelle un cadre conventionnel.", "Raisons historiques, pages 5-6", 2),
+              g7Question("Quel principe protège le choix de développement ?", ["La souveraineté des partenaires", "Leur annexion", "L’interdiction de politique nationale", "La fin des frontières européennes"], 0, "Égalité et libre choix sont affirmés puis évalués.", "Objectifs et principes, page 6"),
+              g7Question("Quel couple est exact ?", ["FED : financement ; BEI : prêts et investissements", "FED : armée ; BEI : tribunal", "FED : parti ; BEI : université", "FED : monnaie ; BEI : frontière"], 0, "Origines et rôles des deux instruments diffèrent.", "Moyens financiers, pages 7-8", 2),
+              g7Question("Quelle formulation respecte la chronologie ?", ["Le cadre initial relie la CEE aux territoires associés", "L’OEACP signe Rome", "Samoa précède Yaoundé", "La CEE naît en 2000"], 0, "Pour 1957-1992, parler de CEE évite l’anachronisme.", "Précision de vocabulaire", 2),
+            ],
+          },
+          {
+            keyPoint: "Lomé organise préférences et stabilisation des recettes ; Cotonou prépare des échanges plus réciproques ; Samoa encadre depuis 2024 un partenariat UE-OACPS régionalisé.",
+            example: "Lomé I crée le STABEX, Lomé II ajoute le SYSMIN, Cotonou prépare les APE et Samoa succède au cadre de Cotonou.",
+            bodyMarkdown: String.raw`## De Lomé à Samoa
+
+| Convention | Signature | Partenaires |
+|---|---:|---|
+| Lomé I | 28 février 1975 | 46 ACP + 9 CEE |
+| Lomé II | 31 octobre 1979 | 58 ACP + **9 CEE**, non 10 |
+| Lomé III | 8 décembre 1984 | 65 ACP + 10 CEE |
+| Lomé IV | 15 décembre 1989 | 68 ACP + 12 CEE |
+
+Lomé IV est révisée à Maurice le **4 novembre 1995**, non en octobre. Lomé I crée le **STABEX**, compensation de certaines pertes de recettes agricoles ; Lomé II ajoute le **SYSMIN** pour des difficultés minières. Ils ne fixent pas les prix et sont désormais historiques. Le **FED** finance ; la **BEI** prête et investit.
+
+## Cotonou et les APE
+
+Cotonou, signé le 23 juin 2000 et en vigueur le 1er avril 2003, réunit dialogue politique, développement et commerce ; **FLEX** succède alors au STABEX. Les négociations des **APE** commencent en septembre 2002. L’UE ouvre son marché sans droits ni quotas, sauf armes ; ses partenaires n’ouvrent qu’une partie du leur, progressivement, avec protections sensibles. Huit APE s’appliquent en 2026 à 33 États OEACP ; les autres utilisent notamment le SPG ou « Tout sauf les armes ».
+
+## Samoa, cadre actuel
+
+Signé le **15 novembre 2023** et appliqué provisoirement depuis le **1er janvier 2024**, Samoa prévoit vingt ans, un socle commun et trois protocoles régionaux. Ses six priorités couvrent droits/démocratie/gouvernance, paix/sécurité, développement humain, croissance durable, environnement/climat et migrations/mobilité. Depuis 2021, **NDICI-Europe dans le monde** intègre au budget de l’UE la coopération autrefois financée par le FED.
+
+> **Astuce mémoire de Davy.** **Y-L-C-S** : Yaoundé associe, Lomé préfère et stabilise, Cotonou réforme, Samoa régionalise.` ,
+            interaction: {
+              kind: "diagram",
+              eyebrow: "Faire évoluer",
+              title: "De Lomé au partenariat de Samoa",
+              instruction: "Sélectionne un dispositif pour distinguer accord politique, commerce et financement.",
+              observation: "La coopération ne disparaît pas après Cotonou : elle change de cadre, de financement et d’échelle régionale.",
+              rootLabel: "Partenariat en transformation",
+              rootDetail: "Préférences, dialogue, commerce progressif et protocoles régionaux",
+              nodes: [
+                { id: "lome", group: "Accords", label: "Lomé, 1975-2000", role: "Préférences et recettes", detail: "Accès préférentiel, STABEX puis SYSMIN et élargissement de la coopération." },
+                { id: "cotonou", group: "Accords", label: "Cotonou, 2000", role: "Politique, développement et commerce", detail: "Dialogue politique renforcé, lutte contre la pauvreté et préparation des APE." },
+                { id: "epa", group: "Commerce", label: "APE", role: "Ouvrir de façon asymétrique et progressive", detail: "L’UE ouvre pleinement son marché ; les partenaires libéralisent une part de leurs échanges sur de longues périodes." },
+                { id: "samoa", group: "Accords", label: "Samoa, 2023-2024", role: "Actualiser et régionaliser", detail: "Une fondation commune et trois protocoles organisent le partenariat actuel UE-OACPS." },
+                { id: "funding", group: "Financement", label: "NDICI-Europe dans le monde", role: "Financer l’action extérieure", detail: "Depuis 2021, l’ancien FED est intégré au grand instrument budgétaire extérieur de l’UE." },
+              ],
+            },
+            extraQuestions: [
+              g7Question("À quoi correspond le STABEX ?", ["À une compensation de pertes de recettes", "À une armée", "À un tribunal", "À la fin de l’OEACP"], 0, "Il amortit certaines variations de recettes agricoles.", "Activité n°2, item 1"),
+              g7Question("Quel changement les APE préparent-ils ?", ["La fin progressive des préférences non réciproques", "L’adhésion à l’UE", "La fin des échanges", "La recolonisation"], 0, "Le régime devient asymétrique, progressif et réciproque.", "Activité n°2, item 2"),
+              g7Question("À quel domaine appartient l’aide aux réfugiés ?", ["Humanitaire", "Minier", "Monétaire", "Agricole européen"], 0, "Elle soutient les personnes déplacées.", "Activité n°2, item 3"),
+              g7Question("À quoi renvoie l’accès préférentiel au marché européen ?", ["Aux accords UE-ACP, notamment Lomé", "À la CEDEAO", "Au pacte de Varsovie", "À une interdiction"], 0, "Lomé ouvre préférentiellement le marché à de nombreux produits.", "Activité n°2, item 4"),
+              g7Question("Quel accord combine politique, pauvreté et commerce ?", ["Cotonou", "Arusha seul", "La CECA", "Yalta"], 0, "Cotonou élargit le partenariat et prépare les APE.", "Activité n°2, item 5"),
+              g7Question("Quel accord est lié aux droits CEE-EAMA ?", ["Yaoundé I", "Samoa", "Lomé IV", "Maastricht"], 0, "Ce repère relève de Yaoundé I.", "Activité n°2, item 6"),
+              g7Question("Quelle convention est liée à l’allègement de dette ?", ["Lomé IV", "Rome", "Arusha", "Samoa seul"], 0, "L’activité rattache cet élément à Lomé IV.", "Activité n°2, item 7"),
+              g7Question("Quelle distinction sur les APE est exacte ?", ["Ouverture totale immédiate", "Ouverture asymétrique, progressive et protégeable", "Exportations interdites", "OEACP remplacée"], 1, "Les obligations diffèrent entre partenaires.", "Précision commerciale", 2),
+              g7Question("Quel accord succède à Cotonou ?", ["Samoa", "Yaoundé I", "Genève", "Versailles"], 0, "Signé en 2023, Samoa s’applique provisoirement depuis 2024.", "Actualisation UE-OEACP", 2),
+              g7Question("Comment Samoa organise-t-il le partenariat ?", ["Socle commun et trois protocoles", "Alliance militaire", "79 adhésions à l’UE", "Fin du dialogue"], 0, "Les protocoles adaptent la coopération aux trois régions.", "Accord de Samoa", 2),
+              g7Question("Quel changement financier intervient en 2021 ?", ["FED intégré via NDICI-Europe dans le monde", "STABEX monnaie", "BEI supprimée", "APE banque"], 0, "Financement, politique et commerce sont distincts.", "Financement 2021-2027", 2),
+            ],
+          },
+        ],
+        keyPoint: "Les accords évoluent des préférences commerciales et de l’aide vers un partenariat politique, commercial et régionalisé adapté aux règles contemporaines.",
+        example: "Lomé I crée le STABEX, Lomé II ajoute le SYSMIN, Cotonou prépare les APE et Samoa devient le cadre actuel.",
+        timelineTitle: "De Yaoundé à Samoa",
         timelineInstruction: "Fais défiler les grandes familles d’accords et leurs innovations.",
         timeline: [
-          { label: "Yaoundé, 1963-1975", shortLabel: "Yaoundé", detail: "Aide financière et technique, suppression de droits de douane et élargissement du FED." },
-          { label: "Lomé, 1975-2000", shortLabel: "Lomé", detail: "Libre accès de produits ACP, STABEX, SYSMIN et coopération dans de nouveaux domaines." },
-          { label: "Cotonou, 2000-2020", shortLabel: "Cotonou", detail: "Dialogue politique, développement, commerce et préparation d’accords de partenariat économique." },
+          { label: "Yaoundé, 1963-1975", shortLabel: "Yaoundé", detail: "Aide financière et technique, coopération commerciale et mobilisation du FED et de la BEI." },
+          { label: "Lomé, 1975-2000", shortLabel: "Lomé", detail: "Préférences commerciales, STABEX, SYSMIN et extension des domaines de coopération." },
+          { label: "Cotonou puis Samoa", shortLabel: "Cotonou puis Samoa", detail: "Cotonou réforme commerce et dialogue politique ; Samoa devient le cadre provisoirement appliqué depuis janvier 2024." },
         ],
-        observation: "Chaque nouvel accord tente de corriger les limites du précédent tout en s’adaptant aux règles internationales.",
-        check: { prompt: "Quel mécanisme stabilise les recettes d’exportation agricoles des ACP ?", options: ["Le STABEX", "L’ECOMOG", "Le Pacte de Varsovie", "L’OAS"], correctIndex: 0, explanation: "Le STABEX est créé pour compenser certaines pertes de recettes agricoles." },
-        distractors: ["Les conventions de Lomé précèdent le traité de Rome.", "Le SYSMIN concerne uniquement les élections.", "Cotonou supprime toute dimension politique du partenariat."],
+        observation: "Chaque cadre tente de corriger le précédent, mais accord politique, régime commercial et instrument financier restent distincts.",
+        check: { prompt: "Quel mécanisme historique compense certaines pertes de recettes d’exportation agricoles ?", options: ["Le STABEX", "L’ECOMOG", "Le Pacte de Varsovie", "L’OAS"], correctIndex: 0, explanation: "Lomé I crée le STABEX ; il ne fixe pas directement les prix mondiaux." },
+        distractors: ["Samoa précède le traité de Rome.", "Le SYSMIN organise des élections européennes.", "Les APE imposent une ouverture totale et immédiate identique aux deux parties."],
       },
       {
         id: "assessment",
         title: "Le bilan de la coopération",
-        summary: "Mettre en balance aides, débouchés et projets avec dépendance, dette et résultats limités.",
+        summary: "Classer réalisations et limites, puis juger la coopération avec des critères économiques, sociaux et politiques.",
         conceptTitle: "Des acquis importants, mais une relation déséquilibrée",
-        explanation: "La coopération finance infrastructures, éducation, santé, agriculture et aide humanitaire, tout en offrant des débouchés à certains produits ACP. Ses limites tiennent à la dépendance aux matières premières, à l’endettement, à la faible transformation locale et à l’inégalité entre partenaires.",
-        keyPoint: "Le bilan UE-ACP est mitigé : les aides et préférences produisent des acquis, sans suffire à transformer durablement les économies ACP.",
-        example: "Le FED et la BEI financent des projets, mais les pays ACP demeurent souvent spécialisés dans l’exportation de produits primaires.",
+        explanation: "La coopération a financé infrastructures, éducation, santé, agriculture, action humanitaire et dialogue politique. Elle n’a cependant pas supprimé la dépendance aux matières premières, la dette, la pauvreté, la faible transformation locale ni les rapports commerciaux inégaux.",
+        bodyMarkdown: String.raw`## Un bilan par domaines
+
+| Domaine | Acquis | Limites |
+|---|---|---|
+| économique | financements, infrastructures, marchés | spécialisation primaire, concurrence, dette, faible transformation |
+| social et humanitaire | écoles, eau, santé, bourses, secours | pauvreté et accès inégal persistants |
+| politique | dialogue, droits, paix | conditionnalité et pouvoir de négociation inégal |
+| technique et culturel | formation et échanges | bénéfices mal répartis ou fuite de compétences |
+
+Une école est un acquis social ; des approvisionnements et débouchés servent aussi l’UE ; une garantie tardive révèle une limite ; un don ne devient durable qu’avec entretien et capacités locales. **Bénéfice mutuel** ne signifie donc pas bénéfice égal.
+
+## Institutions : dater la liste
+
+Conseil des ministres, Comité des ambassadeurs et Assemblée parlementaire paritaire orientent, préparent et débattent sous Cotonou. Le **CDE** cesse ses activités fin 2016 et le **CTA** son mandat fin 2020. Samoa prévoit aujourd’hui sommet, Conseil, Comité des hauts fonctionnaires, Assemblée commune et institutions régionales.
+
+## Méthode
+
+Pour chaque document : **auteur et date → résultat → bénéficiaire → limite → condition d’amélioration**. Mesure ensuite transformation locale, diversification et autonomie, pas le seul montant d’aide.
+
+> **Astuce mémoire de Davy.** **A-L-C** : un **acquis**, une **limite**, une **condition**.` ,
+        interaction: {
+          kind: "diagram",
+          eyebrow: "Évaluer",
+          title: "Du projet au développement durable",
+          instruction: "Sélectionne une dimension pour transformer une liste d’actions en bilan argumenté.",
+          observation: "Une réalisation ponctuelle devient un progrès durable si elle renforce capacités locales, transformation économique et autonomie.",
+          rootLabel: "Bilan du partenariat",
+          rootDetail: "Comparer effets concrets, limites structurelles et conditions d’amélioration",
+          nodes: [
+            { id: "economic", group: "Acquis", label: "Économie", role: "Financer et ouvrir des marchés", detail: "Infrastructures, investissements et échanges peuvent soutenir la production, mais leurs effets dépendent de la valeur créée localement." },
+            { id: "social", group: "Acquis", label: "Social et humanitaire", role: "Améliorer les conditions de vie", detail: "Écoles, eau, santé, bourses et secours sont des résultats concrets lorsqu’ils atteignent durablement les populations." },
+            { id: "dependency", group: "Limites", label: "Dépendance", role: "Identifier les fragilités", detail: "Dette, exportations primaires, concurrence et faible industrialisation limitent l’autonomie de plusieurs partenaires." },
+            { id: "rebalance", group: "Conditions", label: "Rééquilibrage", role: "Transformer et négocier", detail: "Diversification, intégration régionale, transformation locale, transparence et suivi des résultats renforcent la coopération." },
+          ],
+        },
+        keyPoint: "Le bilan UE-OACPS est mitigé : des réalisations existent, mais le développement durable exige diversification, transformation locale, capacités publiques et relation commerciale mieux équilibrée.",
+        example: "Une infrastructure financée est un acquis ; son entretien, son accès par la population et son effet sur la production déterminent si elle contribue durablement au développement.",
         timelineTitle: "Évaluer la coopération",
         timelineInstruction: "Compare les apports, les limites puis les conditions d’un partenariat plus équilibré.",
         timeline: [
-          { label: "Acquis", detail: "Aides, infrastructures, débouchés, coopération technique, humanitaire et agricole." },
-          { label: "Limites", detail: "Dépendance, dette, faible industrialisation, termes de l’échange défavorables et efficacité inégale." },
-          { label: "Rééquilibrage", detail: "Transformation locale, diversification, intégration régionale et meilleure capacité de négociation des ACP." },
+          { label: "Acquis", detail: "Projets, financements, débouchés, coopération technique, sociale, humanitaire et politique." },
+          { label: "Limites", detail: "Dépendance, dette, pauvreté persistante, faible industrialisation et pouvoir de négociation inégal." },
+          { label: "Rééquilibrage", detail: "Transformation locale, diversification, intégration régionale, transparence et évaluation des résultats." },
         ],
         observation: "Un bon bilan ne se limite pas aux montants d’aide : il mesure aussi l’autonomie et la transformation économiques obtenues.",
-        check: { prompt: "Pourquoi le bilan de la coopération UE-ACP est-il qualifié de mitigé ?", options: ["Parce qu’il combine acquis et dépendances persistantes", "Parce qu’aucun accord n’a jamais été signé", "Parce que les ACP sont devenus membres de l’UE", "Parce que toutes les matières premières sont transformées localement"], correctIndex: 0, explanation: "Les réalisations existent, mais elles n’ont pas supprimé les déséquilibres structurels." },
-        distractors: ["La coopération a supprimé toute dépendance économique des ACP.", "Les projets financés ne concernent jamais les infrastructures.", "Une relation équilibrée exige de réduire la transformation locale."],
+        check: { prompt: "Pourquoi le bilan de la coopération UE-OACPS est-il qualifié de mitigé ?", options: ["Parce qu’il combine réalisations et dépendances persistantes", "Parce qu’aucun accord n’a jamais été signé", "Parce que les États OACPS sont devenus membres de l’UE", "Parce que toutes les matières premières sont transformées localement"], correctIndex: 0, explanation: "Les réalisations existent, mais elles n’ont pas supprimé les déséquilibres structurels." },
+        extraQuestions: [
+          { prompt: "Comment classer ensemble soutien aux secteurs clés, dons non remboursables et subventions au développement ?", options: ["Comme des acquis possibles pour les partenaires ACP", "Comme des sanctions militaires", "Comme des limites climatiques", "Comme des adhésions à l’UE"], correctIndex: 0, explanation: "L’activité les présente parmi les aspects positifs, dont l’effet réel doit ensuite être évalué.", sourceLabel: "Activité d’application n°3, éléments 2, 4 et 5", points: 1 },
+          { prompt: "Pourquoi matières premières achetées à bas prix et versement tardif des garanties sont-ils classés comme limites ?", options: ["Ils réduisent les bénéfices attendus et entretiennent l’asymétrie", "Ils augmentent toujours la transformation locale", "Ils suppriment toute dette", "Ils créent l’OACPS"], correctIndex: 0, explanation: "Faible rémunération et retards de compensation affaiblissent l’effet du partenariat.", sourceLabel: "Activité d’application n°3, éléments 1 et 3", points: 1 },
+          { prompt: "Dans le tableau de l’exercice 1, où classer écoles, bourses et adductions d’eau ?", options: ["Réussites économiques et sociales", "Échec politique", "Réussite militaire", "Limite géologique"], correctIndex: 0, explanation: "Ces actions améliorent les services et les capacités humaines.", sourceLabel: "Exercice 1, item 1", points: 1 },
+          { prompt: "Où classer la persistance de la pauvreté ?", options: ["Échec ou limite économique et sociale", "Réussite diplomatique", "Institution commune", "Accord commercial"], correctIndex: 0, explanation: "Elle montre que les financements n’ont pas suffi à produire un développement partagé.", sourceLabel: "Exercice 1, item 2", points: 1 },
+          { prompt: "Que montre le retard puis la disparition de STABEX et SYSMIN ?", options: ["Une limite des mécanismes économiques historiques", "Une réussite militaire", "La création de l’UE", "L’adhésion des ACP à la CEE"], correctIndex: 0, explanation: "Des versements tardifs et la fin des mécanismes limitent leur capacité de stabilisation.", sourceLabel: "Exercice 1, item 3", points: 1 },
+          { prompt: "La promotion des droits humains relève de quel type de résultat ?", options: ["Politique", "Minier", "Climatique", "Monétaire uniquement"], correctIndex: 0, explanation: "Elle appartient au dialogue politique du partenariat.", sourceLabel: "Exercice 1, item 4", points: 1 },
+          { prompt: "Comment classer le maintien de liens qualifiés de néocoloniaux ?", options: ["Comme une limite politique et une asymétrie contestée", "Comme une réussite agricole", "Comme une institution financière", "Comme un protocole régional"], correctIndex: 0, explanation: "Cette critique vise la persistance de rapports de dépendance malgré l’égalité proclamée.", sourceLabel: "Exercice 1, item 5", points: 1 },
+          { prompt: "Quel classement réunit correctement le soutien du FED et l’accès européen aux matières premières et débouchés ?", options: ["Le premier peut soutenir le développement ACP ; le second constitue aussi un avantage économique européen", "Les deux sont des échecs militaires", "Les deux interdisent le commerce", "Le FED appartient à la CEDEAO"], correctIndex: 0, explanation: "L’exercice oblige à identifier le bénéficiaire et le domaine de chaque résultat.", sourceLabel: "Exercice 1, items 6 et 7", points: 2 },
+          { prompt: "Quelle phrase évite un bilan caricatural ?", options: ["Des projets ont produit des acquis, mais les transformations structurelles restent inégales", "Tout est un succès", "Tout est un échec", "L’aide suffit toujours à industrialiser"], correctIndex: 0, explanation: "Un bilan argumenté met en regard réalisations et limites.", sourceLabel: "Conclusion du cours, page 13", points: 2 },
+          { prompt: "Comment juger un don non remboursable ?", options: ["Par son montant seulement", "Par son objectif, ses bénéficiaires, sa mise en œuvre et ses effets durables", "Comme une preuve automatique d’égalité", "Comme un prêt à rembourser"], correctIndex: 1, explanation: "La nature du financement ne garantit pas à elle seule le développement.", sourceLabel: "Méthode de bilan", points: 2 },
+          { prompt: "Quelle condition répond le mieux à la dépendance aux produits primaires ?", options: ["Transformer davantage sur place et diversifier les activités", "Exporter uniquement une matière brute", "Supprimer la formation", "Réduire les échanges régionaux"], correctIndex: 0, explanation: "La transformation locale augmente la valeur ajoutée, les emplois et la résilience.", sourceLabel: "III-2, limites et perspectives", points: 2 },
+        ],
+        distractors: ["Toute aide produit automatiquement un développement durable.", "Aucune réalisation sociale n’est attribuée à la coopération.", "Un meilleur équilibre exige moins de transformation locale."],
       },
     ],
   },
