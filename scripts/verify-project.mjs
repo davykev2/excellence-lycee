@@ -203,6 +203,24 @@ run(
 );
 
 run(
+  "Contenu · audit-terminal-c-svt-petroleum-formation.ts",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    resolve(root, "scripts", "audit-terminal-c-svt-petroleum-formation.ts"),
+  ],
+);
+
+run(
+  "Contenu · audit-terminal-c-svt-petroleum-exploitation.ts",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    resolve(root, "scripts", "audit-terminal-c-svt-petroleum-exploitation.ts"),
+  ],
+);
+
+run(
   "Contenu · audit-terminal-d-svt-conditioned-reflex.ts",
   process.execPath,
   [

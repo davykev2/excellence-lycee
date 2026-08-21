@@ -84,15 +84,61 @@ script isole l'historique distant et refuse toute migration non demandée.
 
 ## 4. Où vit le contenu pédagogique
 
-Le contenu des leçons de mathématiques est **codé en dur dans des fichiers TypeScript** sous `apps/web/src/data/` (`terminalAPolynomialRationalPath.ts`, `terminalCMathPaths*.ts`, `terminalDMathPaths.ts`, etc.).
+Le contenu pédagogique enrichi est encore **versionné dans des fichiers TypeScript** sous `apps/web/src/data/` : parcours dédiés pour les Mathématiques, la Physique-Chimie et les SVT ; seeds et fabrique `createHumanitiesPath()` pour l'Histoire, la Géographie et la Philosophie. Le catalogue visible vit dans `curriculumCatalog.ts`, le chargement différé dans `learningPathLoader.ts` et le compteur consolidé dans `learningPathMetrics.ts`.
 
-> **Tension connue et assumée.** Le `README.md` (section 5) exige un référentiel « non codé en dur » et versionné, et un studio éditorial Supabase existe déjà côté admin. Les leçons de maths n'ont pas encore été migrées vers ce studio : il y a donc deux sources de vérité parallèles. Toute migration doit préserver les identifiants de niveaux et les budgets XP (voir ci-dessous).
+Les décisions détaillées, corrections de sources, poids XP et audits propres à chaque parcours sont consignés dans `apps/web/AGENTS.md`. **Le présent fichier racine doit rester la synthèse de reprise rapide ; ne pas y recopier toute la fiche de chaque leçon.**
+
+> **Tension connue et assumée.** Le `README.md` (section 5) exige un référentiel « non codé en dur » et versionné, et un studio éditorial Supabase existe déjà côté admin. Les parcours pédagogiques enrichis n'ont pas encore été migrés vers ce studio : il y a donc deux sources de vérité parallèles. Toute migration doit préserver les identifiants de niveaux et les budgets XP (voir ci-dessous).
 
 **Règle critique — ne jamais casser la progression des élèves :** les identifiants de niveaux (`id`) et les budgets XP sont utilisés par le registre XP de l'API et par les progressions déjà enregistrées en base. Enrichir un contenu est sans risque ; **renommer un `id` ou changer un `xp` impose une migration Supabase**. Chaque parcours dispose d'un budget de 10 000 XP réparti automatiquement entre ses niveaux selon leur poids relatif.
 
-## 5. État au 23 juillet 2026
+## 5. État réel au 21 août 2026
 
-Dernier travail livré et déployé en production :
+> **Reprise express.** Commencer par `git status --short`, lire cette section, puis lire `apps/web/AGENTS.md` avant toute modification du frontend. La branche active est `main`. Lire le dernier commit commun avec `git log -1 --oneline` plutôt que de figer ici un hash qui devient aussitôt périmé. Ne jamais appeler « livré » un fichier seulement présent dans l'arborescence sale et ne jamais déduire l'état de production depuis Git.
+
+### Couverture pédagogique consolidée
+
+| Domaine | État actuel | Suite identifiable |
+|---|---|---|
+| Mathématiques Terminale A | **8/8 leçons enrichies** | Lot d'exercices guidés `tle-a-maths` encore absent de `content_pipeline/batches/`. |
+| Mathématiques Terminale C | **19/19 leçons enrichies** | Maintenance et audits uniquement. |
+| Mathématiques Terminale D | Les 12 cartes sont couvertes, principalement par adaptation des parcours C enrichis | Conserver les ids/poids historiques ; auditer contre un PDF propre à D seulement si une divergence de programme est établie. |
+| Physique-Chimie Terminales C/D | **Catalogue actuellement référencé entièrement enrichi** depuis le 11/08/2026 | Toute nouvelle carte doit suivre la règle Web/API/migration et vérifier le déploiement séparé de l'API. |
+| SVT Terminale A | **7/7 leçons enrichies** | Le fichier transmis comme « L8 » est un doublon de contenu de la L4 : ne pas créer artificiellement une huitième leçon. |
+| SVT Terminale C | **L1 à L10 enrichies** | Reste L11 « L'amélioration de la fertilité du sol ». L10 est une adaptation riche du guide DPFC, pas une restitution fidèle d’un PDF complet de leçon. |
+| SVT Terminale D | L1 à L7 et L10 livrées, soit **8/15 cartes** | Restent L8, L9 et L11 à L15. Respecter l'ordre du catalogue même lorsque le numéro imprimé sur le PDF diverge. |
+| Histoire Terminale | **H2 à H9 enrichies** et partagées entre A/C/D | H1 existe dans le catalogue ; ne pas confondre avec le lot H2-H9 déclaré terminé. |
+| Philosophie Terminale | **Les 10 parcours L1 à L10 sont enrichis** | Maintenance éditoriale uniquement. |
+| Géographie Terminale | **G1 à G4, G6 et G7 enrichies** | G5 reste « document à fournir » : ne pas inventer son titre ni son contenu sans source. |
+
+Le compteur consolidé du catalogue est **9 419 réponses évaluables** après les 95 réponses de L9 et les 90 réponses de L10 en SVT Terminale C. Un audit de leçon ne doit pas dépendre d'un compteur global figé quand plusieurs enrichissements avancent en parallèle ; le compteur global se verrouille dans l'audit de stabilité après consolidation des lots.
+
+### Travail en cours — ne pas écraser
+
+L'arborescence reste volontairement sale au 21/08/2026 après la consolidation pédagogique. Le lot de cloisonnement BAC et un fichier de configuration extérieur ne doivent pas être embarqués avec les leçons ; relire les diffs hunk par hunk avant tout commit.
+
+1. **Cloisonnement après connexion.** Le nouveau contrat `apps/web/src/routing/routeAccess.ts` empêche une URL Terminale conservée avant authentification d'exposer les sujets BAC à une session Seconde/Première ; la carte BAC de l'Arène suit la même règle, avec exception administrateur. Les changements touchent `LearningApp.tsx`, `ArenaScreen.tsx` et les tests. **Lot non commité au relevé ; ne pas le mélanger aux enrichissements.**
+2. **Fichier extérieur.** `.claude/launch.json` est modifié : le préserver et ne pas l'embarquer sans savoir quelle session le possède.
+3. **Déploiements séparés.** Le commit pédagogique de L9/L10 ne déploie pas l’API et n’applique pas les migrations `20260821120000` et `20260821160000`. Vérifier l’état réel de ces deux opérations avant d’annoncer les parcours comme livrés en production.
+
+### Fonctionnalités produit déjà acquises depuis juillet
+
+- Arène : concours BAC & BT 2024 sur 69, suivi admin, sous-notes, zones, export PDF ; annales 2017-2020 et fac-similés 2022-2023 ; ESATIC 2023-2024 interactifs. La session BAC 2018 reste bloquée tant qu'une source authentique n'est pas fournie.
+- Boutique « or » : monnaie dérivée de l'XP (`50 XP = 1 or`), achats permanents, crédits administrateur et catalogue synchronisé entre Web/API/migration.
+- Plateforme : récupération et changement de mot de passe, notifications e-mail via Resend avec garde-fous, clavier scientifique, niveaux publiés ouverts, chargement différé des parcours, vue éditoriale complète et accueil connecté fiabilisé.
+- Social : messagerie mobile, réactions/commentaires administrables, duels avec choix de matière, leçons et adversaire en ligne.
+
+### Règles de continuation de l'enrichissement
+
+- Lire intégralement le PDF source et reconstruire les schémas avec les interactions natives (`schema`, `diagram`, `timeline`, `curve`) ; ne jamais republier les scans.
+- Corriger les erreurs de source explicitement dans `corrections` ou dans un encadré « Correction/Précision » ; ne jamais les reproduire en silence.
+- Conserver les ids et poids existants. Pour tout nouveau niveau ou nouveau parcours : synchroniser données Web, registre API et migration Supabase ; normaliser à 10 000 XP ; ajouter un audit dédié.
+- Les enrichissements Humanités gardent les 6 ids/poids produits par `createHumanitiesPath()` et ne demandent normalement ni changement API ni migration.
+- Après une modification sous `apps/api/`, exécuter `node scripts/check-api-deploy.mjs` avant toute conclusion sur la production. Une migration Supabase reste une opération ciblée et séparée, avec `--dry-run`, liste explicite et confirmation du projet.
+
+### Jalons historiques conservés pour référence
+
+Les éléments ci-dessous expliquent les choix déjà présents dans le code ; ils ne remplacent pas l'état consolidé et la liste de travail en cours ci-dessus.
 
 - Enrichissement de la leçon de Chimie Terminale D « Les acides α-aminés » dans `terminalDAlphaAminoAcidsPath.ts` : 8 niveaux, 104 questions, 164 formules contrôlées, interactions originales et 10 000 XP. Le parcours `terminale-d-chemistry-alpha-amino-acids` occupe le chapitre 21 et reste propre à la Terminale D. Le cours restitue structure, nomenclature, amphion, synthèse/hydrolyse peptidique, Biuret, protéines et tous les exercices officiels. Corrections explicites de l'anion en milieu basique, de la valine tronquée, du terme `2M_N` et de la séquence Val-Ala. Registre API et migration `20260811180000_chemistry_alpha_amino_acids_path.sql` doivent rester synchronisés. **Le catalogue de Physique-Chimie des Terminales C et D actuellement référencé est désormais entièrement enrichi.**
 
@@ -164,16 +210,18 @@ Dernier travail livré et déployé en production :
 
 ### Suites naturelles
 
-1. Appliquer le même traitement d'enrichissement aux leçons restantes des autres séries. **La Terminale A (maths) est terminée : ses 8 leçons sont toutes enrichies. Les 19 leçons de Mathématiques de Terminale C sont également toutes enrichies. La série Histoire (H2 à H9) est terminée** (partagée A/C/D via la fabrique Humanités). Plusieurs leçons de Terminale D bénéficient déjà des parcours C partagés, mais son catalogue n'est pas encore entièrement enrichi depuis ses propres PDF.
-1c. **Poursuivre les Humanités restantes** avec la fabrique : les leçons de **Géographie** et les leçons de **Philosophie** encore générées sans `bodyMarkdown` (seule la leçon 01 de Philosophie est enrichie à ce jour).
-1b. **Appliquer à la base de production Supabase les trois migrations en attente** : `20260723180000_terminal_a_statistics_mission.sql`, `20260723200000_terminal_a_linear_systems_missions.sql` et `20260723220000_terminal_a_primitives_mission.sql` (le déploiement Vercel ne les exécute pas). La migration `20260723160000` des Suites a, elle, été appliquée et vérifiée le 23/07/2026.
-2. Créer le lot d'exercices guidés **`tle-a-maths`** manquant dans `content_pipeline/batches/` (les autres séries et matières en ont un).
-3. Migrer progressivement la coque Android/Capacitor archivée sous `frontend/` vers l’application active, puis supprimer l’archive après validation mobile.
-4. Migrer le contenu des fichiers TS vers le studio éditorial Supabase.
+1. Terminer et livrer séparément le cloisonnement BAC après connexion. Ne pas le mélanger avec `.claude/launch.json` ni avec un enrichissement pédagogique.
+2. Continuer la SVT : Terminale C L11 ; Terminale D L8, L9 puis L11 à L15, dans l'ordre du catalogue et uniquement à partir des PDF fournis.
+3. En Géographie, traiter G5 seulement lorsque son document et son titre officiel sont disponibles. Les six autres leçons G1-G4/G6-G7 sont enrichies ; les dix leçons de Philosophie sont déjà terminées.
+4. Créer le lot d'exercices guidés **`tle-a-maths`** manquant dans `content_pipeline/batches/`.
+5. Vérifier l'historique distant avant de considérer une migration comme « en attente ». Les trois migrations de juillet anciennement signalées (`20260723180000`, `20260723200000`, `20260723220000`) ne doivent pas être réappliquées à l'aveugle ; utiliser le script ciblé et l'identifiant de projet confirmé.
+6. Migrer progressivement la coque Android/Capacitor archivée sous `frontend/` vers l'application active, puis supprimer l'archive après validation mobile.
+7. À plus long terme, migrer le contenu TypeScript vers le studio éditorial Supabase sans changer les ids ni les budgets XP.
 
 ## 6. Conventions de travail
 
 - **Langue : français** pour toute l'interface, les contenus et les messages de commit.
 - Consigner les décisions durables concernant `apps/web` dans `apps/web/AGENTS.md`, et non dans le README.
+- Après chaque lot important livré, mettre à jour dans ce fichier racine la date, le dernier commit commun, le compteur consolidé, la couverture par matière et la section « Travail en cours ». Retirer immédiatement un lot de cette section dès qu'il est commité ou abandonné.
 - Le README racine décrit la vision ; sa section « Statut actuel » se met à jour manuellement quand une fonctionnalité importante est livrée (aucune automatisation).
 - Les coquilles du PDF source ne sont jamais reproduites en silence : elles sont corrigées et annotées dans le champ `corrections` du niveau concerné.

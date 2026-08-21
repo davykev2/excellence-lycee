@@ -31,6 +31,8 @@ import { terminalCSvtImmuneDefensePath } from "./terminalCSvtImmuneDefensePath";
 import { terminalCSvtHivInfectionPath } from "./terminalCSvtHivInfectionPath";
 import { terminalCSvtFemaleCyclesPath } from "./terminalCSvtFemaleCyclesPath";
 import { terminalCSvtHumanHeredityPath } from "./terminalCSvtHumanHeredityPath";
+import { terminalCSvtPetroleumFormationPath } from "./terminalCSvtPetroleumFormationPath";
+import { terminalCSvtPetroleumExploitationPath } from "./terminalCSvtPetroleumExploitationPath";
 import { terminalCSvtMuscleEnergyPath } from "./terminalCSvtMuscleEnergyPath";
 import { terminalCSvtNervousPath } from "./terminalCSvtNervousPath";
 import { terminalDSvtConditionedReflexPath } from "./terminalDSvtConditionedReflexPath";
@@ -80,6 +82,8 @@ const baseLearningPaths: LearningPath[] = [
   terminalCSvtHivInfectionPath,
   terminalCSvtFemaleCyclesPath,
   terminalCSvtHumanHeredityPath,
+  terminalCSvtPetroleumFormationPath,
+  terminalCSvtPetroleumExploitationPath,
   terminalDSvtConditionedReflexPath,
   terminalDSvtNervousTissuePath,
   terminalDSvtSkeletalMusclePath,

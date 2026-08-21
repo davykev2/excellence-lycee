@@ -606,8 +606,8 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "L’infection de l’organisme par le VIH", pathId: "terminale-c-svt-l6-hiv-infection" },
       { title: "Les cycles sexuels chez la femme", pathId: "terminale-c-svt-l7-female-sexual-cycles" },
       { title: "La transmission d’un caractère héréditaire chez l’Homme", pathId: "terminale-c-svt-l8-human-heredity" },
-      "La mise en place des gisements pétrolifères en Côte d’Ivoire",
-      "L’exploitation des gisements pétrolifères",
+      { title: "La mise en place des gisements pétrolifères en Côte d’Ivoire", pathId: "terminale-c-svt-l9-petroleum-formation" },
+      { title: "L’exploitation des gisements pétrolifères", pathId: "terminale-c-svt-l10-petroleum-exploitation" },
       "L’amélioration de la fertilité du sol",
     ],
     philosophy: [
