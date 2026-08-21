@@ -121,7 +121,7 @@ L'arborescence reste volontairement sale au 21/08/2026 après la consolidation p
 
 1. **Cloisonnement après connexion.** Le nouveau contrat `apps/web/src/routing/routeAccess.ts` empêche une URL Terminale conservée avant authentification d'exposer les sujets BAC à une session Seconde/Première ; la carte BAC de l'Arène suit la même règle, avec exception administrateur. Les changements touchent `LearningApp.tsx`, `ArenaScreen.tsx` et les tests. **Lot non commité au relevé ; ne pas le mélanger à un autre lot.**
 2. **Fichier extérieur.** `.claude/launch.json` est modifié : le préserver et ne pas l'embarquer sans savoir quelle session le possède.
-3. **Déploiements séparés.** Les enrichissements SVT touchent le registre API et préparent cinq migrations encore à contrôler en production : `20260821120000`, `20260821160000`, `20260821180000`, `20260821190000` et `20260821200000`. Vérifier l’alias API puis appliquer explicitement les migrations ciblées avant d’annoncer ces parcours comme livrés en production.
+3. **Déploiements pédagogiques vérifiés le 21/08/2026.** Le frontend public sert les trois nouveaux parcours et le compteur 9 719 ; l’alias `excellence-lycee-api.vercel.app` sert le registre XP du dernier commit avec le fournisseur Supabase. Les migrations ciblées `20260821120000`, `20260821160000`, `20260821180000`, `20260821190000` et `20260821200000` sont appliquées et enregistrées à distance. Toute modification API ou nouvelle migration ultérieure conserve la procédure de déploiement et d’application séparée décrite plus haut.
 
 ### Fonctionnalités produit déjà acquises depuis juillet
 
