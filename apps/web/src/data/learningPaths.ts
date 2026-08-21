@@ -33,6 +33,7 @@ import { terminalCSvtFemaleCyclesPath } from "./terminalCSvtFemaleCyclesPath";
 import { terminalCSvtHumanHeredityPath } from "./terminalCSvtHumanHeredityPath";
 import { terminalCSvtPetroleumFormationPath } from "./terminalCSvtPetroleumFormationPath";
 import { terminalCSvtPetroleumExploitationPath } from "./terminalCSvtPetroleumExploitationPath";
+import { terminalCSvtSoilFertilityPath } from "./terminalCSvtSoilFertilityPath";
 import { terminalCSvtMuscleEnergyPath } from "./terminalCSvtMuscleEnergyPath";
 import { terminalCSvtNervousPath } from "./terminalCSvtNervousPath";
 import { terminalDSvtConditionedReflexPath } from "./terminalDSvtConditionedReflexPath";
@@ -42,6 +43,8 @@ import { terminalDSvtHeartPath } from "./terminalDSvtHeartPath";
 import { terminalDSvtGameteFatePath } from "./terminalDSvtGameteFatePath";
 import { terminalDSvtHumanSexualOrgansPath } from "./terminalDSvtHumanSexualOrgansPath";
 import { terminalDSvtSpermaphyteReproductionPath } from "./terminalDSvtSpermaphyteReproductionPath";
+import { terminalDSvtSingleTraitHeredityPath } from "./terminalDSvtSingleTraitHeredityPath";
+import { terminalDSvtTwoTraitHeredityPath } from "./terminalDSvtTwoTraitHeredityPath";
 import { terminalDSvtInternalEnvironmentPath } from "./terminalDSvtInternalEnvironmentPath";
 import { terminalSvtPaths } from "./terminalSvtPaths";
 import { applyLessonXpBudget } from "./xpRewards";
@@ -84,6 +87,7 @@ const baseLearningPaths: LearningPath[] = [
   terminalCSvtHumanHeredityPath,
   terminalCSvtPetroleumFormationPath,
   terminalCSvtPetroleumExploitationPath,
+  terminalCSvtSoilFertilityPath,
   terminalDSvtConditionedReflexPath,
   terminalDSvtNervousTissuePath,
   terminalDSvtSkeletalMusclePath,
@@ -91,6 +95,8 @@ const baseLearningPaths: LearningPath[] = [
   terminalDSvtGameteFatePath,
   terminalDSvtHumanSexualOrgansPath,
   terminalDSvtSpermaphyteReproductionPath,
+  terminalDSvtSingleTraitHeredityPath,
+  terminalDSvtTwoTraitHeredityPath,
   terminalDSvtInternalEnvironmentPath,
 ];
 

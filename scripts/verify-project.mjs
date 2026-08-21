@@ -221,6 +221,15 @@ run(
 );
 
 run(
+  "Contenu · audit-terminal-c-svt-soil-fertility.ts",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    resolve(root, "scripts", "audit-terminal-c-svt-soil-fertility.ts"),
+  ],
+);
+
+run(
   "Contenu · audit-terminal-d-svt-conditioned-reflex.ts",
   process.execPath,
   [
@@ -280,6 +289,24 @@ run(
   [
     resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
     resolve(root, "scripts", "audit-terminal-d-svt-spermaphyte-reproduction.ts"),
+  ],
+);
+
+run(
+  "Contenu · audit-terminal-d-svt-single-trait-heredity.ts",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    resolve(root, "scripts", "audit-terminal-d-svt-single-trait-heredity.ts"),
+  ],
+);
+
+run(
+  "Contenu · audit-terminal-d-svt-two-trait-heredity.ts",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    resolve(root, "scripts", "audit-terminal-d-svt-two-trait-heredity.ts"),
   ],
 );
 

@@ -105,21 +105,23 @@ Les décisions détaillées, corrections de sources, poids XP et audits propres 
 | Mathématiques Terminale D | Les 12 cartes sont couvertes, principalement par adaptation des parcours C enrichis | Conserver les ids/poids historiques ; auditer contre un PDF propre à D seulement si une divergence de programme est établie. |
 | Physique-Chimie Terminales C/D | **Catalogue actuellement référencé entièrement enrichi** depuis le 11/08/2026 | Toute nouvelle carte doit suivre la règle Web/API/migration et vérifier le déploiement séparé de l'API. |
 | SVT Terminale A | **7/7 leçons enrichies** | Le fichier transmis comme « L8 » est un doublon de contenu de la L4 : ne pas créer artificiellement une huitième leçon. |
-| SVT Terminale C | **L1 à L10 enrichies** | Reste L11 « L'amélioration de la fertilité du sol ». L10 est une adaptation riche du guide DPFC, pas une restitution fidèle d’un PDF complet de leçon. |
-| SVT Terminale D | L1 à L7 et L10 livrées, soit **8/15 cartes** | Restent L8, L9 et L11 à L15. Respecter l'ordre du catalogue même lorsque le numéro imprimé sur le PDF diverge. |
-| Histoire Terminale | **H2 à H9 enrichies** et partagées entre A/C/D | H1 existe dans le catalogue ; ne pas confondre avec le lot H2-H9 déclaré terminé. |
+| SVT Terminale C | **11/11 leçons enrichies** | Catalogue complet. L10 et L11 restent des adaptations riches du guide DPFC, pas des restitutions fidèles de PDF complets. |
+| SVT Terminale D | **L1 à L10 livrées, soit 10/15 cartes** | Restent seulement L11 à L15. Respecter l'ordre du catalogue même lorsque le numéro imprimé sur le PDF diverge. |
+| Histoire Terminale | **H2 à H9 enrichies** et partagées entre A/C/D | Reste H1 ; ne pas confondre avec le lot H2-H9 déclaré terminé. |
 | Philosophie Terminale | **Les 10 parcours L1 à L10 sont enrichis** | Maintenance éditoriale uniquement. |
 | Géographie Terminale | **G1 à G4, G6 et G7 enrichies** | G5 reste « document à fournir » : ne pas inventer son titre ni son contenu sans source. |
 
-Le compteur consolidé du catalogue est **9 419 réponses évaluables** après les 95 réponses de L9 et les 90 réponses de L10 en SVT Terminale C. Un audit de leçon ne doit pas dépendre d'un compteur global figé quand plusieurs enrichissements avancent en parallèle ; le compteur global se verrouille dans l'audit de stabilité après consolidation des lots.
+Il reste donc **7 leçons de Terminale identifiables non enrichies** : SVT Terminale D L11 à L15, Histoire H1 et Géographie G5. Cette dernière reste bloquée tant que sa source n’est pas fournie.
+
+Le compteur consolidé du catalogue est **9 719 réponses évaluables** après l’ajout des 90 réponses de SVT Terminale C L11, des 100 réponses de SVT Terminale D L8 et des 110 réponses de SVT Terminale D L9. Un audit de leçon ne doit pas dépendre d'un compteur global figé quand plusieurs enrichissements avancent en parallèle ; le compteur global se verrouille dans l'audit de stabilité après consolidation des lots.
 
 ### Travail en cours — ne pas écraser
 
-L'arborescence reste volontairement sale au 21/08/2026 après la consolidation pédagogique. Le lot de cloisonnement BAC et un fichier de configuration extérieur ne doivent pas être embarqués avec les leçons ; relire les diffs hunk par hunk avant tout commit.
+L'arborescence reste volontairement sale au 21/08/2026 après la consolidation pédagogique. Le lot de cloisonnement BAC et un fichier de configuration extérieur restent indépendants ; relire les diffs hunk par hunk avant leur propre commit.
 
-1. **Cloisonnement après connexion.** Le nouveau contrat `apps/web/src/routing/routeAccess.ts` empêche une URL Terminale conservée avant authentification d'exposer les sujets BAC à une session Seconde/Première ; la carte BAC de l'Arène suit la même règle, avec exception administrateur. Les changements touchent `LearningApp.tsx`, `ArenaScreen.tsx` et les tests. **Lot non commité au relevé ; ne pas le mélanger aux enrichissements.**
+1. **Cloisonnement après connexion.** Le nouveau contrat `apps/web/src/routing/routeAccess.ts` empêche une URL Terminale conservée avant authentification d'exposer les sujets BAC à une session Seconde/Première ; la carte BAC de l'Arène suit la même règle, avec exception administrateur. Les changements touchent `LearningApp.tsx`, `ArenaScreen.tsx` et les tests. **Lot non commité au relevé ; ne pas le mélanger à un autre lot.**
 2. **Fichier extérieur.** `.claude/launch.json` est modifié : le préserver et ne pas l'embarquer sans savoir quelle session le possède.
-3. **Déploiements séparés.** Le commit pédagogique de L9/L10 ne déploie pas l’API et n’applique pas les migrations `20260821120000` et `20260821160000`. Vérifier l’état réel de ces deux opérations avant d’annoncer les parcours comme livrés en production.
+3. **Déploiements séparés.** Les enrichissements SVT touchent le registre API et préparent cinq migrations encore à contrôler en production : `20260821120000`, `20260821160000`, `20260821180000`, `20260821190000` et `20260821200000`. Vérifier l’alias API puis appliquer explicitement les migrations ciblées avant d’annoncer ces parcours comme livrés en production.
 
 ### Fonctionnalités produit déjà acquises depuis juillet
 
@@ -131,6 +133,7 @@ L'arborescence reste volontairement sale au 21/08/2026 après la consolidation p
 ### Règles de continuation de l'enrichissement
 
 - Lire intégralement le PDF source et reconstruire les schémas avec les interactions natives (`schema`, `diagram`, `timeline`, `curve`) ; ne jamais republier les scans.
+- Une leçon reconstruite depuis un support complet peut être marquée `faithful` ou `faithful-corrected`. Si seul le programme/guide DPFC est disponible, employer `adapted`, citer exactement les pages utilisées et ne jamais qualifier d’« officiel » un exercice inventé.
 - Corriger les erreurs de source explicitement dans `corrections` ou dans un encadré « Correction/Précision » ; ne jamais les reproduire en silence.
 - Conserver les ids et poids existants. Pour tout nouveau niveau ou nouveau parcours : synchroniser données Web, registre API et migration Supabase ; normaliser à 10 000 XP ; ajouter un audit dédié.
 - Les enrichissements Humanités gardent les 6 ids/poids produits par `createHumanitiesPath()` et ne demandent normalement ni changement API ni migration.

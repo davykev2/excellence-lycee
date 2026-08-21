@@ -75,7 +75,7 @@ async function loadSvtPaths(levelId: string) {
     ]);
   }
   if (levelId === "terminale-c") {
-    const [nervousSystem, drugsNervousSystem, cellEnergyProduction, muscleEnergyUse, immuneDefense, hivInfection, femaleCycles, humanHeredity, petroleumFormation, petroleumExploitation] = await Promise.all([
+    const [nervousSystem, drugsNervousSystem, cellEnergyProduction, muscleEnergyUse, immuneDefense, hivInfection, femaleCycles, humanHeredity, petroleumFormation, petroleumExploitation, soilFertility] = await Promise.all([
       import("./terminalCSvtNervousPath").then((module) => [module.terminalCSvtNervousPath]),
       import("./terminalCSvtDrugsPath").then((module) => [module.terminalCSvtDrugsPath]),
       import("./terminalCSvtCellEnergyPath").then((module) => [module.terminalCSvtCellEnergyPath]),
@@ -86,11 +86,12 @@ async function loadSvtPaths(levelId: string) {
       import("./terminalCSvtHumanHeredityPath").then((module) => [module.terminalCSvtHumanHeredityPath]),
       import("./terminalCSvtPetroleumFormationPath").then((module) => [module.terminalCSvtPetroleumFormationPath]),
       import("./terminalCSvtPetroleumExploitationPath").then((module) => [module.terminalCSvtPetroleumExploitationPath]),
+      import("./terminalCSvtSoilFertilityPath").then((module) => [module.terminalCSvtSoilFertilityPath]),
     ]);
-    return [...nervousSystem, ...drugsNervousSystem, ...cellEnergyProduction, ...muscleEnergyUse, ...immuneDefense, ...hivInfection, ...femaleCycles, ...humanHeredity, ...petroleumFormation, ...petroleumExploitation];
+    return [...nervousSystem, ...drugsNervousSystem, ...cellEnergyProduction, ...muscleEnergyUse, ...immuneDefense, ...hivInfection, ...femaleCycles, ...humanHeredity, ...petroleumFormation, ...petroleumExploitation, ...soilFertility];
   }
   if (levelId === "terminale-d") {
-    const [conditionedReflex, nervousTissue, skeletalMuscle, heart, gameteFate, humanSexualOrgans, spermaphyteReproduction, internalEnvironment] = await Promise.all([
+    const [conditionedReflex, nervousTissue, skeletalMuscle, heart, gameteFate, humanSexualOrgans, spermaphyteReproduction, singleTraitHeredity, twoTraitHeredity, internalEnvironment] = await Promise.all([
       import("./terminalDSvtConditionedReflexPath").then((module) => module.terminalDSvtConditionedReflexPath),
       import("./terminalDSvtNervousTissuePath").then((module) => module.terminalDSvtNervousTissuePath),
       import("./terminalDSvtSkeletalMusclePath").then((module) => module.terminalDSvtSkeletalMusclePath),
@@ -98,9 +99,11 @@ async function loadSvtPaths(levelId: string) {
       import("./terminalDSvtGameteFatePath").then((module) => module.terminalDSvtGameteFatePath),
       import("./terminalDSvtHumanSexualOrgansPath").then((module) => module.terminalDSvtHumanSexualOrgansPath),
       import("./terminalDSvtSpermaphyteReproductionPath").then((module) => module.terminalDSvtSpermaphyteReproductionPath),
+      import("./terminalDSvtSingleTraitHeredityPath").then((module) => module.terminalDSvtSingleTraitHeredityPath),
+      import("./terminalDSvtTwoTraitHeredityPath").then((module) => module.terminalDSvtTwoTraitHeredityPath),
       import("./terminalDSvtInternalEnvironmentPath").then((module) => module.terminalDSvtInternalEnvironmentPath),
     ]);
-    return [conditionedReflex, nervousTissue, skeletalMuscle, heart, gameteFate, humanSexualOrgans, spermaphyteReproduction, internalEnvironment];
+    return [conditionedReflex, nervousTissue, skeletalMuscle, heart, gameteFate, humanSexualOrgans, spermaphyteReproduction, singleTraitHeredity, twoTraitHeredity, internalEnvironment];
   }
   return [];
 }
