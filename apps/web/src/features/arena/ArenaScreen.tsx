@@ -24,6 +24,7 @@ import type { LearnerProfile, SchoolLevel, SubjectDefinition, SubjectId } from "
 import type { UserRole } from "../../domain/auth";
 import { formatXp } from "../../data/xpRewards";
 import { getBacExamBySlug, type BacExamSlug } from "../../data/bacExamCatalog";
+import { isTerminalLevelId } from "../../routing/routeAccess";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
 import { ArenaExercisesPage } from "./ArenaExercisesPage";
 import { MathCodexPage } from "../codex/MathCodexPage";
@@ -192,7 +193,14 @@ export function ArenaScreen({
 }: ArenaScreenProps) {
   const [selectedModeId, setSelectedModeId] = useState<ArenaModeId>("exercises");
   const [selectionMessage, setSelectionMessage] = useState<string | null>(null);
-  const selectedMode = useMemo(() => arenaModes.find((mode) => mode.id === selectedModeId) ?? arenaModes[0], [selectedModeId]);
+  const availableArenaModes = useMemo(
+    () => arenaModes.filter((mode) => mode.id !== "bac" || isTerminalLevelId(level.id)),
+    [level.id],
+  );
+  const selectedMode = useMemo(
+    () => availableArenaModes.find((mode) => mode.id === selectedModeId) ?? availableArenaModes[0],
+    [availableArenaModes, selectedModeId],
+  );
   const SelectedIcon = selectedMode.icon;
 
   const selectMode = (modeId: ArenaModeId) => {
@@ -306,7 +314,7 @@ export function ArenaScreen({
           <p>Choisis ton défi, mesure tes progrès et deviens meilleur à chaque tentative.</p>
           <div className="arena-hero-stats">
             <span><Medal size={20} weight="duotone" /><strong>{formatXp(totalXp)}</strong> XP gagnés</span>
-            <span><Sparkle size={20} weight="duotone" /><strong>7</strong> modes</span>
+            <span><Sparkle size={20} weight="duotone" /><strong>{availableArenaModes.length}</strong> modes</span>
             <span><UsersThree size={20} weight="duotone" /><strong>{level.label}</strong></span>
           </div>
         </div>
@@ -333,7 +341,7 @@ export function ArenaScreen({
       <section className="arena-modes-section" aria-labelledby="arena-modes-title">
         <div className="arena-section-heading"><div><p className="path-kicker">Étape 2</p><h2 id="arena-modes-title">Choisis ton mode</h2></div><span>Solo, examen ou multijoueur</span></div>
         <div className="arena-mode-grid">
-          {arenaModes.map((mode) => {
+          {availableArenaModes.map((mode) => {
             const Icon = mode.icon;
             const isActive = mode.id === selectedModeId;
             return (

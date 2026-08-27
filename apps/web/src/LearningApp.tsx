@@ -31,6 +31,7 @@ import {
   routeForNavigation,
   type AppRoute,
 } from "./routing/appRoute";
+import { routeAllowedForUser } from "./routing/routeAccess";
 import {
   canOpenMasteryLevel,
   MASTERY_LEVELS_REQUIRE_SEQUENCE,
@@ -148,16 +149,6 @@ function mergeLearningPaths(current: LearningPath[], incoming: LearningPath[]) {
   const byId = new Map(current.map((path) => [path.id, path]));
   for (const path of incoming) byId.set(path.id, path);
   return [...byId.values()];
-}
-
-function routeAllowedForUser(route: AppRoute, user: AuthUser): AppRoute {
-  if (route.navigation === "admin" && user.role !== "admin") {
-    return { navigation: "home", subjectId: route.subjectId };
-  }
-  if (route.navigation === "arena" && route.arenaEditor && user.role !== "admin" && user.role !== "content_editor") {
-    return { ...route, arenaEditor: false };
-  }
-  return route;
 }
 
 export function LearningApp({ user }: { user?: AuthUser }) {

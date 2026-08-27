@@ -30,6 +30,8 @@ import {
   canOpenMasteryLevel,
   MASTERY_LEVELS_REQUIRE_SEQUENCE,
 } from "../apps/web/src/config/masteryAccess.ts";
+import type { AuthUser, AccountType } from "../apps/web/src/domain/auth.ts";
+import { routeAllowedForUser } from "../apps/web/src/routing/routeAccess.ts";
 
 const projectRoot = fileURLToPath(new URL("../", import.meta.url));
 
@@ -234,6 +236,62 @@ test("l'audit éditorial reste aligné sur les leçons publiées et celles encor
   assert.equal(chargedParticleD?.published, true);
   assert.equal(chargedParticleD && editorialStatusOf(chargedParticleD), "complete");
   assert.equal(learningPaths.find((path) => path.id === "terminale-cd-charged-particle-magnetic-field")?.chapterNumberByLevel?.["terminale-d"], 6);
+});
+
+test("une session Seconde ou Première ne peut jamais reprendre une page BAC de Terminale", () => {
+  const terminalBacRoute = {
+    navigation: "arena" as const,
+    subjectId: "mathematics" as const,
+    arenaMode: "bac" as const,
+    bacExamSlug: "2018",
+  };
+  const accountTypes: AccountType[] = ["student", "parent", "teacher"];
+  const nonTerminalLevels = schoolLevels.filter((level) => level.stage !== "terminale");
+
+  for (const level of nonTerminalLevels) {
+    for (const accountType of accountTypes) {
+      const user: AuthUser = {
+        id: `${accountType}-${level.id}`,
+        email: `${accountType}-${level.id}@example.test`,
+        name: "Compte de contrôle",
+        role: accountType === "teacher" ? "teacher" : "student",
+        accountType,
+        levelId: level.id,
+        emailVerified: true,
+      };
+      assert.deepEqual(
+        routeAllowedForUser(terminalBacRoute, user),
+        { navigation: "home", subjectId: "mathematics" },
+        `${accountType}/${level.id} ne doit pas ouvrir un sujet de Terminale après la connexion.`,
+      );
+    }
+  }
+
+  const terminalStudent: AuthUser = {
+    id: "student-terminale-c",
+    email: "student-terminale-c@example.test",
+    name: "Élève Terminale C",
+    role: "student",
+    accountType: "student",
+    levelId: "terminale-c",
+    emailVerified: true,
+  };
+  assert.deepEqual(routeAllowedForUser(terminalBacRoute, terminalStudent), terminalBacRoute);
+
+  const admin: AuthUser = {
+    ...terminalStudent,
+    id: "admin-seconde-c",
+    email: "admin-seconde-c@example.test",
+    name: "Administrateur de contrôle",
+    role: "admin",
+    accountType: "teacher",
+    levelId: "seconde-c",
+  };
+  assert.deepEqual(
+    routeAllowedForUser(terminalBacRoute, admin),
+    terminalBacRoute,
+    "Un administrateur conserve l'accès aux sujets BAC pour les contrôler.",
+  );
 });
 
 test("l'accueil reprend le parcours réellement utilisé et calcule l'objectif du jour", () => {
