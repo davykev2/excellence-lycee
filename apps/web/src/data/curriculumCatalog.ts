@@ -697,7 +697,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "Le système de défense de l’organisme", pathId: "terminale-d-svt-l11-immune-defense" },
       { title: "L’infection de l’organisme par le VIH", pathId: "terminale-d-svt-l12-hiv-infection" },
       "La mise en place des gisements miniers en Côte d’Ivoire",
-      "L’exploitation des gisements miniers en Côte d’Ivoire",
+      { title: "L’exploitation des gisements miniers en Côte d’Ivoire", pathId: "terminale-d-svt-l14-mining-exploitation" },
       "L’amélioration et la protection des sols",
     ],
     philosophy: [
