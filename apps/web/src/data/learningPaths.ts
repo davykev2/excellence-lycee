@@ -49,6 +49,7 @@ import { terminalDSvtInternalEnvironmentPath } from "./terminalDSvtInternalEnvir
 import { terminalDSvtImmuneDefensePath } from "./terminalDSvtImmuneDefensePath";
 import { terminalDSvtHivInfectionPath } from "./terminalDSvtHivInfectionPath";
 import { terminalDSvtMiningExploitationPath } from "./terminalDSvtMiningExploitationPath";
+import { terminalDSvtSoilProtectionPath } from "./terminalDSvtSoilProtectionPath";
 import { terminalSvtPaths } from "./terminalSvtPaths";
 import { applyLessonXpBudget } from "./xpRewards";
 
@@ -104,6 +105,7 @@ const baseLearningPaths: LearningPath[] = [
   terminalDSvtImmuneDefensePath,
   terminalDSvtHivInfectionPath,
   terminalDSvtMiningExploitationPath,
+  terminalDSvtSoilProtectionPath,
 ];
 
 export const learningPaths: LearningPath[] = baseLearningPaths.map(applyLessonXpBudget);

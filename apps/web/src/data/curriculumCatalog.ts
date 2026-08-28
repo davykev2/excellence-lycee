@@ -698,7 +698,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "L’infection de l’organisme par le VIH", pathId: "terminale-d-svt-l12-hiv-infection" },
       "La mise en place des gisements miniers en Côte d’Ivoire",
       { title: "L’exploitation des gisements miniers en Côte d’Ivoire", pathId: "terminale-d-svt-l14-mining-exploitation" },
-      "L’amélioration et la protection des sols",
+      { title: "L’amélioration et la protection des sols", pathId: "terminale-d-svt-l15-soil-protection" },
     ],
     philosophy: [
       { title: "La dissertation philosophique", pathId: "terminale-philo-l1-dissertation" },
