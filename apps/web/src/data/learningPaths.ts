@@ -46,6 +46,7 @@ import { terminalDSvtSpermaphyteReproductionPath } from "./terminalDSvtSpermaphy
 import { terminalDSvtSingleTraitHeredityPath } from "./terminalDSvtSingleTraitHeredityPath";
 import { terminalDSvtTwoTraitHeredityPath } from "./terminalDSvtTwoTraitHeredityPath";
 import { terminalDSvtInternalEnvironmentPath } from "./terminalDSvtInternalEnvironmentPath";
+import { terminalDSvtImmuneDefensePath } from "./terminalDSvtImmuneDefensePath";
 import { terminalSvtPaths } from "./terminalSvtPaths";
 import { applyLessonXpBudget } from "./xpRewards";
 
@@ -98,6 +99,7 @@ const baseLearningPaths: LearningPath[] = [
   terminalDSvtSingleTraitHeredityPath,
   terminalDSvtTwoTraitHeredityPath,
   terminalDSvtInternalEnvironmentPath,
+  terminalDSvtImmuneDefensePath,
 ];
 
 export const learningPaths: LearningPath[] = baseLearningPaths.map(applyLessonXpBudget);
