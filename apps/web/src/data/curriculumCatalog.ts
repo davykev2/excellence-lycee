@@ -695,7 +695,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
       { title: "La transmission de deux caractères héréditaires chez les êtres vivants", pathId: "terminale-d-svt-l9-two-trait-heredity" },
       { title: "Le maintien de la constance du milieu intérieur", pathId: "terminale-d-svt-l10-internal-environment" },
       { title: "Le système de défense de l’organisme", pathId: "terminale-d-svt-l11-immune-defense" },
-      "L’infection de l’organisme par le VIH",
+      { title: "L’infection de l’organisme par le VIH", pathId: "terminale-d-svt-l12-hiv-infection" },
       "La mise en place des gisements miniers en Côte d’Ivoire",
       "L’exploitation des gisements miniers en Côte d’Ivoire",
       "L’amélioration et la protection des sols",
