@@ -4,6 +4,7 @@ import { z } from "zod";
 import {
   BAC_EXAM_IDS,
   BAC_EXAM_ZONES,
+  canProfileAccessBacExam,
   getBacExamAppreciation,
   getBacExamConfiguration,
   getBacExamSectionScores,
@@ -296,6 +297,12 @@ function setLocalSubjectPublished(examId: string, actorId: string, published: bo
 export async function bacExamRoutes(app: FastifyInstance) {
   app.get("/:examId", { preHandler: app.authenticate }, async (request, reply) => {
     reply.header("Cache-Control", "private, no-store");
+    if (!canProfileAccessBacExam(request.authContext)) {
+      return reply.code(403).send({
+        error: "BAC_ACCESS_DENIED",
+        message: "Les sujets BAC sont réservés aux classes de Terminale.",
+      });
+    }
     const parsed = paramsSchema.safeParse(request.params);
     if (!parsed.success) return reply.code(404).send({ error: "EXAM_NOT_FOUND", message: "Épreuve introuvable." });
     const state = supabaseConfigured
@@ -320,6 +327,12 @@ export async function bacExamRoutes(app: FastifyInstance) {
     config: { rateLimit: { max: 5, timeWindow: "1 hour" } },
   }, async (request, reply) => {
     reply.header("Cache-Control", "private, no-store");
+    if (!canProfileAccessBacExam(request.authContext)) {
+      return reply.code(403).send({
+        error: "BAC_ACCESS_DENIED",
+        message: "Les sujets BAC sont réservés aux classes de Terminale.",
+      });
+    }
     const params = paramsSchema.safeParse(request.params);
     const body = submitSchema.safeParse(request.body);
     if (!params.success) return reply.code(404).send({ error: "EXAM_NOT_FOUND", message: "Épreuve introuvable." });

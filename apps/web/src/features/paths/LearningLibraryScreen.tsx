@@ -67,10 +67,16 @@ export function LearningLibraryScreen({ level, subjects, selectedSubjectId, path
           const isActive = subject.id === selectedSubjectId;
           const hasCatalog = catalogLessons.some((lesson) => lesson.subjectId === subject.id && lesson.levelId === level.id);
           return (
-            <button className={isActive ? "is-active" : ""} type="button" key={subject.id} onClick={() => onSubjectChange(subject.id)}>
+            <button
+              className={isActive ? "is-active" : ""}
+              type="button"
+              key={subject.id}
+              disabled={!subject.enabled}
+              onClick={() => onSubjectChange(subject.id)}
+            >
               <Icon size={22} weight={isActive ? "fill" : "duotone"} />
               <span>{subject.shortLabel}</span>
-              {!hasCatalog && <small>À fournir</small>}
+              {!subject.enabled ? <small>Bientôt</small> : !hasCatalog && <small>À fournir</small>}
             </button>
           );
         })}

@@ -31,7 +31,12 @@ import {
   routeForNavigation,
   type AppRoute,
 } from "./routing/appRoute";
-import { routeAllowedForUser } from "./routing/routeAccess";
+import {
+  canAccessLearningPath,
+  initialSubjectIdForLocation,
+  levelIdForLearningPath,
+  routeAllowedForUser,
+} from "./routing/routeAccess";
 import {
   canOpenMasteryLevel,
   MASTERY_LEVELS_REQUIRE_SEQUENCE,
@@ -85,17 +90,6 @@ const requestedPreviewLevel = previewParams.get("__level-preview");
 const previewLevelId = schoolLevels.some((level) => level.id === requestedPreviewLevel) ? requestedPreviewLevel! : "seconde-c";
 const requestedPreviewPathId = previewParams.get("__path-preview");
 const requestedPreviewLessonId = previewParams.get("__lesson-preview");
-const initialRouteHint = readAppRoute(window.location, {
-  navigation: "home",
-  subjectId: initialDashboard.subjectId,
-});
-const explicitInitialSubjectId = previewParams.get("matiere");
-const requestedInitialPathId = requestedPreviewPathId ?? initialRouteHint.pathId;
-const requestedInitialSubjectId: SubjectId = explicitInitialSubjectId
-  && Object.prototype.hasOwnProperty.call(subjects, explicitInitialSubjectId)
-  ? explicitInitialSubjectId as SubjectId
-  : curriculumLessonTitles.find((lesson) => lesson.pathId === requestedInitialPathId)?.subjectId
-    ?? initialDashboard.subjectId;
 const previewUser: AuthUser = {
   id: "preview-user",
   email: "apprenant@excellence.local",
@@ -170,6 +164,16 @@ function LearningAppWithPaths({ user }: { user: AuthUser }) {
   const pendingSubjectLoads = useRef(new Map<SubjectId, Promise<void>>());
   const loadGeneration = useRef(0);
   const includeAllPaths = user.role === "admin" || isAdminContentPreview || isPathPreview;
+  const requestedInitialSubjectId = useMemo(
+    () => initialSubjectIdForLocation(
+      window.location,
+      initialDashboard.subjectId,
+      curriculumLessonTitles,
+      requestedPreviewPathId,
+      user,
+    ),
+    [user.id, user.levelId, user.role],
+  );
 
   const ensureSubjectPaths = useCallback((subjectId: SubjectId) => {
     if (includeAllPaths || loadedSubjectIds.current.has(subjectId)) return Promise.resolve();
@@ -218,7 +222,7 @@ function LearningAppWithPaths({ user }: { user: AuthUser }) {
         if (active) setPathLoadingError(error instanceof Error ? error : new Error("Chargement des cours impossible."));
       });
     return () => { active = false; };
-  }, [includeAllPaths, user.levelId]);
+  }, [includeAllPaths, requestedInitialSubjectId, user.levelId]);
 
   if (pathLoadingError) throw pathLoadingError;
   if (!baseLearningPaths) {
@@ -341,9 +345,14 @@ function LearningAppShell({
     return () => window.removeEventListener("popstate", onPopState);
   }, [prepareRoute, route, routeFallback, user]);
 
+  const routedPath = useMemo(
+    () => availablePaths.find((path) => path.id === selectedPathId) ?? null,
+    [availablePaths, selectedPathId],
+  );
+  const routeLevelId = levelIdForLearningPath(user, routedPath);
   const level = useMemo(
-    () => schoolLevels.find((item) => item.id === profile.levelId) ?? schoolLevels[0],
-    [profile.levelId],
+    () => schoolLevels.find((item) => item.id === routeLevelId) ?? schoolLevels[0],
+    [routeLevelId],
   );
   const subjectOptions = useMemo(
     () => Object.values(subjects).filter((item) => isSubjectAvailableForLevel(item, level.id)),
@@ -379,10 +388,7 @@ function LearningAppShell({
     }),
     [availablePaths, dashboardPathPreference, level.id, progressByPath, subject.id],
   );
-  const selectedPath = useMemo(
-    () => availablePaths.find((path) => path.id === selectedPathId && path.levelIds.includes(level.id)) ?? null,
-    [availablePaths, level.id, selectedPathId],
-  );
+  const selectedPath = routedPath && canAccessLearningPath(user, routedPath) ? routedPath : null;
   const activePath = selectedPath ?? dashboardPath;
   const completedLessonIds = activePath
     ? completedLessonsByPath[activePath.id] ?? emptyCompletedLessons
@@ -487,7 +493,9 @@ function LearningAppShell({
 
   useEffect(() => {
     if (progressLoading || route.navigation !== "paths" || !route.pathId) return;
-    const requestedPath = availablePaths.find((path) => path.id === route.pathId && path.levelIds.includes(level.id));
+    const requestedPath = availablePaths.find((path) => (
+      path.id === route.pathId && canAccessLearningPath(user, path)
+    ));
     if (!requestedPath) {
       navigate({ navigation: "paths", subjectId: subject.id }, { replace: true, scroll: false });
       return;

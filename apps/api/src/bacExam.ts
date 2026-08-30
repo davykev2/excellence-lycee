@@ -8,6 +8,13 @@ export const BAC_CI_2023_EXAM_ID = "bac-ci-2023-archive";
 export const ESATIC_2023_EXAM_ID = "esatic-2023-archive";
 export const ESATIC_2024_EXAM_ID = "esatic-2024-archive";
 
+export function canProfileAccessBacExam(profile: { levelId: string; role: string }) {
+  return profile.role === "admin"
+    || profile.levelId === "terminale-a"
+    || profile.levelId === "terminale-c"
+    || profile.levelId === "terminale-d";
+}
+
 export type BacExamChoice = "A" | "B" | "C" | "D" | "E";
 export type BacExamAnswers = Record<string, BacExamChoice>;
 export type BacExamZone = "cocody" | "bingerville" | "yopougon" | "online";

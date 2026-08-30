@@ -15,6 +15,7 @@ declare module "fastify" {
       id: string;
       email: string;
       role: UserRole;
+      levelId: string;
       accessToken?: string;
     };
   }

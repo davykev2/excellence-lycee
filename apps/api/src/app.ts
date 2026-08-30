@@ -19,6 +19,7 @@ import { storeRoutes } from "./routes/store.js";
 import { bacExamRoutes } from "./routes/bacExam.js";
 import { notificationRoutes } from "./routes/notifications.js";
 import { authenticateWithSupabase, supabaseConfigured } from "./supabase.js";
+import { database, type UserRole } from "./database.js";
 
 export async function buildApp() {
   const app = Fastify({ logger: true, trustProxy: config.isProduction });
@@ -43,6 +44,7 @@ export async function buildApp() {
           id: context.id,
           email: context.email,
           role: context.role,
+          levelId: context.user.levelId,
           accessToken,
         };
         return;
@@ -53,10 +55,18 @@ export async function buildApp() {
 
     try {
       await request.jwtVerify();
+      const profile = database.prepare("SELECT level_id AS levelId, role FROM users WHERE id = ?").get(request.user.sub) as {
+        levelId: string;
+        role: UserRole;
+      } | undefined;
+      if (!profile) {
+        return reply.code(401).send({ error: "UNAUTHORIZED", message: "Session invalide ou expirée." });
+      }
       request.authContext = {
         id: request.user.sub,
         email: request.user.email,
-        role: request.user.role,
+        role: profile.role,
+        levelId: profile.levelId,
       };
     } catch {
       return reply.code(401).send({ error: "UNAUTHORIZED", message: "Authentification requise." });

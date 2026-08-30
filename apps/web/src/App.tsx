@@ -23,7 +23,7 @@ const learningFallback = (
 );
 
 export function App() {
-  const { user, loading } = useAuth();
+  const { user, loading, sessionError, retrySession } = useAuth();
   const { hasRecoveryIntent } = readPasswordRecoveryState();
 
   if (hasRecoveryIntent) return <AuthScreen />;
@@ -32,6 +32,19 @@ export function App() {
   }
   if (loading) {
     return <main className="session-loading" role="status"><span className="session-loading-mark" />Préparation de ton espace…</main>;
+  }
+  if (sessionError) {
+    return (
+      <main
+        className="session-loading"
+        role="alert"
+        style={{ flexDirection: "column", padding: 24, textAlign: "center" }}
+      >
+        <strong>Ta session n’a pas pu être reprise.</strong>
+        <span style={{ maxWidth: 560, fontWeight: 600 }}>{sessionError}</span>
+        <button className="primary-action is-compact" type="button" onClick={retrySession}>Réessayer</button>
+      </main>
+    );
   }
   if (!user) return <AuthScreen />;
   return <Suspense fallback={learningFallback}><LearningApp user={user} /></Suspense>;
