@@ -5,6 +5,10 @@ export function isTerminalLevelId(levelId: string) {
   return levelId === "terminale-a" || levelId === "terminale-c" || levelId === "terminale-d";
 }
 
+export function canAccessBacExams(user: Pick<AuthUser, "levelId" | "role">) {
+  return user.role === "admin" || isTerminalLevelId(user.levelId);
+}
+
 /**
  * Empêche une URL conservée avant la connexion d'ouvrir un espace qui ne
  * correspond pas au profil scolaire venant d'être chargé.
@@ -19,8 +23,7 @@ export function routeAllowedForUser(route: AppRoute, user: AuthUser): AppRoute {
   if (
     route.navigation === "arena"
     && route.arenaMode === "bac"
-    && user.role !== "admin"
-    && !isTerminalLevelId(user.levelId)
+    && !canAccessBacExams(user)
   ) {
     return { navigation: "home", subjectId: route.subjectId };
   }

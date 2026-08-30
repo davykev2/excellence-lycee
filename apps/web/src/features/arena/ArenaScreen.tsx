@@ -24,7 +24,7 @@ import type { LearnerProfile, SchoolLevel, SubjectDefinition, SubjectId } from "
 import type { UserRole } from "../../domain/auth";
 import { formatXp } from "../../data/xpRewards";
 import { getBacExamBySlug, type BacExamSlug } from "../../data/bacExamCatalog";
-import { isTerminalLevelId } from "../../routing/routeAccess";
+import { canAccessBacExams } from "../../routing/routeAccess";
 import { CompanionAvatar } from "../companion/CompanionAvatar";
 import { ArenaExercisesPage } from "./ArenaExercisesPage";
 import { MathCodexPage } from "../codex/MathCodexPage";
@@ -194,8 +194,8 @@ export function ArenaScreen({
   const [selectedModeId, setSelectedModeId] = useState<ArenaModeId>("exercises");
   const [selectionMessage, setSelectionMessage] = useState<string | null>(null);
   const availableArenaModes = useMemo(
-    () => arenaModes.filter((mode) => mode.id !== "bac" || isTerminalLevelId(level.id)),
-    [level.id],
+    () => arenaModes.filter((mode) => mode.id !== "bac" || canAccessBacExams({ levelId: level.id, role })),
+    [level.id, role],
   );
   const selectedMode = useMemo(
     () => availableArenaModes.find((mode) => mode.id === selectedModeId) ?? availableArenaModes[0],
