@@ -34,6 +34,14 @@ run(
   process.execPath,
   ["--check", resolve(root, "scripts", "push-supabase-migrations.mjs")],
 );
+run(
+  "Contenu · audit-terminal-history-h1-onu.ts",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    resolve(root, "scripts", "audit-terminal-history-h1-onu.ts"),
+  ],
+);
 
 for (const script of [
   "audit-terminal-a-math.mjs",
