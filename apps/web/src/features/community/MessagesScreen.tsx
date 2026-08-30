@@ -151,7 +151,7 @@ export function MessagesScreen({ profile, level }: MessagesScreenProps) {
   };
 
   const handleComposerKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.key === "Enter" && !event.shiftKey) {
+    if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) {
       event.preventDefault();
       void sendReply();
     }
@@ -275,7 +275,7 @@ export function MessagesScreen({ profile, level }: MessagesScreenProps) {
             </div>
             <form className="message-reply" onSubmit={(event) => void sendReply(event)}>
               {(replyTo || editing) && <div className="message-composer-context"><div><strong>{editing ? "Modifier ton message" : `Répondre à ${replyTo?.senderName}`}</strong><span>{editing?.body ?? replyTo?.body}</span></div><button type="button" onClick={() => { setReplyTo(null); setEditing(null); setReply(""); }} aria-label="Annuler"><X size={16} weight="bold" /></button></div>}
-              <textarea aria-label="Écrire une réponse" value={reply} onChange={(event) => setReply(event.target.value)} onKeyDown={handleComposerKeyDown} placeholder="Écris ta réponse… Entrée pour envoyer" rows={2} maxLength={2000} />
+              <textarea aria-label="Écrire une réponse" value={reply} onChange={(event) => setReply(event.target.value)} onKeyDown={handleComposerKeyDown} placeholder="Écris ta réponse… Entrée pour envoyer" rows={2} maxLength={2000} enterKeyHint="send" autoCapitalize="sentences" autoComplete="off" />
               <button type="submit" disabled={!reply.trim() || messaging.mutating} aria-label={editing ? "Enregistrer la modification" : "Envoyer la réponse"}>{editing ? <Check size={22} weight="bold" /> : <PaperPlaneTilt size={22} weight="fill" />}</button>
               <small>{reply.length}/2000</small>
             </form>

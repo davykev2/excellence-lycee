@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { GlobalChatMessage } from "../../domain/community";
 import { apiRequest } from "../../lib/api";
+import { reconcileMessageList } from "./messageSync";
 
 interface GlobalMessagesResponse {
   messages: Array<Omit<GlobalChatMessage, "sentAt"> & { createdAt: string }>;
@@ -12,21 +13,23 @@ export function useGlobalChat() {
   const [loading, setLoading] = useState(true);
   const [mutating, setMutating] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const requestInFlightRef = useRef(false);
+  const requestVersionRef = useRef(0);
 
   const loadMessages = useCallback(async (silent = false) => {
-    if (requestInFlightRef.current) return;
-    requestInFlightRef.current = true;
+    const requestVersion = ++requestVersionRef.current;
     if (!silent) setLoading(true);
     try {
       const response = await apiRequest<GlobalMessagesResponse>("/messages/global?limit=200");
-      setMessages(response.messages.map(({ createdAt, ...message }) => ({ ...message, sentAt: createdAt })));
+      if (requestVersion !== requestVersionRef.current) return;
+      const nextMessages = response.messages.map(({ createdAt, ...message }) => ({ ...message, sentAt: createdAt }));
+      setMessages((current) => reconcileMessageList(current, nextMessages));
       setError(null);
     } catch (reason) {
-      if (!silent) setError(reason instanceof Error ? reason.message : "Le salon global est momentanément indisponible.");
+      if (requestVersion === requestVersionRef.current) {
+        setError(reason instanceof Error ? reason.message : "Le salon global est momentanément indisponible.");
+      }
     } finally {
-      if (!silent) setLoading(false);
-      requestInFlightRef.current = false;
+      if (requestVersion === requestVersionRef.current) setLoading(false);
     }
   }, []);
 
@@ -82,9 +85,8 @@ export function useGlobalChat() {
   const deleteMessage = useCallback(async (messageId: string) => {
     await runMutation(async () => {
       await apiRequest<void>(`/messages/global/${messageId}`, { method: "DELETE" });
-      await loadMessages(true);
     });
-  }, [loadMessages, runMutation]);
+  }, [runMutation]);
 
   return {
     messages,

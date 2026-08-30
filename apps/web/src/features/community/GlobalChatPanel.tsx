@@ -69,7 +69,7 @@ export function GlobalChatPanel({ profile }: GlobalChatPanelProps) {
   };
 
   const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.key === "Enter" && !event.shiftKey) {
+    if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) {
       event.preventDefault();
       void submit();
     }
@@ -129,7 +129,7 @@ export function GlobalChatPanel({ profile }: GlobalChatPanelProps) {
 
       <form className="message-reply global-chat-composer" onSubmit={(event) => void submit(event)}>
         {(replyTo || editing) && <div className="message-composer-context"><div><strong>{editing ? "Modifier ton message" : `Répondre à ${replyTo?.senderName}`}</strong><span>{editing?.body ?? replyTo?.body}</span></div><button type="button" onClick={() => { setReplyTo(null); setEditing(null); setBody(""); }} aria-label="Annuler"><X size={16} weight="bold" /></button></div>}
-        <textarea aria-label="Écrire dans le salon global" value={body} onChange={(event) => setBody(event.target.value)} onKeyDown={handleKeyDown} placeholder="Écris à toute la communauté… Entrée pour envoyer" rows={2} maxLength={2000} />
+        <textarea aria-label="Écrire dans le salon global" value={body} onChange={(event) => setBody(event.target.value)} onKeyDown={handleKeyDown} placeholder="Écris à toute la communauté… Entrée pour envoyer" rows={2} maxLength={2000} enterKeyHint="send" autoCapitalize="sentences" autoComplete="off" />
         <button type="submit" disabled={!body.trim() || chat.mutating} aria-label={editing ? "Enregistrer la modification" : "Publier dans le salon global"}>{editing ? <Check size={22} weight="bold" /> : <PaperPlaneTilt size={22} weight="fill" />}</button>
         <small>{body.length}/2000</small>
       </form>

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ChatMessage, MessageRecipient, MessageThread } from "../../domain/community";
 import { apiRequest } from "../../lib/api";
+import { normalizeMessageList, reconcileMessageList } from "./messageSync";
 
 interface ThreadsResponse {
   threads: MessageThread[];
@@ -27,53 +28,57 @@ export function useMessaging(includeArchived: boolean) {
   const activeIdRef = useRef(activeId);
   const lastMessageIdByThreadRef = useRef(new Map<string, string | undefined>());
   const refreshInFlightRef = useRef(false);
+  const threadsRequestVersionRef = useRef(0);
+  const recipientsRequestVersionRef = useRef(0);
+  const messagesRequestVersionRef = useRef(0);
   activeIdRef.current = activeId;
 
   const loadThreads = useCallback(async (silent = false) => {
+    const requestVersion = ++threadsRequestVersionRef.current;
     if (!silent) setLoadingThreads(true);
     try {
       const response = await apiRequest<ThreadsResponse>(`/messages/threads?archived=${includeArchived}`);
+      if (requestVersion !== threadsRequestVersionRef.current) return;
       setThreads(response.threads);
       setActiveId((current) => current && response.threads.some((thread) => thread.id === current)
         ? current
         : response.threads[0]?.id ?? null);
       setError(null);
     } catch (reason) {
-      if (!silent) setError(reason instanceof Error ? reason.message : "La messagerie n’a pas pu être chargée.");
+      if (requestVersion === threadsRequestVersionRef.current) {
+        setError(reason instanceof Error ? reason.message : "La messagerie n’a pas pu être chargée.");
+      }
     } finally {
-      if (!silent) setLoadingThreads(false);
+      if (requestVersion === threadsRequestVersionRef.current) setLoadingThreads(false);
     }
   }, [includeArchived]);
 
   const loadRecipients = useCallback(async () => {
+    const requestVersion = ++recipientsRequestVersionRef.current;
     try {
       const response = await apiRequest<RecipientsResponse>("/messages/recipients");
+      if (requestVersion !== recipientsRequestVersionRef.current) return;
       setRecipients(response.recipients);
     } catch (reason) {
-      setError(reason instanceof Error ? reason.message : "Les destinataires sont indisponibles.");
+      if (requestVersion === recipientsRequestVersionRef.current) {
+        setError(reason instanceof Error ? reason.message : "Les destinataires sont indisponibles.");
+      }
     }
   }, []);
 
   const loadMessages = useCallback(async (threadId: string, silent = false) => {
+    const requestVersion = ++messagesRequestVersionRef.current;
     if (!silent) setLoadingMessages(true);
     try {
       const response = await apiRequest<MessagesResponse>(`/messages/threads/${threadId}/messages`);
-      if (activeIdRef.current !== threadId) return;
-      const nextMessages = response.messages.map(({ createdAt, ...message }) => ({ ...message, sentAt: createdAt }));
+      if (requestVersion !== messagesRequestVersionRef.current || activeIdRef.current !== threadId) return;
+      const nextMessages = normalizeMessageList(
+        response.messages.map(({ createdAt, ...message }) => ({ ...message, sentAt: createdAt })),
+      );
       const lastMessageId = nextMessages.at(-1)?.id;
       const hasNewMessage = lastMessageIdByThreadRef.current.get(threadId) !== lastMessageId;
       lastMessageIdByThreadRef.current.set(threadId, lastMessageId);
-      setMessages((current) => {
-        const unchanged = current.length === nextMessages.length && current.every((message, index) => {
-          const next = nextMessages[index];
-          return message.id === next.id
-            && message.body === next.body
-            && message.editedAt === next.editedAt
-            && message.deletedAt === next.deletedAt
-            && message.readByRecipient === next.readByRecipient;
-        });
-        return unchanged ? current : nextMessages;
-      });
+      setMessages((current) => reconcileMessageList(current, nextMessages));
       setError(null);
       if (!silent || (hasNewMessage && document.visibilityState === "visible")) {
         await apiRequest<void>(`/messages/threads/${threadId}/read`, { method: "POST" });
@@ -81,9 +86,11 @@ export function useMessaging(includeArchived: boolean) {
         window.dispatchEvent(new Event("excellence:messages-updated"));
       }
     } catch (reason) {
-      if (!silent) setError(reason instanceof Error ? reason.message : "Les messages sont indisponibles.");
+      if (requestVersion === messagesRequestVersionRef.current && activeIdRef.current === threadId) {
+        setError(reason instanceof Error ? reason.message : "Les messages sont indisponibles.");
+      }
     } finally {
-      if (!silent) setLoadingMessages(false);
+      if (requestVersion === messagesRequestVersionRef.current) setLoadingMessages(false);
     }
   }, []);
 
