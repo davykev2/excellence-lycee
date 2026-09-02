@@ -30,6 +30,15 @@ run(
 );
 run("Tests de stabilité", npm, [...npmPrefix, "run", "test:stability"], api);
 run(
+  "Présentation des exercices de l’Arène",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    "--test",
+    resolve(root, "tests", "arena-exercises-presentation.test.ts"),
+  ],
+);
+run(
   "Syntaxe du garde-fou Supabase",
   process.execPath,
   ["--check", resolve(root, "scripts", "push-supabase-migrations.mjs")],

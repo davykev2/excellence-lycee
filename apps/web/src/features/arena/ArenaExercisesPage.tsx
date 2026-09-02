@@ -8,19 +8,15 @@ import {
   CheckCircle,
   ClipboardText,
   Eye,
-  FlagCheckered,
   FloppyDisk,
   Lightbulb,
   LockKey,
-  MapTrifold,
   Monitor,
   NotePencil,
   Plus,
-  Play,
   RocketLaunch,
   Sparkle,
   DeviceMobile,
-  Target,
   Trash,
   WarningCircle,
 } from "@phosphor-icons/react";
@@ -76,8 +72,6 @@ function difficultyLabel(difficulty: ArenaExerciseDifficulty) {
   return difficulties.find((item) => item.id === difficulty)?.label ?? difficulty;
 }
 
-const journeyIcons = [Play, Target, RocketLaunch, FlagCheckered];
-
 function levelSummary(level: Pick<PublishedArenaExerciseLevel, "instructionsMarkdown" | "exercises">) {
   const plainText = level.instructionsMarkdown
     .replace(/\$([^$]+)\$/g, "$1")
@@ -88,49 +82,53 @@ function levelSummary(level: Pick<PublishedArenaExerciseLevel, "instructionsMark
   return plainText.length > 165 ? `${plainText.slice(0, 162).trim()}…` : plainText || fallback;
 }
 
-type ArenaJourneyLevel = Pick<
+type ArenaExerciseSeries = Pick<
   PublishedArenaExerciseLevel,
   "id" | "stageNumber" | "title" | "instructionsMarkdown" | "exercises"
 >;
 
-function ArenaLevelJourney({
-  levels,
+function ArenaSeriesList({
+  series,
   onSelect,
   preview = false,
 }: {
-  levels: ArenaJourneyLevel[];
-  onSelect?: (level: ArenaJourneyLevel) => void;
+  series: ArenaExerciseSeries[];
+  onSelect?: (series: ArenaExerciseSeries) => void;
   preview?: boolean;
 }) {
-  const orderedLevels = [...levels].sort((left, right) => left.stageNumber - right.stageNumber);
+  const orderedSeries = [...series].sort((left, right) => left.stageNumber - right.stageNumber);
   return (
-    <div className={`mastery-road arena-level-journey ${preview ? "is-editor-preview" : ""}`} aria-label="Aperçu du parcours des niveaux">
-      <span className="mastery-road-line" aria-hidden="true" />
+    <section className={`arena-series-list ${preview ? "is-editor-preview" : ""}`} aria-label={preview ? "Aperçu de la liste des séries" : "Séries d’exercices disponibles"}>
+      {!preview && (
+        <header className="arena-series-list__header">
+          <div><p>Séries disponibles</p><h2>Travaille à ton rythme</h2></div>
+          <span>{orderedSeries.length} série{orderedSeries.length > 1 ? "s" : ""}</span>
+        </header>
+      )}
       <ol>
-        {orderedLevels.map((level, index) => {
-          const Icon = journeyIcons[index % journeyIcons.length];
-          const selectLevel = () => onSelect?.(level);
+        {orderedSeries.map((item) => {
+          const titleId = `arena-series-title-${item.id}`;
           return (
-            <li className={`mastery-stop arena-level-stop is-available ${index % 2 === 0 ? "is-left" : "is-right"}`} key={level.id}>
-              <button className="mastery-level-node" type="button" onClick={selectLevel} disabled={!onSelect} aria-label={`Niveau ${level.stageNumber} : ${level.title}`}>
-                <Icon size={34} weight="duotone" />
-              </button>
-              <article className="mastery-level-card">
-                <div className="mastery-level-meta"><span>Niveau {level.stageNumber}</span><span>{level.exercises.length} exercice{level.exercises.length > 1 ? "s" : ""}</span></div>
-                <h2>{level.title}</h2>
-                <p>{levelSummary(level)}</p>
-                <div className="mastery-level-footer">
-                  <span>Corrections expliquées</span>
+            <li key={item.id}>
+              <article className="arena-series-card" aria-labelledby={titleId}>
+                <div className="arena-series-card__meta">
+                  <span>Série {String(item.stageNumber).padStart(2, "0")}</span>
+                  <span>{item.exercises.length} exercice{item.exercises.length > 1 ? "s" : ""}</span>
+                </div>
+                <h3 id={titleId}>{item.title}</h3>
+                <p>{levelSummary(item)}</p>
+                <div className="arena-series-card__footer">
+                  <span>Correction détaillée pour chaque exercice</span>
                   {onSelect
-                    ? <button className="arena-level-card-action" type="button" onClick={selectLevel}>Commencer</button>
-                    : <strong>Aperçu en direct</strong>}
+                    ? <button className="arena-series-card__open" type="button" onClick={() => onSelect(item)}>Ouvrir la série</button>
+                    : <strong>Aperçu</strong>}
                 </div>
               </article>
             </li>
           );
         })}
       </ol>
-    </div>
+    </section>
   );
 }
 
@@ -153,23 +151,24 @@ function ExerciseLevelPlayer({ level, onClose }: { level: PublishedArenaExercise
   return (
     <section className="arena-exercise-player" aria-labelledby="arena-exercise-player-title">
       <header>
-        <button type="button" onClick={onClose}><ArrowLeft size={18} weight="bold" />Tous les niveaux</button>
-        <div><span>{difficultyLabel(level.difficulty)} • Niveau {level.stageNumber}</span><h2 id="arena-exercise-player-title">{level.title}</h2></div>
+        <button type="button" onClick={onClose}><ArrowLeft size={18} weight="bold" />Toutes les séries</button>
+        <div><span>{difficultyLabel(level.difficulty)} • Série {level.stageNumber}</span><h2 id="arena-exercise-player-title">{level.title}</h2></div>
         <strong>{level.exercises.length} exercice{level.exercises.length > 1 ? "s" : ""}</strong>
       </header>
       {level.instructionsMarkdown && <div className="arena-level-instructions"><Lightbulb size={21} weight="duotone" /><MarkdownContent markdown={level.instructionsMarkdown} /></div>}
       <div className="arena-player-exercises">
         {level.exercises.map((exercise, index) => {
           const correctionVisible = revealed.has(exercise.id);
+          const correctionId = `arena-correction-${level.id}-${exercise.id}`;
           return (
             <article key={exercise.id}>
               <div className="arena-player-exercise-heading"><span>{index + 1}</span><h3>{exercise.title}</h3></div>
               <div className="arena-player-statement"><MarkdownContent markdown={exercise.statementMarkdown} preserveLineBreaks /></div>
-              <button className="arena-correction-toggle" type="button" onClick={() => toggleCorrection(exercise.id)} aria-expanded={correctionVisible}>
-                {correctionVisible ? <Eye size={18} weight="fill" /> : <CheckCircle size={18} weight="duotone" />}
-                {correctionVisible ? "Masquer la correction" : "J’ai terminé — voir la correction"}
+              <button className="arena-correction-toggle" type="button" onClick={() => toggleCorrection(exercise.id)} aria-expanded={correctionVisible} aria-controls={correctionId}>
+                <Eye size={18} weight={correctionVisible ? "fill" : "duotone"} />
+                {correctionVisible ? "Masquer la correction" : "Afficher la correction"}
               </button>
-              {correctionVisible && <div className="arena-player-correction"><strong><Check size={18} weight="bold" />Correction expliquée</strong><MarkdownContent markdown={exercise.correctionMarkdown} preserveLineBreaks /></div>}
+              <div className="arena-player-correction" id={correctionId} role="region" aria-label={`Correction de ${exercise.title}`} hidden={!correctionVisible}><strong><Check size={18} weight="bold" />Correction expliquée</strong><MarkdownContent markdown={exercise.correctionMarkdown} preserveLineBreaks /></div>
             </article>
           );
         })}
@@ -204,17 +203,17 @@ function ExerciseLibrary({
     return (
       <div className="arena-bank-empty">
         <BookOpenText size={42} weight="duotone" />
-        <h3>Aucun niveau publié pour le moment</h3>
+        <h3>Aucune série publiée pour le moment</h3>
         <p>L’équipe pédagogique est en train d’alimenter cette partie. Reviens bientôt.</p>
       </div>
     );
   }
-  return <ArenaLevelJourney levels={visibleLevels} onSelect={(level) => setActiveLevel(level as PublishedArenaExerciseLevel)} />;
+  return <ArenaSeriesList series={visibleLevels} onSelect={(item) => setActiveLevel(item as PublishedArenaExerciseLevel)} />;
 }
 
 interface ExerciseEditorProps {
   document?: ArenaExerciseLevelDocument;
-  journeyLevels: ArenaJourneyLevel[];
+  series: ArenaExerciseSeries[];
   target: {
     levelId: string;
     subjectId: SubjectId;
@@ -228,7 +227,7 @@ interface ExerciseEditorProps {
   onSaved: (document: ArenaExerciseLevelDocument) => void;
 }
 
-function ExerciseEditor({ document, journeyLevels, target, canPublish, onSave, onSetStatus, onSaved }: ExerciseEditorProps) {
+function ExerciseEditor({ document, series, target, canPublish, onSave, onSetStatus, onSaved }: ExerciseEditorProps) {
   const [title, setTitle] = useState("");
   const [instructionsMarkdown, setInstructionsMarkdown] = useState("");
   const [exercises, setExercises] = useState<ArenaExerciseItem[]>([emptyExercise()]);
@@ -239,12 +238,12 @@ function ExerciseEditor({ document, journeyLevels, target, canPublish, onSave, o
   const [error, setError] = useState<string | null>(null);
   const [mobileView, setMobileView] = useState<"edit" | "preview">("edit");
   const [previewDevice, setPreviewDevice] = useState<"desktop" | "mobile">("desktop");
-  const [previewMode, setPreviewMode] = useState<"journey" | "content">("journey");
+  const [previewMode, setPreviewMode] = useState<"list" | "content">("list");
 
   useEffect(() => {
     setDocumentId(document?.id);
     setStatus(document?.status ?? "draft");
-    setTitle(document?.title ?? `${difficultyLabel(target.difficulty)} • Niveau ${target.stageNumber}`);
+    setTitle(document?.title ?? `${difficultyLabel(target.difficulty)} • Série ${target.stageNumber}`);
     setInstructionsMarkdown(document?.instructionsMarkdown ?? "Résous les exercices dans l’ordre, puis consulte les corrections pour comprendre tes erreurs.");
     setExercises(document?.exercises.length ? document.exercises : [emptyExercise()]);
     setError(null);
@@ -269,18 +268,18 @@ function ExerciseEditor({ document, journeyLevels, target, canPublish, onSave, o
     });
   };
 
-  const journeyPreviewLevels = useMemo<ArenaJourneyLevel[]>(() => {
-    const otherLevels = journeyLevels
+  const seriesPreview = useMemo<ArenaExerciseSeries[]>(() => {
+    const otherSeries = series
       .filter((item) => item.stageNumber !== target.stageNumber)
       .map((item) => ({ ...item }));
-    return [...otherLevels, {
+    return [...otherSeries, {
       id: documentId ?? `arena-editor-preview-${target.stageNumber}`,
       stageNumber: target.stageNumber,
-      title: title || `Niveau ${target.stageNumber}`,
+      title: title || `Série ${target.stageNumber}`,
       instructionsMarkdown,
       exercises,
     }].sort((left, right) => left.stageNumber - right.stageNumber);
-  }, [documentId, exercises, instructionsMarkdown, journeyLevels, target.stageNumber, title]);
+  }, [documentId, exercises, instructionsMarkdown, series, target.stageNumber, title]);
 
   const payload = (): ArenaExerciseLevelPayload => ({
     levelId: target.levelId,
@@ -300,7 +299,7 @@ function ExerciseEditor({ document, journeyLevels, target, canPublish, onSave, o
   });
 
   const validate = () => {
-    if (title.trim().length < 2) return "Donne un titre à ce niveau.";
+    if (title.trim().length < 2) return "Donne un titre à cette série.";
     const incomplete = exercises.findIndex((exercise) => exercise.title.trim().length < 2 || !exercise.statementMarkdown.trim() || !exercise.correctionMarkdown.trim());
     return incomplete >= 0 ? `Complète le titre, l’énoncé et la correction de l’exercice ${incomplete + 1}.` : null;
   };
@@ -334,7 +333,7 @@ function ExerciseEditor({ document, journeyLevels, target, canPublish, onSave, o
       const updated = await onSetStatus(saved.id, nextStatus);
       setStatus(updated.status);
       onSaved(updated);
-      setMessage(nextStatus === "published" ? "Niveau publié dans l’Arène." : "Niveau envoyé à l’administrateur pour validation.");
+      setMessage(nextStatus === "published" ? "Série publiée dans l’Arène." : "Série envoyée à l’administrateur pour validation.");
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : "Le statut n’a pas pu être modifié.");
     } finally {
@@ -345,7 +344,7 @@ function ExerciseEditor({ document, journeyLevels, target, canPublish, onSave, o
   return (
     <section className="arena-editor-shell">
       <header className="arena-editor-header">
-        <div><span className={`arena-editor-status is-${status}`}>{statusLabels[status]}</span><div><small>{target.lesson.title}</small><strong>{difficultyLabel(target.difficulty)} • Niveau {target.stageNumber}</strong></div></div>
+        <div><span className={`arena-editor-status is-${status}`}>{statusLabels[status]}</span><div><small>{target.lesson.title}</small><strong>{difficultyLabel(target.difficulty)} • Série {target.stageNumber}</strong></div></div>
         <div className="arena-editor-actions">
           <button type="button" onClick={() => void saveDraft()} disabled={saving}><FloppyDisk size={18} weight="duotone" />{saving ? "Enregistrement…" : "Sauvegarder"}</button>
           {status !== "review" && !canPublish && <button className="is-review" type="button" onClick={() => void changeStatus("review")} disabled={saving}><CheckCircle size={18} />Envoyer en validation</button>}
@@ -353,9 +352,9 @@ function ExerciseEditor({ document, journeyLevels, target, canPublish, onSave, o
         </div>
       </header>
 
-      <div className="arena-editor-view-toggle" role="tablist" aria-label="Vue de l’atelier">
-        <button role="tab" aria-selected={mobileView === "edit"} className={mobileView === "edit" ? "is-active" : ""} type="button" onClick={() => setMobileView("edit")}><NotePencil size={17} />Éditeur</button>
-        <button role="tab" aria-selected={mobileView === "preview"} className={mobileView === "preview" ? "is-active" : ""} type="button" onClick={() => setMobileView("preview")}><Eye size={17} />Aperçu</button>
+      <div className="arena-editor-view-toggle" aria-label="Vue de l’atelier">
+        <button aria-pressed={mobileView === "edit"} className={mobileView === "edit" ? "is-active" : ""} type="button" onClick={() => setMobileView("edit")}><NotePencil size={17} />Éditeur</button>
+        <button aria-pressed={mobileView === "preview"} className={mobileView === "preview" ? "is-active" : ""} type="button" onClick={() => setMobileView("preview")}><Eye size={17} />Aperçu</button>
       </div>
 
       {(message || error) && <div className={`arena-editor-message ${error ? "is-error" : ""}`} role={error ? "alert" : "status"}>{error ? <WarningCircle size={19} /> : <CheckCircle size={19} weight="fill" />}<span>{error ?? message}</span></div>}
@@ -363,13 +362,13 @@ function ExerciseEditor({ document, journeyLevels, target, canPublish, onSave, o
       <div className={`arena-editor-layout show-${mobileView}`}>
         <div className="arena-editor-form">
           <section className="arena-editor-card">
-            <div className="arena-editor-card-title"><span>1</span><div><strong>Présentation du niveau</strong><small>Ce que l’élève verra avant les exercices</small></div></div>
-            <label><span>Titre du niveau</span><input value={title} onChange={(event) => setTitle(event.target.value)} maxLength={180} placeholder="Ex. Applications directes" /></label>
-            <label><span>Consigne générale <small>Markdown et formules LaTeX détectés automatiquement</small></span><textarea value={instructionsMarkdown} onChange={(event) => setInstructionsMarkdown(event.target.value)} rows={4} placeholder="Explique brièvement comment aborder ce niveau…" /></label>
+            <div className="arena-editor-card-title"><span>1</span><div><strong>Présentation de la série</strong><small>Ce que l’élève verra avant les exercices</small></div></div>
+            <label><span>Titre de la série</span><input value={title} onChange={(event) => setTitle(event.target.value)} maxLength={180} placeholder="Ex. Applications directes" /></label>
+            <label><span>Consigne générale <small>Markdown et formules LaTeX détectés automatiquement</small></span><textarea value={instructionsMarkdown} onChange={(event) => setInstructionsMarkdown(event.target.value)} rows={4} placeholder="Explique brièvement comment aborder cette série…" /></label>
           </section>
 
           <section className="arena-editor-card">
-            <div className="arena-editor-card-title"><span>2</span><div><strong>Exercices du niveau</strong><small>Colle les énoncés et leurs corrections</small></div><b>{exercises.length}</b></div>
+            <div className="arena-editor-card-title"><span>2</span><div><strong>Exercices de la série</strong><small>Colle les énoncés et leurs corrections</small></div><b>{exercises.length}</b></div>
             <div className="arena-editor-exercise-list">
               {exercises.map((exercise, index) => (
                 <article key={exercise.id}>
@@ -380,7 +379,7 @@ function ExerciseEditor({ document, journeyLevels, target, canPublish, onSave, o
                 </article>
               ))}
             </div>
-            <button className="arena-add-exercise" type="button" onClick={addExercise}><Plus size={18} weight="bold" />Ajouter un exercice à ce niveau</button>
+            <button className="arena-add-exercise" type="button" onClick={addExercise}><Plus size={18} weight="bold" />Ajouter un exercice à cette série</button>
           </section>
         </div>
 
@@ -388,19 +387,19 @@ function ExerciseEditor({ document, journeyLevels, target, canPublish, onSave, o
           <div className="arena-preview-browser">
             <div className="arena-preview-lights" aria-hidden="true"><i /><i /><i /></div>
             <span>Aperçu élève • actualisé instantanément</span>
-            <div className="arena-preview-device-toggle" role="tablist" aria-label="Format de l’aperçu">
-              <button type="button" role="tab" aria-selected={previewDevice === "desktop"} className={previewDevice === "desktop" ? "is-active" : ""} onClick={() => setPreviewDevice("desktop")}><Monitor size={15} weight="duotone" />Ordinateur</button>
-              <button type="button" role="tab" aria-selected={previewDevice === "mobile"} className={previewDevice === "mobile" ? "is-active" : ""} onClick={() => setPreviewDevice("mobile")}><DeviceMobile size={15} weight="duotone" />Mobile</button>
+            <div className="arena-preview-device-toggle" aria-label="Format de l’aperçu">
+              <button type="button" aria-pressed={previewDevice === "desktop"} className={previewDevice === "desktop" ? "is-active" : ""} onClick={() => setPreviewDevice("desktop")}><Monitor size={15} weight="duotone" />Ordinateur</button>
+              <button type="button" aria-pressed={previewDevice === "mobile"} className={previewDevice === "mobile" ? "is-active" : ""} onClick={() => setPreviewDevice("mobile")}><DeviceMobile size={15} weight="duotone" />Mobile</button>
             </div>
           </div>
-          <div className="arena-preview-mode-toggle" role="tablist" aria-label="Type d’aperçu">
-            <button type="button" role="tab" aria-selected={previewMode === "journey"} className={previewMode === "journey" ? "is-active" : ""} onClick={() => setPreviewMode("journey")}><MapTrifold size={16} weight="duotone" />Parcours</button>
-            <button type="button" role="tab" aria-selected={previewMode === "content"} className={previewMode === "content" ? "is-active" : ""} onClick={() => setPreviewMode("content")}><BookOpenText size={16} weight="duotone" />Contenu du niveau</button>
+          <div className="arena-preview-mode-toggle" aria-label="Type d’aperçu">
+            <button type="button" aria-pressed={previewMode === "list"} className={previewMode === "list" ? "is-active" : ""} onClick={() => setPreviewMode("list")}><ClipboardText size={16} weight="duotone" />Liste des séries</button>
+            <button type="button" aria-pressed={previewMode === "content"} className={previewMode === "content" ? "is-active" : ""} onClick={() => setPreviewMode("content")}><BookOpenText size={16} weight="duotone" />Contenu de la série</button>
           </div>
-          {previewMode === "journey"
-            ? <div className="arena-editor-journey-preview"><ArenaLevelJourney levels={journeyPreviewLevels} preview /></div>
+          {previewMode === "list"
+            ? <div className="arena-editor-series-preview"><ArenaSeriesList series={seriesPreview} preview /></div>
             : <article className="arena-preview-sheet">
-                <header><p>{difficultyLabel(target.difficulty)} • Niveau {target.stageNumber}</p><h2>{title || "Titre du niveau"}</h2><span>{target.lesson.title}</span></header>
+                <header><p>{difficultyLabel(target.difficulty)} • Série {target.stageNumber}</p><h2>{title || "Titre de la série"}</h2><span>{target.lesson.title}</span></header>
                 <div className="arena-preview-instructions"><MarkdownContent markdown={instructionsMarkdown} emptyState={<p>La consigne apparaîtra ici.</p>} /></div>
                 <div className="arena-preview-exercises">
                   {exercises.map((exercise, index) => (
@@ -488,16 +487,16 @@ export function ArenaExercisesPage({
     ...targetDocuments.map((document) => document.stageNumber),
     ...publishedDifficultyLevels.map((document) => document.stageNumber),
   ) + 1;
-  const journeyLevelsByStage = new Map<number, ArenaJourneyLevel>();
-  publishedDifficultyLevels.forEach((item) => journeyLevelsByStage.set(item.stageNumber, item));
-  targetDocuments.forEach((item) => journeyLevelsByStage.set(item.stageNumber, {
+  const seriesByStage = new Map<number, ArenaExerciseSeries>();
+  publishedDifficultyLevels.forEach((item) => seriesByStage.set(item.stageNumber, item));
+  targetDocuments.forEach((item) => seriesByStage.set(item.stageNumber, {
     id: item.id,
     stageNumber: item.stageNumber,
     title: item.title,
     instructionsMarkdown: item.instructionsMarkdown,
     exercises: item.exercises,
   }));
-  const journeyPreviewSources = [...journeyLevelsByStage.values()];
+  const seriesPreviewSources = [...seriesByStage.values()];
 
   useEffect(() => { setStageNumber(1); }, [difficulty, selectedLessonKey, selectedLevelId, selectedSubjectId]);
 
@@ -531,12 +530,12 @@ export function ArenaExercisesPage({
       {selectedLesson ? (
         <>
           <section className="arena-difficulty-section" aria-labelledby="arena-difficulty-title">
-            <div><p>{editorOpen ? "2. Organiser la progression" : "Choisis ton défi"}</p><h2 id="arena-difficulty-title">Niveau de difficulté</h2></div>
-            <div className="arena-difficulty-tabs" role="tablist" aria-label="Difficulté des exercices">
+            <div><p>{editorOpen ? "2. Classer les séries" : "Choisis une difficulté"}</p><h2 id="arena-difficulty-title">Niveau de difficulté</h2></div>
+            <div className="arena-difficulty-tabs" aria-label="Difficulté des exercices">
               {difficulties.map((item) => {
                 const publishedCount = exerciseData.publishedLevels.filter((levelItem) => levelItem.difficulty === item.id).length;
                 const draftCount = allTargetDocuments.filter((levelItem) => levelItem.difficulty === item.id).length;
-                return <button type="button" role="tab" aria-selected={difficulty === item.id} className={`is-${item.tone} ${difficulty === item.id ? "is-active" : ""}`} key={item.id} onClick={() => setDifficulty(item.id)}><span>{item.label}</span><small>{item.description}</small><b>{editorOpen ? `${draftCount} niveau${draftCount > 1 ? "x" : ""}` : `${publishedCount} disponible${publishedCount > 1 ? "s" : ""}`}</b></button>;
+                return <button type="button" aria-pressed={difficulty === item.id} className={`is-${item.tone} ${difficulty === item.id ? "is-active" : ""}`} key={item.id} onClick={() => setDifficulty(item.id)}><span>{item.label}</span><small>{item.description}</small><b>{editorOpen ? `${draftCount} série${draftCount > 1 ? "s" : ""}` : `${publishedCount} série${publishedCount > 1 ? "s" : ""}`}</b></button>;
               })}
             </div>
           </section>
@@ -544,16 +543,16 @@ export function ArenaExercisesPage({
           {editorOpen ? (
             <>
               <section className="arena-stage-picker">
-                <div><span>3</span><div><strong>Choisis le niveau à modifier</strong><small>Tu peux ajouter autant de niveaux que nécessaire dans chaque difficulté.</small></div></div>
+                <div><span>3</span><div><strong>Choisis la série à modifier</strong><small>Tu peux ajouter autant de séries que nécessaire dans chaque difficulté.</small></div></div>
                 <div className="arena-stage-buttons">
-                  {targetDocuments.sort((left, right) => left.stageNumber - right.stageNumber).map((document) => <button className={stageNumber === document.stageNumber ? "is-active" : ""} type="button" key={document.id} onClick={() => setStageNumber(document.stageNumber)}><span>Niveau {document.stageNumber}</span><i className={`is-${document.status}`} />{statusLabels[document.status]}</button>)}
-                  <button className={`is-new ${stageNumber === nextStage ? "is-active" : ""}`} type="button" onClick={() => setStageNumber(nextStage)}><Plus size={17} weight="bold" />Nouveau niveau {nextStage}</button>
+                  {targetDocuments.sort((left, right) => left.stageNumber - right.stageNumber).map((document) => <button className={stageNumber === document.stageNumber ? "is-active" : ""} type="button" key={document.id} onClick={() => setStageNumber(document.stageNumber)}><span>Série {document.stageNumber}</span><i className={`is-${document.status}`} />{statusLabels[document.status]}</button>)}
+                  <button className={`is-new ${stageNumber === nextStage ? "is-active" : ""}`} type="button" onClick={() => setStageNumber(nextStage)}><Plus size={17} weight="bold" />Nouvelle série {nextStage}</button>
                 </div>
               </section>
               <ExerciseEditor
                 key={`${selectedLevelId}-${selectedSubjectId}-${selectedLessonKey}-${difficulty}-${stageNumber}-${selectedDocument?.id ?? "new"}`}
                 document={selectedDocument}
-                journeyLevels={journeyPreviewSources}
+                series={seriesPreviewSources}
                 target={{ levelId: selectedLevelId, subjectId: selectedSubjectId, lesson: selectedLesson, difficulty, stageNumber }}
                 canPublish={canPublish}
                 onSave={exerciseData.save}

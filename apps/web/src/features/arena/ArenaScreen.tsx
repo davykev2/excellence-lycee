@@ -73,7 +73,7 @@ const arenaModes = [
     metric: "12 séries",
     action: "Choisir une série",
     featured: "Série ciblée • Fonctions et vecteurs",
-    featuredDescription: "8 exercices du niveau fondamental au niveau défi.",
+    featuredDescription: "8 exercices classés du niveau fondamental au niveau approfondi.",
     highlights: ["Difficulté progressive", "Correction expliquée", "Tentatives illimitées"],
   },
   {

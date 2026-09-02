@@ -16,7 +16,7 @@ interface ArenaExerciseFilters {
 
 function previewPublishedLevels(filters: ArenaExerciseFilters): PublishedArenaExerciseLevel[] {
   if (!filters.lessonKey) return [];
-  const titles = ["Comprendre les bases", "Applications guidées", "Méthodes combinées", "Défi de synthèse"];
+  const titles = ["Comprendre les bases", "Applications guidées", "Méthodes combinées", "Synthèse de la leçon"];
   const instructions = [
     "Applique directement les notions essentielles de la leçon.",
     "Repère les informations utiles puis avance étape par étape.",

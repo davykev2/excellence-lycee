@@ -248,30 +248,24 @@
 .arena-difficulty-tabs button > small { overflow: hidden; color: #718095; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
 .arena-difficulty-tabs button > b { margin-top: 7px; color: var(--difficulty-color); font-size: 9px; text-transform: uppercase; }
 
-.arena-level-grid { max-width: 1240px; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 13px; margin: 18px auto 0; }
-.arena-level-grid > button { display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center; gap: 13px; min-height: 122px; padding: 17px; border: 1px solid #dfe3dd; border-radius: 17px; background: #fff; color: var(--navy-800); text-align: left; cursor: pointer; box-shadow: 0 8px 24px rgb(8 36 73 / 5%); }
-.arena-level-grid > button:hover { border-color: #acd2a6; transform: translateY(-2px); }
-.arena-level-grid > button > span { width: 47px; height: 47px; display: grid; place-items: center; border-radius: 14px; background: #eaf5e7; color: #2c9136; font-weight: 950; }
-.arena-level-grid > button > span.is-medium { background: #fff0e4; color: #c7661d; }
-.arena-level-grid > button > span.is-hard { background: #e8eef7; color: #163f73; }
-.arena-level-grid > button > div { min-width: 0; display: grid; }
-.arena-level-grid small { color: #708095; font-size: 9px; font-weight: 850; text-transform: uppercase; }
-.arena-level-grid strong { overflow: hidden; margin-top: 4px; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; }
-.arena-level-grid p { margin: 5px 0 0; color: #6f7e91; font-size: 10px; }
-.arena-level-grid svg { color: var(--green-600); }
-
-.arena-level-journey { max-width: 1160px; margin: 4px auto 0; padding-top: 42px; }
-.arena-level-journey .mastery-road-line { top: 54px; bottom: 70px; }
-.arena-level-journey > ol { gap: 18px; }
-.arena-level-stop { min-height: 165px; }
-.arena-level-stop .mastery-level-card { min-height: 148px; display: grid; align-content: center; }
-.arena-level-stop .mastery-level-meta span:first-child { color: var(--green-600); }
-.arena-level-stop .mastery-level-meta span:last-child { color: var(--orange-600); }
-.arena-level-stop .mastery-level-card h2 { margin-top: 9px; }
-.arena-level-stop .mastery-level-card > p { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
-.arena-level-stop .mastery-level-footer { min-height: 31px; }
-.arena-level-card-action { padding: 0; border: 0; background: transparent; color: var(--orange-600); font: inherit; font-size: 10px; font-weight: 900; cursor: pointer; }
-.arena-level-card-action:hover { color: #b7440c; text-decoration: underline; text-underline-offset: 3px; }
+.arena-series-list { max-width: 1240px; margin: 24px auto 0; }
+.arena-series-list__header { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 13px; }
+.arena-series-list__header p, .arena-series-list__header h2 { margin: 0; }
+.arena-series-list__header p { color: #637187; font-size: 12px; font-weight: 850; text-transform: uppercase; letter-spacing: .05em; }
+.arena-series-list__header h2 { margin-top: 3px; font-size: 22px; }
+.arena-series-list__header > span { color: #68778b; font-size: 13px; font-weight: 800; }
+.arena-series-list > ol { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; margin: 0; padding: 0; list-style: none; }
+.arena-series-list > ol > li { min-width: 0; }
+.arena-series-card { width: 100%; min-height: 188px; height: 100%; display: grid; grid-template-rows: auto auto 1fr auto; gap: 10px; padding: 21px; border: 1px solid #dce2dc; border-radius: 15px; background: #fff; color: var(--navy-800); font: inherit; text-align: left; box-shadow: 0 7px 22px rgb(8 36 73 / 4%); }
+.arena-series-card__meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #65748a; font-size: 12px; font-weight: 800; }
+.arena-series-card__meta span:first-child { color: var(--green-700); }
+.arena-series-card h3 { margin: 0; font-size: 18px; line-height: 1.3; }
+.arena-series-card > p { display: -webkit-box; overflow: hidden; margin: 0; color: #617086; font-size: 13px; line-height: 1.55; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+.arena-series-card__footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 11px; border-top: 1px solid #e7ebe7; color: #68778b; font-size: 12px; }
+.arena-series-card__footer strong { flex: 0 0 auto; color: var(--green-700); font-size: 12px; }
+.arena-series-card__open { flex: 0 0 auto; min-height: 44px; padding: 0 14px; border: 1px solid #a8cfa2; border-radius: 9px; background: #f2f8f0; color: #267630; font: inherit; font-size: 12px; font-weight: 900; cursor: pointer; transition: border-color .18s ease, background-color .18s ease; }
+.arena-series-card__open:hover { border-color: var(--green-600); background: #e8f4e5; }
+.arena-series-card__open:focus-visible { outline: 3px solid rgb(73 173 63 / 25%); outline-offset: 3px; border-color: var(--green-600); }
 
 .arena-bank-empty, .arena-bank-feedback { max-width: 1240px; min-height: 230px; display: grid; place-items: center; align-content: center; gap: 8px; margin: 18px auto 0; padding: 30px; border: 1px dashed #d1d9d0; border-radius: 18px; background: #fff; color: #758397; text-align: center; }
 .arena-bank-empty h3, .arena-bank-empty p { margin: 0; }
@@ -373,27 +367,15 @@
 .arena-preview-mode-toggle { position: sticky; z-index: 2; top: 43px; display: grid; grid-template-columns: 1fr 1.35fr; gap: 4px; margin: 10px 12px 0; padding: 4px; border: 1px solid #d8ded8; border-radius: 11px; background: rgba(255,255,255,.94); box-shadow: 0 5px 14px rgb(8 32 63 / 6%); backdrop-filter: blur(8px); }
 .arena-preview-mode-toggle button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 35px; border: 0; border-radius: 8px; background: transparent; color: #6e7c8f; font-size: 9px; font-weight: 900; cursor: pointer; }
 .arena-preview-mode-toggle button.is-active { background: var(--navy-800); color: #fff; box-shadow: 0 4px 10px rgb(8 32 63 / 14%); }
-.arena-editor-journey-preview { min-height: 700px; margin: 12px; overflow: hidden; border-radius: 13px; background: #fff; box-shadow: 0 6px 18px rgb(8 32 63 / 7%); }
-.arena-level-journey.is-editor-preview { margin: 0; padding: 32px 18px 44px; }
-.arena-level-journey.is-editor-preview > ol { gap: 9px; }
-.arena-level-journey.is-editor-preview .mastery-road-line { top: 42px; bottom: 52px; left: 50px; width: 3px; }
-.arena-level-journey.is-editor-preview .mastery-stop { grid-template-columns: 64px minmax(0, 1fr); min-height: 128px; }
-.arena-level-journey.is-editor-preview .mastery-stop .mastery-level-node { grid-column: 1; grid-row: 1; }
-.arena-level-journey.is-editor-preview .mastery-stop .mastery-level-card { grid-column: 2; grid-row: 1; margin: 0 0 0 12px; }
-.arena-level-journey.is-editor-preview .mastery-level-node { width: 66px; height: 66px; border-width: 3px; border-radius: 20px; box-shadow: 0 7px 0 #b3450b, 0 0 0 5px rgba(251, 107, 22, .06), 0 11px 20px rgba(160,70,17,.13); cursor: default; animation: none; }
-.arena-level-journey.is-editor-preview .mastery-level-node svg { width: 25px; height: 25px; }
-.arena-level-journey.is-editor-preview .mastery-level-card { min-height: 112px; padding: 13px; border-radius: 14px; }
-.arena-level-journey.is-editor-preview .mastery-level-meta span { font-size: 7px; }
-.arena-level-journey.is-editor-preview .mastery-level-card h2 { margin-top: 6px; font-size: 13px; }
-.arena-level-journey.is-editor-preview .mastery-level-card > p { font-size: 9px; }
-.arena-level-journey.is-editor-preview .mastery-level-footer { min-height: 22px; margin-top: 8px; padding-top: 8px; font-size: 7px; }
-.arena-level-journey.is-editor-preview .mastery-level-footer strong { font-size: 7px; }
-.arena-editor-preview.is-mobile-device .arena-editor-journey-preview { width: min(390px, calc(100% - 24px)); margin: 18px auto; border-radius: 24px; }
-.arena-editor-preview.is-mobile-device .arena-level-journey.is-editor-preview { padding-inline: 8px; }
-.arena-editor-preview.is-mobile-device .arena-level-journey.is-editor-preview .mastery-stop { grid-template-columns: 62px minmax(0, 1fr); min-height: 132px; }
-.arena-editor-preview.is-mobile-device .arena-level-journey.is-editor-preview .mastery-road-line { left: 39px; }
-.arena-editor-preview.is-mobile-device .arena-level-journey.is-editor-preview .mastery-stop .mastery-level-node { grid-column: 1; grid-row: 1; }
-.arena-editor-preview.is-mobile-device .arena-level-journey.is-editor-preview .mastery-stop .mastery-level-card { grid-column: 2; grid-row: 1; margin: 0 0 0 8px; }
+.arena-editor-series-preview { min-height: 700px; margin: 12px; overflow: hidden; border-radius: 13px; background: #fff; box-shadow: 0 6px 18px rgb(8 32 63 / 7%); }
+.arena-series-list.is-editor-preview { margin: 0; padding: 20px; }
+.arena-series-list.is-editor-preview > ol { grid-template-columns: 1fr; gap: 10px; }
+.arena-series-list.is-editor-preview .arena-series-card { min-height: 154px; padding: 15px; border-radius: 12px; }
+.arena-series-list.is-editor-preview .arena-series-card__meta, .arena-series-list.is-editor-preview .arena-series-card__footer { font-size: 10px; }
+.arena-series-list.is-editor-preview .arena-series-card h3 { font-size: 15px; }
+.arena-series-list.is-editor-preview .arena-series-card > p { font-size: 11px; -webkit-line-clamp: 2; }
+.arena-editor-preview.is-mobile-device .arena-editor-series-preview { width: min(390px, calc(100% - 24px)); margin: 18px auto; border: 7px solid var(--navy-900); border-radius: 30px; box-shadow: 0 18px 42px rgb(5 29 62 / 20%); }
+.arena-editor-preview.is-mobile-device .arena-series-list.is-editor-preview { padding: 18px 10px; }
 .arena-preview-sheet { position: relative; min-height: 700px; margin: 12px; padding: clamp(18px, 3vw, 34px); border-radius: 13px; background: #fff; box-shadow: 0 6px 18px rgb(8 32 63 / 7%); transition: width .2s ease, border-radius .2s ease, padding .2s ease; }
 .arena-editor-preview.is-mobile-device { background: radial-gradient(circle at 50% 10%, #f8f4e9 0, #e8ece8 72%); }
 .arena-editor-preview.is-mobile-device .arena-preview-sheet { width: min(390px, calc(100% - 24px)); min-height: 720px; margin: 18px auto; padding: 48px 16px 25px; border: 8px solid var(--navy-900); border-radius: 34px; box-shadow: 0 18px 42px rgb(5 29 62 / 20%); }
@@ -419,7 +401,6 @@
 
 @media (max-width: 1180px) {
   .arena-editor-layout { grid-template-columns: minmax(360px, .9fr) minmax(380px, 1.1fr); }
-  .arena-level-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
   .arena-stage-picker { align-items: flex-start; flex-direction: column; }
   .arena-stage-buttons { justify-content: flex-start; }
 }
@@ -431,7 +412,7 @@
   .arena-editor-view-toggle { display: flex; }
   .arena-editor-layout.show-edit .arena-editor-preview, .arena-editor-layout.show-preview .arena-editor-form { display: none; }
   .arena-editor-preview { position: static; max-height: none; }
-  .arena-level-journey { padding: 28px 14px 40px; }
+  .arena-series-list > ol { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 680px) {
@@ -445,9 +426,8 @@
   .arena-target-fields { grid-template-columns: 1fr; }
   .arena-target-fields .is-lesson { grid-column: auto; }
   .arena-difficulty-tabs { grid-template-columns: 1fr; }
-  .arena-level-grid { grid-template-columns: 1fr; }
-  .arena-level-journey { padding: 25px 10px 34px; }
-  .arena-level-stop { min-height: 150px; }
+  .arena-series-list__header { align-items: start; }
+  .arena-series-card { min-height: 0; padding: 17px; }
   .arena-exercise-player > header { grid-template-columns: auto 1fr; }
   .arena-exercise-player > header > div { text-align: left; }
   .arena-exercise-player > header > strong { display: none; }
@@ -464,11 +444,7 @@
   .arena-preview-browser > span { order: 3; width: 100%; margin-left: 0; text-align: center; }
   .arena-preview-device-toggle { margin-left: auto; }
   .arena-preview-mode-toggle { top: 67px; }
-  .arena-level-journey.is-editor-preview { padding-inline: 8px; }
-  .arena-level-journey.is-editor-preview .mastery-stop { grid-template-columns: 62px minmax(0, 1fr); min-height: 132px; }
-  .arena-level-journey.is-editor-preview .mastery-road-line { left: 39px; }
-  .arena-level-journey.is-editor-preview .mastery-stop .mastery-level-node { grid-column: 1; grid-row: 1; }
-  .arena-level-journey.is-editor-preview .mastery-stop .mastery-level-card { grid-column: 2; grid-row: 1; margin: 0 0 0 8px; }
+  .arena-series-card__footer { align-items: flex-start; flex-direction: column; }
   .arena-editor-preview.is-mobile-device .arena-preview-sheet { width: min(390px, calc(100% - 12px)); margin: 8px auto; padding: 44px 12px 20px; border-width: 6px; border-radius: 29px; }
 }
 
@@ -1049,4 +1025,3 @@
   .onboarding-form-step .auth-school-choice > div { gap: 5px; }
   .onboarding-form-step .auth-school-choice button { padding-inline: 5px; font-size: 9px; }
 }
-
