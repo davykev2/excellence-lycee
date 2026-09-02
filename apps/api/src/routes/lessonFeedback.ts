@@ -132,7 +132,7 @@ function sqliteFeedback(userId: string, role: UserRole, pathId: string, lessonId
   `).all(pathId, lessonId) as SqliteCommentRow[];
   const commentReactionRows = database.prepare(`
     SELECT reaction.comment_id AS commentId, reaction.reaction,
-      COUNT(*) AS count,
+      SUM(CASE WHEN profile.role <> 'admin' THEN 1 ELSE 0 END) AS count,
       SUM(CASE WHEN profile.role = 'admin' THEN 1 ELSE 0 END) AS adminCount
     FROM lesson_comment_reactions reaction
     JOIN lesson_comments comment ON comment.id = reaction.comment_id
@@ -151,7 +151,7 @@ function sqliteFeedback(userId: string, role: UserRole, pathId: string, lessonId
     const summary = commentReactions.get(row.commentId) ?? emptyCommentReactions();
     summary.counts[row.reaction] = Number(row.count);
     summary.adminCounts[row.reaction] = Number(row.adminCount);
-    summary.total += Number(row.count);
+    summary.total += Number(row.count) + Number(row.adminCount);
     commentReactions.set(row.commentId, summary);
   });
   ownCommentReactionRows.forEach((row) => {
@@ -197,7 +197,7 @@ function sqliteAdminFeed(limit: number): AdminFeedbackItem[] {
         NULL AS commentAuthorName, c.created_at AS createdAt
       FROM lesson_comments c
       LEFT JOIN users u ON u.id = c.author_user_id
-      WHERE COALESCE(u.role, 'student') NOT IN ('admin', 'content_editor')
+      WHERE u.role = 'student' AND u.audience = 'student'
       UNION ALL
       SELECT 'reaction' AS kind, r.user_id || ':' || r.path_id || ':' || r.lesson_id AS id,
         r.path_id AS pathId, r.lesson_id AS lessonId, r.user_id AS authorId,
@@ -206,7 +206,7 @@ function sqliteAdminFeed(limit: number): AdminFeedbackItem[] {
         NULL AS commentId, NULL AS commentBody, NULL AS commentAuthorName, r.updated_at AS createdAt
       FROM lesson_reactions r
       LEFT JOIN users u ON u.id = r.user_id
-      WHERE COALESCE(u.role, 'student') NOT IN ('admin', 'content_editor')
+      WHERE u.role = 'student' AND u.audience = 'student'
       UNION ALL
       SELECT 'comment_reaction' AS kind, r.user_id || ':' || r.comment_id AS id,
         c.path_id AS pathId, c.lesson_id AS lessonId, r.user_id AS authorId,
@@ -219,7 +219,7 @@ function sqliteAdminFeed(limit: number): AdminFeedbackItem[] {
       JOIN lesson_comments c ON c.id = r.comment_id
       LEFT JOIN users u ON u.id = r.user_id
       LEFT JOIN users comment_author ON comment_author.id = c.author_user_id
-      WHERE COALESCE(u.role, 'student') NOT IN ('admin', 'content_editor')
+      WHERE u.role = 'student' AND u.audience = 'student'
     )
     ORDER BY createdAt DESC
     LIMIT ?
