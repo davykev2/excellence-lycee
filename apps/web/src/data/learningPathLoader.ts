@@ -91,7 +91,7 @@ async function loadSvtPaths(levelId: string) {
     return [...nervousSystem, ...drugsNervousSystem, ...cellEnergyProduction, ...muscleEnergyUse, ...immuneDefense, ...hivInfection, ...femaleCycles, ...humanHeredity, ...petroleumFormation, ...petroleumExploitation, ...soilFertility];
   }
   if (levelId === "terminale-d") {
-    const [conditionedReflex, nervousTissue, skeletalMuscle, heart, gameteFate, humanSexualOrgans, spermaphyteReproduction, singleTraitHeredity, twoTraitHeredity, internalEnvironment, immuneDefense, hivInfection, miningExploitation, soilProtection] = await Promise.all([
+    const [conditionedReflex, nervousTissue, skeletalMuscle, heart, gameteFate, humanSexualOrgans, spermaphyteReproduction, singleTraitHeredity, twoTraitHeredity, internalEnvironment, immuneDefense, hivInfection, miningFormation, miningExploitation, soilProtection] = await Promise.all([
       import("./terminalDSvtConditionedReflexPath").then((module) => module.terminalDSvtConditionedReflexPath),
       import("./terminalDSvtNervousTissuePath").then((module) => module.terminalDSvtNervousTissuePath),
       import("./terminalDSvtSkeletalMusclePath").then((module) => module.terminalDSvtSkeletalMusclePath),
@@ -104,10 +104,11 @@ async function loadSvtPaths(levelId: string) {
       import("./terminalDSvtInternalEnvironmentPath").then((module) => module.terminalDSvtInternalEnvironmentPath),
       import("./terminalDSvtImmuneDefensePath").then((module) => module.terminalDSvtImmuneDefensePath),
       import("./terminalDSvtHivInfectionPath").then((module) => module.terminalDSvtHivInfectionPath),
+      import("./terminalDSvtMiningFormationPath").then((module) => module.terminalDSvtMiningFormationPath),
       import("./terminalDSvtMiningExploitationPath").then((module) => module.terminalDSvtMiningExploitationPath),
       import("./terminalDSvtSoilProtectionPath").then((module) => module.terminalDSvtSoilProtectionPath),
     ]);
-    return [conditionedReflex, nervousTissue, skeletalMuscle, heart, gameteFate, humanSexualOrgans, spermaphyteReproduction, singleTraitHeredity, twoTraitHeredity, internalEnvironment, immuneDefense, hivInfection, miningExploitation, soilProtection];
+    return [conditionedReflex, nervousTissue, skeletalMuscle, heart, gameteFate, humanSexualOrgans, spermaphyteReproduction, singleTraitHeredity, twoTraitHeredity, internalEnvironment, immuneDefense, hivInfection, miningFormation, miningExploitation, soilProtection];
   }
   return [];
 }

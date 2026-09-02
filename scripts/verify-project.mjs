@@ -355,6 +355,15 @@ run(
 );
 
 run(
+  "Contenu · audit-terminal-d-svt-mining-formation.ts",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    resolve(root, "scripts", "audit-terminal-d-svt-mining-formation.ts"),
+  ],
+);
+
+run(
   "Contenu · audit-terminal-d-svt-mining-exploitation.ts",
   process.execPath,
   [

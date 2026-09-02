@@ -48,6 +48,7 @@ import { terminalDSvtTwoTraitHeredityPath } from "./terminalDSvtTwoTraitHeredity
 import { terminalDSvtInternalEnvironmentPath } from "./terminalDSvtInternalEnvironmentPath";
 import { terminalDSvtImmuneDefensePath } from "./terminalDSvtImmuneDefensePath";
 import { terminalDSvtHivInfectionPath } from "./terminalDSvtHivInfectionPath";
+import { terminalDSvtMiningFormationPath } from "./terminalDSvtMiningFormationPath";
 import { terminalDSvtMiningExploitationPath } from "./terminalDSvtMiningExploitationPath";
 import { terminalDSvtSoilProtectionPath } from "./terminalDSvtSoilProtectionPath";
 import { terminalSvtPaths } from "./terminalSvtPaths";
@@ -104,6 +105,7 @@ const baseLearningPaths: LearningPath[] = [
   terminalDSvtInternalEnvironmentPath,
   terminalDSvtImmuneDefensePath,
   terminalDSvtHivInfectionPath,
+  terminalDSvtMiningFormationPath,
   terminalDSvtMiningExploitationPath,
   terminalDSvtSoilProtectionPath,
 ];
