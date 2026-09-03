@@ -241,6 +241,15 @@ export function inspectHomeworkImportPackage(value: unknown): HomeworkImportInsp
   }
   if (!seriesEntity || !textValue(seriesEntity.id) || !textValue(seriesEntity.name)) {
     issues.push({ severity: "error", path: "series", message: "La série doit contenir un id et un nom lisible." });
+  } else if (levelEntity && canonicalLevels.has(textValue(levelEntity.id))) {
+    const expectedSeriesId = textValue(levelEntity.id).split("-").at(-1)?.toLowerCase();
+    if (textValue(seriesEntity.id).toLowerCase() !== expectedSeriesId) {
+      issues.push({
+        severity: "error",
+        path: "series.id",
+        message: "La série doit correspondre exactement au niveau sélectionné.",
+      });
+    }
   }
   const durationSeconds = finitePositive(metadataRoot.durationSeconds);
   if (!Number.isInteger(durationSeconds) || durationSeconds < 60 || durationSeconds > 8 * 60 * 60) {

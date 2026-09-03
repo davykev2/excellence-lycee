@@ -190,6 +190,19 @@ test("l’import privé résume le devoir sans exposer ses réponses", () => {
   assert.equal("expectedAnswer" in inspection.metadata, false, "l’aperçu ne remonte jamais le corrigé");
 });
 
+test("l’aperçu refuse une série qui ne correspond pas au niveau", () => {
+  const homework = validPackage();
+  homework.series.id = "terminale-c";
+
+  const inspection = inspectHomeworkImportPackage(homework);
+
+  assert.equal(inspection.valid, false);
+  assert.ok(inspection.issues.some((issue) => (
+    issue.path === "series.id"
+    && issue.message === "La série doit correspondre exactement au niveau sélectionné."
+  )));
+});
+
 test("une question neutralisée peut rester fidèle sans inventer une fausse réponse", () => {
   const homework = validPackage();
   (homework as unknown as Record<string, unknown>).sourceNotice = "Transcription fidèle du sujet original.";

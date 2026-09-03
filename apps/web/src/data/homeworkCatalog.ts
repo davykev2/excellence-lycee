@@ -54,7 +54,7 @@ export const lsyMathTc2025Homework: HomeworkDefinition = {
   academicYear: "2025-2026",
   subject: { id: "mathematics", name: "Mathématiques", icon: "∑" },
   level: { id: "terminale-c", name: "Terminale" },
-  series: { id: "terminale-c", name: "C" },
+  series: { id: "c", name: "C" },
   durationSeconds: 3 * 60 * 60,
   gradingMode: "hybrid",
   subjectPublished: true,
