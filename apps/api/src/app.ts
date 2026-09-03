@@ -18,6 +18,7 @@ import { lessonFeedbackRoutes } from "./routes/lessonFeedback.js";
 import { storeRoutes } from "./routes/store.js";
 import { bacExamRoutes } from "./routes/bacExam.js";
 import { notificationRoutes } from "./routes/notifications.js";
+import { homeworkRoutes } from "./routes/homework.js";
 import { authenticateWithSupabase, supabaseConfigured } from "./supabase.js";
 import { database, type UserRole } from "./database.js";
 
@@ -44,6 +45,7 @@ export async function buildApp() {
           id: context.id,
           email: context.email,
           role: context.role,
+          accountType: context.user.accountType,
           levelId: context.user.levelId,
           accessToken,
         };
@@ -55,9 +57,10 @@ export async function buildApp() {
 
     try {
       await request.jwtVerify();
-      const profile = database.prepare("SELECT level_id AS levelId, role FROM users WHERE id = ?").get(request.user.sub) as {
+      const profile = database.prepare("SELECT level_id AS levelId, role, audience AS accountType FROM users WHERE id = ?").get(request.user.sub) as {
         levelId: string;
         role: UserRole;
+        accountType: "student" | "parent" | "teacher";
       } | undefined;
       if (!profile) {
         return reply.code(401).send({ error: "UNAUTHORIZED", message: "Session invalide ou expirée." });
@@ -66,11 +69,32 @@ export async function buildApp() {
         id: request.user.sub,
         email: request.user.email,
         role: profile.role,
+        accountType: profile.accountType,
         levelId: profile.levelId,
       };
     } catch {
       return reply.code(401).send({ error: "UNAUTHORIZED", message: "Authentification requise." });
     }
+  });
+
+  app.setErrorHandler((error, _request, reply) => {
+    app.log.error(error);
+    if (reply.sent) return;
+    const statusCode = typeof error === "object" && error && "statusCode" in error && typeof error.statusCode === "number"
+      ? error.statusCode
+      : 500;
+    const publicStatus = statusCode < 500 ? statusCode : 500;
+    const publicMessage = publicStatus < 500 && error instanceof Error
+      ? error.message
+      : "Une erreur interne est survenue.";
+    const domainCode = publicStatus < 500 && typeof error === "object" && error && "code" in error
+      && typeof error.code === "string" && /^[A-Z][A-Z0-9_]{2,79}$/.test(error.code)
+      ? error.code
+      : "INTERNAL_ERROR";
+    return reply.code(publicStatus).send({
+      error: domainCode,
+      message: publicMessage,
+    });
   });
 
   app.get("/health", async () => ({ status: "ok", service: "excellence-api", dataProvider: config.dataProvider }));
@@ -87,22 +111,7 @@ export async function buildApp() {
   await app.register(storeRoutes, { prefix: "/store" });
   await app.register(bacExamRoutes, { prefix: "/bac-exams" });
   await app.register(notificationRoutes, { prefix: "/notifications" });
-
-  app.setErrorHandler((error, _request, reply) => {
-    app.log.error(error);
-    if (reply.sent) return;
-    const statusCode = typeof error === "object" && error && "statusCode" in error && typeof error.statusCode === "number"
-      ? error.statusCode
-      : 500;
-    const publicStatus = statusCode < 500 ? statusCode : 500;
-    const publicMessage = publicStatus < 500 && error instanceof Error
-      ? error.message
-      : "Une erreur interne est survenue.";
-    return reply.code(publicStatus).send({
-      error: "INTERNAL_ERROR",
-      message: publicMessage,
-    });
-  });
+  await app.register(homeworkRoutes, { prefix: "/homeworks" });
 
   return app;
 }

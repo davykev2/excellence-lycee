@@ -12,6 +12,7 @@ const hasDevelopmentPreview = import.meta.env.DEV && [
   "__admin-content-preview",
   "__arena-exercise-editor-preview",
   "__duel-preview",
+  "__homework-preview",
   "__bac-exam-preview",
 ].some((parameter) => previewParams.has(parameter));
 

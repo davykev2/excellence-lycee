@@ -51,6 +51,10 @@ export function canAccessBacExams(user: Pick<AuthUser, "levelId" | "role">) {
   return user.role === "admin" || isTerminalLevelId(user.levelId);
 }
 
+export function canAccessHomeworks(user: Pick<AuthUser, "accountType" | "role">) {
+  return user.role === "admin" || (user.role === "student" && user.accountType === "student");
+}
+
 /**
  * Empêche une URL conservée avant la connexion d'ouvrir un espace qui ne
  * correspond pas au profil scolaire venant d'être chargé.
@@ -73,6 +77,13 @@ export function routeAllowedForUser(route: AppRoute, user: AuthUser): AppRoute {
     && !canAccessBacExams(user)
   ) {
     return { navigation: "home", subjectId: subjectRoute.subjectId };
+  }
+  if (
+    subjectRoute.navigation === "arena"
+    && subjectRoute.arenaMode === "homework"
+    && !canAccessHomeworks(user)
+  ) {
+    return { navigation: "arena", subjectId: subjectRoute.subjectId };
   }
   return subjectRoute;
 }

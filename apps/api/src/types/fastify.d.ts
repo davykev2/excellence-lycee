@@ -1,6 +1,6 @@
 import "@fastify/jwt";
 import type { FastifyReply, FastifyRequest } from "fastify";
-import type { UserRole } from "../database.js";
+import type { AccountAudience, UserRole } from "../database.js";
 
 declare module "@fastify/jwt" {
   interface FastifyJWT {
@@ -15,6 +15,7 @@ declare module "fastify" {
       id: string;
       email: string;
       role: UserRole;
+      accountType: AccountAudience;
       levelId: string;
       accessToken?: string;
     };

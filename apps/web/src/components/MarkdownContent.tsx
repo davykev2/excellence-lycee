@@ -1,5 +1,6 @@
 import { Fragment, type ReactNode } from "react";
 import { MathText } from "./MathText";
+import { normalizePastedExerciseLayout } from "./markdownLayout";
 
 function inline(value: string) {
   const parts = value.split(/(`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*|\[[^\]]+\]\(https?:\/\/[^)\s]+\))/g).filter(Boolean);
@@ -95,13 +96,6 @@ function parseBlocks(markdown: string) {
   }
   flushParagraph();
   return blocks;
-}
-
-function normalizePastedExerciseLayout(markdown: string) {
-  return markdown.replace(
-    /(^|[^\n])\s*([a-h]\))\s*(?=\\\(|\$\$?)/gi,
-    (_, prefix: string, label: string) => `${prefix}${prefix ? "\n" : ""}${label} `,
-  );
 }
 
 export function MarkdownContent({

@@ -33,6 +33,7 @@ import {
 } from "./routing/appRoute";
 import {
   canAccessLearningPath,
+  canAccessHomeworks,
   initialSubjectIdForLocation,
   levelIdForLearningPath,
   routeAllowedForUser,
@@ -84,6 +85,7 @@ const isPathPreview = import.meta.env.DEV && previewParams.has("__paths-preview"
 const isAdminContentPreview = import.meta.env.DEV && previewParams.has("__admin-content-preview");
 const isArenaExerciseEditorPreview = import.meta.env.DEV && previewParams.has("__arena-exercise-editor-preview");
 const isDuelPreview = import.meta.env.DEV && previewParams.has("__duel-preview");
+const isHomeworkPreview = import.meta.env.DEV && previewParams.has("__homework-preview");
 const isBacExamPreview = import.meta.env.DEV && previewParams.has("__bac-exam-preview");
 const forceDavyTourPreview = import.meta.env.DEV && previewParams.has("__davy-tour-preview");
 const requestedPreviewLevel = previewParams.get("__level-preview");
@@ -123,6 +125,8 @@ function createRouteFallback(
 ): AppRoute {
   return isArenaExerciseEditorPreview
     ? { navigation: "arena", subjectId: "mathematics", arenaMode: "exercises", arenaEditor: true }
+    : isHomeworkPreview
+    ? { navigation: "arena", subjectId: "mathematics", arenaMode: "homework" }
     : isBacExamPreview
     ? { navigation: "arena", subjectId: "mathematics", arenaMode: "bac", bacExamSlug: "2024" }
     : isDuelPreview
@@ -150,7 +154,7 @@ export function LearningApp({ user }: { user?: AuthUser }) {
     ? arenaEditorPreviewUser
     : isAdminContentPreview
       ? adminPreviewUser
-      : isBacExamPreview || isDuelPreview || isPathPreview
+      : isBacExamPreview || isHomeworkPreview || isDuelPreview || isPathPreview
         ? previewUser
         : user;
   if (!effectiveUser) throw new Error("Session apprenant indisponible.");
@@ -271,7 +275,7 @@ function LearningAppShell({
   const [dashboardPathPreference, setDashboardPathPreference] = useState<DashboardPathPreference | null>(null);
   const navigationRequest = useRef(0);
   const { logout, updateUser } = useAuth();
-  const localPreview = isPathPreview || isAdminContentPreview || isArenaExerciseEditorPreview || isDuelPreview || isBacExamPreview;
+  const localPreview = isPathPreview || isAdminContentPreview || isArenaExerciseEditorPreview || isDuelPreview || isHomeworkPreview || isBacExamPreview;
   const {
     progressByPath,
     completedLessonsByPath,
@@ -596,8 +600,11 @@ function LearningAppShell({
           subjects={subjectOptions}
           totalXp={totalXp}
           role={user.role}
+          homeworkAvailable={canAccessHomeworks(user)}
           exercisesOpen={route.arenaMode === "exercises"}
           codexOpen={route.arenaMode === "codex"}
+          homeworkOpen={route.arenaMode === "homework"}
+          homeworkRef={route.homeworkRef}
           duelOpen={route.arenaMode === "duel"}
           bacExamOpen={route.arenaMode === "bac"}
           bacExamSlug={route.bacExamSlug}
@@ -608,6 +615,8 @@ function LearningAppShell({
           onBackHome={() => handleNavigate("home")}
           onOpenExercises={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "exercises" })}
           onOpenCodex={() => navigate({ navigation: "arena", subjectId: "mathematics", arenaMode: "codex" })}
+          onOpenHomeworks={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "homework" })}
+          onSelectHomework={(homeworkRef: string) => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "homework", homeworkRef })}
           onOpenDuel={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "duel" })}
           onOpenBacExam={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "bac" })}
           onSelectBacExam={(slug: BacExamSlug) => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "bac", bacExamSlug: slug })}

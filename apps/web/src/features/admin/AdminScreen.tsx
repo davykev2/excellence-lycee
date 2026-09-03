@@ -53,6 +53,7 @@ import { EditorialOverview } from "./EditorialOverview";
 import { BacExamPublicationControl } from "./BacExamPublicationControl";
 import { BacExamParticipantResults } from "./BacExamParticipantResults";
 import { EmailBroadcastPanel } from "./EmailBroadcastPanel";
+import { HomeworkReviewWorkspace } from "./homework";
 
 const reactionMeta: Record<LessonReaction, { label: string; Icon: typeof Heart }> = {
   useful: { label: "a trouvé utile", Icon: ThumbsUp },
@@ -918,6 +919,7 @@ export function AdminScreen({
       {activeSection === "operations" && (
         <section className="admin-section" data-testid="admin-operations">
           <div className="admin-section-heading"><div><p className="admin-eyebrow">Supervision</p><h2>Opérations et qualité</h2><p>Traite les validations, signalements et contrôles indispensables.</p></div><span className="admin-live-pill"><i /> Surveillance active</span></div>
+          <HomeworkReviewWorkspace />
           <EmailBroadcastPanel preview={preview} />
           <BacExamPublicationControl preview={preview} />
           <BacExamParticipantResults preview={preview} />

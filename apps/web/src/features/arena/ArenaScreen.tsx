@@ -32,6 +32,7 @@ import { DuelPreviewPage } from "./DuelPreviewPage";
 import { BacCi2024ExamPage } from "./BacCi2024ExamPage";
 import { BacExamLibraryPage } from "./BacExamLibraryPage";
 import { BacArchiveExamPage } from "./BacArchiveExamPage";
+import { HomeworkExamPage, HomeworkLibraryPage } from "./homework";
 
 interface ArenaScreenProps {
   profile: LearnerProfile;
@@ -40,8 +41,11 @@ interface ArenaScreenProps {
   subjects: SubjectDefinition[];
   totalXp: number;
   role: UserRole;
+  homeworkAvailable: boolean;
   exercisesOpen: boolean;
   codexOpen: boolean;
+  homeworkOpen: boolean;
+  homeworkRef?: string;
   duelOpen: boolean;
   bacExamOpen: boolean;
   bacExamSlug?: string;
@@ -52,6 +56,8 @@ interface ArenaScreenProps {
   onBackHome: () => void;
   onOpenExercises: () => void;
   onOpenCodex: () => void;
+  onOpenHomeworks: () => void;
+  onSelectHomework: (homeworkRef: string) => void;
   onOpenDuel: () => void;
   onOpenBacExam: () => void;
   onSelectBacExam: (slug: BacExamSlug) => void;
@@ -96,11 +102,11 @@ const arenaModes = [
     description: "Compose sur plusieurs notions avec une durée limitée et une note finale sur 20.",
     icon: ClipboardText,
     tone: "navy",
-    metric: "3 devoirs",
+    metric: "Durée limitée",
     action: "Voir les devoirs",
-    featured: "Devoir surveillé n°1",
-    featuredDescription: "Fonctions numériques • 45 minutes • Barème sur 20.",
-    highlights: ["Chronomètre", "Barème par question", "Bilan des compétences"],
+    featured: "Devoirs interactifs",
+    featuredDescription: "Sujet complet, sauvegarde automatique et barème détaillé sur 20.",
+    highlights: ["Chronomètre fiable", "Raisonnement relu", "Correction détaillée"],
   },
   {
     id: "duel",
@@ -170,8 +176,11 @@ export function ArenaScreen({
   subjects,
   totalXp,
   role,
+  homeworkAvailable,
   exercisesOpen,
   codexOpen,
+  homeworkOpen,
+  homeworkRef,
   duelOpen,
   bacExamOpen,
   bacExamSlug,
@@ -182,6 +191,8 @@ export function ArenaScreen({
   onBackHome,
   onOpenExercises,
   onOpenCodex,
+  onOpenHomeworks,
+  onSelectHomework,
   onOpenDuel,
   onOpenBacExam,
   onSelectBacExam,
@@ -194,8 +205,11 @@ export function ArenaScreen({
   const [selectedModeId, setSelectedModeId] = useState<ArenaModeId>("exercises");
   const [selectionMessage, setSelectionMessage] = useState<string | null>(null);
   const availableArenaModes = useMemo(
-    () => arenaModes.filter((mode) => mode.id !== "bac" || canAccessBacExams({ levelId: level.id, role })),
-    [level.id, role],
+    () => arenaModes.filter((mode) => (
+      (mode.id !== "bac" || canAccessBacExams({ levelId: level.id, role }))
+      && (mode.id !== "homework" || homeworkAvailable)
+    )),
+    [homeworkAvailable, level.id, role],
   );
   const selectedMode = useMemo(
     () => availableArenaModes.find((mode) => mode.id === selectedModeId) ?? availableArenaModes[0],
@@ -210,6 +224,10 @@ export function ArenaScreen({
     }
     if (modeId === "codex") {
       onOpenCodex();
+      return;
+    }
+    if (modeId === "homework") {
+      onOpenHomeworks();
       return;
     }
     if (modeId === "duel") {
@@ -232,6 +250,10 @@ export function ArenaScreen({
     }
     if (selectedMode.id === "codex") {
       onOpenCodex();
+      return;
+    }
+    if (selectedMode.id === "homework") {
+      onOpenHomeworks();
       return;
     }
     if (selectedMode.id === "duel") {
@@ -263,6 +285,28 @@ export function ArenaScreen({
   }
 
   if (codexOpen) return <MathCodexPage onBackArena={onBackArena} />;
+
+  if (homeworkOpen) {
+    if (homeworkRef) {
+      return (
+        <HomeworkExamPage
+          homeworkRef={homeworkRef}
+          profile={profile}
+          localOnly={localOnly}
+          onBackLibrary={onOpenHomeworks}
+        />
+      );
+    }
+    return (
+      <HomeworkLibraryPage
+        profile={profile}
+        isAdmin={role === "admin"}
+        localOnly={localOnly}
+        onBackArena={onBackArena}
+        onOpenHomework={onSelectHomework}
+      />
+    );
+  }
 
   if (duelOpen) {
     return <DuelPreviewPage profile={profile} level={level} subject={subject} subjects={subjects} onBackArena={onBackArena} />;

@@ -6,7 +6,8 @@ export interface AppRoute {
   subjectId?: SubjectId;
   pathId?: string;
   lessonId?: string;
-  arenaMode?: "exercises" | "codex" | "duel" | "bac";
+  arenaMode?: "exercises" | "codex" | "homework" | "duel" | "bac";
+  homeworkRef?: string;
   bacExamSlug?: string;
   arenaEditor?: boolean;
   bacResults?: boolean;
@@ -50,6 +51,7 @@ const preservedPreviewParams = [
   "__davy-tour-preview",
   "__arena-exercise-editor-preview",
   "__duel-preview",
+  "__homework-preview",
   "__bac-exam-preview",
 ] as const;
 
@@ -85,18 +87,29 @@ export function readAppRoute(location: Pick<Location, "pathname" | "search">, fa
       ? "exercises" as const
       : second === "codex"
         ? "codex" as const
+        : second === "devoirs"
+          ? "homework" as const
         : second === "duel"
           ? "duel" as const
           : second === "exos-types-bac" || second === "concours-bac-ci-2024"
             ? "bac" as const
           : undefined;
     const arenaEditor = arenaMode === "exercises" && third === "editeur";
+    const homeworkRef = arenaMode === "homework" ? decodeSegment(third) : undefined;
     const legacyBacRoute = second === "concours-bac-ci-2024";
     const bacExamSlug = arenaMode === "bac"
       ? legacyBacRoute ? "2024" : decodeSegment(third)
       : undefined;
     const bacResults = arenaMode === "bac" && (legacyBacRoute ? third === "resultats" : fourth === "resultats");
-    return { navigation: "arena", subjectId, arenaMode, arenaEditor, bacExamSlug, bacResults };
+    return {
+      navigation: "arena",
+      subjectId,
+      arenaMode,
+      ...(homeworkRef ? { homeworkRef } : {}),
+      arenaEditor,
+      bacExamSlug,
+      bacResults,
+    };
   }
   if (section === "boutique") return { navigation: "store", subjectId };
   if (section === "classement") return { navigation: "ranking", subjectId };
@@ -122,6 +135,9 @@ function pathnameFor(route: AppRoute) {
   if (route.navigation === "arena") {
     if (route.arenaMode === "exercises") return route.arenaEditor ? "/arene/exercices/editeur" : "/arene/exercices";
     if (route.arenaMode === "codex") return "/arene/codex";
+    if (route.arenaMode === "homework") {
+      return route.homeworkRef ? `/arene/devoirs/${encodeURIComponent(route.homeworkRef)}` : "/arene/devoirs";
+    }
     if (route.arenaMode === "duel") return "/arene/duel";
     if (route.arenaMode === "bac") {
       if (!route.bacExamSlug) return "/arene/exos-types-bac";

@@ -13,6 +13,7 @@ import { appRouteUrl, readAppRoute } from "../apps/web/src/routing/appRoute.ts";
 import {
   canAccessLearningPath,
   canAccessBacExams,
+  canAccessHomeworks,
   canAccessSubject,
   initialSubjectIdForLocation,
   levelIdForLearningPath,
@@ -109,6 +110,34 @@ test("la visibilité BAC et l'accès direct partagent exactement la même décis
   assert.equal(canAccessBacExams(invalidProfile), false, "Un profil scolaire invalide doit échouer fermé.");
   assert.equal(canProfileAccessBacExam(invalidProfile), false, "L'API doit aussi échouer fermée.");
   assert.deepEqual(routeAllowedForUser(bacRoute, invalidProfile), { navigation: "home", subjectId: "mathematics" });
+});
+
+test("les devoirs à composer sont réservés aux élèves et aux administrateurs", () => {
+  const homeworkRoute = readAppRoute({
+    pathname: "/arene/devoirs/lycee-scientifique-yamoussoukro-mathematiques-tc-2025-2026-devoir-1",
+    search: "?matiere=mathematics",
+  }, { navigation: "home" });
+  const student = createUser({ levelId: "terminale-c", accountType: "student" });
+  const parent = createUser({ levelId: "terminale-c", accountType: "parent" });
+  const teacher = createUser({ levelId: "terminale-c", accountType: "teacher" });
+  const editor = createUser({ levelId: "terminale-c", accountType: "teacher", role: "content_editor" });
+  const promotedStudentEditor = createUser({ levelId: "terminale-c", accountType: "student", role: "content_editor" });
+  const admin = createUser({ levelId: "seconde-a", accountType: "teacher", role: "admin" });
+
+  assert.equal(canAccessHomeworks(student), true);
+  assert.equal(canAccessHomeworks(admin), true);
+  assert.equal(canAccessHomeworks(parent), false);
+  assert.equal(canAccessHomeworks(teacher), false);
+  assert.equal(canAccessHomeworks(editor), false);
+  assert.equal(canAccessHomeworks(promotedStudentEditor), false);
+  assert.deepEqual(routeAllowedForUser(homeworkRoute, student), homeworkRoute);
+  assert.deepEqual(routeAllowedForUser(homeworkRoute, admin), homeworkRoute);
+  for (const user of [parent, teacher, editor, promotedStudentEditor]) {
+    assert.deepEqual(
+      routeAllowedForUser(homeworkRoute, user),
+      { navigation: "arena", subjectId: "mathematics" },
+    );
+  }
 });
 
 test("une panne de reprise après F5 n'est pas confondue avec une absence de session", () => {
@@ -288,6 +317,7 @@ test("les URL principales restent canoniques après lecture, F5 et historique", 
     { pathname: "/parcours/path-test/niveaux/lesson-test", search: "?matiere=svt" },
     { pathname: "/arene", search: "?matiere=mathematics" },
     { pathname: "/arene/exercices/editeur", search: "?matiere=mathematics" },
+    { pathname: "/arene/devoirs/lycee-scientifique-yamoussoukro-mathematiques-tc-2025-2026-devoir-1", search: "?matiere=mathematics" },
     { pathname: "/arene/exos-types-bac/2024/resultats", search: "?matiere=mathematics" },
     { pathname: "/boutique", search: "?matiere=svt" },
     { pathname: "/classement", search: "?matiere=svt" },
