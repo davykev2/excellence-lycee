@@ -6,6 +6,7 @@ import heroDecoration from "../../assets/hero-math-decoration.png";
 import { ProgressRing } from "./ProgressRing";
 import { PlatformStats, type PlatformStatsValue } from "./PlatformStats";
 import { SubjectPreview } from "./SubjectPreview";
+import { SupportCard } from "../support/SupportCard";
 
 export type DashboardDailyGoal = DashboardContent["dailyGoal"];
 
@@ -25,6 +26,7 @@ interface DashboardProps {
   onAskHint: () => void;
   onOpenGoal: () => void;
   onOpenArena: () => void;
+  onOpenSupport: () => void;
   stats: PlatformStatsValue;
   dailyGoal?: DashboardDailyGoal;
   syncIssue?: DashboardSyncIssue | null;
@@ -41,6 +43,7 @@ export function Dashboard({
   onAskHint,
   onOpenGoal,
   onOpenArena,
+  onOpenSupport,
   stats,
   dailyGoal = content.dailyGoal,
   syncIssue = null,
@@ -104,6 +107,8 @@ export function Dashboard({
       </section>
 
       <PlatformStats stats={stats} />
+
+      <SupportCard location="dashboard" onOpen={onOpenSupport} />
 
       {syncIssue && (
         <section

@@ -19,6 +19,7 @@ import { storeRoutes } from "./routes/store.js";
 import { bacExamRoutes } from "./routes/bacExam.js";
 import { notificationRoutes } from "./routes/notifications.js";
 import { homeworkRoutes } from "./routes/homework.js";
+import { donationRoutes } from "./routes/donations.js";
 import { authenticateWithSupabase, supabaseConfigured } from "./supabase.js";
 import { database, type UserRole } from "./database.js";
 
@@ -112,6 +113,7 @@ export async function buildApp() {
   await app.register(bacExamRoutes, { prefix: "/bac-exams" });
   await app.register(notificationRoutes, { prefix: "/notifications" });
   await app.register(homeworkRoutes, { prefix: "/homeworks" });
+  await app.register(donationRoutes, { prefix: "/donations" });
 
   return app;
 }

@@ -6,6 +6,8 @@ const LearningApp = lazy(() =>
   import("./LearningApp").then((module) => ({ default: module.LearningApp })),
 );
 
+const SupportScreen = lazy(() => import("./features/support/SupportScreen"));
+
 const previewParams = new URLSearchParams(window.location.search);
 const hasDevelopmentPreview = import.meta.env.DEV && [
   "__paths-preview",
@@ -26,7 +28,9 @@ const learningFallback = (
 export function App() {
   const { user, loading, sessionError, retrySession } = useAuth();
   const { hasRecoveryIntent } = readPasswordRecoveryState();
+  const normalizedPath = window.location.pathname.replace(/\/+$/, "") || "/";
 
+  if (normalizedPath === "/soutenir") return <Suspense fallback={learningFallback}><SupportScreen /></Suspense>;
   if (hasRecoveryIntent) return <AuthScreen />;
   if (hasDevelopmentPreview) {
     return <Suspense fallback={learningFallback}><LearningApp /></Suspense>;

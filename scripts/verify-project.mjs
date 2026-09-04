@@ -39,6 +39,16 @@ run(
   ],
 );
 run(
+  "Soutien volontaire et paiement Wave",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    "--test",
+    resolve(root, "tests", "support-route.test.ts"),
+    resolve(root, "tests", "wave-checkout.test.ts"),
+  ],
+);
+run(
   "Syntaxe du garde-fou Supabase",
   process.execPath,
   ["--check", resolve(root, "scripts", "push-supabase-migrations.mjs")],

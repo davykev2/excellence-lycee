@@ -44,6 +44,8 @@ const dataProvider = resolveDataProvider(process.env, isProduction);
 const elevenLabsApiKey = process.env.ELEVENLABS_API_KEY?.trim() ?? "";
 const davyVoiceId = process.env.DAVY_VOICE_ID?.trim() ?? "";
 const resendApiKey = process.env.RESEND_API_KEY?.trim() ?? "";
+const waveApiKey = process.env.WAVE_API_KEY?.trim() ?? "";
+const waveApiSigningSecret = process.env.WAVE_API_SIGNING_SECRET?.trim() ?? "";
 // Resend exige un domaine vérifié : tant que le porteur n'en a pas, EMAIL_FROM
 // reste vide et tout l'envoi est inerte plutôt que de partir en erreur.
 const emailFrom = process.env.EMAIL_FROM?.trim() ?? "";
@@ -65,6 +67,11 @@ export const config = {
   resendApiKey,
   emailFrom,
   emailReplyTo: process.env.EMAIL_REPLY_TO?.trim() ?? "",
+  // Clé Wave Business strictement serveur : elle ne doit jamais être exposée
+  // au frontend, dans une réponse API ou dans les journaux.
+  waveApiKey,
+  waveApiSigningSecret,
+  waveConfigured: Boolean(waveApiKey),
   // Adresse publique du frontend, utilisée pour les liens des e-mails. En local
   // elle vaut l'origine du serveur Vite ; en production, le domaine Vercel.
   publicWebUrl: (process.env.PUBLIC_WEB_URL?.trim() || process.env.WEB_ORIGIN?.trim() || "http://localhost:4173").replace(/\/+$/, ""),

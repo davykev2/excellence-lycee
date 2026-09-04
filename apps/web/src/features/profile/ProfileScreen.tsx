@@ -18,6 +18,7 @@ import type { AuthUser } from "../../domain/auth";
 import type { LearnerProfile, SchoolLevel } from "../../domain/learning";
 import { apiRequest } from "../../lib/api";
 import { ProfileAvatar } from "../../ui/ProfileAvatar";
+import { SupportCard } from "../support/SupportCard";
 
 const stageLabels: Record<SchoolLevel["stage"], string> = {
   seconde: "Seconde",
@@ -33,6 +34,7 @@ interface ProfileScreenProps {
   roleLabel: string;
   onLogout: () => void;
   onReplayDavyTour: () => void;
+  onOpenSupport: () => void;
   onProfileUpdated: (user: AuthUser) => void;
 }
 
@@ -69,7 +71,7 @@ function optimizeProfilePhoto(file: File) {
   });
 }
 
-export function ProfileScreen({ profile, currentLevel, onBackHome, email, roleLabel, onLogout, onReplayDavyTour, onProfileUpdated }: ProfileScreenProps) {
+export function ProfileScreen({ profile, currentLevel, onBackHome, email, roleLabel, onLogout, onReplayDavyTour, onOpenSupport, onProfileUpdated }: ProfileScreenProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [pendingPhoto, setPendingPhoto] = useState<string | null>(null);
   const [photoError, setPhotoError] = useState<string | null>(null);
@@ -221,6 +223,7 @@ export function ProfileScreen({ profile, currentLevel, onBackHome, email, roleLa
             <SpeakerHigh size={23} weight="duotone" />
             <span><strong>Refaire la visite avec Davy</strong><small>Réécouter la présentation des espaces de la plateforme.</small></span>
           </button>
+          <SupportCard location="profile" onOpen={onOpenSupport} />
           <div className="profile-account-card">
             <span>Compte connecté</span>
             <strong>{email}</strong>

@@ -412,7 +412,10 @@ export function AuthScreen() {
         </div>
       </section>
 
-      <footer className="onboarding-footer">Programme ivoirien · De la Seconde à la Terminale</footer>
+      <footer className="onboarding-footer">
+        Programme ivoirien · De la Seconde à la Terminale
+        <a className="onboarding-footer-support" href="/soutenir">Soutenir le projet</a>
+      </footer>
     </main>
   );
 }

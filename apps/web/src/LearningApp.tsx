@@ -594,6 +594,7 @@ function LearningAppShell({
           roleLabel={user.role === "admin" ? "Administrateur" : user.accountType === "teacher" ? "Enseignant" : user.accountType === "parent" ? "Parent" : "Élève"}
           onLogout={() => void logout()}
           onReplayDavyTour={() => setTourReplayKey((current) => current + 1)}
+          onOpenSupport={() => window.location.assign("/soutenir")}
           onProfileUpdated={updateUser}
         />
       ) : activeNavigation === "ranking" ? (
@@ -700,6 +701,7 @@ function LearningAppShell({
           onAskHint={() => setOpenDialog("tutor")}
           onOpenGoal={() => setOpenDialog("goal")}
           onOpenArena={() => handleNavigate("arena")}
+          onOpenSupport={() => window.location.assign("/soutenir")}
           stats={platformStats}
           dailyGoal={dashboardContent.dailyGoal}
           syncIssue={dashboardSyncIssue}
