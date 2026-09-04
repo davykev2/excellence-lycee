@@ -54,22 +54,21 @@ test("l'interface présente le don comme volontaire, sans avantage pédagogique"
   assert.match(supportSource, /Contribution volontaire\./);
   assert.match(supportSource, /Si tu es mineur, demande l’accord d’un parent/);
   assert.match(supportSource, /Aucun contenu, XP ou classement n’en dépend/);
-  assert.match(supportSource, /const fallbackMinimumAmountXof = 100;/);
-  assert.match(supportSource, /const fallbackMaximumAmountXof = 1_000_000;/);
-  assert.match(supportSource, /"\/donations\/config"/);
-  assert.match(supportSource, /configuration\?\.minAmount \?\? fallbackMinimumAmountXof/);
-  assert.match(supportSource, /configuration\?\.maxAmount \?\? fallbackMaximumAmountXof/);
-  assert.match(supportSource, /Number\.isInteger\(amountXof\)/);
+  assert.match(supportSource, /Tu choisis et confirmes le montant directement sur Wave\./);
+  assert.match(supportSource, /La contribution ne remplace aucun paiement scolaire/);
 });
 
-test("un retour navigateur ne peut jamais confirmer seul un paiement", () => {
+test("le lien marchand ouvre Wave sans fabriquer de confirmation de paiement", () => {
   const supportSource = source("apps/web/src/features/support/SupportScreen.tsx");
 
-  assert.match(supportSource, /`\/donations\/\$\{encodeURIComponent\(reference\)\}\/status`/);
-  assert.match(supportSource, /if \(result\.status === "paid"\)/);
-  assert.match(supportSource, /Cette page ne se fie jamais au simple lien de retour\./);
-  assert.doesNotMatch(supportSource, /search\.get\(["'](?:paid|payment|status|success|donation)["']\)/i);
-  assert.match(supportSource, /launchUrl\.origin !== "https:\/\/pay\.wave\.com"/);
+  assert.match(supportSource, /https:\/\/pay\.wave\.com\/m\/M_ci_M4N-baBQdy32\/c\/ci\//);
+  assert.match(supportSource, /href=\{waveMerchantPaymentUrl\}/);
+  assert.match(supportSource, /referrerPolicy="no-referrer"/);
+  assert.doesNotMatch(supportSource, /target="_blank"/);
+  assert.doesNotMatch(supportSource, /apiRequest|\/donations\/|result\.status === "paid"/);
+  assert.doesNotMatch(supportSource, /paiement (?:a bien été|est) confirm(?:é|ée)/i);
+  assert.match(supportSource, /seul le reçu affiché par Wave confirme le paiement/);
+  assert.match(supportSource, /bouton Retour de ton navigateur/);
 });
 
 test("aucun secret Wave ou Supabase privilégié n'entre dans le bundle apprenant", () => {
