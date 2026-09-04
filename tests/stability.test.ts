@@ -102,6 +102,39 @@ test("chaque parcours publié garde un registre XP Web/API cohérent", () => {
   }
 });
 
+test("la leçon Limites et continuité adopte le cours continu sans casser ses identifiants", () => {
+  const path = learningPaths.find((item) => item.id === "terminale-c-math-l01-limits-continuity");
+  assert.ok(path, "Le parcours Limites et continuité doit rester publié.");
+  assert.equal(path.presentation, "continuous-course");
+  assert.deepEqual(
+    path.modules.flatMap((module) => module.lessons).map((lesson) => lesson.id),
+    [
+      "limit-composition",
+      "monotone-finite-limit",
+      "parabolic-branches",
+      "continuous-extension",
+      "continuous-image-interval",
+      "continuity-operations",
+      "continuous-bijection-inverse",
+      "intermediate-value-theorem",
+      "rational-powers",
+      "complete-function-study-mission",
+    ],
+    "La nouvelle lecture ne doit pas invalider les progressions et retours historiques.",
+  );
+
+  const appSource = readFileSync(resolve(projectRoot, "apps/web/src/LearningApp.tsx"), "utf8");
+  const librarySource = readFileSync(resolve(projectRoot, "apps/web/src/features/paths/LearningLibraryScreen.tsx"), "utf8");
+  const readerSource = readFileSync(resolve(projectRoot, "apps/web/src/features/lesson/ContinuousCourseScreen.tsx"), "utf8");
+
+  assert.match(appSource, /selectedPath\?\.presentation === "continuous-course"/);
+  assert.match(appSource, /activePath\.presentation !== "continuous-course"/);
+  assert.match(librarySource, /Cours complet/);
+  assert.match(librarySource, /\{levelCount\} parties/);
+  assert.match(readerSource, /Sommaire/);
+  assert.doesNotMatch(readerSource, /J[’']ai compris|niveau suivant|Gagner[^\n]*XP|Débloquer/i);
+});
+
 test("le chargement à la demande restitue exactement les parcours de chaque classe", async () => {
   clearLearningPathBundleCacheForTests();
 

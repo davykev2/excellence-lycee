@@ -113,7 +113,7 @@ export function LessonFeedbackPanel({
         <div>
           <p className="path-kicker">{isCorrection ? "Retour sur la correction" : "Ton avis compte"}</p>
           <h2 id={`lesson-feedback-title-${context}`}>
-            {isCorrection ? "Cette correction t’a-t-elle aidé ?" : "Aide-nous à améliorer ce niveau"}
+            {isCorrection ? "Cette correction t’a-t-elle aidé ?" : "Aide-nous à améliorer cette partie"}
           </h2>
           <p>{isCorrection
             ? "Dis-nous si les explications sont claires ou ce qu’il faudrait détailler davantage."
@@ -129,7 +129,7 @@ export function LessonFeedbackPanel({
         </div>
       ) : (
         <>
-          <div className="lesson-reactions" aria-label="Réagir à ce niveau">
+          <div className="lesson-reactions" aria-label="Réagir à cette partie">
             {reactions.map((reaction) => {
               const Icon = reaction.icon;
               const selected = feedback.reactions.myReaction === reaction.id;
@@ -154,7 +154,7 @@ export function LessonFeedbackPanel({
           <div className="lesson-comment-composer">
             <ProfileAvatar name={currentUser.name} photoUrl={currentUser.photoUrl} />
             <label>
-              <span className="sr-only">Ton commentaire sur ce niveau</span>
+              <span className="sr-only">Ton commentaire sur cette partie</span>
               <textarea
                 value={draft}
                 maxLength={1000}

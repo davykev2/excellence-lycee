@@ -507,7 +507,7 @@ Si $f$ et $g$ sont deux fonctions **continues sur un intervalle $I$**, alors :
 
 Si $f$ est continue sur un intervalle $I$ et $g$ continue sur l’ensemble $f(I)$, alors $g\circ f$ est continue sur $I$.
 
-> **Le point de vigilance.** Pour une composée, il ne suffit pas que $g$ soit continue « quelque part » : elle doit l’être **sur l’image $f(I)$**. C’est pourquoi on calcule d’abord $f(I)$ — d’où l’utilité du niveau précédent.
+> **Le point de vigilance.** Pour une composée, il ne suffit pas que $g$ soit continue « quelque part » : elle doit l’être **sur l’image $f(I)$**. C’est pourquoi on calcule d’abord $f(I)$ — d’où l’utilité de la partie précédente.
 
 > **Astuce mémoire de Davy.** Pour les opérations, retiens les deux feux rouges : **quotient $\Rightarrow$ dénominateur non nul** ; **racine carrée $\Rightarrow$ contenu positif ou nul**. Pour une composée, contrôle le trajet $I\to f(I)\to g(f(I))$.
 
@@ -669,7 +669,7 @@ $f$ est continue et strictement décroissante sur $[-1;+\infty[$, avec $f([-1;+\
 - $-10\in\,]-\infty;5]$, donc $f(x)=-10$ admet une **solution unique**.
 - $13\notin\,]-\infty;5]$, donc $f(x)=13$ n’admet **aucune** solution.
 
-> **La méthode complète.** Pour savoir si $f(x)=m$ a une solution, on ne devine pas : on calcule l’**intervalle image** et on regarde si $m$ lui appartient. C’est le lien direct avec le niveau « Image d’un intervalle ».
+> **La méthode complète.** Pour savoir si $f(x)=m$ a une solution, on ne devine pas : on calcule l’**intervalle image** et on regarde si $m$ lui appartient. C’est le lien direct avec la partie « Image d’un intervalle ».
 
 ### Exemple du cours — existence et unicité
 
@@ -758,7 +758,7 @@ $$f:[0;+\infty[\ \longrightarrow\ [0;+\infty[,\qquad x\longmapsto x^n$$
 
 La racine n-ième d’un réel positif ou nul $x$ se note $\sqrt[n]{x}$ ou $x^{\frac1n}$.
 
-> **Le lien avec le niveau précédent.** La fonction $x\mapsto x^n$ est continue et strictement croissante sur $[0;+\infty[$ : elle réalise donc une bijection, ce qui **autorise** à parler de sa réciproque. La racine n-ième n’existe pas par convention, elle est justifiée par la propriété des bijections.
+> **Le lien avec la partie précédente.** La fonction $x\mapsto x^n$ est continue et strictement croissante sur $[0;+\infty[$ : elle réalise donc une bijection, ce qui **autorise** à parler de sa réciproque. La racine n-ième n’existe pas par convention, elle est justifiée par la propriété des bijections.
 
 ### Conséquences
 
@@ -826,7 +826,7 @@ $$\frac{a^3}{\sqrt{a^{0,4}}}=\frac{a^3}{a^{\frac15}}=a^{3-\frac15}=a^{\frac{14}{
   },
   {
     id: "complete-function-study-mission",
-    title: "Mission finale : conduire une étude complète de fonction",
+    title: "Étude guidée : conduire une étude complète de fonction",
     summary: "Mobiliser limites, continuité, TVI, asymptotes et tangente sur l’étude complète du document.",
     pages: "13-19",
     section: "C. Situations complexes et D. Exercices résolus",
@@ -905,7 +905,7 @@ Pour tout $x>-1$ : $f(x)-(-x+1)=\dfrac{x^2-x}{1+x^3}=\dfrac{x(x-1)}{1+x^3}$. Com
 - $(C)$ est **en dessous** de $(T)$ sur $]0;1[$ ;
 - $(C)$ et $(T)$ se coupent aux points d’abscisses $0$ et $1$.
 
-> **Ce qu’il faut retenir de cette mission.** Le signe d’une dérivée compliquée s’obtient en isolant une **fonction auxiliaire** ; le TVI donne alors la racine qui sépare les variations. C’est le schéma le plus fréquent au Baccalauréat.`,
+> **Ce qu’il faut retenir de cette étude.** Le signe d’une dérivée compliquée s’obtient en isolant une **fonction auxiliaire** ; le TVI donne alors la racine qui sépare les variations. C’est le schéma le plus fréquent au Baccalauréat.`,
     keyPoint: "Étude complète : domaine, limites, asymptotes, dérivée via une fonction auxiliaire, variations, tangente et position.",
     example: "$f'(x)=\\frac{g(x)}{(1+x^3)^2}$ : le signe de $f'$ est celui de $g$, dont la racine unique $\\alpha$ vérifie $1,6<\\alpha<1,7$.",
     methodSteps: [
@@ -958,12 +958,13 @@ export const terminalCLimitsContinuityPath: LearningPath = {
   id: "terminale-c-math-l01-limits-continuity",
   subjectId: "mathematics",
   levelIds: ["terminale-c"],
+  presentation: "continuous-course",
   curriculumLabel: "Programme ivoirien • Terminale C • Leçon officielle fidèlement structurée",
   curriculumSourceUrl: "https://dpfc-ci.net/",
   theme: { number: 1, title: "Fonctions numériques" },
   chapterNumber: 1,
   title: "Limites et continuité",
-  description: "Le cours officiel intégral, sans les activités, découpé en niveaux progressifs avec ses exercices et corrections.",
+  description: "Le cours officiel intégral, sans la situation d’apprentissage, présenté en lecture continue avec ses exemples, manipulations et corrections expliquées.",
   estimatedMinutes: builtLevels.reduce((sum, lesson) => sum + lesson.durationMinutes, 0),
   outcomes: [
     "Calculer la limite d’une fonction composée et d’une fonction monotone bornée",

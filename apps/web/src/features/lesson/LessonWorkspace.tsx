@@ -498,6 +498,97 @@ function initialInteractionValue(lesson: LearningLesson) {
   return lesson.interaction.input.initial;
 }
 
+/**
+ * Corps interactif autonome d'une partie de cours.
+ *
+ * Le titre, la consigne et l'observation restent volontairement à la charge de
+ * l'écran appelant afin que ce panneau puisse être inséré aussi bien dans le
+ * lecteur historique que dans une page de cours continue.
+ */
+export function LessonInteractionPanel({ lesson }: { lesson: LearningLesson }) {
+  const [inputValue, setInputValue] = useState(() => initialInteractionValue(lesson));
+
+  useEffect(() => {
+    setInputValue(initialInteractionValue(lesson));
+  }, [lesson.id]);
+
+  const outputValue = useMemo(() => {
+    if (lesson.interaction.kind === "timeline" || lesson.interaction.kind === "diagram" || lesson.interaction.kind === "orbit" || lesson.interaction.kind === "schema") return null;
+    if (lesson.interaction.kind === "curve") return evaluateCurveRule(lesson.interaction.rule, inputValue);
+    return evaluateRule(lesson.interaction.rule, inputValue);
+  }, [inputValue, lesson.interaction]);
+  const timelineItem = lesson.interaction.kind === "timeline"
+    ? lesson.interaction.items[Math.min(Math.round(inputValue), lesson.interaction.items.length - 1)]
+    : null;
+
+  if (lesson.interaction.kind === "timeline") {
+    return timelineItem ? (
+      <div className="mastery-timeline-lab">
+        <div className="mastery-timeline-focus" aria-live="polite"><strong>{timelineItem.label}</strong><span>{timelineItem.detail}</span></div>
+        <label htmlFor={`mastery-timeline-${lesson.id}`}>Repère {Math.round(inputValue) + 1} sur {lesson.interaction.items.length}</label>
+        <input id={`mastery-timeline-${lesson.id}`} className="lesson-slider" type="range" min={0} max={lesson.interaction.items.length - 1} step={1} value={inputValue} onInput={(event) => setInputValue(Number(event.currentTarget.value))} />
+        <div className="mastery-timeline-markers">{lesson.interaction.items.map((item, index) => <button aria-pressed={index === Math.round(inputValue)} className={index === Math.round(inputValue) ? "is-active" : ""} key={`${item.label}-${index}`} onClick={() => setInputValue(index)} type="button">{item.shortLabel ?? item.label}</button>)}</div>
+      </div>
+    ) : null;
+  }
+
+  if (lesson.interaction.kind === "diagram") {
+    return (
+      <DiagramLab
+        interaction={lesson.interaction}
+        selectedIndex={Math.round(inputValue)}
+        onSelect={setInputValue}
+      />
+    );
+  }
+
+  if (lesson.interaction.kind === "schema") {
+    return (
+      <SchemaLab
+        interaction={lesson.interaction}
+        selectedIndex={Math.round(inputValue)}
+        lessonId={lesson.id}
+        onSelect={setInputValue}
+      />
+    );
+  }
+
+  if (lesson.interaction.kind === "orbit") {
+    return (
+      <OrbitLab
+        interaction={lesson.interaction}
+        angleDegrees={inputValue}
+        lessonId={lesson.id}
+        onAngleChange={setInputValue}
+      />
+    );
+  }
+
+  if (lesson.interaction.kind === "curve") {
+    return (
+      <CurveLab
+        interaction={lesson.interaction}
+        inputValue={inputValue}
+        outputValue={outputValue}
+        lessonId={lesson.id}
+        onInputChange={setInputValue}
+      />
+    );
+  }
+
+  return (
+    <div className="mastery-mini-lab">
+      <strong>{lesson.interaction.formulaTex
+        ? <MathFormula tex={lesson.interaction.formulaTex} fallback={lesson.interaction.formula} />
+        : <MathText>{lesson.interaction.formula}</MathText>}
+      </strong>
+      <label htmlFor={`mastery-slider-${lesson.id}`}>{lesson.interaction.inputSymbol ?? "x"} = {formatNumber(inputValue)}</label>
+      <input id={`mastery-slider-${lesson.id}`} className="lesson-slider" type="range" min={lesson.interaction.input.min} max={lesson.interaction.input.max} step={lesson.interaction.input.step} value={inputValue} onChange={(event) => setInputValue(Number(event.target.value))} />
+      <span className={outputValue === null ? "is-undefined" : ""}>{outputValue === null ? "Non définie" : `${formatNumber(outputValue)}${lesson.interaction.outputSuffix ? ` ${lesson.interaction.outputSuffix}` : ""}`}</span>
+    </div>
+  );
+}
+
 function synchronizationErrorMessage(reason: unknown) {
   if (reason instanceof ApiError) {
     if (reason.code === "LESSON_NOT_FOUND") {
@@ -527,7 +618,6 @@ export function LessonWorkspace({
   const [phase, setPhase] = useState<Phase>("learn");
   const [answers, setAnswers] = useState<LessonAnswer[]>(() => questions.map(() => null));
   const [openFormulaKeyboardIndex, setOpenFormulaKeyboardIndex] = useState<number | null>(null);
-  const [inputValue, setInputValue] = useState(() => initialInteractionValue(lesson));
   const [result, setResult] = useState<AttemptResult | null>(null);
   const [score, setScore] = useState(0);
   const [submitting, setSubmitting] = useState(false);
@@ -540,7 +630,6 @@ export function LessonWorkspace({
     setPhase("learn");
     setAnswers(questions.map(() => null));
     setOpenFormulaKeyboardIndex(null);
-    setInputValue(initialInteractionValue(lesson));
     setResult(null);
     setScore(0);
     setResultSynced(false);
@@ -557,14 +646,6 @@ export function LessonWorkspace({
     mainRef.current?.scrollTo({ top: 0, behavior: "auto" });
   }, [phase]);
 
-  const outputValue = useMemo(() => {
-    if (lesson.interaction.kind === "timeline" || lesson.interaction.kind === "diagram" || lesson.interaction.kind === "orbit" || lesson.interaction.kind === "schema") return null;
-    if (lesson.interaction.kind === "curve") return evaluateCurveRule(lesson.interaction.rule, inputValue);
-    return evaluateRule(lesson.interaction.rule, inputValue);
-  }, [inputValue, lesson.interaction]);
-  const timelineItem = lesson.interaction.kind === "timeline"
-    ? lesson.interaction.items[Math.min(Math.round(inputValue), lesson.interaction.items.length - 1)]
-    : null;
   const answeredCount = answers.filter((answer) => answer !== null && (typeof answer !== "string" || Boolean(answer.trim()))).length;
   const allAnswered = answers.every((answer) => answer !== null && (typeof answer !== "string" || Boolean(answer.trim())));
   const supportsFormulaKeyboard = path.subjectId === "mathematics" || path.subjectId === "physics-chemistry";
@@ -690,52 +771,7 @@ export function LessonWorkspace({
             <section className="mastery-course-card is-lab">
               <div><span className="mastery-course-icon"><SlidersHorizontal size={25} weight="duotone" /></span><p className="path-kicker">Manipuler</p><h2>{lesson.interaction.title}</h2></div>
               <p><MathText>{lesson.interaction.instruction}</MathText></p>
-              {lesson.interaction.kind === "timeline" && timelineItem ? (
-                <div className="mastery-timeline-lab">
-                  <div className="mastery-timeline-focus" aria-live="polite"><strong>{timelineItem.label}</strong><span>{timelineItem.detail}</span></div>
-                  <label htmlFor={`mastery-timeline-${lesson.id}`}>Repère {Math.round(inputValue) + 1} sur {lesson.interaction.items.length}</label>
-                  <input id={`mastery-timeline-${lesson.id}`} className="lesson-slider" type="range" min={0} max={lesson.interaction.items.length - 1} step={1} value={inputValue} onInput={(event) => setInputValue(Number(event.currentTarget.value))} />
-                  <div className="mastery-timeline-markers">{lesson.interaction.items.map((item, index) => <button aria-pressed={index === Math.round(inputValue)} className={index === Math.round(inputValue) ? "is-active" : ""} key={`${item.label}-${index}`} onClick={() => setInputValue(index)} type="button">{item.shortLabel ?? item.label}</button>)}</div>
-                </div>
-              ) : lesson.interaction.kind === "diagram" ? (
-                <DiagramLab
-                  interaction={lesson.interaction}
-                  selectedIndex={Math.round(inputValue)}
-                  onSelect={setInputValue}
-                />
-              ) : lesson.interaction.kind === "schema" ? (
-                <SchemaLab
-                  interaction={lesson.interaction}
-                  selectedIndex={Math.round(inputValue)}
-                  lessonId={lesson.id}
-                  onSelect={setInputValue}
-                />
-              ) : lesson.interaction.kind === "orbit" ? (
-                <OrbitLab
-                  interaction={lesson.interaction}
-                  angleDegrees={inputValue}
-                  lessonId={lesson.id}
-                  onAngleChange={setInputValue}
-                />
-              ) : lesson.interaction.kind === "curve" ? (
-                <CurveLab
-                  interaction={lesson.interaction}
-                  inputValue={inputValue}
-                  outputValue={outputValue}
-                  lessonId={lesson.id}
-                  onInputChange={setInputValue}
-                />
-              ) : lesson.interaction.kind !== "timeline" ? (
-                <div className="mastery-mini-lab">
-                  <strong>{lesson.interaction.formulaTex
-                    ? <MathFormula tex={lesson.interaction.formulaTex} fallback={lesson.interaction.formula} />
-                    : <MathText>{lesson.interaction.formula}</MathText>}
-                  </strong>
-                  <label htmlFor={`mastery-slider-${lesson.id}`}>{lesson.interaction.inputSymbol ?? "x"} = {formatNumber(inputValue)}</label>
-                  <input id={`mastery-slider-${lesson.id}`} className="lesson-slider" type="range" min={lesson.interaction.input.min} max={lesson.interaction.input.max} step={lesson.interaction.input.step} value={inputValue} onChange={(event) => setInputValue(Number(event.target.value))} />
-                  <span className={outputValue === null ? "is-undefined" : ""}>{outputValue === null ? "Non définie" : `${formatNumber(outputValue)}${lesson.interaction.outputSuffix ? ` ${lesson.interaction.outputSuffix}` : ""}`}</span>
-                </div>
-              ) : null}
+              <LessonInteractionPanel lesson={lesson} />
               <p className="mastery-observation"><Sparkle size={21} weight="duotone" /><MathText>{lesson.interaction.observation}</MathText></p>
             </section>
 

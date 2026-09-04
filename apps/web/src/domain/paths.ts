@@ -240,6 +240,13 @@ export interface LearningPath {
   id: string;
   subjectId: SubjectId;
   levelIds: string[];
+  /**
+   * Présentation élève du contenu. Les anciens parcours restent des routes de
+   * maîtrise par défaut ; les cours migrés s'ouvrent comme un document continu.
+   * Les identifiants de LearningLesson restent alors conservés en arrière-plan
+   * pour ne pas invalider les progressions et retours déjà enregistrés.
+   */
+  presentation?: "mastery-road" | "continuous-course";
   curriculumLabel: string;
   curriculumSourceUrl: string;
   theme: {

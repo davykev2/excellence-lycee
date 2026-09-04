@@ -57,7 +57,7 @@ export function LearningLibraryScreen({ level, subjects, selectedSubjectId, path
       </header>
 
       <section className="library-intro">
-        <div><p className="path-kicker">Parcours d’apprentissage</p><h1>Qu’est-ce que tu veux maîtriser ?</h1><p>Choisis une matière, puis une leçon. Davy te guidera niveau après niveau.</p></div>
+        <div><p className="path-kicker">Cours du programme</p><h1>Qu’est-ce que tu veux maîtriser ?</h1><p>Choisis une matière, puis ouvre une leçon. Davy t’accompagne tout au long du cours.</p></div>
         <SelectedIcon size={58} weight="duotone" aria-hidden="true" />
       </section>
 
@@ -99,7 +99,9 @@ export function LearningLibraryScreen({ level, subjects, selectedSubjectId, path
                     <h3>{lesson.title}</h3>
                     <span>{path ? path.description : "Titre officiel ajouté. Le contenu détaillé sera publié prochainement."}</span>
                   </div>
-                  {path ? (
+                  {path?.presentation === "continuous-course" ? (
+                    <footer><span><Clock size={17} />{path.estimatedMinutes} min</span><span><BookOpenText size={17} />{levelCount} parties</span><span><BookOpenText size={17} />Cours complet</span><ArrowRight className="lesson-library-arrow" size={22} weight="bold" /></footer>
+                  ) : path ? (
                     <footer><span><Clock size={17} />{path.estimatedMinutes} min</span><span><BookOpenText size={17} />{levelCount} niveaux</span><span><Medal size={17} />{formatXp(totalXp)} XP</span><ArrowRight className="lesson-library-arrow" size={22} weight="bold" /></footer>
                   ) : (
                     <footer><span><Clock size={17} />Contenu à venir</span><span className="lesson-library-source">Progression officielle 2025-2026</span></footer>

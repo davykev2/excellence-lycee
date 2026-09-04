@@ -49,6 +49,9 @@ const AdminScreen = lazy(() =>
 const LessonWorkspace = lazy(() =>
   import("./features/lesson/LessonWorkspace").then((module) => ({ default: module.LessonWorkspace })),
 );
+const ContinuousCourseScreen = lazy(() =>
+  import("./features/lesson/ContinuousCourseScreen").then((module) => ({ default: module.ContinuousCourseScreen })),
+);
 const MathPathScreen = lazy(() =>
   import("./features/paths/MathPathScreen").then((module) => ({ default: module.MathPathScreen })),
 );
@@ -404,6 +407,7 @@ function LearningAppShell({
     [activePath, completedLessonIds, pathLessons],
   );
   const progress = pathLessons.length > 0 ? Math.round((completedLessonIds.size / pathLessons.length) * 100) : 0;
+  const activePathIsContinuousCourse = activePath?.presentation === "continuous-course";
   const completedToday = useMemo(() => completedLevelsToday(progressByPath), [progressByPath]);
   const activeLessonIndex = activeLessonId ? pathLessons.findIndex((lesson) => lesson.id === activeLessonId) : -1;
   const activeLesson = activeLessonIndex >= 0 ? pathLessons[activeLessonIndex] : null;
@@ -422,13 +426,15 @@ function LearningAppShell({
       lesson: {
         ...initialDashboard.lesson,
         id: currentLesson?.id ?? initialDashboard.lesson.id,
-        eyebrow: "Ton parcours :",
-        title: currentLesson?.title ?? "Nouveau parcours",
-        remainingMinutes: currentLesson?.durationMinutes ?? 0,
-        ctaLabel: completedLessonIds.size === pathLessons.length ? "Revoir la leçon" : "Continuer le parcours",
+        eyebrow: activePathIsContinuousCourse ? "Ton cours :" : "Ton parcours :",
+        title: activePathIsContinuousCourse ? activePath?.title ?? "Nouveau cours" : currentLesson?.title ?? "Nouveau parcours",
+        remainingMinutes: activePathIsContinuousCourse ? activePath?.estimatedMinutes ?? 0 : currentLesson?.durationMinutes ?? 0,
+        ctaLabel: activePathIsContinuousCourse
+          ? "Ouvrir le cours complet"
+          : completedLessonIds.size === pathLessons.length ? "Revoir la leçon" : "Continuer le parcours",
       },
     }),
-    [completedLessonIds.size, completedToday, currentLesson, pathLessons.length, profile],
+    [activePath, activePathIsContinuousCourse, completedLessonIds.size, completedToday, currentLesson, pathLessons.length, profile],
   );
   const dashboardSyncIssue = useMemo(() => {
     const unavailable: string[] = [];
@@ -630,6 +636,21 @@ function LearningAppShell({
         <StoreScreen profile={profile} level={level} store={store} />
       ) : activeNavigation === "messages" ? (
         <MessagesScreen key={level.id} profile={profile} level={level} />
+      ) : activeNavigation === "paths" && selectedPath?.presentation === "continuous-course" ? (
+        <ContinuousCourseScreen
+          path={selectedPath}
+          level={level}
+          subject={subjects[selectedPath.subjectId]}
+          currentUser={{
+            id: user.id,
+            name: profile.name,
+            photoUrl: profile.photoUrl,
+            role: user.role,
+          }}
+          localOnly={localPreview}
+          focusedSectionId={activeLessonId ?? undefined}
+          onBackToLibrary={() => navigate({ navigation: "paths", subjectId: selectedPath.subjectId })}
+        />
       ) : activeNavigation === "paths" && selectedPath ? (
         <MathPathScreen
           path={selectedPath}
@@ -712,7 +733,7 @@ function LearningAppShell({
         />
       )}
 
-      {activeLesson && activePath && (
+      {activeLesson && activePath && activePath.presentation !== "continuous-course" && (
         <Suspense fallback={<main className="admin-loading" role="status">Chargement de la leçon…</main>}>
           <LessonWorkspace
             key={activeLesson.id}
