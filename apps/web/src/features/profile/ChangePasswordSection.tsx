@@ -72,7 +72,7 @@ export function ChangePasswordSection({ onPasswordChanged }: { onPasswordChanged
         <div>
           <p className="path-kicker">Sécurité</p>
           <h2>Changer mon mot de passe</h2>
-          <p>Choisis au moins 10 caractères, avec une majuscule, une minuscule et un chiffre.</p>
+          <p>Choisis-le librement : aucune majuscule, aucun chiffre ni symbole n’est imposé. Utilise simplement au moins 6 caractères.</p>
         </div>
       </div>
 
@@ -105,12 +105,13 @@ export function ChangePasswordSection({ onPasswordChanged }: { onPasswordChanged
             <LockKey size={19} />
             <input
               required
-              minLength={10}
+              minLength={6}
+              maxLength={72}
               type={showPassword ? "text" : "password"}
               autoComplete="new-password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              placeholder="10 caractères, majuscule et chiffre"
+              placeholder="Ton nouveau mot de passe, au format libre"
             />
           </span>
         </label>
@@ -121,7 +122,8 @@ export function ChangePasswordSection({ onPasswordChanged }: { onPasswordChanged
             <LockKey size={19} />
             <input
               required
-              minLength={10}
+              minLength={6}
+              maxLength={72}
               type={showPassword ? "text" : "password"}
               autoComplete="new-password"
               value={confirmation}

@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import type { FastifyInstance, FastifyReply } from "fastify";
 import { z } from "zod";
 import { database, publicUser, type UserRow, writeAuditLog } from "../database.js";
+import { passwordSchema } from "../passwordPolicy.js";
 import {
   clearRefreshCookie,
   createRefreshToken,
@@ -31,11 +32,6 @@ const validLevels = new Set([
   "seconde-a", "seconde-c", "premiere-a", "premiere-c", "premiere-d",
   "terminale-a", "terminale-c", "terminale-d",
 ]);
-
-const passwordSchema = z.string().min(10).max(128)
-  .regex(/[a-z]/, "Le mot de passe doit contenir une minuscule.")
-  .regex(/[A-Z]/, "Le mot de passe doit contenir une majuscule.")
-  .regex(/[0-9]/, "Le mot de passe doit contenir un chiffre.");
 
 const registerSchema = z.object({
   name: z.string().trim().min(2).max(80),
