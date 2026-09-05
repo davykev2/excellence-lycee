@@ -19,6 +19,7 @@ import type { AuthUser } from "../../domain/auth";
 import type { SchoolLevel, SubjectDefinition } from "../../domain/learning";
 import type { LearningLesson, LearningPath, LessonQuestion } from "../../domain/paths";
 import { getPathLessons } from "../paths/pathLessons";
+import { CoursePracticePanel } from "./CoursePracticePanel";
 import { LessonFeedbackPanel } from "./LessonFeedbackPanel";
 import { LessonInteractionPanel } from "./LessonWorkspace";
 
@@ -438,6 +439,8 @@ export function ContinuousCourseScreen({
                   </div>
                   {lesson.method.tip && <p className="course-reader-callout"><Lightbulb size={19} weight="duotone" aria-hidden="true" /><MathText>{lesson.method.tip}</MathText></p>}
                 </section>
+
+                <CoursePracticePanel lesson={lesson} />
 
                 {lesson.source && (
                   <aside className="course-reader-source">

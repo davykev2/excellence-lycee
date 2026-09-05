@@ -1,9 +1,11 @@
 import type {
+  CourseActivity,
   LearningLesson,
   LearningPath,
   LessonInteraction,
   LessonKind,
   LessonQuestion,
+  LessonSourceMetadata,
   TimelineInteractionItem,
 } from "../domain/paths";
 
@@ -19,6 +21,9 @@ export interface PhilosophySectionSeed {
   interaction?: LessonInteraction;
   /** Exercices supplémentaires tirés du document, en plus du contrôle `check`. */
   extraQuestions?: LessonQuestion[];
+  /** Ateliers du lecteur continu, sans note et indépendants du registre XP. */
+  courseActivities?: CourseActivity[];
+  source?: LessonSourceMetadata;
   keyPoint: string;
   example: string;
   mapTitle: string;
@@ -46,10 +51,13 @@ export interface PhilosophyMissionSeed {
   interaction?: LessonInteraction;
   /** Consignes supplémentaires du document. */
   extraQuestions?: LessonQuestion[];
+  courseActivities?: CourseActivity[];
+  source?: LessonSourceMetadata;
 }
 
 export interface PhilosophyCourseSeed {
   id: string;
+  presentation?: LearningPath["presentation"];
   chapterNumber: number;
   themeNumber: number;
   themeTitle: string;
@@ -57,6 +65,9 @@ export interface PhilosophyCourseSeed {
   description: string;
   centralQuestion: string;
   memorySentence: string;
+  overviewBodyMarkdown?: string;
+  overviewActivities?: CourseActivity[];
+  overviewSource?: LessonSourceMetadata;
   sections: [PhilosophySectionSeed, PhilosophySectionSeed, PhilosophySectionSeed, PhilosophySectionSeed];
   mission: PhilosophyMissionSeed;
 }
@@ -119,6 +130,8 @@ function sectionLesson(course: PhilosophyCourseSeed, section: PhilosophySectionS
         explanation: section.keyPoint,
       },
     ],
+    courseActivities: section.courseActivities,
+    source: section.source,
   };
 }
 
@@ -134,6 +147,7 @@ function overviewLesson(course: PhilosophyCourseSeed): LearningLesson {
       eyebrow: "Niveau 1 • Vue d’ensemble",
       title: course.centralQuestion,
       explanation: `${course.description} La leçon progresse en quatre étapes : ${course.sections.map((section) => section.title).join(" ; ")}.`,
+      bodyMarkdown: course.overviewBodyMarkdown,
       notation: course.memorySentence,
       example: "Au BAC, commence toujours par transformer le thème en problème, puis organise les réponses possibles en axes argumentés.",
     },
@@ -182,6 +196,8 @@ function overviewLesson(course: PhilosophyCourseSeed): LearningLesson {
         explanation: "Les auteurs servent à soutenir un raisonnement déjà compris ; ils ne remplacent pas l’analyse.",
       },
     ],
+    courseActivities: course.overviewActivities,
+    source: course.overviewSource,
   };
 }
 
@@ -229,6 +245,8 @@ function missionLesson(course: PhilosophyCourseSeed): LearningLesson {
     },
     question: mission.questions[0],
     questions: [...mission.questions, ...(mission.extraQuestions ?? [])],
+    courseActivities: mission.courseActivities,
+    source: mission.source,
   };
 }
 
@@ -237,6 +255,7 @@ export function createPhilosophyPath(course: PhilosophyCourseSeed): LearningPath
   const lessons = [overviewLesson(course), ...contentLessons, missionLesson(course)];
   return {
     id: course.id,
+    presentation: course.presentation,
     subjectId: "philosophy",
     levelIds: ["terminale-a", "terminale-c", "terminale-d"],
     curriculumLabel: "Programme ivoirien • Terminale • Côte d’Ivoire École Numérique",
@@ -253,7 +272,9 @@ export function createPhilosophyPath(course: PhilosophyCourseSeed): LearningPath
     modules: [{
       id: `${course.id}-mastery`,
       title: `Maîtriser « ${course.title} »`,
-      description: "Cinq niveaux courts pour comprendre et raisonner, puis une mission finale inspirée des évaluations du cours officiel.",
+      description: course.presentation === "continuous-course"
+        ? "Un cours continu en six parties, avec exemples expliqués, ateliers non notés et corrigés guidés."
+        : "Cinq niveaux courts pour comprendre et raisonner, puis une mission finale inspirée des évaluations du cours officiel.",
       lessons,
     }],
   };

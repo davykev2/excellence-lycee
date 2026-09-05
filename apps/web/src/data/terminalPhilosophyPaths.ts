@@ -11,6 +11,7 @@ const q = (prompt: string, answer: string, wrong1: string, wrong2: string, wrong
 const courses: PhilosophyCourseSeed[] = [
   {
     id: "terminale-philo-l1-dissertation",
+    presentation: "continuous-course",
     chapterNumber: 1,
     themeNumber: 1,
     themeTitle: "La méthodologie",
@@ -18,6 +19,52 @@ const courses: PhilosophyCourseSeed[] = [
     description: "Comprendre un sujet, en dégager le problème, puis construire une introduction, une argumentation et une conclusion.",
     centralQuestion: "Comment passer d’un sujet donné à une copie argumentée qui résout un problème ?",
     memorySentence: "Étudier les mots, reformuler, problématiser, argumenter avec des références, puis conclure.",
+    overviewBodyMarkdown: String.raw`## La dissertation, du sujet à la réponse
+
+La dissertation philosophique n’est ni une récitation de cours ni une suite d’opinions. Elle part d’un **sujet**, en fait apparaître une **difficulté centrale**, puis construit une réponse argumentée.
+
+| Au brouillon | Dans la copie |
+|---|---|
+| Étudier les termes essentiels | Rédiger une introduction qui fait apparaître le problème |
+| Reformuler sans changer le sens | Développer des axes soutenus par des arguments et des références |
+| Formuler le problème et ses aspects | Conclure par un bilan et une réponse claire |
+
+## Le fil directeur
+
+1. **Étude parcellaire** : définir les mots importants selon le contexte.
+2. **Reformulation** : expliciter le sujet sans le trahir.
+3. **Problématisation** : faire apparaître la tension, puis les aspects.
+4. **Introduction** : amorce, problème, aspects.
+5. **Développement** : axes, arguments, références et transitions.
+6. **Conclusion** : bilan, réponse et, si elle est pertinente, ouverture.
+
+> **Principe essentiel.** Chaque étape prépare la suivante. Si la reformulation déforme le sujet, le problème, le plan et la conclusion seront eux aussi hors sujet.`,
+    overviewActivities: [
+      {
+        id: "dissertation-complete-sequence",
+        kind: "ordering",
+        title: "Reconstruis le chemin complet d’une dissertation",
+        instruction: "Les six opérations sont mélangées. Replace-les dans l’ordre logique à l’aide des flèches.",
+        sourceLabel: "Pages 1–2 · synthèse du cours",
+        items: [
+          { id: "conclusion", label: "Conclusion", detail: "Faire le bilan et répondre clairement au problème." },
+          { id: "study", label: "Étude parcellaire", detail: "Définir les mots et expressions essentiels selon le contexte." },
+          { id: "development", label: "Développement", detail: "Défendre les axes par des arguments, références et transitions." },
+          { id: "problematisation", label: "Problématisation", detail: "Dégager la difficulté centrale et les aspects qu’elle soulève." },
+          { id: "reformulation", label: "Reformulation", detail: "Réécrire le sujet plus explicitement sans en altérer le sens." },
+          { id: "introduction", label: "Introduction", detail: "Enchaîner amorce, problème et aspects dans un même mouvement." },
+        ],
+        correctOrder: ["study", "reformulation", "problematisation", "introduction", "development", "conclusion"],
+        explanation: "Le brouillon sécurise le sens avant la rédaction : comprendre, problématiser, introduire, argumenter, puis répondre.",
+      },
+    ],
+    overviewSource: {
+      documentTitle: "Tle Philosophie — Leçon 1 : La dissertation philosophique",
+      pages: "1–2",
+      section: "Présentation et architecture générale",
+      fidelity: "faithful-corrected",
+      corrections: ["La situation d’apprentissage de la page 1 est volontairement ignorée conformément au format du cours continu."],
+    },
     sections: [
       {
         id: "study-subject",
@@ -59,9 +106,43 @@ En remplaçant chaque terme par sa définition, le sujet devient :
 
 Parmi ces trois propositions pour « Doit-on condamner le progrès technique ? » :
 
-- « L’essor de la technique doit-il susciter la crainte ? » — **oriente** vers la crainte, donc infidèle ;
+- « L’essor de la technique doit-il susciter la crainte ? » — conserve une orientation négative, mais remplace **condamner** par **craindre** ;
 - « A-t-on des raisons de se féliciter des prouesses de la technique ? » — **inverse** le sens ;
-- « Est-il nécessaire de craindre les avancées réalisées par l’ensemble des procédés scientifiques employés dans l’investigation et la transformation de la nature ? » — **développe chaque terme** sans trancher : c’est la bonne.`,
+- « Est-il nécessaire de craindre les avancées réalisées par l’ensemble des procédés scientifiques employés dans l’investigation et la transformation de la nature ? » — explicite mieux **la technique**, mais remplace encore **condamner** par **craindre**.
+
+> **Proposition pédagogique Excellence.** La page 4 ne donne pas de corrigé séparé pour cette activité. La reformulation la plus strictement fidèle reste celle du premier corrigé : **« Faut-il blâmer les avancées réalisées par la technique ? »**`,
+        courseActivities: [
+          {
+            id: "technical-progress-context-sort",
+            kind: "categorize",
+            title: "Définition, reformulation fidèle ou déplacement du sujet ?",
+            instruction: "Classe chaque formulation selon sa fonction. Lis ensuite la justification : les nuances de vocabulaire comptent.",
+            sourceLabel: "Pages 1 et 4 · activité 3 — analyse pédagogique Excellence",
+            groups: [
+              { id: "definition", label: "Définition contextuelle", description: "Explique un terme du sujet." },
+              { id: "faithful", label: "Reformulation fidèle", description: "Explicite l’ensemble sans orienter la réponse." },
+              { id: "shift", label: "Déplacement ou inversion", description: "Change la question initiale." },
+            ],
+            items: [
+              { id: "must", label: "« Doit-on » : a-t-on le droit, est-il normal, faut-il…", correctGroupId: "definition", explanation: "Cette expression précise la modalité normative du sujet." },
+              { id: "condemn", label: "« Condamner » : blâmer, rejeter, désapprouver.", correctGroupId: "definition", explanation: "Le sens moral est retenu ici, pas le sens judiciaire." },
+              { id: "progress", label: "« Progrès technique » : avancées et exploits réalisés par la technique.", correctGroupId: "definition", explanation: "La définition dépend du contexte précis du sujet." },
+              { id: "faithful-rewrite", label: "« Faut-il blâmer les avancées réalisées par la technique ? »", correctGroupId: "faithful", explanation: "Chaque terme est remplacé par une expression équivalente, sans réponse anticipée." },
+              { id: "fear-rewrite", label: "« L’essor de la technique doit-il susciter la crainte ? »", correctGroupId: "shift", explanation: "Craindre une conséquence n’est pas exactement condamner moralement un progrès." },
+              { id: "celebrate-rewrite", label: "« A-t-on des raisons de se féliciter des prouesses de la technique ? »", correctGroupId: "shift", explanation: "La formulation inverse l’orientation du verbe « condamner »." },
+            ],
+          },
+        ],
+        source: {
+          documentTitle: "Tle Philosophie — Leçon 1 : La dissertation philosophique",
+          pages: "1 et 4",
+          section: "Compréhension du sujet et activités d’application 1 à 3",
+          fidelity: "faithful-corrected",
+          corrections: [
+            "L’activité 2 ne comporte pas de corrigé imprimé.",
+            "L’activité 3 ne fournit pas de corrigé séparé ; son analyse interactive est explicitement présentée comme une proposition pédagogique Excellence.",
+          ],
+        },
         keyPoint: "Comprendre un sujet, c’est définir ses mots essentiels dans leur contexte, puis le réécrire plus clairement sans en changer le sens.",
         example: "« Doit-on condamner le progrès technique ? » devient « Faut-il blâmer les avancées réalisées par la technique ? »",
         mapTitle: "Les deux étapes de la phase préparatoire",
@@ -121,6 +202,59 @@ Sujet : **« Il faut plaindre celui qui vit en société. »**
 > **Astuce d’écriture.** Le second aspect commence presque toujours par un mot d’opposition : « toutefois », « cependant », « ne… pas au contraire ». C’est cette bascule qui prouve que tu as vu la tension.
 
 > **Erreur fréquente.** Recopier le sujet sous forme de question n’est pas problématiser. « Doit-on condamner le progrès technique ? » n’est pas un problème : c’est encore le sujet.`,
+        courseActivities: [
+          {
+            id: "technical-progress-problem-builder",
+            kind: "guided-writing",
+            title: "Fais apparaître la tension du sujet",
+            instruction: "À partir de « Doit-on condamner le progrès technique ? », écris le problème puis deux aspects réellement opposés.",
+            sourceLabel: "Pages 1, 2 et 4 · problématisation du progrès technique",
+            prompts: [
+              {
+                id: "problem",
+                label: "Le problème central",
+                hint: "Ne recopie pas le sujet : révèle la difficulté.",
+                placeholder: "Exemple de départ : La technique est-elle… ?",
+                rows: 3,
+              },
+              {
+                id: "aspect-one",
+                label: "Aspect 1",
+                hint: "Interroge les bienfaits ou la puissance de la technique.",
+                placeholder: "En quoi le progrès technique… ?",
+                rows: 3,
+              },
+              {
+                id: "aspect-two",
+                label: "Aspect 2",
+                hint: "Fais apparaître la thèse opposée avec une charnière.",
+                placeholder: "Toutefois, le progrès technique ne… ?",
+                rows: 3,
+              },
+            ],
+            criteria: [
+              { id: "central-difficulty", label: "J’ai formulé une difficulté centrale", hint: "Le problème dépasse le simple recopiage du sujet." },
+              { id: "two-sides", label: "Mes deux aspects s’opposent réellement", hint: "L’un ouvre la défense, l’autre l’objection." },
+              { id: "question-form", label: "Mes aspects sont des questions", hint: "Ils annoncent les axes sans donner déjà la conclusion." },
+              { id: "same-topic", label: "Je reste fidèle au progrès technique", hint: "Je n’ai pas remplacé le sujet par une autre question." },
+            ],
+            modelTitle: "Une problématisation cohérente",
+            modelMarkdown: String.raw`**Problème :** La technique est-elle nuisible ?
+
+**Aspect 1 :** En quoi le progrès technique est-il un facteur de développement ?
+
+**Aspect 2 :** Toutefois, le progrès technique ne suscite-t-il pas des inquiétudes ?
+
+Les pages 2 et 4 inversent l’ordre de ces deux aspects. Les deux ordres sont recevables si l’introduction et le développement restent cohérents du début à la fin.`,
+          },
+        ],
+        source: {
+          documentTitle: "Tle Philosophie — Leçon 1 : La dissertation philosophique",
+          pages: "1–4",
+          section: "Problématisation et applications sur le progrès technique et la vie en société",
+          fidelity: "faithful-corrected",
+          corrections: ["Les pages 2 et 4 présentent les deux aspects du progrès technique dans un ordre inverse ; aucun ordre unique n’est imposé si la copie reste cohérente."],
+        },
         keyPoint: "Le problème est la difficulté centrale née d’une contradiction ; les aspects sont les questions qu’il soulève et annoncent les axes.",
         example: "Pour « Doit-on condamner le progrès technique ? », le problème est : la technique est-elle nuisible ?",
         mapTitle: "De la reformulation aux axes",
@@ -165,6 +299,58 @@ Sujet : **« Doit-on condamner le progrès technique ? »**
 > **Ce qu’il faut observer.** L’amorce part d’un constat partagé, jamais d’une généralité creuse du type « Depuis la nuit des temps ». Le mot « **Malheureusement** » fait basculer vers la difficulté : c’est la charnière qui fait naître le problème. Enfin, « **N’est-elle pas au contraire** » ouvre le second axe.
 
 > **Erreur fréquente.** Annoncer le plan (« Nous verrons d’abord… puis… ») n’est **pas** annoncer les aspects. Les aspects sont des **questions**, pas un sommaire.`,
+        courseActivities: [
+          {
+            id: "technical-progress-introduction-order",
+            kind: "ordering",
+            title: "Remets l’introduction modèle dans l’ordre",
+            instruction: "Déplace les quatre fragments pour reconstruire le mouvement du paragraphe, de l’entrée dans le sujet jusqu’aux aspects.",
+            sourceLabel: "Page 2 · activité d’application corrigée",
+            items: [
+              { id: "aspects", label: "Les aspects", detail: "« Dans quelle mesure la puissance technique constitue-t-elle une menace ? N’est-elle pas au contraire un facteur de développement ? »" },
+              { id: "amorce", label: "L’amorce", detail: "« L’expérience quotidienne nous révèle le progrès vertigineux des sciences et techniques… »" },
+              { id: "problem", label: "Le problème", detail: "« Dès lors, doit-on souscrire à l’idée selon laquelle la technique est nuisible ? »" },
+              { id: "hinge", label: "La charnière", detail: "« Malheureusement, cette évolution de la technoscience s’accompagne souvent d’une réelle menace… »" },
+            ],
+            correctOrder: ["amorce", "hinge", "problem", "aspects"],
+            explanation: "L’amorce installe le thème, la charnière révèle la difficulté, le problème la formule et les aspects ouvrent les axes.",
+          },
+          {
+            id: "technical-progress-introduction-draft",
+            kind: "guided-writing",
+            title: "Rédige ta propre introduction",
+            instruction: "Écris un seul paragraphe pour le sujet « Doit-on condamner le progrès technique ? », puis compare sa structure au modèle.",
+            sourceLabel: "Page 2 · corrigé de l’activité d’application",
+            prompts: [
+              {
+                id: "introduction",
+                label: "Mon introduction complète",
+                hint: "Amorce concrète → charnière → problème → deux aspects interrogatifs.",
+                placeholder: "Pars d’un constat précis sur la technique, fais apparaître la difficulté, puis pose le problème et ses deux aspects…",
+                rows: 8,
+              },
+            ],
+            criteria: [
+              { id: "grounded-opening", label: "Mon amorce est concrète", hint: "Elle entre dans le sujet sans formule vague du type « depuis la nuit des temps »." },
+              { id: "hinge", label: "Une charnière fait apparaître la difficulté", hint: "Par exemple : pourtant, cependant, malheureusement." },
+              { id: "problem", label: "Le problème est explicitement posé", hint: "Le correcteur comprend immédiatement la tension." },
+              { id: "aspects", label: "Deux aspects opposés terminent le paragraphe", hint: "Ils sont formulés comme des questions, pas comme un sommaire." },
+            ],
+            modelTitle: "Introduction modèle annotée",
+            modelMarkdown: String.raw`**Amorce.** L’expérience quotidienne nous révèle le progrès vertigineux des sciences et techniques dans presque toutes les sphères de la vie. Et cela semble confirmer l’idée selon laquelle l’avenir appartient à la science et à la technique.
+
+**Charnière et problème.** Malheureusement, cette évolution de la technoscience s’accompagne souvent d’une réelle menace pour l’humanité entière. Dès lors, doit-on souscrire à l’idée selon laquelle la technique est nuisible ?
+
+**Aspects.** Dans quelle mesure la puissance technique constitue-t-elle une menace ? N’est-elle pas au contraire un facteur de développement ?`,
+          },
+        ],
+        source: {
+          documentTitle: "Tle Philosophie — Leçon 1 : La dissertation philosophique",
+          pages: "2",
+          section: "Introduction et activité d’application corrigée",
+          fidelity: "faithful",
+          corrections: [],
+        },
         keyPoint: "L’introduction enchaîne trois composantes : une amorce, le problème, puis les aspects formulés en questions.",
         example: "« Malheureusement… Dès lors, doit-on souscrire à l’idée selon laquelle la technique est nuisible ? » : la charnière fait naître le problème.",
         mapTitle: "Les trois composantes de l’introduction",
@@ -231,6 +417,38 @@ La conclusion consiste à **répondre de façon claire et précise au problème 
 | **L’ouverture** | facultative : élargir vers une question voisine |
 
 > **Erreur fréquente.** Une conclusion qui ne répond pas au problème posé en introduction, ou qui introduit un argument nouveau, invalide tout le devoir. Le problème ouvert en introduction doit être **refermé** ici.`,
+        courseActivities: [
+          {
+            id: "development-conclusion-sort",
+            kind: "categorize",
+            title: "Que faut-il placer dans le développement et dans la conclusion ?",
+            instruction: "Classe chaque élément. La troisième catégorie repère ce qui affaiblit une copie.",
+            sourceLabel: "Pages 2–3 · développement corrigé sur la vie en société",
+            groups: [
+              { id: "development", label: "Développement", description: "Résout le problème par des axes argumentés." },
+              { id: "conclusion", label: "Conclusion", description: "Ferme le problème sans relancer le devoir." },
+              { id: "mistake", label: "Erreur de méthode", description: "Élément à éviter ou à corriger." },
+            ],
+            items: [
+              { id: "axis", label: "Une thèse partielle qui répond à un aspect du problème.", correctGroupId: "development", explanation: "C’est l’axe : il structure une partie entière." },
+              { id: "argument", label: "Une raison précise qui justifie l’axe.", correctGroupId: "development", explanation: "L’argument explique pourquoi la thèse tient." },
+              { id: "reference", label: "Une référence expliquée et reliée à l’argument.", correctGroupId: "development", explanation: "La citation sert le raisonnement ; elle ne le remplace pas." },
+              { id: "transition", label: "Un passage logique vers l’argument ou l’axe suivant.", correctGroupId: "development", explanation: "La transition empêche la simple juxtaposition." },
+              { id: "summary", label: "Un bref bilan du chemin parcouru.", correctGroupId: "conclusion", explanation: "Le bilan prépare la réponse finale." },
+              { id: "answer", label: "Une réponse claire au problème posé en introduction.", correctGroupId: "conclusion", explanation: "C’est l’élément obligatoire de la conclusion." },
+              { id: "opening", label: "Une question voisine, seulement si elle prolonge réellement la réflexion.", correctGroupId: "conclusion", explanation: "L’ouverture est possible, mais jamais obligatoire." },
+              { id: "new-argument", label: "Un nouvel argument important qui n’a jamais été développé.", correctGroupId: "mistake", explanation: "La conclusion ne doit pas introduire une preuve nouvelle." },
+              { id: "floating-quote", label: "Une citation célèbre posée sans expliquer ce qu’elle prouve.", correctGroupId: "mistake", explanation: "Une référence plaquée ne remplace pas l’argument." },
+            ],
+          },
+        ],
+        source: {
+          documentTitle: "Tle Philosophie — Leçon 1 : La dissertation philosophique",
+          pages: "2–3",
+          section: "Développement, conclusion et évaluation sur la vie en société",
+          fidelity: "faithful",
+          corrections: [],
+        },
         keyPoint: "Un développement enchaîne axe, argument et référence, relié par des transitions ; la conclusion fait le bilan, répond au problème, puis peut ouvrir.",
         example: "Sartre « L’enfer c’est les autres » et Garaudy « L’enfer, c’est l’absence des autres » se répondent terme à terme.",
         interaction: {
@@ -291,7 +509,11 @@ La conclusion consiste à **répondre de façon claire et précise au problème 
 
 ### II. Problème à analyser
 
-> **L’égalité entre les hommes est-elle une illusion ?**
+> **Formulation du document :** L’égalité entre les hommes est-elle une illusion ?
+
+Cette formulation déplace légèrement le sujet vers l’égalité. Pour rester au plus près de la question posée, on peut aussi écrire :
+
+> **Formulation directe proposée par Excellence :** La diversité culturelle empêche-t-elle l’unité entre les peuples ?
 
 ### III. Axes d’analyse et références
 
@@ -319,7 +541,116 @@ La conclusion consiste à **répondre de façon claire et précise au problème 
 
 > **Emmanuel KANT**, *Fondements de la métaphysique des mœurs* : « Agis de telle sorte que tu traites l’humanité, aussi bien dans ta personne que dans la personne de tout autre, toujours en même temps comme une fin, et jamais simplement comme un moyen. »
 
-> **Ce que ce corrigé enseigne.** L’axe 1 n’est pas une erreur qu’on corrige ensuite : c’est une thèse **sérieusement défendue**, avec ses auteurs. La force d’une dissertation vient de ce que l’on donne à l’adversaire ses meilleures armes avant de lui répondre.`,
+> **Ce que ce corrigé enseigne.** L’axe 1 n’est pas une erreur qu’on corrige ensuite : c’est une thèse **sérieusement défendue**, avec ses auteurs. La force d’une dissertation vient de ce que l’on donne à l’adversaire ses meilleures armes avant de lui répondre.
+
+---
+
+## Deuxième dossier corrigé — « Le travail humanise-t-il ? »
+
+### I. Définition des termes essentiels
+
+| Terme | Définition dans le sujet |
+|---|---|
+| **Travail** | activité consciente de transformation de la nature et de l’homme, et activité de production de biens utiles |
+| **Humanise** | rend humain, confère dignité et valeur, soustrait l’homme à certaines tendances primaires |
+
+### II. Problème à analyser
+
+> Le travail, activité consciente de production de biens utiles, soustrait-il l’homme à l’animalité ?
+
+### III. Axes et références possibles
+
+#### Axe 1 — Le travail est un facteur d’humanisation
+
+**Argument 1.** Parce qu’il est une activité consciente, le travail transforme la nature et permet à l’être humain de développer ses propres facultés.
+
+> **Karl MARX**, *Le Capital* : « En même temps qu’il agit par ce mouvement sur la nature extérieure et la modifie, il modifie sa propre nature et développe les facultés qui y sommeillent. »
+
+**Argument 2.** Le travail produit les biens nécessaires, satisfait les besoins et éloigne l’être humain de l’oisiveté.
+
+> **VOLTAIRE**, *Candide* : « Le travail éloigne de nous trois grands maux : l’ennui, le vice et le besoin. »
+
+#### Axe 2 — Dans certaines formes, le travail aliène et déshumanise
+
+**Argument 1.** Le machinisme et la division du travail peuvent réduire le travailleur à une fonction et lui faire perdre sa dignité.
+
+> **Karl MARX**, *Manuscrits de 1844* : « Le travail produit l’ouvrier en tant que marchandise. »
+
+**Argument 2.** Le travail peut être pénible et dégrader le corps aussi bien que l’esprit.
+
+> **PLATON**, *La République* : « Tout ce qui est artisanal et manœuvrier porte honte et déforme l’âme en même temps que le corps. »
+
+#### Synthèse possible — Le travail reste une activité majeure de formation
+
+Malgré ses formes aliénantes, le travail peut socialiser l’individu et le former physiquement, intellectuellement et moralement. Cette troisième partie est une **possibilité de synthèse**, non une obligation mécanique.
+
+> **Emmanuel MOUNIER**, *Le Personnalisme* : « Tout travail travaille à faire l’homme. »`,
+      courseActivities: [
+        {
+          id: "cultural-plurality-guided-plan",
+          kind: "guided-writing",
+          title: "Construis le plan du sujet sur la pluralité des cultures",
+          instruction: "Rédige les quatre éléments du raisonnement avant de comparer avec le corrigé du document.",
+          sourceLabel: "Pages 5–6 · situation d’évaluation 1",
+          prompts: [
+            { id: "problem", label: "Problème", hint: "Fais apparaître l’opposition entre diversité et unité.", placeholder: "La diversité culturelle… ?", rows: 3 },
+            { id: "axis-one", label: "Axe 1", hint: "Explique comment les différences peuvent diviser.", placeholder: "Thèse, un argument et une référence pertinente…", rows: 5 },
+            { id: "axis-two", label: "Axe 2", hint: "Montre comment la pluralité peut aussi rapprocher.", placeholder: "Thèse, un argument et une référence pertinente…", rows: 5 },
+            { id: "answer", label: "Réponse finale", hint: "Réponds sans effacer la difficulté étudiée.", placeholder: "En définitive, la diversité culturelle…", rows: 4 },
+          ],
+          criteria: [
+            { id: "faithful-problem", label: "Mon problème reste fidèle au rapprochement des peuples", hint: "Je n’ai pas remplacé le sujet par une question voisine." },
+            { id: "opposed-axes", label: "Mes axes défendent deux positions opposées", hint: "Le second ne répète pas le premier." },
+            { id: "explained-reference", label: "Chaque référence est expliquée", hint: "Je dis précisément ce qu’elle prouve." },
+            { id: "nuanced-answer", label: "Ma réponse tranche tout en restant nuancée", hint: "Elle tient compte des tensions analysées." },
+          ],
+          modelTitle: "Plan guidé — pluralité des cultures",
+          modelMarkdown: String.raw`**Problème direct :** La diversité culturelle empêche-t-elle l’unité entre les peuples ?
+
+**Axe 1 — Elle peut diviser.** Les différences nourrissent parfois le rejet et l’ethnocentrisme. Lévi-Strauss décrit le réflexe qui consiste à répudier les formes culturelles éloignées des nôtres.
+
+**Axe 2 — Elle peut rapprocher.** Le brassage enrichit les peuples et le respect de chaque personne est une exigence morale. Saint-Exupéry écrit : « Si tu diffères de moi, loin de me léser, tu m’enrichis. »
+
+**Réponse :** La pluralité n’assure pas automatiquement l’unité, mais elle devient une force de rapprochement lorsqu’elle est accompagnée de dialogue et de respect.`,
+        },
+        {
+          id: "work-humanization-guided-plan",
+          kind: "guided-writing",
+          title: "Traite le second sujet : « Le travail humanise-t-il ? »",
+          instruction: "Le document fournit deux axes et une synthèse possible. Construis ton propre chemin avant d’ouvrir le corrigé.",
+          sourceLabel: "Pages 6–7 · situation d’évaluation 2",
+          prompts: [
+            { id: "problem", label: "Problème", hint: "Interroge la capacité du travail à former l’être humain.", placeholder: "Le travail, activité consciente… ?", rows: 3 },
+            { id: "axis-one", label: "Axe 1", hint: "Montre ce que le travail développe ou produit.", placeholder: "Thèse, argument, référence…", rows: 5 },
+            { id: "axis-two", label: "Axe 2", hint: "Montre comment certaines formes de travail peuvent aliéner.", placeholder: "Thèse, argument, référence…", rows: 5 },
+            { id: "answer", label: "Réponse ou synthèse", hint: "Distingue le travail de ses formes dégradantes.", placeholder: "Le travail peut humaniser à condition que…", rows: 4 },
+          ],
+          criteria: [
+            { id: "defined-work", label: "J’ai défini le travail dans le contexte", hint: "Activité consciente, transformation et production." },
+            { id: "conditions", label: "Je distingue le travail de ses conditions d’exercice", hint: "Le problème ne reçoit pas une réponse simplement oui/non." },
+            { id: "author-links", label: "Marx, Voltaire ou Mounier soutiennent un argument précis", hint: "Les auteurs ne sont pas seulement cités." },
+            { id: "optional-synthesis", label: "Ma synthèse reste justifiée", hint: "Une troisième partie n’est jamais obligatoire par principe." },
+          ],
+          modelTitle: "Plan guidé — travail et humanisation",
+          modelMarkdown: String.raw`**Problème :** Le travail, activité consciente de production de biens utiles, soustrait-il l’homme à l’animalité ?
+
+**Axe 1 — Le travail humanise.** Il transforme la nature, développe les facultés et répond aux besoins. Marx l’explique dans *Le Capital* ; Voltaire ajoute que le travail éloigne « l’ennui, le vice et le besoin ».
+
+**Axe 2 — Certaines formes déshumanisent.** Le machinisme, la division du travail ou la pénibilité peuvent transformer le travailleur en marchandise. C’est la critique de Marx dans les *Manuscrits de 1844*.
+
+**Synthèse possible :** Le travail n’humanise pas par sa seule existence ; il le fait lorsqu’il demeure une activité consciente, digne et formatrice. Mounier résume cette possibilité : « Tout travail travaille à faire l’homme. »`,
+        },
+      ],
+      source: {
+        documentTitle: "Tle Philosophie — Leçon 1 : La dissertation philosophique",
+        pages: "5–7",
+        section: "Situations d’évaluation sur la pluralité culturelle et le travail",
+        fidelity: "faithful-corrected",
+        corrections: [
+          "Le problème proposé pour la pluralité déplace légèrement le sujet vers l’égalité ; une formulation directe est ajoutée et clairement attribuée à Excellence.",
+          "Le troisième axe sur le travail est présenté comme une synthèse possible, jamais comme une obligation de plan en trois parties.",
+        ],
+      },
       plan: [
         { label: "Définir les termes", shortLabel: "Définir", detail: "Pluralité des cultures, être un obstacle à, rapprochement des peuples : chaque expression est définie dans le contexte du sujet." },
         { label: "Formuler le problème", shortLabel: "Problème", detail: "L’égalité entre les hommes est-elle une illusion ?" },

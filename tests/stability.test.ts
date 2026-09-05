@@ -135,6 +135,45 @@ test("la leçon Limites et continuité adopte le cours continu sans casser ses i
   assert.doesNotMatch(readerSource, /J[’']ai compris|niveau suivant|Gagner[^\n]*XP|Débloquer/i);
 });
 
+test("la dissertation philosophique reste un cours continu avec des ateliers non notés", () => {
+  const path = learningPaths.find((item) => item.id === "terminale-philo-l1-dissertation");
+  assert.ok(path, "Le parcours Dissertation philosophique doit rester publié.");
+  assert.equal(path.presentation, "continuous-course");
+  assert.deepEqual(path.levelIds, ["terminale-a", "terminale-c", "terminale-d"]);
+
+  const lessons = path.modules.flatMap((module) => module.lessons);
+  assert.deepEqual(
+    lessons.map((lesson) => lesson.id),
+    [
+      "terminale-philo-l1-dissertation-overview",
+      "terminale-philo-l1-dissertation-study-subject",
+      "terminale-philo-l1-dissertation-problematisation",
+      "terminale-philo-l1-dissertation-introduction",
+      "terminale-philo-l1-dissertation-development-conclusion",
+      "terminale-philo-l1-dissertation-mission-finale",
+    ],
+    "Les liens profonds et progressions historiques de Philosophie L1 doivent rester stables.",
+  );
+  assert.deepEqual(lessons.map((lesson) => lesson.xp), [1080, 1490, 1620, 1760, 1890, 2160]);
+  assert.equal(
+    lessons.reduce((total, lesson) => total + lesson.questions.length, 0),
+    33,
+    "Les ateliers de cours ne doivent pas gonfler le compteur des exercices évaluables.",
+  );
+
+  const activities = lessons.flatMap((lesson) => lesson.courseActivities ?? []);
+  assert.equal(activities.length, 8);
+  assert.deepEqual(
+    [...new Set(activities.map((activity) => activity.kind))].sort(),
+    ["categorize", "guided-writing", "ordering"],
+  );
+  assert.ok(lessons.every((lesson) => lesson.source?.pages), "Chaque partie doit citer ses pages sources.");
+
+  const readerSource = readFileSync(resolve(projectRoot, "apps/web/src/features/lesson/ContinuousCourseScreen.tsx"), "utf8");
+  assert.match(readerSource, /CoursePracticePanel/);
+  assert.doesNotMatch(readerSource, /J[’']ai compris|niveau suivant|Gagner[^\n]*XP|Débloquer/i);
+});
+
 test("le chargement à la demande restitue exactement les parcours de chaque classe", async () => {
   clearLearningPathBundleCacheForTests();
 

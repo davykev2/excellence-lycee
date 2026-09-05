@@ -205,6 +205,79 @@ export interface LessonMethod {
   tip?: string;
 }
 
+interface CourseActivityBase {
+  /** Identifiant stable dans la partie du cours ; il ne participe jamais au registre XP. */
+  id: string;
+  title: string;
+  instruction: string;
+  sourceLabel?: string;
+}
+
+export interface CourseActivityGroup {
+  id: string;
+  label: string;
+  description?: string;
+}
+
+export interface CourseCategorizeItem {
+  id: string;
+  label: string;
+  correctGroupId: string;
+  explanation: string;
+}
+
+/** Classement objectif, auto-corrigé sans note ni incidence sur la progression. */
+export interface CourseCategorizeActivity extends CourseActivityBase {
+  kind: "categorize";
+  groups: [CourseActivityGroup, CourseActivityGroup, ...CourseActivityGroup[]];
+  items: [CourseCategorizeItem, CourseCategorizeItem, ...CourseCategorizeItem[]];
+}
+
+export interface CourseOrderingItem {
+  id: string;
+  label: string;
+  detail: string;
+}
+
+/** Remise en ordre accessible au clavier grâce à des boutons Monter/Descendre. */
+export interface CourseOrderingActivity extends CourseActivityBase {
+  kind: "ordering";
+  items: [CourseOrderingItem, CourseOrderingItem, ...CourseOrderingItem[]];
+  correctOrder: [string, string, ...string[]];
+  explanation: string;
+}
+
+export interface CourseWritingPrompt {
+  id: string;
+  label: string;
+  placeholder: string;
+  hint?: string;
+  rows?: number;
+}
+
+export interface CourseWritingCriterion {
+  id: string;
+  label: string;
+  hint: string;
+}
+
+/**
+ * Production libre guidée : l'élève compare lui-même son brouillon à un modèle.
+ * Le moteur ne prononce aucun verdict et ne calcule aucun score sur une rédaction.
+ */
+export interface CourseGuidedWritingActivity extends CourseActivityBase {
+  kind: "guided-writing";
+  prompts: [CourseWritingPrompt, ...CourseWritingPrompt[]];
+  criteria: [CourseWritingCriterion, ...CourseWritingCriterion[]];
+  modelTitle: string;
+  modelMarkdown: string;
+}
+
+export type CourseActivity =
+  | CourseCategorizeActivity
+  | CourseOrderingActivity
+  | CourseGuidedWritingActivity;
+
 export interface LearningLesson {
   id: string;
   title: string;
@@ -226,6 +299,8 @@ export interface LearningLesson {
   question: LessonQuestion;
   /** Multiple questions make partial (10/20) and perfect (20/20) mastery possible. */
   questions?: LessonQuestion[];
+  /** Ateliers du lecteur continu, sans XP ni notation automatique des productions libres. */
+  courseActivities?: CourseActivity[];
   source?: LessonSourceMetadata;
 }
 

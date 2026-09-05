@@ -62,6 +62,15 @@ run(
   ],
 );
 
+run(
+  "Contenu · audit-terminal-philosophy-l1-dissertation.ts",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    resolve(root, "scripts", "audit-terminal-philosophy-l1-dissertation.ts"),
+  ],
+);
+
 for (const script of [
   "audit-terminal-a-math.mjs",
   "audit-terminal-c-math.mjs",
