@@ -92,43 +92,56 @@ Les décisions détaillées, corrections de sources, poids XP et audits propres 
 
 **Règle critique — ne jamais casser la progression des élèves :** les identifiants de niveaux (`id`) et les budgets XP sont utilisés par le registre XP de l'API et par les progressions déjà enregistrées en base. Enrichir un contenu est sans risque ; **renommer un `id` ou changer un `xp` impose une migration Supabase**. Chaque parcours dispose d'un budget de 10 000 XP réparti automatiquement entre ses niveaux selon leur poids relatif.
 
-## 5. État réel au 21 août 2026
+## 5. État réel au 5 septembre 2026
 
 > **Reprise express.** Commencer par `git status --short`, lire cette section, puis lire `apps/web/AGENTS.md` avant toute modification du frontend. La branche active est `main`. Lire le dernier commit commun avec `git log -1 --oneline` plutôt que de figer ici un hash qui devient aussitôt périmé. Ne jamais appeler « livré » un fichier seulement présent dans l'arborescence sale et ne jamais déduire l'état de production depuis Git.
+
+### Références vérifiées de la reprise
+
+- Le dernier commit **produit** vérifié avant cette mise à jour documentaire est `fe62a94` (`Active le soutien via le lien marchand Wave`) ; `main`, `origin/main` et `origin/HEAD` étaient alignés. Le commit de handoff se place ensuite au-dessus : toujours lire `git log -1 --oneline` et ne jamais réinitialiser la branche vers ce repère.
+- Le frontend public `https://excellence-lycee.vercel.app` est vérifié READY. La route publique `/soutenir` contient bien le lien marchand Wave actif ; utiliser `npx --yes vercel@latest inspect excellence-lycee.vercel.app --json` pour l'identifiant de déploiement courant, car un commit de documentation peut lui-même déclencher un nouveau build.
+- L'API `https://excellence-lycee-api.vercel.app` sert le déploiement READY `dpl_GbiKdbZ7eMQqx9q26UnxaDky1EFU`. `node scripts/check-api-deploy.mjs` est vert et `/api/health` répond 200 avec `dataProvider: "supabase"`.
+- L'historique distant Supabase du projet `oqvzbaneyvidmrxjtasn` contient les migrations récentes `20260827010000`, `20260827020000`, `20260827030000`, `20260827040000`, `20260830110000`, `20260902010000` et `20260903120000`. Elles couvrent SVT D L11/L12/L14/L15, le feedback, SVT D L13 et le moteur Devoirs. Ne pas les réappliquer.
+- Le dernier vérificateur intégral exécuté sur cette base est vert : dépendances, typages Web/API, stabilité, audits pédagogiques, intégrations, builds et budgets. Les tests de stabilité sont à **60/60** et les tests Soutien/Wave à **14/14**.
 
 ### Couverture pédagogique consolidée
 
 | Domaine | État actuel | Suite identifiable |
 |---|---|---|
-| Mathématiques Terminale A | **8/8 leçons enrichies** | Lot d'exercices guidés `tle-a-maths` encore absent de `content_pipeline/batches/`. |
+| Mathématiques Terminale A | **8 thèmes sources / 9 parcours enrichis** | La Probabilité possède les variantes A1/A2 ; le lot d'exercices guidés `tle-a-maths` reste absent de `content_pipeline/batches/`. |
 | Mathématiques Terminale C | **19/19 leçons enrichies** | Maintenance et audits uniquement. |
 | Mathématiques Terminale D | Les 12 cartes sont couvertes, principalement par adaptation des parcours C enrichis | Conserver les ids/poids historiques ; auditer contre un PDF propre à D seulement si une divergence de programme est établie. |
-| Physique-Chimie Terminales C/D | **Catalogue actuellement référencé entièrement enrichi** depuis le 11/08/2026 | Toute nouvelle carte doit suivre la règle Web/API/migration et vérifier le déploiement séparé de l'API. |
+| Physique-Chimie Terminales C/D | **29/29 cartes en C et 27/27 en D** ; matière intentionnellement absente en A | Toute nouvelle carte doit suivre la règle Web/API/migration et vérifier le déploiement séparé de l'API. |
 | SVT Terminale A | **7/7 leçons enrichies** | Le fichier transmis comme « L8 » est un doublon de contenu de la L4 : ne pas créer artificiellement une huitième leçon. |
 | SVT Terminale C | **11/11 leçons enrichies** | Catalogue complet. L10 et L11 restent des adaptations riches du guide DPFC, pas des restitutions fidèles de PDF complets. |
-| SVT Terminale D | **L1 à L10 livrées, soit 10/15 cartes** | Restent seulement L11 à L15. Respecter l'ordre du catalogue même lorsque le numéro imprimé sur le PDF diverge. |
-| Histoire Terminale | **H2 à H9 enrichies** et partagées entre A/C/D | Reste H1 ; ne pas confondre avec le lot H2-H9 déclaré terminé. |
-| Philosophie Terminale | **Les 10 parcours L1 à L10 sont enrichis** | Maintenance éditoriale uniquement. |
+| SVT Terminale D | **15/15 leçons enrichies** | L11 défense immunitaire, L12 VIH, L13 formation des ressources minières, L14 exploitation minière et L15 protection des sols sont livrées. |
+| Histoire Terminale | **9/9 leçons H1 à H9 enrichies** et partagées entre A/C/D | H1 ONU a été révisée fidèlement ; maintenance éditoriale uniquement. |
+| Philosophie Terminale | **10/10 parcours enrichis** | Les 10 cartes sont visibles en A, mais les catalogues C/D omettent actuellement L6 « L'histoire et l'humanité » et n'en affichent que 9 : corriger ce raccord sans recréer le contenu. |
 | Géographie Terminale | **G1 à G4, G6 et G7 enrichies** | G5 reste « document à fournir » : ne pas inventer son titre ni son contenu sans source. |
 
-Il reste donc **7 leçons de Terminale identifiables non enrichies** : SVT Terminale D L11 à L15, Histoire H1 et Géographie G5. Cette dernière reste bloquée tant que sa source n’est pas fournie.
+Dans le périmètre Mathématiques, Physique-Chimie, SVT, Histoire, Géographie et Philosophie, **seule Géographie G5 reste réellement à enrichir**, faute de titre authentique et de PDF source. Le Français et l'Anglais possèdent encore des catalogues à construire et doivent rester inaccessibles tant que leur contenu n'est pas publié.
 
-Le compteur consolidé du catalogue est **9 719 réponses évaluables** après l’ajout des 90 réponses de SVT Terminale C L11, des 100 réponses de SVT Terminale D L8 et des 110 réponses de SVT Terminale D L9. Un audit de leçon ne doit pas dépendre d'un compteur global figé quand plusieurs enrichissements avancent en parallèle ; le compteur global se verrouille dans l'audit de stabilité après consolidation des lots.
+Le compteur canonique est **10 294 réponses évaluables** dans `apps/web/src/data/learningPathMetrics.ts`. Le test de stabilité le recalcule depuis le catalogue ; un audit de leçon ne doit jamais dépendre d'un jalon global figé quand plusieurs enrichissements avancent en parallèle.
 
 ### Travail en cours — ne pas écraser
 
-L'arborescence reste volontairement sale au 21/08/2026 après la consolidation pédagogique. Le lot de cloisonnement BAC et un fichier de configuration extérieur restent indépendants ; relire les diffs hunk par hunk avant leur propre commit.
+Au relevé, **aucun fichier produit actif de `apps/web` ou `apps/api` n'est sale**. Trois changements extérieurs restent volontairement hors commit ; toute nouvelle session doit les préserver :
 
-1. **Cloisonnement après connexion.** Le nouveau contrat `apps/web/src/routing/routeAccess.ts` empêche une URL Terminale conservée avant authentification d'exposer les sujets BAC à une session Seconde/Première ; la carte BAC de l'Arène suit la même règle, avec exception administrateur. Les changements touchent `LearningApp.tsx`, `ArenaScreen.tsx` et les tests. **Lot non commité au relevé ; ne pas le mélanger à un autre lot.**
-2. **Fichier extérieur.** `.claude/launch.json` est modifié : le préserver et ne pas l'embarquer sans savoir quelle session le possède.
-3. **Déploiements pédagogiques vérifiés le 21/08/2026.** Le frontend public sert les trois nouveaux parcours et le compteur 9 719 ; l’alias `excellence-lycee-api.vercel.app` sert le registre XP du dernier commit avec le fournisseur Supabase. Les migrations ciblées `20260821120000`, `20260821160000`, `20260821180000`, `20260821190000` et `20260821200000` sont appliquées et enregistrées à distance. Toute modification API ou nouvelle migration ultérieure conserve la procédure de déploiement et d’application séparée décrite plus haut.
+1. `.claude/launch.json` : correction locale du port Web de 5173 vers 4173 et retrait de `autoPort` ; modification non attribuée au lot produit courant.
+2. `README.md` : suppression locale d'une ancienne phrase sur le tout premier parcours ; ne pas restaurer ni committer sans coordination avec son propriétaire.
+3. `output/` : répertoire non suivi contenant notamment `excellence-vert-ui-backup-20260828/` et des artefacts PDF. Le corrigé détaillé BAC 2024 présent sous `output/pdf/` est sensible ; ce répertoire n'est pas la source active d'Excellence Lycée et ne doit jamais être ajouté en bloc au dépôt.
 
-### Fonctionnalités produit déjà acquises depuis juillet
+Le cloisonnement des profils n'est plus un travail en attente : il est livré. Après connexion ou F5, les comptes Seconde, Première, Terminale, Parent, Enseignant et Administrateur conservent leur contexte autorisé ; les sujets BAC restent réservés à la Terminale et aux administrateurs, et un administrateur peut prévisualiser un parcours interclasse depuis le studio.
+
+### Fonctionnalités produit acquises
 
 - Arène : concours BAC & BT 2024 sur 69, suivi admin, sous-notes, zones, export PDF ; annales 2017-2020 et fac-similés 2022-2023 ; ESATIC 2023-2024 interactifs. La session BAC 2018 reste bloquée tant qu'une source authentique n'est pas fournie.
 - Boutique « or » : monnaie dérivée de l'XP (`50 XP = 1 or`), achats permanents, crédits administrateur et catalogue synchronisé entre Web/API/migration.
-- Plateforme : récupération et changement de mot de passe, notifications e-mail via Resend avec garde-fous, clavier scientifique, niveaux publiés ouverts, chargement différé des parcours, vue éditoriale complète et accueil connecté fiabilisé.
-- Social : messagerie mobile, réactions/commentaires administrables, duels avec choix de matière, leçons et adversaire en ligne.
+- Plateforme : récupération/changement de mot de passe, notifications e-mail via Resend, clavier scientifique, niveaux publiés ouverts, chargement différé, studio éditorial accessible, accueil connecté et reprise F5 fiabilisés. Le mot de passe est libre en composition ; seules les limites techniques Supabase de **6 à 72 caractères** subsistent.
+- Social : messagerie mobile synchronisée, réactions/commentaires administrables, distinction des réactions Administration, cloche limitée aux retours élèves et réponse privée par Messages ; duels avec matière, leçons, difficulté, format et adversaire en ligne.
+- Devoirs : moteur interactif versionné et sécurisé, minuteur serveur, autosauvegarde/reprise, correction automatique des réponses objectives et barème humain pour les démonstrations. Le premier modèle publié est le devoir 1 de Mathématiques Terminale C 2025-2026 du Lycée Scientifique de Yamoussoukro ; la migration `20260903120000_secure_homework_attempts.sql` est appliquée. Ses résultats/corrections restent volontairement fermés jusqu'à la fin des tentatives et des revues humaines.
+- Parcours : la migration vers une lecture **en cours continu non gamifié** a commencé. La référence canonique est la leçon 1 de Mathématiques Terminale C (« Limites et continuité », 10 parties, 73 questions) ; son adaptation Terminale D hérite actuellement de la même présentation. Tous les autres parcours gardent temporairement l'ancienne route de maîtrise. Les ids, XP et progressions historiques restent conservés derrière cette présentation.
+- Soutien : `/soutenir` est public et ouvre directement le lien marchand Wave fourni. Le montant et la confirmation restent chez Wave, le reçu Wave est l'unique preuve et aucun don n'accorde d'avantage pédagogique. L'API Checkout plus riche existe mais reste volontairement dormante jusqu'à disponibilité de véritables identifiants serveur et d'une réconciliation vérifiée.
 
 ### Règles de continuation de l'enrichissement
 
@@ -196,16 +209,16 @@ Les éléments ci-dessous expliquent les choix déjà présents dans le code ; i
 
 > **Modèle à suivre pour les prochaines leçons.** Le générateur `buildOfficialMathPath` **ignore** le paramètre `weight` passé dans chaque `officialMathTopic` : il applique `50 + Math.min(index, 7) * 5`, exactement la même formule que `terminalCMathRewardWeight` côté API. Toute réécriture d'une leçon générée doit donc reproduire cette formule et conserver l'ordre des identifiants pour ne rien casser.
 
-### Histoire — série complète (26/07/2026)
+### Histoire — série complète H1 à H9 (révisée le 30/08/2026)
 
-> ✅ **Les huit leçons d'Histoire du thème 2 et 3 (H2 à H9) sont désormais toutes enrichies et en ligne** : bipolarisation, monde multipolaire, montée des nationalismes, indépendance de la Côte d'Ivoire, indépendance de l'Algérie, Union africaine, valeurs du monde occidental, mutations de la civilisation négro-africaine.
+> ✅ **Les neuf leçons d'Histoire H1 à H9 sont enrichies** : ONU, bipolarisation, monde multipolaire, montée des nationalismes, indépendance de la Côte d'Ivoire, indépendance de l'Algérie, Union africaine, valeurs du monde occidental et mutations de la civilisation négro-africaine. H1 ONU a été relue intégralement contre son PDF et vit dans `terminalHistoryUnitedNationsPath.ts`.
 
 **Patron différent des maths — la fabrique Humanités.** Les leçons d'Histoire, de Géographie et de Philosophie ne sont **pas** des `officialLevel` : elles sont produites par `createHumanitiesPath()` (`apps/web/src/data/humanitiesPathFactory.ts`) à partir d'un `HumanitiesCourseSeed`. Points clés :
 
 - Un seed a **exactement 3 sections** ; la fabrique génère **6 niveaux** (1 aperçu « Les repères essentiels » + 4 niveaux de contenu + 1 mission finale). Une section est scindée en 2 niveaux via `blueprint.splitSectionIndex` (dans `humanitiesAssessmentBlueprints.ts`).
 - **Titres des niveaux scindés** : ils sont dérivés des `shortLabel` du `timeline` de la section (premier item → niveau A ; items suivants joints par « et » → niveau B). Pour piloter proprement les titres, on réécrit le `timeline` de la section scindée.
 - **Enrichir** = ajouter aux sections un `bodyMarkdown` (cours rédigé en markdown : titres, tableaux, encadrés) et des `extraQuestions` ; pour la section scindée, un `parts: [Partial, Partial]` avec un `bodyMarkdown`/`extraQuestions` dédié par moitié ; pour la mission, `mission.bodyMarkdown` (situation d'évaluation + documents) et `mission.extraQuestions` dans `humanitiesAssessmentBlueprints.ts`.
-- **Aucune migration Supabase** : la fabrique **fige les identifiants et les XP** (les 6 poids sont dans `humanitiesMasteryRewards`, déjà au registre API). Enrichir ne touche donc que deux fichiers de données web : `terminalHistoryPaths.ts` et `humanitiesAssessmentBlueprints.ts`.
+- **Aucune migration Supabase** : la fabrique **fige les identifiants et les XP** (les 6 poids sont dans `humanitiesMasteryRewards`, déjà au registre API). Un enrichissement ordinaire touche `terminalHistoryPaths.ts` et `humanitiesAssessmentBlueprints.ts`; une leçon volumineuse peut être extraite dans un module dédié, comme H1, sans changer ses ids ni ses XP.
 - **Leçon partagée** : `levelIds: ["terminale-a", "terminale-c", "terminale-d"]` — une seule leçon d'Histoire sert les trois séries de Terminale.
 - Les coquilles factuelles du PDF source sont corrigées et annotées dans des encadrés « Correction »/« Précision » (ex. Syrte *décide*/Durban *crée* l'UA ; putsch d'avril 1961 à Alger ; Ahmed Ben Bella ; colonie de peuplement).
 
@@ -213,13 +226,16 @@ Les éléments ci-dessous expliquent les choix déjà présents dans le code ; i
 
 ### Suites naturelles
 
-1. Terminer et livrer séparément le cloisonnement BAC après connexion. Ne pas le mélanger avec `.claude/launch.json` ni avec un enrichissement pédagogique.
-2. Continuer la SVT : Terminale C L11 ; Terminale D L8, L9 puis L11 à L15, dans l'ordre du catalogue et uniquement à partir des PDF fournis.
-3. En Géographie, traiter G5 seulement lorsque son document et son titre officiel sont disponibles. Les six autres leçons G1-G4/G6-G7 sont enrichies ; les dix leçons de Philosophie sont déjà terminées.
-4. Créer le lot d'exercices guidés **`tle-a-maths`** manquant dans `content_pipeline/batches/`.
-5. Vérifier l'historique distant avant de considérer une migration comme « en attente ». Les trois migrations de juillet anciennement signalées (`20260723180000`, `20260723200000`, `20260723220000`) ne doivent pas être réappliquées à l'aveugle ; utiliser le script ciblé et l'identifiant de projet confirmé.
-6. Migrer progressivement la coque Android/Capacitor archivée sous `frontend/` vers l'application active, puis supprimer l'archive après validation mobile.
-7. À plus long terme, migrer le contenu TypeScript vers le studio éditorial Supabase sans changer les ids ni les budgets XP.
+1. Corriger le raccord catalogue de Philosophie C/D : ajouter la carte L6 « L'histoire et l'humanité » déjà enrichie, sans dupliquer le parcours ni modifier ses ids/XP.
+2. Généraliser progressivement le format **cours continu** à partir de la référence Mathématiques TC/TD L1. Chaque PDF doit devenir une lecture complète, interactive et non gamifiée ; conserver en arrière-plan les ids, XP, réactions et progressions historiques.
+3. En Géographie, traiter G5 seulement lorsque son document et son titre officiel sont disponibles. Ne rien inventer.
+4. Alimenter le moteur Devoirs avec les prochains sujets réels et leurs barèmes/corrections privées, sans dupliquer le runner. Laisser séparés la publication du sujet, la revue humaine et l'ouverture des résultats.
+5. Construire puis publier réellement les contenus Français/Anglais avant de rendre leurs cartes interactives. Étendre ensuite la couverture Seconde/Première à partir de sources officielles.
+6. Créer le lot d'exercices guidés **`tle-a-maths`** manquant dans `content_pipeline/batches/`.
+7. Laisser le Checkout API Wave dormant tant que les identifiants serveur, les webhooks et la réconciliation ne sont pas disponibles. Le fichier `apps/api/.env.example` est actuellement ignoré par Git : versionner proprement un exemple sans secret avant toute activation.
+8. Ajouter ultérieurement une défense en profondeur aux RPC Supabase BAC appelables directement ; l'API publique refuse déjà les profils non-Terminale, mais cette garde serveur ne remplace pas une politique SQL équivalente.
+9. Migrer progressivement la coque Android/Capacitor archivée sous `frontend/` vers l'application active, puis supprimer l'archive après validation mobile.
+10. À plus long terme, migrer le contenu TypeScript vers le studio éditorial Supabase sans changer les ids ni les budgets XP.
 
 ## 6. Conventions de travail
 
