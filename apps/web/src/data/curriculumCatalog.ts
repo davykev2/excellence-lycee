@@ -486,7 +486,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
     ],
     french: [
       "Œuvre narrative",
-      "La dissertation littéraire",
+      { title: "La dissertation littéraire", trackLabel: "A1 / A2", pathId: "terminale-french-l2-literary-dissertation" },
       "Le commentaire composé",
       "Groupement de textes théâtraux",
       "Résumé du texte argumentatif",
@@ -583,7 +583,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
     ],
     french: [
       "Œuvre narrative",
-      "La dissertation littéraire",
+      { title: "La dissertation littéraire", pathId: "terminale-french-l2-literary-dissertation" },
       "Le commentaire composé",
       "Groupement de textes théâtraux",
       "Résumé du texte argumentatif",
@@ -669,7 +669,7 @@ const curriculumByLevel: Record<string, LevelCurriculum> = {
     ],
     french: [
       "Œuvre narrative",
-      "La dissertation littéraire",
+      { title: "La dissertation littéraire", pathId: "terminale-french-l2-literary-dissertation" },
       "Le commentaire composé",
       "Groupement de textes théâtraux",
       "Résumé du texte argumentatif",

@@ -122,6 +122,15 @@ run(
 );
 
 run(
+  "Contenu · audit-terminal-french-literary-dissertation.ts",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    resolve(root, "scripts", "audit-terminal-french-literary-dissertation.ts"),
+  ],
+);
+
+run(
   "Contenu · audit-terminal-a-svt-brain-activity.ts",
   process.execPath,
   [

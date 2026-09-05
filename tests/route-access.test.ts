@@ -189,6 +189,7 @@ test("une nouvelle session recalcule la matière demandée depuis l'URL courante
   const pathSubjects = [
     { pathId: "math-path", subjectId: "mathematics" as const },
     { pathId: "svt-path", subjectId: "svt" as const },
+    { pathId: "terminale-french-l2-literary-dissertation", subjectId: "french" as const },
   ];
 
   assert.equal(
@@ -228,7 +229,20 @@ test("une nouvelle session recalcule la matière demandée depuis l'URL courante
       secondeStudent,
     ),
     "mathematics",
-    "Une matière désactivée ne doit pas devenir le bundle initial après F5.",
+    "Une matière hors programme ne doit pas devenir le bundle initial après F5.",
+  );
+
+  const terminaleStudent = createUser({ levelId: "terminale-c", accountType: "student" });
+  assert.equal(
+    initialSubjectIdForLocation(
+      { pathname: "/parcours/terminale-french-l2-literary-dissertation", search: "" },
+      "mathematics",
+      pathSubjects,
+      null,
+      terminaleStudent,
+    ),
+    "french",
+    "Le deep-link Français doit charger son bundle après connexion en Terminale.",
   );
 });
 
@@ -272,21 +286,34 @@ test("une matière hors programme est corrigée avant affichage, sauf pour le co
   }
   assert.deepEqual(routeAllowedForUser(historyRoute, secondeAdmin), historyRoute);
 
-  const disabledFrenchRoute = readAppRoute(
+  const frenchRoute = readAppRoute(
     { pathname: "/parcours", search: "?matiere=french" },
     { navigation: "home" },
   );
-  assert.equal(routeAllowedForUser(disabledFrenchRoute, secondeStudent).subjectId, "mathematics");
-  assert.deepEqual(routeAllowedForUser(disabledFrenchRoute, secondeAdmin), disabledFrenchRoute);
+  const premiereStudent = createUser({ levelId: "premiere-d", accountType: "student" });
+  const terminaleStudent = createUser({ levelId: "terminale-d", accountType: "student" });
+  assert.equal(routeAllowedForUser(frenchRoute, secondeStudent).subjectId, "mathematics");
+  assert.equal(routeAllowedForUser(frenchRoute, premiereStudent).subjectId, "mathematics");
+  assert.deepEqual(routeAllowedForUser(frenchRoute, terminaleStudent), frenchRoute);
+  assert.deepEqual(routeAllowedForUser(frenchRoute, secondeAdmin), frenchRoute);
+
+  const frenchPath = {
+    id: "terminale-french-l2-literary-dissertation",
+    levelIds: ["terminale-a", "terminale-c", "terminale-d"],
+  };
+  assert.equal(canAccessLearningPath(secondeStudent, frenchPath), false);
+  assert.equal(canAccessLearningPath(premiereStudent, frenchPath), false);
+  assert.equal(canAccessLearningPath(terminaleStudent, frenchPath), true);
+  assert.equal(canAccessLearningPath(secondeAdmin, frenchPath), true);
 });
 
-test("chaque classe expose exactement ses matières visibles et bloque celles encore désactivées", () => {
+test("chaque classe expose exactement ses matières publiées pour son niveau", () => {
   const expectedVisibleSubjects: Record<string, string[]> = {
-    "seconde-a": ["mathematics", "physics-chemistry", "french", "english", "svt"],
-    "seconde-c": ["mathematics", "physics-chemistry", "french", "english", "svt"],
-    "premiere-a": ["mathematics", "physics-chemistry", "french", "english", "svt", "philosophy"],
-    "premiere-c": ["mathematics", "physics-chemistry", "french", "english", "svt", "philosophy"],
-    "premiere-d": ["mathematics", "physics-chemistry", "french", "english", "svt", "philosophy"],
+    "seconde-a": ["mathematics", "physics-chemistry", "english", "svt"],
+    "seconde-c": ["mathematics", "physics-chemistry", "english", "svt"],
+    "premiere-a": ["mathematics", "physics-chemistry", "english", "svt", "philosophy"],
+    "premiere-c": ["mathematics", "physics-chemistry", "english", "svt", "philosophy"],
+    "premiere-d": ["mathematics", "physics-chemistry", "english", "svt", "philosophy"],
     "terminale-a": ["mathematics", "french", "english", "svt", "philosophy", "history-geography"],
     "terminale-c": ["mathematics", "physics-chemistry", "french", "english", "svt", "philosophy", "history-geography"],
     "terminale-d": ["mathematics", "physics-chemistry", "french", "english", "svt", "philosophy", "history-geography"],

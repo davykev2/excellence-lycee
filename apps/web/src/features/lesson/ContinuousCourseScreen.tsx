@@ -249,7 +249,7 @@ function CourseQuickCheck({
 }
 
 function lessonQuestions(lesson: LearningLesson) {
-  return (lesson.questions?.length ? lesson.questions : [lesson.question]).slice(0, 2);
+  return lesson.questions?.length ? lesson.questions : [lesson.question];
 }
 
 export function ContinuousCourseScreen({
@@ -440,7 +440,10 @@ export function ContinuousCourseScreen({
                   {lesson.method.tip && <p className="course-reader-callout"><Lightbulb size={19} weight="duotone" aria-hidden="true" /><MathText>{lesson.method.tip}</MathText></p>}
                 </section>
 
-                <CoursePracticePanel lesson={lesson} />
+                <CoursePracticePanel
+                  lesson={lesson}
+                  storageScope={`${currentUser.id}:${path.id}:${lesson.id}`}
+                />
 
                 {lesson.source && (
                   <aside className="course-reader-source">

@@ -25,6 +25,7 @@ import { terminalHistoryPaths } from "./terminalHistoryPaths";
 import { terminalMathematicsPaths } from "./terminalMathPaths";
 import { terminalPhilosophyAdvancedPaths } from "./terminalPhilosophyAdvancedPaths";
 import { terminalPhilosophyPaths } from "./terminalPhilosophyPaths";
+import { terminalFrenchLiteraryDissertationPath } from "./terminalFrenchLiteraryDissertationPath";
 import { terminalCSvtCellEnergyPath } from "./terminalCSvtCellEnergyPath";
 import { terminalCSvtDrugsPath } from "./terminalCSvtDrugsPath";
 import { terminalCSvtImmuneDefensePath } from "./terminalCSvtImmuneDefensePath";
@@ -81,6 +82,7 @@ const baseLearningPaths: LearningPath[] = [
   ...terminalHistoryPaths,
   ...terminalPhilosophyPaths,
   ...terminalPhilosophyAdvancedPaths,
+  terminalFrenchLiteraryDissertationPath,
   ...terminalSvtPaths,
   terminalCSvtNervousPath,
   terminalCSvtDrugsPath,

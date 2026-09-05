@@ -253,6 +253,8 @@ export interface CourseWritingPrompt {
   placeholder: string;
   hint?: string;
   rows?: number;
+  /** Un champ facultatif ne bloque jamais l'ouverture du corrigé guidé. */
+  optional?: boolean;
 }
 
 export interface CourseWritingCriterion {

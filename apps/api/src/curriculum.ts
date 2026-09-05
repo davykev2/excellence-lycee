@@ -719,6 +719,26 @@ for (const [pathId, suffixes] of philosophyLessonSuffixes) {
   });
 }
 
+const frenchLiteraryDissertationPathId = "terminale-french-l2-literary-dissertation";
+const frenchLiteraryDissertationSuffixes = [
+  "overview-barreme",
+  "analyze-subject",
+  "find-ideas",
+  "build-plan",
+  "write-introduction",
+  "write-development",
+  "write-conclusion",
+  "bac-2025-workshop",
+] as const;
+const frenchLiteraryDissertationWeights = [40, 55, 60, 65, 70, 80, 75, 95] as const;
+
+frenchLiteraryDissertationSuffixes.forEach((suffix, index) => {
+  lessonRewards.set(
+    `${frenchLiteraryDissertationPathId}:${frenchLiteraryDissertationPathId}-${suffix}`,
+    frenchLiteraryDissertationWeights[index],
+  );
+});
+
 const svtLessonSuffixes = [
   ["terminale-svt-l1-emotional-reactions", ["overview", "manifestations", "causes-stressors", "nervous-regulation", "hormonal-regulation", "mission-finale"]],
   ["terminale-svt-l2-brain-activity", ["overview", "cerebral-areas", "movement-preparation", "movement-execution", "memory", "mission-finale"]],

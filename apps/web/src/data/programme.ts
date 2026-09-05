@@ -36,7 +36,8 @@ export const subjects: Record<SubjectId, SubjectDefinition> = {
     id: "french",
     label: "Français",
     shortLabel: "Français",
-    enabled: false,
+    enabled: true,
+    levelIds: ["terminale-a", "terminale-c", "terminale-d"],
     theme: { accent: "#a8497e", accentSoft: "#f7eaf2" },
   },
   english: {

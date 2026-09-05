@@ -28,6 +28,11 @@ async function loadTerminalPhilosophyPaths() {
   return [...philosophy, ...advancedPhilosophy];
 }
 
+async function loadTerminalFrenchPaths() {
+  return import("./terminalFrenchLiteraryDissertationPath")
+    .then((module) => [module.terminalFrenchLiteraryDissertationPath]);
+}
+
 async function loadTerminalPhysicsPaths(levelId: string) {
   const [kinematics, inertia, uniformFields, freeOscillations, magneticField, chargedParticle, laplaceLaw, induction, autoInduction, derivatorIntegrator, freeElectricalOscillations, rlcForcedSinusoidal, rlcIntensityResonance, acPower, waveLight, corpuscularLight, spontaneousNuclear, provokedNuclear, chemistry, gravitation] = await Promise.all([
     import("./physicsPaths").then((module) => module.physicsPaths),
@@ -139,6 +144,9 @@ async function loadPathsForSubject(levelId: string, subjectId: SubjectId) {
   }
   if (subjectId === "philosophy" && levelId.startsWith("terminale-")) {
     return loadTerminalPhilosophyPaths();
+  }
+  if (subjectId === "french" && levelId.startsWith("terminale-")) {
+    return loadTerminalFrenchPaths();
   }
   if (subjectId === "svt") return loadSvtPaths(levelId);
   return [];

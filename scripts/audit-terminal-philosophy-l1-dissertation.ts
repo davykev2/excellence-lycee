@@ -121,7 +121,8 @@ const practiceCss = readFileSync(new URL("../apps/web/src/styles/course-practice
 assert.ok(factorySource.includes("presentation: course.presentation"));
 assert.ok(factorySource.includes("courseActivities: section.courseActivities"));
 assert.ok(factorySource.includes("source: mission.source"));
-assert.ok(readerSource.includes("<CoursePracticePanel lesson={lesson} />"));
+assert.ok(readerSource.includes("<CoursePracticePanel"));
+assert.ok(readerSource.includes("storageScope="));
 assert.ok(!readerSource.match(/J[’']ai compris|niveau suivant|Gagner[^\n]*XP|Débloquer/i));
 assert.ok(practiceSource.includes("Excellence ne lui attribue aucune note automatique"));
 assert.ok(practiceSource.includes("l’activité fonctionne aussi sans glisser-déposer"));

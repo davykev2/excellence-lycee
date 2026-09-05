@@ -174,6 +174,86 @@ test("la dissertation philosophique reste un cours continu avec des ateliers non
   assert.doesNotMatch(readerSource, /J[’']ai compris|niveau suivant|Gagner[^\n]*XP|Débloquer/i);
 });
 
+test("la dissertation littéraire reste un cours continu avec des ateliers libres non notés", () => {
+  const path = learningPaths.find((item) => item.id === "terminale-french-l2-literary-dissertation");
+  assert.ok(path, "Le parcours Dissertation littéraire doit rester publié.");
+  assert.equal(path.subjectId, "french");
+  assert.equal(path.presentation, "continuous-course");
+  assert.deepEqual(path.levelIds, ["terminale-a", "terminale-c", "terminale-d"]);
+
+  const lessons = path.modules.flatMap((module) => module.lessons);
+  assert.deepEqual(
+    lessons.map((lesson) => lesson.id),
+    [
+      "terminale-french-l2-literary-dissertation-overview-barreme",
+      "terminale-french-l2-literary-dissertation-analyze-subject",
+      "terminale-french-l2-literary-dissertation-find-ideas",
+      "terminale-french-l2-literary-dissertation-build-plan",
+      "terminale-french-l2-literary-dissertation-write-introduction",
+      "terminale-french-l2-literary-dissertation-write-development",
+      "terminale-french-l2-literary-dissertation-write-conclusion",
+      "terminale-french-l2-literary-dissertation-bac-2025-workshop",
+    ],
+    "Les liens profonds du premier cours continu de Français doivent rester stables.",
+  );
+  assert.equal(
+    lessons.reduce((total, lesson) => total + lesson.questions.length, 0),
+    32,
+    "Les ateliers libres ne doivent pas gonfler le compteur des exercices évaluables.",
+  );
+  assert.equal(
+    lessons.reduce((total, lesson) => total + lesson.xp, 0),
+    XP_PER_LESSON,
+  );
+
+  const activities = lessons.flatMap((lesson) => lesson.courseActivities ?? []);
+  assert.ok(activities.length > 0, "Le cours doit proposer au moins un atelier interactif.");
+  assert.ok(
+    activities.some((activity) => activity.kind === "guided-writing"),
+    "Les productions écrites doivent être proposées comme ateliers guidés libres.",
+  );
+  const serializedActivities = JSON.stringify(activities);
+  assert.doesNotMatch(
+    serializedActivities,
+    /"(?:points|correctIndex|acceptedAnswers|xp)"\s*:/,
+    "Un atelier libre de Français ne doit embarquer ni note automatique ni XP.",
+  );
+
+  assert.ok(lessons.every((lesson) => lesson.source?.pages), "Chaque partie doit citer ses pages sources.");
+  const practiceSource = readFileSync(
+    resolve(projectRoot, "apps/web/src/features/lesson/CoursePracticePanel.tsx"),
+    "utf8",
+  );
+  const readerSource = readFileSync(
+    resolve(projectRoot, "apps/web/src/features/lesson/ContinuousCourseScreen.tsx"),
+    "utf8",
+  );
+  assert.match(practiceSource, /localStorage\.setItem\(storageKey/);
+  assert.match(practiceSource, /localStorage\.removeItem\(storageKey/);
+  assert.match(practiceSource, /window\.setTimeout/);
+  assert.match(practiceSource, /prompt\.optional/);
+  assert.match(practiceSource, /sauvegardé uniquement sur cet appareil/);
+  assert.match(readerSource, /currentUser\.id.*path\.id.*lesson\.id/s);
+  assert.doesNotMatch(readerSource, /\.slice\(0, 2\)/);
+  const conclusionWriting = activities.find(
+    (activity) => activity.kind === "guided-writing" && activity.id === "write-bac-conclusion",
+  );
+  assert.ok(conclusionWriting?.kind === "guided-writing");
+  assert.equal(
+    conclusionWriting.prompts.find((prompt) => prompt.id === "opening")?.optional,
+    true,
+    "L’ouverture facultative ne doit pas bloquer l’accès au corrigé guidé.",
+  );
+  assert.deepEqual(
+    curriculumLessonTitles
+      .filter((lesson) => lesson.pathId === path.id)
+      .map((lesson) => lesson.levelId)
+      .sort(),
+    ["terminale-a", "terminale-c", "terminale-d"],
+    "Le même cours doit être publié dans les trois catalogues de Terminale.",
+  );
+});
+
 test("le chargement à la demande restitue exactement les parcours de chaque classe", async () => {
   clearLearningPathBundleCacheForTests();
 
