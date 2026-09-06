@@ -49,6 +49,15 @@ run(
   ],
 );
 run(
+  "Correction des cours continus",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    "--test",
+    resolve(root, "tests", "continuous-course-correction.test.ts"),
+  ],
+);
+run(
   "Syntaxe du garde-fou Supabase",
   process.execPath,
   ["--check", resolve(root, "scripts", "push-supabase-migrations.mjs")],

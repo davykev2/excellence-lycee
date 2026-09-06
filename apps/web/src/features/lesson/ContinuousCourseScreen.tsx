@@ -1,6 +1,7 @@
 import {
   ArrowLeft,
   BookOpenText,
+  ChartBar,
   CheckCircle,
   ChatCircleDots,
   Clock,
@@ -10,6 +11,7 @@ import {
   ListNumbers,
   SlidersHorizontal,
   Sparkle,
+  WarningCircle,
   XCircle,
 } from "@phosphor-icons/react";
 import { useEffect, useId, useMemo, useRef, useState, type RefObject } from "react";
@@ -19,6 +21,12 @@ import type { AuthUser } from "../../domain/auth";
 import type { SchoolLevel, SubjectDefinition } from "../../domain/learning";
 import type { LearningLesson, LearningPath, LessonQuestion } from "../../domain/paths";
 import { getPathLessons } from "../paths/pathLessons";
+import {
+  calculateCourseCorrection,
+  formatCourseScore,
+  getCourseQuestionCorrection,
+  type CourseQuickAnswer,
+} from "./courseCorrection";
 import { CoursePracticePanel } from "./CoursePracticePanel";
 import { LessonFeedbackPanel } from "./LessonFeedbackPanel";
 import { LessonInteractionPanel } from "./LessonWorkspace";
@@ -32,8 +40,6 @@ interface ContinuousCourseScreenProps {
   focusedSectionId?: string;
   onBackToLibrary: () => void;
 }
-
-type QuickAnswer = number | string | null;
 
 const formulaKeyboardGroups = [
   {
@@ -60,39 +66,6 @@ const formulaKeyboardGroups = [
 
 function sectionDomId(sectionId: string) {
   return `course-section-${sectionId}`;
-}
-
-function normalizeAnswer(value: string) {
-  return value
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLocaleLowerCase("fr")
-    .replace(/[−–—]/g, "-")
-    .replace(/∞/g, "infini")
-    .replace(/[×·*]/g, "")
-    .replace(/÷/g, "/")
-    .replace(/²/g, "^2")
-    .replace(/³/g, "^3")
-    .replace(/√/g, "sqrt")
-    .replace(/π/g, "pi")
-    .replace(/\+inf(?:inity|ini)?/g, "+infini")
-    .replace(/-inf(?:inity|ini)?/g, "-infini")
-    .replace(/\s+/g, "")
-    .replace(/[{}$]/g, "");
-}
-
-function isCorrect(question: LessonQuestion, answer: QuickAnswer) {
-  if (question.type !== "short-answer") {
-    return typeof answer === "number" && answer === question.correctIndex;
-  }
-  if (typeof answer !== "string" || !answer.trim()) return false;
-  const normalized = normalizeAnswer(answer);
-  return (question.acceptedAnswers ?? []).some((accepted) => normalizeAnswer(accepted) === normalized);
-}
-
-function correctAnswerLabel(question: LessonQuestion) {
-  if (question.type === "short-answer") return question.acceptedAnswers?.[0] ?? "Voir l’explication";
-  return question.options[question.correctIndex] ?? "Voir l’explication";
 }
 
 function insertAtCursor(
@@ -162,24 +135,24 @@ function CourseQuickCheck({
   lessonId,
   question,
   index,
+  answer,
+  checked,
+  onAnswer,
 }: {
   lessonId: string;
   question: LessonQuestion;
   index: number;
+  answer: CourseQuickAnswer;
+  checked: boolean;
+  onAnswer: (answer: CourseQuickAnswer) => void;
 }) {
   const inputId = useId();
   const inputRef = useRef<HTMLInputElement>(null);
-  const [answer, setAnswer] = useState<QuickAnswer>(question.type === "short-answer" ? "" : null);
-  const [checked, setChecked] = useState(false);
-  const correct = checked && isCorrect(question, answer);
-
-  const updateAnswer = (next: QuickAnswer, checkImmediately = false) => {
-    setAnswer(next);
-    setChecked(checkImmediately);
-  };
+  const correction = checked ? getCourseQuestionCorrection(question, answer) : null;
+  const status = correction?.status;
 
   return (
-    <article className={`course-reader-question${checked ? correct ? " is-correct" : " is-incorrect" : ""}`}>
+    <article className={`course-reader-question${status ? ` is-${status}` : ""}`}>
       <header>
         <span>Vérification {index + 1}</span>
         {question.sourceLabel && <small>{question.sourceLabel}</small>}
@@ -194,57 +167,155 @@ function CourseQuickCheck({
             ref={inputRef}
             type="text"
             value={typeof answer === "string" ? answer : ""}
-            onChange={(event) => updateAnswer(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" && String(answer).trim()) setChecked(true);
-            }}
+            onChange={(event) => onAnswer(event.target.value)}
             placeholder="Écris ta réponse"
             autoComplete="off"
+            aria-invalid={status === "incorrect" || status === "unanswered" ? true : undefined}
           />
           <CourseFormulaKeyboard
             inputRef={inputRef}
             value={typeof answer === "string" ? answer : ""}
-            onChange={(value) => updateAnswer(value)}
+            onChange={onAnswer}
           />
-          <button
-            className="course-reader-action"
-            type="button"
-            disabled={!String(answer).trim()}
-            onClick={() => setChecked(true)}
-          >
-            Vérifier ma réponse
-          </button>
         </div>
       ) : (
         <div className="course-reader-choices" role="group" aria-label={`Réponses à la vérification ${index + 1}`}>
           {question.options.map((option, optionIndex) => (
-            <button
-              type="button"
-              key={`${lessonId}-${index}-${optionIndex}`}
-              className={answer === optionIndex ? "is-selected" : ""}
-              aria-pressed={answer === optionIndex}
-              onClick={() => updateAnswer(optionIndex, true)}
-            >
-              <span>{String.fromCharCode(65 + optionIndex)}</span>
-              <MathText>{option}</MathText>
-            </button>
+            (() => {
+              const selected = answer === optionIndex;
+              const expected = question.correctIndex === optionIndex;
+              const stateClass = checked
+                ? selected && status === "correct"
+                  ? " is-answer-correct"
+                  : selected
+                    ? " is-answer-wrong"
+                    : expected
+                      ? " is-answer-expected"
+                      : ""
+                : "";
+              return (
+                <button
+                  type="button"
+                  key={`${lessonId}-${index}-${optionIndex}`}
+                  className={`${selected ? "is-selected" : ""}${stateClass}`}
+                  aria-pressed={selected}
+                  onClick={() => onAnswer(optionIndex)}
+                >
+                  <span>{String.fromCharCode(65 + optionIndex)}</span>
+                  <MathText>{option}</MathText>
+                </button>
+              );
+            })()
           ))}
         </div>
       )}
 
-      {checked && (
-        <div className="course-reader-result" aria-live="polite">
-          {correct
-            ? <CheckCircle size={22} weight="fill" aria-hidden="true" />
-            : <XCircle size={22} weight="fill" aria-hidden="true" />}
+      {correction && (
+        <div className={`course-reader-result is-${correction.status}`} aria-live="polite">
+          {correction.status === "correct"
+            ? <CheckCircle size={24} weight="fill" aria-hidden="true" />
+            : correction.status === "unanswered"
+              ? <WarningCircle size={24} weight="fill" aria-hidden="true" />
+              : <XCircle size={24} weight="fill" aria-hidden="true" />}
           <div>
-            <strong>{correct ? "Exact, tu peux poursuivre." : "Pas encore. Reprends le raisonnement."}</strong>
-            {!correct && <p>Réponse attendue : <MathText>{correctAnswerLabel(question)}</MathText></p>}
-            <p><MathText>{question.explanation}</MathText></p>
+            <strong>
+              {correction.status === "correct"
+                ? "Bonne réponse"
+                : correction.status === "unanswered"
+                  ? "Pas de réponse"
+                  : "Réponse incorrecte"}
+            </strong>
+            {correction.status === "correct" && correction.answerLabel && (
+              <p className="course-reader-answer is-correct-answer">
+                <span>Ta réponse</span><MathText>{correction.answerLabel}</MathText>
+              </p>
+            )}
+            {correction.status === "incorrect" && correction.answerLabel && (
+              <p className="course-reader-answer is-student-wrong">
+                <span>Ta réponse</span><del><MathText>{correction.answerLabel}</MathText></del>
+              </p>
+            )}
+            {correction.status !== "correct" && (
+              <p className="course-reader-answer is-expected-answer">
+                <span>{correction.status === "unanswered" ? "Solution attendue" : "Réponse correcte"}</span>
+                <MathText>{correction.expectedAnswerLabel}</MathText>
+              </p>
+            )}
+            <p className="course-reader-explanation"><span>Pourquoi ?</span><MathText>{question.explanation}</MathText></p>
           </div>
         </div>
       )}
     </article>
+  );
+}
+
+function emptyQuickAnswer(question: LessonQuestion): CourseQuickAnswer {
+  return question.type === "short-answer" ? "" : null;
+}
+
+function CourseQuickCheckGroup({
+  lessonId,
+  questions,
+}: {
+  lessonId: string;
+  questions: LessonQuestion[];
+}) {
+  const [answers, setAnswers] = useState<CourseQuickAnswer[]>(() => questions.map(emptyQuickAnswer));
+  const [checked, setChecked] = useState(false);
+  const summary = checked ? calculateCourseCorrection(questions, answers) : null;
+
+  useEffect(() => {
+    setAnswers(questions.map(emptyQuickAnswer));
+    setChecked(false);
+  }, [lessonId]);
+
+  const updateAnswer = (index: number, answer: CourseQuickAnswer) => {
+    setAnswers((current) => current.map((value, answerIndex) => answerIndex === index ? answer : value));
+    setChecked(false);
+  };
+
+  return (
+    <form
+      className="course-reader-check-form"
+      onSubmit={(event) => {
+        event.preventDefault();
+        setChecked(true);
+      }}
+    >
+      <div className="course-reader-question-list">
+        {questions.map((question, questionIndex) => (
+          <CourseQuickCheck
+            key={`${lessonId}-quick-check-${questionIndex}`}
+            lessonId={lessonId}
+            question={question}
+            index={questionIndex}
+            answer={answers[questionIndex] ?? emptyQuickAnswer(question)}
+            checked={checked}
+            onAnswer={(answer) => updateAnswer(questionIndex, answer)}
+          />
+        ))}
+      </div>
+
+      <div className="course-reader-check-actions">
+        <button className="course-reader-action" type="submit">Valider mes réponses</button>
+        <span>Tu peux valider même si une réponse est vide.</span>
+      </div>
+
+      {summary && (
+        <section className="course-reader-score" aria-live="polite" aria-label="Résultat de cette vérification">
+          <ChartBar size={28} weight="duotone" aria-hidden="true" />
+          <div>
+            <p className="path-kicker">Résultat</p>
+            <strong>{summary.percentage} %</strong>
+            <span>{formatCourseScore(summary.scoreOutOf20)} / 20</span>
+          </div>
+          <p>
+            {summary.correctAnswers} bonne{summary.correctAnswers > 1 ? "s" : ""} réponse{summary.correctAnswers > 1 ? "s" : ""}
+            {" sur "}{summary.totalQuestions}. Ce bilan est un repère d’entraînement, sans XP ni pénalité.
+          </p>
+        </section>
+      )}
+    </form>
   );
 }
 
@@ -465,18 +536,9 @@ export function ContinuousCourseScreen({
                     <header>
                       <p className="path-kicker">Vérifie ta compréhension</p>
                       <h3 id={`course-checks-${lesson.id}`}>Quelques secondes pour faire le point</h3>
-                      <p>Réponds puis lis tout de suite l’explication. Il n’y a ni note ni pénalité.</p>
+                      <p>Réponds à ton rythme, puis valide l’ensemble pour voir la correction et ton bilan sur 20. Il n’y a ni XP ni pénalité.</p>
                     </header>
-                    <div>
-                      {quickChecks.map((question, questionIndex) => (
-                        <CourseQuickCheck
-                          key={`${lesson.id}-quick-check-${questionIndex}`}
-                          lessonId={lesson.id}
-                          question={question}
-                          index={questionIndex}
-                        />
-                      ))}
-                    </div>
+                    <CourseQuickCheckGroup lessonId={lesson.id} questions={quickChecks} />
                   </section>
                 )}
 
