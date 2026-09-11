@@ -14,6 +14,10 @@ import {
   previewHomeworkByReference,
 } from "../apps/web/src/data/homeworkCatalog.ts";
 import {
+  LSY_MATH_TC_AS49_PAGE_5_HOMEWORK_SLUG,
+  lsyMathTcAs49Page5Homework,
+} from "../apps/web/src/data/homeworks/lsyMathTcAs49Page5Homework.ts";
+import {
   canRetryHomework,
   homeworkExercisePoints,
   homeworkQuestionPointSplit,
@@ -99,6 +103,35 @@ test("le paquet public ne divulgue ni clé de réponse ni correction", () => {
   }
 });
 
+test("le devoir suivant restitue fidèlement la page 5 avant une copie numérique non gamifiée", () => {
+  const homework = lsyMathTcAs49Page5Homework;
+  const exercises = homeworkExercises(homework);
+  const questions = homeworkQuestions(homework);
+
+  assert.equal(homework.slug, LSY_MATH_TC_AS49_PAGE_5_HOMEWORK_SLUG);
+  assert.equal(homework.durationSeconds, 2 * 60 * 60);
+  assert.equal(homework.correctionAfterSubmission, true);
+  assert.equal(homework.maxAttempts, 1);
+  assert.equal(homework.questionCount, 16);
+  assert.equal(questions.length, 16);
+  assert.deepEqual(exercises.map(homeworkExercisePoints), [10, 10]);
+  assert.equal(questions.some((question) => question.id === "ex1-q5-cancelled"), false);
+  assert.match(homework.statementMarkdown ?? "", /Lycée Scientifique Yamoussoukro/);
+  assert.match(homework.statementMarkdown ?? "", /Cette épreuve comporte une page numérotée 1\/1/);
+  assert.match(homework.statementMarkdown ?? "", /~~5\) Détermine tous les entiers naturels/);
+  assert.match(homework.statementMarkdown ?? "", /197 et 257 sont premiers entre eux/);
+  assert.match(homework.sourceNotice ?? "", /ni année scolaire, ni numéro de devoir, ni barème/);
+  assert.match(homework.sourceNotice ?? "", /question 5.*barrée/i);
+  assert.equal(previewHomeworkByReference(homework.id), homework);
+  assert.equal(previewHomeworkByReference(homework.slug), homework);
+  assert.equal(canRetryHomework(homework), false);
+
+  const keys = allObjectKeys(homework);
+  for (const forbiddenKey of ["expectedAnswer", "explanationMarkdown", "correctionFigures"]) {
+    assert.equal(keys.has(forbiddenKey), false, `${forbiddenKey} ne doit pas entrer dans le sujet public.`);
+  }
+});
+
 test("chaque démonstration hybride garde résultat et raisonnement dans une même question", () => {
   const questions = homeworkQuestions(lsyMathTc2025Homework);
   const hybrid = questions.filter((question) => question.gradingMode === "hybrid");
@@ -166,6 +199,8 @@ test("la minuterie utilise l'heure serveur et survit à un décalage de l'horlog
 
 test("l'interface expose le partage hybride, le clavier de formules et le contrat mobile", () => {
   const appSource = readFileSync(`${projectRoot}/apps/web/src/App.tsx`, "utf8");
+  const learningAppSource = readFileSync(`${projectRoot}/apps/web/src/LearningApp.tsx`, "utf8");
+  const markdownSource = readFileSync(`${projectRoot}/apps/web/src/components/MarkdownContent.tsx`, "utf8");
   const questionSource = readFileSync(
     `${projectRoot}/apps/web/src/features/arena/homework/HomeworkQuestionCard.tsx`,
     "utf8",
@@ -186,6 +221,11 @@ test("l'interface expose le partage hybride, le clavier de formules et le contra
 
   assert.match(questionSource, /Réponse finale/);
   assert.match(appSource, /__homework-preview/);
+  assert.match(learningAppSource, /const isFocusedHomework = route\.navigation === "arena"/);
+  assert.match(learningAppSource, /!isFocusedHomework && \(\s*<MobileNavigation/);
+  assert.match(learningAppSource, /activeNavigation !== "admin" && !isFocusedHomework/);
+  assert.match(markdownSource, /part\.startsWith\("~~"\)/);
+  assert.match(markdownSource, /<s key=/);
   assert.match(questionSource, /Démonstration ou justification/);
   assert.match(questionSource, /après lecture/);
   assert.match(questionSource, /Lecture par un correcteur<\/span>/);
@@ -196,8 +236,9 @@ test("l'interface expose le partage hybride, le clavier de formules et le contra
   assert.match(questionSource, /question\.imageAlt/);
   assert.match(questionSource, /<MathText>\{question\.sourceNotice\}<\/MathText>/);
   assert.match(examSource, /Question neutralisée/);
-  assert.match(examSource, /Davy prépare le devoir/);
-  assert.match(examSource, /Davy recharge ton résultat/);
+  assert.match(examSource, /Préparation du devoir/);
+  assert.match(examSource, /Chargement de ton résultat/);
+  assert.doesNotMatch(examSource, /Davy prépare le devoir|Davy recharge ton résultat/);
   assert.match(examSource, /Ton résultat n’a pas pu être rechargé/);
   assert.match(examSource, /homework\.sourceNotice/);
   assert.match(examSource, /Information sur la source du devoir/);
@@ -235,6 +276,16 @@ test("l'interface expose le partage hybride, le clavier de formules et le contra
   assert.match(examSource, /homework-correction-question/);
   assert.match(examSource, /correction\.promptMarkdown/);
   assert.match(examSource, /correction\.choices/);
+  assert.match(examSource, /J’ai fini/);
+  assert.match(examSource, /Voir la correction/);
+  assert.match(examSource, /homework-original-subject/);
+  assert.match(examSource, /Sujet original · retranscription fidèle/);
+  assert.match(examSource, /Copie numérique/);
+  assert.doesNotMatch(examSource, /<CompanionAvatar/);
+  assert.doesNotMatch(examSource, /<Medal/);
+  assert.match(css, /\.homework-original-subject-paper/);
+  assert.match(css, /\.homework-correction-reveal/);
+  assert.match(css, /\.homework-correction-figures/);
 });
 
 test("la mise en page des exercices collés ne coupe jamais une formule comme $(D)$", () => {
@@ -306,6 +357,7 @@ test("l’effacement, l’expiration et les nouvelles tentatives gardent un cont
   assert.equal(nextHomeworkAttemptDurationSeconds(summary), Math.round(3 * 60 * 60 * 0.66));
   assert.equal(canRetryHomework({ ...summary, correctionsPublished: true }), false);
   assert.equal(canRetryHomework({ ...summary, attemptsUsed: 3 }), false);
+  assert.equal(canRetryHomework({ ...summary, correctionAfterSubmission: true }), false);
 
   const apiSource = readFileSync(
     `${projectRoot}/apps/web/src/features/arena/homework/homeworkApi.ts`,

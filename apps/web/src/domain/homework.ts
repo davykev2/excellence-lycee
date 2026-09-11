@@ -78,6 +78,8 @@ export interface HomeworkSummary {
   gradingMode: HomeworkGradingMode;
   subjectPublished?: boolean;
   correctionsPublished?: boolean;
+  /** Per-copy release; answers remain server-side until that copy is submitted. */
+  correctionAfterSubmission?: boolean;
   exerciseCount?: number;
   questionCount: number;
   totalPoints: number;
@@ -92,6 +94,8 @@ export interface HomeworkSummary {
 export interface HomeworkDefinition extends HomeworkSummary {
   instructionsMarkdown?: string;
   sourceNotice?: string;
+  /** Faithful transcription displayed as the original paper, before the digital answer sheet. */
+  statementMarkdown?: string;
   pointsScale?: number;
   sections: HomeworkSection[];
 }
@@ -125,12 +129,25 @@ export interface HomeworkAttempt {
 }
 
 export interface HomeworkCorrectionRubricCriterion extends HomeworkRubricCriterion {
-  pointsAwarded: number;
+  pointsAwarded?: number;
   status?: "met" | "partial" | "not-met";
+}
+
+export interface HomeworkCorrectionFigure {
+  url: string;
+  alt: string;
+  caption?: string;
 }
 
 export interface HomeworkCorrectionEntry {
   questionId: string;
+  sectionId?: string;
+  sectionTitle?: string;
+  sectionOrder?: number;
+  exerciseId?: string;
+  exerciseTitle?: string;
+  exerciseOrder?: number;
+  questionOrder?: number;
   label?: string;
   promptMarkdown?: string;
   choices?: HomeworkChoice[];
@@ -138,9 +155,10 @@ export interface HomeworkCorrectionEntry {
   attachmentUrls: string[];
   expectedAnswer?: string | string[];
   correct?: boolean;
-  pointsAwarded: number;
+  pointsAwarded?: number;
   pointsMax: number;
   explanationMarkdown?: string;
+  figures?: HomeworkCorrectionFigure[];
   reviewComment?: string;
   rubricCriteria?: HomeworkCorrectionRubricCriterion[];
 }

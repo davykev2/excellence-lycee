@@ -190,6 +190,40 @@ test("l’import privé résume le devoir sans exposer ses réponses", () => {
   assert.equal("expectedAnswer" in inspection.metadata, false, "l’aperçu ne remonte jamais le corrigé");
 });
 
+test("l’import auto-corrigé exige une tentative unique et valide les figures privées", () => {
+  const homework = validPackage() as ReturnType<typeof validPackage> & {
+    correctionAfterSubmission?: boolean;
+    statementMarkdown?: string;
+  };
+  homework.maxAttempts = 1;
+  homework.correctionAfterSubmission = true;
+  homework.statementMarkdown = "# Sujet original\n\nUne retranscription fidèle clairement séparée des champs de réponse.";
+  Object.assign(homework.sections[0].exercises[0].questions[2], {
+    correctionFigures: [{
+      url: "https://example.test/private/figure.svg",
+      alt: "Figure détaillée du corrigé",
+      caption: "Construction originale.",
+    }],
+  });
+
+  const valid = inspectHomeworkImportPackage(homework);
+  assert.equal(valid.valid, true);
+  assert.equal(valid.issues.some((issue) => issue.path === "correctionAfterSubmission"), false);
+
+  homework.maxAttempts = 2;
+  const repeatedAttempt = inspectHomeworkImportPackage(homework);
+  assert.equal(repeatedAttempt.valid, false);
+  assert.ok(repeatedAttempt.issues.some((issue) => issue.message.includes("tentative unique")));
+
+  homework.maxAttempts = 1;
+  Object.assign(homework.sections[0].exercises[0].questions[2], {
+    correctionFigures: [{ url: "http://example.test/figure.svg", alt: "x" }],
+  });
+  const unsafeFigure = inspectHomeworkImportPackage(homework);
+  assert.equal(unsafeFigure.valid, false);
+  assert.ok(unsafeFigure.issues.some((issue) => issue.path.includes("correctionFigures")));
+});
+
 test("l’aperçu refuse une série qui ne correspond pas au niveau", () => {
   const homework = validPackage();
   homework.series.id = "terminale-c";

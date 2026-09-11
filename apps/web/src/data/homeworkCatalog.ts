@@ -5,6 +5,7 @@ import type {
   HomeworkQuestion,
   HomeworkRubricCriterion,
 } from "../domain/homework";
+import { lsyMathTcAs49Page5Homework } from "./homeworks/lsyMathTcAs49Page5Homework";
 
 export const LSY_MATH_TC_2025_HOMEWORK_SLUG =
   "lycee-scientifique-yamoussoukro-mathematiques-tc-2025-2026-devoir-1";
@@ -429,7 +430,7 @@ export const lsyMathTc2025Homework: HomeworkDefinition = {
   }],
 };
 
-export const homeworkPreviewCatalog = [lsyMathTc2025Homework] as const;
+export const homeworkPreviewCatalog = [lsyMathTc2025Homework, lsyMathTcAs49Page5Homework] as const;
 
 export function previewHomeworkByReference(reference: string) {
   return homeworkPreviewCatalog.find((homework) => homework.id === reference || homework.slug === reference);

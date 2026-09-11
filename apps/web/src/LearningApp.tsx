@@ -298,6 +298,9 @@ function LearningAppShell({
   } = useUnreadMessages(localPreview);
   const profile: LearnerProfile = useMemo(() => ({ name: user.name, photoUrl: user.photoUrl, levelId: user.levelId }), [user]);
   const activeNavigation = route.navigation;
+  const isFocusedHomework = route.navigation === "arena"
+    && route.arenaMode === "homework"
+    && Boolean(route.homeworkRef);
   const subjectId = route.subjectId ?? previewPath?.subjectId ?? initialDashboard.subjectId;
   const selectedPathId = route.pathId ?? null;
   const activeLessonId = route.lessonId ?? null;
@@ -709,9 +712,11 @@ function LearningAppShell({
         )}
       </Suspense>
 
-      <MobileNavigation activeItem={activeNavigation} onNavigate={handleNavigate} canAccessAdmin={user.role === "admin"} unreadMessages={unreadMessages} />
+      {!isFocusedHomework && (
+        <MobileNavigation activeItem={activeNavigation} onNavigate={handleNavigate} canAccessAdmin={user.role === "admin"} unreadMessages={unreadMessages} />
+      )}
 
-      {activeNavigation !== "admin" && (
+      {activeNavigation !== "admin" && !isFocusedHomework && (
         <CompanionGuide
           learnerName={profile.name}
           level={level}
@@ -726,7 +731,7 @@ function LearningAppShell({
         />
       )}
 
-      {activeNavigation !== "admin" && (
+      {activeNavigation !== "admin" && !isFocusedHomework && (
         <FirstVisitTour
           userId={user.id}
           learnerName={profile.name}

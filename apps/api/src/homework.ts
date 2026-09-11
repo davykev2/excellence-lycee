@@ -72,6 +72,7 @@ export interface HomeworkSummary {
   gradingMode: HomeworkGradingMode;
   subjectPublished: boolean;
   correctionsPublished: boolean;
+  correctionAfterSubmission: boolean;
   exerciseCount: number;
   questionCount: number;
   totalPoints: number;
@@ -86,6 +87,7 @@ export interface HomeworkSummary {
 export interface HomeworkDefinition extends HomeworkSummary {
   instructionsMarkdown?: string;
   sourceNotice?: string;
+  statementMarkdown?: string;
   sections: Array<{
     id: string;
     title: string;
@@ -116,6 +118,13 @@ export interface HomeworkAttempt {
 
 export interface HomeworkCorrection {
   questionId: string;
+  sectionId?: string;
+  sectionTitle?: string;
+  sectionOrder?: number;
+  exerciseId?: string;
+  exerciseTitle?: string;
+  exerciseOrder?: number;
+  questionOrder?: number;
   label: string;
   promptMarkdown: string;
   choices?: HomeworkChoice[];
@@ -123,9 +132,10 @@ export interface HomeworkCorrection {
   attachmentUrls: string[];
   expectedAnswer?: unknown;
   correct?: boolean;
-  pointsAwarded: number;
+  pointsAwarded?: number;
   pointsMax: number;
   explanationMarkdown: string;
+  figures?: Array<{ url: string; alt: string; caption?: string }>;
   reviewComment?: string;
   rubricCriteria?: HomeworkRubricCriterion[];
 }
@@ -193,6 +203,7 @@ export interface HomeworkImportQuestion {
   imageUrl?: string;
   imageAlt?: string;
   sourceNotice?: string;
+  correctionFigures?: Array<{ url: string; alt: string; caption?: string }>;
 }
 
 export interface HomeworkImportPackage {
@@ -210,9 +221,11 @@ export interface HomeworkImportPackage {
   gradingMode: HomeworkGradingMode;
   instructionsMarkdown?: string;
   sourceNotice?: string;
+  statementMarkdown?: string;
   maxAttempts: number;
   subjectPublished: boolean;
   correctionsPublished: boolean;
+  correctionAfterSubmission?: boolean;
   sections: Array<{
     id: string;
     title: string;
@@ -335,6 +348,7 @@ export function groupHomeworkQuestions(
     exerciseInstructionsMarkdown?: string;
   }>,
   sourceNotice?: string,
+  statementMarkdown?: string,
 ): HomeworkDefinition {
   const sectionMap = new Map<string, HomeworkDefinition["sections"][number]>();
   for (const question of rows) {
@@ -381,7 +395,7 @@ export function groupHomeworkQuestions(
           questions: exercise.questions.sort((a, b) => a.order - b.order),
         })),
     }));
-  return { ...summary, instructionsMarkdown, sourceNotice, sections };
+  return { ...summary, instructionsMarkdown, sourceNotice, statementMarkdown, sections };
 }
 
 interface LocalQuizRow {
@@ -403,9 +417,11 @@ interface LocalQuizRow {
   grading_mode: HomeworkGradingMode;
   instructions_markdown: string | null;
   source_notice: string | null;
+  statement_markdown: string | null;
   published: number;
   subject_open: number;
   corrections_published: number;
+  correction_after_submission: number;
   max_attempts: number;
   version: number;
   import_id: string | null;
@@ -439,6 +455,7 @@ interface LocalQuestionRow {
   image_url: string | null;
   image_alt: string | null;
   source_notice: string | null;
+  correction_figures_json: string;
 }
 
 interface LocalAttemptRow {
@@ -495,9 +512,11 @@ export function ensureLocalHomeworkSchema() {
       grading_mode TEXT NOT NULL CHECK (grading_mode IN ('auto', 'manual', 'hybrid')),
       instructions_markdown TEXT,
       source_notice TEXT,
+      statement_markdown TEXT,
       published INTEGER NOT NULL DEFAULT 0 CHECK (published IN (0, 1)),
       subject_open INTEGER NOT NULL DEFAULT 0 CHECK (subject_open IN (0, 1)),
       corrections_published INTEGER NOT NULL DEFAULT 0 CHECK (corrections_published IN (0, 1)),
+      correction_after_submission INTEGER NOT NULL DEFAULT 0 CHECK (correction_after_submission IN (0, 1)),
       max_attempts INTEGER NOT NULL DEFAULT 3 CHECK (max_attempts BETWEEN 1 AND 10),
       version INTEGER NOT NULL DEFAULT 1 CHECK (version > 0),
       import_id TEXT UNIQUE,
@@ -537,6 +556,7 @@ export function ensureLocalHomeworkSchema() {
       image_url TEXT,
       image_alt TEXT,
       source_notice TEXT,
+      correction_figures_json TEXT NOT NULL DEFAULT '[]',
       CHECK (ABS((auto_points_max + manual_points_max) - points) < 0.0001),
       UNIQUE (quiz_id, order_number)
     );
@@ -590,6 +610,12 @@ export function ensureLocalHomeworkSchema() {
   if (!quizColumns.some((column) => column.name === "payload_hash")) {
     database.exec("ALTER TABLE homework_quizzes ADD COLUMN payload_hash TEXT");
   }
+  if (!quizColumns.some((column) => column.name === "statement_markdown")) {
+    database.exec("ALTER TABLE homework_quizzes ADD COLUMN statement_markdown TEXT");
+  }
+  if (!quizColumns.some((column) => column.name === "correction_after_submission")) {
+    database.exec("ALTER TABLE homework_quizzes ADD COLUMN correction_after_submission INTEGER NOT NULL DEFAULT 0 CHECK (correction_after_submission IN (0, 1))");
+  }
   database.exec("CREATE UNIQUE INDEX IF NOT EXISTS homework_quizzes_import_id_idx ON homework_quizzes(import_id) WHERE import_id IS NOT NULL");
 
   const questionColumns = database.prepare("PRAGMA table_info(homework_questions)").all() as Array<{ name: string }>;
@@ -609,6 +635,9 @@ export function ensureLocalHomeworkSchema() {
   }
   if (!questionColumns.some((column) => column.name === "source_notice")) {
     database.exec("ALTER TABLE homework_questions ADD COLUMN source_notice TEXT");
+  }
+  if (!questionColumns.some((column) => column.name === "correction_figures_json")) {
+    database.exec("ALTER TABLE homework_questions ADD COLUMN correction_figures_json TEXT NOT NULL DEFAULT '[]'");
   }
 }
 
@@ -723,6 +752,7 @@ function homeworkSummary(quiz: LocalQuizRow, actor: HomeworkActor): HomeworkSumm
     gradingMode: quiz.grading_mode,
     subjectPublished: quiz.subject_open === 1,
     correctionsPublished: quiz.corrections_published === 1,
+    correctionAfterSubmission: quiz.correction_after_submission === 1,
     exerciseCount: questionStats.exercise_count,
     questionCount: questionStats.question_count,
     totalPoints: questionStats.total_points,
@@ -801,6 +831,7 @@ export function getLocalHomework(actor: HomeworkActor, homeworkReference: string
       quiz.instructions_markdown ?? undefined,
       [],
       quiz.source_notice ?? undefined,
+      quiz.statement_markdown ?? undefined,
     );
   }
   const questions = localQuestions(quiz.id).map((row) => ({
@@ -818,6 +849,7 @@ export function getLocalHomework(actor: HomeworkActor, homeworkReference: string
     quiz.instructions_markdown ?? undefined,
     questions,
     quiz.source_notice ?? undefined,
+    quiz.statement_markdown ?? undefined,
   );
 }
 
@@ -1289,7 +1321,12 @@ function localHomeworkResult(actor: HomeworkActor, attempt: LocalAttemptRow, all
   const answeredCount = questions.reduce((total, question) => (
     question.is_neutralized === 1 || answers.has(question.id) ? total + 1 : total
   ), 0);
-  const correctionsAvailable = allowAdminSecrets || (quiz.corrections_published === 1 && attempt.review_status !== "pending");
+  const correctionsAvailable = allowAdminSecrets
+    || quiz.correction_after_submission === 1
+    || (quiz.corrections_published === 1 && attempt.review_status !== "pending");
+  const hidePendingAssessment = quiz.correction_after_submission === 1
+    && attempt.review_status === "pending"
+    && !allowAdminSecrets;
   const result: HomeworkResult = {
     attemptId: attempt.id,
     homeworkId: attempt.quiz_id,
@@ -1304,7 +1341,7 @@ function localHomeworkResult(actor: HomeworkActor, attempt: LocalAttemptRow, all
     totalPoints: attempt.total_points,
     correctionsAvailable,
   };
-  if (correctionsAvailable) {
+  if (correctionsAvailable && !hidePendingAssessment) {
     result.autoGradedPoints = attempt.auto_points;
     result.scoreOutOf20 = attempt.score_out_of_20 ?? undefined;
     result.appreciation = attempt.score_out_of_20 == null ? undefined : appreciation(attempt.score_out_of_20);
@@ -1317,6 +1354,13 @@ function localHomeworkResult(actor: HomeworkActor, attempt: LocalAttemptRow, all
       const awarded = parseJson<Array<{ id: string; pointsAwarded: number }>>(answer?.rubric_awards_json, []);
       return {
         questionId: question.id,
+        sectionId: question.section_id,
+        sectionTitle: question.section_title,
+        sectionOrder: question.section_order,
+        exerciseId: question.exercise_id,
+        exerciseTitle: question.exercise_title,
+        exerciseOrder: question.exercise_order,
+        questionOrder: question.order_number,
         label: question.question_label,
         promptMarkdown: question.prompt_markdown,
         choices: normalizeChoices(parseJson<unknown>(question.choices_json, null)),
@@ -1325,18 +1369,26 @@ function localHomeworkResult(actor: HomeworkActor, attempt: LocalAttemptRow, all
         ...(question.is_neutralized === 1
           ? {}
           : { expectedAnswer: parseJson<unknown>(question.expected_answer_json, null) }),
-        correct: question.is_neutralized === 1 ? true : question.auto_points_max > 0 ? Boolean(answer?.correct) : undefined,
-        pointsAwarded: question.is_neutralized === 1
-          ? question.points
-          : (answer?.auto_points ?? 0) + (answer?.manual_points ?? 0),
+        ...(!hidePendingAssessment ? {
+          correct: question.is_neutralized === 1 ? true : question.auto_points_max > 0 ? Boolean(answer?.correct) : undefined,
+          pointsAwarded: question.is_neutralized === 1
+            ? question.points
+            : (answer?.auto_points ?? 0) + (answer?.manual_points ?? 0),
+        } : {}),
         pointsMax: question.points,
         explanationMarkdown: question.explanation_markdown,
-        reviewComment: answer?.review_comment ?? undefined,
-        rubricCriteria: rubric.length > 0 ? rubric.map((criterion) => ({
-          ...criterion,
-          pointsAwarded: awarded.find((item) => item.id === criterion.id)?.pointsAwarded ?? 0,
-          status: "reviewed" as const,
-        })) : undefined,
+        figures: parseJson<Array<{ url: string; alt: string; caption?: string }>>(
+          question.correction_figures_json,
+          [],
+        ),
+        ...(!hidePendingAssessment ? {
+          reviewComment: answer?.review_comment ?? undefined,
+          rubricCriteria: rubric.length > 0 ? rubric.map((criterion) => ({
+            ...criterion,
+            pointsAwarded: awarded.find((item) => item.id === criterion.id)?.pointsAwarded ?? 0,
+            status: "reviewed" as const,
+          })) : undefined,
+        } : {}),
       };
     });
   }
@@ -1495,6 +1547,13 @@ export function importLocalHomeworkPackage(
   actor: HomeworkActor,
   input: HomeworkImportPackage,
 ): HomeworkImportResult {
+  if (input.correctionAfterSubmission && input.maxAttempts !== 1) {
+    throw new HomeworkOperationError(
+      "La correction après remise exige une tentative unique.",
+      400,
+      "HOMEWORK_SELF_CORRECTION_REQUIRES_SINGLE_ATTEMPT",
+    );
+  }
   return database.transaction(() => {
     const payloadHash = homeworkPayloadHash(input);
     const alreadyImported = database.prepare(`
@@ -1587,9 +1646,10 @@ export function importLocalHomeworkPackage(
         id, stable_id, slug, title, number, institution, academic_year,
         subject_id, subject_name, subject_icon, level_id, level_name,
         series_id, series_name, duration_seconds, grading_mode,
-        instructions_markdown, source_notice, published, subject_open, corrections_published,
+        instructions_markdown, source_notice, statement_markdown,
+        published, subject_open, corrections_published, correction_after_submission,
         max_attempts, version, import_id, payload_hash
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?)
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       quizId,
       input.stableId,
@@ -1609,8 +1669,10 @@ export function importLocalHomeworkPackage(
       input.gradingMode,
       input.instructionsMarkdown?.trim() || null,
       input.sourceNotice?.trim() || null,
+      input.statementMarkdown?.trim() || null,
       input.subjectPublished ? 1 : 0,
       input.correctionsPublished ? 1 : 0,
+      input.correctionAfterSubmission ? 1 : 0,
       input.maxAttempts,
       version,
       input.importId,
@@ -1625,8 +1687,8 @@ export function importLocalHomeworkPackage(
         question_label, prompt_markdown, question_type, answer_kind,
         grading_mode, is_neutralized, choices_json, expected_answer_json,
         points, auto_points_max, manual_points_max, explanation_markdown,
-        rubric_json, image_url, image_alt, source_notice
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        rubric_json, image_url, image_alt, source_notice, correction_figures_json
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
     for (const section of input.sections) {
       for (const exercise of section.exercises) {
@@ -1659,6 +1721,7 @@ export function importLocalHomeworkPackage(
             question.imageUrl ?? null,
             question.imageAlt ?? null,
             question.sourceNotice?.trim() || null,
+            JSON.stringify(question.correctionFigures ?? []),
           );
         }
       }
@@ -1774,16 +1837,20 @@ async function homeworkRpc<T>(accessToken: string, name: string, args: Record<st
   return data as T;
 }
 
-export function listSupabaseHomeworks(
+export async function listSupabaseHomeworks(
   accessToken: string,
   filters: { subjectId?: string; academicYear?: string; institution?: string; levelId?: string },
 ) {
-  return homeworkRpc<HomeworkSummary[]>(accessToken, "list_homeworks_v1", {
+  const homeworks = await homeworkRpc<HomeworkSummary[]>(accessToken, "list_homework_experiences_v1", {
     p_subject_id: filters.subjectId ?? null,
     p_academic_year: filters.academicYear ?? null,
     p_institution: filters.institution ?? null,
     p_level_id: filters.levelId ?? null,
   });
+  return homeworks.map((homework) => ({
+    ...homework,
+    correctionAfterSubmission: homework.correctionAfterSubmission === true,
+  }));
 }
 
 export async function getSupabaseHomework(accessToken: string, homeworkReference: string): Promise<HomeworkDefinition> {
@@ -1791,13 +1858,20 @@ export async function getSupabaseHomework(accessToken: string, homeworkReference
     summary: HomeworkSummary;
     instructionsMarkdown?: string;
     sourceNotice?: string;
+    statementMarkdown?: string;
     questions: Array<HomeworkPublicQuestion & {
       sectionId?: string; sectionTitle?: string; sectionOrder?: number;
       exerciseId?: string; exerciseTitle?: string; exerciseOrder?: number;
       exerciseInstructionsMarkdown?: string;
     }>;
-  }>(accessToken, "get_homework_public_v1", { p_homework_ref: homeworkReference });
-  return groupHomeworkQuestions(payload.summary, payload.instructionsMarkdown, payload.questions, payload.sourceNotice);
+  }>(accessToken, "get_homework_experience_v1", { p_homework_ref: homeworkReference });
+  return groupHomeworkQuestions(
+    payload.summary,
+    payload.instructionsMarkdown,
+    payload.questions,
+    payload.sourceNotice,
+    payload.statementMarkdown,
+  );
 }
 
 export function startSupabaseHomeworkAttempt(accessToken: string, homeworkReference: string) {
@@ -1837,11 +1911,11 @@ export function deleteSupabaseHomeworkAnswer(
 }
 
 export function submitSupabaseHomeworkAttempt(accessToken: string, attemptId: string) {
-  return homeworkRpc<HomeworkResult>(accessToken, "finalize_homework_attempt_v1", { p_attempt_id: attemptId });
+  return homeworkRpc<HomeworkResult>(accessToken, "finalize_homework_experience_attempt_v1", { p_attempt_id: attemptId });
 }
 
 export function getSupabaseHomeworkResult(accessToken: string, attemptId: string) {
-  return homeworkRpc<HomeworkResult>(accessToken, "get_homework_result_v1", { p_attempt_id: attemptId });
+  return homeworkRpc<HomeworkResult>(accessToken, "get_homework_experience_result_v1", { p_attempt_id: attemptId });
 }
 
 export function listSupabaseHomeworkReviews(accessToken: string, status: HomeworkReviewStatus) {
@@ -1877,7 +1951,7 @@ export function setSupabaseHomeworkPublication(
 }
 
 export function importSupabaseHomeworkPackage(accessToken: string, input: HomeworkImportPackage) {
-  return homeworkRpc<HomeworkImportResult>(accessToken, "import_homework_package_v1", {
+  return homeworkRpc<HomeworkImportResult>(accessToken, "import_homework_experience_package_v1", {
     p_payload: input,
   });
 }

@@ -9,7 +9,6 @@ import {
   FileText,
   FloppyDisk,
   Hourglass,
-  Medal,
   NotePencil,
   SealCheck,
   ShieldCheck,
@@ -33,7 +32,6 @@ import {
   isHomeworkAnswerComplete,
 } from "../../../domain/homework";
 import { useAuth } from "../../auth/AuthProvider";
-import { CompanionAvatar } from "../../companion/CompanionAvatar";
 import "../../../styles/homework.css";
 import { useHomeworkAttempt } from "./homeworkApi";
 import {
@@ -65,13 +63,19 @@ function answerText(answer?: HomeworkAnswerValue | null) {
   ].filter(Boolean).join("\n\n");
 }
 
-function CorrectionEntry({ correction }: { correction: HomeworkCorrectionEntry }) {
+function CorrectionEntry({
+  correction,
+  showAssessment,
+}: {
+  correction: HomeworkCorrectionEntry;
+  showAssessment: boolean;
+}) {
   const studentAnswer = answerText(correction.studentAnswer);
   return (
     <article className={`homework-correction-entry${correction.correct === true ? " is-correct" : correction.correct === false ? " is-incorrect" : ""}`}>
       <header>
         <span>{correction.label ?? correction.questionId}</span>
-        <strong>{points(correction.pointsAwarded)} / {points(correction.pointsMax)} pt</strong>
+        {showAssessment && <strong>{points(correction.pointsAwarded ?? 0)} / {points(correction.pointsMax)} pt</strong>}
       </header>
       {correction.promptMarkdown && (
         <section className="homework-correction-question">
@@ -105,7 +109,7 @@ function CorrectionEntry({ correction }: { correction: HomeworkCorrectionEntry }
                 : correction.expectedAnswer}
               preserveLineBreaks
             />
-            : <p>Cette réponse a été évaluée à partir du barème.</p>}
+            : <p>La solution complète est détaillée juste après.</p>}
         </section>
       </div>
       {correction.explanationMarkdown && (
@@ -114,19 +118,57 @@ function CorrectionEntry({ correction }: { correction: HomeworkCorrectionEntry }
           <div><strong>Correction expliquée</strong><MarkdownContent markdown={correction.explanationMarkdown} preserveLineBreaks /></div>
         </section>
       )}
-      {correction.rubricCriteria && correction.rubricCriteria.length > 0 && (
+      {correction.figures && correction.figures.length > 0 && (
+        <div className="homework-correction-figures">
+          {correction.figures.map((figure) => (
+            <figure key={`${correction.questionId}-${figure.url}`}>
+              <img src={figure.url} alt={figure.alt} loading="lazy" decoding="async" />
+              {figure.caption && <figcaption>{figure.caption}</figcaption>}
+            </figure>
+          ))}
+        </div>
+      )}
+      {showAssessment && correction.rubricCriteria && correction.rubricCriteria.length > 0 && (
         <ul className="homework-correction-rubric">
           {correction.rubricCriteria.map((criterion) => (
             <li key={criterion.id}>
               <span>{criterion.label}</span>
-              <strong>{points(criterion.pointsAwarded)} / {points(criterion.pointsMax)}</strong>
+              <strong>{points(criterion.pointsAwarded ?? 0)} / {points(criterion.pointsMax)}</strong>
             </li>
           ))}
         </ul>
       )}
-      {correction.reviewComment && <blockquote>{correction.reviewComment}</blockquote>}
+      {showAssessment && correction.reviewComment && <blockquote>{correction.reviewComment}</blockquote>}
     </article>
   );
+}
+
+function correctionGroups(corrections: HomeworkCorrectionEntry[] = []) {
+  const groups = new Map<string, {
+    id: string;
+    title: string;
+    order: number;
+    corrections: HomeworkCorrectionEntry[];
+  }>();
+  corrections.forEach((correction) => {
+    const id = correction.exerciseId ?? "correction";
+    const group = groups.get(id) ?? {
+      id,
+      title: correction.exerciseTitle ?? "Correction",
+      order: correction.exerciseOrder ?? Number.MAX_SAFE_INTEGER,
+      corrections: [],
+    };
+    group.corrections.push(correction);
+    groups.set(id, group);
+  });
+  return [...groups.values()]
+    .sort((left, right) => left.order - right.order)
+    .map((group) => ({
+      ...group,
+      corrections: group.corrections.sort(
+        (left, right) => (left.questionOrder ?? 0) - (right.questionOrder ?? 0),
+      ),
+    }));
 }
 
 function HomeworkResultView({
@@ -150,9 +192,33 @@ function HomeworkResultView({
 }) {
   const pending = result.reviewStatus === "pending" || result.status === "awaiting-review" || result.status === "submitted";
   const scorePublished = result.scoreOutOf20 != null;
-  const displayedScore = result.scoreOutOf20 ?? result.provisionalScoreOutOf20;
+  const displayedScore = pending && homework.correctionAfterSubmission
+    ? undefined
+    : result.scoreOutOf20 ?? result.provisionalScoreOutOf20;
   const retryAvailable = canRetryHomework(homework);
   const nextDuration = nextHomeworkAttemptDurationSeconds(homework);
+  const [correctionOpen, setCorrectionOpen] = useState(false);
+  const correctionTitleRef = useRef<HTMLHeadingElement>(null);
+  const groups = useMemo(() => correctionGroups(result.corrections), [result.corrections]);
+  const canRevealCorrection = result.correctionsAvailable && groups.length > 0;
+  const assessmentAvailable = !pending;
+  const resultQuestions = homeworkQuestions(homework);
+  const hasAutomaticAssessment = resultQuestions.some(
+    (question) => !question.isNeutralized && question.gradingMode !== "manual",
+  );
+  const hasNeutralizedQuestion = resultQuestions.some((question) => question.isNeutralized);
+
+  useEffect(() => {
+    setCorrectionOpen(false);
+  }, [result.attemptId]);
+
+  const revealCorrection = () => {
+    setCorrectionOpen(true);
+    window.requestAnimationFrame(() => {
+      correctionTitleRef.current?.focus();
+      correctionTitleRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
   return (
     <main className="homework-exam-page is-result">
       <header className="homework-exam-topbar">
@@ -169,14 +235,16 @@ function HomeworkResultView({
               ? `${learnerName}, voici ta note finale.`
               : `${learnerName}, ta copie est corrigée.`}</h1>
           <p>{pending
-            ? "Les réponses courtes ont été vérifiées. Un correcteur attribuera maintenant les points du raisonnement, critère par critère."
+            ? canRevealCorrection
+              ? "Ta copie est enregistrée. Tu peux déjà étudier le corrigé détaillé ; ta note attend encore la lecture du raisonnement."
+              : "Les réponses courtes ont été vérifiées. Un correcteur attribuera maintenant les points du raisonnement, critère par critère."
             : scorePublished
               ? result.appreciation?.message ?? "Reprends chaque étape de la correction pour consolider tes méthodes."
-              : "Davy affichera ta note et la correction dès que l’administration publiera les résultats."}</p>
+              : "La note et la correction seront affichées dès que l’administration publiera les résultats."}</p>
           <span>Remise le {dateTime(result.submittedAt)}</span>
         </div>
         <div className="homework-result-score">
-          {pending ? <Hourglass size={34} weight="duotone" /> : <Medal size={34} weight="duotone" />}
+          {pending ? <Hourglass size={34} weight="duotone" /> : <CheckCircle size={34} weight="duotone" />}
           {displayedScore == null ? (
             <><strong>—</strong><span>/20</span><small>Note en attente</small></>
           ) : (
@@ -188,15 +256,27 @@ function HomeworkResultView({
       <section className="homework-result-breakdown">
         <article>
           <span>Réponses automatiques</span>
-          <strong>{result.autoGradedPoints == null ? "Masqué" : `${points(result.autoGradedPoints)} pt`}</strong>
-          <small>{result.autoGradedPoints == null ? "Visible à la publication" : "Déjà vérifiées"}</small>
+          <strong>{!hasAutomaticAssessment
+            ? "Aucune"
+            : !assessmentAvailable || result.autoGradedPoints == null
+              ? "En attente"
+              : `${points(result.autoGradedPoints)} pt`}</strong>
+          <small>{!hasAutomaticAssessment
+            ? "Sujet entièrement rédigé"
+            : assessmentAvailable && result.autoGradedPoints != null
+              ? "Déjà vérifiées"
+              : homework.correctionAfterSubmission ? "Avec la note finale" : "Visible à la publication"}</small>
         </article>
         <article>
           <span>{pending ? "Raisonnement à relire" : "Correction humaine"}</span>
           <strong>{pending ? `${points(result.pendingManualPoints)} pt` : "Terminée"}</strong>
           <small>{pending ? "En attente" : "Intégrée dans la note finale"}</small>
         </article>
-        <article><span>Questions traitées</span><strong>{result.answeredCount}/{result.questionCount}</strong><small>Question neutralisée incluse</small></article>
+        <article>
+          <span>Questions traitées</span>
+          <strong>{result.answeredCount}/{result.questionCount}</strong>
+          {hasNeutralizedQuestion && <small>Question neutralisée incluse</small>}
+        </article>
       </section>
 
       {retryAvailable && (
@@ -216,9 +296,60 @@ function HomeworkResultView({
         </section>
       )}
 
-      {pending ? (
+      {canRevealCorrection && !correctionOpen ? (
+        <section className="homework-correction-reveal" aria-labelledby="homework-correction-reveal-title">
+          <BookOpenText size={35} weight="duotone" />
+          <div>
+            <p className="path-kicker">Copie définitivement remise</p>
+            <h2 id="homework-correction-reveal-title">Le corrigé détaillé est prêt.</h2>
+            <p>
+              Ouvre-le quand tu es prêt à comparer chaque étape. La correction apparaîtra sous ce panneau
+              sans modifier ta copie.
+            </p>
+          </div>
+          <button
+            className="primary-action"
+            type="button"
+            aria-expanded="false"
+            aria-controls="homework-detailed-correction"
+            onClick={revealCorrection}
+          >
+            Voir la correction<ArrowRight size={19} weight="bold" />
+          </button>
+        </section>
+      ) : canRevealCorrection && correctionOpen ? (
+        <section id="homework-detailed-correction" className="homework-correction-list">
+          <header>
+            <p className="path-kicker">Correction détaillée</p>
+            <h2 ref={correctionTitleRef} tabIndex={-1}>Le devoir corrigé, exercice par exercice</h2>
+            <p>
+              Compare ton raisonnement au modèle. {pending
+                ? "Les méthodes sont disponibles maintenant ; les points définitifs seront ajoutés après la lecture de ta copie."
+                : "Les points affichés tiennent compte de la correction de ta copie."}
+            </p>
+          </header>
+          {assessmentAvailable && result.reviewComment && (
+            <blockquote className="homework-overall-review"><strong>Appréciation du correcteur</strong>{result.reviewComment}</blockquote>
+          )}
+          {groups.map((group) => (
+            <section className="homework-correction-exercise" key={group.id} aria-labelledby={`homework-correction-${group.id}`}>
+              <header>
+                <span>{group.order === Number.MAX_SAFE_INTEGER ? "Correction" : `Exercice ${group.order}`}</span>
+                <h3 id={`homework-correction-${group.id}`}>{group.title === `Exercice ${group.order}` ? "Solutions détaillées" : group.title}</h3>
+              </header>
+              {group.corrections.map((correction) => (
+                <CorrectionEntry
+                  correction={correction}
+                  showAssessment={assessmentAvailable}
+                  key={correction.questionId}
+                />
+              ))}
+            </section>
+          ))}
+        </section>
+      ) : pending ? (
         <section className="homework-result-waiting">
-          <CompanionAvatar motion="idle" decorative />
+          <Hourglass size={35} weight="duotone" />
           <div>
             <h2>Pourquoi la note n’est-elle pas encore définitive ?</h2>
             <p>
@@ -231,16 +362,10 @@ function HomeworkResultView({
       ) : !scorePublished || !result.correctionsAvailable ? (
         <section className="homework-result-waiting">
           <ShieldCheck size={35} weight="duotone" />
-          <div><h2>Les résultats détaillés restent fermés</h2><p>Davy affichera ta note et toutes les méthodes dès que l’administration publiera les résultats et le corrigé.</p></div>
+          <div><h2>Les résultats détaillés restent fermés</h2><p>La note et toutes les méthodes seront affichées dès que l’administration publiera les résultats et le corrigé.</p></div>
           <button className="secondary-action" type="button" onClick={onReload}>Actualiser</button>
         </section>
-      ) : (
-        <section className="homework-correction-list">
-          <header><p className="path-kicker">Correction détaillée</p><h2>Ta copie, question par question</h2><p>Compare ton raisonnement au modèle et regarde précisément où chaque point a été attribué.</p></header>
-          {result.reviewComment && <blockquote className="homework-overall-review"><strong>Appréciation du correcteur</strong>{result.reviewComment}</blockquote>}
-          {result.corrections?.map((correction) => <CorrectionEntry correction={correction} key={correction.questionId} />)}
-        </section>
-      )}
+      ) : null}
     </main>
   );
 }
@@ -350,7 +475,7 @@ export function HomeworkExamPage({
           <button className="path-back-button" type="button" onClick={onBackLibrary}><ArrowLeft size={20} weight="bold" />Retour aux devoirs</button>
           <span><FileText size={19} weight="duotone" />Résultat de la copie</span>
         </header>
-        <div className="homework-loading" role="status"><span />Davy recharge ton résultat…</div>
+        <div className="homework-loading" role="status"><span />Chargement de ton résultat…</div>
       </main>
     );
   }
@@ -375,7 +500,7 @@ export function HomeworkExamPage({
     return (
       <main className="homework-exam-page">
         <div className="homework-loading" role="status">
-          <span />{exam.resuming ? "Davy reprend ta copie et restaure tes réponses…" : "Davy prépare le devoir…"}
+          <span />{exam.resuming ? "Reprise de ta copie et restauration des réponses…" : "Préparation du devoir…"}
         </div>
       </main>
     );
@@ -412,7 +537,7 @@ export function HomeworkExamPage({
           <div className="homework-start-stats">
             <article><Clock size={23} weight="duotone" /><span>Temps officiel</span><strong>{formatHomeworkDuration(homework.durationSeconds)}</strong></article>
             <article><BookOpenText size={23} weight="duotone" /><span>Exercices</span><strong>{exerciseCount}</strong></article>
-            <article><Medal size={23} weight="duotone" /><span>Barème</span><strong>/{homeworkScoreMax(homework)}</strong></article>
+            <article><CheckCircle size={23} weight="duotone" /><span>Barème</span><strong>/{homeworkScoreMax(homework)}</strong></article>
           </div>
           {homework.sourceNotice && (
             <aside className="homework-source-notice" aria-label="Information sur la source du devoir">
@@ -421,15 +546,29 @@ export function HomeworkExamPage({
             </aside>
           )}
           <section className="homework-hybrid-explainer">
-            <CompanionAvatar motion="wave" decorative />
+            <FileText size={38} weight="duotone" />
             <div>
-              <p className="path-kicker">Une correction juste, pas une devinette automatique</p>
-              <h2>Ton résultat et ta démonstration seront évalués séparément.</h2>
-              <p>
-                Les QCM et résultats courts sont vérifiés par le serveur. Pour les démonstrations,
-                un correcteur lit ta rédaction et attribue chaque partie du barème. La note reste
-                provisoire tant que cette lecture n’est pas terminée.
-              </p>
+              {homework.correctionAfterSubmission ? (
+                <>
+                  <p className="path-kicker">Sujet, copie, puis correction</p>
+                  <h2>Le corrigé reste fermé jusqu’à « J’ai fini ».</h2>
+                  <p>
+                    Tu disposes d’une seule tentative. Après la remise définitive, le bouton
+                    « Voir la correction » te permet de comparer ton raisonnement au corrigé complet,
+                    sans attendre l’attribution de la note.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="path-kicker">Une correction juste, pas une devinette automatique</p>
+                  <h2>Ton résultat et ta démonstration seront évalués séparément.</h2>
+                  <p>
+                    Les QCM et résultats courts sont vérifiés par le serveur. Pour les démonstrations,
+                    un correcteur lit ta rédaction et attribue chaque partie du barème. La note reste
+                    provisoire tant que cette lecture n’est pas terminée.
+                  </p>
+                </>
+              )}
             </div>
           </section>
           {homework.instructionsMarkdown && <div className="homework-start-instructions"><MarkdownContent markdown={homework.instructionsMarkdown} preserveLineBreaks /></div>}
@@ -450,6 +589,7 @@ export function HomeworkExamPage({
     count + (question.isNeutralized || isHomeworkAnswerComplete(attempt.answers[question.id]) ? 1 : 0)
   ), 0);
   const answerProgress = questions.length > 0 ? Math.round((answeredCount / questions.length) * 100) : 0;
+  const hasNeutralizedQuestion = questions.some((question) => question.isNeutralized);
 
   return (
     <main className="homework-exam-page is-composing">
@@ -486,7 +626,27 @@ export function HomeworkExamPage({
 
       <ExerciseNavigation exercises={exercises} />
 
-      <article className="homework-paper">
+      <article className={`homework-paper${homework.statementMarkdown ? " has-faithful-statement" : ""}`}>
+        {homework.statementMarkdown && (
+          <section className="homework-original-subject" aria-labelledby="homework-original-subject-title">
+            <div className="homework-original-subject-label">
+              <FileText size={18} weight="duotone" />
+              <span id="homework-original-subject-title">Sujet original · retranscription fidèle</span>
+            </div>
+            <div className="homework-original-subject-paper">
+              <MarkdownContent markdown={homework.statementMarkdown} preserveLineBreaks />
+            </div>
+          </section>
+        )}
+
+        {homework.statementMarkdown && (
+          <header className="homework-answer-sheet-heading">
+            <p className="path-kicker">Copie numérique</p>
+            <h2>Rédige tes réponses ci-dessous</h2>
+            <p>Les champs de réponse ne font pas partie du document original.</p>
+          </header>
+        )}
+
         {exercises.map((exercise) => (
           <section id={`homework-${exercise.id}`} className="homework-exercise" key={exercise.id}>
             <header>
@@ -503,6 +663,7 @@ export function HomeworkExamPage({
                   question={question}
                   answer={attempt.answers[question.id]}
                   disabled={attempt.status !== "in-progress"}
+                  showAssessmentDetails={!homework.statementMarkdown}
                   onAnswer={(answer) => exam.setAnswer(question.id, answer)}
                 />
               ))}
@@ -514,10 +675,10 @@ export function HomeworkExamPage({
           <div>
             <strong>{answeredCount}/{questions.length} réponses enregistrées</strong>
             <span>{missing.length === 0 ? "Ta copie est complète." : `${missing.length} réponse${missing.length > 1 ? "s" : ""} manque${missing.length > 1 ? "nt" : ""}. Les questions non traitées vaudront 0.`}</span>
-            <small>Question neutralisée : ses points sont accordés automatiquement.</small>
+            {hasNeutralizedQuestion && <small>Question neutralisée : ses points sont accordés automatiquement.</small>}
           </div>
           <button className="primary-action" type="button" disabled={exam.submitting} onClick={() => setConfirming(true)}>
-            {exam.submitting ? "Remise de la copie…" : "Valider ma copie"}<Check size={19} weight="bold" />
+            {exam.submitting ? "Remise de la copie…" : "J’ai fini"}<Check size={19} weight="bold" />
           </button>
           {(exam.error || exam.saveError) && <p className="homework-inline-error" role="alert">{exam.error ?? exam.saveError}</p>}
         </footer>
@@ -527,7 +688,7 @@ export function HomeworkExamPage({
         <div className="homework-confirm-layer" role="presentation">
           <section role="dialog" aria-modal="true" aria-labelledby="homework-confirm-title">
             <span><NotePencil size={30} weight="duotone" /></span>
-            <h2 id="homework-confirm-title">Remettre définitivement ta copie ?</h2>
+            <h2 id="homework-confirm-title">Tu as fini ?</h2>
             <p>
               {missing.length === 0
                 ? "Toutes tes réponses seront enregistrées. Tu ne pourras plus les modifier après la remise."
@@ -543,7 +704,7 @@ export function HomeworkExamPage({
                   if (missing[0]) document.getElementById(`homework-question-${missing[0].id}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
                 }}
               >
-                {missing.length > 0 ? "Compléter ma copie" : "Relire encore"}
+                {missing.length > 0 ? "Continuer à répondre" : "Relire ma copie"}
               </button>
               <button
                 className="primary-action is-compact"
@@ -556,7 +717,7 @@ export function HomeworkExamPage({
                   }
                 })}
               >
-                {exam.submitting ? "Enregistrement…" : <><ShieldCheck size={19} weight="duotone" />{missing.length > 0 ? "Remettre malgré tout" : "Oui, valider"}</>}
+                {exam.submitting ? "Enregistrement…" : <><ShieldCheck size={19} weight="duotone" />{missing.length > 0 ? "J’ai fini malgré les réponses vides" : "J’ai fini, remettre ma copie"}</>}
               </button>
             </div>
           </section>

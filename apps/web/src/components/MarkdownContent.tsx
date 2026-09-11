@@ -3,7 +3,7 @@ import { MathText } from "./MathText";
 import { normalizePastedExerciseLayout } from "./markdownLayout";
 
 function inline(value: string) {
-  const parts = value.split(/(`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*|\[[^\]]+\]\(https?:\/\/[^)\s]+\))/g).filter(Boolean);
+  const parts = value.split(/(`[^`]+`|~~[^~]+~~|\*\*[^*]+\*\*|\*[^*]+\*|\[[^\]]+\]\(https?:\/\/[^)\s]+\))/g).filter(Boolean);
   return parts.map((part, index) => {
     const link = /^\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)$/.exec(part);
     if (link) {
@@ -11,6 +11,9 @@ function inline(value: string) {
     }
     if (part.startsWith("**") && part.endsWith("**")) {
       return <strong key={`${part}-${index}`}><MathText>{part.slice(2, -2)}</MathText></strong>;
+    }
+    if (part.startsWith("~~") && part.endsWith("~~")) {
+      return <s key={`${part}-${index}`}><MathText>{part.slice(2, -2)}</MathText></s>;
     }
     if (part.startsWith("*") && part.endsWith("*")) {
       return <em key={`${part}-${index}`}><MathText>{part.slice(1, -1)}</MathText></em>;

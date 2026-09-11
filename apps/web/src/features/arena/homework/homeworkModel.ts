@@ -42,6 +42,7 @@ export function isClosedHomeworkAttemptCode(code?: string) {
 export function canRetryHomework(homework: HomeworkSummary) {
   return homework.subjectPublished === true
     && homework.correctionsPublished !== true
+    && homework.correctionAfterSubmission !== true
     && !homework.activeAttemptId
     && homework.attemptsUsed < homework.maxAttempts;
 }

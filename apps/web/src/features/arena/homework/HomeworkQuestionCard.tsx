@@ -130,11 +130,13 @@ export function HomeworkQuestionCard({
   question,
   answer,
   disabled,
+  showAssessmentDetails = true,
   onAnswer,
 }: {
   question: HomeworkQuestion;
   answer?: HomeworkStoredAnswer;
   disabled: boolean;
+  showAssessmentDetails?: boolean;
   onAnswer: (answer: HomeworkStoredAnswer) => void;
 }) {
   const finalInputRef = useRef<HTMLInputElement>(null);
@@ -154,9 +156,9 @@ export function HomeworkQuestionCard({
       <header>
         <div>
           <span className="homework-question-label">{question.label}</span>
-          <GradingBadge question={question} />
+          {showAssessmentDetails && <GradingBadge question={question} />}
         </div>
-        <strong>{pointLabel(question.points)} pt{question.points > 1 ? "s" : ""}</strong>
+        {showAssessmentDetails && <strong>{pointLabel(question.points)} pt{question.points > 1 ? "s" : ""}</strong>}
       </header>
 
       <div className="homework-question-prompt">
@@ -211,7 +213,7 @@ export function HomeworkQuestionCard({
       ) : question.gradingMode === "hybrid" ? (
         <div className="homework-free-answer is-hybrid">
           <label>
-            <span>Réponse finale <small>partie vérifiée automatiquement</small></span>
+            <span>Réponse finale {showAssessmentDetails && <small>partie vérifiée automatiquement</small>}</span>
             <input
               ref={finalInputRef}
               type="text"
@@ -228,7 +230,7 @@ export function HomeworkQuestionCard({
             onChange={(value) => updateFreeAnswer({ finalAnswer: value })}
           />
           <label>
-            <span>Démonstration ou justification <small>lue par un correcteur</small></span>
+            <span>Démonstration ou justification {showAssessmentDetails && <small>lue par un correcteur</small>}</span>
             <textarea
               ref={reasoningRef}
               rows={7}
@@ -248,7 +250,7 @@ export function HomeworkQuestionCard({
       ) : question.gradingMode === "manual" || question.answerKind === "essay" ? (
         <div className="homework-free-answer">
           <label>
-            <span>Ta démonstration <small>sera lue avec le barème ci-dessous</small></span>
+            <span>Ta démonstration {showAssessmentDetails && <small>sera lue avec le barème ci-dessous</small>}</span>
             <textarea
               ref={reasoningRef}
               rows={8}
@@ -289,7 +291,7 @@ export function HomeworkQuestionCard({
         </div>
       )}
 
-      {!question.isNeutralized && question.rubricCriteria && question.rubricCriteria.length > 0 && (
+      {showAssessmentDetails && !question.isNeutralized && question.rubricCriteria && question.rubricCriteria.length > 0 && (
         <section className="homework-public-rubric" aria-label="Barème de cette question">
           <header><PencilLine size={18} weight="duotone" /><strong>Ce que le correcteur vérifiera</strong></header>
           <ul>

@@ -960,6 +960,125 @@ test("free math answers tolerate keyboard, Unicode, LaTeX and interval variants 
   assert.equal(normalizeHomeworkAnswer("m≤2\n"), normalizeHomeworkAnswer("m\\leq 2"));
 });
 
+test("a single-attempt homework reveals its private detailed correction only after final submission", async () => {
+  const invalidMode = packagePayload("20000000-0000-4000-8000-000000000090");
+  invalidMode.stableId = "contract-homework-self-correction-invalid";
+  invalidMode.slug = "contract-homework-self-correction-invalid";
+  Object.assign(invalidMode, {
+    institution: "Établissement de test auto-correction invalide",
+    number: 2,
+    maxAttempts: 2,
+    correctionAfterSubmission: true,
+  });
+  const invalidImport = await request(admin, {
+    method: "POST",
+    url: "/homeworks/admin/import",
+    payload: invalidMode,
+  });
+  assert.equal(invalidImport.response.statusCode, 400);
+  assert.match(invalidImport.body.message, /tentative unique/);
+
+  const selfCorrection = packagePayload("20000000-0000-4000-8000-000000000091");
+  selfCorrection.stableId = "contract-homework-self-correction";
+  selfCorrection.slug = "contract-homework-self-correction";
+  Object.assign(selfCorrection, {
+    institution: "Établissement de test auto-correction",
+    number: 2,
+    maxAttempts: 1,
+    subjectPublished: true,
+    correctionsPublished: false,
+    correctionAfterSubmission: true,
+    statementMarkdown: "# Sujet original\n\nUne retranscription fidèle séparée de la copie numérique.",
+  });
+  Object.assign(selfCorrection.sections[0].exercises[0].questions[2], {
+    correctionFigures: [{
+      url: "https://example.test/private-corrections/figure-1.svg",
+      alt: "Construction géométrique détaillée de la correction",
+      caption: "Figure reconstruite pour le corrigé.",
+    }],
+  });
+
+  const imported = await request(admin, {
+    method: "POST",
+    url: "/homeworks/admin/import",
+    payload: selfCorrection,
+  });
+  assert.equal(imported.response.statusCode, 201);
+  assert.equal(imported.body.homework.correctionAfterSubmission, true);
+  assert.equal(imported.body.homework.maxAttempts, 1);
+
+  const visibleSubject = await request(learner, {
+    method: "GET",
+    url: "/homeworks/contract-homework-self-correction",
+  });
+  assert.equal(visibleSubject.response.statusCode, 200);
+  assert.equal(visibleSubject.body.homework.statementMarkdown, selfCorrection.statementMarkdown);
+  assert.equal(visibleSubject.body.homework.correctionAfterSubmission, true);
+  assert.deepEqual(visibleSubject.body.homework.sections, []);
+  assert.doesNotMatch(visibleSubject.response.body, /La correction sépare le résultat final/);
+
+  const started = await request(learner, {
+    method: "POST",
+    url: "/homeworks/contract-homework-self-correction/attempts",
+  });
+  assert.equal(started.response.statusCode, 201);
+  const attemptId = started.body.attempt.id as string;
+  const questions = started.body.homework.sections[0].exercises[0].questions as Array<Record<string, any>>;
+  assert.equal(questions.length, 3);
+  assert.equal(questions.some((question) => "expectedAnswer" in question), false);
+  assert.equal(questions.some((question) => "explanationMarkdown" in question), false);
+
+  const resultBeforeSubmission = await request(learner, {
+    method: "GET",
+    url: `/homeworks/attempts/${attemptId}/result`,
+  });
+  assert.equal(resultBeforeSubmission.response.statusCode, 409);
+  assert.equal(resultBeforeSubmission.body.error, "ATTEMPT_IN_PROGRESS");
+
+  const manualQuestionId = questions[2].id as string;
+  const saved = await request(learner, {
+    method: "PUT",
+    url: `/homeworks/attempts/${attemptId}/answers/${manualQuestionId}`,
+    payload: {
+      answer: { reasoning: "Je rédige mes hypothèses, mes étapes puis ma conclusion." },
+      attachmentUrls: [],
+    },
+  });
+  assert.equal(saved.response.statusCode, 200);
+  assert.equal("expectedAnswer" in saved.body, false);
+
+  const finalized = await request(learner, {
+    method: "POST",
+    url: `/homeworks/attempts/${attemptId}/finalize`,
+  });
+  assert.equal(finalized.response.statusCode, 200);
+  assert.equal(finalized.body.result.status, "awaiting-review");
+  assert.equal(finalized.body.result.correctionsAvailable, true);
+  assert.equal(finalized.body.result.scoreOutOf20, undefined);
+  assert.equal(finalized.body.result.provisionalScoreOutOf20, undefined);
+  assert.equal(finalized.body.result.autoGradedPoints, undefined);
+  assert.equal(finalized.body.result.corrections.length, 3);
+  assert.equal(finalized.body.result.corrections[0].exerciseTitle, "Exercice 1");
+  assert.equal(finalized.body.result.corrections[0].questionOrder, 1);
+  assert.match(finalized.body.result.corrections[0].explanationMarkdown, /exactement deux unités/);
+  assert.equal("pointsAwarded" in finalized.body.result.corrections[0], false);
+  assert.equal("rubricCriteria" in finalized.body.result.corrections[2], false);
+  assert.deepEqual(finalized.body.result.corrections[2].figures, selfCorrection.sections[0].exercises[0].questions[2].correctionFigures);
+
+  const privateResult = await request(otherLearner, {
+    method: "GET",
+    url: `/homeworks/attempts/${attemptId}/result`,
+  });
+  assert.equal(privateResult.response.statusCode, 404);
+
+  const secondAttempt = await request(learner, {
+    method: "POST",
+    url: "/homeworks/contract-homework-self-correction/attempts",
+  });
+  assert.equal(secondAttempt.response.statusCode, 409);
+  assert.equal(secondAttempt.body.error, "HOMEWORK_ATTEMPT_LIMIT");
+});
+
 test("the Supabase migration exposes the same private, hybrid and reviewed contract", () => {
   const sql = readFileSync(resolve(
     import.meta.dirname,
@@ -1059,5 +1178,32 @@ test("the Supabase migration exposes the same private, hybrid and reviewed contr
   );
   assert.doesNotMatch(publicBody, /homework_expected_answer|homework_explanation_markdown|bonnes_reponses|correcte/);
   assert.match(sql, /revoke all on function public\.finalize_homework_attempt_internal_v1\(uuid\) from public, anon, authenticated/);
+  assert.match(sql, /notify pgrst, 'reload schema'/);
+});
+
+test("the self-correction migration keeps answers private until submission and preserves pending scores", () => {
+  const sql = readFileSync(resolve(
+    import.meta.dirname,
+    "../supabase/migrations/20260909010000_homework_self_correction_mode.sql",
+  ), "utf8");
+
+  for (const rpc of [
+    "list_homework_experiences_v1",
+    "get_homework_experience_v1",
+    "import_homework_experience_package_v1",
+    "finalize_homework_experience_attempt_v1",
+    "get_homework_experience_result_v1",
+  ]) {
+    assert.match(sql, new RegExp(`create or replace function public\\.${rpc}\\b`));
+    assert.match(sql, new RegExp(`grant execute on function public\\.${rpc}`));
+  }
+  assert.match(sql, /homework_correction_after_submission/);
+  assert.match(sql, /entry\.item \|\| jsonb_build_object\([\s\S]*'correctionAfterSubmission'/);
+  assert.match(sql, /not homework_correction_after_submission or homework_max_attempts = 1/);
+  assert.match(sql, /p_allow_admin_secrets or v_release_after_submission/);
+  assert.match(sql, /correction\.item - 'pointsAwarded' - 'correct' - 'reviewComment' - 'rubricCriteria'/);
+  assert.match(sql, /v_result := v_result[\s\S]*- 'autoGradedPoints'[\s\S]*- 'provisionalScoreOutOf20'/);
+  assert.match(sql, /homework_correction_figures/);
+  assert.match(sql, /revoke all on function public\.homework_experience_result_json_v1/);
   assert.match(sql, /notify pgrst, 'reload schema'/);
 });

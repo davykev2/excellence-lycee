@@ -99,6 +99,11 @@ const importRubricSchema = z.object({
   label: z.string().trim().min(2).max(500),
   pointsMax: z.number().positive().max(1_000),
 }).strict();
+const importCorrectionFigureSchema = z.object({
+  url: z.string().url().refine((url) => url.startsWith("https://"), "Une figure de correction doit utiliser HTTPS."),
+  alt: z.string().trim().min(3).max(500),
+  caption: z.string().trim().min(3).max(1_000).optional(),
+}).strict();
 const importQuestionSchema = z.object({
   id: importIdentifierSchema,
   label: z.string().trim().min(1).max(80),
@@ -117,6 +122,7 @@ const importQuestionSchema = z.object({
   imageUrl: z.string().url().refine((url) => url.startsWith("https://"), "Une image doit utiliser HTTPS.").optional(),
   imageAlt: z.string().trim().min(3).max(500).optional(),
   sourceNotice: z.string().trim().min(3).max(4_000).optional(),
+  correctionFigures: z.array(importCorrectionFigureSchema).max(8).optional(),
 }).strict().superRefine((question, context) => {
   const nearlyEqual = (left: number, right: number) => Math.abs(left - right) <= 0.0001;
   if (!nearlyEqual(question.autoPoints + question.manualPoints, question.points)) {
@@ -223,12 +229,21 @@ const importPackageSchema = z.object({
   gradingMode: z.enum(["auto", "manual", "hybrid"]),
   instructionsMarkdown: z.string().trim().max(30_000).optional(),
   sourceNotice: z.string().trim().min(3).max(4_000).optional(),
+  statementMarkdown: z.string().trim().min(20).max(120_000).optional(),
   maxAttempts: z.number().int().min(1).max(10).default(3),
   subjectPublished: z.boolean().default(false),
   correctionsPublished: z.boolean().default(false),
+  correctionAfterSubmission: z.boolean().default(false),
   sections: z.array(importSectionSchema).min(1).max(20),
 }).strict().superRefine((homework, context) => {
   const questions = homework.sections.flatMap((section) => section.exercises.flatMap((exercise) => exercise.questions));
+  if (homework.correctionAfterSubmission && homework.maxAttempts !== 1) {
+    context.addIssue({
+      code: "custom",
+      path: ["maxAttempts"],
+      message: "La correction après remise exige une tentative unique.",
+    });
+  }
   const sectionIds = homework.sections.map((section) => section.id);
   if (new Set(sectionIds).size !== sectionIds.length) {
     context.addIssue({ code: "custom", path: ["sections"], message: "Les identifiants des parties doivent être uniques." });

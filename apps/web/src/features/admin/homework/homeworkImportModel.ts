@@ -47,7 +47,8 @@ const canonicalLevels = new Set([
 const allowedRootKeys = new Set([
   "importId", "stableId", "slug", "title", "number", "institution", "academicYear",
   "subject", "level", "series", "durationSeconds", "gradingMode", "instructionsMarkdown", "sourceNotice",
-  "maxAttempts", "subjectPublished", "correctionsPublished", "sections",
+  "statementMarkdown", "maxAttempts", "subjectPublished", "correctionsPublished",
+  "correctionAfterSubmission", "sections",
 ]);
 
 const emptyMetadata = {
@@ -261,6 +262,20 @@ export function inspectHomeworkImportPackage(value: unknown): HomeworkImportInsp
   if (!Number.isInteger(metadataRoot.maxAttempts) || (metadataRoot.maxAttempts as number) < 1 || (metadataRoot.maxAttempts as number) > 10) {
     issues.push({ severity: "error", path: "maxAttempts", message: "Le nombre maximal de tentatives doit être un entier compris entre 1 et 10." });
   }
+  if (root.correctionAfterSubmission != null && typeof root.correctionAfterSubmission !== "boolean") {
+    issues.push({ severity: "error", path: "correctionAfterSubmission", message: "correctionAfterSubmission doit être un booléen." });
+  }
+  if (root.correctionAfterSubmission === true && metadataRoot.maxAttempts !== 1) {
+    issues.push({
+      severity: "error",
+      path: "maxAttempts",
+      message: "La correction après remise exige une tentative unique.",
+    });
+  }
+  const statementMarkdown = textValue(root.statementMarkdown);
+  if (statementMarkdown && (statementMarkdown.length < 20 || statementMarkdown.length > 120_000)) {
+    issues.push({ severity: "error", path: "statementMarkdown", message: "La transcription du sujet doit contenir entre 20 et 120 000 caractères." });
+  }
   if (root.subjectPublished === true || root.correctionsPublished === true) {
     issues.push({
       severity: "warning",
@@ -438,6 +453,19 @@ export function inspectHomeworkImportPackage(value: unknown): HomeworkImportInsp
     } else {
       issues.push({ severity: "warning", path: `${path}.explanationMarkdown`, message: `La correction détaillée de la question ${index + 1} est vide.` });
     }
+
+    list(question.correctionFigures).forEach((figure, figureIndex) => {
+      const item = record(figure);
+      const url = textValue(item?.url);
+      const alt = textValue(item?.alt);
+      if (!item || !url.startsWith("https://") || alt.length < 3) {
+        issues.push({
+          severity: "error",
+          path: `${path}.correctionFigures[${figureIndex}]`,
+          message: "Chaque figure de correction doit fournir une URL HTTPS et un texte alternatif.",
+        });
+      }
+    });
 
     const choices = list(question.choices);
     const answerKind = textValue(question.answerKind);
