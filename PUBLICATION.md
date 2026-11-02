@@ -22,4 +22,10 @@ Le lot indexé exclut secrets, `.vercel`, prototypes abandonnés, bases locales 
 
 Les identifiants de déploiement seront consignés dans la reprise du laboratoire après contrôle des alias. Ce document consigné avant l’envoi ne prouve pas à lui seul une mise en ligne.
 
+### Déploiement API
+
+API du commit `225d60f127498f5085102606c5a48c7381ffb5be` déployée READY : `dpl_8jFES6FYKsa5tCvrUHVf45kyGBfU`, alias `https://excellence-lycee-api.vercel.app`. Le projet distant attend `Root Directory=apps/api` : le snapshot Git dédié a conservé cette arborescence, sans credentials ni dépendances locales. Une première tentative depuis le sous-dossier a échoué avant activation ; elle n’a pas remplacé l’ancien alias.
+
+La commande durable doit partir de la racine du monorepo avec une sélection explicite `--project excellence-lycee-api`. L’ancien exemple partant de `apps/api` est corrigé dans `AGENTS.md`.
+
 L’audit de préparation a identifié les deux alertes API déjà documentées (fast-uri et zod). `npm audit fix` sans option de rupture les a corrigées dans cette copie de publication, avec zéro vulnérabilité annoncé par l’audit API. Les sources du laboratoire restent inchangées.

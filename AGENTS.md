@@ -64,10 +64,13 @@ http://localhost:4173/?__paths-preview&__path-preview=<pathId>&__level-preview=t
 > ⚠️ **PIÈGE : un push ne redéploie PAS l'API.** Le projet `excellence-lycee-api` ne se redéploie pas automatiquement sur push. Dès qu'on **modifie du code sous `apps/api/` (nouvelle route, logique serveur…), il faut le déployer à la main**, sinon le frontend appelle une API à l'ancien code (symptôme typique : `Route GET:/… not found` renvoyé par Fastify, alors que `/api/health` répond). Le projet est déjà lié (`apps/api/.vercel/`), donc :
 >
 > ```bash
-> cd apps/api && npx vercel deploy --prod --yes
+> # Depuis la racine du dépôt : le projet API attend Root Directory = apps/api.
+> npx vercel deploy --prod --yes --scope excellencelycee --project excellence-lycee-api
 > ```
 >
 > (Vérifier ensuite : `curl https://excellence-lycee.vercel.app/api/<route>` doit renvoyer 401 et non 404.)
+
+> **Actualisation vérifiée le02/11/2026 :** le projet API est configuré avec `Root Directory=apps/api`. L’ancienne commande exécutée depuis `apps/api` échoue donc avec « Root Directory apps/api does not exist » ; ne pas modifier le réglage distant pour contourner cela. Lancer le CLI depuis la racine du monorepo et préciser le projet API, ou utiliser un snapshot dédié lié au projet API qui conserve l’arborescence `apps/api`. La sélection explicite du projet évite de déployer l’API dans le projet frontend. Référence : [options du CLI Vercel](https://vercel.com/docs/cli/global-options), [monorepos](https://vercel.com/docs/monorepos).
 
 > **Plusieurs sessions travaillent sur ce dépôt**, parfois simultanément dans le même dossier (Claude et ChatGPT). Avant chaque lot et avant tout commit, relire `git status` : un fichier apparu ou modifié pendant la tâche appartient à la session qui l'a ouvert, sauf coordination explicite. Ne jamais écraser, embarquer dans un commit ou déployer les changements d'une autre session ; signaler immédiatement les fichiers qui se chevauchent et fusionner les ajouts intentionnellement. Chacune ne connaît que ses propres déploiements : **ne jamais déduire l'état de la production depuis l'historique git**, on conclut à un retard qui n'existe pas. La seule source de vérité est l'alias public. Avant de déployer ou de signaler un problème :
 >
