@@ -1,4 +1,5 @@
 import type { SubjectId } from "./learning";
+import type { CourseDocument } from "./courseDocument";
 
 export type LessonKind = "concept" | "graph" | "practice" | "challenge";
 
@@ -314,12 +315,13 @@ export interface LearningModule {
 }
 
 export interface LearningPath {
+  courseDocument?: CourseDocument;
   id: string;
   subjectId: SubjectId;
   levelIds: string[];
   /**
-   * Présentation élève du contenu. Les anciens parcours restent des routes de
-   * maîtrise par défaut ; les cours migrés s'ouvrent comme un document continu.
+   * Métadonnée éditoriale de migration. Le shell utilise maintenant le lecteur
+   * continu pour tous les parcours, y compris ceux portant une ancienne valeur.
    * Les identifiants de LearningLesson restent alors conservés en arrière-plan
    * pour ne pas invalider les progressions et retours déjà enregistrés.
    */

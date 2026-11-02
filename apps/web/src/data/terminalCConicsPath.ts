@@ -6,6 +6,8 @@ import type {
   TimelineInteractionItem,
 } from "../domain/paths";
 
+import { terminalCConicsDocument } from "./courseDocuments/terminalCConicsDocument";
+
 const sourceDocument = "TC Maths leçon 07 Coniques.pdf";
 
 const choice = (
@@ -1169,9 +1171,11 @@ export const terminalCConicsPath: LearningPath = {
   levelIds: ["terminale-c"],
   curriculumLabel: "Programme ivoirien • Terminale C • Leçon officielle fidèlement structurée",
   curriculumSourceUrl: "https://dpfc-ci.net/",
-  theme: { number: 2, title: "Géométrie du plan" },
+  theme: { number: 2, title: "Algèbre et géométrie" },
   chapterNumber: 7,
   title: "Coniques",
+  presentation: "continuous-course",
+  courseDocument: terminalCConicsDocument,
   description: "Foyer, directrice, excentricité, équations réduites, éléments caractéristiques et problèmes officiels sur les paraboles, ellipses et hyperboles.",
   estimatedMinutes: builtLevels.reduce((sum, lesson) => sum + lesson.durationMinutes, 0),
   outcomes: [

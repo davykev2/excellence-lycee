@@ -283,8 +283,8 @@ function FunctionLab() {
         <p id="codex-expression-help" className="codex-field-help">Utilise x, +, −, *, /, ^ et les fonctions sin, cos, tan, sqrt, abs, exp, ln ou log. Exemple : <code>2x+sin(x)</code>.</p>
         <div className="codex-presets" aria-label="Exemples de fonctions">{functionPresets.map((preset) => <button type="button" key={preset.label} onClick={() => setExpressionSource(preset.value)}>{preset.label}</button>)}</div>
         {parsed.error && <div className="codex-inline-error" role="alert">{parsed.error}</div>}
-        <div className="codex-control-group"><div><strong>Fenêtre graphique</strong><small>Ajuste les axes si la courbe sort du cadre.</small></div><div className="codex-number-grid"><NumberField label="x min" value={xMin} onChange={setXMin} /><NumberField label="x max" value={xMax} onChange={setXMax} /><NumberField label="y min" value={yMin} onChange={setYMin} /><NumberField label="y max" value={yMax} onChange={setYMax} /></div></div>
-        <div className="codex-control-group"><div><strong>Tangente au point d’abscisse a</strong><small>Déplace a pour suivre la tangente.</small></div><label className="codex-range-field"><span>a = {formatNumber(tangentX)}</span><input type="range" min={xMin} max={xMax} step={(xMax - xMin) / 200} value={tangentX} onChange={(event) => setTangentX(Number(event.target.value))} /></label></div>
+        <div className="codex-control-group"><div><strong>Fenêtre graphique</strong></div><div className="codex-number-grid"><NumberField label="x min" value={xMin} onChange={setXMin} /><NumberField label="x max" value={xMax} onChange={setXMax} /><NumberField label="y min" value={yMin} onChange={setYMin} /><NumberField label="y max" value={yMax} onChange={setYMax} /></div></div>
+        <div className="codex-control-group"><div><strong>Tangente au point d’abscisse a</strong></div><label className="codex-range-field"><span>a = {formatNumber(tangentX)}</span><input type="range" min={xMin} max={xMax} step={(xMax - xMin) / 200} value={tangentX} onChange={(event) => setTangentX(Number(event.target.value))} /></label></div>
       </div>
       <div className="codex-visual-panel">
         <CoordinatePlane
@@ -346,7 +346,6 @@ function AnalyticGeometryLab() {
           <label><input type="checkbox" checked={showLine} onChange={(event) => setShowLine(event.target.checked)} /><span>Afficher la droite (AB)</span></label>
           <label><input type="checkbox" checked={showCircle} onChange={(event) => setShowCircle(event.target.checked)} /><span>Cercle de centre A passant par B</span></label>
         </div>
-        <div className="codex-method-note"><Sparkle size={20} weight="duotone" /><p>Déplace les coordonnées : les constructions et les résultats se mettent à jour instantanément.</p></div>
       </div>
       <div className="codex-visual-panel">
         <CoordinatePlane
@@ -485,8 +484,8 @@ export function MathCodexPage({ onBackArena }: { onBackArena: () => void }) {
   return (
     <main className="codex-page">
       <header className="codex-page-header">
-        <button type="button" onClick={onBackArena}><ArrowLeft size={19} weight="bold" />Retour à l’Arène</button>
-        <div><p><Sparkle size={16} weight="fill" /> Laboratoire interactif Excellence</p><h1>Codex Mathématiques</h1><span>Observe, manipule et vérifie tes conjectures avant de démontrer.</span></div>
+        <button type="button" onClick={onBackArena}><ArrowLeft size={19} weight="bold" />M’entraîner</button>
+        <div><h1>Courbes et géométrie</h1></div>
         <div className="codex-header-mark"><ChartLine size={26} weight="duotone" /><span>Mode exploration</span></div>
       </header>
 

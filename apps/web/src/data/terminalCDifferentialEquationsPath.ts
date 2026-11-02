@@ -6,6 +6,7 @@ import type {
   LessonQuestion,
   TimelineInteractionItem,
 } from "../domain/paths";
+import { terminalCDifferentialDocument } from "./courseDocuments/terminalCDifferentialDocument";
 
 const sourceDocument = "TC Maths leçon 18 Equations différentielles.pdf";
 
@@ -1086,7 +1087,8 @@ export const terminalCDifferentialEquationsPath: LearningPath = {
   levelIds: ["terminale-c"],
   curriculumLabel: "Programme ivoirien • Terminale C • Leçon officielle fidèlement structurée",
   curriculumSourceUrl: "https://dpfc-ci.net/",
-  theme: { number: 1, title: "Fonctions numériques" },
+  theme: { number: 1, title: "Analyse et probabilité" },
+  courseDocument: terminalCDifferentialDocument,
   chapterNumber: 18,
   title: "Équations différentielles",
   description:

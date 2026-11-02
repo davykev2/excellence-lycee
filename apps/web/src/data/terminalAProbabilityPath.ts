@@ -6,6 +6,7 @@ import type {
   LessonQuestion,
   TimelineInteractionItem,
 } from "../domain/paths";
+import { terminalA1ProbabilityDocument, terminalA2ProbabilityDocument } from "./courseDocuments/terminalAProbabilityDocument";
 
 const sourceDocument = "TA Maths leçon 02 Probabilité.pdf";
 
@@ -655,6 +656,8 @@ const a1Levels = levels.map((seed, index) => officialLevel(index + 1, seed));
 const a2Levels = levels.slice(0, -1).map((seed, index) => officialLevel(index + 1, seed));
 
 export const terminalA1ProbabilityPath: LearningPath = {
+  courseDocument: terminalA1ProbabilityDocument,
+  presentation: "continuous-course",
   id: "terminale-a1-probability-random-variable",
   subjectId: "mathematics",
   levelIds: ["terminale-a"],
@@ -663,7 +666,7 @@ export const terminalA1ProbabilityPath: LearningPath = {
   theme,
   chapterNumber: 2,
   title: "Probabilité et variable aléatoire",
-  description: "Le cours officiel intégral : expériences aléatoires, vocabulaire des événements, lois de probabilité, équiprobabilité, variable aléatoire et mission finale de la kermesse.",
+  description: "Probabilités et variables aléatoires : résumé, applications expliquées, évaluations et essentiel pour la Terminale A1.",
   estimatedMinutes: a1Levels.reduce((sum, lesson) => sum + lesson.durationMinutes, 0),
   outcomes: [
     "Décrire une expérience aléatoire",
@@ -679,6 +682,8 @@ export const terminalA1ProbabilityPath: LearningPath = {
 };
 
 export const terminalA2ProbabilityPath: LearningPath = {
+  courseDocument: terminalA2ProbabilityDocument,
+  presentation: "continuous-course",
   id: "terminale-a2-probability",
   subjectId: "mathematics",
   levelIds: ["terminale-a"],

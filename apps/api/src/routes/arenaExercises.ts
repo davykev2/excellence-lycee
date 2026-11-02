@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
+import { arenaPayloadSchema as payloadSchema } from "../arenaExerciseSchema.js";
 import type {
   ArenaExerciseLevelDocument,
   ArenaExerciseLevelPayload,
@@ -16,29 +17,6 @@ import {
   updateSupabaseArenaExerciseLevelStatus,
   writeSupabaseAudit,
 } from "../supabase.js";
-
-const exerciseSchema = z.object({
-  id: z.string().trim().regex(/^[a-zA-Z0-9-]{4,80}$/),
-  title: z.string().trim().min(2).max(160),
-  statementMarkdown: z.string().trim().min(1).max(25_000),
-  correctionMarkdown: z.string().trim().min(1).max(25_000),
-});
-
-const payloadSchema = z.object({
-  levelId: z.string().regex(/^(seconde|premiere|terminale)-(a|c|d)$/),
-  subjectId: z.enum(["mathematics", "physics-chemistry", "french", "english", "svt", "philosophy", "history-geography"]),
-  lessonKey: z.string().trim().regex(/^[a-z0-9-]{3,180}$/),
-  lessonTitle: z.string().trim().min(2).max(240),
-  difficulty: z.enum(["easy", "medium", "hard"]),
-  stageNumber: z.number().int().min(1).max(99),
-  title: z.string().trim().min(2).max(180),
-  instructionsMarkdown: z.string().trim().max(6_000),
-  exercises: z.array(exerciseSchema).min(1).max(30),
-}).superRefine((payload, context) => {
-  if (new Set(payload.exercises.map((exercise) => exercise.id)).size !== payload.exercises.length) {
-    context.addIssue({ code: "custom", message: "Chaque exercice doit avoir un identifiant unique." });
-  }
-});
 
 const saveSchema = z.object({
   documentId: z.string().uuid().optional(),

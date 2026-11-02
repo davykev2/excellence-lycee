@@ -1,0 +1,25 @@
+.french-workshop-page .philo-memory-icon { color:#a8497e; background:#f7eaf2; }
+.french-workshop-page .philo-memory-heading p,.french-workshop-page .philo-notion-detail header p,.french-workshop-page .philo-format { color:#965079; }
+.french-workshop-page .philo-daily { border-color:#ead8e4; background:linear-gradient(120deg,#fff6fb,#fff); }
+.french-workshop-page .philo-daily>div>svg,.french-workshop-page .philo-notion-grid>button>svg { color:#a8497e; }
+.french-workshop-page .philo-options>button.is-selected:not(.is-correct):not(.is-incorrect) { border-color:#ba7ba4; background:#fcf4f9; box-shadow:inset 0 0 0 1px #c893b5; }
+.french-workshop-page .philo-question h2 { font-size:clamp(21px,2.7vw,27px); }
+.french-workshop-page .french-section-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.french-workshop-page .french-section-grid>button { min-height:190px; }
+.french-excerpt { white-space:pre-line; padding:18px 20px; background:#fcf6fa; border-left:3px solid #bb88a7; border-radius:0 12px 12px 0; font-size:17px!important; line-height:1.85; color:#34445c; overflow-wrap:anywhere; }
+.french-term-answer { display:grid; gap:12px; margin:24px 0; font-size:15px; font-weight:700; }
+.french-term-answer input { width:100%; min-height:50px; border:1px solid #c6a8bb; border-radius:10px; padding:12px; background:#fff; color:#193854; font-size:17px; font-weight:400; }
+.french-term-answer input.is-correct { border-color:#43825a; color:#25663d; background:#edf8ef; }
+.french-term-answer input.is-incorrect { border-color:#ba6868; color:#ab343d; background:#fff4f3; text-decoration:line-through; }
+.french-gap { font-weight:800; color:#a8497e; }
+.french-accepted { color:#496c81; }
+.french-correction-rule { margin:22px 0; padding:17px; border-radius:12px; background:#f2f6f4; }
+.french-correction-rule h4 { margin:0 0 10px; color:#2c6847; font-size:18px; }
+.french-correction-rule p { font-size:16px; line-height:1.85; margin:10px 0; }
+.french-reference-card h4 { margin:25px 0 10px; font-size:17px; }
+.training-main-card.is-rose .training-card-icon { color:#a8497e; background:#f7eaf2; }
+@media(max-width:560px) {
+  .french-workshop-page .french-section-grid { grid-template-columns:1fr; }
+  .french-workshop-page .french-section-grid>button { min-height:155px; }
+  .french-excerpt { padding:15px 14px; }
+}

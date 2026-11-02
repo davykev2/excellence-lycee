@@ -123,7 +123,7 @@ export function GlobalChatPanel({ profile }: GlobalChatPanelProps) {
             </div>
           </div>
         ))}
-        {!chat.loading && chat.messages.length === 0 && <div className="global-chat-empty"><GlobeHemisphereWest size={48} weight="duotone" /><strong>Lance la première discussion</strong><span>Un bonjour, une question ou une astuce suffit pour commencer.</span></div>}
+        {!chat.loading && chat.messages.length === 0 && <div className="global-chat-empty"><GlobeHemisphereWest size={48} weight="duotone" /><strong>Aucun message</strong></div>}
         <div ref={endRef} />
       </div>
 

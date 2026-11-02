@@ -281,7 +281,7 @@ export function MessagesScreen({ profile, level }: MessagesScreenProps) {
             </form>
           </article>
         ) : (
-          <article className="conversation-placeholder"><ChatCircleDots size={58} weight="duotone" /><h2>{showArchived ? "Aucune archive sélectionnée" : "Commence une conversation"}</h2><p>Choisis un échange dans la liste ou écris à une personne autorisée.</p>{!showArchived && <button className="primary-action is-compact" type="button" onClick={openCompose}><Plus size={19} /> Nouveau message</button>}</article>
+          <article className="conversation-placeholder"><ChatCircleDots size={58} weight="duotone" /><h2>{showArchived ? "Aucune archive sélectionnée" : "Messages privés"}</h2>{!showArchived && <button className="primary-action is-compact" type="button" onClick={openCompose}><Plus size={19} /> Nouveau message</button>}</article>
         )}
       </section>
 

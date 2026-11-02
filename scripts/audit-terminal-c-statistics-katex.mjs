@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import katex from "../apps/web/node_modules/katex/dist/katex.mjs";
 import ts from "../apps/api/node_modules/typescript/lib/typescript.js";
+import { loadStatisticsDocument } from "./load-statistics-document.mjs";
 
 const source = readFileSync(
   new URL("../apps/web/src/data/terminalCStatisticsPath.ts", import.meta.url),
@@ -11,11 +12,22 @@ const javaScript = ts.transpileModule(source, {
   compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
 }).outputText;
 const module = { exports: {} };
+const document=loadStatisticsDocument((file,dependencies={})=>{
+  const source=readFileSync(new URL("../"+file,import.meta.url),"utf8");
+  const js=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
+  const result={exports:{}};
+  new Function("exports","module","require",js)(result.exports,result,specifier=>{
+    if(specifier in dependencies)return dependencies[specifier];
+    throw new Error("Dépendance documentaire inattendue : "+specifier);
+  });
+  return result.exports;
+});
 
 new Function("exports", "module", "require", javaScript)(
   module.exports,
   module,
-  () => {
+  (specifier) => {
+    if(specifier==="./courseDocuments/terminalCStatisticsDocument")return document;
     throw new Error("Dépendance inattendue pendant l’audit KaTeX.");
   },
 );

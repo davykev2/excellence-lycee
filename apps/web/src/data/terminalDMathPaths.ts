@@ -1,4 +1,5 @@
 import type { LearningPath } from "../domain/paths";
+import { getTerminalCDMathPair } from "./terminalCDMathSharing";
 import {
   terminalCLimitsContinuityPath,
   terminalCDerivativesPath,
@@ -28,12 +29,25 @@ interface TerminalDPathSeed {
 }
 
 function adaptTerminalDPath({ id, chapterNumber, documentTitle, source }: TerminalDPathSeed): LearningPath {
+  const pair = getTerminalCDMathPair(id, "terminale-d");
+  if (!pair || pair.c !== source.id || pair.chapterD !== chapterNumber) {
+    throw new Error(`Correspondance de mathématiques C/D invalide : ${id}.`);
+  }
+  // Only the class/context metadata differs. Bodies, evaluations, figures and anchors
+  // stay the same objects, so an editorial correction benefits both series.
+  const document = source.courseDocument;
   return {
     ...source,
     id,
     levelIds: ["terminale-d"],
     curriculumLabel: "Programme ivoirien • Terminale D • Cours officiel fourni",
     chapterNumber,
+    courseDocument: document?.levelIds.includes("terminale-c") ? {
+      ...document,
+      id: `${id}-document`,
+      levelIds: ["terminale-d"],
+      source: { ...document.source, lessonLabel: `Leçon ${chapterNumber}` },
+    } : undefined,
     modules: source.modules.map((module) => ({
       ...module,
       id: `${id}-mastery`,

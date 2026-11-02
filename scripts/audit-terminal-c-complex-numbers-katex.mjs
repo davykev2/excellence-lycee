@@ -2,6 +2,18 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import katex from "../apps/web/node_modules/katex/dist/katex.mjs";
 import ts from "../apps/api/node_modules/typescript/lib/typescript.js";
+import { loadComplexDocument } from "./load-complex-document.mjs";
+
+const documentary=loadComplexDocument((relative,dependencies={})=>{
+ const src=readFileSync(new URL("../"+relative,import.meta.url),"utf8");
+ const js=ts.transpileModule(src,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
+ const target={exports:{}};
+ new Function("exports","module","require",js)(target.exports,target,request=>{
+  if(Object.hasOwn(dependencies,request))return dependencies[request];
+  throw new Error("Dépendance documentaire inattendue : "+request);
+ });
+ return target.exports;
+});
 
 const source = readFileSync(
   new URL("../apps/web/src/data/terminalCComplexNumbersPath.ts", import.meta.url),
@@ -15,7 +27,8 @@ const module = { exports: {} };
 new Function("exports", "module", "require", javaScript)(
   module.exports,
   module,
-  () => {
+  request => {
+    if(request==="./courseDocuments/terminalCComplexDocument")return documentary;
     throw new Error("Dépendance inattendue pendant l’audit KaTeX.");
   },
 );

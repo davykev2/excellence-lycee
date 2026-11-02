@@ -1,0 +1,80 @@
+/* Visual shortcuts keep real destinations and the existing Cap Ivoire palette. */
+.home-action-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 6px 0 28px;
+}
+.home-action-card {
+  --card-ink: #246038;
+  --card-surface: #f0f7ed;
+  --card-edge: #cfdcc9;
+  min-width: 0;
+  min-height: 162px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 21px 23px;
+  border: 1px solid var(--card-edge);
+  border-radius: 20px;
+  background: var(--card-surface);
+  color: var(--card-ink);
+  box-shadow: 0 5px 0 var(--card-edge);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.home-action-card.is-orange { --card-ink: #a04716; --card-surface: #fff2e7; --card-edge: #efd6c2; }
+.home-action-card.is-blue { --card-ink: #285782; --card-surface: #eef4fc; --card-edge: #d2dff0; }
+.home-action-card.is-gold { --card-ink: #806019; --card-surface: #fdf7e7; --card-edge: #e9ddbc; }
+.home-action-card.is-purple { --card-ink: #6d458c; --card-surface: #f5eff9; --card-edge: #e1d4e9; }
+.home-action-card.is-teal { --card-ink: #146b64; --card-surface: #edf7f4; --card-edge: #c8e0d9; }
+.home-action-card.is-navy { --card-ink: #254a75; --card-surface: #eff2f7; --card-edge: #d1dbe8; }
+.home-action-card.is-coffee { --card-ink: #8b4c28; --card-surface: #fff3e9; --card-edge: #ead3bf; }
+.home-action-card-top { display: flex; align-items: flex-start; gap: 8px; min-width: 0; }
+.home-action-card-icon { display: grid; place-items: center; flex: 0 0 auto; width: 54px; height: 54px; border-radius: 16px; background: #fff; }
+.home-action-card-arrow { margin-left: auto; opacity: .72; }
+.home-action-card-copy { display: block; min-width: 0; }
+.home-action-card-copy strong { display: block; font-size: 18px; line-height: 1.3; font-weight: 850; letter-spacing: -.015em; }
+.home-action-card-copy small { display: block; margin-top: 5px; color: #526173; font-size: 12px; line-height: 1.45; }
+.home-action-card[data-home-card="resume"] .home-action-card-copy small { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.home-action-card-badge { display: inline-grid; place-items: center; min-width: 25px; height: 25px; padding: 0 6px; margin-left: auto; border-radius: 20px; background: #146b64; color: #fff; font-size: 12px; font-weight: 850; }
+.home-action-card-badge + .home-action-card-arrow { margin-left: 0; }
+.home-action-card:focus-visible { outline: 3px solid #0b5964; outline-offset: 5px; }
+.home-action-card:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--card-edge); }
+.level-empty-page.has-home-cards .home-action-grid { margin-top: 26px; }
+.level-empty-page.has-home-cards .level-empty-hero { margin-top: 28px; }
+@media (hover: hover) {
+  .home-action-card:hover { transform: translateY(-3px); box-shadow: 0 8px 0 var(--card-edge), 0 12px 18px #122d4910; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .home-action-card { animation: home-card-enter .3s ease backwards; }
+  .home-action-card:nth-child(2) { animation-delay: .025s; }
+  .home-action-card:nth-child(3) { animation-delay: .05s; }
+  .home-action-card:nth-child(4) { animation-delay: .075s; }
+  .home-action-card:nth-child(5) { animation-delay: .1s; }
+  .home-action-card:nth-child(6) { animation-delay: .125s; }
+  .home-action-card:nth-child(7) { animation-delay: .15s; }
+  .home-action-card:nth-child(8) { animation-delay: .175s; }
+  @keyframes home-card-enter { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+}
+@media (max-width: 920px) {
+  .home-action-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 12px; margin: 4px 0 25px; }
+  .home-action-card { min-height: 135px; padding: 16px; gap: 12px; border-radius: 17px; box-shadow: 0 4px 0 var(--card-edge); }
+  .home-action-card-icon { width: 45px; height: 45px; border-radius: 13px; }
+  .home-action-card-icon svg { width: 34px; height: 34px; }
+  .home-action-card-copy strong { font-size: 16px; }
+  .home-action-card-copy small { margin-top: 3px; font-size: 11px; }
+  .home-action-card-arrow { width: 17px; height: 17px; }
+}
+@media (max-width: 350px) {
+  .home-action-card { min-height: 128px; padding: 13px; }
+  .home-action-card-copy strong { font-size: 15px; }
+  .home-action-card-icon { width: 41px; height: 41px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-action-card { animation: none; transition: none; }
+}

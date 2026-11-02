@@ -236,7 +236,7 @@ export function BacCi2024ExamPage({
   if (exam.error && !state) {
     return (
       <main className="bac-exam-page">
-        <button className="path-back-button" type="button" onClick={onBackArena}><ArrowLeft size={20} weight="bold" />Retour à l’Arène</button>
+        <button className="path-back-button" type="button" onClick={onBackArena}><ArrowLeft size={20} weight="bold" />Tous les sujets</button>
         <div className="bac-exam-error" role="alert">
           <WarningCircle size={30} weight="duotone" />
           <div><strong>Le sujet n’a pas pu être chargé.</strong><p>{exam.error}</p></div>
@@ -250,7 +250,7 @@ export function BacCi2024ExamPage({
     return (
       <main className="bac-exam-page">
         <button className="path-back-button" type="button" onClick={onBackArena}>
-          <ArrowLeft size={20} weight="bold" />Retour à l’Arène
+          <ArrowLeft size={20} weight="bold" />Tous les sujets
         </button>
         <section className="bac-result-lock">
           <CompanionAvatar motion="idle" className="bac-result-davy" decorative />
@@ -364,7 +364,7 @@ export function BacCi2024ExamPage({
   return (
     <main className="bac-exam-page">
       <header className="bac-exam-topbar">
-        <button className="path-back-button" type="button" onClick={onBackArena}><ArrowLeft size={20} weight="bold" />Retour à l’Arène</button>
+        <button className="path-back-button" type="button" onClick={onBackArena}><ArrowLeft size={20} weight="bold" />Tous les sujets</button>
         <div className="bac-exam-live-progress" aria-label={`${answeredCount} réponses sur 69`}>
           <span><i style={{ width: `${(answeredCount / 69) * 100}%` }} /></span>
           <strong>{answeredCount}/69</strong>

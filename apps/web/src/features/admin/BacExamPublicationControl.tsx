@@ -150,7 +150,6 @@ export function BacExamPublicationControl({ preview = false }: { preview?: boole
         <div><p className="admin-eyebrow">Annales et concours</p><h2 id="admin-bac-publication-title">Ouverture des sujets</h2></div>
         <span>{bacExamCatalog.length} sujets indépendants</span>
       </header>
-      <p>Ouvre ou ferme chaque année séparément, y compris les sujets ESATIC. Un sujet fermé reste visible dans la bibliothèque avec un cadenas.</p>
       <div>
         {bacExamCatalog.map((definition) => (
           <BacExamPublicationCard key={definition.id} definition={definition} preview={preview} />

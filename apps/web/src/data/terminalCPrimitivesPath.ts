@@ -6,6 +6,7 @@ import type {
   LessonQuestion,
   TimelineInteractionItem,
 } from "../domain/paths";
+import { terminalCPrimitivesDocument } from "./courseDocuments/terminalCPrimitivesDocument";
 
 const sourceDocument = "TC Maths leçon 06 PRIMITIVES.pdf";
 
@@ -1327,11 +1328,12 @@ const builtLevels = levels.map((level, index) => officialLevel(index, level));
 
 export const terminalCPrimitivesPath: LearningPath = {
   id: "terminale-c-math-l06-primitives",
+  courseDocument: terminalCPrimitivesDocument,
   subjectId: "mathematics",
   levelIds: ["terminale-c"],
   curriculumLabel: "Programme ivoirien • Terminale C • Leçon officielle fidèlement structurée",
   curriculumSourceUrl: "https://dpfc-ci.net/",
-  theme: { number: 1, title: "Analyse" },
+  theme: { number: 1, title: "Analyse et probabilité" },
   chapterNumber: 6,
   title: "Primitives",
   description: "Définition, existence, familles, primitives usuelles et composées, optimisation et exercices officiels d’approfondissement.",

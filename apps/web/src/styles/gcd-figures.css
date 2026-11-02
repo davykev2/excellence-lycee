@@ -1,0 +1,5 @@
+.gcd-tool p,.gcd-tool label,.gcd-tool table{font-size:16px;line-height:1.65}
+.gcd-grid-scroll{width:100%;overflow-x:auto;margin:16px 0;background:white;border:1px solid #d8e2df;border-radius:8px}
+.gcd-grid-scroll>svg{display:block;min-width:360px;max-width:none}
+.practice-editor .gcd-tool button,.practice-editor .gcd-tool select,.practice-editor .gcd-tool input{min-height:44px;font-size:16px}
+.gcd-tool .arithmetic-equation{font-size:16px}

@@ -1,0 +1,178 @@
+/** Public reading text only. The authored source/errata remain intact in each path. */
+const rewrites: readonly [RegExp,string][] = [
+  [/Le cours part d’un fait : piqué par une épine[^\n]+/g,"Pour comprendre la communication nerveuse, on répond à trois questions complémentaires :"],
+  [/> \*\*Correction du document :\*\* les éclairs[^\n]+/g,"> **Interprétation.** Des éclairs lumineux évoquent d’abord une perturbation des voies ou du cortex visuels ; la non-reconnaissance concerne les régions visuelles associatives."],
+  [/> \*\*Correction majeure :\*\* les mutations[^\n]+/g,"> **À retenir.** Les mutations apparaissent sans tenir compte du besoin adaptatif ; la sélection agit ensuite sur leurs effets héréditaires."],
+  [/> \*\*Correction du document :\*\* ce n’est pas une nouvelle hydrolyse[^\n]+/g,"> **Cycle actine–myosine.** La **fixation d’ATP** sur la myosine permet le détachement ; son hydrolyse réarme ensuite la tête."],
+  [/> \*\*Correction majeure :\*\* les « 8 ATP »[^\n]+/g,"> **Bilan de la glycolyse.** Le gain direct est de **2 ATP nets**. La valorisation ultérieure du NADH doit être comptée séparément."],
+  [/> \*\*Correction du document :\*\* la voie classique[^\n]+/g,"> **Complément.** IgM et certaines sous-classes d’IgG peuvent activer la voie classique. Les voies des lectines et alternative peuvent démarrer sans anticorps."],
+  [/> \*\*Correction du document :\*\* ce n’est pas le CMH[^\n]+/g,"> **Reconnaissance du greffon.** Des lymphocytes et d’autres effecteurs reconnaissent des différences moléculaires liées au HLA ; le CMH n’est pas un capteur autonome."],
+  [/> \*\*Correction du document :\*\* les macrophages[^\n]+/g,"> **Présentation antigénique.** Les cellules présentent surtout des **peptides liés au CMH**. L’activation implique co-stimulation, contacts et cytokines."],
+  [/> \*\*Correction de langue :\*\*[^\n]+/g,"> **Formulation.** « Si aucune entrave n’est rencontrée » signifie que la migration peut se poursuivre."],
+  [/> \*\*Périmètre respecté\.\*\*[^\n]+/g,""],
+  [/Le cours source classe l’accélération cardiaque[^\n]+/g,"L’accélération cardiaque peut être ressentie ou mesurée ; contrairement à une pâleur ou à un geste, elle n’est pas directement visible."],
+  [/ La source indique « feed-back \+ ou − »[^\n]+/g,""],
+  [/Le PDF juxtapose/g,"Les documents comparent"],
+  [/ La phrase source « plus le cerveau est grand, plus l’intelligence est grande » est donc trop générale\./g," Le volume cérébral ne suffit donc pas, à lui seul, à mesurer l’intelligence."],
+  [/> \*\*Correction importante :\*\* le tableau source[^\n]+/g,"> **À retenir.** Comparativement au tronc et aux jambes, les humains ont des bras **plus courts** et des membres inférieurs **plus longs** que les grands singes africains."],
+  [/Le PDF dit que la femme produit « un type de gamète »\.[^\n]+/g,"Relativement au chromosome sexuel, les ovocytes apportent uniquement **X**. Ils restent génétiquement différents pour de nombreux autosomes, du fait de la répartition des chromosomes et des recombinaisons."],
+  [/Le tableau du PDF duplique la ligne X[^\n]+/g,"Les ovocytes apportent tous un chromosome X. Le bilan théorique du croisement reste **50 % XX et 50 % XY**."],
+  [/La correction source relie donc/g,"On relie donc"],
+  [/La phrase du PDF « c’est au père qu’incombe la responsabilité » peut être mal comprise\. Scientifiquement, /g,"Dans ce modèle, "],
+  [/> \*\*Correction de consigne :\*\*[^\n]+/g,"> **Bilan.** On dénombre les filles et les garçons, ou plus rigoureusement les zygotes XX et XY dans le modèle étudié."],
+  [/Drépanocytose dans le modèle scolaire du PDF/g,"Drépanocytose dans le modèle étudié"],
+  [/— notions qui dépassent le modèle simple du PDF/g,"— limites du modèle simple étudié"],
+  [/Le PDF parle de consultation « prénuptiale »\. Le terme plus large \*\*consultation préconceptionnelle\*\* convient aussi/g,"Une **consultation préconceptionnelle** s’adresse aussi"],
+  [/, dans le texte source, l’embryoscopie/g,", dans le document historique, l’embryoscopie"],
+  [/La situation d’apprentissage introductive du PDF[^\n]+/g,""],
+  [/> \*\*Point de précision :\*\* le schéma du PDF[^\n]+/g,"> **Dans une cellule eucaryote**, le transcrit subit normalement une maturation avant d’être exporté. Le transcrit initial et l’ARNm utilisable sont donc à distinguer."],
+  [/Le PDF parle de « trois acides nucléiques »[^\n]+/g,"L’ARNm est un acide nucléique ; ses unités sont les **nucléotides** A, U, C et G."],
+  [/> \*\*Correction essentielle du PDF :\*\*[^\n]+/g,"> **À retenir.** La transcription est catalysée par une **ARN polymérase**. L’ADN polymérase intervient principalement dans la réplication de l’ADN."],
+  [/Le PDF appelle le brin matrice[^\n]+/g,"On distingue le **brin matrice/transcrit** du **brin codant/non transcrit**."],
+  [/Le PDF décrit principalement les sites P et A\. On peut aussi nommer/g,"Aux sites P et A s’ajoute"],
+  [/> \*\*Correction de précision :\*\*[^\n]+/g,"> **Terminaison.** La chaîne est libérée de l’ARNt qui la porte sous l’action d’un facteur de libération ; le complexe est ensuite recyclé."],
+  [/Le PDF fournit les deux séquences suivantes sans orientation et les appelle « brins non codants » :/g,"On étudie les deux séquences suivantes comme des **brins codants orientés de 5′ vers 3′** :"],
+  [/Or, lues comme des \*\*brins codants de 5′ vers 3′\*\*, ces séquences[^\n]+/g,"Ces brins codants donnent les deux nonapeptides annoncés. Pour écrire les ARNm, on remplace T par U en conservant l’orientation de 5′ vers 3′."],
+  [/Le mot « drogue » utilisé dans le PDF recouvre/g,"Le mot « drogue » recouvre"],
+  [/L’expression « psycho-dépressif » du PDF est remplacée par/g,"On parle de"],
+  [/Le corrigé indique qu’une enzyme « libère le neuromédiateur fixé », puis qu’il est réabsorbé\. En réalité, /g,"Après son action, "],
+  [/Le PDF classe l’amphétamine et la cocaïne parmi les/g,"L’amphétamine et la cocaïne font partie des"],
+  [/> \*\*Correction majeure :\*\* le corrigé de la page 8[^\n]+/g,"> **À distinguer.** La cocaïne bloque principalement la **recapture** de la dopamine. L’amphétamine favorise notamment sa libération."],
+  [/Le PDF affirme que le LSD inhibe l’action de la sérotonine\. Cette formulation est trop simple et trompeuse : /g,""],
+  [/Le PDF distingue les conséquences sur l’organisme et sur la vie sociale\. Cette distinction est utile, mais plusieurs formulations sont trop absolues\./g,"On distingue les conséquences sur l’organisme et sur la vie sociale."],
+  [/Le mot « désintoxication » du PDF correspond seulement à/g,"Le sevrage correspond seulement à"],
+  [/Le PDF propose six expressions\. Le classement fidèle est/g,"Les six expressions se classent ainsi"],
+  [/> \*\*Correction de lecture :\*\*[^\n]+/g,"> **Lecture du graphique.** Le départ est voisin de 50 %, le maximum proche de 230 % vers 50 minutes et le témoin proche de 45–60 %. Ce sont des valeurs approchées : il faut lire les axes et les points."],
+  [/ Le tableau du PDF oppose « peu rapide » et « rapide » : cette comparaison doit rester liée/g," La comparaison de vitesse doit rester liée"],
+  [/Le PDF utilise 3 ATP par NADH et 2 ATP par \$\\mathrm\{FADH_2\}\$, ce qui conduit au bilan conventionnel de 38 ATP\./g,"Le bilan conventionnel de 38 ATP utilise 3 ATP par NADH et 2 ATP par $\\mathrm{FADH_2}$."],
+  [/> \*\*Correction du corrigé source :\*\*[^\n]+/g,"> **Consommation de dioxygène.** Le cycle de Krebs produit NADH et $\\mathrm{FADH_2}$ ; c’est la chaîne respiratoire qui réduit directement $\\mathrm{O_2}$ en eau."],
+  [/L’activité du document inverse les intitulés de vitesse dans son corrigé\. /g,""],
+  [/Les pages 14 à 16 fournissent des enregistrements[^\n]+/g,"Les enregistrements de secousse, de tétanos et de fatigue permettent de relier la fréquence des stimulations à la réponse mécanique."],
+  [/ comme le suggère le schéma source/g,""],
+  [/Le corrigé source marque la dernière phrase « vrai »\.[^\n]+/g,"Certaines substances protectrices du sérum sont des anticorps, mais toutes ne le sont pas. Le sérum contient aussi d’autres protéines de défense, dont celles du complément."],
+  [/Le texte source indique que gp120 se décroche[^\n]+/g,"gp120 reste associée au complexe d’enveloppe et change de conformation ; gp41 expose son peptide de fusion et **rapproche les deux membranes jusqu’à leur fusion**. Le virus n’injecte pas son ARN comme une seringue rigide : son enveloppe fusionne avec la membrane cellulaire."],
+  [/Le graphique scolaire indique une hausse initiale des T4\. En réalité, /g,""],
+  [/Les trois courbes imprimées/g,"Les trois courbes schématiques"],
+  [/> \*\*Repère santé :\*\* le scénario du PDF[^\n]+/g,"> **Repère santé.** En l’absence de premières règles à 15 ans, une évaluation par un professionnel de santé est recommandée. Ce repère n’est pas un diagnostic individuel."],
+  [/ Le PDF indique « environ 37 h plus tard »[^\n]+/g,""],
+  [/Les deux hormones ovariennes du PDF/g,"Les deux hormones ovariennes du graphique"],
+  [/L’interaction ci-dessous redessine[^\n]+/g,"La courbe de LH utilise un **indice relatif** : elle représente la forme et l’ordre des événements, et non des mesures cliniques."],
+  [/Le texte source juxtapose les résultats[^\n]+/g,""],
+  [/La page 6 propose ensuite un exercice sur les testicules, hors du thème féminin\. Il sert ici de \*\*transfert sur la logique FSH\/LH\*\*\. Parmi les six affirmations de la source, les exactes sont/g,"L’exercice sur les testicules permet un **transfert sur la logique FSH/LH**. Les affirmations exactes sont"],
+  [/Le mot ancien « hétérosome » du PDF est remplacé ici par/g,"On emploie les termes"],
+  [/> \*\*Correction du PDF :\*\* la page 7[^\n]+/g,"> **Génotypes.** Dans ce pedigree, I1 est la mère de groupe **A**."],
+  [/> \*\*Correction du PDF :\*\* la page 8[^\n]+/g,"> **Locus lié à X.** Seule la mère peut être hétérozygote ; le père XY est hémizygote $X^DY$."],
+  [/> \*\*Correction majeure :\*\* si le corrigé scolaire[^\n]+/g,"> **Limite de la déduction.** Six enfants atteints ne suffisent pas à prouver que 9 est $NN$. Un test moléculaire ou une descendance révélant un enfant non atteint pourrait mieux trancher."],
+  [/Cette lecture corrige la confusion de la page 4[^\n]+/g,""],
+  [/## Une reproduction originale du document A-D/g,"## Les quatre étapes expérimentales"],
+  [/La récupération spontanée demandée dans ce niveau[^\n]+/g,"Pour rechercher une récupération spontanée après extinction, il faut réaliser un test retardé : les seuls tableaux d’acquisition et d’extinction ne suffisent pas."],
+  [/Le corrigé dit que le réflexe conditionnel est temporaire et non stéréotypé\. Il vaut mieux écrire : /g,""],
+  [/à « 12 h 45 » pour le blanc/g,"à 14 h 45 pour le blanc"],
+  [/ Le « 12 h 45 » rompt l’ordre[^\n]+/g,""],
+  [/Le PDF représente cela par une « nouvelle liaison nerveuse entre aire auditive et aire gustative »\. C’est un modèle scolaire utile, mais pas un câble unique nouvellement fabriqué : /g,"Il ne s’agit pas d’un câble unique nouvellement fabriqué : "],
+  [/La correction source place :/g,"Le classement est :"],
+  [/ Cette réponse est restituée pour l’exercice, puis précisée par les voies modernes ci-dessus\./g," Ce classement se lit avec les voies nerveuses décrites ci-dessus."],
+  [/ Le corrigé source écrit « fibres gustatives »[^\n]+/g," L’influence allant du cortex vers le centre salivaire est une influence descendante centrale, et non une voie gustative afférente."],
+  [/Le PDF mentionne dressage, automatisme et éducation\. Ces domaines/g,"Dressage, automatisme et éducation"],
+  [/la source retient \*\*c\*\*, « a pour centre la moelle épinière »\. Cette réponse ne vaut que pour le réflexe spinal visé ; elle ne définit pas tous les réflexes innés/g,"le réflexe spinal visé a pour centre la moelle épinière (**c**). Tous les réflexes innés ne sont cependant pas spinaux"],
+  [/ Le corrigé source écrit une fois 5-10 ; le tableau impose 5-9\./g,""],
+  [/> \*\*Correction de la source\.\*\* La phrase « le tissu nerveux[^\n]+/g,"> **À retenir.** Le tissu nerveux comprend neurones et glie ; un nerf périphérique contient de nombreux axones. Les dendrites participent à la réception des signaux."],
+  [/> \*\*Correction de mécanisme\.\*\*[^\n]+/g,"> **À retenir.** La pompe Na⁺/K⁺ entretient les gradients ; le potentiel instantané dépend surtout des perméabilités relatives et des flux à travers les canaux de fuite."],
+  [/ La courbe interactive redessine/g," La courbe représente"],
+  [/ Les valeurs sont un modèle cohérent[^\n]+/g," Les valeurs constituent un modèle pédagogique."],
+  [/> \*\*Correction de la source\.\*\* La période absolue[^\n]+/g,"> **À retenir.** La période réfractaire absolue est due à l’inactivation des canaux Na⁺. Le sens physiologique du signal n’est pas une règle morphologique universelle passant toujours par les dendrites et le soma."],
+  [/L’électronographie du PDF/g,"L’électronographie"],
+  [/> \*\*Correction de la source\.\*\* Le PDF parle de « recapture[^\n]+/g,"> **À retenir.** À la plaque motrice, l’ACh est hydrolysée et la choline est recaptée. Un PPSI peut réduire l’excitabilité sans hyperpolarisation visible, par effet de shunt."],
+  [/> \*\*Corrections de portée\.\*\*[^\n]+/g,"> **Portée de l’expérience.** L’enregistrement ne constitue pas un diagnostic individuel. L’expérience à la cholinestérase identifie un médiateur dans le cadre cholinergique étudié."],
+  [/> \*\*Précision scientifique\.\*\* Le document source montre[^\n]+/g,"> **Enveloppes conjonctives.** L’épimysium entoure le muscle, le périmysium les faisceaux et l’endomysium les fibres."],
+  [/Le document source appelle « bande B sombre »[^\n]+/g,"Les bandes sont nommées selon la nomenclature physiologique : **A = sombre**, **I = claire**. Ces repères permettent de localiser les coupes X, Y et Z."],
+  [/La source regroupe aussi actine[^\n]+/g,"L’actine et la myosine participent directement à l’interaction mécanique ; troponine et tropomyosine sont surtout **régulatrices**. Le calcium déclenche la contraction en levant cette régulation."],
+  [/> \*\*Précision\.\*\* Le document source[^\n]+/g,"> **Repère.** La bande A est sombre et la bande I est claire."],
+  [/ Le document source note une variation de −85 à −20 mV ; le tracé et la physiologie d’un potentiel d’action complet indiquent plutôt un dépassement positif\./g," Un potentiel d’action intracellulaire complet comporte un dépassement positif."],
+  [/Le document source attribue la sommation[^\n]+/g,"Dans le protocole de fréquence, la persistance du Ca²⁺ permet la **sommation temporelle**. L’activation de nouvelles fibres explique plutôt le recrutement lorsque l’intensité augmente."],
+  [/Le document emploie le terme \*\*« phosphocréatinase »\*\*[^\n]+/g,"La réaction est catalysée par la **créatine kinase**."],
+  [/Le bilan scolaire ancien du document/g,"Un bilan conventionnel historique"],
+  [/du modèle du PDF/g,"du modèle conventionnel"],
+  [/Cette lecture conserve le principe de l’épreuve[^\n]+/g,"La mitochondrie convertit l’énergie des nutriments en gradient électrochimique puis en ATP : elle ne crée pas d’énergie."],
+  [/Le texte source place « ATP se fixe »[^\n]+/g,"La **fixation d’ATP produit le détachement** de la myosine ; son hydrolyse réarme la tête avant l’attachement suivant."],
+  [/> \*\*Fidélité corrigée\.\*\*[^\n]+/g,""],
+  [/> \*\*Correction terminologique\.\*\*[^\n]+/g,"> **Vocabulaire.** Le nœud atrioventriculaire relaie le signal ; les branches droite et gauche prolongent le faisceau commun de His."],
+  [/La source parle d’une entrée « massive et transitoire » de calcium\. Cette formule est trop vague : /g,""],
+  [/ Le tracé du PDF appelle parfois « latence »[^\n]+/g," La latence désigne un délai avant une réponse enregistrée, et non une phase standard du potentiel d’action ventriculaire."],
+  [/> \*\*Correction de la source\.\*\* Associer mécaniquement[^\n]+/g,"> **ECG et mécanique.** Les ondes P, QRS et T décrivent des événements électriques qui précèdent et chevauchent les phases mécaniques ; elles ne se confondent pas avec les systoles et la diastole."],
+  [/Le PDF attribue surtout la reprise des battements à la destruction de l’acétylcholine par l’acétylcholinestérase\. Cette enzyme limite effectivement l’action de l’ACh, mais elle n’explique pas seule l’échappement\./g,"L’acétylcholinestérase limite l’action de l’ACh, mais elle n’explique pas seule l’échappement vagal."],
+  [/La source résume ce phénomène comme le retrait d’un « enduit protéique » épididymaire ; cette image est insuffisante\./g,""],
+  [/appelée dans le PDF « tiers supérieur »/g,"dans sa portion ampullaire"],
+  [/> \*\*Correction scientifique — durée\.\*\*[^\n]+/g,"> **Durée de fécondabilité.** Chez l’humain, l’ovocyte ovulé reste généralement fécondable environ **12 à 24 h**. Les durées varient selon les mammifères ; les spermatozoïdes peuvent persister plusieurs jours dans des conditions favorables."],
+  [/> \*\*Précision de vocabulaire\.\*\*[^\n]+/g,"> **Vocabulaire.** À la rencontre gamétique humaine, la cellule femelle est un **ovocyte II**. L’activation entraîne l’achèvement de la méiose II."],
+  [/> \*\*Précision scientifique\.\*\* Le PDF attribue[^\n]+/g,"> **Fécondation.** Enzymes et mouvement du flagelle contribuent au franchissement des enveloppes ; reconnaissances moléculaires, remaniements et fusion membranaire sont aussi nécessaires."],
+  [/Le PDF nomme l’enveloppe modifiée « membrane de fécondation »\. Cette expression convient à certains organismes, mais chez les mammifères on décrit plus précisément/g,"Chez les mammifères, on décrit"],
+  [/La source définit la \*\*caryogamie\*\*[^\n]+/g,"Chez les mammifères, la réunion des patrimoines parentaux ne commence pas par la fusion littérale des enveloppes pronucléaires. Celles-ci se désassemblent, puis les chromosomes maternels et paternels s’organisent sur un **premier fuseau mitotique commun**."],
+  [/> \*\*Correction scientifique\.\*\* La segmentation[^\n]+/g,"> **Segmentation.** Le nombre de cellules augmente **sans croissance globale notable** de l’embryon. Chez l’humain, la morula apparaît généralement vers **J3–J4**."],
+  [/> \*\*Correction de la source\.\*\* « Ovovyte »[^\n]+/g,"> **Repères.** Ovocyte II, zone pellucide modifiée et désassemblage des enveloppes pronucléaires sont les termes à employer."],
+  [/ Le fascicule écrit que l’endomètre est « presque totalement détruit »[^.]+\./g," La couche basale demeure et permet la reconstruction du cycle suivant."],
+  [/contrairement à la première phrase du corrigé page 15/g,""],
+  [/ Le corrigé officiel associe parfois la prolifération à la progestérone ; la distinction correcte est :/g," À retenir :"],
+  [/Les axes imprimés sont difficiles à lire[^\n]+/g,"Les courbes sont exprimées en **valeurs relatives** : on compare l’ordre des événements, sans interpréter les hauteurs comme des mesures cliniques."],
+  [/ La liste source oublie parfois l’hypothalamus : ajoute-le avec la GnRH\./g," La chaîne commence par l’hypothalamus et la GnRH."],
+  [/ La phrase du corrigé page 15[^\n]+/g," FSH et LH agissent sur l’ovaire ; l’endomètre répond directement aux stéroïdes ovariens."],
+  [/ Le schéma source est donc un modèle fréquent, pas une règle universelle\./g," Ce schéma est donc un modèle fréquent, pas une règle universelle."],
+  [/L’expression source « œuf principal ou œuf embryon » est remplacée par zygote, terme précis pour la cellule issue de cette fusion\./g,"Le **zygote** est la cellule issue de cette fusion."],
+  [/La dernière phrase de la page 7 l’attribue à toutes les spermaphytes\. On corrige la portée : /g,"Cette double fécondation caractérise le modèle angiosperme étudié : "],
+  [/Le terme source « anthérozoïde » pour b[^\n]+/g,"Le repère b désigne un **spermatozoïde végétal**, gamète mâle non mobile transporté par le tube pollinique."],
+  [/> \*\*Correction numérique\.\*\*[^\n]+/g,"> **Arrondis.** 3 054,9375 s’arrondit à 3 054,94 ; 339,4375 à 339,44."],
+  [/## Une leçon, trois numérotations\n+Le fichier[^\n]+\n/g,""],
+  [/La correction à trous de la page 11 inverse[^\n]+/g,"Pour compléter le texte, on suit la syntaxe et l’enchaînement des mécanismes. Sur un schéma, un repère absent ou illisible ne peut pas être identifié à partir du seul document : on se limite aux structures effectivement visibles."],
+  [/ La page 2 inverse ces repères[^\n]+/g,""],
+  [/La source range le « tube collecteur de Bellini » parmi les constituants du néphron\. /g,""],
+  [/La source place les osmorécepteurs dans les carotides[^.]+\./g,"Le contrôle osmotique est distinct du contrôle des récepteurs vasculaires."],
+  [/Le corrigé de la page 5 place « monocytes »[^\n]+/g,"Les **neutrophiles** sont recrutés rapidement au foyer, avant l’arrivée des monocytes dans la chronologie étudiée."],
+  [/Le corrigé imprimé attribue à tort[^\n]+/g,"B bénéficie d’une **immunité passive humorale** ; F d’un **transfert adoptif cellulaire**. A et D ont développé une immunité active après immunisation."],
+  [/> \*\*Correction de classement :\*\*[^\n]+/g,""],
+  [/Le seul site nommé dans l’exemple de situation[^\n]+/g,"**Ity** est un exemple de gisement d’or. Une carte minière doit être lue avec sa légende, sa date et la distinction entre indice, gisement et mine active."],
+  [/La page 19 annonce un schéma de synthèse[^\n]+/g,"La chronologie de synthèse relie les étapes et les légendes attendues."],
+  [/ La phrase « facile, rapide et donne de bons résultats » du texte est donc replacée dans ses limites :/g," Les limites sont à prendre en compte :"],
+  [/Le corrigé dit que « plus la profondeur augmente, plus la teneur diminue »\. C’est une tendance générale après 50 m, mais pas une diminution stricte dès la surface :/g,"La teneur tend à diminuer après 50 m, mais pas strictement dès la surface :"],
+  [/L’activité 2 de la page 9 affirme[^\n]+/g,"Le taux de découverture influence le prix de revient. La profondeur de 100 m n’est pas une frontière universelle entre ciel ouvert et souterrain. Pour les trois affirmations proposées, les réponses exactes sont **1 et 3**."],
+  [/La couverture imprimée écrit « 82,5 qtx\/kg »[^\n]+/g,"Les rendements du tableau sont exprimés en **quintaux par hectare**."],
+  [/La source attribue toute la décomposition et la minéralisation aux vers\. La correction distingue les rôles :/g,"Les acteurs jouent des rôles complémentaires :"],
+  [/L’activité annoncée en bas de la page 3[^\n]+/g,""],
+  [/La notation imprimée \$Ca\(CO_3H\)_2\$ est remplacée par \$Ca\(HCO_3\)_2\$\./g,"L’hydrogénocarbonate de calcium s’écrit $Ca(HCO_3)_2$."],
+  [/Le corrigé source affirme à tort[^\n]+/g,"Le $Ca^{2+}$ occupe des sites d’échange en remplaçant des cations tels que $H^+$. Dans un sol acide, un chaulage raisonné fait **augmenter le pH** vers une zone plus adaptée."],
+  [/, non « de la figure b » comme l’écrit le corrigé/g,""],
+  [/L’affirmation source selon laquelle elle contient des « activateurs de croissance »[^\n]+/g,""],
+  [/Les huit mots et groupes de mots sont conservés parce qu’ils constituent le corrigé officiel\./g,"On organise les huit mots et groupes de mots selon le mécanisme étudié."],
+  [/Le corrigé source choisit correctement le riz[^\n]+/g,"Le riz convient : dans ce modèle, ses besoins sont **inférieurs ou égaux** aux quantités disponibles."],
+  [/> \*\*Limite documentaire :\*\*[^\n]+/g,""],
+];
+
+export function svtReadingTitle(value:string):string {
+  return value.replace(/^Mission(?: finale| officielle)?\s*[:—–-]?\s*/iu,"Application : ")
+    .replace(/^Piloter une mission /u,"Étudier ")
+    .replace(/^La carte de la leçon$/u,"Repères et fil conducteur")
+    .replace(/^(\d+\.?\s*)?Corriger\s+/u,"$1Étudier ")
+    .replace(/^(\d+\.?\s*)?Correction(?:s)?(?: du| de la| de| —)?\s*/u,"$1Repères : ")
+    .replace(/\bAuditer\b/gu,"Analyser")
+    .replace(/\bExercices officiels\b/gu,"Applications")
+    .replace(/\bcorrigé(?:e)?\b/gu,"")
+    .replace(/\s+/g," ").trim().replace(/\s*:\s*$/u,"").replace(/^./u,letter=>letter.toLocaleUpperCase("fr"));
+}
+
+export function svtReadingText(value:string):string {
+  let text=value.replace(/\r\n/g,"\n")
+    // A historical non-raw template swallowed these LaTeX escapes; restore the same fractions.
+    .replace(/\u000crac1([24]),/g,(_,denominator:string)=>`\\frac{1}{${denominator}}\\,`)
+    .replace(/ quad ; quad /g,"\\quad;\\quad ")
+    .replace(/\\mathrm\{phosphocréatine \+ ADP \+ H\^\+ \\rightleftharpoons créatine \+ ATP\}/g,()=>String.raw`\text{phosphocréatine}+\mathrm{ADP}+H^+\rightleftharpoons\text{créatine}+\mathrm{ATP}`)
+    .replace(/\\rho_\{pétrole\}/g,()=>String.raw`\rho_{\text{pétrole}}`);
+  for(const [pattern,replacement] of rewrites)text=text.replace(pattern,()=>replacement);
+  // These callouts contain numbering/editorial bookkeeping, not biological content.
+  text=text.replace(/^> \*\*Corrections de la source\.\*\*[^\n]*$/gm,"");
+  return text.replace(/\bLa mission(?: finale| officielle)?\b/gu,"L’application").replace(/\bla mission(?: finale| officielle)?\b/gu,"l’application")
+    .replace(/(?<!\p{L})mission(?: finale| officielle)?(?!\p{L})/giu,"application")
+    .replace(/\bce niveau\b/gu,"cette partie").replace(/\bdu niveau\b/gu,"de la partie")
+    .replace(/\bLe parcours\b/gu,"Le cours").replace(/\ble parcours\b/gu,"le cours")
+    .replace(/\bdu PDF\b/gu,"du document").replace(/\bLe PDF\b/gu,"Le document")
+    .replace(/^#{1,6}\s+(.+)$/gm,(_,title:string)=>"### "+svtReadingTitle(title))
+    .replace(/\n{3,}/g,"\n\n").trim();
+}

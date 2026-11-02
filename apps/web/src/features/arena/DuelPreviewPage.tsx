@@ -357,7 +357,6 @@ function DuelSetupMockup({
                 );
               })}
             </div>
-            <small>Choisis au moins une leçon. Les questions seront mélangées lorsque plusieurs leçons sont sélectionnées.</small>
           </fieldset>
 
           <fieldset className="duel-option-group duel-format-choice">
@@ -541,7 +540,6 @@ function DuelOpponentPicker({
             <div>
               <p>ÉLÈVES DE {level.label.toUpperCase()}</p>
               <h2>Qui veux-tu défier ?</h2>
-              <span>Les élèves connectés apparaissent toujours en premier.</span>
             </div>
             <button type="button" onClick={onReload} disabled={loading} aria-label="Actualiser les élèves">
               <ArrowClockwise size={18} weight="bold" />
@@ -1155,7 +1153,7 @@ export function DuelPreviewPage({ profile, level, subject: initialSubject, subje
   return (
     <main ref={duelPageRef} className="duel-preview-page">
       <header className="duel-page-toolbar">
-        <button className="path-back-button" type="button" onClick={onBackArena}><ArrowLeft size={20} weight="bold" />Arène</button>
+        <button className="path-back-button" type="button" onClick={onBackArena}><ArrowLeft size={20} weight="bold" />M’entraîner</button>
         <span><UsersThree size={18} weight="duotone" /> Duel multijoueur</span>
       </header>
 

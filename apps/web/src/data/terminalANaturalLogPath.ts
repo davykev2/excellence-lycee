@@ -1,3 +1,4 @@
+import { terminalALogarithmDocument } from "./courseDocuments/terminalALogarithmDocument";
 import type {
   CurveLessonInteraction,
   LearningLesson,
@@ -694,6 +695,8 @@ Sur $]0;+\infty[$ :
 const builtLevels = levels.map((seed, index) => officialLevel(index + 1, seed));
 
 export const terminalANaturalLogPath: LearningPath = {
+  courseDocument: terminalALogarithmDocument,
+  presentation: "continuous-course",
   id: "terminale-a-natural-logarithm",
   subjectId: "mathematics",
   levelIds: ["terminale-a"],

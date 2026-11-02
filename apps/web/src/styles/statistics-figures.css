@@ -1,0 +1,24 @@
+.statistics-figure { margin: 1.25rem 0; padding: 1rem; border: 1px solid #dae4ee; border-radius: 16px; background: #fff; min-width: 0; font-size: 16px; }
+.statistics-figure figcaption { font-weight: 750; font-size: 16px; }
+.statistics-figure p, .statistics-figure label, .statistics-figure select, .statistics-figure button { font-size: 16px; line-height: 1.65; }
+.stats-axis-units { color: #42596c; margin: .5rem 0; }
+.stats-canvas { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+.stats-canvas svg { display: block; width: 560px; max-width: none; }
+.stats-grid { stroke: #dbe5ed; stroke-width: 1; }
+.stats-axes { stroke: #536e84; stroke-width: 1.5; }
+.stats-ticks, .stats-mean text { font: 16px system-ui,sans-serif; fill: #243e55; }
+.stats-point { fill: #234e80; stroke: #fff; stroke-width: 1.3; }
+.stats-empty { fill: #fff; stroke: #234e80; stroke-width: 1.5; }
+.stats-line-y { stroke: #078465; stroke-width: 2.3; }
+.stats-line-x { stroke: #a75716; stroke-width: 2.3; }
+.stats-residual { stroke: #594497; stroke-width: 2; stroke-dasharray: 4 4; }
+.stats-mean path { stroke: #bf3758; stroke-width: 2.5; }
+.stats-mean text { fill: #9a2444; paint-order: stroke; stroke: #fff; stroke-width: 4px; stroke-linejoin: round; }
+.stats-controls { display: grid; gap: .5rem; margin-top: .75rem; min-width: 0; }
+.stats-controls select, .stats-controls button { min-height: 44px; min-width: 0; max-width: 100%; width: 100%; background: #fff; color: #183b53; border: 1px solid #b6c7d6; border-radius: 8px; padding: .5rem; }
+.stats-controls input[type="range"] { width: 100%; min-height: 44px; margin: 0; }
+.stats-check { display: flex; align-items: center; gap: .65rem; min-height: 44px; }
+.stats-check input { flex: 0 0 22px; width: 22px; height: 22px; }
+.stats-key { display: flex; flex-wrap: wrap; gap: .5rem 1rem; }
+.stats-point-key { color: #234e80; }.stats-mean-key { color: #9a2444; }.stats-y-key { color: #076952; }.stats-x-key { color: #924409; }
+.statistics-figure .katex-display { max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: .25rem 0; }

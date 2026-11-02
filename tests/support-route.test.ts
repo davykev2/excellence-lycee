@@ -43,7 +43,8 @@ test("le soutien reste contextuel et ne devient pas un onglet principal ou mobil
   const learningAppSource = source("apps/web/src/LearningApp.tsx");
 
   assert.match(authSource, /href="\/soutenir"/);
-  assert.match(dashboardSource, /<SupportCard\s+location="dashboard"\s+onOpen=\{onOpenSupport\}/);
+  assert.doesNotMatch(dashboardSource, /HomeActionGrid|SupportCard/);
+  assert.match(source("apps/web/src/features/dashboard/HomeActionGrid.tsx"), /id: "support", title: "Offrir un café"[^\n]+onOpen: onOpenSupport/);
   assert.match(profileSource, /<SupportCard\s+location="profile"\s+onOpen=\{onOpenSupport\}/);
   assert.equal((learningAppSource.match(/onOpenSupport=\{\(\) => window\.location\.assign\("\/soutenir"\)\}/g) ?? []).length, 2);
 });

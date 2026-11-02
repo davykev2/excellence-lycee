@@ -6,6 +6,7 @@ import type {
   LessonQuestion,
   TimelineInteractionItem,
 } from "../domain/paths";
+import { terminalAPolynomialDocument } from "./courseDocuments/terminalAPolynomialDocument";
 
 const sourceDocument = "TA Maths leçon 01 fonctions polynôme et fonctions rationnelles.pdf";
 
@@ -1266,6 +1267,8 @@ Pour $f(x)=\frac{x^2+3x+3}{x+1}$ :
 const builtLevels = levels.map((seed, index) => officialLevel(index + 1, seed));
 
 export const terminalAPolynomialRationalPath: LearningPath = {
+  courseDocument: terminalAPolynomialDocument,
+  presentation: "continuous-course",
   id: "terminale-a-polynomial-rational-functions",
   subjectId: "mathematics",
   levelIds: ["terminale-a"],
@@ -1274,7 +1277,7 @@ export const terminalAPolynomialRationalPath: LearningPath = {
   theme: { number: 1, title: "Fonctions numériques" },
   chapterNumber: 1,
   title: "Étude de fonctions polynômes et de fonctions rationnelles",
-  description: "Le cours officiel intégral, sans les activités, découpé en niveaux progressifs avec ses exercices et corrections.",
+  description: "Limites, asymptotes, dérivation et étude de fonctions : résumé, applications détaillées, questions d’évaluation et essentiel.",
   estimatedMinutes: builtLevels.reduce((sum, lesson) => sum + lesson.durationMinutes, 0),
   outcomes: [
     "Calculer et interpréter les limites d’une fonction polynôme ou rationnelle",

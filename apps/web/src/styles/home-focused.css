@@ -1,0 +1,46 @@
+/* Focused homepage: deliberate breathing space, one primary learning action. */
+.home-focused { min-width: 0; min-height: 100%; padding: clamp(32px, 4.5vw, 64px) clamp(24px, 4vw, 64px) 100px; }
+.home-focused-content { max-width: 1080px; margin-inline: auto; }
+.home-focused .dashboard-header { gap: 18px; margin-bottom: 30px; }
+.home-focused .dashboard-header h1 { min-width: 0; margin: 0; color: var(--navy-900); font-size: clamp(27px, 3vw, 40px); line-height: 1.2; overflow-wrap: anywhere; }
+.home-learning-tip { display: flex; gap: 17px; align-items: center; margin: 0 0 22px; padding: 19px 24px; border: 1px solid #dcb159; border-radius: 18px; background: linear-gradient(110deg, #fff4d5, #fff9e7); color: var(--navy-900); }
+.home-learning-tip > svg { flex: 0 0 auto; color: #906317; }
+.home-learning-tip > div { min-width: 0; }
+.home-learning-tip h2 { margin: 0 0 5px; color: #775011; font-size: .9rem; font-weight: 850; }
+.home-learning-tip p { margin: 0; font-size: 1rem; line-height: 1.65; font-weight: 650; overflow-wrap: anywhere; }
+.home-focused .home-resume-card { grid-template-columns: minmax(0, 1.65fr) minmax(190px, .8fr); gap: clamp(16px, 3vw, 38px); padding: clamp(26px, 3.3vw, 44px); border-color: #d5e6dc; border-radius: 26px; background: linear-gradient(110deg, #fffdf9, #f2f9f2); box-shadow: 0 10px 30px #102f5810; }
+.home-focused .home-resume-copy > .path-kicker { margin-bottom: 18px; font-size: .93rem; font-weight: 850; letter-spacing: 0; text-transform: none; }
+.home-focused .home-resume-copy h2 { margin: 0 0 24px; font-size: clamp(26px, 2.8vw, 38px); line-height: 1.25; }
+.home-resume-actions { display: flex; align-items: flex-start; flex-direction: column; gap: 12px; }
+.home-focused .home-resume-card .primary-action { min-height: 56px; min-width: 0; justify-content: center; gap: 11px; padding: 14px 24px; border: 1px solid #ba4306; border-radius: 15px; color: #fff; background: linear-gradient(120deg, #c94a05, #b84004); box-shadow: 0 5px 12px #ed55081c; font-size: 1rem; font-weight: 850; }
+.home-focused .home-resume-card .primary-action:hover { background: #a73803; }
+.home-other-course { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 7px 0; border: 0; background: transparent; color: var(--navy-900); font: inherit; font-size: .98rem; font-weight: 750; text-decoration: underline; text-underline-offset: 5px; cursor: pointer; }
+.home-book-artwork { justify-self: end; width: 100%; max-width: 280px; height: auto; }
+.home-focused .home-sync-error { margin-bottom: 22px; }
+.home-no-course { padding: clamp(24px, 4vw, 42px); border: 1px solid #d5e6dc; border-radius: 24px; background: #f4f9f3; }
+.home-no-course h2 { margin: 0 0 12px; font-size: clamp(22px, 3vw, 30px); line-height: 1.25; }
+.home-no-course p { margin: 0 0 18px; color: #526173; font-size: 1rem; line-height: 1.7; }
+.home-no-course .home-other-course { padding: 0; }
+@media (max-width: 1100px) { .home-focused .home-resume-card { grid-template-columns: minmax(0, 1fr); } .home-book-artwork { display: none; } }
+@media (max-width: 920px) {
+  .home-focused { padding: 26px 18px 112px; }
+  .home-focused .dashboard-header { margin-bottom: 24px; }
+  .home-focused .dashboard-header h1 { font-size: clamp(25px, 4.8vw, 34px); }
+  .home-learning-tip { padding: 17px 18px; gap: 12px; margin-bottom: 20px; border-radius: 16px; }
+  .home-learning-tip > svg { width: 28px; height: 28px; }
+  .home-learning-tip h2 { font-size: .85rem; }
+  .home-focused .home-resume-card { padding: clamp(22px, 4vw, 34px); border-radius: 22px; }
+  .home-focused .home-resume-copy h2 { font-size: clamp(25px, 4.8vw, 34px); }
+  .home-focused .home-resume-card .primary-action { width: 100%; padding: 13px 15px; }
+  .home-resume-actions { align-items: stretch; }
+  .home-other-course { align-self: flex-start; }
+}
+@media (max-width: 370px) {
+  .home-focused { padding-inline: 14px; }
+  .home-focused .dashboard-header { gap: 10px; }
+  .home-focused .dashboard-header h1 { font-size: 25px; }
+  .home-focused .home-profile-link { width: 44px; height: 44px; }
+  .home-learning-tip { padding: 15px; align-items: flex-start; gap: 10px; }
+  .home-learning-tip > svg { width: 25px; height: 25px; }
+  .home-focused .home-resume-card { padding: 22px 19px; }
+}

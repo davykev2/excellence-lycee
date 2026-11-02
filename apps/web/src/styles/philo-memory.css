@@ -1,0 +1,62 @@
+.training-main-card.is-purple .training-card-icon { background:#efe8fa; color:#72529c; }
+.philo-memory-page { max-width:1180px; margin:0 auto; padding:26px clamp(18px,4vw,50px) 54px; color:#112b4b; min-width:0; }
+.philo-memory-page * { box-sizing:border-box; }
+.philo-memory-page button,.philo-memory-page input,.philo-memory-page textarea,.philo-memory-page select { font:inherit; }
+.philo-memory-page button,.philo-memory-page a,.philo-memory-page input,.philo-memory-page textarea,.philo-memory-page select { touch-action:manipulation; }
+.philo-memory-page :is(button,a,input,textarea,select):focus-visible { outline:3px solid #7c5b9e; outline-offset:4px; }
+.philo-memory-topbar { display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:20px; border-bottom:1px solid #e0e5ed; }
+.philo-memory-topbar button { display:inline-flex; align-items:center; gap:9px; min-height:44px; padding:8px 13px; border:1px solid #dce2e9; border-radius:12px; background:white; color:#23446d; cursor:pointer; }
+.philo-memory-topbar>span { color:#667a91; font-size:13px; }
+.philo-memory-heading { display:flex; align-items:center; gap:16px; margin:30px 0; }
+.philo-memory-icon { display:grid; place-items:center; flex:0 0 58px; height:58px; border-radius:18px; background:#eee7f5; color:#705196; }
+.philo-memory-heading p,.philo-notion-detail header p { margin:0 0 6px; color:#795a94; font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+.philo-memory-heading h1 { margin:0; font-size:clamp(28px,4vw,40px); line-height:1.15; letter-spacing:-.035em; }
+.philo-daily { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px; padding:24px; border:1px solid #dfd5ec; border-radius:20px; background:linear-gradient(120deg,#faf7ff,#fff); }
+.philo-daily>div { display:flex; align-items:center; gap:15px; }
+.philo-daily>div>svg { color:#7a5c9b; flex-shrink:0; }
+.philo-daily h2 { margin:0 0 7px; font-size:21px; }.philo-daily p { margin:0; color:#5b6e85; font-size:15px; line-height:1.6; }
+.philo-primary,.philo-secondary,.philo-hint-button { display:inline-flex; align-items:center; justify-content:center; gap:12px; min-height:48px; padding:12px 18px; border:1px solid transparent; border-radius:12px; font-weight:750!important; cursor:pointer; line-height:1.4; }
+.philo-primary { background:#287645; color:white; }.philo-primary:hover { background:#1d6539; }.philo-secondary { border-color:#d8dde6; background:white; color:#29496c; }
+.philo-primary:disabled,.philo-secondary:disabled { opacity:.55; cursor:not-allowed; }
+.philo-text-button { min-height:44px; padding:8px 2px; border:0; background:transparent; color:#37617f; text-decoration:underline; text-underline-offset:4px; cursor:pointer; }
+.philo-settings { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px; margin:24px 0; }
+.philo-settings label { display:flex; align-items:center; flex-wrap:wrap; gap:10px; font-size:14px; font-weight:700; }.philo-settings select { min-height:44px; padding:8px 34px 8px 12px; border:1px solid #d7dfe8; border-radius:10px; color:#254566; background:white; }
+.philo-settings p { margin:0; color:#6b788a; font-size:12px; }
+.philo-notion-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:15px; }
+.philo-notion-grid>button { min-width:0; display:flex; align-items:flex-start; flex-direction:column; gap:10px; min-height:177px; padding:21px; border:1px solid #e1e4eb; border-radius:18px; background:#fff; color:#183757; text-align:left; cursor:pointer; transition:transform .16s,border-color .16s,box-shadow .16s; }
+.philo-notion-grid>button:hover { transform:translateY(-3px); border-color:#b3a0c7; box-shadow:0 7px 20px #2634540b; }.philo-notion-grid>button>svg { color:#8c6bab; }.philo-notion-grid strong { font-size:18px; }.philo-notion-grid span { color:#667990; font-size:14px; line-height:1.5; }.philo-notion-grid small { margin-top:auto; color:#6b577e; font-size:12px; }
+.philo-notion-detail { border:1px solid #e0d9e9; border-radius:18px; padding:25px; margin:22px 0; background:#fdfbff; }.philo-notion-detail>header { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:15px; margin-bottom:20px; }.philo-notion-detail h2 { margin:0; font-size:26px; }.philo-notion-actions,.philo-result-actions { display:flex; align-items:center; flex-wrap:wrap; gap:12px; }
+.philo-reference-library>label { display:grid; gap:8px; font-size:14px; font-weight:700; margin:22px 0; }.philo-reference-library input { width:100%; min-height:48px; padding:12px 14px; border:1px solid #d0dbe6; border-radius:11px; background:white; }
+.philo-reference-card { margin:18px 0; padding:24px; border:1px solid #dde3eb; border-radius:17px; background:#fff; }
+.philo-memory-page blockquote { margin:20px 0; padding:19px 21px; border-left:3px solid #ad91c5; background:#f8f5fc; border-radius:0 12px 12px 0; font-size:clamp(18px,2vw,22px); line-height:1.75; overflow-wrap:anywhere; }
+.philo-reference-card h3 { margin:8px 0 14px; font-size:21px; }.philo-reference-card>p,.philo-feedback>p { font-size:16px; line-height:1.85; }
+.philo-source { display:grid; justify-items:start; gap:6px; padding:0 0 16px; color:#526780; font-size:14px; line-height:1.6; overflow-wrap:anywhere; }.philo-source strong { color:#3c4962; font-size:16px; }.philo-source small { color:#6b7b8c; font-size:12px; }.philo-source a { display:inline-flex; align-items:center; gap:7px; min-height:44px; color:#326a76; text-decoration:underline; text-underline-offset:3px; }
+.philo-application { padding:14px 17px; border-radius:10px; background:#f1f6f5; }.philo-application strong { display:block; color:#346756; }
+.philo-session { max-width:800px; margin:0 auto; }.philo-session-meta { display:flex; align-items:center; justify-content:space-between; gap:14px; font-size:14px; font-weight:750; color:#5e5378; }
+.philo-session progress { display:block; width:100%; height:7px; appearance:none; border:0; border-radius:10px; margin:17px 0 26px; background:#edf0f5; }.philo-session progress::-webkit-progress-bar { background:#edf0f5; border-radius:10px; }.philo-session progress::-webkit-progress-value { background:#8a6ba6; border-radius:10px; }.philo-session progress::-moz-progress-bar { background:#8a6ba6; border-radius:10px; }
+.philo-question { min-width:0; padding:clamp(18px,3vw,30px); background:white; border:1px solid #dfe4eb; border-radius:20px; }
+.philo-format { margin:0 0 14px!important; color:#805a9c; font-size:12px!important; line-height:1.5!important; font-weight:800; text-transform:uppercase; letter-spacing:.05em; }
+.philo-question-notions { margin:-5px 0 20px; color:#61748a; font-size:14px; line-height:1.6; }
+.philo-question h2 { margin:0 0 23px; color:#17334e; font-size:clamp(21px,2.7vw,27px); line-height:1.6; white-space:pre-line; outline:none; }
+.philo-options { display:grid; gap:12px; margin:20px 0; }.philo-options>button { display:grid; grid-template-columns:28px minmax(0,1fr) auto; align-items:center; gap:13px; width:100%; min-height:66px; border:1px solid #d7dfe8; border-radius:13px; padding:15px; color:#2a425e; background:#fff; text-align:left; font-size:16px; line-height:1.65; cursor:pointer; overflow-wrap:anywhere; }
+.philo-option-letter { display:grid; place-items:center; border-radius:8px; background:#f0f3f7; min-height:29px; font-size:12px; font-weight:800; }
+.philo-options>button.is-selected { border-color:#8d70aa; background:#f7f3fc; box-shadow:inset 0 0 0 1px #a48ab9; }
+.philo-options>button.is-correct { border-color:#43825a; background:#edf8ef; color:#25663d; box-shadow:none; }.philo-options>button.is-incorrect { border-color:#ba6868; color:#ab343d; background:#fff4f3; box-shadow:none; }.philo-options>button.is-expected { border-color:#5e91bc; background:#f1f7ff; color:#235f9a; }
+.philo-options>button:disabled { cursor:default; opacity:1; }
+.philo-question-actions { display:flex; align-items:center; flex-wrap:wrap; gap:12px; margin-top:25px; }.philo-hint-button { border-color:#dce3eb; background:white; color:#725d3c; font-size:14px; }
+.philo-cloze { border:0; padding:0; margin:0; min-width:0; }.philo-cloze p { margin:15px 0; font-size:21px; line-height:2.8; }.philo-cloze label { display:inline-flex; max-width:100%; }.philo-cloze input { display:inline-block; width:12ch; max-width:100%; min-width:5ch; min-height:44px; padding:5px 8px; margin:4px; border:1px solid #b4a2c9; border-radius:8px; background:#fbf8ff; color:#2c3e5a; font-size:18px; }
+.philo-completion label { display:grid; gap:10px; font-size:15px; font-weight:750; }.philo-completion textarea { width:100%; resize:vertical; min-height:115px; padding:12px; border:1px solid #bdcadd; border-radius:11px; color:#264261; background:white; font-size:16px; line-height:1.8; }
+.philo-order-answer,.philo-order-pool { display:flex; flex-wrap:wrap; gap:10px; padding:15px; min-height:75px; border:1px dashed #b9a8cb; border-radius:13px; background:#fbf9ff; margin:16px 0; }.philo-order-answer>span { color:#7e7488; font-size:14px; }.philo-order-answer button,.philo-order-pool button { display:inline-flex; align-items:center; gap:12px; max-width:100%; min-height:44px; padding:9px 12px; border:1px solid #d1c5df; border-radius:9px; color:#53416c; background:white; font-size:16px; line-height:1.6; text-align:left; cursor:pointer; }.philo-order-answer button span { color:#85798e; }
+.philo-hint { margin:20px 0 0; padding:12px; background:#fff8e7; color:#705728; border-radius:10px; font-size:15px; overflow-wrap:anywhere; }
+.philo-order-pool:empty { display:none; }
+.philo-feedback { margin:25px 0 0; padding-top:22px; border-top:1px solid #dce7df; }.philo-feedback>h3 { display:flex; align-items:center; gap:10px; color:#287545; margin:0 0 17px; font-size:20px; }.philo-feedback.is-incorrect>h3,.philo-feedback del { color:#ad3740; }.philo-feedback .philo-expected { color:#235f9a; background:#f3f7ff; padding:13px 16px; border-radius:10px; }.philo-feedback .philo-assisted { color:#735a29; }.philo-feedback .philo-primary { margin-top:16px; }
+.philo-session>.philo-text-button { margin-top:16px; }.philo-storage-error { background:#fff4df; padding:14px; border:1px solid #e9d09e; border-radius:12px; line-height:1.7; color:#7d5b21; }
+.philo-session-results { padding:35px 25px; border:1px solid #d9e4dd; border-radius:20px; background:white; text-align:center; }.philo-session-results>svg { color:#398354; }.philo-session-results h2 { font-size:30px; margin:16px 0; }.philo-session-results>strong { display:block; font-size:22px; }.philo-session-results p { color:#5e7288; font-size:16px; line-height:1.75; }.philo-result-actions { justify-content:center; margin-top:25px; }
+@media(max-width:700px) {
+  .philo-memory-page { padding:19px 16px 35px; }.philo-memory-heading { margin:24px 0; gap:12px; }.philo-memory-icon { flex-basis:48px; height:48px; border-radius:14px; }
+  .philo-notion-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }.philo-notion-grid>button { padding:16px 13px; min-height:177px; }.philo-notion-grid strong { font-size:17px; }.philo-notion-grid span { font-size:13px; }.philo-notion-grid small { font-size:11px; }
+  .philo-daily { padding:20px; gap:20px; }.philo-daily>.philo-primary { width:100%; }.philo-notion-detail { padding:21px 17px; }.philo-notion-actions>button { width:100%; }.philo-reference-card { padding:20px 17px; }
+  .philo-question { padding:20px 16px; border-radius:16px; }.philo-options>button { grid-template-columns:25px minmax(0,1fr) auto; padding:13px 11px; gap:10px; }.philo-options>button>svg { width:19px; height:19px; }
+  .philo-question-actions>.philo-primary { flex:1 1 100%; }.philo-memory-page blockquote { padding:15px 14px; }.philo-result-actions>button { width:100%; }
+}
+@media(prefers-reduced-motion:reduce) { .philo-notion-grid>button { transition:none; }.philo-notion-grid>button:hover { transform:none; } }

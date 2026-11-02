@@ -15,7 +15,6 @@ import { useMemo, useState } from "react";
 import type { HomeworkSummary } from "../../../domain/homework";
 import type { LearnerProfile } from "../../../domain/learning";
 import { formatHomeworkDuration } from "../../../domain/homework";
-import { CompanionAvatar } from "../../companion/CompanionAvatar";
 import "../../../styles/homework.css";
 import { useHomeworkLibrary } from "./homeworkApi";
 
@@ -105,7 +104,7 @@ export function HomeworkLibraryPage({
     <main className="homework-library-page">
       <header className="homework-library-topbar">
         <button className="path-back-button" type="button" onClick={onBackArena}>
-          <ArrowLeft size={20} weight="bold" />Retour à l’Arène
+          <ArrowLeft size={20} weight="bold" />M’entraîner
         </button>
         <span><Books size={19} weight="duotone" />Devoirs d’établissements</span>
       </header>
@@ -114,19 +113,11 @@ export function HomeworkLibraryPage({
         <div>
           <p className="path-kicker">Conditions réelles · Correction expliquée</p>
           <h1>Compose les devoirs des écoles d’excellence.</h1>
-          <p>
-            Retrouve les anciens sujets par établissement, matière et année. Ta copie reste enregistrée,
-            même si tu actualises la page.
-          </p>
           <div>
             <span><PlayCircle size={18} weight="duotone" />Chronomètre officiel</span>
             <span><CheckCircle size={18} weight="duotone" />Note sur 20</span>
             <span><FileText size={18} weight="duotone" />Démonstrations relues</span>
           </div>
-        </div>
-        <div className="homework-library-davy">
-          <CompanionAvatar motion="wave" decorative />
-          <p><strong>Je garde ta copie.</strong><span>Avance à ton rythme, sans perdre tes réponses.</span></p>
         </div>
       </section>
 

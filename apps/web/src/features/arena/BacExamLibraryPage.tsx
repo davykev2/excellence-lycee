@@ -10,8 +10,12 @@ import {
   WarningCircle,
 } from "@phosphor-icons/react";
 import { bacExamCatalog, type BacExamCatalogEntry, type BacExamSlug } from "../../data/bacExamCatalog";
-import { CompanionAvatar } from "../companion/CompanionAvatar";
 import { useBacExam } from "./useBacExam";
+import type { KeyboardEvent } from "react";
+import { INP_HB_COLLECTION_LOCKED } from "../../config/examCollections";
+import { getOfficialBacPaper } from "../../data/officialBacCatalog";
+import { OfficialBacLibrary, type OfficialBacSelectionProps } from "./OfficialBacLibrary";
+import { OfficialBacReader } from "./OfficialBacReader";
 
 function BacExamLibraryCard({
   exam,
@@ -75,22 +79,41 @@ function BacExamLibraryCard({
 
 export function BacExamLibraryPage({
   preview = false,
+  collection = "inp-hb",
+  levelId,
+  archiveYear,
+  archivePaperId,
+  onArchiveSelection,
+  onCollectionChange,
   onBackArena,
   onOpenExam,
-}: {
+}: OfficialBacSelectionProps & {
   preview?: boolean;
+  collection?: "inp-hb" | "bac";
+  onCollectionChange: (collection: "inp-hb" | "bac") => void;
   onBackArena: () => void;
   onOpenExam: (slug: BacExamSlug) => void;
 }) {
   const verifiedSessionCount = bacExamCatalog.filter((exam) => exam.sourceVerified !== false).length;
   const bacSessions = bacExamCatalog.filter((exam) => exam.collection !== "esatic");
   const esaticSessions = bacExamCatalog.filter((exam) => exam.collection === "esatic");
+  const paper = collection === "bac" ? getOfficialBacPaper(archiveYear, archivePaperId, levelId) : undefined;
+  const onTabKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    const tabs = Array.from(event.currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+    const current = tabs.indexOf(document.activeElement as HTMLButtonElement);
+    const index = event.key === "Home" ? 0 : event.key === "End" ? 1
+      : event.key === "ArrowRight" ? (current + 1) % 2 : event.key === "ArrowLeft" ? (current + 1) % 2 : -1;
+    if (index < 0) return;
+    event.preventDefault(); tabs[index]?.focus(); onCollectionChange(index === 0 ? "inp-hb" : "bac");
+  };
+
+  if (paper) return <OfficialBacReader key={paper.id} paper={paper} onBack={() => onArchiveSelection(paper.year)} />;
 
   return (
     <main className="bac-library-page">
       <header className="bac-library-topbar">
         <button className="path-back-button" type="button" onClick={onBackArena}>
-          <ArrowLeft size={20} weight="bold" />Arène
+          <ArrowLeft size={20} weight="bold" />M’entraîner
         </button>
         <span><GraduationCap size={20} weight="duotone" />Annales et concours</span>
       </header>
@@ -98,23 +121,32 @@ export function BacExamLibraryPage({
       <section className="bac-library-hero">
         <div>
           <p className="path-kicker">Annales Excellence</p>
-          <h1>Choisis ton sujet</h1>
-          <p>Entraîne-toi sur les sujets type BAC ou prépare le concours d’entrée à l’ESATIC.</p>
-          <div>
+          <h1>Sujets d’examen</h1>
+          {collection === "inp-hb" && !INP_HB_COLLECTION_LOCKED && <div>
             <span><strong>{verifiedSessionCount}</strong> sessions disponibles</span>
             <span><strong>4</strong> zones de participation</span>
             <span><strong>{esaticSessions.length}</strong> sujets ESATIC</span>
-          </div>
-        </div>
-        <div className="bac-library-davy">
-          <CompanionAvatar motion="wave" decorative />
-          <p><strong>Davy te conseille</strong><span>Commence par une année, puis compare tes progrès à la suivante.</span></p>
+          </div>}
         </div>
       </section>
 
+      <div className="exam-collection-tabs" role="tablist" aria-label="Catégorie de sujets" onKeyDown={onTabKeyDown}>
+        <button id="exam-tab-inp-hb" role="tab" type="button" aria-controls="exam-collection-panel" aria-selected={collection === "inp-hb"} tabIndex={collection === "inp-hb" ? 0 : -1} onClick={() => onCollectionChange("inp-hb")}>
+          {INP_HB_COLLECTION_LOCKED && <LockKey size={20} weight="fill" aria-hidden="true" />}<span>INP-HB</span>
+          {INP_HB_COLLECTION_LOCKED && <small>Verrouillé</small>}
+        </button>
+        <button id="exam-tab-bac" role="tab" type="button" aria-controls="exam-collection-panel" aria-selected={collection === "bac"} tabIndex={collection === "bac" ? 0 : -1} onClick={() => onCollectionChange("bac")}>Anciens sujets de BAC</button>
+      </div>
+
+      {collection === "inp-hb" ? <div id="exam-collection-panel" role="tabpanel" aria-labelledby="exam-tab-inp-hb">
+      {INP_HB_COLLECTION_LOCKED ? <section className="exam-collection-empty exam-collection-locked" aria-labelledby="exam-lock-title">
+        <div className="exam-lock-symbol"><LockKey size={38} weight="duotone" aria-hidden="true" /></div>
+        <h2 id="exam-lock-title">Contenu INP-HB verrouillé</h2>
+        <p>Ces sujets ne sont pas accessibles pour le moment.</p>
+      </section> : <>
       <section className="bac-library-collection" aria-labelledby="bac-library-bac-title">
         <header>
-          <div><p className="path-kicker">BAC &amp; BT</p><h2 id="bac-library-bac-title">Sujets type BAC</h2></div>
+          <div><p className="path-kicker">Concours d’entrée</p><h2 id="bac-library-bac-title">Sujets INP-HB</h2></div>
           <span>{bacSessions.length} sessions</span>
         </header>
         <div className="bac-library-grid">
@@ -127,15 +159,18 @@ export function BacExamLibraryPage({
       <section className="bac-library-collection is-esatic" aria-labelledby="bac-library-esatic-title">
         <header>
           <div><p className="path-kicker">Concours d’entrée</p><h2 id="bac-library-esatic-title">Annales ESATIC</h2></div>
-          <span>{esaticSessions.length} sujets pour commencer</span>
+          <span>{esaticSessions.length} sujets</span>
         </header>
-        <p className="bac-library-collection-intro">Les sujets 2023 et 2024 sont disponibles en consultation fidèle, matière par matière. Davy ajoutera ensuite les feuilles de réponses interactives.</p>
         <div className="bac-library-grid">
           {esaticSessions.map((exam) => (
             <BacExamLibraryCard key={exam.id} exam={exam} preview={preview} onOpen={onOpenExam} />
           ))}
         </div>
       </section>
+      </>}
+      </div> : <div id="exam-collection-panel" role="tabpanel" aria-labelledby="exam-tab-bac">
+        <OfficialBacLibrary levelId={levelId} archiveYear={archiveYear} archivePaperId={archivePaperId} onArchiveSelection={onArchiveSelection} />
+      </div>}
     </main>
   );
 }

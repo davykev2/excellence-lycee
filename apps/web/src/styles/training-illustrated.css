@@ -1,0 +1,37 @@
+.training-page.is-illustrated { background: #fff; color: #142c4b; padding-bottom: 130px; }
+.is-illustrated .training-heading { max-width: 1280px; justify-content: flex-end; margin-bottom: 20px; }
+.training-banner { position: relative; isolation: isolate; display: grid; align-items: center; max-width: 1280px; min-height: 162px; padding: 28px 25px; margin-bottom: 27px; border-radius: 22px; background: #142c4b; text-align: center; }
+.training-banner > img { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+.training-banner p { margin: 0 0 8px; color: #d0e7e6; font-size: 11px; line-height: 1.5; letter-spacing: .09em; text-transform: uppercase; font-weight: 800; }
+.training-banner h1 { margin: 0; color: #fff; font-size: clamp(28px, 3vw, 38px); line-height: 1.2; letter-spacing: -.035em; }
+.is-illustrated .training-main-grid { max-width: 1280px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.is-illustrated .training-main-card { position: relative; display: flex; flex-direction: row; align-items: center; gap: 0; min-height: 158px; padding: 10px 18px 10px 0; border: 1px solid #d9e8e3; border-radius: 22px; background: #e8f4ef; color: #142c4b; box-shadow: 0 5px 9px #142c4b0d; }
+.is-illustrated .training-main-card.is-orange { background: #fcf0de; border-color: #efdfc4; }
+.is-illustrated .training-main-card.is-purple { background: #f0ebf8; border-color: #e2d8ee; }
+.is-illustrated .training-main-card.is-rose { background: #f7eaf2; border-color: #eddde6; }
+.is-illustrated .training-main-card.is-blue { background: #e8f2fb; }
+.is-illustrated .training-main-card.is-locked, .is-illustrated .training-main-card.is-locked:hover { background: #edf1f5; border-color: #dfe4ea; color: #52657d; transform: none; }
+.training-card-art { flex: 0 0 42%; width: 42%; height: 136px; object-fit: contain; pointer-events: none; }
+.training-card-copy { flex: 1; min-width: 0; padding-bottom: 22px; }
+.is-illustrated .training-main-card h2 { display: block; margin: 0; color: inherit; font-size: clamp(20px, 1.7vw, 25px); line-height: 1.15; font-weight: 800; letter-spacing: -.035em; }
+.is-illustrated .training-card-action { display: block; width: auto; margin: 10px 0 0; padding: 0; border: 0; color: #35525e; font-size: 12px; line-height: 1.5; font-weight: 500; }
+.training-card-arrow { position: absolute; right: 16px; bottom: 13px; display: grid; place-items: center; width: 43px; height: 29px; border-radius: 20px; background: #0d6c68; color: #fff; }
+.is-illustrated .is-locked .training-card-art { opacity: .75; filter: saturate(.55); }
+.is-illustrated .is-locked .training-card-arrow { background: #dce4e9; color: #52657d; }
+.is-illustrated .training-main-card:hover:not(:disabled) { border-color: #71a89f; transform: translateY(-2px); box-shadow: 0 8px 16px #142c4b16; }
+.is-illustrated .training-main-card:focus-visible { outline: 3px solid #0d6c68; outline-offset: 4px; }
+.is-illustrated .training-more-tools { max-width: 1280px; background: #f6f9f8; border-color: #dce6e3; }
+@media (min-width: 921px) and (max-width: 1320px) { .is-illustrated .training-main-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 920px) { .is-illustrated .training-main-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) {
+  .training-page.is-illustrated { padding: 20px 17px 130px; }
+  .is-illustrated .training-heading { margin-bottom: 17px; }
+  .training-banner { min-height: 142px; padding: 24px 14px; border-radius: 18px; margin-bottom: 22px; }
+  .is-illustrated .training-main-grid { grid-template-columns: minmax(0, 1fr); gap: 15px; }
+  .is-illustrated .training-main-card { min-height: 140px; padding: 8px 20px 8px 0; border-radius: 20px; }
+  .training-card-art { height: 122px; }
+  .is-illustrated .training-main-card h2 { font-size: 23px; }
+  .is-illustrated .training-more-tools > summary > span { display: block; margin: 5px 0 0; }
+}
+@media (max-width: 360px) { .training-page.is-illustrated { padding-inline: 14px; } .is-illustrated .training-main-card h2 { font-size: 21px; } }
+@media (prefers-reduced-motion: reduce) { .is-illustrated .training-main-card { transition: none; } .is-illustrated .training-main-card:hover:not(:disabled) { transform: none; } }

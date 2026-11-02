@@ -11,11 +11,26 @@ const javaScript = ts.transpileModule(source, {
   compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
 }).outputText;
 const module = { exports: {} };
+function loadDocumentFile(name, dependencies = {}) {
+  const source = readFileSync(new URL("../apps/web/src/data/courseDocuments/" + name + ".ts", import.meta.url), "utf8");
+  const js = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
+  const result = { exports: {} };
+  new Function("exports", "module", "require", js)(result.exports, result, specifier => {
+    if (specifier in dependencies) return dependencies[specifier];
+    throw new Error("Dépendance documentaire inattendue : " + specifier);
+  });
+  return result.exports;
+}
+const document = loadDocumentFile("terminalCDifferentialDocument", {
+  "./terminalCDifferentialSummary": loadDocumentFile("terminalCDifferentialSummary"),
+  "./terminalCDifferentialEvaluations": loadDocumentFile("terminalCDifferentialEvaluations"),
+});
 
 new Function("exports", "module", "require", javaScript)(
   module.exports,
   module,
-  () => {
+  (specifier) => {
+    if (specifier === "./courseDocuments/terminalCDifferentialDocument") return document;
     throw new Error("Dépendance inattendue pendant l’audit KaTeX.");
   },
 );

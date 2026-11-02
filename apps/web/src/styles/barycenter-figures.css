@@ -1,0 +1,22 @@
+.barycenter-figure{min-width:0;max-width:100%;margin:1.25rem 0;padding:1rem;border:1px solid #dce5ec;border-radius:16px;background:#fff;color:#243e51;font-size:16px;line-height:1.6}
+.bary-figure-title{font-weight:700;margin-bottom:.5rem}
+.barycenter-canvas{max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;border-radius:8px}
+.barycenter-canvas:focus-visible{outline:3px solid #176dad;outline-offset:2px}
+.barycenter-canvas svg{display:block;width:100%;height:auto}
+.bary-label{font-size:16px;font-family:inherit;font-weight:600;fill:#1d3e55;paint-order:stroke;stroke:#fff;stroke-width:3px;stroke-linejoin:round}
+.bary-segments{stroke:#7c91a1;stroke-width:1.8;fill:none}
+.bary-highlight{stroke:#1478a3;stroke-width:3;fill:none}
+.bary-circle{stroke:#1478a3;stroke-width:2;fill:none}
+.bary-circle ellipse{stroke-dasharray:5 4;stroke-width:1.3}
+.bary-reference-circle{stroke:#b1bec9;stroke-width:1.5;stroke-dasharray:5 5;fill:none}
+.bary-point{fill:#1d526e;stroke:#fff;stroke-width:1}
+.bary-open-point{fill:#fff;stroke:#1478a3;stroke-width:2}
+.bary-grid{stroke:#dce5eb;stroke-width:1;fill:none}
+.bary-area{stroke:none;fill:#ddedf8}.bary-area-1{fill:#dcf0e4}.bary-area-2{fill:#f6e7c8}
+.bary-controls{display:flex;gap:.75rem;flex-wrap:wrap;margin:.75rem 0}
+.bary-controls label{display:grid;gap:.25rem;min-width:0;width:min(100%,390px);font-size:16px}
+.bary-controls input,.bary-controls select{min-height:44px;width:100%;max-width:100%;accent-color:#1478a3;font:inherit}
+.bary-controls select{border:1px solid #bfcfda;border-radius:8px;background:#fff;color:inherit;padding:.4rem}
+.barycenter-figure figcaption{margin-top:.65rem;font-size:16px;line-height:1.65;color:#40586a}
+.bary-figure-group{min-width:0;max-width:100%}
+@media(max-width:560px){.barycenter-figure{padding:.75rem}.bary-figure-title{line-height:1.5}}

@@ -27,7 +27,7 @@ export function StoreScreen({ profile, level, store }: StoreScreenProps) {
         <div>
           <p className="header-kicker">Récompense ton travail</p>
           <h1>Boutique</h1>
-          <p>Ton or grandit avec ton XP : {wallet.goldRate} XP gagnés = 1 or. Dépense-le sans jamais toucher à ton classement.</p>
+          <p>{wallet.goldRate} XP = 1 or</p>
         </div>
         <div className="community-level-pill"><GraduationCap size={23} weight="duotone" /><span>Ma classe</span><strong>{level.label}</strong></div>
       </header>
@@ -91,7 +91,6 @@ export function StoreScreen({ profile, level, store }: StoreScreenProps) {
         );
       })}
 
-      <p className="store-footnote">D’autres articles arriveront bientôt — bonus de jeu, contenus exclusifs et bien plus.</p>
     </main>
   );
 }

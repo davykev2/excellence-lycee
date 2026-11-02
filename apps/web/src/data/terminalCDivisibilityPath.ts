@@ -6,6 +6,7 @@ import type {
   TimelineInteractionItem,
 } from "../domain/paths";
 
+import { terminalCDivisibilityDocument } from "./courseDocuments/terminalCDivisibilityDocument";
 const sourceDocument = "TC Maths leçon 03 Divisibilité dans  Z.pdf";
 
 const choice = (
@@ -1084,11 +1085,13 @@ const builtLevels = levels.map((seed, index) => officialLevel(index, seed));
 
 export const terminalCDivisibilityPath: LearningPath = {
   id: "terminale-c-math-l03-divisibility",
+  presentation: "continuous-course",
+  courseDocument: terminalCDivisibilityDocument,
   subjectId: "mathematics",
   levelIds: ["terminale-c"],
   curriculumLabel: "Programme ivoirien • Terminale C • Leçon officielle fidèlement structurée",
   curriculumSourceUrl: "https://dpfc-ci.net/",
-  theme: { number: 3, title: "Arithmétique" },
+  theme: { number: 3, title: "Algèbre et géométrie" },
   chapterNumber: 3,
   title: "Divisibilité dans ℤ",
   description: "Le cours officiel intégral, sans la situation d'apprentissage, enrichi de méthodes, exercices expliqués et missions de codage.",

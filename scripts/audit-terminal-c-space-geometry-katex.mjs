@@ -1,6 +1,18 @@
 import { readFileSync } from "node:fs";
 import katex from "../apps/web/node_modules/katex/dist/katex.mjs";
 import ts from "../apps/api/node_modules/typescript/lib/typescript.js";
+import { loadSpaceDocument } from "./load-space-document.mjs";
+
+const documentary = loadSpaceDocument((relative, dependencies = {}) => {
+  const source = readFileSync(new URL("../"+relative, import.meta.url), "utf8");
+  const js = ts.transpileModule(source, {compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
+  const target = {exports:{}};
+  new Function("exports","module","require",js)(target.exports,target,request => {
+    if(Object.hasOwn(dependencies,request))return dependencies[request];
+    throw new Error("Dépendance documentaire inattendue : "+request);
+  });
+  return target.exports;
+});
 
 const source = readFileSync(
   new URL("../apps/web/src/data/terminalCSpaceGeometryPath.ts", import.meta.url),
@@ -14,8 +26,9 @@ const module = { exports: {} };
 new Function("exports", "module", "require", javaScript)(
   module.exports,
   module,
-  () => {
-    throw new Error("Dépendance inattendue pendant l’audit KaTeX.");
+  request => {
+    if(request==="./courseDocuments/terminalCSpaceDocument")return documentary;
+    throw new Error("Dépendance inattendue pendant l’audit KaTeX : "+request);
   },
 );
 

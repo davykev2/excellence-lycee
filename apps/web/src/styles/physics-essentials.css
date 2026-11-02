@@ -1,0 +1,27 @@
+/* The three-tab PC reader reuses documentary typography, without changing rewards. */
+.physics-course-document .physics-course-assessment { max-width: 1020px; margin: 0 auto; }
+.physics-course-document .physics-assessment-section { min-width: 0; margin-top: 28px; }
+.physics-course-document .physics-assessment-section > .course-reader-section-head { padding-bottom: 20px; }
+.physics-course-document .document-correction-panel .lesson-rich-content,
+.physics-course-document .document-correction-panel .lesson-table-scroll table,
+.physics-course-document .course-reader-rich-content .lesson-rich-content,
+.physics-course-document .course-reader-rich-content .lesson-table-scroll table,
+.physics-course-document .course-reader-answer { font-size: 16px; line-height: 1.85; }
+.physics-course-document .math-formula.is-inline { max-width: calc(100% - .16em); overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+.physics-course-document .lesson-table-scroll .math-formula.is-inline { max-width: none; overflow: visible; }
+.physics-course-document .document-correction-button { cursor: pointer; }
+.physics-essential-figure svg { min-width: 500px; }
+.physics-essential-figure svg text { font-size: 16px; }
+.physics-essential-figure .essential-circle-scroll:focus-visible { outline: 3px solid #86c7c0; outline-offset: -3px; }
+.physics-essential-figure figcaption { font-size: 16px; line-height: 1.75; }
+.physics-essential-figure figcaption > label { display: block; }
+.physics-figure-toggle,
+.physics-figure-options > button { min-height: 44px; max-width: 100%; padding: 9px 13px; border: 1px solid #bcd2d4; border-radius: 8px; color: #164d58; background: #fff; font: inherit; cursor: pointer; }
+.physics-figure-options { display: flex; flex-wrap: wrap; gap: 8px; }
+.physics-figure-options > button[aria-pressed="true"] { color: #0d6c68; background: #dff2ec; border-color: #0d6c68; }
+.physics-figure-toggle:focus-visible,
+.physics-figure-options > button:focus-visible { outline: 3px solid #86c7c0; outline-offset: 3px; }
+@media (max-width: 600px) {
+  .physics-course-document .legacy-course-tabs > button { font-size: 12px; }
+  .physics-course-document .physics-assessment-section { padding: 17px; }
+}

@@ -1,3 +1,4 @@
+import { terminalCGcdDocument } from "./courseDocuments/terminalCGcdDocument";
 import type {
   LearningLesson,
   LearningPath,
@@ -1278,9 +1279,11 @@ export const terminalCLcmGcdPath: LearningPath = {
   levelIds: ["terminale-c"],
   curriculumLabel: "Programme ivoirien • Terminale C • Leçon officielle fidèlement structurée",
   curriculumSourceUrl: "https://dpfc-ci.net/",
-  theme: { number: 3, title: "Arithmétique" },
+  theme: { number: 2, title: "Algèbre et géométrie" },
   chapterNumber: 11,
   title: "PPCM et PGCD de deux entiers relatifs",
+  presentation: "continuous-course",
+  courseDocument: terminalCGcdDocument,
   description: "PPCM, PGCD, algorithme d’Euclide, Bézout, Gauss, équations diophantiennes, congruences et codage, avec les 36 questions officielles réparties en huit niveaux.",
   estimatedMinutes: builtLevels.reduce((sum, lesson) => sum + lesson.durationMinutes, 0),
   outcomes: [

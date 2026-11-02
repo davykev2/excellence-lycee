@@ -6,6 +6,7 @@ import type {
   LessonQuestion,
   TimelineInteractionItem,
 } from "../domain/paths";
+import { terminalCDerivativesDocument } from "./courseDocuments/terminalCDerivativesDocument";
 
 const sourceDocument = "TC Maths leçon 04 DERIVABILITE ET ETUDE DE FONCTIONS.pdf";
 
@@ -1085,11 +1086,12 @@ const builtLevels = levels.map((seed, index) => officialLevel(index, seed));
 
 export const terminalCDerivativesPath: LearningPath = {
   id: "terminale-c-math-l04-derivatives-functions",
+  courseDocument: terminalCDerivativesDocument,
   subjectId: "mathematics",
   levelIds: ["terminale-c"],
   curriculumLabel: "Programme ivoirien • Terminale C • Leçon officielle fidèlement structurée",
   curriculumSourceUrl: "https://dpfc-ci.net/",
-  theme: { number: 1, title: "Fonctions numériques" },
+  theme: { number: 1, title: "Analyse et probabilité" },
   chapterNumber: 4,
   title: "Dérivabilité et étude de fonctions",
   description: "Le cours officiel intégral, sans les activités introductives, enrichi avec ses applications et exercices.",

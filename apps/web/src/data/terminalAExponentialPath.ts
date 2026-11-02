@@ -1,3 +1,4 @@
+import { terminalAExponentialDocument } from "./courseDocuments/terminalAExponentialDocument";
 import type {
   CurveLessonInteraction,
   LearningLesson,
@@ -680,6 +681,8 @@ Comme $t$ est un nombre entier de jours, on prend $t=11$ : **le magasin fera la 
 const builtLevels = levels.map((seed, index) => officialLevel(index + 1, seed));
 
 export const terminalAExponentialPath: LearningPath = {
+  courseDocument: terminalAExponentialDocument,
+  presentation: "continuous-course",
   id: "terminale-a-exponential",
   subjectId: "mathematics",
   levelIds: ["terminale-a"],

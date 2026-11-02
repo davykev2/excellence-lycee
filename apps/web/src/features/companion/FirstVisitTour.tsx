@@ -11,6 +11,7 @@ import {
 } from "@phosphor-icons/react";
 import { CompanionAvatar } from "./CompanionAvatar";
 import { useDavyVoice } from "./useDavyVoice";
+import { showDocumentHome, showOriginalHome } from "../../config/homeLayout";
 
 interface TourStep {
   id: string;
@@ -52,48 +53,32 @@ function tourSteps(learnerName: string): TourStep[] {
       targetId: "nav-home",
       eyebrow: "Ton point de départ",
       title: "L’Accueil",
-      text: "Tu y retrouves ta prochaine leçon, ta progression et les objectifs utiles pour continuer sans te perdre.",
-      spokenText: "Voici l’Accueil. Tu y retrouves ta prochaine leçon, ta progression et les objectifs utiles pour continuer sans te perdre.",
+      text: showDocumentHome ? "Retrouve ton cours et ouvre directement son résumé, ses questions ou sa fiche essentielle. Mes cours et M’entraîner restent accessibles juste en dessous." : showOriginalHome ? "Tu y retrouves ton cours à reprendre et les raccourcis pour choisir une leçon ou faire des exercices." : "Tu y retrouves une astuce à retenir et ton cours à reprendre. Tu peux aussi choisir un autre cours.",
+      spokenText: showDocumentHome ? "Voici l’Accueil. Retrouve ton cours et ouvre directement son résumé, ses questions ou sa fiche essentielle. Mes cours et M’entraîner restent accessibles juste en dessous." : showOriginalHome ? "Voici l’Accueil. Tu y retrouves ton cours à reprendre et les raccourcis pour choisir une leçon ou faire des exercices." : "Voici l’Accueil. Tu y retrouves une astuce à retenir et ton cours à reprendre. Tu peux aussi choisir un autre cours.",
     },
     {
       id: "paths",
       targetId: "nav-paths",
-      eyebrow: "Apprendre dans le bon ordre",
-      title: "Les Parcours",
-      text: "Choisis une matière, ouvre une leçon puis avance niveau après niveau. Tes résultats et tes XP y sont conservés.",
-      spokenText: "Dans les Parcours, tu choisis une matière, tu ouvres une leçon, puis tu avances niveau après niveau. Tes résultats et tes X P y sont conservés.",
+      eyebrow: "Trouver une leçon",
+      title: "Mes cours",
+      text: "Choisis ta matière, cherche une leçon et ouvre son cours complet. Le sommaire t’aide à retrouver chaque partie.",
+      spokenText: "Dans Mes cours, choisis ta matière, cherche une leçon et ouvre son cours complet. Le sommaire t’aide à retrouver chaque partie.",
     },
     {
       id: "arena",
       targetId: "nav-arena",
-      eyebrow: "T’entraîner et te dépasser",
-      title: "L’Arène",
-      text: "Tu peux y faire des exercices, des devoirs, des quiz, des duels, des compétitions et des sujets type BAC.",
-      spokenText: "Voici l’Arène. Tu peux y faire des exercices, des devoirs, des quiz, des duels, des compétitions et des sujets type bac.",
+      eyebrow: "Passer à la pratique",
+      title: "M’entraîner",
+      text: "Ouvre directement des exercices, un devoir ou un sujet d’examen. Les outils de courbes et de géométrie sont aussi ici.",
+      spokenText: "Dans M’entraîner, ouvre directement des exercices, un devoir ou un sujet d’examen. Les outils de courbes et de géométrie sont aussi ici.",
     },
     {
-      id: "ranking",
-      targetId: "nav-ranking",
-      eyebrow: "Mesurer tes efforts",
-      title: "Le Classement",
-      text: "Il te permet de suivre ta position dans ta classe. Mais rappelle-toi : ta vraie victoire, c’est de mieux comprendre qu’hier.",
-      spokenText: "Le Classement te permet de suivre ta position dans ta classe. Mais rappelle-toi : ta vraie victoire, c’est de mieux comprendre qu’hier.",
-    },
-    {
-      id: "messages",
-      targetId: "nav-messages",
-      eyebrow: "Ne jamais rester bloqué",
-      title: "Les Messages",
-      text: "C’est ici que tu échanges avec les personnes qui t’accompagnent lorsque tu as besoin d’une aide humaine.",
-      spokenText: "Dans les Messages, tu échanges avec les personnes qui t’accompagnent lorsque tu as besoin d’une aide humaine.",
-    },
-    {
-      id: "profile",
-      targetId: "nav-profile",
+      id: "space",
+      targetId: "nav-space",
       eyebrow: "Ton espace personnel",
-      title: "Le Profil",
-      text: "Tu y vérifies ton compte, ton niveau et ta série. Pour changer de classe, il faudra contacter un administrateur.",
-      spokenText: "Dans ton Profil, tu vérifies ton compte, ton niveau et ta série. Pour changer de classe, il faudra contacter un administrateur.",
+      title: "Mon espace",
+      text: "Tes résultats, tes messages, ton profil, le classement et la boutique sont réunis ici. Pour modifier ta classe, contacte l’administration.",
+      spokenText: "Mon espace réunit tes résultats, tes messages, ton profil, le classement et la boutique. Pour modifier ta classe, contacte l’administration.",
     },
     {
       id: "davy",
@@ -202,6 +187,13 @@ export function FirstVisitTour({ userId, learnerName, replayKey = 0, forceOpen =
     setStepIndex(previousIndex);
     voice.speak(steps[previousIndex].spokenText);
   };
+
+  if (!started) return (
+    <aside className="davy-tour-invite" aria-label="Visite facultative avec Davy">
+      <button type="button" onClick={start}><SpeakerHigh size={18} /> Découvrir le site</button>
+      <button type="button" onClick={complete}>Plus tard</button>
+    </aside>
+  );
 
   const cardStyle: CSSProperties = !started || !targetRect
     ? { left: "50%", top: "50%", transform: "translate(-50%, -50%)" }

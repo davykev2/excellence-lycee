@@ -1,0 +1,25 @@
+import type {FrenchReference} from "./model";
+const oqlf=(title:string,path:string):FrenchReference=>({title,publisher:"Office québécois de la langue française",url:"https://vitrinelinguistique.oqlf.gouv.qc.ca/"+path});
+export const frenchReferences={
+ comparison:oqlf("La comparaison","23222/la-redaction-et-la-communication/figures-de-style/figures-jouant-sur-le-sens/la-comparaison"),
+ metaphor:oqlf("La métaphore","23203/la-redaction-et-la-communication/figures-de-style/figures-jouant-sur-le-sens/la-metaphore"),
+ personification:oqlf("Personnification","fiche-gdt/fiche/45372/personnification"),
+ hyperbole:oqlf("L’hyperbole","23212/la-redaction-et-la-communication/figures-de-style/figures-jouant-sur-le-sens/lhyperbole"),
+ anaphora:oqlf("L’anaphore rhétorique","23214/la-redaction-et-la-communication/figures-de-style/figures-jouant-sur-la-construction-de-la-phrase/lanaphore"),
+ antithesis:oqlf("L’antithèse","23241/la-redaction-et-la-communication/figures-de-style/figures-jouant-sur-le-sens/lantithese"),
+ oxymoron:oqlf("L’oxymore","23233/la-redaction-et-la-communication/figures-de-style/figures-jouant-sur-le-sens/loxymore"),
+ understatement:oqlf("La litote","23201/la-redaction-et-la-communication/figures-de-style/figures-jouant-sur-le-sens/la-litote"),
+ euphemism:oqlf("L’euphémisme","index.php?id=23202"),
+ metonymy:oqlf("La métonymie","23197/la-redaction-et-la-communication/figures-de-style/figures-jouant-sur-le-sens/la-metonymie"),
+ gradation:oqlf("Gradation","fiche-gdt/fiche/45576/gradation"),
+ periphrasis:oqlf("La périphrase","24100/la-redaction-et-la-communication/figures-de-style/figures-jouant-sur-la-construction-de-la-phrase/la-periphrase"),
+ theme:{title:"Thème, sujet d’un écrit",publisher:"Dictionnaire de l’Académie française, 9e édition (2024)",url:"https://www.dictionnaire-academie.fr/article/A9T0971"},
+ thesis:{title:"Thèse, sens argumentatif",publisher:"Dictionnaire de l’Académie française, 7e édition (1878)",url:"https://www.dictionnaire-academie.fr/article/A7T0549"},
+ argument:{title:"Argument – Conclusion",publisher:"Christian Plantin, Dictionnaire de l’argumentation, laboratoire ICAR (CNRS)",url:"https://icar.cnrs.fr/dicoplantin/argument-conclusion-fr/"},
+ paragraph:{title:"Le paragraphe d’argumentation",publisher:"Département de philosophie, Cégep de Trois-Rivières",url:"https://philosophie.cegeptr.qc.ca/2008/09/directives-pour-les-paragraphes-dargumentation-de-la-dissertation/"},
+ persuade:{title:"Persuader / Convaincre",publisher:"Lumni, Julien Valette, 2024",url:"https://www.lumni.fr/article/persuader-convaincre"},
+ strategy:{title:"Faire le choix d’une stratégie argumentative",publisher:"IUTenligne, expression-communication",url:"https://www.iutenligne.net/rsc/rsc-public/expression/poveda_prevot/convaincre/methode/strategieargumentative.html"},
+ organization:{title:"Les indices d’organisation du texte",publisher:"IUTenligne, expression-communication",url:"https://www.iutenligne.net/rsc/rsc-public/expression/poveda_prevot/convaincre/methode/indicetextuel.html"},
+ link:oqlf("Marqueur de relation","fiche-gdt/fiche/26559642/marqueur-de-relation"),
+ subordination:oqlf("Le subordonnant et les relations logiques","24302/la-grammaire/la-grammaire-actuelle/les-fonctions-et-roles-syntaxiques/le-subordonnant"),
+};

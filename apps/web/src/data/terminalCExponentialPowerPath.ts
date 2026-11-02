@@ -7,6 +7,8 @@ import type {
   TimelineInteractionItem,
 } from "../domain/paths";
 
+import { terminalCExponentialPowerDocument } from "./courseDocuments/terminalCExponentialPowerDocument";
+
 const sourceDocument = "TC Maths leçon 10 Fonction exponentielle et fonction puissance.pdf";
 
 const choice = (
@@ -1022,7 +1024,8 @@ export const terminalCExponentialPowerPath: LearningPath = {
   levelIds: ["terminale-c"],
   curriculumLabel: "Programme ivoirien • Terminale C • Leçon officielle fidèlement structurée",
   curriculumSourceUrl: "https://dpfc-ci.net/",
-  theme: { number: 1, title: "Fonctions numériques" },
+  theme: { number: 1, title: "Analyse et probabilité" },
+  courseDocument: terminalCExponentialPowerDocument,
   chapterNumber: 10,
   title: "Fonction exponentielle et fonction puissance",
   description: "Exponentielle népérienne, équations, limites, dérivation, primitives, bases quelconques, puissances réelles, croissances comparées et missions de synthèse.",

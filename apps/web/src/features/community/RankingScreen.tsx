@@ -44,7 +44,6 @@ export function RankingScreen({ profile, level, totalXp, localOnly = false }: Ra
         <div>
           <p className="header-kicker">Communauté Excellence</p>
           <h1>Classement</h1>
-          <p>Progresse avec ta classe, sans perdre de vue ton propre rythme.</p>
         </div>
         <div className="community-level-pill"><GraduationCap size={23} weight="duotone" /><span>Ma classe</span><strong>{level.label}</strong></div>
       </header>

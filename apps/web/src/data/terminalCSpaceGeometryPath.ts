@@ -6,6 +6,7 @@ import type {
   TimelineInteractionItem,
 } from "../domain/paths";
 
+import { terminalCSpaceDocument } from "./courseDocuments/terminalCSpaceDocument";
 const sourceDocument = "TC Maths leçon 05 Géometrie analytique de lespace.pdf";
 
 const choice = (
@@ -1051,9 +1052,11 @@ export const terminalCSpaceGeometryPath: LearningPath = {
   levelIds: ["terminale-c"],
   curriculumLabel: "Programme ivoirien • Terminale C • Leçon officielle fidèlement structurée",
   curriculumSourceUrl: "https://dpfc-ci.net/",
-  theme: { number: 2, title: "Géométrie" },
+  theme: { number: 2, title: "Algèbre et géométrie" },
   chapterNumber: 5,
   title: "Géométrie analytique de l’espace",
+  presentation: "continuous-course",
+  courseDocument: terminalCSpaceDocument,
   description: "Le cours officiel intégral, sans la situation d’apprentissage introductive, enrichi avec ses démonstrations et exercices corrigés.",
   estimatedMinutes: builtLevels.reduce((sum, lesson) => sum + lesson.durationMinutes, 0),
   outcomes: [

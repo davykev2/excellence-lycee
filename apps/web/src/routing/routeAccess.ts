@@ -14,6 +14,10 @@ export function initialSubjectIdForLocation(
   previewPathId?: string | null,
   user?: Pick<AuthUser, "levelId" | "role">,
 ) {
+  const activityRoute = readAppRoute(location, { navigation: "home" });
+  const activitySubject = activityRoute.arenaMode === "philo-memory" ? "philosophy"
+    : activityRoute.arenaMode === "french-workshop" ? "french" : undefined;
+  if (activitySubject) return !user || canAccessSubject(user, activitySubject) ? activitySubject : fallbackSubjectId;
   const explicitSubjectId = new URLSearchParams(location.search).get("matiere");
   if (explicitSubjectId && Object.prototype.hasOwnProperty.call(subjects, explicitSubjectId)) {
     const requestedSubjectId = explicitSubjectId as SubjectId;
@@ -22,7 +26,8 @@ export function initialSubjectIdForLocation(
 
   const route = readAppRoute(location, { navigation: "home" });
   const requestedPathId = previewPathId ?? route.pathId;
-  const requestedSubjectId = pathSubjects.find((path) => path.pathId === requestedPathId)?.subjectId ?? fallbackSubjectId;
+  const requestedSubjectId = route.arenaMode === "philo-memory" ? "philosophy"
+    : pathSubjects.find((path) => path.pathId === requestedPathId)?.subjectId ?? fallbackSubjectId;
   return !user || canAccessSubject(user, requestedSubjectId) ? requestedSubjectId : fallbackSubjectId;
 }
 
@@ -51,6 +56,14 @@ export function canAccessBacExams(user: Pick<AuthUser, "levelId" | "role">) {
   return user.role === "admin" || isTerminalLevelId(user.levelId);
 }
 
+export function canAccessPhiloMemory(user: Pick<AuthUser, "levelId" | "role">) {
+  return user.role === "admin" || (isTerminalLevelId(user.levelId) && canAccessSubject(user, "philosophy"));
+}
+
+export function canAccessFrenchWorkshop(user: Pick<AuthUser, "levelId" | "role">) {
+  return user.role === "admin" || (isTerminalLevelId(user.levelId) && canAccessSubject(user, "french"));
+}
+
 export function canAccessHomeworks(user: Pick<AuthUser, "accountType" | "role">) {
   return user.role === "admin" || (user.role === "student" && user.accountType === "student");
 }
@@ -70,6 +83,14 @@ export function routeAllowedForUser(route: AppRoute, user: AuthUser): AppRoute {
   }
   if (subjectRoute.navigation === "arena" && subjectRoute.arenaEditor && user.role !== "admin" && user.role !== "content_editor") {
     return { ...subjectRoute, arenaEditor: false };
+  }
+  if (
+    subjectRoute.navigation === "arena" && subjectRoute.arenaMode === "philo-memory" && !canAccessPhiloMemory(user)
+  ) {
+    return { navigation: "arena", subjectId: subjectRoute.subjectId };
+  }
+  if (subjectRoute.navigation === "arena" && subjectRoute.arenaMode === "french-workshop" && !canAccessFrenchWorkshop(user)) {
+    return { navigation: "arena", subjectId: subjectRoute.subjectId };
   }
   if (
     subjectRoute.navigation === "arena"

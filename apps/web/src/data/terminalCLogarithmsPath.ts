@@ -6,6 +6,7 @@ import type {
   LessonQuestion,
   TimelineInteractionItem,
 } from "../domain/paths";
+import { terminalCLogarithmsDocument } from "./courseDocuments/terminalCLogarithmsDocument";
 
 const sourceDocument = "TC Maths leçon 08 FONCTIONS LOGARITHMES.pdf";
 
@@ -1176,11 +1177,12 @@ const builtLevels = levels.map((level, index) => officialLevel(index, level));
 
 export const terminalCLogarithmsPath: LearningPath = {
   id: "terminale-c-math-l08-logarithms",
+  courseDocument: terminalCLogarithmsDocument,
   subjectId: "mathematics",
   levelIds: ["terminale-c"],
   curriculumLabel: "Programme ivoirien • Terminale C • Leçon officielle fidèlement structurée",
   curriculumSourceUrl: "https://dpfc-ci.net/",
-  theme: { number: 1, title: "Fonctions numériques" },
+  theme: { number: 1, title: "Analyse et probabilité" },
   chapterNumber: 8,
   title: "Fonctions logarithmes",
   description: "Logarithme népérien, propriétés algébriques, équations, limites, dérivation, primitives, autres bases et études complètes.",

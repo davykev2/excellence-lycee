@@ -61,7 +61,7 @@ export function CompanionGuide({
   onAskHint,
 }: CompanionGuideProps) {
   const [open, setOpen] = useState(false);
-  const [showIntro, setShowIntro] = useState(() => window.localStorage.getItem(introStorageKey) !== "yes");
+  const [showIntro, setShowIntro] = useState(false);
   const [motion, setMotion] = useState<CompanionMotion>("idle");
   const [reduceMotion, setReduceMotion] = useState(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   const [offset, setOffset] = useState<CompanionOffset>(readStoredOffset);
@@ -201,18 +201,18 @@ export function CompanionGuide({
         actionLabel: "Continuer ma leçon",
       },
       paths: {
-        kicker: "Ton parcours",
-        title: "Avance dans l’ordre conseillé",
-        message: "Chaque leçon débloque la suivante. Les étapes déjà réussies restent disponibles si tu veux les revoir.",
+        kicker: "Mes cours",
+        title: "Trouve la partie qui t’intéresse",
+        message: "Choisis une matière et ouvre une leçon. Le sommaire te permet de passer directement à la partie que tu veux travailler.",
         action: "resume",
-        actionLabel: "Ouvrir la prochaine leçon",
+        actionLabel: "Ouvrir mon cours",
       },
       arena: {
-        kicker: "Place au défi",
-        title: "Choisis ton combat",
-        message: "Exercices, quiz, devoirs ou duels : commence par le mode qui correspond à ton objectif du jour.",
+        kicker: "Passer à la pratique",
+        title: "Choisis ton entraînement",
+        message: "Commence par un exercice, un devoir ou un sujet d’examen. Les autres outils et défis restent dans la rubrique en dessous.",
         action: "dismiss",
-        actionLabel: "Je choisis mon défi",
+        actionLabel: "Je choisis mon entraînement",
       },
       ranking: {
         kicker: "Ton rythme d’abord",
@@ -234,6 +234,13 @@ export function CompanionGuide({
         message: "Vérifie ici ta classe et ta série. Pour les modifier à la fin de l’année, adresse-toi à un administrateur : tes progrès resteront conservés.",
         action: "home",
         actionLabel: "Retourner à l’accueil",
+      },
+      space: {
+        kicker: "Mon espace",
+        title: "Tes repères personnels",
+        message: "Retrouve ici tes résultats, tes messages, ton profil, le classement de ta classe et la boutique.",
+        action: "dismiss",
+        actionLabel: "Je regarde mon espace",
       },
     };
 

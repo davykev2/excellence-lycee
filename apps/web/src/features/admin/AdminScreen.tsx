@@ -554,7 +554,6 @@ export function AdminScreen({
         <div>
           <p className="admin-eyebrow"><ShieldCheck size={18} weight="duotone" /> Accès sécurisé</p>
           <h1>Centre d’administration</h1>
-          <p>Pilote les contenus, les utilisateurs et les opérations d’Excellence Lycée.</p>
         </div>
         <div className="admin-header-actions">
           <div className="admin-notification-wrap">
@@ -796,12 +795,12 @@ export function AdminScreen({
       {activeSection === "content" && (
         <section className="admin-section" data-testid="admin-content">
           <div className="admin-section-heading">
-            <div><p className="admin-eyebrow">Bibliothèque pédagogique</p><h2>Contenus et publication</h2><p>Prépare, prévisualise, relis et publie les niveaux du programme ivoirien.</p></div>
+            <div><p className="admin-eyebrow">Bibliothèque pédagogique</p><h2>Contenus et publication</h2></div>
             <button className="primary-action is-compact" type="button" onClick={() => setContentStudioOpen(true)}><BookOpenText size={19} weight="bold" /> Ouvrir le studio</button>
           </div>
           <article className="admin-content-studio-callout">
             <span><BookOpenText size={31} weight="duotone" /></span>
-            <div><p className="admin-eyebrow">Nouveau</p><h3>Studio de création avec aperçu instantané</h3><p>Choisis une leçon, colle ton texte, structure-le, prépare les exercices et observe exactement le résultat côté élève avant de publier.</p><ul><li>Autosauvegarde des brouillons</li><li>Version publiée protégée</li><li>Historique restaurable</li><li>Contrôle qualité avant publication</li></ul></div>
+            <div><h3>Studio de création</h3></div>
             <button type="button" onClick={() => setContentStudioOpen(true)}>Créer ou modifier une leçon</button>
           </article>
           <div className="admin-toolbar">

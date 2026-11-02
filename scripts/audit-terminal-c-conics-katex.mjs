@@ -1,6 +1,18 @@
 import { readFileSync } from "node:fs";
 import katex from "../apps/web/node_modules/katex/dist/katex.mjs";
 import ts from "../apps/api/node_modules/typescript/lib/typescript.js";
+import { loadConicsDocument } from "./load-conics-document.mjs";
+
+const documentary = loadConicsDocument((relative, dependencies = {}) => {
+  const source = readFileSync(new URL("../"+relative, import.meta.url), "utf8");
+  const js = ts.transpileModule(source, {compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
+  const target = {exports:{}};
+  new Function("exports","module","require",js)(target.exports,target,request => {
+    if(Object.hasOwn(dependencies,request))return dependencies[request];
+    throw new Error("Dépendance documentaire inattendue : "+request);
+  });
+  return target.exports;
+});
 
 const source = readFileSync(
   new URL("../apps/web/src/data/terminalCConicsPath.ts", import.meta.url),
@@ -14,8 +26,9 @@ const module = { exports: {} };
 new Function("exports", "module", "require", javaScript)(
   module.exports,
   module,
-  () => {
-    throw new Error("Dépendance inattendue pendant l’audit KaTeX.");
+  request => {
+    if(request==="./courseDocuments/terminalCConicsDocument")return documentary;
+    throw new Error("Dépendance inattendue pendant l’audit KaTeX : "+request);
   },
 );
 

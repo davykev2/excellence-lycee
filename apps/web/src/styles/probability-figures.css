@@ -1,0 +1,31 @@
+.probability-exploration { display: grid; gap: 20px; min-width: 0; }
+.probability-figure { margin: 12px 0; padding: 16px; border: 1px solid #d9e3e1; border-radius: 16px; background: #fff; min-width: 0; color: #20363e; font-size: 16px; line-height: 1.65; }
+.probability-figure > figcaption { font-size: 16px; font-weight: 700; margin-bottom: 14px; }
+.probability-canvas { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; border-radius: 8px; }
+.probability-canvas > svg { display: block; max-width: none; background: #fff; }
+.probability-canvas > svg text { font: 16px system-ui, sans-serif; fill: #20363e; }
+.probability-figure .probability-grid { stroke: #e7edeb; stroke-width: 1; }
+.probability-figure .probability-axis { stroke: #56666c; stroke-width: 1.5; }
+.probability-tree-edge line { stroke: #91a5ac; stroke-width: 2; }
+.probability-tree-edge rect { fill: #fff; }
+.probability-tree-edge.is-selected line { stroke: #147b65; stroke-width: 3; }
+.probability-tree-node circle { fill: #243f50; }
+.probability-node-label-background { fill: #fff; }
+.probability-tree-node .probability-outcome { fill: #147b65; font-weight: 650; }
+.probability-paths { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.probability-paths button { min-height: 44px; padding: 8px 12px; font-size: 16px; line-height: 1.45; border: 1px solid #cfddda; border-radius: 10px; background: #fff; color: #244856; }
+.probability-paths button[aria-pressed="true"] { color: #0e624f; border-color: #16846c; background: #edf8f3; }
+.probability-figure input[type="range"] { display: block; width: 100%; min-height: 44px; margin: 3px 0 12px; accent-color: #147b65; }
+.probability-figure label { display: block; font-size: 16px; margin-top: 12px; }
+.probability-readout { border-left: 3px solid #147b65; background: #f1f8f5; padding: 10px 12px; overflow-wrap: anywhere; }
+.probability-readout p { margin: 2px 0; }
+.probability-step line { stroke: #22669b; stroke-width: 2.6; }
+.probability-step circle { stroke: #22669b; stroke-width: 2.2; }
+.probability-step .is-closed { fill: #22669b; }
+.probability-step .is-open { fill: #fff; }
+.probability-cursor { stroke: #b66a14; stroke-width: 1.8; stroke-dasharray: 5 5; }
+.probability-cursor-dot { fill: #b66a14; stroke: white; stroke-width: 1.5; }
+.probability-bar { fill: #6395b6; }
+.probability-bar.is-selected { fill: #147b65; }
+.probability-canvas:focus-visible, .probability-paths button:focus-visible, .probability-figure input:focus-visible { outline: 3px solid #d69a3c; outline-offset: 3px; }
+@media (max-width: 520px) { .probability-figure { padding: 12px; } }

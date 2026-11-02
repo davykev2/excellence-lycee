@@ -1,0 +1,59 @@
+/* Read-only official BAC documents. Series comes from the stored learner profile. */
+.official-bac-library { margin-top: 30px; }
+.official-bac-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-bottom: 20px; }
+.official-bac-heading h2 { margin: 8px 0; font-size: clamp(1.4rem, 3vw, 2rem); }
+.official-bac-series { padding: 9px 14px; border-radius: 999px; background: #e1efe9; color: #075b47; font-weight: 800; }
+.official-bac-years { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.official-bac-years > button { min-height: 150px; display: flex; align-items: center; gap: 18px; padding: 24px; border: 1px solid #cad9d4; border-radius: 22px; background: white; color: var(--navy-900); font: inherit; text-align: left; cursor: pointer; box-shadow: 0 6px 0 #dce8df; }
+.official-bac-years > button > span { display: grid; gap: 4px; flex: 1; font-weight: 700; }
+.official-bac-years strong { font-size: 2rem; }
+.official-bac-years > button > svg:first-child { color: #086a55; }
+.official-bac-years > button:hover, .official-bac-subject:hover { border-color: #177a64; background: #f5fbf7; }
+.official-bac-years > button:focus-visible, .official-bac-subject:focus-visible, .official-bac-reader button:focus-visible, .official-bac-reader a:focus-visible { outline: 3px solid #1e8271; outline-offset: 4px; }
+.official-bac-subjects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.official-bac-subject { display: flex; align-items: center; gap: 16px; min-width: 0; padding: 17px; border: 1px solid #d7e0dc; border-radius: 20px; color: var(--navy-900); background: #fff; font: inherit; text-align: left; cursor: pointer; }
+.official-bac-subject > img { width: 70px; height: 96px; flex: 0 0 70px; object-fit: cover; object-position: top; border: 1px solid #dce1de; border-radius: 6px; }
+.official-bac-subject > svg { flex-shrink: 0; color: #086a55; }
+.official-bac-subject-info { display: grid; min-width: 0; flex: 1; gap: 7px; overflow-wrap: anywhere; }
+.official-bac-subject-info strong { font-size: 1.06rem; line-height: 1.35; }
+.official-bac-subject-info > span, .official-bac-subject-info small { color: #526273; font-size: .9rem; line-height: 1.45; }
+.official-bac-unavailable { padding: 14px; color: #684610; background: #fff2d4; border-radius: 12px; line-height: 1.6; }
+.official-bac-reader { min-width: 0; padding: 28px clamp(16px, 3vw, 48px) 100px; color: var(--navy-900); background: var(--cream-50); }
+.official-bac-reader-heading { display: grid; gap: 20px; max-width: 1050px; margin: 0 auto; }
+.official-bac-reader-heading > button { justify-self: start; }
+.official-bac-reader-heading h1 { margin: 8px 0; font-size: clamp(1.6rem, 3.4vw, 2.8rem); overflow-wrap: anywhere; }
+.official-bac-reader-heading .path-kicker { color: #075b47; }
+.official-bac-downloads { display: flex; flex-wrap: wrap; gap: 10px; }
+.official-bac-downloads > a { text-decoration: none; font-size: .94rem; min-height: 44px; }
+.official-bac-toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; max-width: 1050px; margin: 24px auto 14px; }
+.official-bac-toolbar > span { font-size: .94rem; color: #526273; }
+.official-bac-zoom { display: flex; align-items: center; gap: 3px; background: #fff; padding: 4px; border: 1px solid #d7e0dc; border-radius: 14px; }
+.official-bac-zoom > button { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 6px 10px; border: 0; border-radius: 9px; background: #eef5f0; color: #075b47; font: inherit; font-size: .9rem; font-weight: 750; cursor: pointer; }
+.official-bac-zoom > button:disabled { opacity: .4; cursor: default; }
+.official-bac-zoom > span { min-width: 55px; text-align: center; font-size: .9rem; }
+.official-bac-pages-viewport { width: 100%; max-width: 1050px; margin: 0 auto; overflow-x: auto; overscroll-behavior-x: contain; border: 1px solid #d6dfd9; border-radius: 12px; background: #e6ebe7; }
+.official-bac-pages-viewport:focus-visible { outline: 3px solid #1e8271; outline-offset: 3px; }
+.official-bac-pages { min-width: 100%; }
+.official-bac-page { margin: 0 0 18px; background: white; }
+.official-bac-page:last-child { margin-bottom: 0; }
+.official-bac-page > img { display: block; width: 100%; height: auto; }
+.official-bac-page figcaption { padding: 12px; color: #526273; text-align: center; font-size: .9rem; background: #f8faf8; }
+.official-bac-page-error { min-height: 220px; display: grid; justify-items: center; align-content: center; gap: 16px; padding: 24px; }
+@media (max-width: 850px) {
+  .official-bac-subjects { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .official-bac-years { gap: 12px; }
+  .official-bac-years > button { min-height: 140px; flex-wrap: wrap; gap: 10px; padding: 16px; }
+  .official-bac-years > button > span { flex-basis: 65%; }
+  .official-bac-years > button > svg:last-child { display: none; }
+  .official-bac-years strong { font-size: 1.7rem; }
+  .official-bac-subject { gap: 12px; padding: 14px; }
+  .official-bac-subject > img { width: 56px; height: 78px; flex-basis: 56px; }
+  .official-bac-reader { padding-inline: 10px; }
+  .official-bac-reader-heading { gap: 14px; }
+  .official-bac-reader-heading .path-kicker { font-size: .82rem; }
+  .official-bac-downloads { gap: 8px; }
+  .official-bac-downloads > a { padding: 10px 12px; font-size: .86rem; }
+  .official-bac-toolbar { margin-top: 18px; }
+}

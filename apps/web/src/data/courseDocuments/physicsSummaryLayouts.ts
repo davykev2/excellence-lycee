@@ -1,0 +1,48 @@
+export type PhysicsSummarySectionPlan = readonly [title: string, topicCount: number, optional?: boolean];
+
+/** Explicit editorial groupings, independent of historic mastery levels and XP. */
+export const physicsSummaryLayouts: Record<string, readonly PhysicsSummarySectionPlan[]> = {
+  "seconde-c-kinematics": [["Repérage et trajectoire",2],["Vitesse et accélération",2],["Mouvements rectilignes",2],["Mouvement circulaire",1],["Application de synthèse",1,true]],
+  "terminale-cd-inertia-motion": [["Référentiels",1],["Théorèmes de mécanique",2],["Résolution et mouvements usuels",3],["Application de synthèse",1,true]],
+  "terminale-c-gravitation": [["Interaction et champ gravitationnels",2],["Mouvement des satellites",2],["Lois de Kepler",1],["Application de synthèse",1,true]],
+  "terminale-cd-uniform-fields": [["Notion de champ uniforme",1],["Mouvement dans le champ de pesanteur",2],["Mouvement dans le champ électrique",2],["Application de synthèse",1,true]],
+  "terminale-cd-free-mechanical-oscillations": [["L’oscillateur mécanique",2],["Équation du mouvement et graphes",3],["Énergie mécanique",1],["Applications",2,true]],
+  "terminale-cd-magnetic-field": [["Champ et lignes de champ",3],["Champ du solénoïde",2],["Superposition des champs",1],["Applications",2,true]],
+  "terminale-cd-charged-particle-magnetic-field": [["Force de Lorentz",2],["Mouvement et déviation",2],["Dispositifs et applications",4],["Application de synthèse",1,true]],
+  "terminale-cd-laplace-law": [["La force de Laplace",4],["Dispositifs et applications",2],["Applications numériques",2,true]],
+  "terminale-c-induction-electromagnetic": [["Flux magnétique",1],["Phénomène d’induction",1],["Lois de Lenz et de Faraday",2],["Dispositifs et signaux",2],["Applications",2,true]],
+  "terminale-cd-auto-induction": [["Phénomène et inductance",2],["Force électromotrice et tension",2],["Énergie magnétique",1],["Applications",3,true]],
+  "terminale-cd-derivator-integrator": [["L’amplificateur opérationnel",1],["Montage dérivateur",3],["Montage intégrateur",2],["Comparer les montages",1],["Application",1,true]],
+  "terminale-cd-free-electrical-oscillations": [["Oscillations et régimes",2],["Équation et grandeurs électriques",2],["Énergie et analogie mécanique",2],["Entretien des oscillations",1],["Applications graphiques",2,true]],
+  "terminale-cd-rlc-forced-sinusoidal": [["Grandeurs sinusoïdales et mesures",3],["Lois du circuit et diagramme de Fresnel",3],["Applications",3,true]],
+  "terminale-cd-rlc-intensity-resonance": [["La résonance d’intensité",2],["Bande passante et sélectivité",2],["Surtension et usages",1],["Applications",4,true]],
+  "terminale-cd-ac-power": [["Puissances et énergie",2],["Transport de l’énergie",1],["Puissance du circuit RLC",2],["Applications",4,true]],
+  "terminale-c-wave-light": [["Diffraction",2],["Interférences de Young",2],["Spectre électromagnétique",1],["Applications",4,true]],
+  "terminale-c-corpuscular-light": [["Photon et effet photoélectrique",2],["Spectres et niveaux d’énergie",2],["Applications",5,true]],
+  "terminale-cd-spontaneous-nuclear": [["Structure de la matière",2],["Transformations radioactives",3],["Décroissance, activité et datation",3],["Application",1,true]],
+  "terminale-cd-provoked-nuclear": [["Masse et cohésion nucléaire",2],["Réactions nucléaires",2],["Bilan énergétique",1],["Applications et usages",4,true]],
+  "terminale-cd-chemistry-alcohols": [["Structure et nomenclature",2],["Préparation",1],["Propriétés et réactions",3],["Application",1,true]],
+  "terminale-cd-chemistry-carbonyl": [["Structure et nomenclature",2],["Tests et réactions",3],["Applications",2,true]],
+  "terminale-d-chemistry-amines": [["Structure et nomenclature",2],["Propriétés chimiques",2],["Applications",3,true]],
+  "terminale-cd-chemistry-carboxylic-acids": [["Acides carboxyliques",1],["Dérivés et amides",3],["Estérification",1],["Applications",2,true]],
+  "terminale-cd-chemistry-soap": [["Saponification et corps gras",3],["Préparation au laboratoire",1],["Bilan de matière",1],["Applications",2,true]],
+  "terminale-d-chemistry-alpha-amino-acids": [["Structure et propriétés acido-basiques",2],["Liaison peptidique et synthèse",2],["Identification et masses molaires",2],["Peptides et protéines",1],["Application",1,true]],
+  "terminale-cd-chemistry-ph": [["L’eau et son autoprotolyse",2],["Dissolution et concentrations",2],["Notion de pH",1],["Applications",2,true]],
+  "terminale-cd-chemistry-strong-acid-base": [["Acides forts",2],["Bases fortes",2],["Espèces, mélanges et dilution",3]],
+  "terminale-cd-chemistry-weak-acid-base": [["Acides faibles",3],["Bases faibles et équilibre",2],["Applications",2,true]],
+  "terminale-cd-chemistry-acid-base-couples": [["Couples conjugués",1],["Constante d’acidité",2],["Prédominance et indicateurs",1],["Force et classement",2],["Application",1,true]],
+  "terminale-cd-chemistry-acid-base-buffers": [["Acide fort et base forte",2],["Acide faible et base forte",2],["Acide fort et base faible",1],["Solutions tampons",1],["Application",1,true]],
+  "terminale-cd-chemistry-acid-base-titration": [["Principe d’un dosage",1],["Méthode colorimétrique",3],["Exploitation et méthode pH-métrique",2],["Application",1,true]],
+};
+
+export const physicsSummaryTopicTitles: Record<string, string> = {
+  "official-fixation-exercises":"Vocabulaire et système à ressort",
+  "official-solenoid-exercises":"Applications au solénoïde",
+  "official-laplace-exercises":"Applications de la loi de Laplace",
+  "official-induction-exercises":"Applications des lois d’induction",
+  "derivator-quiz-triangular-signal":"Signaux du dérivateur",
+  "integrator-quiz-square-signal":"Signaux de l’intégrateur",
+  "lc-consolidation-data-audit":"Exploiter un oscillogramme : données et expressions",
+  "ac-power-official-exercise-four":"Puissance et impédance : application numérique",
+  "wave-light-frequency-table-lab":"Longueurs d’onde, couleurs et diffraction",
+};

@@ -127,9 +127,9 @@ test("la leçon Limites et continuité adopte le cours continu sans casser ses i
   const librarySource = readFileSync(resolve(projectRoot, "apps/web/src/features/paths/LearningLibraryScreen.tsx"), "utf8");
   const readerSource = readFileSync(resolve(projectRoot, "apps/web/src/features/lesson/ContinuousCourseScreen.tsx"), "utf8");
 
-  assert.match(appSource, /selectedPath\?\.presentation === "continuous-course"/);
-  assert.match(appSource, /activePath\.presentation !== "continuous-course"/);
-  assert.match(librarySource, /Cours complet/);
+  assert.match(appSource, /activeNavigation === "paths" && selectedPath \? \(\s*<ContinuousCourseScreen/);
+  assert.doesNotMatch(appSource, /<MathPathScreen|<LessonWorkspace|selectedPath\?\.presentation === "continuous-course"/);
+  assert.match(librarySource, /Ouvrir le cours/);
   assert.match(librarySource, /\{levelCount\} parties/);
   assert.match(readerSource, /Sommaire/);
   assert.doesNotMatch(readerSource, /J[’']ai compris|niveau suivant|Gagner[^\n]*XP|Débloquer/i);

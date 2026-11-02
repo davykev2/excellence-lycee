@@ -6,6 +6,7 @@ import type {
   LessonQuestion,
   TimelineInteractionItem,
 } from "../domain/paths";
+import { terminalCLimitsContinuityDocument } from "./courseDocuments/terminalCLimitsContinuityDocument";
 
 const sourceDocument = "TC Maths leçon 01 Limite et continuité.pdf";
 
@@ -959,9 +960,10 @@ export const terminalCLimitsContinuityPath: LearningPath = {
   subjectId: "mathematics",
   levelIds: ["terminale-c"],
   presentation: "continuous-course",
+  courseDocument: terminalCLimitsContinuityDocument,
   curriculumLabel: "Programme ivoirien • Terminale C • Leçon officielle fidèlement structurée",
   curriculumSourceUrl: "https://dpfc-ci.net/",
-  theme: { number: 1, title: "Fonctions numériques" },
+  theme: { number: 1, title: "Analyse et probabilité" },
   chapterNumber: 1,
   title: "Limites et continuité",
   description: "Le cours officiel intégral, sans la situation d’apprentissage, présenté en lecture continue avec ses exemples, manipulations et corrections expliquées.",

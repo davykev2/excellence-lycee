@@ -7,6 +7,7 @@ import type {
   TimelineInteractionItem,
 } from "../domain/paths";
 
+import { terminalCComplexDocument } from "./courseDocuments/terminalCComplexDocument";
 const sourceDocument = "TC Maths leçon 09 Nombres complexes.pdf";
 
 const choice = (
@@ -1249,9 +1250,11 @@ export const terminalCComplexNumbersPath: LearningPath = {
   levelIds: ["terminale-c"],
   curriculumLabel: "Programme ivoirien • Terminale C • Leçon officielle fidèlement structurée",
   curriculumSourceUrl: "https://dpfc-ci.net/",
-  theme: { number: 4, title: "Calculs algébriques" },
+  theme: { number: 2, title: "Algèbre et géométrie" },
   chapterNumber: 9,
   title: "Nombres complexes",
+  presentation: "continuous-course",
+  courseDocument: terminalCComplexDocument,
   description: "Forme algébrique, conjugué, module, plan complexe, arguments, formes trigonométrique et exponentielle, Moivre, Euler et équations.",
   estimatedMinutes: builtLevels.reduce((sum, lesson) => sum + lesson.durationMinutes, 0),
   outcomes: [

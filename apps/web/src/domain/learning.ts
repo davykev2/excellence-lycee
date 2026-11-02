@@ -14,6 +14,7 @@ export type NavigationId =
   | "store"
   | "ranking"
   | "messages"
+  | "space"
   | "profile"
   | "admin";
 

@@ -5,20 +5,56 @@ import ts from "../apps/api/node_modules/typescript/lib/typescript.js";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 
-function loadTypeScript(relativePath) {
+function loadTypeScript(relativePath, dependencies = {}) {
   const source = readFileSync(resolve(root, relativePath), "utf8");
   const javaScript = ts.transpileModule(source, {
     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
   }).outputText;
   const module = { exports: {} };
-  new Function("exports", "module", javaScript)(module.exports, module);
+  const localRequire = (specifier) => {
+    if (specifier in dependencies) return dependencies[specifier];
+    throw new Error(`Dépendance non déclarée pour l’audit : ${specifier}`);
+  };
+  new Function("exports", "module", "require", javaScript)(module.exports, module, localRequire);
   return module.exports;
 }
 
-const polynomial = loadTypeScript("apps/web/src/data/terminalAPolynomialRationalPath.ts");
-const probability = loadTypeScript("apps/web/src/data/terminalAProbabilityPath.ts");
-const logarithm = loadTypeScript("apps/web/src/data/terminalANaturalLogPath.ts");
-const exponential = loadTypeScript("apps/web/src/data/terminalAExponentialPath.ts");
+const polynomialDocument = loadTypeScript("apps/web/src/data/courseDocuments/terminalAPolynomialDocument.ts", {
+  "./terminalAPolynomialSummary": loadTypeScript("apps/web/src/data/courseDocuments/terminalAPolynomialSummary.ts"),
+  "./terminalAPolynomialEvaluations": loadTypeScript("apps/web/src/data/courseDocuments/terminalAPolynomialEvaluations.ts"),
+});
+const polynomial = loadTypeScript("apps/web/src/data/terminalAPolynomialRationalPath.ts", {
+  "./courseDocuments/terminalAPolynomialDocument": polynomialDocument,
+});
+const probabilitySummary = loadTypeScript("apps/web/src/data/courseDocuments/terminalAProbabilitySummary.ts");
+const probabilityDocument = loadTypeScript("apps/web/src/data/courseDocuments/terminalAProbabilityDocument.ts", {
+  "./terminalAProbabilitySummary": probabilitySummary,
+  "./terminalAProbabilityVariables": loadTypeScript("apps/web/src/data/courseDocuments/terminalAProbabilityVariables.ts", {
+    "./terminalAProbabilitySummary": probabilitySummary,
+  }),
+  "./terminalAProbabilityEvaluations": loadTypeScript("apps/web/src/data/courseDocuments/terminalAProbabilityEvaluations.ts", {
+    "./terminalAProbabilitySummary": probabilitySummary,
+  }),
+});
+const probability = loadTypeScript("apps/web/src/data/terminalAProbabilityPath.ts", {
+  "./courseDocuments/terminalAProbabilityDocument": probabilityDocument,
+});
+const logarithmSummary = loadTypeScript("apps/web/src/data/courseDocuments/terminalALogarithmSummary.ts");
+const logarithmDocument = loadTypeScript("apps/web/src/data/courseDocuments/terminalALogarithmDocument.ts", {
+  "./terminalALogarithmSummary": logarithmSummary,
+  "./terminalALogarithmEvaluations": loadTypeScript("apps/web/src/data/courseDocuments/terminalALogarithmEvaluations.ts", {
+    "./terminalALogarithmSummary": logarithmSummary,
+  }),
+});
+const logarithm = loadTypeScript("apps/web/src/data/terminalANaturalLogPath.ts", {
+  "./courseDocuments/terminalALogarithmDocument": logarithmDocument,
+});
+const exponentialStudies = loadTypeScript("apps/web/src/data/courseDocuments/terminalAExponentialStudies.ts");
+const exponentialDocument = loadTypeScript("apps/web/src/data/courseDocuments/terminalAExponentialDocument.ts", {
+  "./terminalAExponentialSummary": loadTypeScript("apps/web/src/data/courseDocuments/terminalAExponentialSummary.ts", {"./terminalAExponentialStudies":exponentialStudies}),
+  "./terminalAExponentialEvaluations": loadTypeScript("apps/web/src/data/courseDocuments/terminalAExponentialEvaluations.ts", {"./terminalAExponentialStudies":exponentialStudies}),
+});
+const exponential = loadTypeScript("apps/web/src/data/terminalAExponentialPath.ts", {"./courseDocuments/terminalAExponentialDocument":exponentialDocument});
 const sequences = loadTypeScript("apps/web/src/data/terminalASequencesPath.ts");
 const statistics = loadTypeScript("apps/web/src/data/terminalAStatisticsPath.ts");
 const linearSystems = loadTypeScript("apps/web/src/data/terminalALinearSystemsPath.ts");

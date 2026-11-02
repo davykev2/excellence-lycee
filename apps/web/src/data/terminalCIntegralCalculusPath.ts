@@ -7,6 +7,8 @@ import type {
   TimelineInteractionItem,
 } from "../domain/paths";
 
+import { terminalCIntegralDocument } from "./courseDocuments/terminalCIntegralDocument";
+
 const sourceDocument = "TC Maths leçon 15 Calcul intégral.pdf";
 
 const choice = (
@@ -1145,7 +1147,8 @@ export const terminalCIntegralCalculusPath: LearningPath = {
   levelIds: ["terminale-c"],
   curriculumLabel: "Programme ivoirien • Terminale C • Leçon officielle fidèlement structurée",
   curriculumSourceUrl: "https://dpfc-ci.net/",
-  theme: { number: 1, title: "Analyse" },
+  theme: { number: 1, title: "Analyse et probabilité" },
+  courseDocument: terminalCIntegralDocument,
   chapterNumber: 15,
   title: "Calcul intégral",
   description: "Intégrale définie, propriétés, comparaison, valeur moyenne, techniques de calcul, aires et fonctions définies par une intégrale.",

@@ -5,6 +5,7 @@ import type {
   LessonQuestion,
   TimelineInteractionItem,
 } from "../domain/paths";
+import { terminalCSequencesDocument } from "./courseDocuments/terminalCSequencesDocument";
 
 const sourceDocument = "TC Maths leçon 12 Suites numériques.pdf";
 
@@ -1367,10 +1368,11 @@ export const terminalCSequencesPath: LearningPath = {
   levelIds: ["terminale-c"],
   curriculumLabel: "Programme ivoirien • Terminale C • Leçon officielle fidèlement structurée",
   curriculumSourceUrl: "https://dpfc-ci.net/",
-  theme: { number: 1, title: "Fonctions numériques" },
+  theme: { number: 1, title: "Analyse et probabilité" },
+  courseDocument: terminalCSequencesDocument,
   chapterNumber: 12,
   title: "Suites numériques",
-  description: "Le cours officiel intégral, des suites arithmétiques et géométriques aux suites récurrentes, avec 79 questions fidèles, leurs corrections détaillées et une mission financière de synthèse.",
+  description: "Rappels, bornes, variations et convergence des suites ; résumé continu, méthodes et questions d’évaluation.",
   estimatedMinutes: builtLevels.reduce((sum, lesson) => sum + lesson.durationMinutes, 0),
   outcomes: [
     "Reconnaître et exploiter une suite arithmétique ou géométrique",

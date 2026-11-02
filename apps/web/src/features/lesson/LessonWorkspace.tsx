@@ -444,7 +444,7 @@ function SchemaLab({ interaction, selectedIndex, lessonId, onSelect }: {
                 left: `${(zone.xStart / viewWidth) * 100}%`,
                 width: `${((zone.xEnd - zone.xStart) / viewWidth) * 100}%`,
               }}
-            >{zone.label}</span>
+            ><MathText>{zone.label}</MathText></span>
           ))}
         </div>
       ) : null}
@@ -466,7 +466,7 @@ function SchemaLab({ interaction, selectedIndex, lessonId, onSelect }: {
           </g>
         ))}
       </svg>
-      {interaction.caption && <p className="schema-caption">{interaction.caption}</p>}
+      {interaction.caption && <p className="schema-caption"><MathText>{interaction.caption}</MathText></p>}
       <div className="schema-markers" role="tablist" aria-label="Repères du schéma">
         {interaction.hotspots.map((hotspot, index) => (
           <button
@@ -476,11 +476,11 @@ function SchemaLab({ interaction, selectedIndex, lessonId, onSelect }: {
             onClick={() => onSelect(index)}
             role="tab"
             type="button"
-          >{hotspot.number}. {hotspot.label}</button>
+          ><MathText>{`${hotspot.number}. ${hotspot.label}`}</MathText></button>
         ))}
       </div>
       <div className="schema-focus" aria-live="polite" id={`schema-focus-${lessonId}`}>
-        <strong>{active.number}. {active.label}</strong>
+        <strong><MathText>{`${active.number}. ${active.label}`}</MathText></strong>
         <p><MathText>{active.detail}</MathText></p>
       </div>
     </div>
@@ -491,7 +491,7 @@ function formatNumber(value: number) {
   return new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 2 }).format(value);
 }
 
-function initialInteractionValue(lesson: LearningLesson) {
+function initialInteractionValue(lesson: Pick<LearningLesson, "id" | "interaction">) {
   if (lesson.interaction.kind === "timeline" || lesson.interaction.kind === "diagram" || lesson.interaction.kind === "schema") return 0;
   if (lesson.interaction.kind === "curve") return lesson.interaction.marker.initial;
   if (lesson.interaction.kind === "orbit") return lesson.interaction.marker.initial;
@@ -505,7 +505,7 @@ function initialInteractionValue(lesson: LearningLesson) {
  * l'écran appelant afin que ce panneau puisse être inséré aussi bien dans le
  * lecteur historique que dans une page de cours continue.
  */
-export function LessonInteractionPanel({ lesson }: { lesson: LearningLesson }) {
+export function LessonInteractionPanel({ lesson }: { lesson: Pick<LearningLesson, "id" | "interaction"> }) {
   const [inputValue, setInputValue] = useState(() => initialInteractionValue(lesson));
 
   useEffect(() => {
@@ -524,10 +524,10 @@ export function LessonInteractionPanel({ lesson }: { lesson: LearningLesson }) {
   if (lesson.interaction.kind === "timeline") {
     return timelineItem ? (
       <div className="mastery-timeline-lab">
-        <div className="mastery-timeline-focus" aria-live="polite"><strong>{timelineItem.label}</strong><span>{timelineItem.detail}</span></div>
+        <div className="mastery-timeline-focus" aria-live="polite"><strong><MathText>{timelineItem.label}</MathText></strong><span><MathText>{timelineItem.detail}</MathText></span></div>
         <label htmlFor={`mastery-timeline-${lesson.id}`}>Repère {Math.round(inputValue) + 1} sur {lesson.interaction.items.length}</label>
         <input id={`mastery-timeline-${lesson.id}`} className="lesson-slider" type="range" min={0} max={lesson.interaction.items.length - 1} step={1} value={inputValue} onInput={(event) => setInputValue(Number(event.currentTarget.value))} />
-        <div className="mastery-timeline-markers">{lesson.interaction.items.map((item, index) => <button aria-pressed={index === Math.round(inputValue)} className={index === Math.round(inputValue) ? "is-active" : ""} key={`${item.label}-${index}`} onClick={() => setInputValue(index)} type="button">{item.shortLabel ?? item.label}</button>)}</div>
+        <div className="mastery-timeline-markers">{lesson.interaction.items.map((item, index) => <button aria-pressed={index === Math.round(inputValue)} className={index === Math.round(inputValue) ? "is-active" : ""} key={`${item.label}-${index}`} onClick={() => setInputValue(index)} type="button"><MathText>{item.shortLabel ?? item.label}</MathText></button>)}</div>
       </div>
     ) : null;
   }

@@ -3,7 +3,8 @@ import { MathText } from "./MathText";
 import { normalizePastedExerciseLayout } from "./markdownLayout";
 
 function inline(value: string) {
-  const parts = value.split(/(`[^`]+`|~~[^~]+~~|\*\*[^*]+\*\*|\*[^*]+\*|\[[^\]]+\]\(https?:\/\/[^)\s]+\))/g).filter(Boolean);
+  // Math is atomic: ^* and multiplication inside LaTeX are not Markdown emphasis.
+  const parts = value.split(/(\$\$[\s\S]+?\$\$|\$[^$]+\$|`[^`]+`|~~(?:\$\$[\s\S]+?\$\$|\$[^$]+\$|[^~])+~~|\*\*(?:\$\$[\s\S]+?\$\$|\$[^$]+\$|[^*])+\*\*|\*(?:\$\$[\s\S]+?\$\$|\$[^$]+\$|[^*])+\*|\[[^\]]+\]\(https?:\/\/[^)\s]+\))/g).filter(Boolean);
   return parts.map((part, index) => {
     const link = /^\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)$/.exec(part);
     if (link) {
@@ -46,6 +47,10 @@ function parseBlocks(markdown: string) {
   for (const rawLine of lines) {
     const line = rawLine.trim();
     if (!line) {
+      flushParagraph();
+      continue;
+    }
+    if (line === ">") {
       flushParagraph();
       continue;
     }

@@ -1,0 +1,21 @@
+.arithmetic-tool{min-width:0;max-width:100%;margin:16px 0;padding:18px;border:1px solid #dce7e3;border-radius:14px;background:#f8fbf9;color:#182837;font-size:16px;line-height:1.65}
+.arithmetic-tool h4{margin:0 0 12px;font-size:18px}
+.arithmetic-fields{display:flex;flex-wrap:wrap;align-items:end;gap:12px}
+.arithmetic-tool label{display:flex;flex:1 1 150px;min-width:0;flex-direction:column;gap:4px;font-size:16px}
+.arithmetic-tool input,.arithmetic-tool select{min-width:0;width:100%;min-height:44px;padding:8px 10px;border:1px solid #b7c9c3;border-radius:8px;background:#fff;color:#182837;font:inherit}
+.arithmetic-tool input[type=range]{padding:0;accent-color:#267755}
+.arithmetic-equation{max-width:100%;overflow-x:auto;padding:10px 0;font-size:17px;font-variant-numeric:tabular-nums}
+.arithmetic-table{max-width:100%;overflow-x:auto;margin:12px 0}
+.arithmetic-tool table{width:100%;border-collapse:collapse;font-size:16px!important;white-space:nowrap}
+.arithmetic-tool th,.arithmetic-tool td{padding:8px 12px;border:1px solid #ccdcd6;font-size:16px!important;text-align:center}
+.arithmetic-tool th{background:#e8f2ec}
+.arithmetic-error{color:#aa2533}
+.arithmetic-sieve{display:grid;grid-template-columns:repeat(auto-fit,minmax(38px,1fr));gap:4px}
+.arithmetic-sieve span{display:grid;min-height:40px;place-items:center;border:1px solid #d3e1da;border-radius:4px;background:white;font-size:16px}
+.arithmetic-sieve .is-eliminated{color:#787f87;text-decoration:line-through;background:#eef0f1}
+.arithmetic-sieve .is-prime{border-color:#5c9b76;background:#e0f1e5;color:#175d37;font-weight:700}
+.arithmetic-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.arithmetic-actions button{min-height:44px;max-width:100%;padding:9px 14px;border:1px solid #3c7a58;border-radius:8px;background:#fff;color:#195c37;font:inherit;cursor:pointer}
+.arithmetic-actions button:disabled{opacity:.6;cursor:default}
+.arithmetic-actions button:focus-visible,.arithmetic-tool input:focus-visible,.arithmetic-tool select:focus-visible{outline:3px solid #81bfa5;outline-offset:2px}
+@media(max-width:420px){.arithmetic-tool{padding:12px}.arithmetic-fields{gap:10px}.arithmetic-sieve{grid-template-columns:repeat(5,minmax(0,1fr))}}

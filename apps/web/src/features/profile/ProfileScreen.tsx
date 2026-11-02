@@ -1,8 +1,6 @@
 import {
   ArrowLeft,
-  BookOpenText,
   Camera,
-  CalendarBlank,
   CheckCircle,
   CircleNotch,
   GraduationCap,
@@ -30,6 +28,7 @@ interface ProfileScreenProps {
   profile: LearnerProfile;
   currentLevel: SchoolLevel;
   onBackHome: () => void;
+  backLabel?: string;
   email: string;
   roleLabel: string;
   onLogout: () => void;
@@ -71,7 +70,7 @@ function optimizeProfilePhoto(file: File) {
   });
 }
 
-export function ProfileScreen({ profile, currentLevel, onBackHome, email, roleLabel, onLogout, onReplayDavyTour, onOpenSupport, onProfileUpdated }: ProfileScreenProps) {
+export function ProfileScreen({ profile, currentLevel, onBackHome, backLabel = "Accueil", email, roleLabel, onLogout, onReplayDavyTour, onOpenSupport, onProfileUpdated }: ProfileScreenProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [pendingPhoto, setPendingPhoto] = useState<string | null>(null);
   const [photoError, setPhotoError] = useState<string | null>(null);
@@ -146,7 +145,7 @@ export function ProfileScreen({ profile, currentLevel, onBackHome, email, roleLa
       <header className="profile-page-header">
         <button className="path-back-button" type="button" onClick={onBackHome}>
           <ArrowLeft size={20} weight="bold" />
-          Accueil
+          {backLabel}
         </button>
         <span className="profile-save-state"><CheckCircle size={19} weight="fill" /> Profil mémorisé</span>
       </header>
@@ -161,7 +160,7 @@ export function ProfileScreen({ profile, currentLevel, onBackHome, email, roleLa
             <input ref={fileInputRef} className="profile-photo-input" type="file" accept="image/jpeg,image/png,image/webp" onChange={(event) => void selectPhoto(event)} />
           </div>
           <div className="profile-identity-copy">
-            <p className="path-kicker">Profil scolaire</p><h1>{profile.name}</h1><span>Ton niveau détermine automatiquement les programmes et parcours disponibles.</span>
+            <p className="path-kicker">Profil scolaire</p><h1>{profile.name}</h1>
             <div className="profile-photo-actions">
               <button type="button" onClick={() => fileInputRef.current?.click()} disabled={photoBusy}>{profile.photoUrl ? "Changer ma photo" : "Ajouter ma photo"}</button>
               {pendingPhoto && <button className="is-primary" type="button" onClick={() => void savePhoto()} disabled={photoBusy}>{photoBusy ? <CircleNotch className="profile-photo-spinner" size={17} /> : <CheckCircle size={17} weight="fill" />} Enregistrer</button>}
@@ -182,7 +181,7 @@ export function ProfileScreen({ profile, currentLevel, onBackHome, email, roleLa
         <article className="profile-level-editor is-read-only">
           <div className="profile-section-heading">
             <span><GraduationCap size={25} weight="duotone" /></span>
-            <div><p className="path-kicker">Contexte scolaire</p><h2>Niveau et série</h2><p>Ces informations sont définies à l’inscription et restent verrouillées pendant l’année académique.</p></div>
+            <div><p className="path-kicker">Contexte scolaire</p><h2>Niveau et série</h2></div>
           </div>
 
           <div className="profile-locked-level" aria-label={`Niveau et série : ${currentLevel.label}`}>
@@ -201,27 +200,15 @@ export function ProfileScreen({ profile, currentLevel, onBackHome, email, roleLa
             <ShieldCheck size={28} weight="duotone" />
             <div>
               <strong>Modification réservée à l’administration</strong>
-              <p>À la fin de l’année académique, adresse-toi à un administrateur pour faire enregistrer ta nouvelle classe. Cette règle évite les changements accidentels et protège ta progression.</p>
+              <p>Pour changer de classe en fin d’année, contacte l’administration.</p>
             </div>
           </div>
         </article>
 
         <aside className="profile-impact-card">
-          <span className="profile-impact-icon"><BookOpenText size={27} weight="duotone" /></span>
-          <p className="path-kicker">Adaptation automatique</p>
-          <h2>Ton espace suit {currentLevel.label}</h2>
-          <ul>
-            <li><CheckCircle size={20} weight="fill" /><span>Les chapitres correspondent au programme de cette classe.</span></li>
-            <li><CheckCircle size={20} weight="fill" /><span>Ta progression déjà acquise reste conservée pour chaque parcours.</span></li>
-            <li><CheckCircle size={20} weight="fill" /><span>Les exercices et les défis de l’Arène utilisent le bon niveau de difficulté.</span></li>
-          </ul>
-          <div className="profile-availability">
-            <CalendarBlank size={21} weight="duotone" />
-            <span><strong>Changement de classe</strong>Demande la mise à jour à l’administration lorsque l’année académique est terminée.</span>
-          </div>
           <button className="profile-davy-tour-button" type="button" onClick={onReplayDavyTour}>
             <SpeakerHigh size={23} weight="duotone" />
-            <span><strong>Refaire la visite avec Davy</strong><small>Réécouter la présentation des espaces de la plateforme.</small></span>
+            <span><strong>Refaire la visite avec Davy</strong></span>
           </button>
           <SupportCard location="profile" onOpen={onOpenSupport} />
           <div className="profile-account-card">

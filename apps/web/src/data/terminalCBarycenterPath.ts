@@ -6,6 +6,7 @@ import type {
   TimelineInteractionItem,
 } from "../domain/paths";
 
+import { terminalCBarycenterDocument } from "./courseDocuments/terminalCBarycenterDocument";
 const sourceDocument = "TC Maths leçon 02 Barycentre.pdf";
 
 const choice = (
@@ -955,7 +956,9 @@ export const terminalCBarycenterPath: LearningPath = {
   levelIds: ["terminale-c"],
   curriculumLabel: "Programme ivoirien • Terminale C • Leçon officielle fidèlement structurée",
   curriculumSourceUrl: "https://dpfc-ci.net/",
-  theme: { number: 2, title: "Géométrie du plan" },
+  theme: { number: 2, title: "Algèbre et géométrie" },
+  presentation: "continuous-course",
+  courseDocument: terminalCBarycenterDocument,
   chapterNumber: 2,
   title: "Barycentre et lignes de niveau",
   description: "Le cours officiel intégral, sans l’activité d’introduction, enrichi de méthodes, constructions et corrections expliquées.",

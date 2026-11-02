@@ -1,3 +1,4 @@
+import { terminalCProbabilityDocument } from "./courseDocuments/terminalCProbabilityDocument";
 import type {
   LearningLesson,
   LearningPath,
@@ -1332,11 +1333,13 @@ const builtLevels = levels.map((level, index) => officialLevel(index, level));
 
 export const terminalCProbabilityPath: LearningPath = {
   id: "terminale-c-math-l17-probability",
+  presentation: "continuous-course",
+  courseDocument: terminalCProbabilityDocument,
   subjectId: "mathematics",
   levelIds: ["terminale-c"],
   curriculumLabel: "Programme ivoirien • Terminale C • Leçon officielle fidèlement structurée",
   curriculumSourceUrl: "https://dpfc-ci.net/",
-  theme: { number: 5, title: "Modélisation d'un phénomène aléatoire" },
+  theme: { number: 5, title: "Analyse et probabilité" },
   chapterNumber: 17,
   title: "Probabilité conditionnelle et variable aléatoire",
   description:

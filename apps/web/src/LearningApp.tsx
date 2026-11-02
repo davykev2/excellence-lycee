@@ -4,18 +4,17 @@ import type { LearningPath } from "./domain/paths";
 import { schoolLevels, subjects, initialDashboard, isSubjectAvailableForLevel } from "./data/programme";
 import { loadLearningPathsForLevel, loadLearningPathsForSubject } from "./data/learningPathLoader";
 import { curriculumLessonTitles } from "./data/curriculumCatalog";
+import { courseLibraryReferences } from "./data/courseLibraryReferences";
+import { mathDomainForLesson } from "./domain/mathLibrary";
 import { Sidebar } from "./features/navigation/Sidebar";
 import { MobileHeader, MobileNavigation } from "./features/navigation/MobileNavigation";
 import { getNextLesson, getPathLessons } from "./features/paths/pathLessons";
 import { TutorPanel } from "./features/tutor/TutorPanel";
-import { DetailsDialog } from "./features/details/DetailsDialog";
-import { usePlatformStats } from "./features/dashboard/PlatformStats";
 import {
   completedLevelsToday,
-  dashboardPathPreferenceKey,
   selectDashboardPath,
-  type DashboardPathPreference,
 } from "./features/dashboard/dashboardLearningState";
+import { readDashboardPreferences, recordDashboardPreference, selectHomeResumeTarget } from "./features/dashboard/homeResume";
 import { useAuth } from "./features/auth/AuthProvider";
 import { useLearningProgress } from "./features/progress/useLearningProgress";
 import type { AuthUser } from "./domain/auth";
@@ -34,26 +33,23 @@ import {
 import {
   canAccessLearningPath,
   canAccessHomeworks,
+  canAccessBacExams,
   initialSubjectIdForLocation,
   levelIdForLearningPath,
   routeAllowedForUser,
 } from "./routing/routeAccess";
-import {
-  canOpenMasteryLevel,
-  MASTERY_LEVELS_REQUIRE_SEQUENCE,
-} from "./config/masteryAccess";
+import { canOpenMasteryLevel } from "./config/masteryAccess";
+import { showDocumentHome, showHistoricalHome, showOriginalHome } from "./config/homeLayout";
+import { homeCourseViews } from "./features/dashboard/homeCourseViews";
 
 const AdminScreen = lazy(() =>
   import("./features/admin/AdminScreen").then((module) => ({ default: module.AdminScreen })),
 );
-const LessonWorkspace = lazy(() =>
-  import("./features/lesson/LessonWorkspace").then((module) => ({ default: module.LessonWorkspace })),
-);
 const ContinuousCourseScreen = lazy(() =>
   import("./features/lesson/ContinuousCourseScreen").then((module) => ({ default: module.ContinuousCourseScreen })),
 );
-const MathPathScreen = lazy(() =>
-  import("./features/paths/MathPathScreen").then((module) => ({ default: module.MathPathScreen })),
+const CourseReferenceScreen = lazy(() =>
+  import("./features/lesson/document/CourseReferenceScreen").then(module => ({ default: module.CourseReferenceScreen })),
 );
 const ArenaScreen = lazy(() =>
   import("./features/arena/ArenaScreen").then((module) => ({ default: module.ArenaScreen })),
@@ -61,8 +57,20 @@ const ArenaScreen = lazy(() =>
 const Dashboard = lazy(() =>
   import("./features/dashboard/Dashboard").then((module) => ({ default: module.Dashboard })),
 );
+const OriginalDashboard = lazy(() =>
+  import("./features/dashboard/OriginalDashboard").then(module => ({ default: module.OriginalDashboard })),
+);
+const HistoricalDashboard = lazy(() =>
+  import("./features/dashboard/HistoricalDashboard").then(module => ({ default: module.HistoricalDashboard })),
+);
+const DocumentDashboard = lazy(() =>
+  import("./features/dashboard/DocumentDashboard").then(module => ({ default: module.DocumentDashboard })),
+);
 const LearningLibraryScreen = lazy(() =>
   import("./features/paths/LearningLibraryScreen").then((module) => ({ default: module.LearningLibraryScreen })),
+);
+const SubjectLibraryScreen = lazy(() =>
+  import("./features/paths/SubjectLibraryScreen").then(module => ({ default: module.SubjectLibraryScreen })),
 );
 const LevelEmptyState = lazy(() =>
   import("./features/dashboard/LevelEmptyState").then((module) => ({ default: module.LevelEmptyState })),
@@ -73,6 +81,12 @@ const MessagesScreen = lazy(() =>
 const ProfileScreen = lazy(() =>
   import("./features/profile/ProfileScreen").then((module) => ({ default: module.ProfileScreen })),
 );
+const PersonalSpaceScreen = lazy(() =>
+  import("./features/profile/PersonalSpaceScreen").then(module => ({ default: module.PersonalSpaceScreen })),
+);
+const LearnerResultsScreen = lazy(() =>
+  import("./features/profile/LearnerResultsScreen").then(module => ({ default: module.LearnerResultsScreen })),
+);
 const RankingScreen = lazy(() =>
   import("./features/community/RankingScreen").then((module) => ({ default: module.RankingScreen })),
 );
@@ -80,7 +94,7 @@ const StoreScreen = lazy(() =>
   import("./features/store/StoreScreen").then((module) => ({ default: module.StoreScreen })),
 );
 
-type OpenDialog = "tutor" | "goal" | null;
+type OpenDialog = "tutor" | null;
 
 const emptyCompletedLessons = new Set<string>();
 const previewParams = new URLSearchParams(window.location.search);
@@ -138,7 +152,7 @@ function createRouteFallback(
     ? { navigation: "admin", subjectId: "mathematics", adminSection: "content", adminStudio: true }
     : isPathPreview
       ? {
-          navigation: "paths",
+          navigation: previewPath ? "paths" : "home",
           subjectId: previewPath?.subjectId ?? fallbackSubjectId,
           pathId: previewPath?.id,
           lessonId: previewLessonId ?? undefined,
@@ -275,14 +289,13 @@ function LearningAppShell({
   const [tourReplayKey, setTourReplayKey] = useState(0);
   const [bundleNavigationLoading, setBundleNavigationLoading] = useState(false);
   const [bundleNavigationError, setBundleNavigationError] = useState<Error | null>(null);
-  const [dashboardPathPreference, setDashboardPathPreference] = useState<DashboardPathPreference | null>(null);
+  const [homeVisitKey, setHomeVisitKey] = useState(0);
   const navigationRequest = useRef(0);
   const { logout, updateUser } = useAuth();
   const localPreview = isPathPreview || isAdminContentPreview || isArenaExerciseEditorPreview || isDuelPreview || isHomeworkPreview || isBacExamPreview;
   const {
     progressByPath,
     completedLessonsByPath,
-    submitAttempt,
     totalXp,
     loading: progressLoading,
     error: progressError,
@@ -290,7 +303,6 @@ function LearningAppShell({
   } = useLearningProgress({ localOnly: localPreview });
   const store = useStoreWallet({ localOnly: localPreview, localTotalXp: totalXp });
   const availablePaths = usePublishedLessonContents(baseLearningPaths, localPreview);
-  const platformStats = usePlatformStats(localPreview);
   const {
     count: unreadMessages,
     error: unreadMessagesError,
@@ -337,6 +349,7 @@ function LearningAppShell({
       if (options?.replace) window.history.replaceState(state, "", url);
       else window.history.pushState(state, "", url);
       setRoute(allowedRoute);
+      if (allowedRoute.navigation === "home") setHomeVisitKey(value => value + 1);
       if (options?.scroll !== false) window.scrollTo({ top: 0, behavior: "auto" });
     });
   }, [prepareRoute]);
@@ -349,7 +362,10 @@ function LearningAppShell({
 
     const onPopState = () => {
       setOpenDialog(null);
-      prepareRoute(readAppRoute(window.location, routeFallback), setRoute);
+      prepareRoute(readAppRoute(window.location, routeFallback), allowedRoute => {
+        setRoute(allowedRoute);
+        if (allowedRoute.navigation === "home") setHomeVisitKey(value => value + 1);
+      });
     };
     window.addEventListener("popstate", onPopState);
     return () => window.removeEventListener("popstate", onPopState);
@@ -359,7 +375,9 @@ function LearningAppShell({
     () => availablePaths.find((path) => path.id === selectedPathId) ?? null,
     [availablePaths, selectedPathId],
   );
-  const routeLevelId = levelIdForLearningPath(user, routedPath);
+  const routedReference = courseLibraryReferences.find(reference => reference.id === selectedPathId) ?? null;
+  const selectedReference = routedReference && canAccessLearningPath(user, routedReference) ? routedReference : null;
+  const routeLevelId = levelIdForLearningPath(user, routedPath ?? routedReference);
   const level = useMemo(
     () => schoolLevels.find((item) => item.id === routeLevelId) ?? schoolLevels[0],
     [routeLevelId],
@@ -370,51 +388,52 @@ function LearningAppShell({
   );
   const subject = subjectOptions.find((item) => item.id === subjectId) ?? subjects.mathematics;
 
+  const dashboardPreferences = useMemo(() => {
+    let storage: Storage | undefined;
+    try { storage = window.localStorage; } catch { /* Resume also works without optional storage. */ }
+    return readDashboardPreferences(storage, user.id, level.id, Object.keys(subjects) as SubjectId[]);
+  }, [level.id, user.id, route]);
+  const homeResumeTarget = useMemo(() => selectHomeResumeTarget({
+    catalog: curriculumLessonTitles, loadedPaths: availablePaths, levelId: level.id,
+    allowedSubjects: subjectOptions.filter(item => item.enabled).map(item => item.id),
+    progressByPath, preferences: dashboardPreferences, fallbackSubjectId: subject.id,
+  }), [availablePaths, dashboardPreferences, level.id, progressByPath, subject.id, subjectOptions]);
+  const dashboardPathPreference = dashboardPreferences.filter(item => showOriginalHome
+    ? availablePaths.some(path => path.id === item.pathId && path.subjectId === subject.id && path.levelIds.includes(level.id))
+    : item.pathId === homeResumeTarget?.pathId)
+    .sort((a, b) => Date.parse(b.openedAt) - Date.parse(a.openedAt))[0] ?? null;
+  const homeSubjectChanging = !showOriginalHome && activeNavigation === "home" && Boolean(homeResumeTarget && homeResumeTarget.subjectId !== subject.id);
   useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem(dashboardPathPreferenceKey(user.id, level.id, subject.id));
-      if (!stored) {
-        setDashboardPathPreference(null);
-        return;
-      }
-      const parsed = JSON.parse(stored) as Partial<DashboardPathPreference>;
-      setDashboardPathPreference(
-        typeof parsed.pathId === "string" && typeof parsed.openedAt === "string"
-          ? { pathId: parsed.pathId, openedAt: parsed.openedAt }
-          : null,
-      );
-    } catch {
-      setDashboardPathPreference(null);
-    }
-  }, [level.id, subject.id, user.id]);
-
+    if (progressLoading || !homeSubjectChanging || !homeResumeTarget) return;
+    navigate({ navigation: "home", subjectId: homeResumeTarget.subjectId }, { replace: true, scroll: false });
+  }, [homeResumeTarget?.subjectId, homeSubjectChanging, navigate, progressLoading]);
   const dashboardPath = useMemo(
-    () => selectDashboardPath({
+    () => activeNavigation === "home" && !showOriginalHome
+    ? availablePaths.find(path => path.id === homeResumeTarget?.pathId && path.levelIds.includes(level.id)) ?? null
+    : selectDashboardPath({
       paths: availablePaths,
       progressByPath,
       levelId: level.id,
       subjectId: subject.id,
       preference: dashboardPathPreference,
     }),
-    [availablePaths, dashboardPathPreference, level.id, progressByPath, subject.id],
+    [activeNavigation, availablePaths, dashboardPathPreference, homeResumeTarget?.pathId, level.id, progressByPath, subject.id],
   );
   const selectedPath = routedPath && canAccessLearningPath(user, routedPath) ? routedPath : null;
   const activePath = selectedPath ?? dashboardPath;
   const completedLessonIds = activePath
     ? completedLessonsByPath[activePath.id] ?? emptyCompletedLessons
     : emptyCompletedLessons;
-  const progressByLesson = activePath ? progressByPath[activePath.id] ?? {} : {};
   const pathLessons = useMemo(() => activePath ? getPathLessons(activePath) : [], [activePath]);
   const currentLesson = useMemo(
     () => activePath ? getNextLesson(activePath, completedLessonIds) ?? pathLessons[pathLessons.length - 1] : undefined,
     [activePath, completedLessonIds, pathLessons],
   );
-  const progress = pathLessons.length > 0 ? Math.round((completedLessonIds.size / pathLessons.length) * 100) : 0;
-  const activePathIsContinuousCourse = activePath?.presentation === "continuous-course";
+  const activePathIsContinuousCourse = Boolean(activePath);
+  const activePathHasHistory = completedLessonIds.size > 0 || dashboardPreferences.some(preference => preference.pathId === activePath?.id);
   const completedToday = useMemo(() => completedLevelsToday(progressByPath), [progressByPath]);
   const activeLessonIndex = activeLessonId ? pathLessons.findIndex((lesson) => lesson.id === activeLessonId) : -1;
   const activeLesson = activeLessonIndex >= 0 ? pathLessons[activeLessonIndex] : null;
-  const nextLesson = activeLessonIndex >= 0 ? pathLessons[activeLessonIndex + 1] : undefined;
 
   const dashboardContent = useMemo(
     () => ({
@@ -429,15 +448,13 @@ function LearningAppShell({
       lesson: {
         ...initialDashboard.lesson,
         id: currentLesson?.id ?? initialDashboard.lesson.id,
-        eyebrow: activePathIsContinuousCourse ? "Ton cours :" : "Ton parcours :",
-        title: activePathIsContinuousCourse ? activePath?.title ?? "Nouveau cours" : currentLesson?.title ?? "Nouveau parcours",
+        eyebrow: activePathHasHistory ? "Là où tu en étais" : "Pour commencer",
+        title: activePath?.title ?? "Nouveau cours",
         remainingMinutes: activePathIsContinuousCourse ? activePath?.estimatedMinutes ?? 0 : currentLesson?.durationMinutes ?? 0,
-        ctaLabel: activePathIsContinuousCourse
-          ? "Ouvrir le cours complet"
-          : completedLessonIds.size === pathLessons.length ? "Revoir la leçon" : "Continuer le parcours",
+        ctaLabel: activePathHasHistory ? "Reprendre mon cours" : "Commencer ce cours",
       },
     }),
-    [activePath, activePathIsContinuousCourse, completedLessonIds.size, completedToday, currentLesson, pathLessons.length, profile],
+    [activePath, activePathHasHistory, activePathIsContinuousCourse, completedLessonIds.size, completedToday, currentLesson, pathLessons.length, profile],
   );
   const dashboardSyncIssue = useMemo(() => {
     const unavailable: string[] = [];
@@ -459,15 +476,9 @@ function LearningAppShell({
   useEffect(() => {
     if (!selectedPath) return;
     const preference = { pathId: selectedPath.id, openedAt: new Date().toISOString() };
-    try {
-      window.localStorage.setItem(
-        dashboardPathPreferenceKey(user.id, level.id, selectedPath.subjectId),
-        JSON.stringify(preference),
-      );
-    } catch {
-      // La progression serveur reste le repli si le stockage local est indisponible.
-    }
-    if (selectedPath.subjectId === subject.id) setDashboardPathPreference(preference);
+    let storage: Storage | undefined;
+    try { storage = window.localStorage; } catch { /* Memory-only resume in this tab remains available. */ }
+    recordDashboardPreference(storage, user.id, level.id, selectedPath.subjectId, preference);
   }, [level.id, selectedPath, subject.id, user.id]);
 
   const handleNavigate = (id: NavigationId) => {
@@ -477,24 +488,17 @@ function LearningAppShell({
 
   const handleSubjectChange = (nextSubjectId: SubjectId) => {
     navigate(route.navigation === "paths"
-      ? { navigation: "paths", subjectId: nextSubjectId }
+      ? { navigation: "paths", subjectId: nextSubjectId, libraryView: "lessons", ...(nextSubjectId === "mathematics" && subject.id === "mathematics" ? { mathDomain: route.mathDomain } : {}) }
       : { ...route, subjectId: nextSubjectId });
   };
 
-  const submitLessonAttempt = (lessonId: string, scoreOutOf20: number) => {
-    if (!activePath) return Promise.reject(new Error("Parcours indisponible"));
-    const lessonReward = pathLessons.find((lesson) => lesson.id === lessonId)?.xp ?? 0;
-    return submitAttempt(activePath.id, lessonId, scoreOutOf20, lessonReward);
-  };
-
-  const openPathLesson = (lessonId: string) => {
+  const openPathCourse = () => {
     if (!activePath) return;
     setOpenDialog(null);
     navigate({
       navigation: "paths",
       subjectId: activePath.subjectId,
       pathId: activePath.id,
-      lessonId,
     }, { scroll: false });
   };
 
@@ -506,6 +510,13 @@ function LearningAppShell({
 
   useEffect(() => {
     if (progressLoading || route.navigation !== "paths" || !route.pathId) return;
+    if (selectedReference) {
+      if (route.lessonId || subjectId !== selectedReference.subjectId || route.courseTab === "assessment") {
+        navigate({ navigation: "paths", subjectId: selectedReference.subjectId, pathId: selectedReference.id, mathDomain: "analyse",
+          ...(route.courseTab === "essentials" ? { courseTab: "essentials" as const } : {}) }, { replace: true, scroll: false });
+      }
+      return;
+    }
     const requestedPath = availablePaths.find((path) => (
       path.id === route.pathId && canAccessLearningPath(user, path)
     ));
@@ -536,7 +547,7 @@ function LearningAppShell({
     if (subjectId !== requestedPath.subjectId) {
       navigate({ ...route, subjectId: requestedPath.subjectId }, { replace: true, scroll: false });
     }
-  }, [availablePaths, completedLessonsByPath, level.id, navigate, progressLoading, route, subject.id, subjectId, user.role]);
+  }, [availablePaths, completedLessonsByPath, level.id, navigate, progressLoading, route, selectedReference, subject.id, subjectId, user.role]);
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -556,14 +567,14 @@ function LearningAppShell({
   }, [navigate, route.lessonId, route.pathId, subject.id]);
 
   if (bundleNavigationError) throw bundleNavigationError;
-  if (progressLoading || bundleNavigationLoading) {
+  if (progressLoading || bundleNavigationLoading || homeSubjectChanging) {
     return <main className="session-loading" role="status"><span className="session-loading-mark" />Synchronisation de ta progression…</main>;
   }
 
   return (
-    <div className="app-shell" style={{ "--subject-accent": subject.theme.accent, "--subject-accent-soft": subject.theme.accentSoft } as React.CSSProperties}>
-      <Sidebar activeItem={activeNavigation} onNavigate={handleNavigate} canAccessAdmin={user.role === "admin"} unreadMessages={unreadMessages} goldBalance={store.loading || store.syncError ? null : store.wallet.goldBalance} />
-      <MobileHeader goldBalance={store.loading || store.syncError ? null : store.wallet.goldBalance} onOpenStore={() => handleNavigate("store")} />
+    <div className="app-shell" data-page={activeNavigation} style={{ "--subject-accent": subject.theme.accent, "--subject-accent-soft": subject.theme.accentSoft } as React.CSSProperties}>
+      <Sidebar activeItem={activeNavigation} onNavigate={handleNavigate} canAccessAdmin={user.role === "admin"} unreadMessages={unreadMessages} />
+      {activeNavigation === "home" && <MobileHeader unreadMessages={unreadMessages} onOpenMessages={() => handleNavigate("messages")} onOpenAdmin={user.role === "admin" ? () => handleNavigate("admin") : undefined} />}
 
       <Suspense fallback={<main className="admin-loading" role="status">Chargement de ton espace…</main>}>
         {activeNavigation === "admin" ? (
@@ -588,11 +599,35 @@ function LearningAppShell({
               });
             }}
           />
+      ) : activeNavigation === "space" && route.spaceSection === "results" ? (
+        <LearnerResultsScreen
+          level={level}
+          progressByPath={progressByPath}
+          progressError={progressError?.message ?? null}
+          onRetryProgress={retryProgress}
+          onBack={() => handleNavigate("space")}
+          onOpenCourse={(pathId, lessonId, targetSubjectId) => navigate({ navigation: "paths", pathId, lessonId, subjectId: targetSubjectId })}
+          onOpenHomeworks={canAccessHomeworks(user) ? () => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "homework" }) : undefined}
+          onOpenExams={canAccessBacExams(user) ? () => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "bac" }) : undefined}
+        />
+      ) : activeNavigation === "space" ? (
+        <PersonalSpaceScreen
+          profile={profile}
+          level={level}
+          roleLabel={user.role === "admin" ? "Administrateur" : user.accountType === "teacher" ? "Enseignant" : user.accountType === "parent" ? "Parent" : "Élève"}
+          unreadMessages={unreadMessages}
+          goldBalance={store.loading || store.syncError ? null : store.wallet.goldBalance}
+          isAdmin={user.role === "admin"}
+          onNavigate={handleNavigate}
+          onOpenResults={() => navigate({ navigation: "space", subjectId: subject.id, spaceSection: "results" })}
+          onReplayTour={() => setTourReplayKey(current => current + 1)}
+        />
       ) : activeNavigation === "profile" ? (
         <ProfileScreen
           profile={profile}
           currentLevel={level}
-          onBackHome={() => handleNavigate("home")}
+          onBackHome={() => handleNavigate("space")}
+          backLabel="Mon espace"
           email={user.email}
           roleLabel={user.role === "admin" ? "Administrateur" : user.accountType === "teacher" ? "Enseignant" : user.accountType === "parent" ? "Parent" : "Élève"}
           onLogout={() => void logout()}
@@ -604,6 +639,23 @@ function LearningAppShell({
         <RankingScreen profile={profile} level={level} totalXp={totalXp} localOnly={isPathPreview} />
       ) : activeNavigation === "arena" ? (
         <ArenaScreen
+          userId={user.id}
+          philoMemoryOpen={route.arenaMode === "philo-memory"}
+          frenchWorkshopOpen={route.arenaMode === "french-workshop"}
+          frenchSection={route.frenchSection}
+          onOpenFrenchWorkshop={() => navigate({ navigation: "arena", subjectId: "french", arenaMode: "french-workshop" })}
+          onFrenchSectionChange={frenchSection => navigate({ navigation: "arena", subjectId: "french", arenaMode: "french-workshop", ...(frenchSection === "figures" || frenchSection === "argumentation" ? { frenchSection } : {}) }, { scroll: false })}
+          philoNotion={route.philoNotion}
+          onOpenPhiloMemory={() => navigate({ navigation: "arena", subjectId: "philosophy", arenaMode: "philo-memory" })}
+          onPhiloNotionChange={philoNotion => navigate({ navigation: "arena", subjectId: "philosophy", arenaMode: "philo-memory", philoNotion }, { scroll: false })}
+          onReviewPhiloCourse={pathId => navigate({ navigation: "paths", subjectId: "philosophy", ...(availablePaths.some(path => path.id === pathId) ? { pathId } : {}) })}
+          exerciseSelection={route.exerciseSelection}
+          exerciseView={route.exerciseView}
+          onChooseExerciseSubject={subjectId => navigate({ navigation: "arena", subjectId, arenaMode: "exercises", exerciseView: "lessons" })}
+          onOpenExerciseLesson={(subjectId, lessonKey) => navigate({ navigation: "arena", subjectId, arenaMode: "exercises", exerciseSelection: { lessonKey, category: "fixation" } })}
+          onBackExerciseSubjects={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "exercises" })}
+          onExerciseSelection={selection => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "exercises", arenaEditor: route.arenaEditor, exerciseSelection: selection })}
+          onReviewExerciseCourse={(pathId, topicId) => navigate({ navigation: "paths", subjectId: subject.id, pathId, lessonId: topicId })}
           profile={profile}
           level={level}
           subject={subject}
@@ -618,6 +670,11 @@ function LearningAppShell({
           duelOpen={route.arenaMode === "duel"}
           bacExamOpen={route.arenaMode === "bac"}
           bacExamSlug={route.bacExamSlug}
+          examCollection={route.examCollection}
+          bacArchiveYear={route.bacArchiveYear}
+          bacArchivePaper={route.bacArchivePaper}
+          onBacArchiveSelection={(bacArchiveYear, bacArchivePaper) => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "bac", examCollection: "bac", bacArchiveYear, bacArchivePaper })}
+          onExamCollectionChange={examCollection => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "bac", examCollection }, { scroll: false })}
           bacResultsOpen={Boolean(route.bacResults)}
           exerciseEditorOpen={Boolean(route.arenaEditor)}
           localOnly={localPreview}
@@ -640,7 +697,19 @@ function LearningAppShell({
         <StoreScreen profile={profile} level={level} store={store} />
       ) : activeNavigation === "messages" ? (
         <MessagesScreen key={level.id} profile={profile} level={level} />
-      ) : activeNavigation === "paths" && selectedPath?.presentation === "continuous-course" ? (
+      ) : activeNavigation === "paths" && selectedReference ? (
+        <CourseReferenceScreen
+          key={selectedReference.id}
+          reference={selectedReference}
+          level={level}
+          subject={subjects[selectedReference.subjectId]}
+          currentUser={{ id: user.id, name: profile.name, photoUrl: profile.photoUrl, role: user.role }}
+          localOnly={localPreview}
+          tab={route.courseTab ?? "summary"}
+          onTabChange={courseTab => navigate({ navigation: "paths", subjectId: selectedReference.subjectId, pathId: selectedReference.id, mathDomain: "analyse", courseTab }, { scroll: false })}
+          onBackToLibrary={() => navigate({ navigation: "paths", subjectId: selectedReference.subjectId, libraryView: "lessons", mathDomain: "analyse" })}
+        />
+      ) : activeNavigation === "paths" && selectedPath ? (
         <ContinuousCourseScreen
           path={selectedPath}
           level={level}
@@ -653,18 +722,20 @@ function LearningAppShell({
           }}
           localOnly={localPreview}
           focusedSectionId={activeLessonId ?? undefined}
-          onBackToLibrary={() => navigate({ navigation: "paths", subjectId: selectedPath.subjectId })}
+          documentTab={route.courseTab ?? "summary"}
+          onDocumentTabChange={(courseTab) => navigate({ navigation: "paths", subjectId: selectedPath.subjectId, pathId: selectedPath.id, courseTab, mathDomain: route.mathDomain }, { scroll: false })}
+          onBackToLibrary={() => navigate({ navigation: "paths", subjectId: selectedPath.subjectId, libraryView: "lessons", mathDomain: route.mathDomain ?? mathDomainForLesson(curriculumLessonTitles.find(lesson => lesson.pathId === selectedPath.id && lesson.levelId === level.id) ?? selectedPath) })}
         />
-      ) : activeNavigation === "paths" && selectedPath ? (
-        <MathPathScreen
-          path={selectedPath}
+      ) : activeNavigation === "paths" && route.libraryView !== "lessons" ? (
+        <SubjectLibraryScreen
           level={level}
-          subject={subjects[selectedPath.subjectId]}
-          progressByLesson={progressByPath[selectedPath.id] ?? {}}
-          completedLessonIds={completedLessonIds}
-          allLessonsAccessible={user.role === "admin" || !MASTERY_LEVELS_REQUIRE_SEQUENCE}
-          onOpenLesson={openPathLesson}
-          onBackToLibrary={() => navigate({ navigation: "paths", subjectId: selectedPath.subjectId })}
+          subjects={subjectOptions}
+          paths={availablePaths}
+          catalogLessons={curriculumLessonTitles}
+          references={courseLibraryReferences}
+          onChooseSubject={handleSubjectChange}
+          onOpenCourse={course => navigate({ navigation: "paths", subjectId: course.subjectId, pathId: course.id, ...(course.subjectId === "mathematics" ? { mathDomain: mathDomainForLesson(course) ?? "analyse" } : {}) })}
+          onBackHome={() => handleNavigate("home")}
         />
       ) : activeNavigation === "paths" ? (
         <LearningLibraryScreen
@@ -673,16 +744,22 @@ function LearningAppShell({
           selectedSubjectId={subject.id}
           paths={availablePaths}
           catalogLessons={curriculumLessonTitles}
+          references={courseLibraryReferences}
+          onSelectReference={pathId => navigate({ navigation: "paths", subjectId: "mathematics", pathId, mathDomain: "analyse" })}
+          mathDomain={route.mathDomain ?? "analyse"}
+          onMathDomainChange={(mathDomain) => navigate({ navigation: "paths", subjectId: "mathematics", libraryView: "lessons", mathDomain }, { scroll: false })}
           onSubjectChange={handleSubjectChange}
           onSelectPath={(pathId) => {
             const path = availablePaths.find((item) => item.id === pathId);
-            if (path) navigate({ navigation: "paths", subjectId: path.subjectId, pathId: path.id });
+            if (path) navigate({ navigation: "paths", subjectId: path.subjectId, pathId: path.id, ...(path.subjectId === "mathematics" ? { mathDomain: route.mathDomain ?? "analyse" } : {}) });
           }}
           onBackHome={() => handleNavigate("home")}
+          onBackSubjects={() => navigate({ navigation: "paths", subjectId: subject.id, mathDomain: route.mathDomain })}
         />
       ) : !activePath ? (
         <LevelEmptyState
           mode="home"
+          homeStyle={showDocumentHome ? "document" : undefined}
           profile={profile}
           level={level}
           subject={subject}
@@ -690,30 +767,77 @@ function LearningAppShell({
           onSubjectChange={handleSubjectChange}
           onOpenProfile={() => handleNavigate("profile")}
           onBackHome={() => handleNavigate("home")}
-          stats={platformStats}
+          userId={user.id}
+          visitKey={homeVisitKey}
+          onOpenSpace={() => handleNavigate("space")}
+          onOpenCourses={() => handleNavigate("paths")}
+          syncIssue={dashboardSyncIssue}
         />
-      ) : (
-        <Dashboard
+      ) : showDocumentHome ? (
+        <DocumentDashboard
           content={dashboardContent}
-          progress={progress}
+          progress={progressError ? null : pathLessons.length ? 100 * pathLessons.filter(lesson => completedLessonIds.has(lesson.id)).length / pathLessons.length : 0}
+          level={level}
+          subject={subject}
+          subjects={subjectOptions}
+          courseViews={homeCourseViews(activePath, level.id)}
+          onSubjectChange={handleSubjectChange}
+          onResumeLesson={() => dashboardPath && navigate({ navigation: "paths", subjectId: dashboardPath.subjectId, pathId: dashboardPath.id })}
+          onOpenCourseView={courseTab => dashboardPath && navigate({ navigation: "paths", subjectId: dashboardPath.subjectId, pathId: dashboardPath.id, courseTab })}
+          onAskHint={() => setOpenDialog("tutor")}
+          onOpenGoal={() => handleNavigate("paths")}
+          onOpenArena={() => handleNavigate("arena")}
+          onOpenSpace={() => handleNavigate("space")}
+          syncIssue={dashboardSyncIssue}
+        />
+      ) : showHistoricalHome ? (
+        <HistoricalDashboard
+          content={dashboardContent}
+          progress={pathLessons.length ? 100 * pathLessons.filter(lesson => completedLessonIds.has(lesson.id)).length / pathLessons.length : 0}
           level={level}
           subject={subject}
           subjects={subjectOptions}
           onSubjectChange={handleSubjectChange}
-          onResumeLesson={() => currentLesson && openPathLesson(currentLesson.id)}
+          onResumeLesson={() => dashboardPath && navigate({ navigation: "paths", subjectId: dashboardPath.subjectId, pathId: dashboardPath.id })}
           onAskHint={() => setOpenDialog("tutor")}
-          onOpenGoal={() => setOpenDialog("goal")}
+          onOpenGoal={() => handleNavigate("paths")}
           onOpenArena={() => handleNavigate("arena")}
+          syncIssue={dashboardSyncIssue}
+        />
+      ) : showOriginalHome ? (
+        <OriginalDashboard
+          content={dashboardContent}
+          level={level}
+          subject={subject}
+          subjects={subjectOptions}
+          onSubjectChange={handleSubjectChange}
+          onResumeLesson={() => dashboardPath && navigate({ navigation: "paths", subjectId: dashboardPath.subjectId, pathId: dashboardPath.id })}
+          onOpenCourses={() => handleNavigate("paths")}
+          onOpenExercises={() => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "exercises" })}
+          onOpenHomeworks={canAccessHomeworks(user) ? () => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "homework" }) : undefined}
+          onOpenExams={canAccessBacExams(user) ? () => navigate({ navigation: "arena", subjectId: subject.id, arenaMode: "bac" }) : undefined}
+          onOpenResults={() => navigate({ navigation: "space", subjectId: subject.id, spaceSection: "results" })}
+          onOpenMessages={() => handleNavigate("messages")}
           onOpenSupport={() => window.location.assign("/soutenir")}
-          stats={platformStats}
-          dailyGoal={dashboardContent.dailyGoal}
+          onOpenSpace={() => handleNavigate("space")}
+          unreadMessages={unreadMessages}
+          syncIssue={dashboardSyncIssue}
+        />
+      ) : (
+        <Dashboard
+          userId={user.id}
+          visitKey={homeVisitKey}
+          content={dashboardContent}
+          onResumeLesson={() => dashboardPath && navigate({ navigation: "paths", subjectId: dashboardPath.subjectId, pathId: dashboardPath.id })}
+          onOpenCourses={() => handleNavigate("paths")}
+          onOpenSpace={() => handleNavigate("space")}
           syncIssue={dashboardSyncIssue}
         />
         )}
       </Suspense>
 
       {!isFocusedHomework && (
-        <MobileNavigation activeItem={activeNavigation} onNavigate={handleNavigate} canAccessAdmin={user.role === "admin"} unreadMessages={unreadMessages} />
+        <MobileNavigation activeItem={activeNavigation} onNavigate={handleNavigate} unreadMessages={unreadMessages} />
       )}
 
       {activeNavigation !== "admin" && !isFocusedHomework && (
@@ -721,12 +845,12 @@ function LearningAppShell({
           learnerName={profile.name}
           level={level}
           activeNavigation={activeNavigation}
-          currentLessonTitle={currentLesson?.title}
+          currentLessonTitle={activePath?.title}
           activeLessonTitle={activeLesson?.title}
           hasActivePath={Boolean(activePath)}
           celebrationKey={completedLessonIds.size}
           onNavigate={handleNavigate}
-          onResumeLesson={() => currentLesson && openPathLesson(currentLesson.id)}
+          onResumeLesson={openPathCourse}
           onAskHint={() => setOpenDialog("tutor")}
         />
       )}
@@ -740,39 +864,11 @@ function LearningAppShell({
         />
       )}
 
-      {activeLesson && activePath && activePath.presentation !== "continuous-course" && (
-        <Suspense fallback={<main className="admin-loading" role="status">Chargement de la leçon…</main>}>
-          <LessonWorkspace
-            key={activeLesson.id}
-            lesson={activeLesson}
-            path={activePath}
-            nextLesson={nextLesson}
-            currentProgress={progressByLesson[activeLesson.id]}
-            currentUser={{
-              id: user.id,
-              name: profile.name,
-              photoUrl: profile.photoUrl,
-              role: user.role,
-            }}
-            localOnly={localPreview}
-            onClose={() => navigate({
-              navigation: "paths",
-              subjectId: activePath.subjectId,
-              pathId: activePath.id,
-            }, { replace: true, scroll: false })}
-            onSubmitAttempt={submitLessonAttempt}
-            onOpenNext={openPathLesson}
-          />
-        </Suspense>
-      )}
       {openDialog === "tutor" && (
         <TutorPanel
           lessonTitle={activeLesson?.title ?? currentLesson?.title}
           onClose={() => setOpenDialog(null)}
         />
-      )}
-      {openDialog === "goal" && (
-        <DetailsDialog content={dashboardContent} onClose={() => setOpenDialog(null)} />
       )}
       {notice && <div className="toast" role="status">{notice}</div>}
     </div>

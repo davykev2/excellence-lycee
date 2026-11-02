@@ -2,6 +2,18 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import katex from "../apps/web/node_modules/katex/dist/katex.mjs";
 import ts from "../apps/api/node_modules/typescript/lib/typescript.js";
+import { loadGcdDocument } from "./load-gcd-document.mjs";
+
+function loadTypeScript(path, dependencies={}){
+ const source=readFileSync(new URL("../"+path,import.meta.url),"utf8");
+ const code=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
+ const mod={exports:{}};
+ new Function("exports","module","require",code)(mod.exports,mod,name=>{
+  if(Object.prototype.hasOwnProperty.call(dependencies,name))return dependencies[name];
+  throw new Error("Dépendance inattendue : "+name);
+ });
+ return mod.exports;
+}
 
 const source = readFileSync(
   new URL("../apps/web/src/data/terminalCLcmGcdPath.ts", import.meta.url),
@@ -15,7 +27,8 @@ const module = { exports: {} };
 new Function("exports", "module", "require", javaScript)(
   module.exports,
   module,
-  () => {
+  (name) => {
+    if(name==="./courseDocuments/terminalCGcdDocument")return loadGcdDocument(loadTypeScript);
     throw new Error("Dépendance inattendue pendant l’audit KaTeX.");
   },
 );

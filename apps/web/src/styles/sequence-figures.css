@@ -1,0 +1,10 @@
+.practice-sequence-figure .practice-figure-canvas { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+.practice-sequence-figure svg { display: block; width: 100%; min-width: 480px; height: auto; }
+.practice-sequence-figure svg text { font-family: inherit; font-size: 14px; fill: #32485d; }
+.practice-sequence-figure figcaption { font-size: 16px; line-height: 1.65; }
+.practice-sequence-figure .practice-plot-legend li::before { border-color: currentColor; }
+.practice-sequence-figure .sequence-function-line { fill: none; stroke: #17618a; stroke-width: 2.4; }
+.practice-sequence-figure .sequence-diagonal { stroke: #5f7183; stroke-width: 1.5; stroke-dasharray: 6 5; }
+.practice-sequence-figure .sequence-staircase { fill: none; stroke: #ae4d15; stroke-width: 1.7; }
+.practice-cobweb { max-width: 640px; }
+@media (max-width: 560px) { .practice-sequence-figure svg { min-width: 480px; } }

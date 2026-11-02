@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type {
   ArenaExerciseLevelDocument,
   ArenaExerciseLevelPayload,
@@ -14,36 +14,6 @@ interface ArenaExerciseFilters {
   lessonKey?: string;
 }
 
-function previewPublishedLevels(filters: ArenaExerciseFilters): PublishedArenaExerciseLevel[] {
-  if (!filters.lessonKey) return [];
-  const titles = ["Comprendre les bases", "Applications guidées", "Méthodes combinées", "Synthèse de la leçon"];
-  const instructions = [
-    "Applique directement les notions essentielles de la leçon.",
-    "Repère les informations utiles puis avance étape par étape.",
-    "Combine plusieurs propriétés pour construire ton raisonnement.",
-    "Mobilise toute la leçon dans des situations proches de l’examen.",
-  ];
-  const now = new Date().toISOString();
-  return titles.map((title, index) => ({
-    id: `arena-preview-level-${index + 1}`,
-    levelId: filters.levelId,
-    subjectId: filters.subjectId,
-    lessonKey: filters.lessonKey!,
-    lessonTitle: "Leçon sélectionnée",
-    difficulty: "easy",
-    stageNumber: index + 1,
-    title,
-    instructionsMarkdown: instructions[index],
-    exercises: [{
-      id: `arena-preview-exercise-${index + 1}`,
-      title: `Exercice ${index + 1}`,
-      statementMarkdown: "Résous cette situation en justifiant clairement chaque étape.",
-      correctionMarkdown: "La correction expliquée détaille ici la méthode attendue.",
-    }],
-    version: 1,
-    publishedAt: now,
-  }));
-}
 
 function previewDocument(payload: ArenaExerciseLevelPayload, id: string = crypto.randomUUID()): ArenaExerciseLevelDocument {
   return {
@@ -68,12 +38,14 @@ export function useArenaExercises({
 }) {
   const [publishedLevels, setPublishedLevels] = useState<PublishedArenaExerciseLevel[]>([]);
   const [editorLevels, setEditorLevels] = useState<ArenaExerciseLevelDocument[]>([]);
+  const editorLevelsRef = useRef<ArenaExerciseLevelDocument[]>([]);
   const [loading, setLoading] = useState(!localOnly);
   const [error, setError] = useState<string | null>(null);
+  const loadEpoch = useRef(0);
 
   const reload = useCallback(async () => {
+    const epoch = ++loadEpoch.current;
     if (localOnly) {
-      if (!canEdit) setPublishedLevels(previewPublishedLevels(filters));
       setLoading(false);
       setError(null);
       return;
@@ -89,19 +61,23 @@ export function useArenaExercises({
           ? apiRequest<{ levels: ArenaExerciseLevelDocument[] }>("/arena-exercises/editor")
           : Promise.resolve({ levels: [] as ArenaExerciseLevelDocument[] }),
       ]);
+      if (epoch !== loadEpoch.current) return;
       setPublishedLevels(publishedResponse.levels);
+      editorLevelsRef.current = editorResponse.levels;
       setEditorLevels(editorResponse.levels);
     } catch (reason) {
-      setError(reason instanceof Error ? reason.message : "La banque d’exercices n’a pas pu être chargée.");
+      if (epoch === loadEpoch.current) setError(reason instanceof Error ? reason.message : "La banque d’exercices n’a pas pu être chargée.");
     } finally {
-      setLoading(false);
+      if (epoch === loadEpoch.current) setLoading(false);
     }
   }, [canEdit, filters.lessonKey, filters.levelId, filters.subjectId, localOnly]);
 
-  useEffect(() => { void reload(); }, [reload]);
+  useEffect(() => { void reload(); return () => { loadEpoch.current++; }; }, [reload]);
 
   const upsertEditorLevel = (level: ArenaExerciseLevelDocument) => {
-    setEditorLevels((current) => [level, ...current.filter((item) => item.id !== level.id)]);
+    const editorDocuments = [level, ...editorLevelsRef.current.filter((item) => item.id !== level.id)];
+    editorLevelsRef.current = editorDocuments;
+    setEditorLevels(editorDocuments);
     if (level.status === "published") {
       setPublishedLevels((current) => [{
         id: level.id,
@@ -110,6 +86,9 @@ export function useArenaExercises({
         lessonKey: level.lessonKey,
         lessonTitle: level.lessonTitle,
         difficulty: level.difficulty,
+        category: level.category,
+        sourceSectionId: level.sourceSectionId,
+        courseTopicId: level.courseTopicId,
         stageNumber: level.stageNumber,
         title: level.title,
         instructionsMarkdown: level.instructionsMarkdown,
@@ -123,7 +102,7 @@ export function useArenaExercises({
 
   const save = async (payload: ArenaExerciseLevelPayload, documentId?: string, note?: string) => {
     if (localOnly) {
-      const existing = editorLevels.find((item) => item.id === documentId);
+      const existing = editorLevelsRef.current.find((item) => item.id === documentId);
       const level = previewDocument(payload, existing?.id);
       if (existing) {
         level.draftVersion = existing.draftVersion + 1;
@@ -142,7 +121,7 @@ export function useArenaExercises({
 
   const setStatus = async (documentId: string, status: ArenaExerciseStatus) => {
     if (localOnly) {
-      const existing = editorLevels.find((item) => item.id === documentId);
+      const existing = editorLevelsRef.current.find((item) => item.id === documentId);
       if (!existing) throw new Error("Enregistre d’abord le brouillon.");
       return upsertEditorLevel({
         ...existing,

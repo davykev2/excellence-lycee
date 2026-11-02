@@ -1,3 +1,4 @@
+import { terminalCStatisticsDocument } from "./courseDocuments/terminalCStatisticsDocument";
 import type {
   LearningLesson,
   LearningPath,
@@ -886,7 +887,9 @@ export const terminalCStatisticsPath: LearningPath = {
   levelIds: ["terminale-c"],
   curriculumLabel: "Programme ivoirien • Terminale C • Leçon officielle fidèlement structurée",
   curriculumSourceUrl: "https://dpfc-ci.net/",
-  theme: { number: 6, title: "Organisation et traitement des données" },
+  theme: { number: 6, title: "Analyse et probabilité" },
+  presentation: "continuous-course",
+  courseDocument: terminalCStatisticsDocument,
   chapterNumber: 19,
   title: "Statistique à deux variables",
   description:

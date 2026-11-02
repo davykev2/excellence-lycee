@@ -36,6 +36,24 @@ run(
     resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
     "--test",
     resolve(root, "tests", "arena-exercises-presentation.test.ts"),
+    resolve(root, "tests", "arena-exercises.test.ts"),
+    resolve(root, "tests", "arena-exercises-api.test.ts"),
+    resolve(root, "tests", "derivatives-exercises.test.ts"),
+    resolve(root, "tests", "primitives-exercises.test.ts"),
+    resolve(root, "tests", "logarithms-exercises.test.ts"),
+    resolve(root, "tests", "exponential-power-exercises.test.ts"),
+    resolve(root, "tests", "sequences-exercises.test.ts"),
+    resolve(root, "tests", "integral-exercises.test.ts"),
+    resolve(root, "tests", "differential-exercises.test.ts"),
+    resolve(root, "tests", "probability-exercises.test.ts"),
+    resolve(root, "tests", "statistics-exercises.test.ts"),
+    resolve(root, "tests", "barycenter-exercises.test.ts"),
+    resolve(root, "tests", "divisibility-exercises.test.ts"),
+    resolve(root, "tests", "space-exercises.test.ts"),
+    resolve(root, "tests", "conics-exercises.test.ts"),
+    resolve(root, "tests", "complex-exercises.test.ts"),
+    resolve(root, "tests", "complex-input.test.ts"),
+    resolve(root, "tests", "gcd-exercises.test.ts"),
   ],
 );
 run(
@@ -58,9 +76,178 @@ run(
   ],
 );
 run(
+  "Navigation simplifiée et historique des résultats",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    "--test",
+    resolve(root, "tests", "usability-navigation.test.ts"),
+    resolve(root, "tests", "home-action-cards.test.ts"),
+    resolve(root, "tests", "home-focused.test.ts"),
+    resolve(root, "tests", "home-original.test.ts"),
+    resolve(root, "tests", "home-historical.test.ts"),
+    resolve(root, "tests", "home-document.test.ts"),
+    resolve(root, "tests", "subject-library-homework-lock.test.ts"),
+    resolve(root, "tests", "training-illustrated.test.ts"),
+    resolve(root, "tests", "exam-collections.test.ts"),
+    resolve(root, "tests", "official-bac-library.test.ts"),
+    resolve(root, "tests", "math-library-essentials.test.ts"),
+    resolve(root, "tests", "analysis-reminder.test.ts"),
+    resolve(root, "tests", "math-shared-essentials.test.ts"),
+    resolve(root, "tests", "math-cd-sharing.test.ts"),
+    resolve(root, "tests", "physics-shared-essentials.test.ts"),
+    resolve(root, "tests", "physics-course-summary.test.ts"),
+    resolve(root, "tests", "humanities-course-summary.test.ts"),
+    resolve(root, "tests", "svt-shared-essentials.test.ts"),
+    resolve(root, "tests", "svt-course-summary.test.ts"),
+  ],
+);
+run(
+  "Ateliers de mémorisation · philo, français et accès",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    "--test",
+    resolve(root, "tests", "philo-memory.test.ts"),
+    resolve(root, "tests", "philo-memory-navigation.test.ts"),
+    resolve(root, "tests", "french-workshop.test.ts"),
+    resolve(root, "tests", "french-workshop-navigation.test.ts"),
+  ],
+);
+run(
+  "Cours documentaires · résumé et évaluation",
+  process.execPath,
+  [
+    resolve(api, "node_modules", "tsx", "dist", "cli.mjs"),
+    "--test",
+    resolve(root, "tests", "course-document.test.ts"),
+    resolve(root, "tests", "terminal-a-functions-document.test.ts"),
+    resolve(root, "tests", "terminal-a-probability-document.test.ts"),
+    resolve(root, "tests", "terminal-a-logarithm-document.test.ts"),
+    resolve(root, "tests", "terminal-a-exponential-document.test.ts"),
+    resolve(root, "tests", "derivatives-document.test.ts"),
+    resolve(root, "tests", "primitives-document.test.ts"),
+    resolve(root, "tests", "logarithms-document.test.ts"),
+    resolve(root, "tests", "exponential-power-document.test.ts"),
+    resolve(root, "tests", "sequences-document.test.ts"),
+    resolve(root, "tests", "integral-document.test.ts"),
+    resolve(root, "tests", "differential-document.test.ts"),
+    resolve(root, "tests", "probability-document.test.ts"),
+    resolve(root, "tests", "statistics-document.test.ts"),
+    resolve(root, "tests", "barycenter-document.test.ts"),
+    resolve(root, "tests", "divisibility-document.test.ts"),
+    resolve(root, "tests", "space-document.test.ts"),
+    resolve(root, "tests", "conics-document.test.ts"),
+    resolve(root, "tests", "complex-document.test.ts"),
+    resolve(root, "tests", "gcd-document.test.ts"),
+    resolve(root, "tests", "document-corrections.test.ts"),
+    resolve(root, "tests", "philosophy-course-documents.test.ts"),
+  ],
+);
+run(
+  "Cours documentaires · audit TC L1",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-c-limits-document.ts")],
+);
+run(
+  "Cours documentaires · fonctions Terminale A",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-a-functions-document.ts")],
+);
+run(
+  "Cours documentaires · probabilités Terminale A1/A2",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-a-probability-document.ts")],
+);
+run(
+  "Cours documentaires · logarithme Terminale A",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-a-logarithm-document.ts")],
+);
+run(
+  "Cours documentaires · exponentielle Terminale A",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-a-exponential-document.ts")],
+);
+run(
+  "Cours documentaires · audit nombres complexes TC",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-c-complex-document.ts")],
+);
+run(
+  "Cours documentaires · audit PPCM et PGCD TC",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-c-gcd-document.ts")],
+);
+run(
+  "Cours documentaires · audit dérivabilité TC",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-c-derivatives-document.ts")],
+);
+run(
+  "Cours documentaires · audit primitives TC",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-c-primitives-document.ts")],
+);
+run(
+  "Cours documentaires · audit logarithmes TC",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-c-logarithms-document.ts")],
+);
+run(
+  "Cours documentaires · audit exponentielles et puissances TC",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-c-exponential-power-document.ts")],
+);
+run(
+  "Cours documentaires · audit suites numériques TC",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-c-sequences-document.ts")],
+);
+run(
+  "Cours documentaires · audit calcul intégral TC",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-c-integral-document.ts")],
+);
+run(
+  "Cours documentaires · audit équations différentielles TC",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-c-differential-document.ts")],
+);
+run(
+  "Cours documentaires · audit probabilités TC",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-c-probability-document.ts")],
+);
+run(
+  "Cours documentaires · audit statistiques TC",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-c-statistics-document.ts")],
+);
+run(
   "Syntaxe du garde-fou Supabase",
   process.execPath,
   ["--check", resolve(root, "scripts", "push-supabase-migrations.mjs")],
+);
+run(
+  "Cours documentaires · audit barycentre TC Tome 2",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-c-barycenter-document.ts")],
+);
+run(
+  "Cours documentaires · audit divisibilité TC Tome 2",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-c-divisibility-document.ts")],
+);
+run(
+  "Cours documentaires · géométrie de l’espace TC",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-c-space-document.ts")],
+);
+run(
+  "Cours documentaires · audit coniques TC",
+  process.execPath,
+  [resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), resolve(root, "scripts", "audit-terminal-c-conics-document.ts")],
 );
 run(
   "Contenu · audit-terminal-history-h1-onu.ts",

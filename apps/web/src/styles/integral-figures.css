@@ -1,0 +1,13 @@
+.practice-integral-figure { margin: 1.2rem 0; min-width: 0; max-width: 100%; }
+.practice-integral-figure .practice-figure-canvas { overflow-x: auto; max-width: 100%; overscroll-behavior-x: contain; }
+.practice-integral-figure svg { display: block; width: 100%; min-width: 520px; height: auto; }
+.practice-integral-figure svg text { font-family: inherit; font-size: 14px; fill: #32485d; }
+.practice-integral-figure figcaption { font-size: 16px; line-height: 1.6; }
+.practice-integral-figure .practice-plot-legend li::before { border-color: currentColor; }
+.integral-lab { max-width: 100%; min-width: 0; }
+.integral-lab > label { display: block; font-size: 16px; margin-top: .8rem; }
+.integral-lab > input { width: 100%; min-height: 44px; accent-color: #218665; }
+.integral-lab > select { font: inherit; padding: .7rem; max-width: 100%; background: #fff; border: 1px solid #b8c6cd; border-radius: 8px; }
+.integral-values { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .7rem; font-size: 16px; }
+.integral-values > div { padding: .7rem; background: #eff8f5; border-radius: 9px; min-width: 0; }
+.integral-values dt { font-weight: 600; }.integral-values dd { margin: .3rem 0 0; overflow-wrap: anywhere; }

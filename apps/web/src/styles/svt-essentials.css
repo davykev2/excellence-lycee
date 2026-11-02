@@ -1,0 +1,27 @@
+.svt-course-document .physics-course-assessment { max-width: 1020px; margin: 0 auto; }
+.svt-course-document .physics-assessment-section { min-width: 0; margin-top: 28px; }
+.svt-course-document .physics-assessment-section > .course-reader-section-head { padding-bottom: 20px; }
+.svt-course-document .document-correction-panel .lesson-rich-content,
+.svt-course-document .document-correction-panel .lesson-table-scroll table,
+.svt-course-document .course-reader-rich-content .lesson-rich-content,
+.svt-course-document .course-reader-rich-content .lesson-table-scroll table,
+.svt-course-document .course-reader-answer { font-size: 16px; line-height: 1.85; }
+.svt-course-document .math-formula.is-inline { max-width: calc(100% - .16em); overflow-x: auto; overflow-y: hidden; vertical-align: middle; }
+.svt-course-document .lesson-table-scroll .math-formula.is-inline { max-width: none; overflow: visible; }
+.biology-essential-figure svg { width: 600px; min-width: 600px; max-width: none; }
+.biology-essential-figure.is-compact svg { width: 300px; min-width: 300px; margin: 0 auto; }
+.biology-essential-figure svg text { font-size: 16px; }
+.biology-essential-figure svg text[fill="white"] { fill: #fff; }
+.biology-essential-figure svg text[fill="#245abd"] { fill: #245abd; }
+.biology-essential-figure svg text[fill="#087d69"] { fill: #087d69; }
+.biology-essential-figure svg text[fill="#8d3ba6"] { fill: #8d3ba6; }
+.biology-essential-figure svg text[fill="#ad3e41"] { fill: #ad3e41; }
+.biology-essential-figure figcaption > strong { display: block; margin-bottom: 12px; }
+.biology-essential-figure figcaption > p { margin-bottom: 0; }
+.biology-parent-options { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 12px; }
+.biology-parent-options label { display: grid; gap: 6px; }
+.biology-parent-options select { min-height: 44px; padding: 8px 12px; border: 1px solid #bcd2d4; border-radius: 8px; font: inherit; background: white; color: #164d58; }
+@media (max-width: 600px) {
+  .svt-course-document .legacy-course-tabs > button { font-size: 12px; }
+  .svt-course-document .physics-assessment-section { padding: 17px; }
+}

@@ -1,0 +1,12 @@
+.app-shell { --mobile-header-offset: 0px; }
+.app-shell[data-page="home"] { --mobile-header-offset: 72px; }
+.app-shell:not([data-page="home"]) .sidebar-nav { margin-top: 0; }
+.document-summary-end { display: flex; justify-content: flex-end; }
+.bac-library-hero, .homework-library-hero { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+@media (max-width: 920px) {
+  .app-shell .messages-page { inset: var(--mobile-header-offset) 0 auto; height: calc(100dvh - var(--mobile-header-offset)); }
+  .app-shell .document-tabs, .app-shell .content-studio-view-toggle { top: var(--mobile-header-offset); }
+  .app-shell .document-heading { scroll-margin-top: 12px; }
+  .app-shell :is(.document-topic, .document-score, .document-evaluation, .document-example-parts > li, .document-evaluation-example) { scroll-margin-top: 93px; }
+  .app-shell .homework-exercise-navigation { top: calc(var(--mobile-header-offset) + 4px); }
+}

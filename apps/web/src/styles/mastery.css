@@ -571,7 +571,7 @@
 .diagram-focus p { color: var(--ink-muted); font-size: 13px; line-height: 1.55; }
 .mastery-curve-lab { display: grid; gap: 11px; padding: 18px; border-radius: 17px; background: #f4f6f7; }
 .mastery-curve-lab > strong { color: var(--navy-950); font-size: 17px; }
-.mastery-curve-lab svg { width: 100%; height: auto; border: 1px solid #e2e8ec; border-radius: 14px; background: #fff; }
+.mastery-curve-lab > svg { width: 100%; height: auto; border: 1px solid #e2e8ec; border-radius: 14px; background: #fff; }
 .mastery-curve-lab > label { color: var(--subject-accent); font-size: 11px; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
 .mastery-curve-lab > span { width: fit-content; padding: 9px 16px; border-radius: 12px; background: var(--subject-accent); color: #fff; font-size: 14px; font-weight: 900; }
 .mastery-curve-lab > span.is-undefined { background: var(--orange-600); }

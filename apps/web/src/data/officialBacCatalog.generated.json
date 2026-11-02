@@ -1,0 +1,2076 @@
+[
+  {
+    "id": "2025-allemand-lv1",
+    "year": 2025,
+    "subject": "Allemand · LV1",
+    "series": "A1 et A2",
+    "levelIds": [
+      "terminale-a"
+    ],
+    "sourceName": "LV1_ALLEMAND_SERIE_A12.pdf",
+    "pageCount": 6,
+    "sha256": "fcc4e746da2427159a5631609bd54245eaea80f63671f5b1a6f093cb529b8a55",
+    "pdfBytes": 2843771,
+    "pdfUrl": "/exams/official-bac/2025/2025-allemand-lv1/document.pdf",
+    "coverUrl": "/exams/official-bac/2025/2025-allemand-lv1/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2025/2025-allemand-lv1/page-001.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-allemand-lv1/page-002.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-allemand-lv1/page-003.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-allemand-lv1/page-004.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-allemand-lv1/page-005.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-allemand-lv1/page-006.webp",
+        "width": 1800,
+        "height": 2546
+      }
+    ]
+  },
+  {
+    "id": "2025-anglais-lv1",
+    "year": 2025,
+    "subject": "Anglais · LV1",
+    "series": "A1 et A2",
+    "levelIds": [
+      "terminale-a"
+    ],
+    "sourceName": "BAC_2025_Cote_dIvoire_SUJET_BAREME_LV1_ANGLAIS_SERIE_A12_.pdf",
+    "pageCount": 10,
+    "sha256": "9e0dd8f43c72834e56fb557ee6750ae6045dd768933fdebd43881fe9f34e7833",
+    "pdfBytes": 4312131,
+    "pdfUrl": "/exams/official-bac/2025/2025-anglais-lv1/document.pdf",
+    "coverUrl": "/exams/official-bac/2025/2025-anglais-lv1/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv1/page-001.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv1/page-002.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv1/page-003.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv1/page-004.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv1/page-005.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv1/page-006.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv1/page-007.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv1/page-008.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv1/page-009.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv1/page-010.webp",
+        "width": 1800,
+        "height": 2546
+      }
+    ]
+  },
+  {
+    "id": "2025-anglais-lv2",
+    "year": 2025,
+    "subject": "Anglais · LV2",
+    "series": "A2",
+    "levelIds": [
+      "terminale-a"
+    ],
+    "sourceName": "BAC_2025_Cote_dIvoire_SUJET_BAREME_LV2_ANGLAIS_SERIE_A2.pdf",
+    "pageCount": 8,
+    "sha256": "4eb528caa4d0280142ddb36bb3e40168f2f3b4a60203eb75b8e2a754da994414",
+    "pdfBytes": 3649333,
+    "pdfUrl": "/exams/official-bac/2025/2025-anglais-lv2/document.pdf",
+    "coverUrl": "/exams/official-bac/2025/2025-anglais-lv2/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv2/page-001.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv2/page-002.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv2/page-003.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv2/page-004.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv2/page-005.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv2/page-006.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv2/page-007.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-anglais-lv2/page-008.webp",
+        "width": 1800,
+        "height": 2546
+      }
+    ]
+  },
+  {
+    "id": "2025-arts-plastiques",
+    "year": 2025,
+    "subject": "Arts plastiques",
+    "series": "A, C et D",
+    "levelIds": [
+      "terminale-a",
+      "terminale-c",
+      "terminale-d"
+    ],
+    "sourceName": "ARTS-PLASTIQUES.pdf",
+    "pageCount": 4,
+    "sha256": "8f1772f9ad64aca2d5b14a84be2d3e413f886772cbb51339a61a0e2932ae20ab",
+    "pdfBytes": 1879216,
+    "pdfUrl": "/exams/official-bac/2025/2025-arts-plastiques/document.pdf",
+    "coverUrl": "/exams/official-bac/2025/2025-arts-plastiques/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2025/2025-arts-plastiques/page-001.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-arts-plastiques/page-002.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-arts-plastiques/page-003.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-arts-plastiques/page-004.webp",
+        "width": 1800,
+        "height": 2546
+      }
+    ]
+  },
+  {
+    "id": "2025-espagnol-lv2",
+    "year": 2025,
+    "subject": "Espagnol · LV2",
+    "series": "A2",
+    "levelIds": [
+      "terminale-a"
+    ],
+    "sourceName": "BAC_2025_Cote_dIvoire_SUJET_BAREME_LV2_ESPAGNOL_SERIE_A2_t.pdf",
+    "pageCount": 9,
+    "sha256": "1b0a760bb5bafedaea16e759da3a65ce9996440bae288f6ff06b50a9f9dae504",
+    "pdfBytes": 4070263,
+    "pdfUrl": "/exams/official-bac/2025/2025-espagnol-lv2/document.pdf",
+    "coverUrl": "/exams/official-bac/2025/2025-espagnol-lv2/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2025/2025-espagnol-lv2/page-001.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-espagnol-lv2/page-002.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-espagnol-lv2/page-003.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-espagnol-lv2/page-004.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-espagnol-lv2/page-005.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-espagnol-lv2/page-006.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-espagnol-lv2/page-007.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-espagnol-lv2/page-008.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-espagnol-lv2/page-009.webp",
+        "width": 1800,
+        "height": 2546
+      }
+    ]
+  },
+  {
+    "id": "2025-francais",
+    "year": 2025,
+    "subject": "Français",
+    "series": "A, C et D",
+    "levelIds": [
+      "terminale-a",
+      "terminale-c",
+      "terminale-d"
+    ],
+    "sourceName": "Francais_RESUME_DE_TEXTE_ TOUTE-SERIE.pdf",
+    "pageCount": 8,
+    "sha256": "598b9bd1b35cf2a43dfe29182d5ce4748a0a1aa6d1348fb11bd66671de6ac480",
+    "pdfBytes": 3096216,
+    "pdfUrl": "/exams/official-bac/2025/2025-francais/document.pdf",
+    "coverUrl": "/exams/official-bac/2025/2025-francais/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2025/2025-francais/page-001.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-francais/page-002.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-francais/page-003.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-francais/page-004.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-francais/page-005.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-francais/page-006.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-francais/page-007.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-francais/page-008.webp",
+        "width": 1800,
+        "height": 2548
+      }
+    ]
+  },
+  {
+    "id": "2025-histoire-geographie",
+    "year": 2025,
+    "subject": "Histoire-Géographie",
+    "series": "A, C et D",
+    "levelIds": [
+      "terminale-a",
+      "terminale-c",
+      "terminale-d"
+    ],
+    "sourceName": "HISTOIRE_GEOGRAPHIE_SERIE_ABCD.pdf",
+    "pageCount": 13,
+    "sha256": "82f96a91ad19c107b3e4dba1df3f1dfbabc660306391fbbd908752f60181c336",
+    "pdfBytes": 5691950,
+    "pdfUrl": "/exams/official-bac/2025/2025-histoire-geographie/document.pdf",
+    "coverUrl": "/exams/official-bac/2025/2025-histoire-geographie/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2025/2025-histoire-geographie/page-001.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-histoire-geographie/page-002.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-histoire-geographie/page-003.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-histoire-geographie/page-004.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-histoire-geographie/page-005.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-histoire-geographie/page-006.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-histoire-geographie/page-007.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-histoire-geographie/page-008.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-histoire-geographie/page-009.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-histoire-geographie/page-010.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-histoire-geographie/page-011.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-histoire-geographie/page-012.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-histoire-geographie/page-013.webp",
+        "width": 1800,
+        "height": 2546
+      }
+    ]
+  },
+  {
+    "id": "2025-mathematiques-a1",
+    "year": 2025,
+    "subject": "Mathématiques",
+    "series": "A1",
+    "levelIds": [
+      "terminale-a"
+    ],
+    "sourceName": "BAC_2025_Cote_dIvoire_SUJET_BAREME_MATHEMATIQUES_SERIE_A1_Copie.pdf",
+    "pageCount": 12,
+    "sha256": "7c9f95b32903ff137f6a6fd5b23b1da387b59f4afef2104f860d268a787da7aa",
+    "pdfBytes": 5818810,
+    "pdfUrl": "/exams/official-bac/2025/2025-mathematiques-a1/document.pdf",
+    "coverUrl": "/exams/official-bac/2025/2025-mathematiques-a1/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a1/page-001.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a1/page-002.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a1/page-003.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a1/page-004.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a1/page-005.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a1/page-006.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a1/page-007.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a1/page-008.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a1/page-009.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a1/page-010.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a1/page-011.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a1/page-012.webp",
+        "width": 1800,
+        "height": 2548
+      }
+    ]
+  },
+  {
+    "id": "2025-mathematiques-a2",
+    "year": 2025,
+    "subject": "Mathématiques",
+    "series": "A2",
+    "levelIds": [
+      "terminale-a"
+    ],
+    "sourceName": "BAC_2025_Cote_dIvoire_SUJET_BAREME_MATHEMATIQUES_SERIE_A2H.pdf",
+    "pageCount": 8,
+    "sha256": "4e497578e8fd72412348867a04847c14be95b7f8f0feac88d7a202d4c2b20bda",
+    "pdfBytes": 3912080,
+    "pdfUrl": "/exams/official-bac/2025/2025-mathematiques-a2/document.pdf",
+    "coverUrl": "/exams/official-bac/2025/2025-mathematiques-a2/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a2/page-001.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a2/page-002.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a2/page-003.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a2/page-004.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a2/page-005.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a2/page-006.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a2/page-007.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-a2/page-008.webp",
+        "width": 1800,
+        "height": 2546
+      }
+    ]
+  },
+  {
+    "id": "2025-mathematiques-c",
+    "year": 2025,
+    "subject": "Mathématiques",
+    "series": "C",
+    "levelIds": [
+      "terminale-c"
+    ],
+    "sourceName": "BAC_2025_Cote_dIvoire_SUJET_BAREME_MATHEMATIQUES_SERIE_C_.pdf",
+    "pageCount": 13,
+    "sha256": "9116c19482d183feafd448c8bc4994d0009417fd3c248c2a276d9487fa5d2679",
+    "pdfBytes": 6073265,
+    "pdfUrl": "/exams/official-bac/2025/2025-mathematiques-c/document.pdf",
+    "coverUrl": "/exams/official-bac/2025/2025-mathematiques-c/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-c/page-001.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-c/page-002.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-c/page-003.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-c/page-004.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-c/page-005.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-c/page-006.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-c/page-007.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-c/page-008.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-c/page-009.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-c/page-010.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-c/page-011.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-c/page-012.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-c/page-013.webp",
+        "width": 1800,
+        "height": 2546
+      }
+    ]
+  },
+  {
+    "id": "2025-mathematiques-d",
+    "year": 2025,
+    "subject": "Mathématiques",
+    "series": "D",
+    "levelIds": [
+      "terminale-d"
+    ],
+    "sourceName": "BAC_2025_Cote_dIvoire_SUJET_BAREME_MATHEMATIQUES_SERIE_D_.pdf",
+    "pageCount": 11,
+    "sha256": "d841a29d9368c76b4a0fbba0256ad7d2179bb1aeff6c59a200dccaf922b55f3b",
+    "pdfBytes": 4730584,
+    "pdfUrl": "/exams/official-bac/2025/2025-mathematiques-d/document.pdf",
+    "coverUrl": "/exams/official-bac/2025/2025-mathematiques-d/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-d/page-001.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-d/page-002.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-d/page-003.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-d/page-004.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-d/page-005.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-d/page-006.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-d/page-007.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-d/page-008.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-d/page-009.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-d/page-010.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-mathematiques-d/page-011.webp",
+        "width": 1800,
+        "height": 2546
+      }
+    ]
+  },
+  {
+    "id": "2025-philosophie-a",
+    "year": 2025,
+    "subject": "Philosophie",
+    "series": "A1 et A2",
+    "levelIds": [
+      "terminale-a"
+    ],
+    "sourceName": "BAC_2025_Cote_dIvoire_SUJET_BAREME_PHILOSOPHIE_SERIE_A12.pdf",
+    "pageCount": 9,
+    "sha256": "809b73a5a175944ce8ab89eb41bce2d8820d108663c56433c5f1379adfef9f7e",
+    "pdfBytes": 3822272,
+    "pdfUrl": "/exams/official-bac/2025/2025-philosophie-a/document.pdf",
+    "coverUrl": "/exams/official-bac/2025/2025-philosophie-a/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-a/page-001.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-a/page-002.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-a/page-003.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-a/page-004.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-a/page-005.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-a/page-006.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-a/page-007.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-a/page-008.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-a/page-009.webp",
+        "width": 1800,
+        "height": 2546
+      }
+    ]
+  },
+  {
+    "id": "2025-philosophie-cd",
+    "year": 2025,
+    "subject": "Philosophie",
+    "series": "C et D",
+    "levelIds": [
+      "terminale-c",
+      "terminale-d"
+    ],
+    "sourceName": "BAC_2025_Cote_dIvoire_SUJET_BAREME_PHILOSOPHIE_SERIE_CDE.pdf",
+    "pageCount": 9,
+    "sha256": "6785d2e484470786cb78ac33fec2e68eb6a7e0a0ba9e870814798c212f708a90",
+    "pdfBytes": 4142794,
+    "pdfUrl": "/exams/official-bac/2025/2025-philosophie-cd/document.pdf",
+    "coverUrl": "/exams/official-bac/2025/2025-philosophie-cd/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-cd/page-001.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-cd/page-002.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-cd/page-003.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-cd/page-004.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-cd/page-005.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-cd/page-006.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-cd/page-007.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-cd/page-008.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-philosophie-cd/page-009.webp",
+        "width": 1800,
+        "height": 2546
+      }
+    ]
+  },
+  {
+    "id": "2025-physique-chimie-c",
+    "year": 2025,
+    "subject": "Physique-Chimie",
+    "series": "C",
+    "levelIds": [
+      "terminale-c"
+    ],
+    "sourceName": "BAC_2025_Cote_dIvoire_SUJET_BAREME_PHYSIQUE_CHIMIE_SERIE_CE.pdf",
+    "pageCount": 14,
+    "sha256": "b0b0750e06f93cb7d5d8c7edf6dafd8565e8b0bdc7b5b43e5bdd4965f0197afc",
+    "pdfBytes": 5384494,
+    "pdfUrl": "/exams/official-bac/2025/2025-physique-chimie-c/document.pdf",
+    "coverUrl": "/exams/official-bac/2025/2025-physique-chimie-c/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-c/page-001.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-c/page-002.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-c/page-003.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-c/page-004.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-c/page-005.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-c/page-006.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-c/page-007.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-c/page-008.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-c/page-009.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-c/page-010.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-c/page-011.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-c/page-012.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-c/page-013.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-c/page-014.webp",
+        "width": 1800,
+        "height": 2546
+      }
+    ]
+  },
+  {
+    "id": "2025-physique-chimie-d",
+    "year": 2025,
+    "subject": "Physique-Chimie",
+    "series": "D",
+    "levelIds": [
+      "terminale-d"
+    ],
+    "sourceName": "BAC_2025_Cote_dIvoire_SUJET_BAREME_PHYSIQUE_CHIMIE_SERIE_D_.pdf",
+    "pageCount": 12,
+    "sha256": "9806b1d0529a285a08f2e30747175c82d6cfeae43bb5fb1b5376b5fb2cdda22d",
+    "pdfBytes": 4989694,
+    "pdfUrl": "/exams/official-bac/2025/2025-physique-chimie-d/document.pdf",
+    "coverUrl": "/exams/official-bac/2025/2025-physique-chimie-d/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-d/page-001.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-d/page-002.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-d/page-003.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-d/page-004.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-d/page-005.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-d/page-006.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-d/page-007.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-d/page-008.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-d/page-009.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-d/page-010.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-d/page-011.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-physique-chimie-d/page-012.webp",
+        "width": 1800,
+        "height": 2546
+      }
+    ]
+  },
+  {
+    "id": "2025-svt-c",
+    "year": 2025,
+    "subject": "SVT",
+    "series": "C",
+    "levelIds": [
+      "terminale-c"
+    ],
+    "sourceName": "BAC-2025-Cote-dIvoire-SUJET-BAREME-SVT-SERIE-C.pdf",
+    "pageCount": 10,
+    "sha256": "987f75aa786a364293c39c3604170a90c60e2c03e4d44b2c027b6d37a1965719",
+    "pdfBytes": 4322057,
+    "pdfUrl": "/exams/official-bac/2025/2025-svt-c/document.pdf",
+    "coverUrl": "/exams/official-bac/2025/2025-svt-c/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2025/2025-svt-c/page-001.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-svt-c/page-002.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-svt-c/page-003.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-svt-c/page-004.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-svt-c/page-005.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-svt-c/page-006.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-svt-c/page-007.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-svt-c/page-008.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-svt-c/page-009.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-svt-c/page-010.webp",
+        "width": 1800,
+        "height": 2546
+      }
+    ]
+  },
+  {
+    "id": "2025-svt-d",
+    "year": 2025,
+    "subject": "SVT",
+    "series": "D",
+    "levelIds": [
+      "terminale-d"
+    ],
+    "sourceName": "BAC-2025-Cote-dIvoire-SUJET-BAREME-SVT-SERIE-D-.pdf",
+    "pageCount": 8,
+    "sha256": "30dfdaeb5b9754d3f78a09ff083a822c71cbf60e4c01b8aaf8f7a8e397e7135e",
+    "pdfBytes": 3455536,
+    "pdfUrl": "/exams/official-bac/2025/2025-svt-d/document.pdf",
+    "coverUrl": "/exams/official-bac/2025/2025-svt-d/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2025/2025-svt-d/page-001.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-svt-d/page-002.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-svt-d/page-003.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-svt-d/page-004.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-svt-d/page-005.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-svt-d/page-006.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-svt-d/page-007.webp",
+        "width": 1800,
+        "height": 2546
+      },
+      {
+        "url": "/exams/official-bac/2025/2025-svt-d/page-008.webp",
+        "width": 1800,
+        "height": 2546
+      }
+    ]
+  },
+  {
+    "id": "2026-allemand-lv2",
+    "year": 2026,
+    "subject": "Allemand · LV2",
+    "series": "A2",
+    "levelIds": [
+      "terminale-a"
+    ],
+    "sourceName": "allemand-lv2-terminale-a2-suj.pdf",
+    "pageCount": 2,
+    "sha256": "153ad046faa69a0fee74f543ba4d5c66e7165c5deb74b659ea0c24a5cec45642",
+    "pdfBytes": 1314619,
+    "pdfUrl": "/exams/official-bac/2026/2026-allemand-lv2/document.pdf",
+    "coverUrl": "/exams/official-bac/2026/2026-allemand-lv2/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2026/2026-allemand-lv2/page-001.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-allemand-lv2/page-002.webp",
+        "width": 1800,
+        "height": 2548
+      }
+    ]
+  },
+  {
+    "id": "2026-espagnol-lv1",
+    "year": 2026,
+    "subject": "Espagnol · LV1",
+    "series": "A1 et A2",
+    "levelIds": [
+      "terminale-a"
+    ],
+    "sourceName": "espagnol-lv1-terminales-a1-a2-sujet-corrige.pdf",
+    "pageCount": 6,
+    "sha256": "fbc837a896899d264e37380dcab5ae083a73c91c29f3f611a6c1d565f7ddb091",
+    "pdfBytes": 4203436,
+    "pdfUrl": "/exams/official-bac/2026/2026-espagnol-lv1/document.pdf",
+    "coverUrl": "/exams/official-bac/2026/2026-espagnol-lv1/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2026/2026-espagnol-lv1/page-001.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-espagnol-lv1/page-002.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-espagnol-lv1/page-003.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-espagnol-lv1/page-004.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-espagnol-lv1/page-005.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-espagnol-lv1/page-006.webp",
+        "width": 1800,
+        "height": 2548
+      }
+    ]
+  },
+  {
+    "id": "2026-francais",
+    "year": 2026,
+    "subject": "Français",
+    "series": "A, C et D",
+    "levelIds": [
+      "terminale-a",
+      "terminale-c",
+      "terminale-d"
+    ],
+    "sourceName": "francais-terminales-a-b-c-d-e.pdf",
+    "pageCount": 19,
+    "sha256": "f7199b7c4ada9a1ca294b49e9f1ec391c6b586877d615dba841f1e9c56ded71f",
+    "pdfBytes": 6932882,
+    "pdfUrl": "/exams/official-bac/2026/2026-francais/document.pdf",
+    "coverUrl": "/exams/official-bac/2026/2026-francais/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-001.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-002.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-003.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-004.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-005.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-006.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-007.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-008.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-009.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-010.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-011.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-012.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-013.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-014.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-015.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-016.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-017.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-018.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-francais/page-019.webp",
+        "width": 1800,
+        "height": 2548
+      }
+    ]
+  },
+  {
+    "id": "2026-histoire-geographie",
+    "year": 2026,
+    "subject": "Histoire-Géographie",
+    "series": "A, C et D",
+    "levelIds": [
+      "terminale-a",
+      "terminale-c",
+      "terminale-d"
+    ],
+    "sourceName": "histoire-geographie-terminale.pdf",
+    "pageCount": 16,
+    "sha256": "41e2daf49dc8eb8e45f016bb3f7e495ae8ed02933563430ce9fcf65c371433ba",
+    "pdfBytes": 6376834,
+    "pdfUrl": "/exams/official-bac/2026/2026-histoire-geographie/document.pdf",
+    "coverUrl": "/exams/official-bac/2026/2026-histoire-geographie/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2026/2026-histoire-geographie/page-001.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-histoire-geographie/page-002.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-histoire-geographie/page-003.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-histoire-geographie/page-004.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-histoire-geographie/page-005.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-histoire-geographie/page-006.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-histoire-geographie/page-007.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-histoire-geographie/page-008.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-histoire-geographie/page-009.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-histoire-geographie/page-010.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-histoire-geographie/page-011.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-histoire-geographie/page-012.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-histoire-geographie/page-013.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-histoire-geographie/page-014.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-histoire-geographie/page-015.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-histoire-geographie/page-016.webp",
+        "width": 1800,
+        "height": 2548
+      }
+    ]
+  },
+  {
+    "id": "2026-mathematiques-a1",
+    "year": 2026,
+    "subject": "Mathématiques",
+    "series": "A1",
+    "levelIds": [
+      "terminale-a"
+    ],
+    "sourceName": "mathematiques-terminale-a1-sujet-corrige.pdf",
+    "pageCount": 7,
+    "sha256": "69980d336c17e56ffdc604587931b8242ed818fce9926251883fc83a91670074",
+    "pdfBytes": 4581311,
+    "pdfUrl": "/exams/official-bac/2026/2026-mathematiques-a1/document.pdf",
+    "coverUrl": "/exams/official-bac/2026/2026-mathematiques-a1/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-a1/page-001.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-a1/page-002.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-a1/page-003.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-a1/page-004.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-a1/page-005.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-a1/page-006.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-a1/page-007.webp",
+        "width": 1800,
+        "height": 2548
+      }
+    ]
+  },
+  {
+    "id": "2026-mathematiques-a2",
+    "year": 2026,
+    "subject": "Mathématiques",
+    "series": "A2",
+    "levelIds": [
+      "terminale-a"
+    ],
+    "sourceName": "mathematiques-terminales-a2-h.pdf",
+    "pageCount": 5,
+    "sha256": "742597af72dd919f83a9faa3aa03c387a9e941cfcacca64a7ad7012115eb72cd",
+    "pdfBytes": 2933085,
+    "pdfUrl": "/exams/official-bac/2026/2026-mathematiques-a2/document.pdf",
+    "coverUrl": "/exams/official-bac/2026/2026-mathematiques-a2/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-a2/page-001.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-a2/page-002.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-a2/page-003.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-a2/page-004.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-a2/page-005.webp",
+        "width": 1800,
+        "height": 2548
+      }
+    ]
+  },
+  {
+    "id": "2026-mathematiques-c",
+    "year": 2026,
+    "subject": "Mathématiques",
+    "series": "C",
+    "levelIds": [
+      "terminale-c"
+    ],
+    "sourceName": "mathematiques-terminale-c-suj.pdf",
+    "pageCount": 13,
+    "sha256": "ba490e8a3e53d10b285ee8d1204e71849df62dd6b00b2c50ffb5e0c20c9bb9a6",
+    "pdfBytes": 6779327,
+    "pdfUrl": "/exams/official-bac/2026/2026-mathematiques-c/document.pdf",
+    "coverUrl": "/exams/official-bac/2026/2026-mathematiques-c/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-c/page-001.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-c/page-002.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-c/page-003.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-c/page-004.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-c/page-005.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-c/page-006.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-c/page-007.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-c/page-008.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-c/page-009.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-c/page-010.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-c/page-011.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-c/page-012.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-c/page-013.webp",
+        "width": 1800,
+        "height": 2548
+      }
+    ]
+  },
+  {
+    "id": "2026-mathematiques-d",
+    "year": 2026,
+    "subject": "Mathématiques",
+    "series": "D",
+    "levelIds": [
+      "terminale-d"
+    ],
+    "sourceName": "mathematiques-terminale-d-sujet-corrige.pdf",
+    "pageCount": 10,
+    "sha256": "9a4c17a92e54d039c3dfb86756b5e238f915c0a7e2085f727a031e7eabc23843",
+    "pdfBytes": 4388194,
+    "pdfUrl": "/exams/official-bac/2026/2026-mathematiques-d/document.pdf",
+    "coverUrl": "/exams/official-bac/2026/2026-mathematiques-d/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-d/page-001.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-d/page-002.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-d/page-003.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-d/page-004.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-d/page-005.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-d/page-006.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-d/page-007.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-d/page-008.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-d/page-009.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-mathematiques-d/page-010.webp",
+        "width": 1800,
+        "height": 2548
+      }
+    ]
+  },
+  {
+    "id": "2026-philosophie-a",
+    "year": 2026,
+    "subject": "Philosophie",
+    "series": "A1 et A2",
+    "levelIds": [
+      "terminale-a"
+    ],
+    "sourceName": "philosophie-terminales-a1-a2-sujet-corrige.pdf",
+    "pageCount": 10,
+    "sha256": "fbe0fbab57d40dff6fc717c6bd1bc704f7d2996b3f220c90855c36a98f2369c3",
+    "pdfBytes": 4450117,
+    "pdfUrl": "/exams/official-bac/2026/2026-philosophie-a/document.pdf",
+    "coverUrl": "/exams/official-bac/2026/2026-philosophie-a/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-a/page-001.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-a/page-002.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-a/page-003.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-a/page-004.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-a/page-005.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-a/page-006.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-a/page-007.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-a/page-008.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-a/page-009.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-a/page-010.webp",
+        "width": 1800,
+        "height": 2548
+      }
+    ]
+  },
+  {
+    "id": "2026-philosophie-cd",
+    "year": 2026,
+    "subject": "Philosophie",
+    "series": "C et D",
+    "levelIds": [
+      "terminale-c",
+      "terminale-d"
+    ],
+    "sourceName": "philosophie-terminales-c-d-e-sujet-corrige.pdf",
+    "pageCount": 11,
+    "sha256": "d7d6cf445138379c0111af03fa0411e14c4a2c8302ec39268d0ec2e4f04a1c50",
+    "pdfBytes": 2740735,
+    "pdfUrl": "/exams/official-bac/2026/2026-philosophie-cd/document.pdf",
+    "coverUrl": "/exams/official-bac/2026/2026-philosophie-cd/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-cd/page-001.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-cd/page-002.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-cd/page-003.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-cd/page-004.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-cd/page-005.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-cd/page-006.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-cd/page-007.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-cd/page-008.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-cd/page-009.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-cd/page-010.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-philosophie-cd/page-011.webp",
+        "width": 1800,
+        "height": 2548
+      }
+    ]
+  },
+  {
+    "id": "2026-physique-chimie-c",
+    "year": 2026,
+    "subject": "Physique-Chimie",
+    "series": "C",
+    "levelIds": [
+      "terminale-c"
+    ],
+    "sourceName": "physique-chimie-terminales-c-.pdf",
+    "pageCount": 12,
+    "sha256": "007bd863c83f20d724e163c76d495fa47dad24a060e3d9db4326747ee9f96738",
+    "pdfBytes": 8054272,
+    "pdfUrl": "/exams/official-bac/2026/2026-physique-chimie-c/document.pdf",
+    "coverUrl": "/exams/official-bac/2026/2026-physique-chimie-c/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-c/page-001.webp",
+        "width": 1800,
+        "height": 2545
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-c/page-002.webp",
+        "width": 1800,
+        "height": 2545
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-c/page-003.webp",
+        "width": 1800,
+        "height": 2545
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-c/page-004.webp",
+        "width": 1800,
+        "height": 2545
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-c/page-005.webp",
+        "width": 1800,
+        "height": 2545
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-c/page-006.webp",
+        "width": 1800,
+        "height": 2545
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-c/page-007.webp",
+        "width": 1800,
+        "height": 2545
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-c/page-008.webp",
+        "width": 1800,
+        "height": 2545
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-c/page-009.webp",
+        "width": 1800,
+        "height": 2545
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-c/page-010.webp",
+        "width": 1800,
+        "height": 2545
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-c/page-011.webp",
+        "width": 1800,
+        "height": 2545
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-c/page-012.webp",
+        "width": 1800,
+        "height": 2545
+      }
+    ]
+  },
+  {
+    "id": "2026-physique-chimie-d",
+    "year": 2026,
+    "subject": "Physique-Chimie",
+    "series": "D",
+    "levelIds": [
+      "terminale-d"
+    ],
+    "sourceName": "physique-chimie-terminale-d-sujet-corrige.pdf",
+    "pageCount": 13,
+    "sha256": "f50a97dfe2e1a0b72e8a55efed0f7cdce9ed14e36cbe8f555199e8ca94240674",
+    "pdfBytes": 8407224,
+    "pdfUrl": "/exams/official-bac/2026/2026-physique-chimie-d/document.pdf",
+    "coverUrl": "/exams/official-bac/2026/2026-physique-chimie-d/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-d/page-001.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-d/page-002.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-d/page-003.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-d/page-004.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-d/page-005.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-d/page-006.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-d/page-007.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-d/page-008.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-d/page-009.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-d/page-010.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-d/page-011.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-d/page-012.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-physique-chimie-d/page-013.webp",
+        "width": 1800,
+        "height": 2548
+      }
+    ]
+  },
+  {
+    "id": "2026-svt-c",
+    "year": 2026,
+    "subject": "SVT",
+    "series": "C",
+    "levelIds": [
+      "terminale-c"
+    ],
+    "sourceName": "svt-terminale-c-sujet-corrige.pdf",
+    "pageCount": 8,
+    "sha256": "47ff095ddb51ddfad747ecd8265fd7628f938c7bf9aed8e82e3007e0513c1b92",
+    "pdfBytes": 5561460,
+    "pdfUrl": "/exams/official-bac/2026/2026-svt-c/document.pdf",
+    "coverUrl": "/exams/official-bac/2026/2026-svt-c/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2026/2026-svt-c/page-001.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-svt-c/page-002.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-svt-c/page-003.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-svt-c/page-004.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-svt-c/page-005.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-svt-c/page-006.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-svt-c/page-007.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-svt-c/page-008.webp",
+        "width": 1800,
+        "height": 2548
+      }
+    ]
+  },
+  {
+    "id": "2026-svt-d",
+    "year": 2026,
+    "subject": "SVT",
+    "series": "D",
+    "levelIds": [
+      "terminale-d"
+    ],
+    "sourceName": "bac-2026-cote-ivoire-svt-terminale-d-sujet-corrige.pdf",
+    "pageCount": 11,
+    "sha256": "ad10f9669bad048634fe4317c191773053759c71a1abc20f2c3cc3b2ce57ce8c",
+    "pdfBytes": 5173950,
+    "pdfUrl": "/exams/official-bac/2026/2026-svt-d/document.pdf",
+    "coverUrl": "/exams/official-bac/2026/2026-svt-d/cover.webp",
+    "pages": [
+      {
+        "url": "/exams/official-bac/2026/2026-svt-d/page-001.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-svt-d/page-002.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-svt-d/page-003.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-svt-d/page-004.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-svt-d/page-005.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-svt-d/page-006.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-svt-d/page-007.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-svt-d/page-008.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-svt-d/page-009.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-svt-d/page-010.webp",
+        "width": 1800,
+        "height": 2548
+      },
+      {
+        "url": "/exams/official-bac/2026/2026-svt-d/page-011.webp",
+        "width": 1800,
+        "height": 2548
+      }
+    ]
+  }
+]

@@ -1,0 +1,47 @@
+/* Shared C/D reference sheets, not a second progression or assessment engine. */
+.course-reader-page.has-essential-sheet {
+  --document-ink: #142c4b;
+  --document-muted: #66758a;
+  --document-line: #e2e8ef;
+  --document-accent: #0d6c68;
+}
+.has-essential-sheet > [hidden] { display: none !important; }
+.legacy-course-tabs { margin: 0 0 25px; }
+.app-shell .course-reader-page .legacy-course-tabs { top: 70px; }
+.has-essential-sheet .course-reader-hero { scroll-margin-top: 80px; }
+.legacy-course-essentials .document-outline { top: 155px; max-height: calc(100dvh - 175px); }
+.legacy-course-essentials .math-essentials-sheet .essential-sheet-section { scroll-margin-top: 175px; }
+.legacy-course-tabs button { font: inherit; font-weight: 750; cursor: pointer; }
+.legacy-course-tabs button:focus-visible { outline: 3px solid #86c7c0; outline-offset: 3px; }
+.lesson-document.legacy-course-essentials { padding: 0 0 30px; }
+.math-essentials-sheet { min-width: 0; font-size: 16px; }
+.math-essentials-sheet .essential-sheet-title { margin: 0 0 4px; }
+.math-essentials-sheet .essential-sheet-section { scroll-margin-top: calc(var(--mobile-header-offset, 0px) + 115px); }
+.math-essentials-sheet .document-summary-section > header h2 { margin: 0; font-size: 1.3rem; }
+.math-essentials-sheet .document-outline nav .document-outline-topic { padding: 11px 9px; min-height: 44px; font-size: .82rem; }
+.math-essentials-sheet .document-outline-topic > span:first-child { color: var(--document-accent); flex: 0 0 25px; }
+.math-essentials-sheet .lesson-table-scroll :is(th, td) { min-width: 95px; }
+.math-essentials-sheet .lesson-table-scroll .math-formula.is-inline { max-width: none; overflow: visible; }
+.math-essentials-sheet .lesson-rich-content { overflow-wrap: anywhere; }
+.essential-load-state { padding: 25px 0; font-size: 16px; color: var(--document-muted); }
+.essential-circle { margin: 22px 0; max-width: 550px; border: 1px solid var(--document-line); border-radius: 12px; background: #f9fbfd; overflow: hidden; }
+.essential-circle-scroll { width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; }
+.essential-circle svg { display: block; width: 100%; min-width: 360px; height: auto; color: #31455d; }
+.essential-circle svg text { fill: currentColor; font: 15px system-ui, sans-serif; }
+.essential-circle svg .essential-circle-point { font-weight: 800; fill: #7c3aed; }
+.essential-circle figcaption { padding: 15px; border-top: 1px solid var(--document-line); }
+.essential-circle figcaption label { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.essential-circle input { width: 100%; min-height: 44px; margin: 7px 0; accent-color: var(--document-accent); }
+.essential-circle-angles { display: flex; gap: 7px; flex-wrap: wrap; }
+.essential-circle-angles button { min-width: 44px; min-height: 44px; padding: 6px 10px; border: 1px solid #cddde1; border-radius: 8px; background: #fff; color: var(--document-ink); }
+.essential-circle-angles button[aria-pressed="true"] { border-color: var(--document-accent); background: #e2f2ee; color: var(--document-accent); }
+.essential-circle-values { display: flex; flex-wrap: wrap; gap: 10px 20px; line-height: 1.7; }
+.essential-circle-values > span:first-child { color: #245abd; }
+.essential-circle-values > span:last-child { color: #0e806d; }
+@media (max-width: 760px) {
+  .math-essentials-sheet .document-summary-section > header h2 { font-size: 1.15rem; }
+  .math-essentials-sheet .document-outline.is-open { max-height: none; }
+}
+@media (max-width: 600px) {
+  .app-shell .course-reader-page .legacy-course-tabs { top: 62px; }
+}
