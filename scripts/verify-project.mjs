@@ -29,6 +29,11 @@ run(
   [resolve(root, "scripts", "audit-web-source-sizes.mjs")],
 );
 run("Tests de stabilité", npm, [...npmPrefix, "run", "test:stability"], api);
+run("Choix de profils à la connexion", process.execPath, [
+  resolve(api, "node_modules", "tsx", "dist", "cli.mjs"), "--test",
+  resolve(root, "tests", "auth-account-access.test.ts"),
+  resolve(root, "tests", "password-recovery-url.test.ts"),
+]);
 run(
   "Présentation des exercices de l’Arène",
   process.execPath,

@@ -1,5 +1,13 @@
 # Publication de la version validée — 2 novembre 2026
 
+## Correctif connexion et récupération — 02/11/2026
+
+Demandes supplémentaires du porteur : verrouiller les choix Parent/Enseignant non construits et corriger les liens de récupération qui ouvraient localhost. Cartes conservées avec `disabled`, cadenas et « Bientôt » ; choix Élève et récupération préservés, aucun compte/rôle supprimé. Contrôles natifs et garde de soumission, bascule centrale réversible. Le verrou est côté Web, pas une suspension de comptes existants.
+
+Cause distante confirmée dans **Supabase oqvzbaneyvidmrxjtasn** : SiteURL=`http://localhost:3000`, aucuneRedirectURL. Réglages enregistrés via le navigateur : SiteURL=`https://excellence-lycee.vercel.app`, une seuleRedirectURL exacte=`https://excellence-lycee.vercel.app/?auth=recovery`, aucun wildcard ajouté. Vercel API : variable publique `PUBLIC_WEB_URL=https://excellence-lycee.vercel.app` ajoutée en Production, sans récupérer de secrets. Le code passe désormais `config.publicWebUrl` à Supabase plutôt que le réglage CORS `webOrigin`; helper testé qui refuse les URL locales/nonHTTPS en production. Cette modification serveur nécessite un déploiement API explicite. Aucune migration ni donnée d’élève modifiée.
+
+QA locale : cartes et étatsdisabled/Bientôt sans débordement à320/390/768/1440 ; parcoursÉlève→connexion→motdepasseoublié→retour accessible, console0, capturemobile inspectée. 25tests ciblés connexion/récupération/accès/motdepasse verts. **Vérificateur intégral entièrement vert : 691tests, auditsWeb/API0vulnérabilité, typages, contenu/banques, intégrations, builds et budgets.** Les alias restent à contrôler après publication. Aucun mot de passe réel n’a été saisi/changé et aucun e-mail de test n’a été envoyé à un tiers ; après publication, demander un nouveau lien pour vérifier la réception de bout en bout.
+
 ## Périmètre autorisé
 
 Le porteur a demandé la mise en ligne du rendu validé dans le laboratoire : Mes cours et M’entraîner illustrés, Exercices par matière, accueil documentaire et tous les contenus locaux qui alimentent ces vues. Les cours, banques interactives, trois onglets, ateliers philo/français et annales 2025–2026 sont conservés. Devoirs et INP-HB restent verrouillés dans l’interface, sans suppression de copies/notes.

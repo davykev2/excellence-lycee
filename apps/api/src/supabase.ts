@@ -1,5 +1,6 @@
 import { createClient, type User } from "@supabase/supabase-js";
 import { config } from "./config.js";
+import { passwordRecoveryRedirectUrl } from "./passwordRecoveryUrl.js";
 import type { AccountAudience, UserRole } from "./database.js";
 import type {
   LessonContentDocument,
@@ -315,7 +316,7 @@ export async function loginWithSupabase(email: string, password: string) {
 
 export async function requestSupabasePasswordReset(email: string) {
   const { error } = await requireAuthClient().auth.resetPasswordForEmail(email, {
-    redirectTo: `${config.webOrigin.replace(/\/$/, "")}/?auth=recovery`,
+    redirectTo: passwordRecoveryRedirectUrl(config.publicWebUrl, config.isProduction),
   });
   if (error) throw authFailure(error);
 }

@@ -727,8 +727,8 @@
   border-radius: 19px;
 }
 
-.onboarding-account-grid > button:hover,
-.onboarding-account-grid > button:focus-visible,
+.onboarding-account-grid > button:not(:disabled):hover,
+.onboarding-account-grid > button:not(:disabled):focus-visible,
 .onboarding-access-grid > button:hover,
 .onboarding-access-grid > button:focus-visible {
   border-color: rgba(71, 160, 71, .6);
@@ -753,8 +753,33 @@
 }
 
 .onboarding-account-grid strong {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
   font-size: 16px;
   font-weight: 900;
+}
+
+.onboarding-account-grid > button:disabled {
+  cursor: not-allowed;
+  opacity: 1;
+  background: #f1f4f2;
+  border-color: #dce3de;
+  box-shadow: none;
+  transform: none;
+}
+
+.onboarding-choice-status {
+  display: inline-flex;
+  padding: 3px 7px;
+  border-radius: 6px;
+  background: #e0e8e2;
+  color: #405e49;
+  font-size: 11px;
+  line-height: 1.35;
+  font-style: normal;
+  font-weight: 800;
 }
 
 .onboarding-account-grid small,

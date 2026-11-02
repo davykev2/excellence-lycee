@@ -1,5 +1,11 @@
 # Prototype Instructions
 
+## Connexion : profils adultes temporairement verrouillés — 02/11/2026
+
+À la demande du porteur, Parent et Enseignant restent visibles sur l’écran d’entrée, mais désactivés nativement avec cadenas et badge « Bientôt ». `config/authAccess.ts` centralise la bascule ; la sélection, le passage au formulaire et l’envoi vérifient aussi le choix autorisé. Élève, connexion, inscription et récupération restent accessibles. C’est un verrou d’interface réversible, pas une suppression de comptes/rôles ni une nouvelle interdiction serveur des comptes existants. Ne pas bloquer les administrateurs dont le compte peut porter un profil enseignant. Les anciennes consignes invitant les trois profils à s’inscrire sont remplacées par cette disponibilité tant que les espaces adultes ne sont pas construits.
+
+En parallèle, la récupération utilise l’adresse publique API, et Supabase a été corrigé pour revenir sur le domaine publié plutôt que localhost. Détails serveur/réglages dans `PUBLICATION.md`. Tests dédiés raccordés à `verify-project.mjs`; les contrôles finaux doivent être consignés avant de revendiquer la publication.
+
 ## Lot sélectionné pour publication — 02/11/2026
 
 Le porteur a validé le rendu illustré et autorisé sa mise en ligne. L’état produit ci-dessous est repris dans une copie de publication dédiée : cours documentaires/banques/essentiels, ateliers, annales, accueil documentaire et nouvelles grilles illustrées. Les mentions « local uniquement » des sections suivantes décrivent leur état avant cette autorisation, pas une interdiction durable. Les prototypes de couleurs rejetés et tout outil d’isolation laboratoire sont exclus. La configuration de production ne doit pas être remplacée par celle du laboratoire ; IDs/XP/compteur 10_326 intacts. Devoirs/INP-HB verrouillés, Anglais « Bientôt », filtrage par classe conservé. Voir `PUBLICATION.md` à la racine pour les contrôles et l’état réel des alias ; ne jamais inférer un déploiement depuis Git seulement.

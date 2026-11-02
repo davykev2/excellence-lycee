@@ -17,6 +17,7 @@ import {
 } from "@phosphor-icons/react";
 import type { SchoolLevel } from "../../domain/learning";
 import type { AccountType } from "../../domain/auth";
+import { isAuthAccountTypeEnabled } from "../../config/authAccess";
 import { schoolLevels } from "../../data/programme";
 import { ApiError, confirmPasswordReset, requestPasswordReset } from "../../lib/api";
 import { CompanionAvatar, type CompanionMotion } from "../companion/CompanionAvatar";
@@ -120,6 +121,7 @@ export function AuthScreen() {
   }, [step]);
 
   const chooseAccountType = (nextAccountType: AccountType) => {
+    if (!isAuthAccountTypeEnabled(nextAccountType)) return;
     setAccountType(nextAccountType);
     setStep("access");
     setError(null);
@@ -130,6 +132,7 @@ export function AuthScreen() {
   };
 
   const chooseMode = (nextMode: AuthMode) => {
+    if (!isAuthAccountTypeEnabled(accountType)) return;
     setMode(nextMode);
     setStep("form");
     setError(null);
@@ -144,7 +147,7 @@ export function AuthScreen() {
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
-    if (!accountType) return;
+    if (!isAuthAccountTypeEnabled(accountType)) return;
     setSubmitting(true);
     setError(null);
     try {
@@ -210,7 +213,7 @@ export function AuthScreen() {
       clearPasswordRecoveryUrl();
       setPasswordRecovery({ hasRecoveryIntent: false, accessToken: null });
     }
-    if (!accountType) setAccountType("student");
+    if (!isAuthAccountTypeEnabled(accountType)) setAccountType("student");
     setMode("login");
     setStep("form");
     setError(null);
@@ -253,14 +256,17 @@ export function AuthScreen() {
               <p className="onboarding-lead">Je serai ton guide sur la plateforme. Pour commencer, dis-moi simplement qui tu es.</p>
 
               <div className="onboarding-account-grid" role="group" aria-label="Choisis ton profil">
-                {accountChoices.map(({ id, title, description, Icon }) => (
-                  <button key={id} type="button" onClick={() => chooseAccountType(id)} data-account-type={id}>
-                    <span><Icon size={27} weight="duotone" /></span>
-                    <strong>{title}</strong>
-                    <small>{description}</small>
-                    <ArrowRight className="onboarding-choice-arrow" size={18} weight="bold" />
-                  </button>
-                ))}
+                {accountChoices.map(({ id, title, description, Icon }) => {
+                  const enabled = isAuthAccountTypeEnabled(id);
+                  return (
+                    <button key={id} type="button" disabled={!enabled} onClick={() => chooseAccountType(id)} data-account-type={id}>
+                      <span><Icon size={27} weight="duotone" /></span>
+                      <strong>{title}{!enabled && <em className="onboarding-choice-status">Bientôt</em>}</strong>
+                      <small>{description}</small>
+                      {enabled ? <ArrowRight className="onboarding-choice-arrow" size={18} weight="bold" /> : <LockKey className="onboarding-choice-arrow" size={18} weight="bold" aria-hidden="true" />}
+                    </button>
+                  );
+                })}
               </div>
               <p className="onboarding-reassurance"><ShieldCheck size={17} weight="fill" /> Un espace adapté à chaque profil, en toute sécurité.</p>
             </div>
